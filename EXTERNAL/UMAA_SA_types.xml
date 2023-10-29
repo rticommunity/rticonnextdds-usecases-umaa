@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+
+<dds version="7.1.0"
+    xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/current/rti_dds_profiles.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <!--  The naming schema for all entities is basename + suffix i.e AccellerationReport + Writer   -->
+
+
+    <!-- SA Data types files -->
+    <types>
+        <include file="UMAA/SA/AccelerationStatus/AccelerationReportType.xml" />
+        <include file="UMAA/SA/CompartmentConfig/CompartmentConfigReportType.xml" />
+        <include file="UMAA/SA/CompartmentStatus/CompartmentReportType.xml" />
+        <include file="UMAA/SA/ContactCOLREGSClassificationStatus/ContactCOLREGSClassificationStatusReportType.xml" />
+        <include file="UMAA/SA/ContactStatus/ContactRemovedReportType.xml" />
+        <include file="UMAA/SA/ContactStatus/ContactReportType.xml" />
+        <include file="UMAA/SA/ContactVisualClassificationStatus/ContactVisualClassificationStatusReportType.xml" />
+        <include file="UMAA/SA/CTDStatus/CTDReportType.xml" />
+        <include file="UMAA/SA/DateTimeStatus/DateTimeReportType.xml" />
+        <include file="UMAA/SA/ECEFPoseStatus/ECEFPoseReportType.xml" />
+        <include file="UMAA/SA/FeatureImageStatus/FeatureImageRemovedReportType.xml" />
+        <include file="UMAA/SA/FeatureImageStatus/FeatureImageReportType.xml" />
+        <include file="UMAA/SA/GlobalDeadReckoning/GlobalDeadReckoningCommandReportType.xml" />
+        <include file="UMAA/SA/GlobalDeadReckoning/GlobalDeadReckoningCommandStatusType.xml" />
+        <include file="UMAA/SA/GlobalDeadReckoning/GlobalDeadReckoningCommandType.xml" />
+        <include file="UMAA/SA/GlobalPoseConfig/GlobalPoseConfigReportType.xml" />
+        <include file="UMAA/SA/GlobalPoseStatus/GlobalPoseReportType.xml" />
+        <include file="UMAA/SA/FeatureImageStatus/FeatureImageRemovedReportType.xml" />
+        <include file="UMAA/SA/ImageStatus/ImageReportType.xml" />
+        <include file="UMAA/SA/LocalDeadReckoning/LocalDeadReckoningCommandReportType.xml" />
+        <include file="UMAA/SA/LocalDeadReckoning/LocalDeadReckoningCommandStatusType.xml" />
+        <include file="UMAA/SA/LocalDeadReckoning/LocalDeadReckoningCommandType.xml" />
+        <include file="UMAA/SA/LocalPoseStatus/LocalPoseReportType.xml" />
+        <include file="UMAA/SA/NEDVelocityStatus/NEDVelocityReportType.xml" />
+        <include file="UMAA/SA/PathReporterSpecs/PathReporterSpecsReportType.xml" />
+        <include file="UMAA/SA/PathReporterStatus/PathReporterReportType.xml" />
+        <include file="UMAA/SA/RangeConfig/RangeConfigReportType.xml" />
+        <include file="UMAA/SA/RangeSpecs/RangeSpecsReportType.xml" />
+        <include file="UMAA/SA/RangeStatus/RangeReportType.xml" />
+        <include file="UMAA/SA/SeaStatus/SeaStatusReportType.xml" />
+        <include file="UMAA/SA/SpeedStatus/SpeedReportType.xml" />
+        <include file="UMAA/SA/StillImageConfig/StillImageConfigReportType.xml" />
+        <include file="UMAA/SA/StillImageSpecs/StillImageSpecsReportType.xml" />
+        <include file="UMAA/SA/StillImageStatus/StillImageReportType.xml" />
+        <include file="UMAA/SA/TranslationalShipMotionStatus/TranslationalShipMotionReportType.xml" />
+        <include file="UMAA/SA/VehicleNavigationModeStatus/VehicleNavigationModeReportType.xml" />
+        <include file="UMAA/SA/VelocityStatus/VelocityReportType.xml" />
+        <include file="UMAA/SA/WaterCurrentStatus/WaterCurrentStatusReportType.xml" />
+        <include file="UMAA/SA/WaterspaceStatus/WaterspaceReportType.xml" />
+        <include file="UMAA/SA/WeatherStatus/WeatherStatusReportType.xml" />
+        <include file="UMAA/SA/WindStatus/WindStatusReportType.xml" />
+    </types>
+</dds>
