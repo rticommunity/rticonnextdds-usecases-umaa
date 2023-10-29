@@ -14,7 +14,12 @@ EXTERNAL: Application code to share as an example
 Make sure you have followed the setup guide for your Connext installation, 
 including setting the NDDSHOME variable.
 
+### Compiled types
 Using rtiddsgen, convert the IDL files to typefiles, and then compile into objects.
+
+### DynamicData types
+Using rtiddsgen, convert the IDL files to typefiles to xml files.
+
 
 To build this example, run make on the included makefile.
 
