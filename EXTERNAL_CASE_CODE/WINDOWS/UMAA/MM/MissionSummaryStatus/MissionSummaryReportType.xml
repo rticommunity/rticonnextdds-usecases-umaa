@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:///C:/Program Files/rti_connext_dds-7.2.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<include file="UMAA/MM/BaseType/MissionSummaryType.xml"/>
+<module name="UMAA">
+  <module name="MM">
+    <module name="MissionSummaryStatus">
+      <const name="MissionSummaryReport_TOPIC" type="string" value="&quot;UMAA::MM::MissionSummaryStatus::MissionSummaryReport&quot;"/>
+      <struct name= "MissionSummaryReportType">
+        <member name="missionSummaries" sequenceMaxLength="100" type="nonBasic"  nonBasicTypeName= "UMAA::MM::BaseType::MissionSummaryType"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:///C:/Program Files/rti_connext_dds-7.2.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/MaritimeEnumeration/EnumerationSets.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<module name="UMAA">
+  <module name="EO">
+    <module name="ThrusterControl">
+      <struct name= "ThrusterControlType">
+        <member name="effort" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Effort"/>
+        <member name="state" type="nonBasic"  nonBasicTypeName= "UMAA::Common::MaritimeEnumeration::PowerPlantStateEnumType::PowerPlantStateEnumType"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

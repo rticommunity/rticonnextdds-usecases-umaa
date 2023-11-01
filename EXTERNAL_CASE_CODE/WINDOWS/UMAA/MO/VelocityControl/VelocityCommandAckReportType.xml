@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:///C:/Program Files/rti_connext_dds-7.2.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/MaritimeEnumeration/EnumerationSets.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<include file="UMAA/Common/Measurement/OrientationVelocity3D.xml"/>
+<include file="UMAA/Common/Measurement/Velocity3D_PlatformXYZ.xml"/>
+<module name="UMAA">
+  <module name="MO">
+    <module name="VelocityControl">
+      <const name="VelocityCommandAckReport_TOPIC" type="string" value="&quot;UMAA::MO::VelocityControl::VelocityCommandAckReport&quot;"/>
+      <struct name= "VelocityCommandAckReportType">
+        <member name="attitudeRate" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::OrientationVelocity3D"/>
+        <member name="velocity" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Velocity3D_PlatformXYZ"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="sessionID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="commandType" type="nonBasic"  nonBasicTypeName= "UMAA::Common::MaritimeEnumeration::VelocityCommandTypeEnumType::VelocityCommandTypeEnumType" key="true"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

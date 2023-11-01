@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:///C:/Program Files/rti_connext_dds-7.2.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<include file="UMAA/Common/MaritimeEnumeration/EnumerationSets.xml"/>
+<module name="UMAA">
+  <module name="EO">
+    <module name="ThrusterControl">
+      <const name="ThrusterCommandStatus_TOPIC" type="string" value="&quot;UMAA::EO::ThrusterControl::ThrusterCommandStatus&quot;"/>
+      <struct name= "ThrusterCommandStatusType">
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="commandStatus" type="nonBasic"  nonBasicTypeName= "UMAA::Common::MaritimeEnumeration::CommandStatusEnumType::CommandStatusEnumType"/>
+        <member name="commandStatusReason" type="nonBasic"  nonBasicTypeName= "UMAA::Common::MaritimeEnumeration::CommandStatusReasonEnumType::CommandStatusReasonEnumType"/>
+        <member name="logMessage" stringMaxLength="4095" type="string"/>
+        <member name="sessionID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

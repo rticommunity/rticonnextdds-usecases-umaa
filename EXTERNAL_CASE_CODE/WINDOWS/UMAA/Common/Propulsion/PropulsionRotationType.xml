@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:///C:/Program Files/rti_connext_dds-7.2.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/Propulsion/PropulsiveRotationAngleType.xml"/>
+<include file="UMAA/Common/Propulsion/PropulsiveRotationEffortType.xml"/>
+<module name="UMAA">
+  <module name="Common">
+    <module name="Propulsion">
+      <module name="PropulsionRotationType_Specializations">
+        <enum name="PropulsionRotationType_Selectors">
+          <enumerator name="PROPULSIVEROTATIONEFFORTTYPE_SELECT"/>
+          <enumerator name="PROPULSIVEROTATIONANGLETYPE_SELECT"/>
+        </enum> 
+        <union name="PropulsionRotationType_Union">
+<discriminator type="nonBasic" nonBasicTypeName="UMAA::Common::Propulsion::PropulsionRotationType_Specializations::PropulsionRotationType_Selectors"/>
+<case>
+          <caseDiscriminator value="(UMAA::Common::Propulsion::PropulsionRotationType_Specializations::PROPULSIVEROTATIONEFFORTTYPE_SELECT)"/>
+<member name="PropulsiveRotationEffortType_data" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Propulsion::PropulsiveRotationEffortType"/>
+</case>
+<case>
+          <caseDiscriminator value="(UMAA::Common::Propulsion::PropulsionRotationType_Specializations::PROPULSIVEROTATIONANGLETYPE_SELECT)"/>
+<member name="PropulsiveRotationAngleType_data" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Propulsion::PropulsiveRotationAngleType"/>
+</case>
+        </union>
+      </module>
+      <struct name= "PropulsionRotationType">
+        <member name="PropulsionRotationType_subtypes" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Propulsion::PropulsionRotationType_Specializations::PropulsionRotationType_Union"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

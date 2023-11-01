@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:///C:/Program Files/rti_connext_dds-7.2.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/Enumeration/EnumerationSets.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<module name="UMAA">
+  <module name="SEM">
+    <module name="BeaconParametersStatus">
+      <const name="BeaconParametersReport_TOPIC" type="string" value="&quot;UMAA::SEM::BeaconParametersStatus::BeaconParametersReport&quot;"/>
+      <struct name= "BeaconParametersReportType">
+        <member name="frequencyBand" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Count" min="-2147483648" max="2147483647"/>
+        <member name="IRLightsArmed" type="boolean"/>
+        <member name="IRLightsOn" type="boolean"/>
+        <member name="locatorArmed" type="boolean"/>
+        <member name="locatorOn" type="boolean"/>
+        <member name="multibandLocator" type="boolean"/>
+        <member name="RGLightsArmed" type="boolean"/>
+        <member name="RGLightsOn" type="boolean"/>
+        <member name="transmitChannel" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Count" min="-2147483648" max="2147483647"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

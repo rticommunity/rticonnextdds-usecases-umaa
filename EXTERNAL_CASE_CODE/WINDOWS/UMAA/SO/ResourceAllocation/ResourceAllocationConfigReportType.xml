@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:///C:/Program Files/rti_connext_dds-7.2.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<include file="UMAA/SO/ResourceAllocation/ResourceAllocationDefinitionType.xml"/>
+<module name="UMAA">
+  <module name="SO">
+    <module name="ResourceAllocation">
+      <const name="ResourceAllocationConfigReport_TOPIC" type="string" value="&quot;UMAA::SO::ResourceAllocation::ResourceAllocationConfigReport&quot;"/>
+      <struct name= "ResourceAllocationConfigReportType">
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+        <member name="resourcesSetID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID"/>
+      </struct>
+      <const name="ResourceAllocationConfigReport_ResourcesSet_TOPIC" type="string" value="&quot;UMAA::SO::ResourceAllocation::ResourceAllocationConfigReport_ResourcesSet&quot;"/>
+      <struct name= "ResourceAllocationConfigReportType_ResourcesSet" baseType="UMAA::SO::ResourceAllocation::ResourceAllocationDefinitionType">
+        <member name="resourcesSetID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="resourcesTimestamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

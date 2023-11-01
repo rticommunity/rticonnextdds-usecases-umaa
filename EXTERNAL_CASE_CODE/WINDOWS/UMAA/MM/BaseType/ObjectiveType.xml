@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:///C:/Program Files/rti_connext_dds-7.2.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/Enumeration/EnumerationSets.xml"/>
+<include file="UMAA/Common/Measurement/DateTime_Tolerance.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<include file="UMAA/Common/PrimitiveConstrained/ConstrainedTypes.xml"/>
+<include file="UMAA/MM/BaseType/ChargingObjectiveType.xml"/>
+<include file="UMAA/MM/BaseType/CommsLinkObjectiveType.xml"/>
+<include file="UMAA/MM/BaseType/ContingencyObjectiveType.xml"/>
+<include file="UMAA/MM/BaseType/DeploymentObjectiveType.xml"/>
+<include file="UMAA/MM/BaseType/LoiterObjectiveType.xml"/>
+<include file="UMAA/MM/BaseType/PassiveLoiterObjectiveType.xml"/>
+<include file="UMAA/MM/BaseType/ProductDisseminateFileObjectiveType.xml"/>
+<include file="UMAA/MM/BaseType/ProductExploitationObjectiveType.xml"/>
+<include file="UMAA/MM/BaseType/RecoveryObjectiveType.xml"/>
+<include file="UMAA/MM/BaseType/RouteObjectiveType.xml"/>
+<include file="UMAA/MM/BaseType/StationkeepObjectiveType.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<module name="UMAA">
+  <module name="MM">
+    <module name="BaseType">
+      <module name="ObjectiveType_Specializations">
+        <enum name="ObjectiveType_Selectors">
+          <enumerator name="PRODUCTDISSEMINATEFILEOBJECTIVETYPE_SELECT"/>
+          <enumerator name="RECOVERYOBJECTIVETYPE_SELECT"/>
+          <enumerator name="PRODUCTEXPLOITATIONOBJECTIVETYPE_SELECT"/>
+          <enumerator name="COMMSLINKOBJECTIVETYPE_SELECT"/>
+          <enumerator name="DEPLOYMENTOBJECTIVETYPE_SELECT"/>
+          <enumerator name="PASSIVELOITEROBJECTIVETYPE_SELECT"/>
+          <enumerator name="STATIONKEEPOBJECTIVETYPE_SELECT"/>
+          <enumerator name="ROUTEOBJECTIVETYPE_SELECT"/>
+          <enumerator name="CHARGINGOBJECTIVETYPE_SELECT"/>
+          <enumerator name="LOITEROBJECTIVETYPE_SELECT"/>
+          <enumerator name="CONTINGENCYOBJECTIVETYPE_SELECT"/>
+        </enum> 
+        <union name="ObjectiveType_Union">
+<discriminator type="nonBasic" nonBasicTypeName="UMAA::MM::BaseType::ObjectiveType_Specializations::ObjectiveType_Selectors"/>
+<case>
+          <caseDiscriminator value="(UMAA::MM::BaseType::ObjectiveType_Specializations::PRODUCTDISSEMINATEFILEOBJECTIVETYPE_SELECT)"/>
+<member name="ProductDisseminateFileObjectiveType_data" type="nonBasic"  nonBasicTypeName= "UMAA::MM::BaseType::ProductDisseminateFileObjectiveType"/>
+</case>
+<case>
+          <caseDiscriminator value="(UMAA::MM::BaseType::ObjectiveType_Specializations::RECOVERYOBJECTIVETYPE_SELECT)"/>
+<member name="RecoveryObjectiveType_data" type="nonBasic"  nonBasicTypeName= "UMAA::MM::BaseType::RecoveryObjectiveType"/>
+</case>
+<case>
+          <caseDiscriminator value="(UMAA::MM::BaseType::ObjectiveType_Specializations::PRODUCTEXPLOITATIONOBJECTIVETYPE_SELECT)"/>
+<member name="ProductExploitationObjectiveType_data" type="nonBasic"  nonBasicTypeName= "UMAA::MM::BaseType::ProductExploitationObjectiveType"/>
+</case>
+<case>
+          <caseDiscriminator value="(UMAA::MM::BaseType::ObjectiveType_Specializations::COMMSLINKOBJECTIVETYPE_SELECT)"/>
+<member name="CommsLinkObjectiveType_data" type="nonBasic"  nonBasicTypeName= "UMAA::MM::BaseType::CommsLinkObjectiveType"/>
+</case>
+<case>
+          <caseDiscriminator value="(UMAA::MM::BaseType::ObjectiveType_Specializations::DEPLOYMENTOBJECTIVETYPE_SELECT)"/>
+<member name="DeploymentObjectiveType_data" type="nonBasic"  nonBasicTypeName= "UMAA::MM::BaseType::DeploymentObjectiveType"/>
+</case>
+<case>
+          <caseDiscriminator value="(UMAA::MM::BaseType::ObjectiveType_Specializations::PASSIVELOITEROBJECTIVETYPE_SELECT)"/>
+<member name="PassiveLoiterObjectiveType_data" type="nonBasic"  nonBasicTypeName= "UMAA::MM::BaseType::PassiveLoiterObjectiveType"/>
+</case>
+<case>
+          <caseDiscriminator value="(UMAA::MM::BaseType::ObjectiveType_Specializations::STATIONKEEPOBJECTIVETYPE_SELECT)"/>
+<member name="StationkeepObjectiveType_data" type="nonBasic"  nonBasicTypeName= "UMAA::MM::BaseType::StationkeepObjectiveType"/>
+</case>
+<case>
+          <caseDiscriminator value="(UMAA::MM::BaseType::ObjectiveType_Specializations::ROUTEOBJECTIVETYPE_SELECT)"/>
+<member name="RouteObjectiveType_data" type="nonBasic"  nonBasicTypeName= "UMAA::MM::BaseType::RouteObjectiveType"/>
+</case>
+<case>
+          <caseDiscriminator value="(UMAA::MM::BaseType::ObjectiveType_Specializations::CHARGINGOBJECTIVETYPE_SELECT)"/>
+<member name="ChargingObjectiveType_data" type="nonBasic"  nonBasicTypeName= "UMAA::MM::BaseType::ChargingObjectiveType"/>
+</case>
+<case>
+          <caseDiscriminator value="(UMAA::MM::BaseType::ObjectiveType_Specializations::LOITEROBJECTIVETYPE_SELECT)"/>
+<member name="LoiterObjectiveType_data" type="nonBasic"  nonBasicTypeName= "UMAA::MM::BaseType::LoiterObjectiveType"/>
+</case>
+<case>
+          <caseDiscriminator value="(UMAA::MM::BaseType::ObjectiveType_Specializations::CONTINGENCYOBJECTIVETYPE_SELECT)"/>
+<member name="ContingencyObjectiveType_data" type="nonBasic"  nonBasicTypeName= "UMAA::MM::BaseType::ContingencyObjectiveType"/>
+</case>
+        </union>
+      </module>
+      <struct name= "ObjectiveType">
+        <member name="approvalRequired" type="boolean"/>
+        <member name="childObjectiveIDs" sequenceMaxLength="100" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID"/>
+        <member name="dependentObjectiveIDs" sequenceMaxLength="100" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID"/>
+        <member name="endTime" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+        <member name="endTimeTolerance" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime_Tolerance" optional="true"/>
+        <member name="name" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::StringShortDescription"/>
+        <member name="preferredResourceIDs" sequenceMaxLength="100" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID"/>
+        <member name="priority" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Order" min="0" max="2147483647"/>
+        <member name="startTime" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+        <member name="startTimeTolerance" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime_Tolerance" optional="true"/>
+        <member name="ObjectiveType_subtypes" type="nonBasic"  nonBasicTypeName= "UMAA::MM::BaseType::ObjectiveType_Specializations::ObjectiveType_Union"/>
+        <member name="objectiveID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="parentObjectiveID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

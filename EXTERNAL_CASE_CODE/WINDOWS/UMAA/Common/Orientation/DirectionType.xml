@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:///C:/Program Files/rti_connext_dds-7.2.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/Orientation/CourseType.xml"/>
+<include file="UMAA/Common/Orientation/HeadingCurrentDirectionType.xml"/>
+<include file="UMAA/Common/Orientation/HeadingMagneticNorthType.xml"/>
+<include file="UMAA/Common/Orientation/HeadingTrueNorthType.xml"/>
+<include file="UMAA/Common/Orientation/HeadingType.xml"/>
+<include file="UMAA/Common/Orientation/HeadingWindDirectionType.xml"/>
+<module name="UMAA">
+  <module name="Common">
+    <module name="Orientation">
+      <module name="DirectionType_Specializations">
+        <enum name="DirectionType_Selectors">
+          <enumerator name="COURSETYPE_SELECT"/>
+          <enumerator name="HEADINGTYPE_SELECT"/>
+        </enum> 
+        <union name="DirectionType_Union">
+<discriminator type="nonBasic" nonBasicTypeName="UMAA::Common::Orientation::DirectionType_Specializations::DirectionType_Selectors"/>
+<case>
+          <caseDiscriminator value="(UMAA::Common::Orientation::DirectionType_Specializations::COURSETYPE_SELECT)"/>
+<member name="CourseType_data" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Orientation::CourseType"/>
+</case>
+<case>
+          <caseDiscriminator value="(UMAA::Common::Orientation::DirectionType_Specializations::HEADINGTYPE_SELECT)"/>
+<member name="HeadingType_data" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Orientation::HeadingType"/>
+</case>
+        </union>
+      </module>
+      <struct name= "DirectionType">
+        <member name="DirectionType_subtypes" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Orientation::DirectionType_Specializations::DirectionType_Union"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

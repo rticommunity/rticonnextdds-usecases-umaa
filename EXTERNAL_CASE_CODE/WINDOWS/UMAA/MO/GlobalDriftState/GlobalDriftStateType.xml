@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:///C:/Program Files/rti_connext_dds-7.2.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/MO/GlobalDriftState/GlobalRegionDriftType.xml"/>
+<include file="UMAA/MO/GlobalDriftState/GlobalTransitDriftType.xml"/>
+<module name="UMAA">
+  <module name="MO">
+    <module name="GlobalDriftState">
+      <module name="GlobalDriftStateType_Specializations">
+        <enum name="GlobalDriftStateType_Selectors">
+          <enumerator name="GLOBALTRANSITDRIFTTYPE_SELECT"/>
+          <enumerator name="GLOBALREGIONDRIFTTYPE_SELECT"/>
+        </enum> 
+        <union name="GlobalDriftStateType_Union">
+<discriminator type="nonBasic" nonBasicTypeName="UMAA::MO::GlobalDriftState::GlobalDriftStateType_Specializations::GlobalDriftStateType_Selectors"/>
+<case>
+          <caseDiscriminator value="(UMAA::MO::GlobalDriftState::GlobalDriftStateType_Specializations::GLOBALTRANSITDRIFTTYPE_SELECT)"/>
+<member name="GlobalTransitDriftType_data" type="nonBasic"  nonBasicTypeName= "UMAA::MO::GlobalDriftState::GlobalTransitDriftType"/>
+</case>
+<case>
+          <caseDiscriminator value="(UMAA::MO::GlobalDriftState::GlobalDriftStateType_Specializations::GLOBALREGIONDRIFTTYPE_SELECT)"/>
+<member name="GlobalRegionDriftType_data" type="nonBasic"  nonBasicTypeName= "UMAA::MO::GlobalDriftState::GlobalRegionDriftType"/>
+</case>
+        </union>
+      </module>
+      <struct name= "GlobalDriftStateType">
+        <member name="GlobalDriftStateType_subtypes" type="nonBasic"  nonBasicTypeName= "UMAA::MO::GlobalDriftState::GlobalDriftStateType_Specializations::GlobalDriftStateType_Union"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

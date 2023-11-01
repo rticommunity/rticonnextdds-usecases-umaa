@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:///C:/Program Files/rti_connext_dds-7.2.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/Orientation/HeadingCurrentDirectionType.xml"/>
+<include file="UMAA/Common/Orientation/HeadingMagneticNorthType.xml"/>
+<include file="UMAA/Common/Orientation/HeadingTrueNorthType.xml"/>
+<include file="UMAA/Common/Orientation/HeadingWindDirectionType.xml"/>
+<module name="UMAA">
+  <module name="Common">
+    <module name="Orientation">
+      <module name="HeadingType_Specializations">
+        <enum name="HeadingType_Selectors">
+          <enumerator name="HEADINGTRUENORTHTYPE_SELECT"/>
+          <enumerator name="HEADINGCURRENTDIRECTIONTYPE_SELECT"/>
+          <enumerator name="HEADINGMAGNETICNORTHTYPE_SELECT"/>
+          <enumerator name="HEADINGWINDDIRECTIONTYPE_SELECT"/>
+        </enum> 
+        <union name="HeadingType_Union">
+<discriminator type="nonBasic" nonBasicTypeName="UMAA::Common::Orientation::HeadingType_Specializations::HeadingType_Selectors"/>
+<case>
+          <caseDiscriminator value="(UMAA::Common::Orientation::HeadingType_Specializations::HEADINGTRUENORTHTYPE_SELECT)"/>
+<member name="HeadingTrueNorthType_data" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Orientation::HeadingTrueNorthType"/>
+</case>
+<case>
+          <caseDiscriminator value="(UMAA::Common::Orientation::HeadingType_Specializations::HEADINGCURRENTDIRECTIONTYPE_SELECT)"/>
+<member name="HeadingCurrentDirectionType_data" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Orientation::HeadingCurrentDirectionType"/>
+</case>
+<case>
+          <caseDiscriminator value="(UMAA::Common::Orientation::HeadingType_Specializations::HEADINGMAGNETICNORTHTYPE_SELECT)"/>
+<member name="HeadingMagneticNorthType_data" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Orientation::HeadingMagneticNorthType"/>
+</case>
+<case>
+          <caseDiscriminator value="(UMAA::Common::Orientation::HeadingType_Specializations::HEADINGWINDDIRECTIONTYPE_SELECT)"/>
+<member name="HeadingWindDirectionType_data" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Orientation::HeadingWindDirectionType"/>
+</case>
+        </union>
+      </module>
+      <struct name= "HeadingType">
+        <member name="HeadingType_subtypes" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Orientation::HeadingType_Specializations::HeadingType_Union"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:///C:/Program Files/rti_connext_dds-7.2.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/Enumeration/EnumerationSets.xml"/>
+<include file="UMAA/Common/Measurement/BuiltInTestStatusType_All.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<include file="UMAA/Common/Measurement/Position2D.xml"/>
+<module name="UMAA">
+  <module name="SEM">
+    <module name="CameraControl">
+      <const name="CameraCommandAckReport_TOPIC" type="string" value="&quot;UMAA::SEM::CameraControl::CameraCommandAckReport&quot;"/>
+      <struct name= "CameraCommandAckReportType">
+        <member name="builtInTest" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::BuiltInTestStatusType_All" optional="true"/>
+        <member name="filtered" type="boolean"/>
+        <member name="imageCenterLocation" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Position2D"/>
+        <member name="mode" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Enumeration::IRPolarityEnumType::IRPolarityEnumType"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="sessionID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

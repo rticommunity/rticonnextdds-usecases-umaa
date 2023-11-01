@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:///C:/Program Files/rti_connext_dds-7.2.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<include file="UMAA/SA/ContactStatus/ContactType.xml"/>
+<module name="UMAA">
+  <module name="SA">
+    <module name="ContactStatus">
+      <const name="ContactReport_TOPIC" type="string" value="&quot;UMAA::SA::ContactStatus::ContactReport&quot;"/>
+      <struct name= "ContactReportType">
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+        <member name="contactsSetID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID"/>
+      </struct>
+      <const name="ContactReport_ContactsSet_TOPIC" type="string" value="&quot;UMAA::SA::ContactStatus::ContactReport_ContactsSet&quot;"/>
+      <struct name= "ContactReportType_ContactsSet" baseType="UMAA::SA::ContactStatus::ContactType">
+        <member name="contactsSetID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="contactsTimestamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

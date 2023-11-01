@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:///C:/Program Files/rti_connext_dds-7.2.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<include file="UMAA/Common/PrimitiveConstrained/ConstrainedTypes.xml"/>
+<module name="UMAA">
+  <module name="EO">
+    <module name="FinSpecs">
+      <const name="FinSpecsReport_TOPIC" type="string" value="&quot;UMAA::EO::FinSpecs::FinSpecsReport&quot;"/>
+      <struct name= "FinSpecsReportType">
+        <member name="maxDeflectionRate" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::AngleRate" min="-62.831" max="62.831"/>
+        <member name="maxNegativeDeflection" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Angle"/>
+        <member name="maxPositiveDeflection" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Angle"/>
+        <member name="minDeflectionRate" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::AngleRate" min="-62.831" max="62.831"/>
+        <member name="name" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::StringShortDescription"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

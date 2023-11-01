@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:///C:/Program Files/rti_connext_dds-7.2.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/Enumeration/EnumerationSets.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<include file="UMAA/SEM/SensorManagement/RangeErrorType.xml"/>
+<module name="UMAA">
+  <module name="SA">
+    <module name="RangeConfig">
+      <const name="RangeConfigReport_TOPIC" type="string" value="&quot;UMAA::SA::RangeConfig::RangeConfigReport&quot;"/>
+      <struct name= "RangeConfigReportType">
+        <member name="horizontalFOVStartAngle" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::RelativeAngle"/>
+        <member name="horizontalFOVStopAngle" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::RelativeAngle"/>
+        <member name="maxRange" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance" min="0" max="401056000"/>
+        <member name="minRange" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance" min="0" max="401056000"/>
+        <member name="rangeError" type="nonBasic"  nonBasicTypeName= "UMAA::SEM::SensorManagement::RangeErrorType"/>
+        <member name="status" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Enumeration::PowerStatusEnumType::PowerStatusEnumType"/>
+        <member name="updateRate" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Frequency_Hertz" min="0.0" max="10000000000"/>
+        <member name="verticalFOVStartAngle" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::RelativeAngle"/>
+        <member name="verticalFOVStopAngle" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::RelativeAngle"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

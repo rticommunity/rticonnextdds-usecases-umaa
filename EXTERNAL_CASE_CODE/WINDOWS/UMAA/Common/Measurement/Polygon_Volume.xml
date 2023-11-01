@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:///C:/Program Files/rti_connext_dds-7.2.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/Enumeration/EnumerationSets.xml"/>
+<include file="UMAA/Common/Measurement/Altitude_MSL.xml"/>
+<include file="UMAA/Common/Measurement/Position2D.xml"/>
+<module name="UMAA">
+  <module name="Common">
+    <module name="Measurement">
+      <struct name= "Polygon_Volume">
+        <member name="ceiling" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Altitude_MSL"/>
+        <member name="floor" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Altitude_MSL"/>
+        <member name="lineKind" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Enumeration::LineSegmentEnumType::LineSegmentEnumType"/>
+        <member name="referencePoints" sequenceMaxLength="100" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Position2D"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

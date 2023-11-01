@@ -84,6 +84,27 @@ Run the following command:
 rtiddsgen -I ./ -convertToXML -inputIDL ./ -r
 ```
 
+## Windows
+
+Make sure you have followed the setup guide for your Connext installation, 
+including setting the NDDSHOME variable by running the setup script.
+
+- Ensure a pre-processor is in your PATH environment variable.
+The default is `cp.exe`. Reference the RTI Code Generator documentation for details.
+
+Set the environment variable $UMAA_HOME for the desired working folder. IE:
+```sh
+export UMAA_HOME="PATH_TO_FOLDER"/WINDOWS
+```
+
+#### Creating XML type files :wrench:
+Run the following script:
+```sh
+gen_all_xml.bat
+```
+
+
+
 # INTERNAL
 Folder for internal scripts to generate customer deliverables.
 

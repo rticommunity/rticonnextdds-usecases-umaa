@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:///C:/Program Files/rti_connext_dds-7.2.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/Measurement/CovarianceOrientationType.xml"/>
+<include file="UMAA/Common/Measurement/CovariancePositionVelocityType.xml"/>
+<include file="UMAA/Common/Measurement/ElevationType.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<include file="UMAA/Common/Measurement/Orientation3D_PlatformXYZ.xml"/>
+<include file="UMAA/Common/Measurement/Position3D_PlatformXYZ.xml"/>
+<module name="UMAA">
+  <module name="SA">
+    <module name="LocalDeadReckoning">
+      <const name="LocalDeadReckoningCommand_TOPIC" type="string" value="&quot;UMAA::SA::LocalDeadReckoning::LocalDeadReckoningCommand&quot;"/>
+      <struct name= "LocalDeadReckoningCommandType">
+        <member name="attitude" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Orientation3D_PlatformXYZ"/>
+        <member name="attitudeCovariance" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::CovarianceOrientationType"/>
+        <member name="elevation" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::ElevationType"/>
+        <member name="position" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Position3D_PlatformXYZ"/>
+        <member name="xyPositionCovariance" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::CovariancePositionVelocityType"/>
+        <member name="zPositionCovariance" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::CovariancePositionVelocityType"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="destination" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="sessionID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

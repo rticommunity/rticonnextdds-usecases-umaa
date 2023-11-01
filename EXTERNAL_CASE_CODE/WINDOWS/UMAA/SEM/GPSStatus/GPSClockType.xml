@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:///C:/Program Files/rti_connext_dds-7.2.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/MaritimeEnumeration/EnumerationSets.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<include file="UMAA/Common/PrimitiveConstrained/ConstrainedTypes.xml"/>
+<module name="UMAA">
+  <module name="SEM">
+    <module name="GPSStatus">
+      <struct name= "GPSClockType">
+        <member name="bias" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::NanosecondsCount" optional="true"/>
+        <member name="biasUncertianty" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::NanosecondsCount" optional="true"/>
+        <member name="drift" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::NanosecondsDrift" optional="true"/>
+        <member name="driftUncertainty" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::NanosecondsDrift" optional="true"/>
+        <member name="elapsedRealtime" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::NanosecondsCount" optional="true"/>
+        <member name="elapsedRealtimeUncertainty" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::NanosecondsCount" optional="true"/>
+        <member name="fullBias" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::NanosecondsCount" optional="true"/>
+        <member name="hardwareClockDiscontinuityCount" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::NanosecondsCount" optional="true"/>
+        <member name="leapSecond" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Count" min="-2147483648" max="2147483647" optional="true"/>
+        <member name="referenceCarrierFrequency" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::RadioFrequency_Hertz" min="0.0" max="10000000000" optional="true"/>
+        <member name="referenceCodeTypeFor" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::StringShortDescription" optional="true"/>
+        <member name="referenceConstellationType" type="nonBasic"  nonBasicTypeName= "UMAA::Common::MaritimeEnumeration::GPSConstellationEnumType::GPSConstellationEnumType" optional="true"/>
+        <member name="time" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Count" min="-2147483648" max="2147483647" optional="true"/>
+        <member name="timeUncertainty" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Size_Numeral" optional="true"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>
