@@ -1,33 +1,52 @@
-# Example Code: UMAA with Compiled and DynamicData types using XML App Creation
+# UMAA CASE+CODE
 
-The purpose of this example is to demonstrate the use of XML Application Creation
-using Compiled and DynamicData types when developing against the UMAA standard.
+Tested compatibility: Connext Pro 7.2
 
-Language: Modern C++
-Tested against Connext PRO 7.1
-
-INTERNAL: Scripts/artifacts related to preparation or deliverables
-EXTERNAL: Application code to share as an example
-
-## Building the Example :wrench:
-
+## Linux
 Make sure you have followed the setup guide for your Connext installation, 
 including setting the NDDSHOME variable.
 
-### Compiled types
-Using rtiddsgen, convert the IDL files to typefiles, and then compile into objects.
+- Set the environment variable $NDDSTARGET for your platform. IE:
+```sh
+export NDDSTARGET=x64Linux4gcc7.3.0
+```
+- Ensure a pre-processor is in your PATH environment variable.
+The default is `cpp`. Reference the RTI Code Generator documentation for details.
 
-### DynamicData types
-Using rtiddsgen, convert the IDL files to typefiles to xml files.
+### Modern C++
+Navigate to the folder `modern_cpp`
 
+Set the environment variable $UMAA_HOME for this folder. IE:
+```sh
+export UMAA_HOME="PATH_TO_FOLDER"/modern_cpp
+```
 
-To build this example, run make on the included makefile.
+#### Compiling Type Objects :wrench:
+Run the following script:
+```sh
+./scripts/build_umaa_objects_cpp11.sh
+```
+
+#### Creating XML type files :wrench:
+Run the following command:
+```sh
+rtiddsgen -I ./ -convertToXML -inputIDL ./ -r
+```
+
+#### Build example application :wrench:
+The purpose of this example is to demonstrate the use of XML Application Creation
+using Compiled and DynamicData types when developing against the UMAA standard.
+
+This example has been developed as a simple User and Provider for the SA Service.
+
+**NOTE: Complete both previous steps for Compiled Types and XML Types before running example.**
+
+To build, run make on the included makefile.
 
 ```sh
 make -f makefile
 ```
-
-## Running the Example
+#### Running the Example
 
 Run each application in two separate command prompt windows. Run the
 following commands from the example directory:
@@ -35,22 +54,42 @@ following commands from the example directory:
 On *UNIX* systems run:
 
 ```sh
-./sa_provider
+./objs/<architecture>/sa_provider
 ```
 
 and on a separate terminal:
 ```sh
-./sa_user
+./objs/<architecture>/sa_user
 ```
 
-If you wish to change the Domain that the application uses, you can change this
-in the application.xml file.  Modify the domain_id attribute of the domain.  In
-This case the domain id is set to 10, but can be any number from 0-255.
+### Traditional C++
+Navigate to the folder `trad_cpp`
 
-```xml
- <domain name="domain" domain_id="10">
- ```
+Set the environment variable $UMAA_HOME for this folder. IE:
+```sh
+export UMAA_HOME="PATH_TO_FOLDER"/trad_cpp
+```
 
-# NOTES
+#### Compiling Type Objects :wrench:
+Run the following script:
+```sh
+./scripts/build_umaa_objects_cpp98.sh
+```
+**NOTE: Enums are converted to using fully qualified names with the `-qualifiedEnumerater` flag.
+Reference the RTI Code Generator documentation for details.**
+
+#### Creating XML type files :wrench:
+Run the following command:
+```sh
+rtiddsgen -I ./ -convertToXML -inputIDL ./ -r
+```
+
+# INTERNAL
+Folder for internal scripts to generate customer deliverables.
+
+## NOTES
 - For Distro A, modifications have been made to the Common/Measurement/Measurements.idl 
 to remove some typos that caused codegen issues. This has been resolved in the latest Distro.
+- The recursion flag `-r` on `rtiddsgen` has an open JIRA(CODEGENII-1991) that when generating makefiles the paths
+for dependencies aren't correct. The current workaround is the scripts until that get's resolved.
+If someone wants to just generate the types without using the makefiles the recursion is faster.

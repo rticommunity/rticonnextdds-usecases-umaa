@@ -1,0 +1,48 @@
+TERMS OF USE AGREEMENT 
+
+IMPORTANT - READ THIS ENTIRE AGREEMENT BEFORE ACCESSING THE UNMANNED MARITIME AUTONOMY ARCHITECTURE (UMAA) SOFTWARE FROM THE DEPARTMENT OF THE NAVY, DI2E UMAAPUBLIC WEBSITE (WEBSITE). BY ACCESSING THE UMAA INTERFACE DEFINITION LANGUAGE (IDL) SOFTWARE FROM THE WEBSITE, YOU AGREE TO BE BOUND BY THE TERMS OF USE STATED IN THIS AGREEMENT. DO NOT ACCESS THE UMAA REFERENCE IMPLEMENTATION SOFTWARE FROM THE WEBSITE UNTIL YOU HAVE CAREFULLY READ, UNDERSTOOD AND AGREED TO THE FOLLOWING TERMS OF USE.
+
+Article 1.0 Introduction.
+
+1.1	    The WEBSITE is intended to provide a data repository where computer software, technical data and other documentation related to the UMAA Reference Implementation Software, (hereinafter, DATA or SOFTWARE) can be accessed and downloaded by authorized parties.
+
+1.2	    The WEBSITE is operated and maintained and administered by the GOVERNMENT, as represented by PMS 406.
+
+1.3	    The DATA is UNCLASS and released under Distribution Statement A and the GOVERNMENT is interested in presenting the DATA or SOFTWARE to entities, so that interested parties may be aware of and take advantage of the direction the GOVERNMENT intends to take as it manages DATA or SOFTWARE development.
+
+1.4	    The GOVERNMENT wants to ensure that all versions of the DATA or SOFTWARE are made reasonably available to all appropriate parties who plan to take advantage of the DATA or SOFTWARE development efforts by the GOVERNMENT for any Government or commercially sponsored effort. To address these considerations, the GOVERNMENT would like to place certain limitations on the use of the DATA or SOFTWARE by parties that access the WEBSITE.
+
+Article 2.0 User Responsibilities.
+
+2.1	    You may download and use the DATA or SOFTWARE as a result of being granting access to the WEBSITE or as otherwise acquired. 
+
+2.1.1	Notwithstanding the requirements of 2.1, the GOVERNMENT recognizes that you retain ownership and copyright in DATA or SOFTWARE that you develop through derivation of software from the WEBSITE. You retain your right to use, modify, release and display such DATA or SOFTWARE for your own purposes.
+
+2.2 	You may not combine DATA or SOFTWARE that is computer software with other computer software that is Open Source Software (OSS), with any other computer software, whether OSS or otherwise, in a manner that might: (i) create, or purport to create, any unintended GOVERNMENT licensing obligations with respect to the resulting DATA or SOFTWARE/computer software combination; or (ii) grant, or purport to grant, to any third party any rights to or immunities under GOVERNMENT intellectual property or GOVERNMENT data rights to the DATA or SOFTWARE. 
+
+2.3	    If you modify the DATA or SOFTWARE, any future deliveries of the modified DATA or SOFTWARE to the GOVERNMENT must be delivered with at least Government Purpose Rights, as that term is defined in DFARS Â§252.227-7013 and 252.227-7014.  
+	  
+2.4 	You may use the DATA or SOFTWARE in the preparation of proposals in response to GOVERNMENT Requests for Procurement. Please be advised, however, that the GOVERNMENT has made and will make the same DATA or SOFTWARE available to all other parties that are interested in competing in the procurement. With respect to GOVERNMENT contracts that already exist, the DATA or SOFTWARE may be issued as Government Furnished Information without prior notice to you.
+
+2.5 	The disclosure of the DATA or SOFTWARE to you does not imply any relinquishment of GOVERNMENT rights that it may or may not have in such DATA or SOFTWARE. Your access to the WEBSITE does not constitute a grant of any license under any trademark, patent or copyright on the DATA or SOFTWARE, or application for same. DATA or SOFTWARE on the WEBSITE is declared a work of the U.S. GOVERNMENT, and is not subject to copyright protection in the United States. Foreign copyrights may apply.
+
+     
+Article 3. General.
+3.1	    THE DATA OR SOFTWARE IS PROVIDED TO YOU "AS IS" WITHOUT ANY WARRANTY OF ANY KIND, EITHER EXPRESSED, IMPLIED, OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, ANY WARRANTY THAT THE DATA OR SOFTWARE WILL CONFORM TO SPECIFICATIONS, ANY IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR FREEDOM FROM INFRINGEMENT, ANY WARRANTY THAT THE DATA OR SOFTWARE WILL BE ERROR FREE, OR ANY WARRANTY THAT DOCUMENTATION, IF PROVIDED, WILL CONFORM TO THE DATA OR SOFTWARE. THIS AGREEMENT DOES NOT, IN ANY MANNER, CONSTITUTE AN ENDORSEMENT BY GOVERNMENT OR ANY PRIOR RECIPIENT OF ANY RESULTS, RESULTING DESIGNS, HARDWARE, SOFTWARE PRODUCTS OR ANY OTHER APPLICATIONS RESULTING FROM USE OF THE DATA OR SOFTWARE. FURTHER, GOVERNMENT DISCLAIMS ALL WARRANTIES AND LIABILITIES REGARDING THIRD-PARTY SOFTWARE, IF PRESENT IN THE DATA OR SOFTWARE.
+
+3.2	    The Government cannot and will not make determinations on whether or not third party modifications to the DATA or SOFTWARE that you originally developed and contributed to the WEBSITE rise to the level of a protectable copyright. By accessing the DATA or SOFTWARE at the WEBSITE, you agree to indemnify and hold the Government harmless against any claim, loss or risk of loss for patent or copyright infringement with respect to such third party modifications.
+
+3.3	    Please feel free to contact the GOVERNMENT if you have suggestions on modifications or improvements to the DATA or SOFTWARE. However, any technical data or computer software included in such suggestions will not be treated as proprietary. If the GOVERNMENT incorporates your modifications/improvements into the DATA or SOFTWARE, it will treat such suggestions/ modifications under the same terms as the DATA or SOFTWARE.
+
+3.4	    This AGREEMENT does not replace or supersede any other written contracts and/or written agreements that you have or will have with the GOVERNMENT. Any inconsistencies in this AGREEMENT will be resolved by giving precedence to the terms and conditions of your other written contracts and/or written agreements with the GOVERNMENT.
+
+3.5	    This AGREEMENT constitutes the entire understanding of the parties. The GOVERNMENT may update the terms of the AGREEMENT from time to time without notice to you.
+
+3.6	    Nothing in this AGREEMENT releases you from performance of any contractual requirements in any contracts with the GOVERNMENT.
+
+3.7	    If any provision of this AGREEMENT is held to be invalid or unenforceable under applicable law, it will not affect the validity or enforceability of the remainder of the terms of this AGREEMENT.
+
+3.8	    This AGREEMENT will be subject to United States Federal law only for all purposes, including, but not limited to, determining the validity of these Terms of Use/License, the meaning of its provisions and the rights, obligations and remedies of the parties
+
+3.9	    THIS AGREEMENT DOES NOT, IN ANY MANNER, CONSTITUTE AN ENDORSEMENT BY GOVERNMENT OF ANY RESULTS, RESULTING DESIGNS, HARDWARE, SOFTWARE OR ANY OTHER APPLICATIONS RESULTING FROM THE USE OF THE DATA UNDER THIS AGREEMENT. THIS AGREEMENT DOES NOT OBLIGATE THE GOVERNMENT IN ANY WAY, SHAPE OR FORM TO AWARD FUTURE PROCUREMENTS TO YOU.
+
