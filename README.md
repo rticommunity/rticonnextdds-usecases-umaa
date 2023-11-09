@@ -24,7 +24,10 @@ The *INTERNAL* folder is to hold any scripts or artifacts to be used in generati
 of deliverables (XML files etc.)
 
 
+
 --------------------------------------------------------------------------------
+# EXTERNAL
+To be migrated to public github
 --------------------------------------------------------------------------------
 
 ## Linux
@@ -131,10 +134,9 @@ gen_all_xml.bat
 ```
 
 --------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-
 # INTERNAL
 Folder for internal scripts to generate customer deliverables.
+--------------------------------------------------------------------------------
 
 ## NOTES
 - For Distro A, modifications have been made to the Common/Measurement/Measurements.idl 
