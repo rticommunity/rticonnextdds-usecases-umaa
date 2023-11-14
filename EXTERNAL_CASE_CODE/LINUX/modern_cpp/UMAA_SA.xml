@@ -384,7 +384,7 @@ to use the software.
     <!-- Participant library -->
     <domain_participant_library name="UMAAParticipantLibrary">
 
-        <!-- Define the writers for the SA Provider Publisher - Associate with Topics and QOS -->
+        <!-- Define the entities for the SA PROVIDER - Associate with Topics and QOS -->
         <domain_participant name="SAProvider" domain_ref="UMAASADomainLibrary::UMAADomain0">
             <domain_participant_qos base_name="UMAAQOSLibrary::ParticipantQOS"/>
 
@@ -394,7 +394,7 @@ to use the software.
                     topic_ref="UMAA::SA::AccelerationStatus::AccelerationReport">
                     <datawriter_qos base_name="UMAAQOSLibrary::AccelerationReportQOS">
 
-                        <!-- Override QOS at individual writer level here if necessary -->
+                        <!-- Override QOS at datawriter_qos/datareader_qos level if necessary -->
                         
                     </datawriter_qos>
                 </data_writer>
@@ -634,7 +634,6 @@ to use the software.
             </publisher>
 
             <subscriber name="LocalDeadReckoningCommandSubscriber">
-                <!-- All Commands Set to Strict Reliable-->
                 <data_reader name="LocalDeadReckoningCommandReader"
                     topic_ref="UMAA::SA::LocalDeadReckoning::LocalDeadReckoningCommand">
                     <datareader_qos base_name="UMAAQOSLibrary::LocalDeadReckoningCommandQOS"  />
@@ -649,7 +648,7 @@ to use the software.
 
         </domain_participant>
 
-        <!-- User will be subscribing to topics from provider-->
+        <!-- Define the entities for the SA USER - Associate with Topics and QOS -->
         <domain_participant name="SAUser" domain_ref="UMAASADomainLibrary::UMAADomain0">
             <domain_participant_qos base_name="UMAAQOSLibrary::ParticipantQOS"/>
 
@@ -665,8 +664,6 @@ to use the software.
                     <datawriter_qos base_name="UMAAQOSLibrary::GlobalDeadReckoningCommandQOS" />
                 </data_writer>
             </publisher>
-            
-
             <subscriber name="AccelerationReportSubscriber">
                 <data_reader name="AccellerationReportReader"
                     topic_ref="UMAA::SA::AccelerationStatus::AccelerationReport">

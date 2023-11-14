@@ -1,7 +1,7 @@
 # UMAA CASE+CODE
 
-Tested compatibility: Connext Pro 7.2
-UMAA Distro included:  A (For public use)
+Tested compatibility: Connext Pro 7.2  
+UMAA Distro included:  A (For public use)  
 
 This repo is intended to hold example applications and helper scripts 
 to assist in development with Connext along with UMAA compliance.
