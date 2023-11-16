@@ -1,6 +1,6 @@
 # UMAA CASE+CODE
 
-This repo is intended to hold helper scripts and example applications
+This repo is intended to hold helper scripts and example applications  
 to assist in development when using Connext along with the UMAA standard. 
 
 
@@ -55,8 +55,8 @@ Run the following script depending on your choice:
 ```sh
 ./build_umaa_objects_cpp.sh c++98
 ```
-**Note: The "-qualifiedEnumerator" flag will be added when generating code for c++98.** 
-Reference the [https://community.rti.com/static/documentation/connext-dds/6.1.2/doc/manuals/connext_dds_professional/code_generator/users_manual/index.htm](RTI code generator) documentation for more info.
+**Note: The "-qualifiedEnumerator" flag will be added when generating code for c++98.**  
+Reference the [RTI code generator](https://community.rti.com/static/documentation/connext-dds/6.1.2/doc/manuals/connext_dds_professional/code_generator/users_manual/index.htm) documentation for more info.
 ________________________________________________________________________________
 
 ## Windows
@@ -66,8 +66,8 @@ ________________________________________________________________________________
 - Make sure you have followed the setup guide for your Connext installation,  
 including setting the NDDSHOME variable by running the setup script.
 
-- Ensure a pre-processor is in your PATH environment variable.
-The default is `cp.exe`. Reference the RTI Code Generator documentation for details.
+- Ensure a pre-processor is in your PATH environment variable.  
+The default is `cp.exe`. Reference the [RTI code generator](https://community.rti.com/static/documentation/connext-dds/6.1.2/doc/manuals/connext_dds_professional/code_generator/users_manual/index.htm) documentation for more info.
 
 Set the environment variable $UMAA_HOME to the target folder:
 ```sh
