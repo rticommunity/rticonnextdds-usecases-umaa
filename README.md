@@ -28,8 +28,8 @@ export NDDSTARGET=x64Linux4gcc7.3.0
 ```sh
 export UMAA_HOME="<PATH_TO_UMAA_IDL_REPO>"
 ```
-- Ensure a pre-processor is in your PATH environment variable.
-The default is `cpp`. Reference the RTI Code Generator documentation for details.
+- Ensure a pre-processor is in your PATH environment variable.  
+The default is `cpp`. Reference the [RTI code generator](https://community.rti.com/static/documentation/connext-dds/6.1.2/doc/manuals/connext_dds_professional/code_generator/users_manual/index.htm) documentation for more info.
 
 
 ### 2. Go to folder
