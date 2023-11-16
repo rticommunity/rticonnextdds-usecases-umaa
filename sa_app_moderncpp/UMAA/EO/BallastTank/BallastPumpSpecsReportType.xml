@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-6.1.2/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<module name="UMAA">
+  <module name="EO">
+    <module name="BallastTank">
+      <const name="BallastPumpSpecsReport_TOPIC" type="string" value="&quot;UMAA::EO::BallastTank::BallastPumpSpecsReport&quot;"/>
+      <struct name= "BallastPumpSpecsReportType">
+        <member name="maxMassEmptyRate" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::MassFlowRate"/>
+        <member name="maxMassFillRate" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::MassFlowRate"/>
+        <member name="maxVolumeEmptyRate" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::VolumetricFlowRate"/>
+        <member name="maxVolumeFillRate" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::VolumetricFlowRate"/>
+        <member name="minMassEmptyRate" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::MassFlowRate"/>
+        <member name="minMassFillRate" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::MassFlowRate"/>
+        <member name="minVolumeEmptyRate" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::VolumetricFlowRate"/>
+        <member name="minVolumeFillRate" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::VolumetricFlowRate"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

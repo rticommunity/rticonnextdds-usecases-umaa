@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.2.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/Enumeration/EnumerationSets.xml"/>
+<include file="UMAA/Common/Measurement/Altitude_AGL.xml"/>
+<include file="UMAA/Common/Measurement/Altitude_MSL.xml"/>
+<include file="UMAA/Common/Measurement/DateTime_Tolerance.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<include file="UMAA/Common/Measurement/Position2D.xml"/>
+<include file="UMAA/Common/PrimitiveConstrained/ConstrainedTypes.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<module name="UMAA">
+  <module name="MM">
+    <module name="BaseType">
+      <struct name= "RecoveryObjectiveType">
+        <member name="altitude" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Altitude_MSL"/>
+        <member name="altitudeAGL" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Altitude_AGL"/>
+        <member name="altitudeASF" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance_ASF" min="0" max="401056000"/>
+        <member name="position" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Position2D"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

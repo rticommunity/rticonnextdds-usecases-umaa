@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-6.1.2/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/Enumeration/EnumerationSets.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<module name="UMAA">
+  <module name="MM">
+    <module name="ControlTransfer">
+      <const name="ControlSystemControlReport_TOPIC" type="string" value="&quot;UMAA::MM::ControlTransfer::ControlSystemControlReport&quot;"/>
+      <struct name= "ControlSystemControlReportType">
+        <member name="authorityLevel" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Count"/>
+        <member name="controlSystemID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID"/>
+        <member name="status" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Enumeration::ResourceAllocationStatusEnumType::ResourceAllocationStatusEnumType"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

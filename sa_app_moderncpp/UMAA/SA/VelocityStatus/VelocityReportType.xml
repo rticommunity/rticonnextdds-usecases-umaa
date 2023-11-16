@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-6.1.2/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/MaritimeEnumeration/EnumerationSets.xml"/>
+<include file="UMAA/Common/Measurement/CovarianceOrientationType.xml"/>
+<include file="UMAA/Common/Measurement/CovarianceVelocityVelocityType.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<include file="UMAA/Common/Measurement/OrientationVelocity3D.xml"/>
+<include file="UMAA/Common/Measurement/Velocity3D_PlatformNED.xml"/>
+<module name="UMAA">
+  <module name="SA">
+    <module name="VelocityStatus">
+      <const name="VelocityReport_TOPIC" type="string" value="&quot;UMAA::SA::VelocityStatus::VelocityReport&quot;"/>
+      <struct name= "VelocityReportType">
+        <member name="attitudeRate" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::OrientationVelocity3D"/>
+        <member name="attitudeRateCovariance" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::CovarianceOrientationType" optional="true"/>
+        <member name="mode" type="nonBasic"  nonBasicTypeName= "UMAA::Common::MaritimeEnumeration::VehicleSpeedModeEnumType::VehicleSpeedModeEnumType" optional="true"/>
+        <member name="velocity" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Velocity3D_PlatformNED"/>
+        <member name="velocityCovariance" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::CovarianceVelocityVelocityType" optional="true"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

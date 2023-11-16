@@ -1,0 +1,294 @@
+
+
+/*
+WARNING: THIS FILE IS AUTO-GENERATED. DO NOT MODIFY.
+
+This file was generated from GlobalRacetrackStateType.idl
+using RTI Code Generator (rtiddsgen) version 4.2.0.
+The rtiddsgen tool is part of the RTI Connext DDS distribution.
+For more information, type 'rtiddsgen -help' at a command shell
+or consult the Code Generator User's Manual.
+*/
+
+#ifndef GlobalRacetrackStateType_1560968254_h
+#define GlobalRacetrackStateType_1560968254_h
+
+#ifndef NDDS_STANDALONE_TYPE
+#ifndef ndds_cpp_h
+#include "ndds/ndds_cpp.h"
+#endif
+#include "rti/xcdr/Interpreter.hpp"
+#else
+#include "ndds_standalone_type.h"
+#endif
+
+#include "UMAA/MO/GlobalRacetrackState/GlobalRacetrackPatternType.h"
+#include "UMAA/MO/GlobalRacetrackState/GlobalRacetrackTransitType.h"
+
+typedef enum UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Selectors
+{
+    UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Selectors_GLOBALRACETRACKPATTERNTYPE_SELECT , 
+    UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Selectors_GLOBALRACETRACKTRANSITTYPE_SELECT 
+} UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Selectors;
+#if (defined(RTI_WIN32) || defined (RTI_WINCE) || defined(RTI_INTIME)) && defined(NDDS_USER_DLL_EXPORT)
+/* If the code is building on Windows, start exporting symbols.
+*/
+#undef NDDSUSERDllExport
+#define NDDSUSERDllExport __declspec(dllexport)
+#endif
+
+#ifndef NDDS_STANDALONE_TYPE
+NDDSUSERDllExport DDS_TypeCode * UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Selectors_get_typecode(void); /* Type code */
+NDDSUSERDllExport RTIXCdrTypePlugin *UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Selectors_get_type_plugin_info(void);
+NDDSUSERDllExport RTIXCdrSampleAccessInfo *UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Selectors_get_sample_access_info(void);
+NDDSUSERDllExport RTIXCdrSampleAccessInfo *UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Selectors_get_sample_seq_access_info(void);
+#endif
+DDS_SEQUENCE(UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_SelectorsSeq, UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Selectors);
+
+NDDSUSERDllExport
+RTIBool UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Selectors_initialize(
+    UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Selectors* self);
+
+NDDSUSERDllExport
+RTIBool UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Selectors_initialize_ex(
+    UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Selectors* self,RTIBool allocatePointers,RTIBool allocateMemory);
+
+NDDSUSERDllExport
+RTIBool UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Selectors_initialize_w_params(
+    UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Selectors* self,
+    const struct DDS_TypeAllocationParams_t * allocParams);  
+
+NDDSUSERDllExport
+RTIBool UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Selectors_finalize_w_return(
+    UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Selectors* self);
+
+NDDSUSERDllExport
+void UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Selectors_finalize(
+    UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Selectors* self);
+
+NDDSUSERDllExport
+void UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Selectors_finalize_ex(
+    UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Selectors* self,RTIBool deletePointers);
+
+NDDSUSERDllExport
+void UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Selectors_finalize_w_params(
+    UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Selectors* self,
+    const struct DDS_TypeDeallocationParams_t * deallocParams);
+
+NDDSUSERDllExport
+void UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Selectors_finalize_optional_members(
+    UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Selectors* self, RTIBool deletePointers);  
+
+NDDSUSERDllExport
+RTIBool UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Selectors_copy(
+    UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Selectors* dst,
+    const UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Selectors* src);
+
+#if (defined(RTI_WIN32) || defined (RTI_WINCE) || defined(RTI_INTIME)) && defined(NDDS_USER_DLL_EXPORT)
+/* If the code is building on Windows, stop exporting symbols.
+*/
+#undef NDDSUSERDllExport
+#define NDDSUSERDllExport
+#endif
+
+extern "C" {
+
+    extern const char *UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_UnionTYPENAME;
+
+}
+
+struct UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_UnionSeq;
+#ifndef NDDS_STANDALONE_TYPE
+class UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_UnionTypeSupport;
+class UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_UnionDataWriter;
+class UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_UnionDataReader;
+#endif
+
+typedef struct UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Union
+{
+    typedef struct UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_UnionSeq Seq;
+    #ifndef NDDS_STANDALONE_TYPE
+    typedef UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_UnionTypeSupport TypeSupport;
+    typedef UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_UnionDataWriter DataWriter;
+    typedef UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_UnionDataReader DataReader;
+    #endif
+
+    UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Selectors _d;
+    struct UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Union_u 
+    {
+
+        UMAA_MO_GlobalRacetrackState_GlobalRacetrackPatternType   GlobalRacetrackPatternType_data ;
+        UMAA_MO_GlobalRacetrackState_GlobalRacetrackTransitType   GlobalRacetrackTransitType_data ;
+    }_u;
+
+} UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Union ;
+#if (defined(RTI_WIN32) || defined (RTI_WINCE) || defined(RTI_INTIME)) && defined(NDDS_USER_DLL_EXPORT)
+/* If the code is building on Windows, start exporting symbols.
+*/
+#undef NDDSUSERDllExport
+#define NDDSUSERDllExport __declspec(dllexport)
+#endif
+
+#ifndef NDDS_STANDALONE_TYPE
+NDDSUSERDllExport DDS_TypeCode * UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Union_get_typecode(void); /* Type code */
+NDDSUSERDllExport RTIXCdrTypePlugin *UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Union_get_type_plugin_info(void);
+NDDSUSERDllExport RTIXCdrSampleAccessInfo *UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Union_get_sample_access_info(void);
+NDDSUSERDllExport RTIXCdrSampleAccessInfo *UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Union_get_sample_seq_access_info(void);
+#endif
+DDS_SEQUENCE(UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_UnionSeq, UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Union);
+
+NDDSUSERDllExport
+RTIBool UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Union_initialize(
+    UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Union* self);
+
+NDDSUSERDllExport
+RTIBool UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Union_initialize_ex(
+    UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Union* self,RTIBool allocatePointers,RTIBool allocateMemory);
+
+NDDSUSERDllExport
+RTIBool UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Union_initialize_w_params(
+    UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Union* self,
+    const struct DDS_TypeAllocationParams_t * allocParams);  
+
+NDDSUSERDllExport
+RTIBool UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Union_finalize_w_return(
+    UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Union* self);
+
+NDDSUSERDllExport
+void UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Union_finalize(
+    UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Union* self);
+
+NDDSUSERDllExport
+void UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Union_finalize_ex(
+    UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Union* self,RTIBool deletePointers);
+
+NDDSUSERDllExport
+void UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Union_finalize_w_params(
+    UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Union* self,
+    const struct DDS_TypeDeallocationParams_t * deallocParams);
+
+NDDSUSERDllExport
+void UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Union_finalize_optional_members(
+    UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Union* self, RTIBool deletePointers);  
+
+NDDSUSERDllExport
+RTIBool UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Union_copy(
+    UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Union* dst,
+    const UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Union* src);
+
+NDDSUSERDllExport
+DDS_LongLong UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Union_getDefaultDiscriminator(void);
+
+#if (defined(RTI_WIN32) || defined (RTI_WINCE) || defined(RTI_INTIME)) && defined(NDDS_USER_DLL_EXPORT)
+/* If the code is building on Windows, stop exporting symbols.
+*/
+#undef NDDSUSERDllExport
+#define NDDSUSERDllExport
+#endif
+
+extern "C" {
+
+    extern const char *UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateTypeTYPENAME;
+
+}
+
+struct UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateTypeSeq;
+#ifndef NDDS_STANDALONE_TYPE
+class UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateTypeTypeSupport;
+class UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateTypeDataWriter;
+class UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateTypeDataReader;
+#endif
+class UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType 
+{
+  public:
+    typedef struct UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateTypeSeq Seq;
+    #ifndef NDDS_STANDALONE_TYPE
+    typedef UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateTypeTypeSupport TypeSupport;
+    typedef UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateTypeDataWriter DataWriter;
+    typedef UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateTypeDataReader DataReader;
+    #endif
+
+    UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Union   GlobalRacetrackStateType_subtypes ;
+
+};
+#if (defined(RTI_WIN32) || defined (RTI_WINCE) || defined(RTI_INTIME)) && defined(NDDS_USER_DLL_EXPORT)
+/* If the code is building on Windows, start exporting symbols.
+*/
+#undef NDDSUSERDllExport
+#define NDDSUSERDllExport __declspec(dllexport)
+#endif
+
+#ifndef NDDS_STANDALONE_TYPE
+NDDSUSERDllExport DDS_TypeCode * UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_get_typecode(void); /* Type code */
+NDDSUSERDllExport RTIXCdrTypePlugin *UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_get_type_plugin_info(void);
+NDDSUSERDllExport RTIXCdrSampleAccessInfo *UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_get_sample_access_info(void);
+NDDSUSERDllExport RTIXCdrSampleAccessInfo *UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_get_sample_seq_access_info(void);
+#endif
+DDS_SEQUENCE(UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateTypeSeq, UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType);
+
+NDDSUSERDllExport
+RTIBool UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_initialize(
+    UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType* self);
+
+NDDSUSERDllExport
+RTIBool UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_initialize_ex(
+    UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType* self,RTIBool allocatePointers,RTIBool allocateMemory);
+
+NDDSUSERDllExport
+RTIBool UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_initialize_w_params(
+    UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType* self,
+    const struct DDS_TypeAllocationParams_t * allocParams);  
+
+NDDSUSERDllExport
+RTIBool UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_finalize_w_return(
+    UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType* self);
+
+NDDSUSERDllExport
+void UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_finalize(
+    UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType* self);
+
+NDDSUSERDllExport
+void UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_finalize_ex(
+    UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType* self,RTIBool deletePointers);
+
+NDDSUSERDllExport
+void UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_finalize_w_params(
+    UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType* self,
+    const struct DDS_TypeDeallocationParams_t * deallocParams);
+
+NDDSUSERDllExport
+void UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_finalize_optional_members(
+    UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType* self, RTIBool deletePointers);  
+
+NDDSUSERDllExport
+RTIBool UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_copy(
+    UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType* dst,
+    const UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType* src);
+
+#if (defined(RTI_WIN32) || defined (RTI_WINCE) || defined(RTI_INTIME)) && defined(NDDS_USER_DLL_EXPORT)
+/* If the code is building on Windows, stop exporting symbols.
+*/
+#undef NDDSUSERDllExport
+#define NDDSUSERDllExport
+#endif
+
+#ifndef NDDS_STANDALONE_TYPE
+namespace rti { 
+    namespace xcdr {
+        template <>
+        struct type_code< UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType_Specializations_GlobalRacetrackStateType_Union> {
+            static const RTIXCdrTypeCode * get();
+        };
+
+        template <>
+        struct type_code< UMAA_MO_GlobalRacetrackState_GlobalRacetrackStateType> {
+            static const RTIXCdrTypeCode * get();
+        };
+
+    } 
+}
+
+#endif
+
+#endif /* GlobalRacetrackStateType */
+

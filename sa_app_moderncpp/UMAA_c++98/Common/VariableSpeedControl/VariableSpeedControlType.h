@@ -1,0 +1,297 @@
+
+
+/*
+WARNING: THIS FILE IS AUTO-GENERATED. DO NOT MODIFY.
+
+This file was generated from VariableSpeedControlType.idl
+using RTI Code Generator (rtiddsgen) version 4.2.0.
+The rtiddsgen tool is part of the RTI Connext DDS distribution.
+For more information, type 'rtiddsgen -help' at a command shell
+or consult the Code Generator User's Manual.
+*/
+
+#ifndef VariableSpeedControlType_455525219_h
+#define VariableSpeedControlType_455525219_h
+
+#ifndef NDDS_STANDALONE_TYPE
+#ifndef ndds_cpp_h
+#include "ndds/ndds_cpp.h"
+#endif
+#include "rti/xcdr/Interpreter.hpp"
+#else
+#include "ndds_standalone_type.h"
+#endif
+
+#include "UMAA/Common/VariableSpeedControl/RecommendedSpeedControl.h"
+#include "UMAA/Common/VariableSpeedControl/RequiredSpeedControl.h"
+#include "UMAA/Common/VariableSpeedControl/TimeWithSpeed.h"
+
+typedef enum UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Selectors
+{
+    UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Selectors_TIMEWITHSPEED_SELECT , 
+    UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Selectors_RECOMMENDEDSPEEDCONTROL_SELECT , 
+    UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Selectors_REQUIREDSPEEDCONTROL_SELECT 
+} UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Selectors;
+#if (defined(RTI_WIN32) || defined (RTI_WINCE) || defined(RTI_INTIME)) && defined(NDDS_USER_DLL_EXPORT)
+/* If the code is building on Windows, start exporting symbols.
+*/
+#undef NDDSUSERDllExport
+#define NDDSUSERDllExport __declspec(dllexport)
+#endif
+
+#ifndef NDDS_STANDALONE_TYPE
+NDDSUSERDllExport DDS_TypeCode * UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Selectors_get_typecode(void); /* Type code */
+NDDSUSERDllExport RTIXCdrTypePlugin *UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Selectors_get_type_plugin_info(void);
+NDDSUSERDllExport RTIXCdrSampleAccessInfo *UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Selectors_get_sample_access_info(void);
+NDDSUSERDllExport RTIXCdrSampleAccessInfo *UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Selectors_get_sample_seq_access_info(void);
+#endif
+DDS_SEQUENCE(UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_SelectorsSeq, UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Selectors);
+
+NDDSUSERDllExport
+RTIBool UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Selectors_initialize(
+    UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Selectors* self);
+
+NDDSUSERDllExport
+RTIBool UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Selectors_initialize_ex(
+    UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Selectors* self,RTIBool allocatePointers,RTIBool allocateMemory);
+
+NDDSUSERDllExport
+RTIBool UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Selectors_initialize_w_params(
+    UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Selectors* self,
+    const struct DDS_TypeAllocationParams_t * allocParams);  
+
+NDDSUSERDllExport
+RTIBool UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Selectors_finalize_w_return(
+    UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Selectors* self);
+
+NDDSUSERDllExport
+void UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Selectors_finalize(
+    UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Selectors* self);
+
+NDDSUSERDllExport
+void UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Selectors_finalize_ex(
+    UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Selectors* self,RTIBool deletePointers);
+
+NDDSUSERDllExport
+void UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Selectors_finalize_w_params(
+    UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Selectors* self,
+    const struct DDS_TypeDeallocationParams_t * deallocParams);
+
+NDDSUSERDllExport
+void UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Selectors_finalize_optional_members(
+    UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Selectors* self, RTIBool deletePointers);  
+
+NDDSUSERDllExport
+RTIBool UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Selectors_copy(
+    UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Selectors* dst,
+    const UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Selectors* src);
+
+#if (defined(RTI_WIN32) || defined (RTI_WINCE) || defined(RTI_INTIME)) && defined(NDDS_USER_DLL_EXPORT)
+/* If the code is building on Windows, stop exporting symbols.
+*/
+#undef NDDSUSERDllExport
+#define NDDSUSERDllExport
+#endif
+
+extern "C" {
+
+    extern const char *UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_UnionTYPENAME;
+
+}
+
+struct UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_UnionSeq;
+#ifndef NDDS_STANDALONE_TYPE
+class UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_UnionTypeSupport;
+class UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_UnionDataWriter;
+class UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_UnionDataReader;
+#endif
+
+typedef struct UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Union
+{
+    typedef struct UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_UnionSeq Seq;
+    #ifndef NDDS_STANDALONE_TYPE
+    typedef UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_UnionTypeSupport TypeSupport;
+    typedef UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_UnionDataWriter DataWriter;
+    typedef UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_UnionDataReader DataReader;
+    #endif
+
+    UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Selectors _d;
+    struct UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Union_u 
+    {
+
+        UMAA_Common_VariableSpeedControl_TimeWithSpeed   TimeWithSpeed_data ;
+        UMAA_Common_VariableSpeedControl_RecommendedSpeedControl   RecommendedSpeedControl_data ;
+        UMAA_Common_VariableSpeedControl_RequiredSpeedControl   RequiredSpeedControl_data ;
+    }_u;
+
+} UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Union ;
+#if (defined(RTI_WIN32) || defined (RTI_WINCE) || defined(RTI_INTIME)) && defined(NDDS_USER_DLL_EXPORT)
+/* If the code is building on Windows, start exporting symbols.
+*/
+#undef NDDSUSERDllExport
+#define NDDSUSERDllExport __declspec(dllexport)
+#endif
+
+#ifndef NDDS_STANDALONE_TYPE
+NDDSUSERDllExport DDS_TypeCode * UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Union_get_typecode(void); /* Type code */
+NDDSUSERDllExport RTIXCdrTypePlugin *UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Union_get_type_plugin_info(void);
+NDDSUSERDllExport RTIXCdrSampleAccessInfo *UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Union_get_sample_access_info(void);
+NDDSUSERDllExport RTIXCdrSampleAccessInfo *UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Union_get_sample_seq_access_info(void);
+#endif
+DDS_SEQUENCE(UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_UnionSeq, UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Union);
+
+NDDSUSERDllExport
+RTIBool UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Union_initialize(
+    UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Union* self);
+
+NDDSUSERDllExport
+RTIBool UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Union_initialize_ex(
+    UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Union* self,RTIBool allocatePointers,RTIBool allocateMemory);
+
+NDDSUSERDllExport
+RTIBool UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Union_initialize_w_params(
+    UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Union* self,
+    const struct DDS_TypeAllocationParams_t * allocParams);  
+
+NDDSUSERDllExport
+RTIBool UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Union_finalize_w_return(
+    UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Union* self);
+
+NDDSUSERDllExport
+void UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Union_finalize(
+    UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Union* self);
+
+NDDSUSERDllExport
+void UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Union_finalize_ex(
+    UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Union* self,RTIBool deletePointers);
+
+NDDSUSERDllExport
+void UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Union_finalize_w_params(
+    UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Union* self,
+    const struct DDS_TypeDeallocationParams_t * deallocParams);
+
+NDDSUSERDllExport
+void UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Union_finalize_optional_members(
+    UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Union* self, RTIBool deletePointers);  
+
+NDDSUSERDllExport
+RTIBool UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Union_copy(
+    UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Union* dst,
+    const UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Union* src);
+
+NDDSUSERDllExport
+DDS_LongLong UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Union_getDefaultDiscriminator(void);
+
+#if (defined(RTI_WIN32) || defined (RTI_WINCE) || defined(RTI_INTIME)) && defined(NDDS_USER_DLL_EXPORT)
+/* If the code is building on Windows, stop exporting symbols.
+*/
+#undef NDDSUSERDllExport
+#define NDDSUSERDllExport
+#endif
+
+extern "C" {
+
+    extern const char *UMAA_Common_VariableSpeedControl_VariableSpeedControlTypeTYPENAME;
+
+}
+
+struct UMAA_Common_VariableSpeedControl_VariableSpeedControlTypeSeq;
+#ifndef NDDS_STANDALONE_TYPE
+class UMAA_Common_VariableSpeedControl_VariableSpeedControlTypeTypeSupport;
+class UMAA_Common_VariableSpeedControl_VariableSpeedControlTypeDataWriter;
+class UMAA_Common_VariableSpeedControl_VariableSpeedControlTypeDataReader;
+#endif
+class UMAA_Common_VariableSpeedControl_VariableSpeedControlType 
+{
+  public:
+    typedef struct UMAA_Common_VariableSpeedControl_VariableSpeedControlTypeSeq Seq;
+    #ifndef NDDS_STANDALONE_TYPE
+    typedef UMAA_Common_VariableSpeedControl_VariableSpeedControlTypeTypeSupport TypeSupport;
+    typedef UMAA_Common_VariableSpeedControl_VariableSpeedControlTypeDataWriter DataWriter;
+    typedef UMAA_Common_VariableSpeedControl_VariableSpeedControlTypeDataReader DataReader;
+    #endif
+
+    UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Union   VariableSpeedControlType_subtypes ;
+
+};
+#if (defined(RTI_WIN32) || defined (RTI_WINCE) || defined(RTI_INTIME)) && defined(NDDS_USER_DLL_EXPORT)
+/* If the code is building on Windows, start exporting symbols.
+*/
+#undef NDDSUSERDllExport
+#define NDDSUSERDllExport __declspec(dllexport)
+#endif
+
+#ifndef NDDS_STANDALONE_TYPE
+NDDSUSERDllExport DDS_TypeCode * UMAA_Common_VariableSpeedControl_VariableSpeedControlType_get_typecode(void); /* Type code */
+NDDSUSERDllExport RTIXCdrTypePlugin *UMAA_Common_VariableSpeedControl_VariableSpeedControlType_get_type_plugin_info(void);
+NDDSUSERDllExport RTIXCdrSampleAccessInfo *UMAA_Common_VariableSpeedControl_VariableSpeedControlType_get_sample_access_info(void);
+NDDSUSERDllExport RTIXCdrSampleAccessInfo *UMAA_Common_VariableSpeedControl_VariableSpeedControlType_get_sample_seq_access_info(void);
+#endif
+DDS_SEQUENCE(UMAA_Common_VariableSpeedControl_VariableSpeedControlTypeSeq, UMAA_Common_VariableSpeedControl_VariableSpeedControlType);
+
+NDDSUSERDllExport
+RTIBool UMAA_Common_VariableSpeedControl_VariableSpeedControlType_initialize(
+    UMAA_Common_VariableSpeedControl_VariableSpeedControlType* self);
+
+NDDSUSERDllExport
+RTIBool UMAA_Common_VariableSpeedControl_VariableSpeedControlType_initialize_ex(
+    UMAA_Common_VariableSpeedControl_VariableSpeedControlType* self,RTIBool allocatePointers,RTIBool allocateMemory);
+
+NDDSUSERDllExport
+RTIBool UMAA_Common_VariableSpeedControl_VariableSpeedControlType_initialize_w_params(
+    UMAA_Common_VariableSpeedControl_VariableSpeedControlType* self,
+    const struct DDS_TypeAllocationParams_t * allocParams);  
+
+NDDSUSERDllExport
+RTIBool UMAA_Common_VariableSpeedControl_VariableSpeedControlType_finalize_w_return(
+    UMAA_Common_VariableSpeedControl_VariableSpeedControlType* self);
+
+NDDSUSERDllExport
+void UMAA_Common_VariableSpeedControl_VariableSpeedControlType_finalize(
+    UMAA_Common_VariableSpeedControl_VariableSpeedControlType* self);
+
+NDDSUSERDllExport
+void UMAA_Common_VariableSpeedControl_VariableSpeedControlType_finalize_ex(
+    UMAA_Common_VariableSpeedControl_VariableSpeedControlType* self,RTIBool deletePointers);
+
+NDDSUSERDllExport
+void UMAA_Common_VariableSpeedControl_VariableSpeedControlType_finalize_w_params(
+    UMAA_Common_VariableSpeedControl_VariableSpeedControlType* self,
+    const struct DDS_TypeDeallocationParams_t * deallocParams);
+
+NDDSUSERDllExport
+void UMAA_Common_VariableSpeedControl_VariableSpeedControlType_finalize_optional_members(
+    UMAA_Common_VariableSpeedControl_VariableSpeedControlType* self, RTIBool deletePointers);  
+
+NDDSUSERDllExport
+RTIBool UMAA_Common_VariableSpeedControl_VariableSpeedControlType_copy(
+    UMAA_Common_VariableSpeedControl_VariableSpeedControlType* dst,
+    const UMAA_Common_VariableSpeedControl_VariableSpeedControlType* src);
+
+#if (defined(RTI_WIN32) || defined (RTI_WINCE) || defined(RTI_INTIME)) && defined(NDDS_USER_DLL_EXPORT)
+/* If the code is building on Windows, stop exporting symbols.
+*/
+#undef NDDSUSERDllExport
+#define NDDSUSERDllExport
+#endif
+
+#ifndef NDDS_STANDALONE_TYPE
+namespace rti { 
+    namespace xcdr {
+        template <>
+        struct type_code< UMAA_Common_VariableSpeedControl_VariableSpeedControlType_Specializations_VariableSpeedControlType_Union> {
+            static const RTIXCdrTypeCode * get();
+        };
+
+        template <>
+        struct type_code< UMAA_Common_VariableSpeedControl_VariableSpeedControlType> {
+            static const RTIXCdrTypeCode * get();
+        };
+
+    } 
+}
+
+#endif
+
+#endif /* VariableSpeedControlType */
+

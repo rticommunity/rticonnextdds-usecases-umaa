@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-6.1.2/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="BasicTypes/Quaternion.xml"/>
+<directive kind="copyC">#undef ERROR</directive>
+<directive kind="copyC">#undef VARIABLE_PITCH</directive>
+<directive kind="copyC">#undef DELETE</directive>
+<directive kind="copyC">#undef PLATFORM</directive>
+<module name="UMAA">
+  <module name="Common">
+    <module name="Enumeration">
+      <module name="AutomationEnumType">
+        <enum name="AutomationEnumType">
+          <enumerator name="AUTOMATIC"/>
+          <enumerator name="MANUAL"/>
+          <enumerator name="SEMI_AUTOMATIC"/>
+        </enum> 
+      </module>
+      <typedef name="BooleanEnumType" type="boolean"/>
+      <module name="BuiltInTestStatusEnumType">
+        <enum name="BuiltInTestStatusEnumType">
+          <enumerator name="BIT_SUSPENDED"/>
+          <enumerator name="BIT_FAILED"/>
+          <enumerator name="BIT_PASSED"/>
+          <enumerator name="RUNNING_BIT"/>
+          <enumerator name="OFF_ABORT"/>
+        </enum> 
+      </module>
+      <module name="IRPolarityEnumType">
+        <enum name="IRPolarityEnumType">
+          <enumerator name="BLACK_HOT"/>
+          <enumerator name="WHITE_HOT"/>
+        </enum> 
+      </module>
+      <module name="LineSegmentEnumType">
+        <enum name="LineSegmentEnumType">
+          <enumerator name="GREAT_CIRCLE"/>
+          <enumerator name="RHUMB"/>
+        </enum> 
+      </module>
+      <module name="NetworkProtocolEnumType">
+        <enum name="NetworkProtocolEnumType">
+          <enumerator name="TCP_IPV4"/>
+          <enumerator name="TCP_IPV6"/>
+          <enumerator name="UDP_IPV4"/>
+          <enumerator name="UDP_IPV6"/>
+        </enum> 
+      </module>
+      <module name="OnOffStatusEnumType">
+        <enum name="OnOffStatusEnumType">
+          <enumerator name="OFF"/>
+          <enumerator name="ON"/>
+        </enum> 
+      </module>
+      <module name="PlanActionEnumType">
+        <enum name="PlanActionEnumType">
+          <enumerator name="ABORT_MISSION_LOAD_PLAN"/>
+          <enumerator name="ADD_PLAN"/>
+          <enumerator name="DELETE_PLAN"/>
+          <enumerator name="DOWNLOAD_PLAN"/>
+          <enumerator name="RETRIEVE_PLAN"/>
+          <enumerator name="UPDATE_PLAN"/>
+          <enumerator name="UPLOAD_PLAN"/>
+        </enum> 
+      </module>
+      <module name="PowerStatusEnumType">
+        <enum name="PowerStatusEnumType">
+          <enumerator name="POWER_OFF"/>
+          <enumerator name="POWER_ON"/>
+          <enumerator name="EMERGENCY_POWER"/>
+          <enumerator name="POWER_STANDBY"/>
+        </enum> 
+      </module>
+      <module name="PrecipitationEnumType">
+        <enum name="PrecipitationEnumType">
+          <enumerator name="THUNDERSTORMS"/>
+          <enumerator name="FOG"/>
+          <enumerator name="HAZE"/>
+          <enumerator name="SNOW"/>
+          <enumerator name="DRIZZLE"/>
+          <enumerator name="RAIN"/>
+          <enumerator name="SHOWERS"/>
+        </enum> 
+      </module>
+      <module name="ResourceAllocationStatusEnumType">
+        <enum name="ResourceAllocationStatusEnumType">
+          <enumerator name="FORCED_ALLOCATION"/>
+          <enumerator name="FORCED_ALLOCATION_W_LAUNCH_RECOVERY"/>
+          <enumerator name="ALLOCATED"/>
+          <enumerator name="ALLOCATED_W_LAUNCH_RECOVERY"/>
+          <enumerator name="AVAILABLE"/>
+          <enumerator name="RELEASED"/>
+          <enumerator name="TEMPORARILY_UNAVAILABLE"/>
+          <enumerator name="UNAVAILABLE"/>
+          <enumerator name="FAULT"/>
+        </enum> 
+      </module>
+      <module name="SpecificLOIEnumType">
+        <enum name="SpecificLOIEnumType">
+          <enumerator name="LOI_1"/>
+          <enumerator name="LOI_2"/>
+          <enumerator name="LOI_3"/>
+          <enumerator name="LOI_4"/>
+          <enumerator name="LOI_5"/>
+        </enum> 
+      </module>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

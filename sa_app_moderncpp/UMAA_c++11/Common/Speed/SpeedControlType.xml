@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.2.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/Speed/EngineRPM.xml"/>
+<include file="UMAA/Common/Speed/SpeedOverGround.xml"/>
+<include file="UMAA/Common/Speed/SpeedThroughAir.xml"/>
+<include file="UMAA/Common/Speed/SpeedThroughWater.xml"/>
+<include file="UMAA/Common/Speed/VehicleSpeedMode.xml"/>
+<module name="UMAA">
+  <module name="Common">
+    <module name="Speed">
+      <module name="SpeedControlType_Specializations">
+        <enum name="SpeedControlType_Selectors">
+          <enumerator name="SPEEDOVERGROUND_SELECT"/>
+          <enumerator name="SPEEDTHROUGHWATER_SELECT"/>
+          <enumerator name="VEHICLESPEEDMODE_SELECT"/>
+          <enumerator name="ENGINERPM_SELECT"/>
+          <enumerator name="SPEEDTHROUGHAIR_SELECT"/>
+        </enum> 
+        <union name="SpeedControlType_Union">
+<discriminator type="nonBasic" nonBasicTypeName="UMAA::Common::Speed::SpeedControlType_Specializations::SpeedControlType_Selectors"/>
+<case>
+          <caseDiscriminator value="(UMAA::Common::Speed::SpeedControlType_Specializations::SPEEDOVERGROUND_SELECT)"/>
+<member name="SpeedOverGround_data" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Speed::SpeedOverGround"/>
+</case>
+<case>
+          <caseDiscriminator value="(UMAA::Common::Speed::SpeedControlType_Specializations::SPEEDTHROUGHWATER_SELECT)"/>
+<member name="SpeedThroughWater_data" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Speed::SpeedThroughWater"/>
+</case>
+<case>
+          <caseDiscriminator value="(UMAA::Common::Speed::SpeedControlType_Specializations::VEHICLESPEEDMODE_SELECT)"/>
+<member name="VehicleSpeedMode_data" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Speed::VehicleSpeedMode"/>
+</case>
+<case>
+          <caseDiscriminator value="(UMAA::Common::Speed::SpeedControlType_Specializations::ENGINERPM_SELECT)"/>
+<member name="EngineRPM_data" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Speed::EngineRPM"/>
+</case>
+<case>
+          <caseDiscriminator value="(UMAA::Common::Speed::SpeedControlType_Specializations::SPEEDTHROUGHAIR_SELECT)"/>
+<member name="SpeedThroughAir_data" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Speed::SpeedThroughAir"/>
+</case>
+        </union>
+      </module>
+      <struct name= "SpeedControlType">
+        <member name="SpeedControlType_subtypes" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Speed::SpeedControlType_Specializations::SpeedControlType_Union"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

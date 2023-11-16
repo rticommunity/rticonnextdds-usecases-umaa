@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-6.1.2/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/MaritimeEnumeration/EnumerationSets.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<include file="UMAA/EO/BatteryStatus/BatteryCellDataType.xml"/>
+<module name="UMAA">
+  <module name="EO">
+    <module name="BatteryStatus">
+      <const name="BatteryReport_TOPIC" type="string" value="&quot;UMAA::EO::BatteryStatus::BatteryReport&quot;"/>
+      <struct name= "BatteryReportType">
+        <member name="cells" sequenceMaxLength="100" type="nonBasic"  nonBasicTypeName= "UMAA::EO::BatteryStatus::BatteryCellDataType"/>
+        <member name="chargeRemaining" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Energy_Percent"/>
+        <member name="current" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::PowerBusCurrent"/>
+        <member name="energyUsageRate" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::ElectricalPower"/>
+        <member name="hours" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Duration_Hours"/>
+        <member name="state" type="nonBasic"  nonBasicTypeName= "UMAA::Common::MaritimeEnumeration::PowerPlantStateEnumType::PowerPlantStateEnumType"/>
+        <member name="temp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Temperature"/>
+        <member name="voltage" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::PowerBusVoltage"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-6.1.2/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/Enumeration/EnumerationSets.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<module name="UMAA">
+  <module name="MO">
+    <module name="GlobalWaypointControl">
+      <const name="GlobalWaypointExecutionStatusReport_TOPIC" type="string" value="&quot;UMAA::MO::GlobalWaypointControl::GlobalWaypointExecutionStatusReport&quot;"/>
+      <struct name= "GlobalWaypointExecutionStatusReportType">
+        <member name="arrivalTime" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+        <member name="crossTrackError" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance"/>
+        <member name="cumulativeDistance" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance"/>
+        <member name="distanceRemaining" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance"/>
+        <member name="distanceToWaypoint" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance"/>
+        <member name="elevationAchieved" type="boolean"/>
+        <member name="maintainTrack" type="boolean"/>
+        <member name="speedAchieved" type="boolean"/>
+        <member name="timeToWaypoint" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+        <member name="trackLineAchieved" type="boolean"/>
+        <member name="waypointsRemaining" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Count"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="sessionID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="waypointID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

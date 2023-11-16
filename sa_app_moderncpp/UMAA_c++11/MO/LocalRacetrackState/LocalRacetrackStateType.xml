@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.2.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/MO/LocalRacetrackState/LocalRacetrackPatternType.xml"/>
+<include file="UMAA/MO/LocalRacetrackState/LocalRacetrackTransitType.xml"/>
+<module name="UMAA">
+  <module name="MO">
+    <module name="LocalRacetrackState">
+      <module name="LocalRacetrackStateType_Specializations">
+        <enum name="LocalRacetrackStateType_Selectors">
+          <enumerator name="LOCALRACETRACKTRANSITTYPE_SELECT"/>
+          <enumerator name="LOCALRACETRACKPATTERNTYPE_SELECT"/>
+        </enum> 
+        <union name="LocalRacetrackStateType_Union">
+<discriminator type="nonBasic" nonBasicTypeName="UMAA::MO::LocalRacetrackState::LocalRacetrackStateType_Specializations::LocalRacetrackStateType_Selectors"/>
+<case>
+          <caseDiscriminator value="(UMAA::MO::LocalRacetrackState::LocalRacetrackStateType_Specializations::LOCALRACETRACKTRANSITTYPE_SELECT)"/>
+<member name="LocalRacetrackTransitType_data" type="nonBasic"  nonBasicTypeName= "UMAA::MO::LocalRacetrackState::LocalRacetrackTransitType"/>
+</case>
+<case>
+          <caseDiscriminator value="(UMAA::MO::LocalRacetrackState::LocalRacetrackStateType_Specializations::LOCALRACETRACKPATTERNTYPE_SELECT)"/>
+<member name="LocalRacetrackPatternType_data" type="nonBasic"  nonBasicTypeName= "UMAA::MO::LocalRacetrackState::LocalRacetrackPatternType"/>
+</case>
+        </union>
+      </module>
+      <struct name= "LocalRacetrackStateType">
+        <member name="LocalRacetrackStateType_subtypes" type="nonBasic"  nonBasicTypeName= "UMAA::MO::LocalRacetrackState::LocalRacetrackStateType_Specializations::LocalRacetrackStateType_Union"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

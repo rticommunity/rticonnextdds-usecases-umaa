@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-6.1.2/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/MaritimeEnumeration/EnumerationSets.xml"/>
+<include file="UMAA/Common/Measurement/Altitude_AGL.xml"/>
+<include file="UMAA/Common/Measurement/Altitude_MSL.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<include file="UMAA/Common/Measurement/Orientation3D.xml"/>
+<include file="UMAA/Common/Measurement/Position2D.xml"/>
+<include file="UMAA/Common/Measurement/Position3D_PlatformXYZ.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<module name="UMAA">
+  <module name="MM">
+    <module name="BaseType">
+      <struct name= "WaypointType">
+        <member name="altitude" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Altitude_MSL" optional="true"/>
+        <member name="altitudeAGL" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Altitude_AGL" optional="true"/>
+        <member name="altitudeASF" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance_ASF" optional="true"/>
+        <member name="attitude" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Orientation3D" optional="true"/>
+        <member name="depth" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance_BSL" optional="true"/>
+        <member name="endTime" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime" optional="true"/>
+        <member name="globalPosition" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Position2D" optional="true"/>
+        <member name="localPosition" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Position3D_PlatformXYZ" optional="true"/>
+        <member name="mode" type="nonBasic"  nonBasicTypeName= "UMAA::Common::MaritimeEnumeration::HeightModeEnumType::HeightModeEnumType" optional="true"/>
+        <member name="pathTolerance" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance" optional="true"/>
+        <member name="speed" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Speed_LocalWaterMass" optional="true"/>
+        <member name="startTime" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime" optional="true"/>
+        <member name="waypointTolerance" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance" optional="true"/>
+        <member name="waypointType" type="nonBasic"  nonBasicTypeName= "UMAA::Common::MaritimeEnumeration::WaypointKindEnumType::WaypointKindEnumType"/>
+        <member name="waypointID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.2.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/Enumeration/EnumerationSets.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<module name="UMAA">
+  <module name="SEM">
+    <module name="DigitalVideoSpecs">
+      <const name="DigitalVideoSpecsReport_TOPIC" type="string" value="&quot;UMAA::SEM::DigitalVideoSpecs::DigitalVideoSpecsReport&quot;"/>
+      <struct name= "DigitalVideoSpecsReportType">
+        <member name="maxBitRate" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DataTransferRate"/>
+        <member name="maxFrameRate" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::FrameRateFPS" min="0" max="1000"/>
+        <member name="minBitRate" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DataTransferRate"/>
+        <member name="minFrameRate" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::FrameRateFPS" min="0" max="1000"/>
+        <member name="supportedAVI" type="boolean"/>
+        <member name="supportedCGA_320x200" type="boolean"/>
+        <member name="supportedCIF_1408x1152" type="boolean"/>
+        <member name="supportedCIF_352x288" type="boolean"/>
+        <member name="supportedCIF_704x576" type="boolean"/>
+        <member name="supportedEGA_640x350" type="boolean"/>
+        <member name="supportedH262" type="boolean"/>
+        <member name="supportedH263" type="boolean"/>
+        <member name="supportedH263PLUS" type="boolean"/>
+        <member name="supportedH264" type="boolean"/>
+        <member name="supportedHD1080_1920x1080" type="boolean"/>
+        <member name="supportedHD480_852x480" type="boolean"/>
+        <member name="supportedHD720_1280x720" type="boolean"/>
+        <member name="supportedHSXGA_5120x4096" type="boolean"/>
+        <member name="supportedMJPEG" type="boolean"/>
+        <member name="supportedMPEG4" type="boolean"/>
+        <member name="supportedQCIF_176x144" type="boolean"/>
+        <member name="supportedQQVGA_160x120" type="boolean"/>
+        <member name="supportedQSXGA_2560x2048" type="boolean"/>
+        <member name="supportedQVGA_320x240" type="boolean"/>
+        <member name="supportedQXGA_2048x1536" type="boolean"/>
+        <member name="supportedSQCIF_128x96" type="boolean"/>
+        <member name="supportedSVGA_800x600" type="boolean"/>
+        <member name="supportedSXGA_1280x1024" type="boolean"/>
+        <member name="supportedUXGA_1600x1200" type="boolean"/>
+        <member name="supportedVGA_640x480" type="boolean"/>
+        <member name="supportedWHSXGA_6400x4096" type="boolean"/>
+        <member name="supportedWHUXGA_7680x4800" type="boolean"/>
+        <member name="supportedWOXGA_2560x1600" type="boolean"/>
+        <member name="supportedWQSXGA_3200x2048" type="boolean"/>
+        <member name="supportedWQUXGA_3840x2400" type="boolean"/>
+        <member name="supportedWSXGA_1600x1024" type="boolean"/>
+        <member name="supportedWUXGA_1920x1200" type="boolean"/>
+        <member name="supportedWVGA_852x480" type="boolean"/>
+        <member name="supportedWXGA_1366x768" type="boolean"/>
+        <member name="supportedXGA_1024x768" type="boolean"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

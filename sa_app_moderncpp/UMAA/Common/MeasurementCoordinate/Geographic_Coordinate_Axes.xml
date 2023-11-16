@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-6.1.2/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="BasicTypes/Quaternion.xml"/>
+<module name="UMAA">
+  <module name="Common">
+    <module name="MeasurementCoordinate">
+      <typedef name="EllipsoidalHeight" type="float64"/>
+      <typedef name="GeodeticLatitude" type="float64" min="-90.0" max="90.0"/>
+      <typedef name="GeodeticLongitude" type="float64" min="-180.0" max="180.0"/>
+      <typedef name="MSLHeight" type="float64"/>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

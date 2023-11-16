@@ -1,0 +1,259 @@
+
+
+/*
+WARNING: THIS FILE IS AUTO-GENERATED. DO NOT MODIFY.
+
+This file was generated from BeaconParametersCommandStatusType.idl
+using RTI Code Generator (rtiddsgen) version 4.2.0.
+The rtiddsgen tool is part of the RTI Connext DDS distribution.
+For more information, type 'rtiddsgen -help' at a command shell
+or consult the Code Generator User's Manual.
+*/
+
+#ifndef BeaconParametersCommandStatusTypePlugin_1549831985_h
+#define BeaconParametersCommandStatusTypePlugin_1549831985_h
+
+#include "BeaconParametersCommandStatusType.hpp"
+
+struct RTICdrStream;
+
+#ifndef pres_typePlugin_h
+#include "pres/pres_typePlugin.h"
+#endif
+
+#include "UMAA/Common/Measurement/MeasurementsPlugin.hpp"
+#include "UMAA/Common/MaritimeEnumeration/EnumerationSetsPlugin.hpp"
+
+#if (defined(RTI_WIN32) || defined (RTI_WINCE) || defined(RTI_INTIME)) && defined(NDDS_USER_DLL_EXPORT)
+/* If the code is building on Windows, start exporting symbols.
+*/
+#undef NDDSUSERDllExport
+#define NDDSUSERDllExport __declspec(dllexport)
+#endif
+
+namespace UMAA {
+    namespace SEM {
+        namespace BeaconParametersControl {
+
+            /* The type used to store keys for instances of type struct
+            * AnotherSimple.
+            *
+            * By default, this type is struct BeaconParametersCommandStatusType
+            * itself. However, if for some reason this choice is not practical for your
+            * system (e.g. if sizeof(struct BeaconParametersCommandStatusType)
+            * is very large), you may redefine this typedef in terms of another type of
+            * your choosing. HOWEVER, if you define the KeyHolder type to be something
+            * other than struct AnotherSimple, the
+            * following restriction applies: the key of struct
+            * BeaconParametersCommandStatusType must consist of a
+            * single field of your redefined KeyHolder type and that field must be the
+            * first field in struct BeaconParametersCommandStatusType.
+            */
+            typedef class BeaconParametersCommandStatusType BeaconParametersCommandStatusTypeKeyHolder;
+
+            #define BeaconParametersCommandStatusTypePlugin_get_sample PRESTypePluginDefaultEndpointData_getSample
+
+            #define BeaconParametersCommandStatusTypePlugin_get_buffer PRESTypePluginDefaultEndpointData_getBuffer 
+            #define BeaconParametersCommandStatusTypePlugin_return_buffer PRESTypePluginDefaultEndpointData_returnBuffer
+
+            #define BeaconParametersCommandStatusTypePlugin_get_key PRESTypePluginDefaultEndpointData_getKey 
+            #define BeaconParametersCommandStatusTypePlugin_return_key PRESTypePluginDefaultEndpointData_returnKey
+
+            #define BeaconParametersCommandStatusTypePlugin_create_sample PRESTypePluginDefaultEndpointData_createSample 
+            #define BeaconParametersCommandStatusTypePlugin_destroy_sample PRESTypePluginDefaultEndpointData_deleteSample 
+
+            /* --------------------------------------------------------------------------------------
+            Support functions:
+            * -------------------------------------------------------------------------------------- */
+
+            NDDSUSERDllExport extern BeaconParametersCommandStatusType*
+            BeaconParametersCommandStatusTypePluginSupport_create_data_w_params(
+                const struct DDS_TypeAllocationParams_t * alloc_params);
+
+            NDDSUSERDllExport extern BeaconParametersCommandStatusType*
+            BeaconParametersCommandStatusTypePluginSupport_create_data_ex(RTIBool allocate_pointers);
+
+            NDDSUSERDllExport extern BeaconParametersCommandStatusType*
+            BeaconParametersCommandStatusTypePluginSupport_create_data(void);
+
+            NDDSUSERDllExport extern RTIBool 
+            BeaconParametersCommandStatusTypePluginSupport_copy_data(
+                BeaconParametersCommandStatusType *out,
+                const BeaconParametersCommandStatusType *in);
+
+            NDDSUSERDllExport extern void 
+            BeaconParametersCommandStatusTypePluginSupport_destroy_data_w_params(
+                BeaconParametersCommandStatusType *sample,
+                const struct DDS_TypeDeallocationParams_t * dealloc_params);
+
+            NDDSUSERDllExport extern void 
+            BeaconParametersCommandStatusTypePluginSupport_destroy_data_ex(
+                BeaconParametersCommandStatusType *sample,RTIBool deallocate_pointers);
+
+            NDDSUSERDllExport extern void 
+            BeaconParametersCommandStatusTypePluginSupport_destroy_data(
+                BeaconParametersCommandStatusType *sample);
+
+            NDDSUSERDllExport extern void 
+            BeaconParametersCommandStatusTypePluginSupport_print_data(
+                const BeaconParametersCommandStatusType *sample,
+                const char *desc,
+                unsigned int indent);
+
+            NDDSUSERDllExport extern BeaconParametersCommandStatusType*
+            BeaconParametersCommandStatusTypePluginSupport_create_key_ex(RTIBool allocate_pointers);
+
+            NDDSUSERDllExport extern BeaconParametersCommandStatusType*
+            BeaconParametersCommandStatusTypePluginSupport_create_key(void);
+
+            NDDSUSERDllExport extern void 
+            BeaconParametersCommandStatusTypePluginSupport_destroy_key_ex(
+                BeaconParametersCommandStatusTypeKeyHolder *key,RTIBool deallocate_pointers);
+
+            NDDSUSERDllExport extern void 
+            BeaconParametersCommandStatusTypePluginSupport_destroy_key(
+                BeaconParametersCommandStatusTypeKeyHolder *key);
+
+            /* ----------------------------------------------------------------------------
+            Callback functions:
+            * ---------------------------------------------------------------------------- */
+
+            NDDSUSERDllExport extern PRESTypePluginParticipantData 
+            BeaconParametersCommandStatusTypePlugin_on_participant_attached(
+                void *registration_data, 
+                const struct PRESTypePluginParticipantInfo *participant_info,
+                RTIBool top_level_registration, 
+                void *container_plugin_context,
+                RTICdrTypeCode *typeCode);
+
+            NDDSUSERDllExport extern void 
+            BeaconParametersCommandStatusTypePlugin_on_participant_detached(
+                PRESTypePluginParticipantData participant_data);
+
+            NDDSUSERDllExport extern PRESTypePluginEndpointData 
+            BeaconParametersCommandStatusTypePlugin_on_endpoint_attached(
+                PRESTypePluginParticipantData participant_data,
+                const struct PRESTypePluginEndpointInfo *endpoint_info,
+                RTIBool top_level_registration, 
+                void *container_plugin_context);
+
+            NDDSUSERDllExport extern void 
+            BeaconParametersCommandStatusTypePlugin_on_endpoint_detached(
+                PRESTypePluginEndpointData endpoint_data);
+
+            NDDSUSERDllExport extern void    
+            BeaconParametersCommandStatusTypePlugin_return_sample(
+                PRESTypePluginEndpointData endpoint_data,
+                BeaconParametersCommandStatusType *sample,
+                void *handle);    
+
+            NDDSUSERDllExport extern RTIBool 
+            BeaconParametersCommandStatusTypePlugin_copy_sample(
+                PRESTypePluginEndpointData endpoint_data,
+                BeaconParametersCommandStatusType *out,
+                const BeaconParametersCommandStatusType *in);
+
+            /* ----------------------------------------------------------------------------
+            (De)Serialize functions:
+            * ------------------------------------------------------------------------- */
+
+            NDDSUSERDllExport extern RTIBool
+            BeaconParametersCommandStatusTypePlugin_serialize_to_cdr_buffer(
+                char * buffer,
+                unsigned int * length,
+                const BeaconParametersCommandStatusType *sample,
+                ::dds::core::policy::DataRepresentationId representation
+                = ::dds::core::policy::DataRepresentation::xcdr()); 
+
+            NDDSUSERDllExport extern RTIBool 
+            BeaconParametersCommandStatusTypePlugin_deserialize(
+                PRESTypePluginEndpointData endpoint_data,
+                BeaconParametersCommandStatusType **sample, 
+                RTIBool * drop_sample,
+                struct RTICdrStream *stream,
+                RTIBool deserialize_encapsulation,
+                RTIBool deserialize_sample, 
+                void *endpoint_plugin_qos);
+
+            NDDSUSERDllExport extern RTIBool
+            BeaconParametersCommandStatusTypePlugin_deserialize_from_cdr_buffer(
+                BeaconParametersCommandStatusType *sample,
+                const char * buffer,
+                unsigned int length);    
+
+            NDDSUSERDllExport extern unsigned int 
+            BeaconParametersCommandStatusTypePlugin_get_serialized_sample_max_size(
+                PRESTypePluginEndpointData endpoint_data,
+                RTIBool include_encapsulation,
+                RTIEncapsulationId encapsulation_id,
+                unsigned int current_alignment);
+
+            /* --------------------------------------------------------------------------------------
+            Key Management functions:
+            * -------------------------------------------------------------------------------------- */
+            NDDSUSERDllExport extern PRESTypePluginKeyKind 
+            BeaconParametersCommandStatusTypePlugin_get_key_kind(void);
+
+            NDDSUSERDllExport extern unsigned int 
+            BeaconParametersCommandStatusTypePlugin_get_serialized_key_max_size(
+                PRESTypePluginEndpointData endpoint_data,
+                RTIBool include_encapsulation,
+                RTIEncapsulationId encapsulation_id,
+                unsigned int current_alignment);
+
+            NDDSUSERDllExport extern unsigned int 
+            BeaconParametersCommandStatusTypePlugin_get_serialized_key_max_size_for_keyhash(
+                PRESTypePluginEndpointData endpoint_data,
+                RTIEncapsulationId encapsulation_id,
+                unsigned int current_alignment);
+
+            NDDSUSERDllExport extern RTIBool 
+            BeaconParametersCommandStatusTypePlugin_deserialize_key(
+                PRESTypePluginEndpointData endpoint_data,
+                BeaconParametersCommandStatusType ** sample,
+                RTIBool * drop_sample,
+                struct RTICdrStream *stream,
+                RTIBool deserialize_encapsulation,
+                RTIBool deserialize_key,
+                void *endpoint_plugin_qos);
+
+            NDDSUSERDllExport extern RTIBool 
+            BeaconParametersCommandStatusTypePlugin_instance_to_key(
+                PRESTypePluginEndpointData endpoint_data,
+                BeaconParametersCommandStatusTypeKeyHolder *key, 
+                const BeaconParametersCommandStatusType *instance);
+
+            NDDSUSERDllExport extern RTIBool 
+            BeaconParametersCommandStatusTypePlugin_key_to_instance(
+                PRESTypePluginEndpointData endpoint_data,
+                BeaconParametersCommandStatusType *instance, 
+                const BeaconParametersCommandStatusTypeKeyHolder *key);
+
+            NDDSUSERDllExport extern RTIBool 
+            BeaconParametersCommandStatusTypePlugin_serialized_sample_to_keyhash(
+                PRESTypePluginEndpointData endpoint_data,
+                struct RTICdrStream *stream, 
+                DDS_KeyHash_t *keyhash,
+                RTIBool deserialize_encapsulation,
+                void *endpoint_plugin_qos); 
+
+            /* Plugin Functions */
+            NDDSUSERDllExport extern struct PRESTypePlugin*
+            BeaconParametersCommandStatusTypePlugin_new(void);
+
+            NDDSUSERDllExport extern void
+            BeaconParametersCommandStatusTypePlugin_delete(struct PRESTypePlugin *);
+
+        } /* namespace BeaconParametersControl  */
+    } /* namespace SEM  */
+} /* namespace UMAA  */
+
+#if (defined(RTI_WIN32) || defined (RTI_WINCE) || defined(RTI_INTIME)) && defined(NDDS_USER_DLL_EXPORT)
+/* If the code is building on Windows, stop exporting symbols.
+*/
+#undef NDDSUSERDllExport
+#define NDDSUSERDllExport
+#endif
+
+#endif /* BeaconParametersCommandStatusTypePlugin_1549831985_h */
+

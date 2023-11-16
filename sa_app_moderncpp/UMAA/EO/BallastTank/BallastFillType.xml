@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-6.1.2/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/Measurement/BallastMassType.xml"/>
+<include file="UMAA/Common/Measurement/LevelType.xml"/>
+<module name="UMAA">
+  <module name="EO">
+    <module name="BallastTank">
+      <module name="BallastFillType_Specializations">
+        <enum name="BallastFillType_Selectors">
+          <enumerator name="LEVELTYPE_SELECT"/>
+          <enumerator name="BALLASTMASSTYPE_SELECT"/>
+        </enum> 
+        <union name="BallastFillType_Union">
+<discriminator type="nonBasic" nonBasicTypeName="UMAA::EO::BallastTank::BallastFillType_Specializations::BallastFillType_Selectors"/>
+<case>
+          <caseDiscriminator value="(UMAA::EO::BallastTank::BallastFillType_Specializations::LEVELTYPE_SELECT)"/>
+<member name="LevelType_data" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::LevelType"/>
+</case>
+<case>
+          <caseDiscriminator value="(UMAA::EO::BallastTank::BallastFillType_Specializations::BALLASTMASSTYPE_SELECT)"/>
+<member name="BallastMassType_data" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::BallastMassType"/>
+</case>
+        </union>
+      </module>
+      <struct name= "BallastFillType">
+        <member name="BallastFillType_subtypes" type="nonBasic"  nonBasicTypeName= "UMAA::EO::BallastTank::BallastFillType_Specializations::BallastFillType_Union"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

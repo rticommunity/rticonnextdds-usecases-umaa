@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.2.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<include file="UMAA/EO/BallastTank/BallastFillType.xml"/>
+<module name="UMAA">
+  <module name="EO">
+    <module name="BallastTank">
+      <const name="BallastTankCommandReport_TOPIC" type="string" value="&quot;UMAA::EO::BallastTank::BallastTankCommandReport&quot;"/>
+      <struct name= "BallastTankCommandReportType">
+        <member name="ballastFill" type="nonBasic"  nonBasicTypeName= "UMAA::EO::BallastTank::BallastFillType"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

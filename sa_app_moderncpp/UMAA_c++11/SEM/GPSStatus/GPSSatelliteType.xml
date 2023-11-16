@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.2.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/Enumeration/EnumerationSets.xml"/>
+<include file="UMAA/Common/MaritimeEnumeration/EnumerationSets.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<include file="UMAA/Common/PrimitiveConstrained/ConstrainedTypes.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<module name="UMAA">
+  <module name="SEM">
+    <module name="GPSStatus">
+      <struct name= "GPSSatelliteType">
+        <member name="antennaCarrierNoiseDensity" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::CarrierToNoiseDensityRatio" optional="true"/>
+        <member name="azimuth" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Angle" optional="true"/>
+        <member name="basebandCarrierNoiseDensity" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::CarrierToNoiseDensityRatio" optional="true"/>
+        <member name="carrierFrequency" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::RadioFrequency_Hertz" min="0.0" max="10000000000" optional="true"/>
+        <member name="constellationType" type="nonBasic"  nonBasicTypeName= "UMAA::Common::MaritimeEnumeration::GPSConstellationEnumType::GPSConstellationEnumType" optional="true"/>
+        <member name="containsAlmanacData" type="boolean" optional="true"/>
+        <member name="elevation" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Angle" optional="true"/>
+        <member name="ephemerisData" type="boolean" optional="true"/>
+        <member name="satelliteId" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" optional="true"/>
+        <member name="usedInFix" type="boolean" optional="true"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

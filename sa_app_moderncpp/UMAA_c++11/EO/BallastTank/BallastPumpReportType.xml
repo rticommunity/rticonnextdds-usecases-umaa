@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.2.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/MaritimeEnumeration/EnumerationSets.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<module name="UMAA">
+  <module name="EO">
+    <module name="BallastTank">
+      <const name="BallastPumpReport_TOPIC" type="string" value="&quot;UMAA::EO::BallastTank::BallastPumpReport&quot;"/>
+      <struct name= "BallastPumpReportType">
+        <member name="massFillRate" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::MassFlowRate" optional="true"/>
+        <member name="state" type="nonBasic"  nonBasicTypeName= "UMAA::Common::MaritimeEnumeration::PumpStateEnumType::PumpStateEnumType"/>
+        <member name="volumeFlowRate" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::VolumetricFlowRate" optional="true"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

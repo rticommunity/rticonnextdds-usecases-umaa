@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-6.1.2/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<module name="UMAA">
+  <module name="EO">
+    <module name="RudderControl">
+      <const name="RudderCommandAckReport_TOPIC" type="string" value="&quot;UMAA::EO::RudderControl::RudderCommandAckReport&quot;"/>
+      <struct name= "RudderCommandAckReportType">
+        <member name="angle" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Angle"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="sessionID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

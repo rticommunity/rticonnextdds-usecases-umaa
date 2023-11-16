@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-6.1.2/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/MO/LocalHoverState/LocalHoveringHoverType.xml"/>
+<include file="UMAA/MO/LocalHoverState/LocalTransitHoverType.xml"/>
+<module name="UMAA">
+  <module name="MO">
+    <module name="LocalHoverState">
+      <module name="LocalHoverStateType_Specializations">
+        <enum name="LocalHoverStateType_Selectors">
+          <enumerator name="LOCALTRANSITHOVERTYPE_SELECT"/>
+          <enumerator name="LOCALHOVERINGHOVERTYPE_SELECT"/>
+        </enum> 
+        <union name="LocalHoverStateType_Union">
+<discriminator type="nonBasic" nonBasicTypeName="UMAA::MO::LocalHoverState::LocalHoverStateType_Specializations::LocalHoverStateType_Selectors"/>
+<case>
+          <caseDiscriminator value="(UMAA::MO::LocalHoverState::LocalHoverStateType_Specializations::LOCALTRANSITHOVERTYPE_SELECT)"/>
+<member name="LocalTransitHoverType_data" type="nonBasic"  nonBasicTypeName= "UMAA::MO::LocalHoverState::LocalTransitHoverType"/>
+</case>
+<case>
+          <caseDiscriminator value="(UMAA::MO::LocalHoverState::LocalHoverStateType_Specializations::LOCALHOVERINGHOVERTYPE_SELECT)"/>
+<member name="LocalHoveringHoverType_data" type="nonBasic"  nonBasicTypeName= "UMAA::MO::LocalHoverState::LocalHoveringHoverType"/>
+</case>
+        </union>
+      </module>
+      <struct name= "LocalHoverStateType">
+        <member name="LocalHoverStateType_subtypes" type="nonBasic"  nonBasicTypeName= "UMAA::MO::LocalHoverState::LocalHoverStateType_Specializations::LocalHoverStateType_Union"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

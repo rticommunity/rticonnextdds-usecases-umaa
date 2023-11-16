@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-6.1.2/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/Enumeration/EnumerationSets.xml"/>
+<include file="UMAA/Common/MaritimeEnumeration/EnumerationSets.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<module name="UMAA">
+  <module name="SEM">
+    <module name="H264VideoEncodingConfig">
+      <const name="H264VideoEncodingConfigReport_TOPIC" type="string" value="&quot;UMAA::SEM::H264VideoEncodingConfig::H264VideoEncodingConfigReport&quot;"/>
+      <struct name= "H264VideoEncodingConfigReportType">
+        <member name="gradualDecoderRefresh" type="boolean"/>
+        <member name="groupOfPictures" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Count"/>
+        <member name="preset" type="nonBasic"  nonBasicTypeName= "UMAA::Common::MaritimeEnumeration::H264PresetEnumType::H264PresetEnumType"/>
+        <member name="profile" type="nonBasic"  nonBasicTypeName= "UMAA::Common::MaritimeEnumeration::H264EncodingEnumType::H264EncodingEnumType"/>
+        <member name="regionOfInterest" type="boolean"/>
+        <member name="ROI_height" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Count"/>
+        <member name="ROI_highBitRate" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::CommsRate_MegabitsPerSecond"/>
+        <member name="ROI_lowBitRate" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::CommsRate_MegabitsPerSecond"/>
+        <member name="ROI_width" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Count"/>
+        <member name="ROI_x" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Count"/>
+        <member name="ROI_y" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Count"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

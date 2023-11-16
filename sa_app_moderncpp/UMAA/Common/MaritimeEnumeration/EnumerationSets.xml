@@ -1,0 +1,818 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-6.1.2/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="BasicTypes/Quaternion.xml"/>
+<directive kind="copyC">#undef ERROR</directive>
+<directive kind="copyC">#undef VARIABLE_PITCH</directive>
+<directive kind="copyC">#undef DELETE</directive>
+<directive kind="copyC">#undef PLATFORM</directive>
+<module name="UMAA">
+  <module name="Common">
+    <module name="MaritimeEnumeration">
+      <module name="AnalogSensorErrorCodeEnumType">
+        <enum name="AnalogSensorErrorCodeEnumType">
+          <enumerator name="INVALID_FORMAT"/>
+          <enumerator name="UNKNOWN_ERROR_FAULT"/>
+          <enumerator name="UNKNOWN_SENSOR_ID"/>
+        </enum> 
+      </module>
+      <module name="AnchorActionEnumType">
+        <enum name="AnchorActionEnumType">
+          <enumerator name="LOWER"/>
+          <enumerator name="RAISE"/>
+          <enumerator name="STOP"/>
+        </enum> 
+      </module>
+      <module name="AnchorKindEnumType">
+        <enum name="AnchorKindEnumType">
+          <enumerator name="COMMERCIAL_STOCKLESS"/>
+          <enumerator name="DANFORTH"/>
+          <enumerator name="FOUR_FLUKE"/>
+          <enumerator name="GENERAL"/>
+          <enumerator name="LIGHTWEIGHT"/>
+          <enumerator name="MARK_2_LWT"/>
+          <enumerator name="MARK_2_STOCKLESS"/>
+          <enumerator name="MUSHROOM"/>
+          <enumerator name="NAVY_TYPE_STOCK"/>
+          <enumerator name="NONMAGNETIC"/>
+          <enumerator name="STANDARD_NAVY_STOCKLESS"/>
+          <enumerator name="TWO_FLUKE_BALANCED_FLUKE"/>
+          <enumerator name="WEDGE_BLOCK_LWT"/>
+        </enum> 
+      </module>
+      <module name="AnchorLocationEnumType">
+        <enum name="AnchorLocationEnumType">
+          <enumerator name="BOWER"/>
+          <enumerator name="KEEL"/>
+          <enumerator name="STERN"/>
+        </enum> 
+      </module>
+      <module name="AnchorStateEnumType">
+        <enum name="AnchorStateEnumType">
+          <enumerator name="DEPLOYED"/>
+          <enumerator name="LOWERING"/>
+          <enumerator name="STOPPED"/>
+          <enumerator name="RAISING"/>
+          <enumerator name="STOWED"/>
+        </enum> 
+      </module>
+      <module name="AudioEncodingQualityEnumType">
+        <enum name="AudioEncodingQualityEnumType">
+          <enumerator name="AVERAGE"/>
+          <enumerator name="BEST"/>
+          <enumerator name="BETTER"/>
+          <enumerator name="GOOD"/>
+          <enumerator name="LESS"/>
+          <enumerator name="POOR"/>
+          <enumerator name="WORST"/>
+        </enum> 
+      </module>
+      <module name="BearingAngleEnumType">
+        <enum name="BearingAngleEnumType">
+          <enumerator name="OWNSHIP"/>
+          <enumerator name="NORTH"/>
+        </enum> 
+      </module>
+      <module name="BilgeControlEnumType">
+        <enum name="BilgeControlEnumType">
+          <enumerator name="AUTO"/>
+          <enumerator name="OFF"/>
+          <enumerator name="ON"/>
+        </enum> 
+      </module>
+      <module name="BilgeStateEnumType">
+        <enum name="BilgeStateEnumType">
+          <enumerator name="FAULT"/>
+          <enumerator name="OFF"/>
+          <enumerator name="ON"/>
+        </enum> 
+      </module>
+      <module name="BitDepthEnumType">
+        <enum name="BitDepthEnumType">
+          <enumerator name="TEN_BITS"/>
+          <enumerator name="TWELVE_BITS"/>
+          <enumerator name="FOURTEEN_BITS"/>
+          <enumerator name="SIXTEEN_BITS"/>
+          <enumerator name="TWENTY_BITS"/>
+          <enumerator name="TWENTY_FOUR_BITS"/>
+          <enumerator name="THIRTY_TWO_BITS"/>
+          <enumerator name="FOURTY_BITS"/>
+          <enumerator name="FOURTY_EIGHT_BITS"/>
+          <enumerator name="FIFTY_SIX_BITS"/>
+          <enumerator name="SIXTY_FOUR_BITS"/>
+          <enumerator name="EIGHT_BITS"/>
+        </enum> 
+      </module>
+      <module name="BlastConditionEnumType">
+        <enum name="BlastConditionEnumType">
+          <enumerator name="BLASTING"/>
+          <enumerator name="RESTING"/>
+        </enum> 
+      </module>
+      <module name="BlastKindEnumType">
+        <enum name="BlastKindEnumType">
+          <enumerator name="LONG_BLAST"/>
+          <enumerator name="SHORT_BLAST"/>
+        </enum> 
+      </module>
+      <module name="CollisionAvoidStateEnumType">
+        <enum name="CollisionAvoidStateEnumType">
+          <enumerator name="DEVIATE_FROM_PATH"/>
+          <enumerator name="DO_NOTHING"/>
+          <enumerator name="STOP_ON_PATH"/>
+        </enum> 
+      </module>
+      <module name="CollisionAvoidStatusEnumType">
+        <enum name="CollisionAvoidStatusEnumType">
+          <enumerator name="ACTIVE_AVOID_OBSTACLE"/>
+          <enumerator name="ACTIVE_STOP_ON_OBSTACLE"/>
+          <enumerator name="DISABLED"/>
+          <enumerator name="ENABLED"/>
+        </enum> 
+      </module>
+      <module name="COLREGSClassificationEnumType">
+        <enum name="COLREGSClassificationEnumType">
+          <enumerator name="POWER_DRIVEN_UNDERWAY"/>
+          <enumerator name="SAILING"/>
+          <enumerator name="FISHING"/>
+          <enumerator name="NOT_UNDER_COMMAND"/>
+          <enumerator name="RESTRICTED_IN_ABILITY_TO_MANUEVER"/>
+          <enumerator name="ANCHORED"/>
+          <enumerator name="CONSTRAINED_BY_DRAUGHT"/>
+          <enumerator name="PUSHING"/>
+          <enumerator name="TOWING"/>
+          <enumerator name="NON_VESSEL"/>
+        </enum> 
+      </module>
+      <module name="CommandStatusReasonEnumType">
+        <enum name="CommandStatusReasonEnumType">
+          <enumerator name="CANCELED"/>
+          <enumerator name="VALIDATION_FAILED"/>
+          <enumerator name="OBJECTIVE_FAILED"/>
+          <enumerator name="SERVICE_FAILED"/>
+          <enumerator name="RESOURCE_FAILED"/>
+          <enumerator name="RESOURCE_REJECTED"/>
+          <enumerator name="INTERRUPTED"/>
+          <enumerator name="TIMEOUT"/>
+          <enumerator name="SUCCEEDED"/>
+        </enum> 
+      </module>
+      <module name="ContactManeuverInfluenceEnumType">
+        <enum name="ContactManeuverInfluenceEnumType">
+          <enumerator name="BEING_OVERTAKEN_COMPLIANT"/>
+          <enumerator name="BEING_OVERTAKEN_NONCOMPLIANT"/>
+          <enumerator name="CROSSING_LEFT_COMPLIANT"/>
+          <enumerator name="CROSSING_LEFT_NONCOMPLIANT"/>
+          <enumerator name="CROSSING_RIGHT_COMPLIANT"/>
+          <enumerator name="CROSSING_RIGHT_NONCOMPLIANT"/>
+          <enumerator name="HEAD_ON_COMPLIANT"/>
+          <enumerator name="HEAD_ON_NONCOMPLIANT"/>
+          <enumerator name="OVERTAKING_COMPLIANT"/>
+          <enumerator name="OVERTAKING_NONCOMPLIANT"/>
+          <enumerator name="GUIDE"/>
+          <enumerator name="IN_EXTREMIS"/>
+          <enumerator name="COLLISION_AVOIDANCE"/>
+          <enumerator name="PREEMPTIVE"/>
+          <enumerator name="OBSTACLE_AVOIDANCE"/>
+          <enumerator name="NONE"/>
+        </enum> 
+      </module>
+      <module name="ContingencyBehaviorEnumType">
+        <enum name="ContingencyBehaviorEnumType">
+          <enumerator name="CONTINUE"/>
+          <enumerator name="FINISH"/>
+          <enumerator name="LOITER"/>
+          <enumerator name="NONE"/>
+          <enumerator name="VEHICLE_SPECIFIC"/>
+          <enumerator name="_HOME"/>
+        </enum> 
+      </module>
+      <module name="CoordinateSystemEnumType">
+        <enum name="CoordinateSystemEnumType">
+          <enumerator name="SENSOR_COORDINATE_SYSTEM"/>
+          <enumerator name="VEHICLE_COORDINATE_SYSTEM"/>
+        </enum> 
+      </module>
+      <module name="CoreStateEnumType">
+        <enum name="CoreStateEnumType">
+          <enumerator name="EMERGENCY"/>
+          <enumerator name="FAILURE"/>
+          <enumerator name="INITIAL"/>
+          <enumerator name="READY"/>
+          <enumerator name="RESET"/>
+          <enumerator name="RESUME"/>
+          <enumerator name="SHUTDOWN"/>
+          <enumerator name="STANDBY"/>
+        </enum> 
+      </module>
+      <module name="DigitalAudioFormatEnumType">
+        <enum name="DigitalAudioFormatEnumType">
+          <enumerator name="AAC_MPEG2"/>
+          <enumerator name="AAC_MPEG4"/>
+          <enumerator name="AIFF"/>
+          <enumerator name="ALAC"/>
+          <enumerator name="DOLBY_DIGITAL"/>
+          <enumerator name="DTS"/>
+          <enumerator name="FLAC"/>
+          <enumerator name="LPCM_PCM"/>
+          <enumerator name="MP2"/>
+          <enumerator name="MP3"/>
+          <enumerator name="REAL_AUDIO"/>
+          <enumerator name="SPEEX"/>
+          <enumerator name="TRUE_AUDIO"/>
+          <enumerator name="ULAW"/>
+          <enumerator name="VORBIS"/>
+          <enumerator name="WAV"/>
+          <enumerator name="WMA"/>
+          <enumerator name="WMA9_LOSS_LESS"/>
+        </enum> 
+      </module>
+      <module name="DigitalSensorErrorCodeEnumType">
+        <enum name="DigitalSensorErrorCodeEnumType">
+          <enumerator name="INVALID_FORMAT"/>
+          <enumerator name="INVALID_FRAME_SIZE"/>
+          <enumerator name="INVALID_MAX_BIT_RATE"/>
+          <enumerator name="INVALID_MAX_FRAME_RATE"/>
+          <enumerator name="INVALID_MIN_BIT_RATE"/>
+          <enumerator name="INVALID_MIN_FRAME_RATE"/>
+          <enumerator name="MULTIPLE_INVALID_PARAMETERS"/>
+          <enumerator name="UNKNOWN_ERROR_FAULT"/>
+          <enumerator name="UNKNOWN_SENSOR_ID"/>
+        </enum> 
+      </module>
+      <module name="DomainEnumType">
+        <enum name="DomainEnumType">
+          <enumerator name="AIR"/>
+          <enumerator name="GROUND"/>
+          <enumerator name="SURFACE"/>
+          <enumerator name="UNDERSEA"/>
+        </enum> 
+      </module>
+      <module name="EngineKindEnumType">
+        <enum name="EngineKindEnumType">
+          <enumerator name="DIESEL"/>
+          <enumerator name="GAS"/>
+        </enum> 
+      </module>
+      <module name="ErrorCodeEnumType">
+        <enum name="ErrorCodeEnumType">
+          <enumerator name="ACTUATOR"/>
+          <enumerator name="FILESYS"/>
+          <enumerator name="NONE"/>
+          <enumerator name="POWER"/>
+          <enumerator name="PROCESSOR"/>
+          <enumerator name="RAM"/>
+          <enumerator name="ROM"/>
+          <enumerator name="SENSOR"/>
+          <enumerator name="SOFTWARE"/>
+        </enum> 
+      </module>
+      <module name="ErrorConditionEnumType">
+        <enum name="ErrorConditionEnumType">
+          <enumerator name="INFO"/>
+          <enumerator name="WARN"/>
+          <enumerator name="ERROR"/>
+          <enumerator name="FAIL"/>
+          <enumerator name="NONE"/>
+        </enum> 
+      </module>
+      <module name="ExposureModeEnumType">
+        <enum name="ExposureModeEnumType">
+          <enumerator name="AUTO_DEFAULT"/>
+          <enumerator name="MANUAL"/>
+          <enumerator name="APETURE_PRIORITY"/>
+          <enumerator name="SHUTTER_PRIORITY"/>
+        </enum> 
+      </module>
+      <module name="FrameSizeEnumType">
+        <enum name="FrameSizeEnumType">
+          <enumerator name="CGA_320x200"/>
+          <enumerator name="CIF_1408x1152"/>
+          <enumerator name="CIF_352x288"/>
+          <enumerator name="CIF_704x576"/>
+          <enumerator name="EGA_640x350"/>
+          <enumerator name="HD1080_1920x1080"/>
+          <enumerator name="HD480_852x480"/>
+          <enumerator name="HD720_1280x720"/>
+          <enumerator name="HSXGA_5120x4096"/>
+          <enumerator name="QCIF_176x144"/>
+          <enumerator name="QQVGA_160x120"/>
+          <enumerator name="QSXGA_2560x2048"/>
+          <enumerator name="QVGA_320x240"/>
+          <enumerator name="QXGA_2048x1536"/>
+          <enumerator name="SQCIF_128x96"/>
+          <enumerator name="SVGA_800x600"/>
+          <enumerator name="SXGA_1280x1024"/>
+          <enumerator name="UXGA_1600x1200"/>
+          <enumerator name="VGA_640x480"/>
+          <enumerator name="WHSXGA_6400x4096"/>
+          <enumerator name="WHUXGA_7680x4800"/>
+          <enumerator name="WOXGA_2560x1600"/>
+          <enumerator name="WQSXGA_3200x2048"/>
+          <enumerator name="WQUXGA_3840x2400"/>
+          <enumerator name="WSXGA_1600x1024"/>
+          <enumerator name="WUXGA_1920x1200"/>
+          <enumerator name="WVGA_852x480"/>
+          <enumerator name="WXGA_1366x768"/>
+          <enumerator name="XGA_1024x768"/>
+        </enum> 
+      </module>
+      <module name="GPSConstellationEnumType">
+        <enum name="GPSConstellationEnumType">
+          <enumerator name="UNKNOWN"/>
+          <enumerator name="BEIDOU"/>
+          <enumerator name="GALILEO"/>
+          <enumerator name="GLONASS"/>
+          <enumerator name="GPS"/>
+          <enumerator name="IRNSS"/>
+          <enumerator name="QZSS"/>
+          <enumerator name="SBAS"/>
+        </enum> 
+      </module>
+      <module name="GPSFixEnumType">
+        <enum name="GPSFixEnumType">
+          <enumerator name="INITIATING"/>
+          <enumerator name="PERFORMING"/>
+          <enumerator name="STABLE"/>
+        </enum> 
+      </module>
+      <module name="GPSNavigationSolutionEnumType">
+        <enum name="GPSNavigationSolutionEnumType">
+          <enumerator name="GPS_1"/>
+          <enumerator name="GPS_2"/>
+          <enumerator name="GPS_2D"/>
+          <enumerator name="GPS_3"/>
+          <enumerator name="GPS_3D"/>
+          <enumerator name="GPS_4"/>
+          <enumerator name="GPS_DEAD_RECK"/>
+          <enumerator name="NO_NAV"/>
+        </enum> 
+      </module>
+      <module name="GuardedTeleoperationStatusEnumType">
+        <enum name="GuardedTeleoperationStatusEnumType">
+          <enumerator name="DISABLED"/>
+          <enumerator name="ENABLED"/>
+          <enumerator name="ACTIVE_AVOID_OBSTACLE"/>
+          <enumerator name="PITCHOVER_LIMIT"/>
+          <enumerator name="ROLLOVER_LIMIT"/>
+          <enumerator name="ACTIVE_STOP_ON_OBSTACLE"/>
+        </enum> 
+      </module>
+      <module name="H264EncodingEnumType">
+        <enum name="H264EncodingEnumType">
+          <enumerator name="BASELINE"/>
+          <enumerator name="CAVLC444"/>
+          <enumerator name="CONSTRAINED_BASELINE"/>
+          <enumerator name="CONSTRAINED_HIGH"/>
+          <enumerator name="EXTENDED"/>
+          <enumerator name="HIGH"/>
+          <enumerator name="HIGH10"/>
+          <enumerator name="HIGH10_INTRA"/>
+          <enumerator name="HIGH422"/>
+          <enumerator name="HIGH422_INTRA"/>
+          <enumerator name="HIGH444_INTRA"/>
+          <enumerator name="HIGH444_PREDICTIVE"/>
+          <enumerator name="MAIN"/>
+          <enumerator name="MULTIVIEW_HIGH"/>
+          <enumerator name="PROGRESSIVE_HIGH"/>
+          <enumerator name="SCALABLE_BASELINE"/>
+          <enumerator name="SCALABLE_CONSTRAINED_BASELINE"/>
+          <enumerator name="SCALABLE_CONSTRAINED_HIGH"/>
+          <enumerator name="SCALABLE_HIGH"/>
+          <enumerator name="SCALABLE_HIGH_INTRA"/>
+          <enumerator name="STEREO_HIGH"/>
+        </enum> 
+      </module>
+      <module name="H264PresetEnumType">
+        <enum name="H264PresetEnumType">
+          <enumerator name="BEST_QUALITY"/>
+          <enumerator name="DRIVE_VISION"/>
+          <enumerator name="LOW_LATENCY"/>
+          <enumerator name="MANIPULATION"/>
+          <enumerator name="PERSISTENT_STARE"/>
+          <enumerator name="PROGRAM_SPECIFIC_1"/>
+          <enumerator name="PROGRAM_SPECIFIC_2"/>
+          <enumerator name="PROGRAM_SPECIFIC_3"/>
+          <enumerator name="PROGRAM_SPECIFIC_4"/>
+          <enumerator name="SLOW_COMMS"/>
+        </enum> 
+      </module>
+      <module name="HandoverResultEnumType">
+        <enum name="HandoverResultEnumType">
+          <enumerator name="DEFERRED"/>
+          <enumerator name="DENIED"/>
+          <enumerator name="GRANTED"/>
+          <enumerator name="TIMEOUT"/>
+          <enumerator name="INSUFFICIENT_AUTHORITY"/>
+          <enumerator name="NOT_AVAILABLE"/>
+        </enum> 
+      </module>
+      <module name="HeadingReferenceEnumType">
+        <enum name="HeadingReferenceEnumType">
+          <enumerator name="MAGNETIC_NORTH"/>
+          <enumerator name="TRUE_NORTH"/>
+          <enumerator name="WIND_DIRECTION"/>
+        </enum> 
+      </module>
+      <module name="HeightModeEnumType">
+        <enum name="HeightModeEnumType">
+          <enumerator name="ALTITUDE"/>
+          <enumerator name="DEPTH"/>
+        </enum> 
+      </module>
+      <module name="HoverKindEnumType">
+        <enum name="HoverKindEnumType">
+          <enumerator name="LAT_LON_PRIORITY"/>
+          <enumerator name="Z_PRIORITY"/>
+        </enum> 
+      </module>
+      <module name="IgnitionStateEnumType">
+        <enum name="IgnitionStateEnumType">
+          <enumerator name="OFF"/>
+          <enumerator name="RUN"/>
+          <enumerator name="START"/>
+        </enum> 
+      </module>
+      <module name="ImageFormatEnumType">
+        <enum name="ImageFormatEnumType">
+          <enumerator name="BMP"/>
+          <enumerator name="CR2_RAW"/>
+          <enumerator name="DNG"/>
+          <enumerator name="GIF"/>
+          <enumerator name="JPEG"/>
+          <enumerator name="NEF"/>
+          <enumerator name="PGM"/>
+          <enumerator name="PNG"/>
+          <enumerator name="PNM"/>
+          <enumerator name="PPM"/>
+          <enumerator name="TIFF"/>
+        </enum> 
+      </module>
+      <module name="ImagingModeEnumType">
+        <enum name="ImagingModeEnumType">
+          <enumerator name="COLOR"/>
+          <enumerator name="GREYSCALE"/>
+          <enumerator name="INFRARED"/>
+          <enumerator name="LOWLIGHT"/>
+        </enum> 
+      </module>
+      <module name="InertialSensorOpStatusEnumType">
+        <enum name="InertialSensorOpStatusEnumType">
+          <enumerator name="COURSE_GPS_ALIGNMENT"/>
+          <enumerator name="COURSE_STATIONARY_ALIGNMENT"/>
+          <enumerator name="FINE_GPS_ALIGNMENT_COMPLETE"/>
+          <enumerator name="FINE_GPS_ALIGNMENT_STARTED"/>
+          <enumerator name="FINE_STATIONARY_ALIGNMENT_COMPLETE"/>
+          <enumerator name="FINE_STATIONARY_ALIGNMENT_STARTED"/>
+          <enumerator name="INERTIAL_SENSOR_FAILURE"/>
+          <enumerator name="INIT"/>
+          <enumerator name="OPERATIONAL"/>
+        </enum> 
+      </module>
+      <module name="InertialSensorStateEnumType">
+        <enum name="InertialSensorStateEnumType">
+          <enumerator name="OFF"/>
+          <enumerator name="ON"/>
+          <enumerator name="RESTARTING"/>
+        </enum> 
+      </module>
+      <module name="LightSensitivityEnumType">
+        <enum name="LightSensitivityEnumType">
+          <enumerator name="AUTO_DEFAULT"/>
+          <enumerator name="ISO_100"/>
+          <enumerator name="ISO_1600"/>
+          <enumerator name="ISO_200"/>
+          <enumerator name="ISO_3200"/>
+          <enumerator name="ISO_400"/>
+          <enumerator name="ISO_800"/>
+        </enum> 
+      </module>
+      <module name="LostCommsStatusEnumType">
+        <enum name="LostCommsStatusEnumType">
+          <enumerator name="ACTIVE"/>
+          <enumerator name="DISABLED"/>
+          <enumerator name="ENABLED"/>
+        </enum> 
+      </module>
+      <module name="MastActionEnumType">
+        <enum name="MastActionEnumType">
+          <enumerator name="LOWER"/>
+          <enumerator name="RAISE"/>
+          <enumerator name="STOP"/>
+        </enum> 
+      </module>
+      <module name="MastStateEnumType">
+        <enum name="MastStateEnumType">
+          <enumerator name="DOWN"/>
+          <enumerator name="MOVING_DOWN"/>
+          <enumerator name="MOVING_UP"/>
+          <enumerator name="UP"/>
+        </enum> 
+      </module>
+      <module name="CommandStatusEnumType">
+        <enum name="CommandStatusEnumType">
+          <enumerator name="FAILED"/>
+          <enumerator name="COMPLETED"/>
+          <enumerator name="ISSUED"/>
+          <enumerator name="COMMANDED"/>
+          <enumerator name="EXECUTING"/>
+          <enumerator name="CANCELED"/>
+        </enum> 
+      </module>
+      <module name="DataEncodingEnumType">
+        <enum name="DataEncodingEnumType">
+          <enumerator name="AVI"/>
+          <enumerator name="H_261"/>
+          <enumerator name="H_262"/>
+          <enumerator name="H_263"/>
+          <enumerator name="H_263PLUS"/>
+          <enumerator name="H_264"/>
+          <enumerator name="MJPEG"/>
+          <enumerator name="MPEG_1"/>
+          <enumerator name="MPEG_2"/>
+          <enumerator name="MPEG_4"/>
+          <enumerator name="NONE"/>
+        </enum> 
+      </module>
+      <module name="FeatureKindEnumType">
+        <enum name="FeatureKindEnumType">
+          <enumerator name="CONTACT"/>
+          <enumerator name="OTHER"/>
+        </enum> 
+      </module>
+      <module name="LoiterKindEnumType">
+        <enum name="LoiterKindEnumType">
+          <enumerator name="CIRCLE"/>
+          <enumerator name="RACETRACK"/>
+        </enum> 
+      </module>
+      <module name="TaskStateEnumType">
+        <enum name="TaskStateEnumType">
+          <enumerator name="PLANNED_PENDING_APPROVAL"/>
+          <enumerator name="AWAITING_EXECUTION_APPROVAL"/>
+          <enumerator name="ALLOCATED"/>
+          <enumerator name="EXECUTION_APPROVED"/>
+          <enumerator name="CANCELED"/>
+          <enumerator name="COMPLETED"/>
+          <enumerator name="DROPPED"/>
+          <enumerator name="PLANNED"/>
+          <enumerator name="PROPOSED"/>
+          <enumerator name="QUEUED"/>
+          <enumerator name="EXECUTING"/>
+          <enumerator name="FAILED"/>
+          <enumerator name="UNALLOCATED"/>
+          <enumerator name="ALLOCATED_PENDING_APPROVAL"/>
+          <enumerator name="AWAITING_MISSION_PLAN"/>
+          <enumerator name="PAUSED"/>
+          <enumerator name="QUEUING"/>
+          <enumerator name="PLANNING"/>
+        </enum> 
+      </module>
+      <module name="TransportEncodingEnumType">
+        <enum name="TransportEncodingEnumType">
+          <enumerator name="MPEG_2"/>
+          <enumerator name="MP4"/>
+          <enumerator name="OTHER"/>
+        </enum> 
+      </module>
+      <module name="WaypointKindEnumType">
+        <enum name="WaypointKindEnumType">
+          <enumerator name="APPROACH_FINAL_POINT"/>
+          <enumerator name="APPROACH_INITIAL_POINT"/>
+          <enumerator name="LAUNCH"/>
+          <enumerator name="LOITER"/>
+          <enumerator name="NAV_ONLY"/>
+          <enumerator name="NAV_TARGET"/>
+          <enumerator name="OTHER"/>
+          <enumerator name="RECOVERY"/>
+          <enumerator name="RENDEZVOUS"/>
+        </enum> 
+      </module>
+      <module name="MeteringModeEnumType">
+        <enum name="MeteringModeEnumType">
+          <enumerator name="AUTO_DEFAULT"/>
+          <enumerator name="CENTER_WEIGHTED"/>
+          <enumerator name="SPOT"/>
+        </enum> 
+      </module>
+      <module name="MountModeEnumType">
+        <enum name="MountModeEnumType">
+          <enumerator name="_FIXED"/>
+          <enumerator name="FIXED_BOW_THRUSTER"/>
+          <enumerator name="FIXED_PORT_PROPULSOR"/>
+          <enumerator name="FIXED_STERN_THRUSTER"/>
+          <enumerator name="VARIABLE_BEARING"/>
+          <enumerator name="VARIABLE_PITCH"/>
+          <enumerator name="VARIABLE_PITCH_AND_BEARING"/>
+        </enum> 
+      </module>
+      <module name="NavigationSolutionEnumType">
+        <enum name="NavigationSolutionEnumType">
+          <enumerator name="ESTIMATED"/>
+          <enumerator name="GROUND_TRUTH"/>
+          <enumerator name="MEASURED"/>
+        </enum> 
+      </module>
+      <module name="ObstacleAvoidanceEnumType">
+        <enum name="ObstacleAvoidanceEnumType">
+          <enumerator name="DEVIATE_FROM_PATH"/>
+          <enumerator name="DO_NOTHING"/>
+          <enumerator name="STOP_ON_PATH"/>
+        </enum> 
+      </module>
+      <module name="PathWayEnumType">
+        <enum name="PathWayEnumType">
+          <enumerator name="HISTORIAL_GLOBAL"/>
+          <enumerator name="HISTORICAL_LOCAL"/>
+          <enumerator name="PLANNED_GLOBAL"/>
+          <enumerator name="PLANNED_LOCAL"/>
+        </enum> 
+      </module>
+      <module name="PlatformModeEnumType">
+        <enum name="PlatformModeEnumType">
+          <enumerator name="MAINTENANCE"/>
+          <enumerator name="STANDARD_OPERATING"/>
+          <enumerator name="TRAINING"/>
+        </enum> 
+      </module>
+      <module name="PlatformModeTransitionEnumType">
+        <enum name="PlatformModeTransitionEnumType">
+          <enumerator name="ACTIVE"/>
+          <enumerator name="EXITING"/>
+          <enumerator name="INITIALIZING"/>
+        </enum> 
+      </module>
+      <module name="PowerPlantStateEnumType">
+        <enum name="PowerPlantStateEnumType">
+          <enumerator name="FAULT"/>
+          <enumerator name="OFF"/>
+          <enumerator name="ON"/>
+        </enum> 
+      </module>
+      <module name="PumpStateEnumType">
+        <enum name="PumpStateEnumType">
+          <enumerator name="FAULT"/>
+          <enumerator name="OFF"/>
+          <enumerator name="ON_FORWARD"/>
+          <enumerator name="ON_REVERSE"/>
+        </enum> 
+      </module>
+      <module name="RangeErrorCodeEnumType">
+        <enum name="RangeErrorCodeEnumType">
+          <enumerator name="INVALID_HORIZONTAL_FOV"/>
+          <enumerator name="INVALID_SENSOR_RANGE"/>
+          <enumerator name="INVALID_SENSOR_STATE"/>
+          <enumerator name="INVALID_UPDATE_RATE"/>
+          <enumerator name="INVALID_VERTICAL_FOV"/>
+          <enumerator name="MULTIPLE_INVALID_PARAMETERS"/>
+          <enumerator name="UNKNOWN_ERROR_FAULT"/>
+          <enumerator name="UNKNOWN_SENSOR_ID"/>
+        </enum> 
+      </module>
+      <module name="RenderUselessStateEnumType">
+        <enum name="RenderUselessStateEnumType">
+          <enumerator name="NORMAL"/>
+          <enumerator name="RENDERED_USELESS"/>
+          <enumerator name="RENDERED_USELESS_FAILED"/>
+        </enum> 
+      </module>
+      <module name="SourceIndicatorEnumType">
+        <enum name="SourceIndicatorEnumType">
+          <enumerator name="ACTUAL"/>
+          <enumerator name="GROUND_TRUTH"/>
+          <enumerator name="SIMULATED"/>
+          <enumerator name="TENTATIVE"/>
+        </enum> 
+      </module>
+      <module name="StillImageErrorCodeEnumType">
+        <enum name="StillImageErrorCodeEnumType">
+          <enumerator name="INVALID_FORMAT"/>
+          <enumerator name="INVALID_FRAME_SIZE"/>
+          <enumerator name="MULTIPLE_INVALID_PARAMETERS"/>
+          <enumerator name="UNKNOWN_ERROR_FAULT"/>
+          <enumerator name="UNKNOWN_SENSOR_ID"/>
+        </enum> 
+      </module>
+      <module name="StreamStateEnumType">
+        <enum name="StreamStateEnumType">
+          <enumerator name="PAUSE"/>
+          <enumerator name="PLAY"/>
+          <enumerator name="STOP"/>
+        </enum> 
+      </module>
+      <module name="TamperDetectionStateEnumType">
+        <enum name="TamperDetectionStateEnumType">
+          <enumerator name="ALWAYS_ENABLED_OR_CLEAR"/>
+          <enumerator name="DISABLED"/>
+          <enumerator name="ENABLED"/>
+        </enum> 
+      </module>
+      <module name="VehicleSpeedModeEnumType">
+        <enum name="VehicleSpeedModeEnumType">
+          <enumerator name="LRC"/>
+          <enumerator name="MEC"/>
+          <enumerator name="MRC"/>
+          <enumerator name="SLOW"/>
+          <enumerator name="VEHICLE_SPECIFIC"/>
+        </enum> 
+      </module>
+      <module name="VehicleSpeedReferenceEnumType">
+        <enum name="VehicleSpeedReferenceEnumType">
+          <enumerator name="SPEED_THROUGH_AIR"/>
+          <enumerator name="OTHER"/>
+          <enumerator name="RPM"/>
+          <enumerator name="SPEED_OVER_GROUND"/>
+          <enumerator name="SPEED_THROUGH_WATER"/>
+        </enum> 
+      </module>
+      <module name="VelocityCommandTypeEnumType">
+        <enum name="VelocityCommandTypeEnumType">
+          <enumerator name="CURRENT_COMMAND_SOG"/>
+          <enumerator name="CURRENT_COMMAND_SRM"/>
+          <enumerator name="DEFAULT_COMMAND_SOG"/>
+          <enumerator name="DEFAULT_COMMAND_SRM"/>
+          <enumerator name="MAX_ALLOWED_SOG"/>
+          <enumerator name="MAX_ALLOWED_SRM"/>
+          <enumerator name="MIN_ALLOWED_SOG"/>
+          <enumerator name="MIN_ALLOWED_SRM"/>
+        </enum> 
+      </module>
+      <module name="VideoFormatEnumType">
+        <enum name="VideoFormatEnumType">
+          <enumerator name="NTSCJ"/>
+          <enumerator name="NTSCM"/>
+          <enumerator name="PALM"/>
+          <enumerator name="PALN"/>
+          <enumerator name="SECAMBG"/>
+          <enumerator name="SECAML"/>
+        </enum> 
+      </module>
+      <module name="VisualClassificationEnumType">
+        <enum name="VisualClassificationEnumType">
+          <enumerator name="AID_TO_NAVIGATION_CHANNEL_MARKER"/>
+          <enumerator name="MEDIUM_VESSEL_FISHING"/>
+          <enumerator name="AID_TO_NAVIGATION_GENERAL"/>
+          <enumerator name="SMALL_VESSEL_JET_SKI"/>
+          <enumerator name="AID_TO_NAVIGATION_LARGE_BUOY"/>
+          <enumerator name="LARGE_VESSEL_CARGO"/>
+          <enumerator name="LARGE_GENERAL_OBSTACLE"/>
+          <enumerator name="LARGE_VESSEL_GENERAL"/>
+          <enumerator name="LARGE_VESSEL_MILITARY"/>
+          <enumerator name="LARGE_VESSEL_PASSENGER"/>
+          <enumerator name="LARGE_VESSEL_OTHER"/>
+          <enumerator name="AID_TO_NAVIGATION_LIGHTHOUSE"/>
+          <enumerator name="MEDIUM_VESSEL_GENERAL"/>
+          <enumerator name="MEDIUM_VESSEL_MILITARY"/>
+          <enumerator name="MEDIUM_VESSEL_OTHER"/>
+          <enumerator name="SMALL_VESSEL_POWER_BOAT"/>
+          <enumerator name="SAILBOAT"/>
+          <enumerator name="AID_TO_NAVIGATION_SMALL_BUOY"/>
+          <enumerator name="SMALL_GENERAL_OBSTACLE"/>
+          <enumerator name="SMALL_VESSEL_GENERAL"/>
+          <enumerator name="SMALL_VESSEL_MILITARY"/>
+          <enumerator name="SMALL_VESSEL_OTHER"/>
+          <enumerator name="MEDIUM_VESSEL_TUG"/>
+          <enumerator name="MEDIUM_VESSEL_TUG_IN_TOW"/>
+          <enumerator name="MEDIUM_VESSEL_YACHT"/>
+        </enum> 
+      </module>
+      <module name="WaterTurnDirectionEnumType">
+        <enum name="WaterTurnDirectionEnumType">
+          <enumerator name="NO_VALID_TURN_DIRECTION"/>
+          <enumerator name="LEFT_TURN"/>
+          <enumerator name="RIGHT_TURN"/>
+          <enumerator name="VEHICLE_SPECIFIC"/>
+          <enumerator name="INTO_THE_CURRENT"/>
+          <enumerator name="INTO_THE_WIND"/>
+        </enum> 
+      </module>
+      <module name="WhiteBalanceEnumType">
+        <enum name="WhiteBalanceEnumType">
+          <enumerator name="AUTO_DEFAULT"/>
+          <enumerator name="CLOUDY"/>
+          <enumerator name="DAYLIGHT"/>
+          <enumerator name="FLASH"/>
+          <enumerator name="FLUORESCENT"/>
+          <enumerator name="SHADE"/>
+          <enumerator name="TUNGSTEN"/>
+        </enum> 
+      </module>
+      <module name="ZoneKindEnumType">
+        <enum name="ZoneKindEnumType">
+          <enumerator name="KEEP_IN"/>
+          <enumerator name="KEEP_OUT"/>
+        </enum> 
+      </module>
+      <module name="ZoomModeEnumType">
+        <enum name="ZoomModeEnumType">
+          <enumerator name="ANALOG_ONLY"/>
+          <enumerator name="DIGITAL_ONLY"/>
+          <enumerator name="OFF"/>
+          <enumerator name="MIXED_DEFAULT"/>
+        </enum> 
+      </module>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

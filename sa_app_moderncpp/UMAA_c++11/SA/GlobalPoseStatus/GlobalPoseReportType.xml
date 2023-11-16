@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.2.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/MaritimeEnumeration/EnumerationSets.xml"/>
+<include file="UMAA/Common/Measurement/Altitude_AGL.xml"/>
+<include file="UMAA/Common/Measurement/Altitude_MSL.xml"/>
+<include file="UMAA/Common/Measurement/CovarianceOrientationType.xml"/>
+<include file="UMAA/Common/Measurement/CovariancePositionPositionType.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<include file="UMAA/Common/Measurement/Orientation3D.xml"/>
+<include file="UMAA/Common/Measurement/Position2D.xml"/>
+<module name="UMAA">
+  <module name="SA">
+    <module name="GlobalPoseStatus">
+      <const name="GlobalPoseReport_TOPIC" type="string" value="&quot;UMAA::SA::GlobalPoseStatus::GlobalPoseReport&quot;"/>
+      <struct name= "GlobalPoseReportType">
+        <member name="altitude" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Altitude_MSL" optional="true"/>
+        <member name="altitudeAGL" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Altitude_AGL" optional="true"/>
+        <member name="altitudeASF" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance_ASF" min="0" max="401056000" optional="true"/>
+        <member name="attitude" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Orientation3D"/>
+        <member name="attitudeCovariance" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::CovarianceOrientationType"/>
+        <member name="course" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Course_TrueNorth"/>
+        <member name="depth" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance_BSL" min="0" max="10000" optional="true"/>
+        <member name="navigationSolution" type="nonBasic"  nonBasicTypeName= "UMAA::Common::MaritimeEnumeration::NavigationSolutionEnumType::NavigationSolutionEnumType"/>
+        <member name="position" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Position2D"/>
+        <member name="positionCovariance" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::CovariancePositionPositionType"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

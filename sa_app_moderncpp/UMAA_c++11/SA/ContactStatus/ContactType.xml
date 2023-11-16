@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.2.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/MaritimeEnumeration/EnumerationSets.xml"/>
+<include file="UMAA/Common/Measurement/Altitude_MSL.xml"/>
+<include file="UMAA/Common/Measurement/CovariancePositionPositionType.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<include file="UMAA/Common/Measurement/Polygon.xml"/>
+<include file="UMAA/Common/Measurement/Position2D.xml"/>
+<include file="UMAA/Common/Measurement/RMSDistanceErrorType.xml"/>
+<include file="UMAA/Common/PrimitiveConstrained/ConstrainedTypes.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<module name="UMAA">
+  <module name="SA">
+    <module name="ContactStatus">
+      <struct name= "ContactType">
+        <member name="area" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Polygon"/>
+        <member name="callSign" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::StringShortDescription" optional="true"/>
+        <member name="contactName" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::StringShortDescription"/>
+        <member name="course" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Course_TrueNorth"/>
+        <member name="CPA" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Position2D" optional="true"/>
+        <member name="CPATime" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime" optional="true"/>
+        <member name="diameter" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance" min="0" max="401056000"/>
+        <member name="elevation" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Altitude_MSL"/>
+        <member name="elevationError" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::RMSDistanceErrorType"/>
+        <member name="heading" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Heading_TrueNorth_Angle" min="-3.1415926535897931264626433832795" max="3.1415926535897932384626433832795"/>
+        <member name="height" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance" min="0" max="401056000" optional="true"/>
+        <member name="kind" type="nonBasic"  nonBasicTypeName= "UMAA::Common::MaritimeEnumeration::FeatureKindEnumType::FeatureKindEnumType"/>
+        <member name="length" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance" min="0" max="401056000" optional="true"/>
+        <member name="MMSINumber" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::MMSI" optional="true"/>
+        <member name="originator" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::StringShortDescription"/>
+        <member name="position" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Position2D"/>
+        <member name="positionCovariance" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::CovariancePositionPositionType"/>
+        <member name="SIDC" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::StringShortDescription"/>
+        <member name="source" sequenceMaxLength="100" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID"/>
+        <member name="sourceIndicator" type="nonBasic"  nonBasicTypeName= "UMAA::Common::MaritimeEnumeration::SourceIndicatorEnumType::SourceIndicatorEnumType"/>
+        <member name="speedOverGround" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::GroundSpeed" min="0" max="200"/>
+        <member name="timeFirstAcquired" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+        <member name="timeLost" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime" optional="true"/>
+        <member name="width" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance" min="0" max="401056000" optional="true"/>
+        <member name="featureID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

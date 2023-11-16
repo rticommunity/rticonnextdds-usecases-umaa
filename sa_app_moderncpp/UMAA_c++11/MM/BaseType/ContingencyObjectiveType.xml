@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.2.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/Enumeration/EnumerationSets.xml"/>
+<include file="UMAA/Common/MaritimeEnumeration/EnumerationSets.xml"/>
+<include file="UMAA/Common/Measurement/Altitude_AGL.xml"/>
+<include file="UMAA/Common/Measurement/Altitude_MSL.xml"/>
+<include file="UMAA/Common/Measurement/DateTime_Tolerance.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<include file="UMAA/Common/Measurement/Position2D.xml"/>
+<include file="UMAA/Common/PrimitiveConstrained/ConstrainedTypes.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<module name="UMAA">
+  <module name="MM">
+    <module name="BaseType">
+      <struct name= "ContingencyObjectiveType">
+        <member name="altitude" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Altitude_MSL"/>
+        <member name="altitudeAGL" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Altitude_AGL"/>
+        <member name="altitudeASF" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance_ASF" min="0" max="401056000"/>
+        <member name="behavior" type="nonBasic"  nonBasicTypeName= "UMAA::Common::MaritimeEnumeration::ContingencyBehaviorEnumType::ContingencyBehaviorEnumType"/>
+        <member name="depth" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance_BSL" min="0" max="10000"/>
+        <member name="DTEDAltitude" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance" min="0" max="401056000"/>
+        <member name="mode" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::StringShortDescription"/>
+        <member name="position" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Position2D"/>
+        <member name="radius" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance" min="0" max="401056000"/>
+        <member name="safeAltitude" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance" min="0" max="401056000"/>
+        <member name="safeAltitudeOffset" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance" min="0" max="401056000"/>
+        <member name="speed" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Speed" min="0" max="299792458"/>
+        <member name="vehicleRunTime" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Duration_Hours" min="0" max="10505"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

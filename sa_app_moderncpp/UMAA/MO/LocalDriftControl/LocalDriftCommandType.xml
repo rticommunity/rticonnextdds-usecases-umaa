@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-6.1.2/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/Measurement/ElevationType.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<include file="UMAA/Common/Measurement/Position2D_PlatformXYZ.xml"/>
+<include file="UMAA/Common/VariableSpeedControl/VariableSpeedControlType.xml"/>
+<module name="UMAA">
+  <module name="MO">
+    <module name="LocalDriftControl">
+      <const name="LocalDriftCommand_TOPIC" type="string" value="&quot;UMAA::MO::LocalDriftControl::LocalDriftCommand&quot;"/>
+      <struct name= "LocalDriftCommandType">
+        <member name="driftTolerance" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance"/>
+        <member name="elevation" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::ElevationType"/>
+        <member name="elevationTolerance" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance"/>
+        <member name="endTime" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime" optional="true"/>
+        <member name="position" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Position2D_PlatformXYZ" optional="true"/>
+        <member name="positionTolerance" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance"/>
+        <member name="speed" type="nonBasic"  nonBasicTypeName= "UMAA::Common::VariableSpeedControl::VariableSpeedControlType"/>
+        <member name="speedTolerance" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::GroundSpeed"/>
+        <member name="transitElevation" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::ElevationType"/>
+        <member name="transitElevationTolerance" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance"/>
+        <member name="transitSpeed" type="nonBasic"  nonBasicTypeName= "UMAA::Common::VariableSpeedControl::VariableSpeedControlType"/>
+        <member name="transitSpeedTolerance" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::GroundSpeed"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="destination" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="sessionID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-6.1.2/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/Measurement/CovarianceOrientationType.xml"/>
+<include file="UMAA/Common/Measurement/CovariancePositionPositionType.xml"/>
+<include file="UMAA/Common/Measurement/ElevationType.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<include file="UMAA/Common/Measurement/Orientation3D_PlatformXYZ.xml"/>
+<include file="UMAA/Common/Measurement/Position2D.xml"/>
+<module name="UMAA">
+  <module name="SA">
+    <module name="GlobalDeadReckoning">
+      <const name="GlobalDeadReckoningCommand_TOPIC" type="string" value="&quot;UMAA::SA::GlobalDeadReckoning::GlobalDeadReckoningCommand&quot;"/>
+      <struct name= "GlobalDeadReckoningCommandType">
+        <member name="attitude" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Orientation3D_PlatformXYZ"/>
+        <member name="attitudeCovariance" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::CovarianceOrientationType"/>
+        <member name="elevation" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::ElevationType"/>
+        <member name="position" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Position2D"/>
+        <member name="positionCovariance" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::CovariancePositionPositionType"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="destination" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="sessionID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

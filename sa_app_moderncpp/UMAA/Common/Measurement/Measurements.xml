@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-6.1.2/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="BasicTypes/Quaternion.xml"/>
+<module name="UMAA">
+  <module name="Common">
+    <module name="Measurement">
+      <typedef name="AngleAcceleration" type="float64"/>
+      <typedef name="AnglePosition" type="float64"/>
+      <typedef name="Charge" type="float64" min="0" max="3600000"/>
+      <typedef name="Conductivity" type="float64"/>
+      <typedef name="DataTransferRate" type="float64"/>
+      <typedef name="Distance_ASF" type="float64" min="0" max="401056000"/>
+      <typedef name="Distance_BSL" type="float64" min="0" max="10000"/>
+      <typedef name="Effort" type="float64"/>
+      <typedef name="Energy_Percent" type="float64" min="0" max="1000"/>
+      <typedef name="FrameRateFPS" type="float64" min="0" max="1000"/>
+      <typedef name="FrequencyRPM" type="float64" min="-100000" max="100000"/>
+      <typedef name="Heading_CurrentDirection" type="float64" min="-3.1415926535897931264626433832795" max="3.1415926535897932384626433832795"/>
+      <typedef name="Heading_MagneticNorth" type="float64" min="-3.1415926535897931264626433832795" max="3.1415926535897932384626433832795"/>
+      <typedef name="Heading_WindDirection" type="float64" min="-3.1415926535897931264626433832795" max="3.1415926535897932384626433832795"/>
+      <typedef name="Mass_MetricTon" type="float64"/>
+      <typedef name="MassFlowRate" type="float64"/>
+      <typedef name="OrientationQuaternion" type="nonBasic"  nonBasicTypeName= "BasicTypes::Quaternion"/>
+      <typedef name="PositiveCount" type="float64" min="0" max="2147483647"/>
+      <typedef name="Power_Percent" type="float64" min="0" max="1000"/>
+      <typedef name="Pressure_Percent" type="float64" min="0" max="200"/>
+      <typedef name="Salinity" type="float64"/>
+      <typedef name="SidesCount" type="int32" min="0" max="255"/>
+      <typedef name="Speed_BSL" type="float64"/>
+      <typedef name="Speed_LocalWaterMass" type="float64" min="0" max="299792458"/>
+      <typedef name="Volume_CubicMeter" type="float64" min="0" max="1000"/>
+      <typedef name="Volume_Percent" type="float64" min="0" max="1000"/>
+      <typedef name="VolumetricFlowRate" type="float64"/>
+    </module>
+  </module>
+</module>
+<include file="UMAA/Common/MeasurementCoordinate/Engineering_Coordinate_Axes.xml"/>
+<include file="UMAA/Common/MeasurementCoordinate/Geographic_Coordinate_Axes.xml"/>
+<include file="BasicTypes/Quaternion.xml"/>
+<module name="UMAA">
+  <module name="Common">
+    <module name="Measurement">
+      <typedef name="AccelerationScalar" type="float64" min="-1310.68" max="1310.68"/>
+      <typedef name="Angle" type="float64"/>
+      <typedef name="AngleRate" type="float64" min="-62.831" max="62.831"/>
+      <typedef name="Azimuth_TrueNorth_PosAngle" type="float64"/>
+      <typedef name="BarometricPressure" type="float64"/>
+      <typedef name="CommsRate_BitsPerSecond" type="int32"/>
+      <typedef name="CommsRate_MegabitsPerSecond" type="float64" min="0" max="1125000"/>
+      <typedef name="ContinuousSize" type="float64" min="0" max="32767"/>
+      <typedef name="Count" type="int32" min="-2147483648" max="2147483647"/>
+      <typedef name="Course_TrueNorth" type="float64"/>
+      <typedef name="CovarOrientation" type="float64"/>
+      <typedef name="CovarPosPos" type="float64"/>
+      <typedef name="CovarPosVel" type="float64"/>
+      <typedef name="CovarVelVel" type="float64"/>
+      <typedef name="DateTimeSeconds" type="int64"/>
+      <typedef name="DateTimeNanoseconds" type="int32" min="0" max="999999999"/>
+      <struct name= "DateTime">
+        <member name="seconds" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTimeSeconds"/>
+        <member name="nanoseconds" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTimeNanoseconds"/>
+      </struct>
+      <typedef name="Density" type="float64"/>
+      <typedef name="Distance" type="float64" min="0" max="401056000"/>
+      <typedef name="Distance_Precise" type="float64" min="0" max="401056000"/>
+      <typedef name="Duration_Hours" type="float64" min="0" max="10505"/>
+      <typedef name="Duration_Seconds" type="float64" min="0" max="37817280"/>
+      <typedef name="ElectricalPower" type="float64" min="0" max="100000000"/>
+      <typedef name="EngineSpeed" type="float64" min="-100000" max="100000"/>
+      <typedef name="FieldOfView_LineOfSightFocalPlane" type="float64"/>
+      <typedef name="FocusValue" type="float64"/>
+      <typedef name="Force" type="float64" min="0" max="100000000"/>
+      <typedef name="Frequency_Hertz" type="float64" min="0.0" max="10000000000"/>
+      <typedef name="GroundSpeed" type="float64" min="0" max="200"/>
+      <typedef name="Heading_TrueNorth_Angle" type="float64" min="-3.1415926535897931264626433832795" max="3.1415926535897932384626433832795"/>
+      <typedef name="IndicatedAirspeed" type="float64"/>
+      <typedef name="IPPort_Counting" type="int32"/>
+      <typedef name="MagneticVariation" type="float64"/>
+      <typedef name="Mass" type="float64" min="0" max="100000000"/>
+      <typedef name="NumericGUID" type="byte" arrayDimensions="16"/>
+      <typedef name="Order" type="int32" min="0" max="2147483647"/>
+      <typedef name="Percent" type="float64" min="0" max="1000"/>
+      <typedef name="Pitch_HalfAngle" type="float64"/>
+      <typedef name="PitchAcceleration" type="float64"/>
+      <typedef name="PitchRate" type="float64" min="0" max="32.767"/>
+      <typedef name="PowerBusCurrent" type="float64" min="-100000" max="100000"/>
+      <typedef name="PowerBusVoltage" type="float64" min="-100000" max="100000"/>
+      <typedef name="Pressure_KiloPascals" type="float64" min="0" max="51200"/>
+      <typedef name="RadioFrequency_Hertz" type="float64" min="0.0" max="10000000000"/>
+      <typedef name="RelativeAngle" type="float64"/>
+      <typedef name="RelativeHumidity" type="float64" min="0" max="1000"/>
+      <typedef name="Roll_Angle" type="float64"/>
+      <typedef name="RollAcceleration" type="float64"/>
+      <typedef name="RollRate" type="float64"/>
+      <typedef name="Size_Numeral" type="float64"/>
+      <typedef name="Speed" type="float64" min="0" max="299792458"/>
+      <typedef name="Temperature" type="float64" min="-273" max="1000"/>
+      <typedef name="TurnRate" type="float64" min="0" max="32.767"/>
+      <typedef name="Yaw_PosAngle" type="float64"/>
+      <typedef name="YawAcceleration" type="float64"/>
+      <typedef name="YawRate" type="float64"/>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

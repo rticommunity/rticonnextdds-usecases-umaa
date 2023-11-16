@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.2.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<include file="UMAA/Common/Measurement/Position3D_PlatformXYZ.xml"/>
+<include file="UMAA/Common/PrimitiveConstrained/ConstrainedTypes.xml"/>
+<module name="UMAA">
+  <module name="EO">
+    <module name="UVPlatformSpecs">
+      <const name="UVPlatformSpecsReport_TOPIC" type="string" value="&quot;UMAA::EO::UVPlatformSpecs::UVPlatformSpecsReport&quot;"/>
+      <struct name= "UVPlatformSpecsReportType">
+        <member name="back" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance" min="0" max="401056000"/>
+        <member name="baselineBuoyancy" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Mass" min="0" max="100000000"/>
+        <member name="beamAtWaterline" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance" min="0" max="401056000"/>
+        <member name="bottom" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance" min="0" max="401056000"/>
+        <member name="centerOfBuoyancy" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Position3D_PlatformXYZ"/>
+        <member name="centerOfGravity" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Position3D_PlatformXYZ"/>
+        <member name="displacement" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Mass" min="0" max="100000000"/>
+        <member name="draft" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance" min="0" max="401056000"/>
+        <member name="front" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance" min="0" max="401056000"/>
+        <member name="heightOverall" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance" min="0" max="401056000"/>
+        <member name="hullDepth" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance" min="0" max="401056000"/>
+        <member name="left" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance" min="0" max="401056000"/>
+        <member name="lengthAtWaterline" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance" min="0" max="401056000"/>
+        <member name="lengthOverall" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance" min="0" max="401056000"/>
+        <member name="massOnLand" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Mass" min="0" max="100000000"/>
+        <member name="name" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::StringShortDescription"/>
+        <member name="outerWidth" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance" min="0" max="401056000"/>
+        <member name="right" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance" min="0" max="401056000"/>
+        <member name="top" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance" min="0" max="401056000"/>
+        <member name="widthOverall" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance" min="0" max="401056000"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

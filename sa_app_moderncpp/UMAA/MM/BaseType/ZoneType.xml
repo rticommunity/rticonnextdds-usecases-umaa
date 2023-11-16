@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-6.1.2/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/MaritimeEnumeration/EnumerationSets.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<include file="UMAA/Common/Measurement/Polygon_Volume.xml"/>
+<include file="UMAA/MM/BaseType/PlanningZoneType.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<module name="UMAA">
+  <module name="MM">
+    <module name="BaseType">
+      <module name="ZoneType_Specializations">
+        <enum name="ZoneType_Selectors">
+          <enumerator name="PLANNINGZONETYPE_SELECT"/>
+        </enum> 
+        <union name="ZoneType_Union">
+<discriminator type="nonBasic" nonBasicTypeName="UMAA::MM::BaseType::ZoneType_Specializations::ZoneType_Selectors"/>
+<case>
+          <caseDiscriminator value="(UMAA::MM::BaseType::ZoneType_Specializations::PLANNINGZONETYPE_SELECT)"/>
+<member name="PlanningZoneType_data" type="nonBasic"  nonBasicTypeName= "UMAA::MM::BaseType::PlanningZoneType"/>
+</case>
+        </union>
+      </module>
+      <struct name= "ZoneType">
+        <member name="zone" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Polygon_Volume"/>
+        <member name="zoneKind" type="nonBasic"  nonBasicTypeName= "UMAA::Common::MaritimeEnumeration::ZoneKindEnumType::ZoneKindEnumType"/>
+        <member name="ZoneType_subtypes" type="nonBasic"  nonBasicTypeName= "UMAA::MM::BaseType::ZoneType_Specializations::ZoneType_Union"/>
+        <member name="zoneID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

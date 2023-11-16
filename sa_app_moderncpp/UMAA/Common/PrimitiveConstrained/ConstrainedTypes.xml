@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-6.1.2/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="BasicTypes/Quaternion.xml"/>
+<module name="UMAA">
+  <module name="Common">
+    <module name="PrimitiveConstrained">
+      <typedef name="CarrierToNoiseDensityRatio" type="float64"/>
+      <typedef name="CovarAngleAngle" type="float64"/>
+      <typedef name="CovarDisAngle" type="float64"/>
+      <typedef name="CovarDisDis" type="float64"/>
+      <typedef name="Left" type="float64" min="-20000000" max="20000000"/>
+      <typedef name="MMSI" stringMaxLength="9" type="string"/>
+      <typedef name="NanosecondsCount" type="int32"/>
+      <typedef name="NanosecondsDrift" type="int32"/>
+      <typedef name="StringLongDescription" stringMaxLength="4095" type="string"/>
+      <typedef name="StringShortDescription" stringMaxLength="1023" type="string"/>
+      <typedef name="UniformResourceIdentifier" stringMaxLength="2047" type="string"/>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

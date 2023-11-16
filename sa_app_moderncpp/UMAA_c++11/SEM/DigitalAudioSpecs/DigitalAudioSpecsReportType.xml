@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.2.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/Enumeration/EnumerationSets.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<module name="UMAA">
+  <module name="SEM">
+    <module name="DigitalAudioSpecs">
+      <const name="DigitalAudioSpecsReport_TOPIC" type="string" value="&quot;UMAA::SEM::DigitalAudioSpecs::DigitalAudioSpecsReport&quot;"/>
+      <struct name= "DigitalAudioSpecsReportType">
+        <member name="maxAllowedBitRate" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::CommsRate_BitsPerSecond"/>
+        <member name="maxChannels" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Count" min="-2147483648" max="2147483647"/>
+        <member name="maxSampleRate" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Count" min="-2147483648" max="2147483647"/>
+        <member name="minAllowedBitRate" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::CommsRate_BitsPerSecond"/>
+        <member name="minSampleRate" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Count" min="-2147483648" max="2147483647"/>
+        <member name="supported10bits" type="boolean"/>
+        <member name="supported12bits" type="boolean"/>
+        <member name="supported14bits" type="boolean"/>
+        <member name="supported16bits" type="boolean"/>
+        <member name="supported20bits" type="boolean"/>
+        <member name="supported24bits" type="boolean"/>
+        <member name="supported32bits" type="boolean"/>
+        <member name="supported40bits" type="boolean"/>
+        <member name="supported48bits" type="boolean"/>
+        <member name="supported56bits" type="boolean"/>
+        <member name="supported64bits" type="boolean"/>
+        <member name="supported8bits" type="boolean"/>
+        <member name="supportedAAC_MPEG2" type="boolean"/>
+        <member name="supportedAAC_MPEG4" type="boolean"/>
+        <member name="supportedAIFF" type="boolean"/>
+        <member name="supportedALAC" type="boolean"/>
+        <member name="supportedAverage" type="boolean"/>
+        <member name="supportedBest" type="boolean"/>
+        <member name="supportedBetter" type="boolean"/>
+        <member name="supportedDolbyDigital" type="boolean"/>
+        <member name="supportedDTS" type="boolean"/>
+        <member name="supportedFLAC" type="boolean"/>
+        <member name="supportedGood" type="boolean"/>
+        <member name="supportedLess" type="boolean"/>
+        <member name="supportedLPCM_PCM" type="boolean"/>
+        <member name="supportedMP2" type="boolean"/>
+        <member name="supportedMP3" type="boolean"/>
+        <member name="supportedPoor" type="boolean"/>
+        <member name="supportedRealAudio" type="boolean"/>
+        <member name="supportedSpeex" type="boolean"/>
+        <member name="supportedTrueAudio" type="boolean"/>
+        <member name="supportedULAW" type="boolean"/>
+        <member name="supportedVORBIS" type="boolean"/>
+        <member name="supportedWAV" type="boolean"/>
+        <member name="supportedWMA" type="boolean"/>
+        <member name="supportedWMA9_Lossless" type="boolean"/>
+        <member name="supportedWorst" type="boolean"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

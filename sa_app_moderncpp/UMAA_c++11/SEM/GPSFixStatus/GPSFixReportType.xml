@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.2.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/Enumeration/EnumerationSets.xml"/>
+<include file="UMAA/Common/MaritimeEnumeration/EnumerationSets.xml"/>
+<include file="UMAA/Common/Measurement/Altitude_MSL.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<include file="UMAA/Common/Measurement/Position2DTime.xml"/>
+<include file="UMAA/Common/Measurement/Velocity3D_PlatformNED.xml"/>
+<module name="UMAA">
+  <module name="SEM">
+    <module name="GPSFixStatus">
+      <const name="GPSFixReport_TOPIC" type="string" value="&quot;UMAA::SEM::GPSFixStatus::GPSFixReport&quot;"/>
+      <struct name= "GPSFixReportType">
+        <member name="altitudeMSL" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Altitude_MSL"/>
+        <member name="GPSFixCommandStatus" type="nonBasic"  nonBasicTypeName= "UMAA::Common::MaritimeEnumeration::GPSFixEnumType::GPSFixEnumType"/>
+        <member name="GPSLatLongValid" type="boolean"/>
+        <member name="magneticVariation" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::MagneticVariation"/>
+        <member name="position2DWithTime" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Position2DTime"/>
+        <member name="SOG" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::GroundSpeed" min="0" max="200"/>
+        <member name="trueCourse" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Course_TrueNorth"/>
+        <member name="velocity" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Velocity3D_PlatformNED"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>
