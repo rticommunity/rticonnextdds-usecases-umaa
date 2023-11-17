@@ -36,7 +36,7 @@ fi
 
 # Find all IDL files and call rtiddsgen on them
 echo "Generating type files"
-find $UMAA_HOME/UMAA $UMAA_HOME/BasicTypes -maxdepth 5 -mindepth 1  -type f \
+find $UMAA_HOME -maxdepth 5 -mindepth 1  -type f \
     -iname '*.idl' -print -exec rtiddsgen -I $UMAA_HOME -language $cpp_vers \
     -update typeFiles -update makefiles -platform $NDDSTARGET $cond_arg {} \;
 

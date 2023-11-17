@@ -107,7 +107,7 @@ void run_example(unsigned int domain_id, unsigned int sample_count)
     //--------------------------END DYNAMIC TYPES USAGE------------------------------------------//
 
     int rand;
-    int counter;
+    int counter = 0;
     while (!shutdown_requested) {
             
             try

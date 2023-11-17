@@ -7,25 +7,29 @@ using Compiled and DynamicData types when developing against the UMAA standard.
 This example has been developed as a simple User and Provider for the SA Service.  
 
 The UMAA Type file folders(UMAA, BasicTypes) need to be in the working directory  
-of the application to allow for the include paths to work.
+of the application to allow for their include paths to work.
 
 This example includes the UMAA 3.0.1 release idl files and is intended as a reference only.
 
-Customers are encouraged to reach out to the Services team to assist with any  
+Customers are encouraged to reach out to the RTI Services team to assist with any  
 implementation of the latest Release which is Distro D(CUI controlled).  
 
-## Linux- Modern CPP
+## Tested compatibility
+- UMAA IDL files: 3.0.1
+- Ubuntu 18.04
+- Connext: 6.1.2, 7.2
 
-### 1. Prepare environment
 
-Set the $UMAA_HOME environment variable to this directory.  
+## 1. Prepare environment
 
-Complete all the steps at the top level readme folder for the Linux environment.  
+- Set the $UMAA_HOME environment variable to this directory.  
 
-Make sure you convert the IDL files to xml as well as compile the type objects   
-to c++11 using the helper scripts  
+- Complete all the steps at the top level readme folder for the Linux environment/Modern CPP.  
 
-### 2. Build application :wrench:
+**Note: Make sure you convert the IDL files to xml as well as compile the type objects   
+to c++11 using the helper scripts**
+
+## 2. Build application
 
 To build, run make on the included makefile.
 
@@ -33,7 +37,7 @@ To build, run make on the included makefile.
 make -f makefile
 ```
 
-### 3. Run the Example
+## 3. Run the Example
 Run each application in two separate command prompt windows.
 
 On *UNIX* systems run:
@@ -47,6 +51,6 @@ and on a separate terminal:
 ./objs/<architecture>/sa_user
 ```
 
-## NOTES
-- For UMAA 3.0.1, modifications have been made to the Common/Measurement/Measurements.idl 
+## UMAA IDL NOTES
+- For UMAA 3.0.1, modifications have been made to the Common/Measurement/Measurements.idl  
 to remove some typos that caused codegen issues. This has been resolved in the latest Release.
