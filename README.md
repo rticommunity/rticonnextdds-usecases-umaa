@@ -92,6 +92,14 @@ gen_all_xml.bat
 # UMAA Application examples
 --------------------------------------------------------------------------------
 
+RTI has developed some example code and xml files for the UMAA SA service as a  
+guide to be used when developing against the UMAA standard using Connext.
+
+These examples include the UMAA 3.0.1 release idl files and are intended as a reference only.
+
+Customers are encouraged to reach out to the RTI Services team to assist with any  
+implementation of the latest Release which is Distro D(CUI controlled).
+
 XML-based app creation as a framework was chosen for the following reasons:  
 
 - A low code option with entities defined in an external xml artifact that can be  
@@ -99,5 +107,4 @@ XML-based app creation as a framework was chosen for the following reasons:
 - XML artifacts can be used in tandem with external tools(Simulink/System Designer)  
 - Decouple configuration management from platform/language
 
-
-Follow the readme in the desired `sa_app_*` folder.
+Follow the readme in the desired `sa_app_*` folder for more.
