@@ -5,6 +5,7 @@
 
 dir=$PWD
 cpp_vers=$1
+SECONDS=0
 
 # Check NDDSHOME variable
 if [[ -z "${NDDSHOME}" ]]; then
@@ -26,3 +27,6 @@ else # Use recursion flag if > 7.x
     rtiddsgen -I $UMAA_HOME -convertToXML -inputIdl $UMAA_HOME/UMAA $UMAA_HOME/BasicTypes -r
 
 fi
+
+duration=$SECONDS
+echo "$(($duration / 60)) minutes and $(($duration % 60)) seconds elapsed."

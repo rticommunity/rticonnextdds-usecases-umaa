@@ -39,13 +39,14 @@ cd scripts/linux
 ```
 
 ### 3. Create XML type files
+**Note: 1-5 minutes**
 Run the following command:
 ```sh
 ./convert_umaa_xml.sh
 ```
 
 ### 4. Compile Type Objects
-**Note: Takes ~10 minutes**
+**Note: 20-30 minutes**
 Run the following script depending on your choice:
 
 #### Modern CPP

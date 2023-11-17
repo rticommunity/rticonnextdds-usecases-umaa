@@ -6,6 +6,7 @@
 
 dir=$PWD
 cpp_vers=$1
+SECONDS=0
 
 # Check CPP version
 if [[ "$cpp_vers" != "c++98" ]] && [[ "$cpp_vers" != "c++11" ]]; then
@@ -49,3 +50,6 @@ find $UMAA_HOME/UMAA $UMAA_HOME/BasicTypes -maxdepth 5 -mindepth 1  -type f \
 echo "Building types"
 find $UMAA_HOME/UMAA $UMAA_HOME/BasicTypes -maxdepth 5 -mindepth 1  -type f \
     -iname 'makefile_*' -print -execdir make -f {} \;
+
+duration=$SECONDS
+echo "$(($duration / 60)) minutes and $(($duration % 60)) seconds elapsed."
