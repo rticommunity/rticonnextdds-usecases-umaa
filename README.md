@@ -109,3 +109,73 @@ XML-based app creation as a framework was chosen for the following reasons:
 - Decouple configuration management from platform/language
 
 Follow the readme in the desired `sa_app_*` folder for more.
+
+--------------------------------------------------------------------------------
+# UMAA Infrastructure examples
+--------------------------------------------------------------------------------
+## Prerequisite
+1. Follow the above instructions to set up the environment, compile types, and convert  
+the IDL files to XML.
+
+2. Follow the chosen readme to setup and run an example SA Provider service.
+
+3. Navigate to the `UMAA_HOME` directory.
+**NOTE: If referencing the type files, the infrastructure service must be run from the `UMAA_HOME` directory.**
+
+--------------------------------------------------------------------------------
+
+## Routing Service
+Complete `Prerequisite` above first.
+
+### Use Case:
+Segment the internal vehicle databus from the UMAA C2 environment.
+
+This example routes all UMAA::SA topic messages from the vehicle domain to the UMAA domain.
+
+This assists in scenarios where you might want to apply separate QOS  
+policies(Security/Transport etc) for internal traffic vs external.
+
+This also improves performance/discovery time by minimizing the amount of endpoints  
+on the same databus.
+
+By including the type files for the SA Service and registering them, the reference xml  
+file is setup for the scenario where type objects have been disabled from discovery.
+
+#### Run the following command: 
+```
+rtiroutingservice -cfgFile <PATH_TO_REPO>umaa_case_code/sa_xml/umaa_sa_routing_service.xml -cfgName bridge_vehicle_umaa_sa 
+```
+
+--------------------------------------------------------------------------------
+
+## Recording Service
+Complete `Prerequisite` above first.
+
+### Use Case:
+Record all UMAA::SA messages from the vehicle domain.
+
+This profile is setup to record to the XCDR format. 
+
+If desired, the file can be converted to the JSON format using the RTI converter tool.
+
+By including the type files for the SA Service and registering them, the reference xml  
+file is setup for the scenario where type objects have been disabled from discovery.
+
+#### Run the following command: 
+```
+rtirecordingservice -cfgFile <PATH_TO_REPO>umaa_case_code/sa_xml/umaa_sa_recording_service.xml -cfgName record_vehicle_umaa_sa 
+```
+
+--------------------------------------------------------------------------------
+
+## Admin Console
+Complete `Prerequisite` above first.
+
+### Use Case:
+Use Admin Console to subscribe to your topics when type propagation is disabled.
+
+1. Right click on the desired topic under the DDS "Logical View" perspective in  
+the top left corner and select `subscribe`.
+2. Add the desired XML type file under the `Types XML files` section.
+3. Add the `UMAA_HOME` directory under the `Include Directories` section.
+

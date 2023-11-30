@@ -32,7 +32,7 @@ to use the software.
 
                 <!-- Control logging verbosity and category here -->
                 <logging>
-                    <verbosity>WARNING</verbosity>
+                    <verbosity>ERROR</verbosity>
                     <category>ALL</category>
                     <print_format>DEBUG</print_format>
 	                <output_file></output_file>
@@ -41,9 +41,14 @@ to use the software.
 
             
             <participant_qos>
-                <!-- Increase the default for some of the larger types -->
                 <resource_limits>
+                    <!-- Increase the default for some of the larger types -->
                     <type_object_max_serialized_length>10000</type_object_max_serialized_length>
+
+                    <!-- Uncomment below to disable type propagation during discovery -->
+                    <!-- <type_code_max_serialized_length>0</type_code_max_serialized_length>
+                    <type_object_max_deserialized_length>0</type_object_max_deserialized_length>  -->
+
                 </resource_limits>              
 
             </participant_qos>
