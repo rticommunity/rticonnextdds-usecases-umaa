@@ -15,27 +15,28 @@
 
 #include <dds/sub/ddssub.hpp>
 #include <dds/core/ddscore.hpp>
-#include <rti/config/Logger.hpp> // for logging
-// Or simply include <dds/dds.hpp>
+#include <rti/config/Logger.hpp>  // for logging
 
-#include "UMAA/SA/CTDStatus/CTDReportType.hpp" // Include header for Compiled Type
 
-#include "application.hpp" // Argument parsing
+// Include header for Compiled Type
+#include "UMAA/SA/CTDStatus/CTDReportType.hpp"  
+
+#include "application.hpp"  // Argument parsing
 #include "umaa_sa_consts.hpp"
 
 using namespace application;
 using namespace dds::core::xtypes;
 
-unsigned int process_ctd_data(dds::sub::DataReader<UMAA::SA::CTDStatus::CTDReportType> &reader)
+unsigned int process_ctd_data(
+        dds::sub::DataReader<UMAA::SA::CTDStatus::CTDReportType> &reader)
 {
     // Take all samples.  Samples are loaned to application, loan is
     // returned when LoanedSamples destructor called.
     unsigned int samples_read = 0;
-    dds::sub::LoanedSamples<UMAA::SA::CTDStatus::CTDReportType> samples = reader.take();
-    for (const auto &sample : samples)
-    {
-        if (sample.info().valid())
-        {
+    dds::sub::LoanedSamples<UMAA::SA::CTDStatus::CTDReportType> samples =
+            reader.take();
+    for (const auto &sample : samples) {
+        if (sample.info().valid()) {
             samples_read++;
             std::cout << sample.data() << std::endl;
         }
@@ -50,10 +51,8 @@ unsigned int process_speed_data(dds::sub::DataReader<DynamicData> &reader)
     // returned when LoanedSamples destructor called.
     unsigned int samples_read = 0;
     dds::sub::LoanedSamples<DynamicData> samples = reader.take();
-    for (const auto &sample : samples)
-    {
-        if (sample.info().valid())
-        {
+    for (const auto &sample : samples) {
+        if (sample.info().valid()) {
             samples_read++;
             std::cout << sample.data() << std::endl;
         }
@@ -64,23 +63,25 @@ unsigned int process_speed_data(dds::sub::DataReader<DynamicData> &reader)
 
 void run_example(unsigned int domain_id, unsigned int sample_count)
 {
+    // ----------------- BEGIN COMPILED TYPES REGISTRATION----------------------
+    // By registering the type here we will use the compiled type instead of
+    // DynamicData Make sure to register the type first before creating the
+    // participant Connext will automatically see if a compiled type has been
+    // registered for use before looking up a Dynamic Data type reference in xml
+    rti::domain::register_type<UMAA::SA::CTDStatus::CTDReportType>(
+            "CTDReportType");
 
-    //--------------------------COMPILED TYPES REGISTRATION---------------------------------------//
-    // By registering the type here we will use the compiled type instead of DynamicData
-    // Make sure to register the type first before creating the participant
-    // Connext will automatically see if a compiled type has been registered for use before
-    // looking up a Dynamic Data type reference in xml
-    rti::domain::register_type<UMAA::SA::CTDStatus::CTDReportType>("CTDReportType");
+    //------------------ END COMPILED TYPES REGISTRATION-----------------------
 
-    //-------------------------- END COMPILED TYPES REGISTRATION-----------------------------------//
 
     // We're going to configure the default QoS Provider to load our own xml
     // and to ignore the NDDS_QOS_PROFILES environment variable and the file
     // USER_QOS_PROFILES.xml
-    // Reference https://community.rti.com/static/documentation/connext-dds/6.1.2/doc/api/connext_dds/api_cpp2/classdds_1_1core_1_1QosProvider.html#DefaultQosProvider
+    // Reference:
+    // https://community.rti.com/static/documentation/connext-dds/6.1.2/doc/api/connext_dds/api_cpp2/classdds_1_1core_1_1QosProvider.html#DefaultQosProvider
     // This allows us to control Logging through XML as needed
     rti::core::QosProviderParams params;
-    params.url_profile({SA_XML_FILE});
+    params.url_profile({ SA_XML_FILE });
     params.ignore_environment_profile(true);
     params.ignore_user_profile(true);
 
@@ -93,18 +94,19 @@ void run_example(unsigned int domain_id, unsigned int sample_count)
     auto qos_provider = dds::core::QosProvider::Default();
 
     // Create the participant as defined in the xml file.  This instantiates the
-    // participant registers the types, and creates the child publisher,
+    // participant, registers the types, and creates the child publisher,
     // subscriber, reader and writer.
     dds::domain::DomainParticipant participant =
-        qos_provider->create_participant_from_config(SA_USER);
+            qos_provider->create_participant_from_config(SA_USER);
 
-    //--------------------------START COMPILED TYPES USAGE-------------------------------------//
+
+    //--------------------START COMPILED TYPES USAGE----------------------------
     // Lookup the DataReader
     dds::sub::DataReader<UMAA::SA::CTDStatus::CTDReportType> ctd_report_reader =
-        rti::sub::find_datareader_by_name<
-            dds::sub::DataReader<UMAA::SA::CTDStatus::CTDReportType>>(
-            participant,
-            CTDREPORTREADER);
+            rti::sub::find_datareader_by_name<
+                    dds::sub::DataReader<UMAA::SA::CTDStatus::CTDReportType>>(
+                    participant,
+                    CTDREPORTREADER);
 
     // Enable the reader
     ctd_report_reader.enable();
@@ -114,55 +116,61 @@ void run_example(unsigned int domain_id, unsigned int sample_count)
 
     // Enable the 'data available' status.
     ctd_status_condition.enabled_statuses(
-        dds::core::status::StatusMask::data_available());
+            dds::core::status::StatusMask::data_available());
 
     // Associate a handler with the status condition. This will run when the
     // condition is triggered, in the context of the dispatch call (see below)
     unsigned int samples_read = 0;
-    ctd_status_condition.extensions().handler([&ctd_report_reader, &samples_read]()
-                                              { samples_read += process_ctd_data(ctd_report_reader); });
-    //--------------------------END COMPILED TYPES USAGE---------------------------------------//
+    ctd_status_condition.extensions().handler(
+            [&ctd_report_reader, &samples_read]() {
+                samples_read += process_ctd_data(ctd_report_reader);
+            });
+    //--------------------END COMPILED TYPES USAGE------------------------------
 
-    //--------------------------START DYNAMIC TYPES USAGE---------------------------------------//
-    // There is a slight performance impact when using Dynamic Types vs Compiled types.
+
+    //-------------------START DYNAMIC TYPES USAGE------------------------------
+    // There is a slight performance impact when using Dynamic Types vs Compiled
+    // types.
 
     // Find the DataWriter defined in the xml
     dds::sub::DataReader<DynamicData> speed_report_reader =
-        rti::sub::find_datareader_by_name<
-            dds::sub::DataReader<DynamicData>>(
-            participant,
-            SPEEDREPORTREADER);
+            rti::sub::find_datareader_by_name<
+                    dds::sub::DataReader<DynamicData>>(
+                    participant,
+                    SPEEDREPORTREADER);
 
     // Enable writer
     speed_report_reader.enable();
 
     // Obtain the DataReader's Status Condition
-    dds::core::cond::StatusCondition speed_status_condition(speed_report_reader);
+    dds::core::cond::StatusCondition speed_status_condition(
+            speed_report_reader);
 
     // Enable the 'data available' status.
     speed_status_condition.enabled_statuses(
-        dds::core::status::StatusMask::data_available());
+            dds::core::status::StatusMask::data_available());
 
     // Associate a handler with the status condition. This will run when the
     // condition is triggered, in the context of the dispatch call (see below)
-    speed_status_condition.extensions().handler([&speed_report_reader, &samples_read]()
-                                                { samples_read += process_speed_data(speed_report_reader); });
+    speed_status_condition.extensions().handler(
+            [&speed_report_reader, &samples_read]() {
+                samples_read += process_speed_data(speed_report_reader);
+            });
 
-    //--------------------------END DYNAMIC TYPES USAGE----------------------------------------//
+    //------------------END DYNAMIC TYPES USAGE---------------------------------
+
 
     // Create a WaitSet and attach the StatusConditions
     dds::core::cond::WaitSet waitset;
     waitset += ctd_status_condition;
     waitset += speed_status_condition;
 
-    while (!shutdown_requested && samples_read < sample_count)
-    {
+    while (!shutdown_requested && samples_read < sample_count) {
         // Dispatch will call the handlers associated to the WaitSet conditions
         // when they activate
-        std::cout << "SA USER sleeping for 4 sec..."
-                  << std::endl;
+        std::cout << "SA USER sleeping for 4 sec..." << std::endl;
 
-        waitset.dispatch(dds::core::Duration(4)); // Wait up to 4s each time
+        waitset.dispatch(dds::core::Duration(4));  // Wait up to 4s each time
     }
 }
 
@@ -170,12 +178,9 @@ int main(int argc, char *argv[])
 {
     // Parse arguments and handle control-C
     auto arguments = parse_arguments(argc, argv);
-    if (arguments.parse_result == ParseReturn::exit)
-    {
+    if (arguments.parse_result == ParseReturn::exit) {
         return EXIT_SUCCESS;
-    }
-    else if (arguments.parse_result == ParseReturn::failure)
-    {
+    } else if (arguments.parse_result == ParseReturn::failure) {
         return EXIT_FAILURE;
     }
     setup_signal_handlers();
@@ -183,15 +188,11 @@ int main(int argc, char *argv[])
     // Sets Connext verbosity to help debugging
     rti::config::Logger::instance().verbosity(arguments.verbosity);
 
-    try
-    {
+    try {
         run_example(arguments.domain_id, arguments.sample_count);
-    }
-    catch (const std::exception &ex)
-    {
+    } catch (const std::exception &ex) {
         // All DDS exceptions inherit from std::exception
-        std::cerr << "Exception in run_example(): " << ex.what()
-                  << std::endl;
+        std::cerr << "Exception in run_example(): " << ex.what() << std::endl;
         return EXIT_FAILURE;
     }
 
