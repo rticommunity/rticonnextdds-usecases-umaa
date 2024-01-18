@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,10 +19,17 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
-#ifndef _LDM_MDE_ELEVATION_ALTITUDEAGLTYPE
-#define _LDM_MDE_ELEVATION_ALTITUDEAGLTYPE
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
 
-#include "UMAA/Common/Measurement/Altitude_AGL.idl"
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ELEVATION_ALTITUDEAGLTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ELEVATION_ALTITUDEAGLTYPE
+
+#include "UMAA/Common/Measurement/Measurements.idl"
 module UMAA
 {
   module Common
@@ -27,13 +38,13 @@ module UMAA
     {
       struct AltitudeAGLType
       {
-      // specifies the distance above ground level
-
-      UMAA::Common::Measurement::Altitude_AGL altitudeAGL;
+      // Specifies the distance above ground level.
+      UMAA::Common::Measurement::DistanceAGL altitudeAGL;
       };
+
 
     };
   };
 };
 
-#endif // _LDM_MDE_ELEVATION_ALTITUDEAGLTYPE
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ELEVATION_ALTITUDEAGLTYPE

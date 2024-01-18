@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,89 +19,66 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
 #ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_GLOBALHOVERCONTROL_GLOBALHOVERCOMMANDTYPE
 #define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_GLOBALHOVERCONTROL_GLOBALHOVERCOMMANDTYPE
 
-#include "UMAA/Common/MaritimeEnumeration/EnumerationSets.idl"
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
 #include "UMAA/Common/Measurement/ElevationType.idl"
 #include "UMAA/Common/Measurement/Measurements.idl"
-#include "UMAA/Common/Measurement/Position2D.idl"
-#include "UMAA/Common/Orientation/HeadingType.idl"
-#include "UMAA/Common/VariableSpeedControl/VariableSpeedControlType.idl"
+#include "UMAA/Common/Orientation/DirectionRequirementType.idl"
+#include "UMAA/Common/Position/GeoPosition2DRequirement.idl"
+#include "UMAA/Common/Requirements/DateTimeRequirement.idl"
+#include "UMAA/Common/Speed/VariableSpeedControlType.idl"
 module UMAA
 {
   module MO
   {
     module GlobalHoverControl
     {
-      const string GlobalHoverCommand_TOPIC = "UMAA::MO::GlobalHoverControl::GlobalHoverCommand";
-      @topic(name="UMAA::MO::GlobalHoverControl::GlobalHoverCommand")
+      const string GlobalHoverCommandTopic = "UMAA::MO::GlobalHoverControl::GlobalHoverCommand";
       struct GlobalHoverCommandType
       {
       // The desired priority to hover at the specified point.
+      UMAA::Common::MaritimeEnumeration::HoverKindEnumModule::HoverKindEnumType controlPriority;
 
-      UMAA::Common::MaritimeEnumeration::HoverKindEnumType::HoverKindEnumType controlPriority;
-
-      // The optional elevation used for the unmanned maritime platform.
-
+      // The elevation used for the vehicle. This value is 0 for USVs.
       UMAA::Common::Measurement::ElevationType elevation;
 
-      // The amount of elevation error allowed relative to the commanded hover elevation.
+      // Specifies the end of the command execution time period for the hover; if not specified runs indefinitely until command is changed externally.
+      @optional UMAA::Common::Requirements::DateTimeRequirement endTime;
 
-      UMAA::Common::Measurement::Distance elevationTolerance;
+      // Defines the heading that the vehicle must maintain for hovering. When not specified, the system will determine the best heading (e.g. current heading, into the wind/current, etc.)
+      @optional UMAA::Common::Orientation::DirectionRequirementType heading;
 
-      // Specifies the end of the valid time period for the loiter; if not specified runs indefinitely until command is changed externally.
+      // The desired hover position of the vehicle in the global coordinate system.
+      UMAA::Common::Position::GeoPosition2DRequirement position;
 
-      @optional UMAA::Common::Measurement::DateTime endTime;
-
-      // Defines the heading that the vehicle must maintain for hovering.
-
-      @optional UMAA::Common::Orientation::HeadingType heading;
-
-      // The amount of angle error allowed relative to the commanded heading.
-
-      UMAA::Common::Measurement::RelativeAngle headingTolerance;
-
-      // The desired hover position (latitude, longitude) of the unmanned platform in the global coordinate system. When not specified, means at current location.
-
-      @optional UMAA::Common::Measurement::Position2D position;
-
-      // The amount of distance error (radius) allowed relative to the commanded position.
-
-      UMAA::Common::Measurement::Distance positionTolerance;
-
-      // The elevation used while driving to the hover location (USVs must specify 0 as it is a required field).
-
+      // The elevation used while driving to the hover location. Surface-based vehicles must specify this value as 0.
       UMAA::Common::Measurement::ElevationType transitElevation;
 
-      // The amount of elevation error allowed relative to the commanded transit elevation.
-
-      UMAA::Common::Measurement::Distance transitElevationTolerance;
-
       // The speed at which one drives to the hover location.
+      UMAA::Common::Speed::VariableSpeedControlType transitSpeed;
 
-      UMAA::Common::VariableSpeedControl::VariableSpeedControlType transitSpeed;
-
-      // The amount of speed error allowed relative to the transit speed.
-
-      UMAA::Common::Measurement::GroundSpeed transitSpeedTolerance;
+      // The time at which the data is valid.
+      UMAA::Common::Measurement::DateTime timeStamp;
 
       // The unique identifier for the source.
-
       @key UMAA::Common::Measurement::NumericGUID source;
 
-      // The unique identifier for the destination.
-
-      @key UMAA::Common::Measurement::NumericGUID destination;
-
       // The unique identifier for the session.
-
       @key UMAA::Common::Measurement::NumericGUID sessionID;
 
-      // The time at which the data was derived.
-
-      UMAA::Common::Measurement::DateTime timeStamp;
+      // The unique identifier for the destination.
+      @key UMAA::Common::Measurement::NumericGUID destination;
       };
+
 
     };
   };

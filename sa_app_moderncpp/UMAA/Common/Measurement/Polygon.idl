@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,11 +19,18 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
-#ifndef _LDM_REFINEMENTS_MEASUREMENTSETS_POLYGON
-#define _LDM_REFINEMENTS_MEASUREMENTSETS_POLYGON
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
+#ifndef _LDM_MDE_REFINEMENTS_MEASUREMENTSETS_POLYGON
+#define _LDM_MDE_REFINEMENTS_MEASUREMENTSETS_POLYGON
 
 #include "UMAA/Common/Enumeration/EnumerationSets.idl"
-#include "UMAA/Common/Measurement/Position2DTime.idl"
+#include "UMAA/Common/Measurement/GeoPosition2D.idl"
 module UMAA
 {
   module Common
@@ -28,17 +39,16 @@ module UMAA
     {
       struct Polygon
       {
-      // lineKind indicates the type of lines that form the polygon.
+      // Indicates the type of lines that form the polygon.
+      UMAA::Common::Enumeration::LineSegmentEnumModule::LineSegmentEnumType lineKind;
 
-      UMAA::Common::Enumeration::LineSegmentEnumType::LineSegmentEnumType lineKind;
-
-      // referencePoint specifies the geospatial points defining the vertices of a polygon. Three or more points are needed to define a polygon.
-
-      sequence<UMAA::Common::Measurement::Position2DTime> referencePoint;
+      // Specifies the geospatial points defining the vertices of a polygon. Three or more points are needed to define a polygon.
+      sequence<UMAA::Common::Measurement::GeoPosition2D,128> referencePoint;
       };
+
 
     };
   };
 };
 
-#endif // _LDM_REFINEMENTS_MEASUREMENTSETS_POLYGON
+#endif // _LDM_MDE_REFINEMENTS_MEASUREMENTSETS_POLYGON

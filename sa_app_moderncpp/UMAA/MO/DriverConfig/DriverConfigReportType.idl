@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,97 +19,47 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
 #ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_DRIVERCONFIG_DRIVERCONFIGREPORTTYPE
 #define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_DRIVERCONFIG_DRIVERCONFIGREPORTTYPE
 
-#include "UMAA/Common/Capabilities/Speed_BSL_Capability.idl"
-#include "UMAA/Common/Measurement/Acceleration3D_PlatformXYZ.idl"
-#include "UMAA/Common/Measurement/ElevationType.idl"
 #include "UMAA/Common/Measurement/Measurements.idl"
-#include "UMAA/Common/Measurement/OrientationAcceleration3D.idl"
-#include "UMAA/Common/Speed/SpeedControlType.idl"
+#include "UMAA/MO/DriverConfig/SurfaceCapabilityBoundsType.idl"
+#include "UMAA/MO/DriverConfig/UnderwaterCapabilityBoundsType.idl"
 module UMAA
 {
   module MO
   {
     module DriverConfig
     {
-      const string DriverConfigReport_TOPIC = "UMAA::MO::DriverConfig::DriverConfigReport";
-      @topic(name="UMAA::MO::DriverConfig::DriverConfigReport")
+      const string DriverConfigReportTopic = "UMAA::MO::DriverConfig::DriverConfigReport";
       struct DriverConfigReportType
       {
-      // The maximum allowed value for the linear acceleration of the unmanned platform.
+      // The amount of time that any boolean achievement execution status attribute that was achieved (true) may be lost (false) for driving commands without failing the command due to short-term temporal conditions. This timeout enables commanded tolerances to be violated for the specified time, allowing the driving service provider to reestablish the achievement (true). If not provided, the driving command will fail immediately upon tolerance violation.
+      @optional UMAA::Common::Measurement::DurationSeconds achievementTimeout;
 
-      @optional UMAA::Common::Measurement::Acceleration3D_PlatformXYZ maxAllowableAcceleration;
+      // The smallest distance from the water surface to the sea floor required by the vehicle to operate.
+      @optional UMAA::Common::Measurement::DistanceBSL minWaterDepth;
 
-      // The maximum allowed value for the rotational acceleration of the unmanned platform.
+      // The bounds of the vehicle while operating on the surface.
+      UMAA::MO::DriverConfig::SurfaceCapabilityBoundsType surfaceBounds;
 
-      @optional UMAA::Common::Measurement::OrientationAcceleration3D maxAllowableAttitudeAcceleration;
+      // The bounds of the vehicle while operating submerged.
+      @optional UMAA::MO::DriverConfig::UnderwaterCapabilityBoundsType underwaterBounds;
 
-      // The maximum allowed value for the elevation of the unmanned platform.
-
-      @optional UMAA::Common::Measurement::ElevationType maxAllowableElevation;
-
-      // The maximum allowed value for the linear speed of the unmanned platform.
-
-      @optional UMAA::Common::Speed::SpeedControlType maxAllowableSpeed;
-
-      // The maximum turn rate.
-
-      @optional UMAA::Common::Measurement::AngleRate maxAllowableTurnRate;
-
-      // specifies the maximum rate of change of the vehicle's elevation.
-
-      @optional UMAA::Common::Capabilities::Speed_BSL_Capability maxElevationChangeRate;
-
-      // The minimum allowed value for the linear acceleration of the unmanned platform.
-
-      @optional UMAA::Common::Measurement::Acceleration3D_PlatformXYZ minAllowableAcceleration;
-
-      // The minimum allowed value for the rotational acceleration of the unmanned platform.
-
-      @optional UMAA::Common::Measurement::OrientationAcceleration3D minAllowableAttitudeAcceleration;
-
-      // The minimum allowed value for the elevation of the unmanned platform.
-
-      @optional UMAA::Common::Measurement::ElevationType minAllowableElevation;
-
-      // The minimum allowed value for the linear speed of the unmanned platform.
-
-      @optional UMAA::Common::Speed::SpeedControlType minAllowableSpeed;
-
-      // The recommended value for the linear acceleration of the unmanned platform.
-
-      @optional UMAA::Common::Measurement::Acceleration3D_PlatformXYZ recommendedAcceleration;
-
-      // The recommended value for the rotational acceleration of the unmanned platform.
-
-      @optional UMAA::Common::Measurement::OrientationAcceleration3D recommendedAttitudeAcceleration;
-
-      // The recommended value for the elevation of the unmanned platform.
-
-      @optional UMAA::Common::Measurement::ElevationType recommendedElevation;
-
-      // specifies the recommended rate of change of the vehicle's elevation.
-
-      @optional UMAA::Common::Capabilities::Speed_BSL_Capability recommendedElevationChangeRate;
-
-      // The recommended value for the linear speed of the unmanned platform.
-
-      @optional UMAA::Common::Speed::SpeedControlType recommendedSpeed;
-
-      // The recommended turn rate.
-
-      @optional UMAA::Common::Measurement::AngleRate recommendedTurnRate;
+      // The time at which the data is valid.
+      UMAA::Common::Measurement::DateTime timeStamp;
 
       // The unique identifier for the source.
-
       @key UMAA::Common::Measurement::NumericGUID source;
-
-      // The time at which the data was derived.
-
-      UMAA::Common::Measurement::DateTime timeStamp;
       };
+
 
     };
   };

@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,6 +19,13 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
 #ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_FUELTANKSPECS_FUELTANKSPECSREPORTTYPE
 #define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_FUELTANKSPECS_FUELTANKSPECSREPORTTYPE
 
@@ -26,26 +37,22 @@ module UMAA
   {
     module FuelTankSpecs
     {
-      const string FuelTankSpecsReport_TOPIC = "UMAA::EO::FuelTankSpecs::FuelTankSpecsReport";
-      @topic(name="UMAA::EO::FuelTankSpecs::FuelTankSpecsReport")
+      const string FuelTankSpecsReportTopic = "UMAA::EO::FuelTankSpecs::FuelTankSpecsReport";
       struct FuelTankSpecsReportType
       {
-      // The maximum capacity of the fuel tank
+      // The maximum capacity of the fuel tank.
+      UMAA::Common::Measurement::VolumeCubicMeter capacity;
 
-      UMAA::Common::Measurement::Volume_CubicMeter capacity;
-
-      // The name of the fuel tank
-
+      // The name of the fuel tank.
       UMAA::Common::PrimitiveConstrained::StringShortDescription name;
 
-      // The unique identifier for the source.
-
-      @key UMAA::Common::Measurement::NumericGUID source;
-
-      // The time at which the data was derived.
-
+      // The time at which the data is valid.
       UMAA::Common::Measurement::DateTime timeStamp;
+
+      // The unique identifier for the source.
+      @key UMAA::Common::Measurement::NumericGUID source;
       };
+
 
     };
   };

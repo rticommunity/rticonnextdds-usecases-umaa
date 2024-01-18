@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -14,6 +18,13 @@
 
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
+
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
 
 #ifndef _LDM_REFINEMENTS_ENUMERATIONSETS_ORDEREDENUMERATIONSETS_ORDEREDENUMERATIONSETS
 #define _LDM_REFINEMENTS_ENUMERATIONSETS_ORDEREDENUMERATIONSETS_ORDEREDENUMERATIONSETS
@@ -33,19 +44,19 @@ module UMAA
     {
 
 
-        module CloudCoverEnumType
+        module CloudCoverEnumModule
         {
           enum CloudCoverEnumType
           {
-              OVERCAST, // Cloud cover is complete (eight-eighths of the sky).
               BROKEN, // Cloud cover is from five-eighths to seven-eighths of the sky.
+              CLEAR, // There are no clouds below 12,000 ft (zero-eighths of the sky).
               FEW, // Cloud cover is from one-eighth to two-eights of the sky.
-              SCATTERED, // Cloud cover is from three-eighths to four-eighths of the sky.
-              CLEAR // There are no clouds below 12,000 ft (zero-eighths of the sky).
+              OVERCAST, // Cloud cover is complete (eight-eighths of the sky).
+              SCATTERED // Cloud cover is from three-eighths to four-eighths of the sky.
           };
         };
 
-        module SeaStateEnumType
+        module SeaStateEnumModule
         {
           enum SeaStateEnumType
           {
@@ -62,15 +73,15 @@ module UMAA
           };
         };
 
-        module WeatherSeverityEnumType
+        module WeatherSeverityEnumModule
         {
           enum WeatherSeverityEnumType
           {
               EXTREME, // The adverse weather conditions are extreme.
               LIGHT, // The adverse weather conditions are light.
               MODERATE, // The adverse weather conditions are moderate.
-              SEVERE, // The adverse weather conditions are severe.
-              NONE // There is no adverse weather.
+              NONE, // There is no adverse weather.
+              SEVERE // The adverse weather conditions are severe.
           };
         };
 

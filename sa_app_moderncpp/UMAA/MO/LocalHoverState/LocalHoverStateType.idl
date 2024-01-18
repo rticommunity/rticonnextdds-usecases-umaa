@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,8 +19,15 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
-#ifndef _LDM_MDE_LOCALHOVERSTATE_LOCALHOVERSTATETYPE
-#define _LDM_MDE_LOCALHOVERSTATE_LOCALHOVERSTATETYPE
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_LOCALHOVERSTATE_LOCALHOVERSTATETYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_LOCALHOVERSTATE_LOCALHOVERSTATETYPE
 
 #include "UMAA/MO/LocalHoverState/LocalHoveringHoverType.idl"
 #include "UMAA/MO/LocalHoverState/LocalTransitHoverType.idl"
@@ -26,30 +37,29 @@ module UMAA
   {
     module LocalHoverState
     {
-      module LocalHoverStateType_Specializations
-      {
-          enum LocalHoverStateType_Selectors
-          {
-              LOCALTRANSITHOVERTYPE_SELECT,
-              LOCALHOVERINGHOVERTYPE_SELECT
-          };
+        enum LocalHoverStateTypeEnum
+        {
+            LOCALTRANSITHOVER_D,
+            LOCALHOVERINGHOVER_D
+        };
 
-          union LocalHoverStateType_Union switch (LocalHoverStateType_Selectors)
-          {
-                case LOCALTRANSITHOVERTYPE_SELECT: UMAA::MO::LocalHoverState::LocalTransitHoverType LocalTransitHoverType_data;
-                case LOCALHOVERINGHOVERTYPE_SELECT: UMAA::MO::LocalHoverState::LocalHoveringHoverType LocalHoveringHoverType_data;
-          };
+        union LocalHoverStateTypeUnion switch (LocalHoverStateTypeEnum)
+        {
+              case LOCALTRANSITHOVER_D:
+                UMAA::MO::LocalHoverState::LocalTransitHoverType LocalTransitHoverVariant;
+              case LOCALHOVERINGHOVER_D:
+                UMAA::MO::LocalHoverState::LocalHoveringHoverType LocalHoveringHoverVariant;
+        };
 
-      };
       struct LocalHoverStateType
       {
       // Union to capture specializations of LocalHoverStateType
-
-      LocalHoverStateType_Specializations::LocalHoverStateType_Union LocalHoverStateType_subtypes;
+      LocalHoverStateTypeUnion LocalHoverStateTypeSubtypes;
       };
+
 
     };
   };
 };
 
-#endif // _LDM_MDE_LOCALHOVERSTATE_LOCALHOVERSTATETYPE
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_LOCALHOVERSTATE_LOCALHOVERSTATETYPE

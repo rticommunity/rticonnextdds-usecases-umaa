@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,18 +19,22 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
 #ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_CONTINGENCYOBJECTIVETYPE
 #define _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_CONTINGENCYOBJECTIVETYPE
 
 #include "UMAA/Common/Enumeration/EnumerationSets.idl"
-#include "UMAA/Common/MaritimeEnumeration/EnumerationSets.idl"
-#include "UMAA/Common/Measurement/Altitude_AGL.idl"
-#include "UMAA/Common/Measurement/Altitude_MSL.idl"
-#include "UMAA/Common/Measurement/DateTime_Tolerance.idl"
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
+#include "UMAA/Common/Measurement/GeoPosition2D.idl"
 #include "UMAA/Common/Measurement/Measurements.idl"
-#include "UMAA/Common/Measurement/Position2D.idl"
 #include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
-#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/Requirements/DateTimeRequirement.idl"
 module UMAA
 {
   module MM
@@ -35,58 +43,46 @@ module UMAA
     {
       struct ContingencyObjectiveType
       {
-      // Specifies the distance along the vehicle path to the waypoint
+      // Specifies the distance along the vehicle path to the waypoint.
+      UMAA::Common::PrimitiveConstrained::GeodeticAltitude altitude;
 
-      UMAA::Common::Measurement::Altitude_MSL altitude;
+      // Specifies the distance above ground level.
+      UMAA::Common::Measurement::DistanceAGL altitudeAGL;
 
-      // altitudeAGL that specifies the distance above ground level
+      // Specifies the distance above sea level.
+      UMAA::Common::Measurement::DistanceASF altitudeASF;
 
-      UMAA::Common::Measurement::Altitude_AGL altitudeAGL;
+      // Defines the system contingency level for the mission.
+      UMAA::Common::MaritimeEnumeration::ContingencyBehaviorEnumModule::ContingencyBehaviorEnumType behavior;
 
-      // Specifies the distance above sea level
+      // Specifies the distance of the waypoint below sea level.
+      UMAA::Common::Measurement::DistanceBSL depth;
 
-      UMAA::Common::Measurement::Distance_ASF altitudeASF;
-
-      // contingencyLevel defines the system contingency level for the mission
-
-      UMAA::Common::MaritimeEnumeration::ContingencyBehaviorEnumType::ContingencyBehaviorEnumType behavior;
-
-      // Specifies the distance of the waypoint below sea level
-
-      UMAA::Common::Measurement::Distance_BSL depth;
-
-      // Specifies DTED altitude at the origin
-
+      // Specifies DTED altitude at the origin.
       UMAA::Common::Measurement::Distance DTEDAltitude;
 
-      // specifies the navigation mode that the unmanned platform operating in
-
+      // Specifies the navigation mode in which the vehicle is operating.
       UMAA::Common::PrimitiveConstrained::StringShortDescription mode;
 
-      // Specifies the location for the vehicle to be at in case of emergency or lost communication
+      // Specifies the location for the vehicle to be at in case of emergency or lost communication.
+      UMAA::Common::Measurement::GeoPosition2D position;
 
-      UMAA::Common::Measurement::Position2D position;
-
-      // Specifies the radius the unmanned platform should be in
-
+      // Specifies the radius the vehicle should be in.
       UMAA::Common::Measurement::Distance radius;
 
-      // Specifies the altitude that is safe or within limit
-
+      // Specifies the altitude that is safe or within limit.
       UMAA::Common::Measurement::Distance safeAltitude;
 
-      // Specifies the offset of safe
-
+      // Specifies the offset of safe.
       UMAA::Common::Measurement::Distance safeAltitudeOffset;
 
-      // Specifies the speed of the unmanned platform
-
+      // Specifies the speed of the vehicle.
       UMAA::Common::Measurement::Speed speed;
 
-      // Specifies the duration that the unmanned platform can go
-
-      UMAA::Common::Measurement::Duration_Hours vehicleRunTime;
+      // Specifies the duration that the vehicle can go.
+      UMAA::Common::Measurement::DurationHours vehicleRunTime;
       };
+
 
     };
   };

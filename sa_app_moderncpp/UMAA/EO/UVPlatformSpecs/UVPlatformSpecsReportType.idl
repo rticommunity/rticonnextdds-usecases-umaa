@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,11 +19,19 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
 #ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONFIGANDCHARACTERISTICS_UVPLATFORMSPECS_UVPLATFORMSPECSREPORTTYPE
 #define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONFIGANDCHARACTERISTICS_UVPLATFORMSPECS_UVPLATFORMSPECSREPORTTYPE
 
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
 #include "UMAA/Common/Measurement/Measurements.idl"
-#include "UMAA/Common/Measurement/Position3D_PlatformXYZ.idl"
+#include "UMAA/Common/Measurement/Position3DBodyXYZ.idl"
 #include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
 module UMAA
 {
@@ -27,98 +39,67 @@ module UMAA
   {
     module UVPlatformSpecs
     {
-      const string UVPlatformSpecsReport_TOPIC = "UMAA::EO::UVPlatformSpecs::UVPlatformSpecsReport";
-      @topic(name="UMAA::EO::UVPlatformSpecs::UVPlatformSpecsReport")
+      const string UVPlatformSpecsReportTopic = "UMAA::EO::UVPlatformSpecs::UVPlatformSpecsReport";
       struct UVPlatformSpecsReportType
       {
-      // The length of the back of the vehicle, measured along the negative X axis of the vehicle coordinate from
+      // The distance from the vehicle reference origin to the most aft  of the vehicle, measured along the negative X-axis of the vehicle coordinate frame.
+      UMAA::Common::Measurement::Distance aftDistance;
 
-      UMAA::Common::Measurement::Distance back;
-
-      // The additional mass required to either achieve neutral buoyancy or sink the submergible vehicle in fresh water
-
-      UMAA::Common::Measurement::Mass baselineBuoyancy;
-
-      // The beam at waterline (BWL)
-
+      // (BWL) The maximum distance of the vehicle at the waterline, the distance along the Y-axis of the widest point of the hull where it meets the waterline.
       UMAA::Common::Measurement::Distance beamAtWaterline;
 
-      // The bottom of the vehicle, measured along the positive Z axis of the vehicle coordinate frame
+      // The distance from the vehicle reference origin to the maximum depth of the vehicle, measured along the positive Z-axis of the vehicle coordinate frame.
+      UMAA::Common::Measurement::Distance bottomDistance;
 
-      UMAA::Common::Measurement::Distance bottom;
+      // The measurements on the vehicle coordinate frame at which the center of buoyancy of the vehicle is located.
+      UMAA::Common::Measurement::Position3DBodyXYZ centerOfBuoyancy;
 
-      // The measurements on the vehicle coordinate frame at which the center of buoyancy of the vehicle is located
+      // The measurements on the vehicle coordinate frame at which the center of gravity of the vehicle is located.
+      UMAA::Common::Measurement::Position3DBodyXYZ centerOfGravity;
 
-      UMAA::Common::Measurement::Position3D_PlatformXYZ centerOfBuoyancy;
+      // The outer diameter as a clean, cylindrical pressure hull of the unmanned vehicle.
+      UMAA::Common::Measurement::Distance diameter;
 
-      // The measurements on the vehicle coordinate frame at which the center of gravity of the vehicle is located
+      // The weight of the volume of displaced fluid up to the waterline in which the vehicle (including fuel, cargo, payloads, etc) is floating.
+      UMAA::Common::Measurement::MassMetricTon displacement;
 
-      UMAA::Common::Measurement::Position3D_PlatformXYZ centerOfGravity;
-
-      // The equivalent mass of the fluid displaced by the unmanned maritime platform
-
-      UMAA::Common::Measurement::Mass displacement;
-
-      // The draft of the unmanned platform
-
+      // Specifies the distance from the waterline to the bottom of the vehicle.
       UMAA::Common::Measurement::Distance draft;
 
-      // The length of the front of the vehicle, measured along the positive X axis of the vehicle coordinate frame
+      // The distance from the vehicle reference origin to the most forward of the vehicle , measured along the positive X axis of the vehicle coordinate frame.
+      UMAA::Common::Measurement::Distance forwardDistance;
 
-      UMAA::Common::Measurement::Distance front;
-
-      // The overall height of the unmanned platform
-
-      UMAA::Common::Measurement::Distance heightOverall;
-
-      // The depth of the unmanned platform
-
-      UMAA::Common::Measurement::Distance hullDepth;
-
-      // The side of the vehicle, measured along the negative Y axis of the vehicle coordinate frame
-
-      UMAA::Common::Measurement::Distance left;
-
-      // The length at waterline (LWL)
-
+      // (LWL) The measured distance of the vehicle at the level where it sits in the water. Measured along the X axis.
       UMAA::Common::Measurement::Distance lengthAtWaterline;
 
-      // The length over all (LOA)
-
-      UMAA::Common::Measurement::Distance lengthOverall;
-
-      // The mass of a dry vehicle on land with empty ballast tanks and suspend from a crane
-
-      UMAA::Common::Measurement::Mass massOnLand;
-
-      // The name of the unmanned platform
-
+      // The name of the unmanned vehicle.
       UMAA::Common::PrimitiveConstrained::StringShortDescription name;
 
-      // The outer diameter as a clean, cylindrical pressure hull of the unmanned platform
+      // The distance from the vehicle reference origin to the most port of the vehicle, measured along the negative Y axis of the vehicle coordinate frame.
+      UMAA::Common::Measurement::Distance portDistance;
 
-      UMAA::Common::Measurement::Distance outerWidth;
+      // The origin from which all distance measurements are taken.
+      UMAA::Common::MaritimeEnumeration::ReferenceFrameOriginEnumModule::ReferenceFrameOriginEnumType referenceFrameOrigin;
 
-      // The side of the vehicle, measured along the positive Y axis of the vehicle coordinate frame
+      // The distance from the vehicle reference origin to the most starboard of the vehicle, measured along the positive Y axis of the vehicle coordinate frame.
+      UMAA::Common::Measurement::Distance starboardDistance;
 
-      UMAA::Common::Measurement::Distance right;
+      // The distance from the vehicle reference origin to the top most part of the vehicle, measured along the negative Z axis of the vehicle coordinate frame.
+      UMAA::Common::Measurement::Distance topDistance;
 
-      // The top of the vehicle, measured along the negative Z axis of the vehicle coordinate frame
+      // The weight of a vehicle on land with empty ballast tanks and suspended from a crane.
+      UMAA::Common::Measurement::MassMetricTon weightLight;
 
-      UMAA::Common::Measurement::Distance top;
+      // The weight of a dry surface vehicle on land with tanks (fuel, ballast, etc) and cargo/payloads at designed capacity and suspended from a crane.
+      UMAA::Common::Measurement::MassMetricTon weightLoaded;
 
-      // The overall distance of the body
-
-      UMAA::Common::Measurement::Distance widthOverall;
+      // The time at which the data is valid.
+      UMAA::Common::Measurement::DateTime timeStamp;
 
       // The unique identifier for the source.
-
       @key UMAA::Common::Measurement::NumericGUID source;
-
-      // The time at which the data was derived.
-
-      UMAA::Common::Measurement::DateTime timeStamp;
       };
+
 
     };
   };

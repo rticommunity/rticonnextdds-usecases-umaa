@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,8 +19,15 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
-#ifndef _LDM_MDE_GLOBALREGULARPOLYGONSTATE_GLOBALREGULARPOLYGONSTATETYPE
-#define _LDM_MDE_GLOBALREGULARPOLYGONSTATE_GLOBALREGULARPOLYGONSTATETYPE
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_GLOBALREGULARPOLYGONSTATE_GLOBALREGULARPOLYGONSTATETYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_GLOBALREGULARPOLYGONSTATE_GLOBALREGULARPOLYGONSTATETYPE
 
 #include "UMAA/MO/GlobalRegularPolygonState/GlobalRegularPolygonPatternType.idl"
 #include "UMAA/MO/GlobalRegularPolygonState/GlobalRegularPolygonTransitType.idl"
@@ -26,30 +37,29 @@ module UMAA
   {
     module GlobalRegularPolygonState
     {
-      module GlobalRegularPolygonStateType_Specializations
-      {
-          enum GlobalRegularPolygonStateType_Selectors
-          {
-              GLOBALREGULARPOLYGONTRANSITTYPE_SELECT,
-              GLOBALREGULARPOLYGONPATTERNTYPE_SELECT
-          };
+        enum GlobalRegularPolygonStateTypeEnum
+        {
+            GLOBALREGULARPOLYGONTRANSIT_D,
+            GLOBALREGULARPOLYGONPATTERN_D
+        };
 
-          union GlobalRegularPolygonStateType_Union switch (GlobalRegularPolygonStateType_Selectors)
-          {
-                case GLOBALREGULARPOLYGONTRANSITTYPE_SELECT: UMAA::MO::GlobalRegularPolygonState::GlobalRegularPolygonTransitType GlobalRegularPolygonTransitType_data;
-                case GLOBALREGULARPOLYGONPATTERNTYPE_SELECT: UMAA::MO::GlobalRegularPolygonState::GlobalRegularPolygonPatternType GlobalRegularPolygonPatternType_data;
-          };
+        union GlobalRegularPolygonStateTypeUnion switch (GlobalRegularPolygonStateTypeEnum)
+        {
+              case GLOBALREGULARPOLYGONTRANSIT_D:
+                UMAA::MO::GlobalRegularPolygonState::GlobalRegularPolygonTransitType GlobalRegularPolygonTransitVariant;
+              case GLOBALREGULARPOLYGONPATTERN_D:
+                UMAA::MO::GlobalRegularPolygonState::GlobalRegularPolygonPatternType GlobalRegularPolygonPatternVariant;
+        };
 
-      };
       struct GlobalRegularPolygonStateType
       {
       // Union to capture specializations of GlobalRegularPolygonStateType
-
-      GlobalRegularPolygonStateType_Specializations::GlobalRegularPolygonStateType_Union GlobalRegularPolygonStateType_subtypes;
+      GlobalRegularPolygonStateTypeUnion GlobalRegularPolygonStateTypeSubtypes;
       };
+
 
     };
   };
 };
 
-#endif // _LDM_MDE_GLOBALREGULARPOLYGONSTATE_GLOBALREGULARPOLYGONSTATETYPE
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_GLOBALREGULARPOLYGONSTATE_GLOBALREGULARPOLYGONSTATETYPE

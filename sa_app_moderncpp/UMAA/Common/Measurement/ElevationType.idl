@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,11 +19,19 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
-#ifndef _LDM_MDE_ELEVATION_ELEVATIONTYPE
-#define _LDM_MDE_ELEVATION_ELEVATIONTYPE
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ELEVATION_ELEVATIONTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ELEVATION_ELEVATIONTYPE
 
 #include "UMAA/Common/Measurement/AltitudeAGLType.idl"
 #include "UMAA/Common/Measurement/AltitudeASFType.idl"
+#include "UMAA/Common/Measurement/AltitudeGeodeticType.idl"
 #include "UMAA/Common/Measurement/AltitudeMSLType.idl"
 #include "UMAA/Common/Measurement/DepthType.idl"
 module UMAA
@@ -28,34 +40,38 @@ module UMAA
   {
     module Measurement
     {
-      module ElevationType_Specializations
-      {
-          enum ElevationType_Selectors
-          {
-              ALTITUDEAGLTYPE_SELECT,
-              ALTITUDEMSLTYPE_SELECT,
-              ALTITUDEASFTYPE_SELECT,
-              DEPTHTYPE_SELECT
-          };
+        enum ElevationTypeEnum
+        {
+            ALTITUDEAGL_D,
+            ALTITUDEMSL_D,
+            ALTITUDEGEODETIC_D,
+            ALTITUDEASF_D,
+            DEPTH_D
+        };
 
-          union ElevationType_Union switch (ElevationType_Selectors)
-          {
-                case ALTITUDEAGLTYPE_SELECT: UMAA::Common::Measurement::AltitudeAGLType AltitudeAGLType_data;
-                case ALTITUDEMSLTYPE_SELECT: UMAA::Common::Measurement::AltitudeMSLType AltitudeMSLType_data;
-                case ALTITUDEASFTYPE_SELECT: UMAA::Common::Measurement::AltitudeASFType AltitudeASFType_data;
-                case DEPTHTYPE_SELECT: UMAA::Common::Measurement::DepthType DepthType_data;
-          };
+        union ElevationTypeUnion switch (ElevationTypeEnum)
+        {
+              case ALTITUDEAGL_D:
+                UMAA::Common::Measurement::AltitudeAGLType AltitudeAGLVariant;
+              case ALTITUDEMSL_D:
+                UMAA::Common::Measurement::AltitudeMSLType AltitudeMSLVariant;
+              case ALTITUDEGEODETIC_D:
+                UMAA::Common::Measurement::AltitudeGeodeticType AltitudeGeodeticVariant;
+              case ALTITUDEASF_D:
+                UMAA::Common::Measurement::AltitudeASFType AltitudeASFVariant;
+              case DEPTH_D:
+                UMAA::Common::Measurement::DepthType DepthVariant;
+        };
 
-      };
       struct ElevationType
       {
       // Union to capture specializations of ElevationType
-
-      ElevationType_Specializations::ElevationType_Union ElevationType_subtypes;
+      ElevationTypeUnion ElevationTypeSubtypes;
       };
+
 
     };
   };
 };
 
-#endif // _LDM_MDE_ELEVATION_ELEVATIONTYPE
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ELEVATION_ELEVATIONTYPE

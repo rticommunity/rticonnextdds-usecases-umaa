@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,16 +19,22 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
 #ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_ROUTEOBJECTIVETYPE
 #define _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_ROUTEOBJECTIVETYPE
 
+#include "UMAA/Common/LargeListMetadata.idl"
 #include "UMAA/Common/Enumeration/EnumerationSets.idl"
-#include "UMAA/Common/MaritimeEnumeration/EnumerationSets.idl"
-#include "UMAA/Common/Measurement/DateTime_Tolerance.idl"
 #include "UMAA/Common/Measurement/Measurements.idl"
 #include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
+#include "UMAA/Common/Requirements/DateTimeRequirement.idl"
 #include "UMAA/MM/BaseType/WaypointType.idl"
-#include "UMAA/Common/Measurement/Measurements.idl"
 module UMAA
 {
   module MM
@@ -33,17 +43,26 @@ module UMAA
     {
       struct RouteObjectiveType
       {
-      // describe whether the route is an altitude or depth mode
-
-      UMAA::Common::MaritimeEnumeration::HeightModeEnumType::HeightModeEnumType mode;
-
-      // description of a route
-
+      // Description of a route.
       UMAA::Common::PrimitiveConstrained::StringShortDescription routeDescription;
+      UMAA::Common::LargeListMetadata waypointsListMetadata;
+      };
 
-      // Specifies the route the vehicle is to travel
-
-      sequence<UMAA::MM::BaseType::WaypointType> waypoints;
+      const string RouteObjectiveWaypointsListElementTopic = "UMAA::MM::BaseType::RouteObjectiveWaypointsListElement";
+      // Defines the large list element type that wraps UMAA::MM::BaseType::WaypointType
+      struct RouteObjectiveTypeWaypointsListElement
+      {
+        UMAA::MM::BaseType::WaypointType element;
+        // NOTE: Ties this element back to the list metadata with the same listID, which 
+        // is the collection of all elements in the topic with the same sourceId
+        UMAA::Common::Measurement::NumericGUID listID;
+        // NOTE: Uniquely identifies this element within the list and universally across any large collection
+        // that currently exists on the DDS bus.
+        @key UMAA::Common::Measurement::NumericGUID elementID;
+        UMAA::Common::Measurement::DateTime elementTimestamp;
+        // NOTE: references to the elementID of the element that logically follows this 
+        // element in the linked list. This is empty if this element is sequentially last.
+        @optional UMAA::Common::Measurement::NumericGUID nextElementID;
       };
 
     };

@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,8 +19,15 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
-#ifndef _LDM_MDE_LOCALDRIFTSTATE_LOCALDRIFTSTATETYPE
-#define _LDM_MDE_LOCALDRIFTSTATE_LOCALDRIFTSTATETYPE
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_LOCALDRIFTSTATE_LOCALDRIFTSTATETYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_LOCALDRIFTSTATE_LOCALDRIFTSTATETYPE
 
 #include "UMAA/MO/LocalDriftState/LocalRegionDriftType.idl"
 #include "UMAA/MO/LocalDriftState/LocalTransitDriftType.idl"
@@ -26,30 +37,29 @@ module UMAA
   {
     module LocalDriftState
     {
-      module LocalDriftStateType_Specializations
-      {
-          enum LocalDriftStateType_Selectors
-          {
-              LOCALTRANSITDRIFTTYPE_SELECT,
-              LOCALREGIONDRIFTTYPE_SELECT
-          };
+        enum LocalDriftStateTypeEnum
+        {
+            LOCALTRANSITDRIFT_D,
+            LOCALREGIONDRIFT_D
+        };
 
-          union LocalDriftStateType_Union switch (LocalDriftStateType_Selectors)
-          {
-                case LOCALTRANSITDRIFTTYPE_SELECT: UMAA::MO::LocalDriftState::LocalTransitDriftType LocalTransitDriftType_data;
-                case LOCALREGIONDRIFTTYPE_SELECT: UMAA::MO::LocalDriftState::LocalRegionDriftType LocalRegionDriftType_data;
-          };
+        union LocalDriftStateTypeUnion switch (LocalDriftStateTypeEnum)
+        {
+              case LOCALTRANSITDRIFT_D:
+                UMAA::MO::LocalDriftState::LocalTransitDriftType LocalTransitDriftVariant;
+              case LOCALREGIONDRIFT_D:
+                UMAA::MO::LocalDriftState::LocalRegionDriftType LocalRegionDriftVariant;
+        };
 
-      };
       struct LocalDriftStateType
       {
       // Union to capture specializations of LocalDriftStateType
-
-      LocalDriftStateType_Specializations::LocalDriftStateType_Union LocalDriftStateType_subtypes;
+      LocalDriftStateTypeUnion LocalDriftStateTypeSubtypes;
       };
+
 
     };
   };
 };
 
-#endif // _LDM_MDE_LOCALDRIFTSTATE_LOCALDRIFTSTATETYPE
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_LOCALDRIFTSTATE_LOCALDRIFTSTATETYPE

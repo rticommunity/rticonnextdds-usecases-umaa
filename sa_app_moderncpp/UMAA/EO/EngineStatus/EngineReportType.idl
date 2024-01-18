@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,11 +19,18 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
 #ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_ENGINESTATUS_ENGINEREPORTTYPE
 #define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_ENGINESTATUS_ENGINEREPORTTYPE
 
 #include "UMAA/Common/Enumeration/EnumerationSets.idl"
-#include "UMAA/Common/MaritimeEnumeration/EnumerationSets.idl"
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
 #include "UMAA/Common/Measurement/Measurements.idl"
 module UMAA
 {
@@ -27,94 +38,73 @@ module UMAA
   {
     module EngineStatus
     {
-      const string EngineReport_TOPIC = "UMAA::EO::EngineStatus::EngineReport";
-      @topic(name="UMAA::EO::EngineStatus::EngineReport")
+      const string EngineReportTopic = "UMAA::EO::EngineStatus::EngineReport";
       struct EngineReportType
       {
-      // The engine coolant level
+      // The engine coolant level.
+      @optional UMAA::Common::Measurement::VolumePercent coolantLevel;
 
-      UMAA::Common::Measurement::Volume_Percent coolantLevel;
+      // The engine coolant pressure.
+      @optional UMAA::Common::Measurement::PressureKiloPascals coolantPressure;
 
-      // The engine coolant pressure
+      // The temperature of the engine coolant.
+      @optional UMAA::Common::Measurement::Temperature coolantTemp;
 
-      UMAA::Common::Measurement::Pressure_KiloPascals coolantPressure;
+      // The temperature of the engine.
+      @optional UMAA::Common::Measurement::Temperature engineTemp;
 
-      // The temperature of the engine coolant
+      // The engine exhaust temperature.
+      @optional UMAA::Common::Measurement::Temperature exhaustTemp;
 
-      UMAA::Common::Measurement::Temperature coolantTemp;
-
-      // The temperature of the engine
-
-      UMAA::Common::Measurement::Temperature engineTemp;
-
-      // The engine exhaust temperature
-
-      UMAA::Common::Measurement::Temperature exhaustTemp;
-
-      // The glow plug indicator state
-
+      // The glow plug indicator state.
       @optional boolean glowPlugIndicator;
 
-      // The glow plug state
+      // The glow plug state.
+      @optional UMAA::Common::Enumeration::OnOffStatusEnumModule::OnOffStatusEnumType glowPlugState;
 
-      @optional UMAA::Common::Enumeration::OnOffStatusEnumType::OnOffStatusEnumType glowPlugState;
-
-      // The glow plug temperature
-
+      // The glow plug temperature.
       @optional UMAA::Common::Measurement::Temperature glowPlugTemp;
 
-      // The time remaining for the glow plug to be on
+      // The time remaining for the glow plug to be on.
+      @optional UMAA::Common::Measurement::DurationSeconds glowPlugTimeRemaining;
 
-      @optional UMAA::Common::Measurement::Duration_Seconds glowPlugTimeRemaining;
+      // The total runtime of the engine in its lifetime.
+      @optional UMAA::Common::Measurement::DurationHours hours;
 
-      // The total runtime of the power plant in its lifetime
+      // The engine manifold air temperature.
+      @optional UMAA::Common::Measurement::Temperature manifoldAirTemp;
 
-      UMAA::Common::Measurement::Duration_Hours hours;
+      // The engine manifold pressure.
+      @optional UMAA::Common::Measurement::PressureKiloPascals manifoldPressure;
 
-      // The engine manifold air temperature
+      // The engine oil level.
+      @optional UMAA::Common::Measurement::VolumePercent oilLevel;
 
-      UMAA::Common::Measurement::Temperature manifoldAirTemp;
+      // The engine oil pressure.
+      @optional UMAA::Common::Measurement::PressureKiloPascals oilPressure;
 
-      // The engine manifold pressure
+      // The engine oil temperature.
+      @optional UMAA::Common::Measurement::Temperature oilTemp;
 
-      UMAA::Common::Measurement::Pressure_KiloPascals manifoldPressure;
+      // The engine oil pressure.
+      @optional UMAA::Common::Measurement::PressurePercent percentOilPressure;
 
-      // The engine oil level
-
-      UMAA::Common::Measurement::Volume_Percent oilLevel;
-
-      // The engine oil pressure
-
-      UMAA::Common::Measurement::Pressure_KiloPascals oilPressure;
-
-      // The engine oil temperature
-
-      UMAA::Common::Measurement::Temperature oilTemp;
-
-      // The engine oil pressure
-
-      UMAA::Common::Measurement::Pressure_Percent percentOilPressure;
-
-      // The engine RPM
-
-      UMAA::Common::Measurement::EngineSpeed RPM;
+      // The engine RPM.
+      @optional UMAA::Common::Measurement::EngineSpeed RPM;
 
       // The current ignition state.
+      UMAA::Common::MaritimeEnumeration::IgnitionStateEnumModule::IgnitionStateEnumType state;
 
-      UMAA::Common::MaritimeEnumeration::IgnitionStateEnumType::IgnitionStateEnumType state;
+      // The engine throttle. Negative values will be regarded as zero for non-reversible engines.
+      @optional UMAA::Common::Measurement::Effort throttle;
 
-      // The engine throttle. Negative values will be regarded as zero for non-reversible engines
-
-      UMAA::Common::Measurement::Effort throttle;
+      // The time at which the data is valid.
+      UMAA::Common::Measurement::DateTime timeStamp;
 
       // The unique identifier for the source.
-
       @key UMAA::Common::Measurement::NumericGUID source;
-
-      // The time at which the data was derived.
-
-      UMAA::Common::Measurement::DateTime timeStamp;
       };
+
 
     };
   };

@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,8 +19,15 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
-#ifndef _LDM_MDE_LOCALRACETRACKSTATE_LOCALRACETRACKSTATETYPE
-#define _LDM_MDE_LOCALRACETRACKSTATE_LOCALRACETRACKSTATETYPE
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_LOCALRACETRACKSTATE_LOCALRACETRACKSTATETYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_LOCALRACETRACKSTATE_LOCALRACETRACKSTATETYPE
 
 #include "UMAA/MO/LocalRacetrackState/LocalRacetrackPatternType.idl"
 #include "UMAA/MO/LocalRacetrackState/LocalRacetrackTransitType.idl"
@@ -26,30 +37,29 @@ module UMAA
   {
     module LocalRacetrackState
     {
-      module LocalRacetrackStateType_Specializations
-      {
-          enum LocalRacetrackStateType_Selectors
-          {
-              LOCALRACETRACKTRANSITTYPE_SELECT,
-              LOCALRACETRACKPATTERNTYPE_SELECT
-          };
+        enum LocalRacetrackStateTypeEnum
+        {
+            LOCALRACETRACKTRANSIT_D,
+            LOCALRACETRACKPATTERN_D
+        };
 
-          union LocalRacetrackStateType_Union switch (LocalRacetrackStateType_Selectors)
-          {
-                case LOCALRACETRACKTRANSITTYPE_SELECT: UMAA::MO::LocalRacetrackState::LocalRacetrackTransitType LocalRacetrackTransitType_data;
-                case LOCALRACETRACKPATTERNTYPE_SELECT: UMAA::MO::LocalRacetrackState::LocalRacetrackPatternType LocalRacetrackPatternType_data;
-          };
+        union LocalRacetrackStateTypeUnion switch (LocalRacetrackStateTypeEnum)
+        {
+              case LOCALRACETRACKTRANSIT_D:
+                UMAA::MO::LocalRacetrackState::LocalRacetrackTransitType LocalRacetrackTransitVariant;
+              case LOCALRACETRACKPATTERN_D:
+                UMAA::MO::LocalRacetrackState::LocalRacetrackPatternType LocalRacetrackPatternVariant;
+        };
 
-      };
       struct LocalRacetrackStateType
       {
       // Union to capture specializations of LocalRacetrackStateType
-
-      LocalRacetrackStateType_Specializations::LocalRacetrackStateType_Union LocalRacetrackStateType_subtypes;
+      LocalRacetrackStateTypeUnion LocalRacetrackStateTypeSubtypes;
       };
+
 
     };
   };
 };
 
-#endif // _LDM_MDE_LOCALRACETRACKSTATE_LOCALRACETRACKSTATETYPE
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_LOCALRACETRACKSTATE_LOCALRACETRACKSTATETYPE

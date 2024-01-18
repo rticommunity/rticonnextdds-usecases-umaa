@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,8 +19,15 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
-#ifndef _LDM_MDE_GLOBALDRIFTSTATE_GLOBALDRIFTSTATETYPE
-#define _LDM_MDE_GLOBALDRIFTSTATE_GLOBALDRIFTSTATETYPE
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_GLOBALDRIFTSTATE_GLOBALDRIFTSTATETYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_GLOBALDRIFTSTATE_GLOBALDRIFTSTATETYPE
 
 #include "UMAA/MO/GlobalDriftState/GlobalRegionDriftType.idl"
 #include "UMAA/MO/GlobalDriftState/GlobalTransitDriftType.idl"
@@ -26,30 +37,29 @@ module UMAA
   {
     module GlobalDriftState
     {
-      module GlobalDriftStateType_Specializations
-      {
-          enum GlobalDriftStateType_Selectors
-          {
-              GLOBALTRANSITDRIFTTYPE_SELECT,
-              GLOBALREGIONDRIFTTYPE_SELECT
-          };
+        enum GlobalDriftStateTypeEnum
+        {
+            GLOBALTRANSITDRIFT_D,
+            GLOBALREGIONDRIFT_D
+        };
 
-          union GlobalDriftStateType_Union switch (GlobalDriftStateType_Selectors)
-          {
-                case GLOBALTRANSITDRIFTTYPE_SELECT: UMAA::MO::GlobalDriftState::GlobalTransitDriftType GlobalTransitDriftType_data;
-                case GLOBALREGIONDRIFTTYPE_SELECT: UMAA::MO::GlobalDriftState::GlobalRegionDriftType GlobalRegionDriftType_data;
-          };
+        union GlobalDriftStateTypeUnion switch (GlobalDriftStateTypeEnum)
+        {
+              case GLOBALTRANSITDRIFT_D:
+                UMAA::MO::GlobalDriftState::GlobalTransitDriftType GlobalTransitDriftVariant;
+              case GLOBALREGIONDRIFT_D:
+                UMAA::MO::GlobalDriftState::GlobalRegionDriftType GlobalRegionDriftVariant;
+        };
 
-      };
       struct GlobalDriftStateType
       {
       // Union to capture specializations of GlobalDriftStateType
-
-      GlobalDriftStateType_Specializations::GlobalDriftStateType_Union GlobalDriftStateType_subtypes;
+      GlobalDriftStateTypeUnion GlobalDriftStateTypeSubtypes;
       };
+
 
     };
   };
 };
 
-#endif // _LDM_MDE_GLOBALDRIFTSTATE_GLOBALDRIFTSTATETYPE
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_GLOBALDRIFTSTATE_GLOBALDRIFTSTATETYPE

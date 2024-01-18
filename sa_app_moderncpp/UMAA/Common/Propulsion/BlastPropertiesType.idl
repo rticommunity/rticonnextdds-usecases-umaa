@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,10 +19,18 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
-#ifndef _LDM_MDE_PROPULSION_BLASTPROPERTIESTYPE
-#define _LDM_MDE_PROPULSION_BLASTPROPERTIESTYPE
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_PROPULSION_BLASTPROPERTIESTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_PROPULSION_BLASTPROPERTIESTYPE
 
 #include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
 module UMAA
 {
   module Common
@@ -27,17 +39,16 @@ module UMAA
     {
       struct BlastPropertiesType
       {
-      // The number of times commanded to blast, if attribute is not included then it is continuous
-
+      // The number of times commanded to blast, if attribute is not included then it is continuous.
       UMAA::Common::Measurement::PositiveCount blastNumber;
 
-      // 1 to 255: The time in seconds between blasts
-
-      UMAA::Common::Measurement::Duration_Seconds restTime;
+      // The time between blasts.
+      UMAA::Common::PrimitiveConstrained::TimeBetweenBlasts restTime;
       };
+
 
     };
   };
 };
 
-#endif // _LDM_MDE_PROPULSION_BLASTPROPERTIESTYPE
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_PROPULSION_BLASTPROPERTIESTYPE

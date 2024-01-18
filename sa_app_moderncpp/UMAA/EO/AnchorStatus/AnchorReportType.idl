@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,10 +19,17 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
 #ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_ANCHORSTATUS_ANCHORREPORTTYPE
 #define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_ANCHORSTATUS_ANCHORREPORTTYPE
 
-#include "UMAA/Common/MaritimeEnumeration/EnumerationSets.idl"
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
 #include "UMAA/Common/Measurement/Measurements.idl"
 module UMAA
 {
@@ -26,26 +37,22 @@ module UMAA
   {
     module AnchorStatus
     {
-      const string AnchorReport_TOPIC = "UMAA::EO::AnchorStatus::AnchorReport";
-      @topic(name="UMAA::EO::AnchorStatus::AnchorReport")
+      const string AnchorReportTopic = "UMAA::EO::AnchorStatus::AnchorReport";
       struct AnchorReportType
       {
       // The current length of chain/rope that is paid out.
-
       UMAA::Common::Measurement::Distance rodeLengthPaidOut;
 
       // The current operational state of the anchor.
+      UMAA::Common::MaritimeEnumeration::AnchorStateEnumModule::AnchorStateEnumType state;
 
-      UMAA::Common::MaritimeEnumeration::AnchorStateEnumType::AnchorStateEnumType state;
+      // The time at which the data is valid.
+      UMAA::Common::Measurement::DateTime timeStamp;
 
       // The unique identifier for the source.
-
       @key UMAA::Common::Measurement::NumericGUID source;
-
-      // The time at which the data was derived.
-
-      UMAA::Common::Measurement::DateTime timeStamp;
       };
+
 
     };
   };

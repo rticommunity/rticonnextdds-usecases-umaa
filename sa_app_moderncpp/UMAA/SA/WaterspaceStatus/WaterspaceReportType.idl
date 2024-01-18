@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,9 +19,17 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
 #ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_WATERSPACESTATUS_WATERSPACEREPORTTYPE
 #define _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_WATERSPACESTATUS_WATERSPACEREPORTTYPE
 
+#include "UMAA/Common/LargeSetMetadata.idl"
 #include "UMAA/Common/Measurement/Measurements.idl"
 #include "UMAA/MM/BaseType/ZoneType.idl"
 module UMAA
@@ -26,21 +38,29 @@ module UMAA
   {
     module WaterspaceStatus
     {
-      const string WaterspaceReport_TOPIC = "UMAA::SA::WaterspaceStatus::WaterspaceReport";
-      @topic(name="UMAA::SA::WaterspaceStatus::WaterspaceReport")
+      const string WaterspaceReportTopic = "UMAA::SA::WaterspaceStatus::WaterspaceReport";
       struct WaterspaceReportType
       {
-      // The zone described by the waterspace.
-
-      sequence<UMAA::MM::BaseType::ZoneType> zones;
+      // The time at which the data is valid.
+      UMAA::Common::Measurement::DateTime timeStamp;
 
       // The unique identifier for the source.
-
       @key UMAA::Common::Measurement::NumericGUID source;
+      UMAA::Common::LargeSetMetadata zonesSetMetadata;
+      };
 
-      // The time at which the data was derived.
-
-      UMAA::Common::Measurement::DateTime timeStamp;
+      const string WaterspaceReportZonesSetElementTopic = "UMAA::SA::WaterspaceStatus::WaterspaceReportZonesSetElement";
+      // Defines the large set element type that wraps UMAA::MM::BaseType::ZoneType
+      struct WaterspaceReportTypeZonesSetElement
+      {
+        UMAA::MM::BaseType::ZoneType element;
+        // NOTE: Ties this element back to the set metadata with the same setID, which 
+        // is the collection of all elements in the topic with the same sourceId
+        UMAA::Common::Measurement::NumericGUID setID;
+        // NOTE: Uniquely identifies this element within the set and universally across any large collection
+        // that currently exists on the DDS bus.
+        @key UMAA::Common::Measurement::NumericGUID elementID;
+        UMAA::Common::Measurement::DateTime elementTimestamp;
       };
 
     };

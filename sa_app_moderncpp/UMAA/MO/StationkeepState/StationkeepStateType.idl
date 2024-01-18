@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,8 +19,15 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
-#ifndef _LDM_MDE_STATIONKEEPSTATE_STATIONKEEPSTATETYPE
-#define _LDM_MDE_STATIONKEEPSTATE_STATIONKEEPSTATETYPE
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_STATIONKEEPSTATE_STATIONKEEPSTATETYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_STATIONKEEPSTATE_STATIONKEEPSTATETYPE
 
 #include "UMAA/MO/StationkeepState/StationkeepingStationkeepType.idl"
 #include "UMAA/MO/StationkeepState/TransitStationkeepType.idl"
@@ -26,30 +37,29 @@ module UMAA
   {
     module StationkeepState
     {
-      module StationkeepStateType_Specializations
-      {
-          enum StationkeepStateType_Selectors
-          {
-              TRANSITSTATIONKEEPTYPE_SELECT,
-              STATIONKEEPINGSTATIONKEEPTYPE_SELECT
-          };
+        enum StationkeepStateTypeEnum
+        {
+            TRANSITSTATIONKEEP_D,
+            STATIONKEEPINGSTATIONKEEP_D
+        };
 
-          union StationkeepStateType_Union switch (StationkeepStateType_Selectors)
-          {
-                case TRANSITSTATIONKEEPTYPE_SELECT: UMAA::MO::StationkeepState::TransitStationkeepType TransitStationkeepType_data;
-                case STATIONKEEPINGSTATIONKEEPTYPE_SELECT: UMAA::MO::StationkeepState::StationkeepingStationkeepType StationkeepingStationkeepType_data;
-          };
+        union StationkeepStateTypeUnion switch (StationkeepStateTypeEnum)
+        {
+              case TRANSITSTATIONKEEP_D:
+                UMAA::MO::StationkeepState::TransitStationkeepType TransitStationkeepVariant;
+              case STATIONKEEPINGSTATIONKEEP_D:
+                UMAA::MO::StationkeepState::StationkeepingStationkeepType StationkeepingStationkeepVariant;
+        };
 
-      };
       struct StationkeepStateType
       {
       // Union to capture specializations of StationkeepStateType
-
-      StationkeepStateType_Specializations::StationkeepStateType_Union StationkeepStateType_subtypes;
+      StationkeepStateTypeUnion StationkeepStateTypeSubtypes;
       };
+
 
     };
   };
 };
 
-#endif // _LDM_MDE_STATIONKEEPSTATE_STATIONKEEPSTATETYPE
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_STATIONKEEPSTATE_STATIONKEEPSTATETYPE

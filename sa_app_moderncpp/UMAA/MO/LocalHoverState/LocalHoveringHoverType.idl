@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,8 +19,15 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
-#ifndef _LDM_MDE_LOCALHOVERSTATE_LOCALHOVERINGHOVERTYPE
-#define _LDM_MDE_LOCALHOVERSTATE_LOCALHOVERINGHOVERTYPE
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_LOCALHOVERSTATE_LOCALHOVERINGHOVERTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_LOCALHOVERSTATE_LOCALHOVERINGHOVERTYPE
 
 #include "UMAA/Common/Enumeration/EnumerationSets.idl"
 module UMAA
@@ -28,20 +39,15 @@ module UMAA
       struct LocalHoveringHoverType
       {
       // Indicates that the elevation requested is within the commanded tolerance. Achievement may be lost and regained resulting in multiple changes to this attribute.
-
       boolean elevationAchieved;
 
-      // Indicates that the heading requested is within the commanded tolerance. Achievement may be lost and regained resulting in multiple changes to this attribute.
-
-      boolean headingAchieved;
-
       // Indicates that the position requested is within the commanded tolerance. Achievement may be lost and regained resulting in multiple changes to this attribute.
-
       boolean positionAchieved;
       };
+
 
     };
   };
 };
 
-#endif // _LDM_MDE_LOCALHOVERSTATE_LOCALHOVERINGHOVERTYPE
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_LOCALHOVERSTATE_LOCALHOVERINGHOVERTYPE

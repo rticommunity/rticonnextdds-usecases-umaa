@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -14,6 +18,13 @@
 
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
+
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
 
 #ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_PRIMITIVEDRIVERCONTROL_PRIMITIVEDRIVERCOMMANDTYPE
 #define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_PRIMITIVEDRIVERCONTROL_PRIMITIVEDRIVERCOMMANDTYPE
@@ -27,42 +38,34 @@ module UMAA
   {
     module PrimitiveDriverControl
     {
-      const string PrimitiveDriverCommand_TOPIC = "UMAA::MO::PrimitiveDriverControl::PrimitiveDriverCommand";
-      @topic(name="UMAA::MO::PrimitiveDriverControl::PrimitiveDriverCommand")
+      const string PrimitiveDriverCommandTopic = "UMAA::MO::PrimitiveDriverControl::PrimitiveDriverCommand";
       struct PrimitiveDriverCommandType
       {
-      // The desired propulsive linear effort (X, Y, Z) in percent. Propulsive linear effort represents a thrusting action that results in a linear motion along the respective axis.
-
+      // The desired propulsive linear effort (X, Y, Z) in percent. Propulsive linear effort represents an action that results in a linear motion along the respective axis.
       UMAA::Common::Measurement::LinearEffort propulsiveLinearEffort;
 
-      // The desired propulsive rotational effort (X, Y, Z) in percent. Propulsive rotational effort represents a thrusting action that results in a rotational motion about the respective axis.
-
+      // The desired propulsive rotational effort (X, Y, Z) in percent. Propulsive rotational effort represents an action that results in a rotational motion about the respective axis.
       UMAA::Common::Measurement::RotationalEffort propulsiveRotationalEffort;
 
-      // The desired resistive linear effort (X, Y, Z) in percent. Resistive linear effort represents a braking action that impedes linear motion along the respective axis.
-
+      // The desired resistive linear effort (X, Y, Z) in percent. Resistive linear effort represents an action that impedes linear motion along the respective axis.
       UMAA::Common::Measurement::LinearEffort resistiveLinearEffort;
 
-      // The desired resistive rotational effort (X, Y, Z) in percent. Resistive rotational effort represents a braking action that impedes rotational motion about the respective axis.
-
+      // The desired resistive rotational effort (X, Y, Z) in percent. Resistive rotational effort represents an action that impedes rotational motion about the respective axis.
       UMAA::Common::Measurement::RotationalEffort resistiveRotationalEffort;
 
-      // The unique identifier for the source.
+      // The time at which the data is valid.
+      UMAA::Common::Measurement::DateTime timeStamp;
 
+      // The unique identifier for the source.
       @key UMAA::Common::Measurement::NumericGUID source;
 
-      // The unique identifier for the destination.
-
-      @key UMAA::Common::Measurement::NumericGUID destination;
-
       // The unique identifier for the session.
-
       @key UMAA::Common::Measurement::NumericGUID sessionID;
 
-      // The time at which the data was derived.
-
-      UMAA::Common::Measurement::DateTime timeStamp;
+      // The unique identifier for the destination.
+      @key UMAA::Common::Measurement::NumericGUID destination;
       };
+
 
     };
   };

@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,12 +19,18 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
 #ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_RESOURCEALLOCATION_RESOURCEALLOCATIONCONTROLINFO
 #define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_RESOURCEALLOCATION_RESOURCEALLOCATIONCONTROLINFO
 
 #include "UMAA/Common/Measurement/Measurements.idl"
 #include "UMAA/SO/ResourceAllocation/ResourceAllocationControlSession.idl"
-#include "UMAA/Common/Measurement/Measurements.idl"
 module UMAA
 {
   module SO
@@ -30,13 +40,12 @@ module UMAA
       struct ResourceAllocationControlInfo
       {
       // Information on the consumer currently controlling the resource. If empty, this resource is not currently allocated for control.
-
       @optional UMAA::SO::ResourceAllocation::ResourceAllocationControlSession controlSession;
 
       // The identifier of the resource being controlled.
-
-      @key UMAA::Common::Measurement::NumericGUID resourceId;
+      @key UMAA::Common::Measurement::NumericGUID resourceID;
       };
+
 
     };
   };

@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -14,6 +18,13 @@
 
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
+
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
 
 #ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_RESOURCEALLOCATION_RESOURCEALLOCATIONCONTROLSESSION
 #define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_RESOURCEALLOCATION_RESOURCEALLOCATIONCONTROLSESSION
@@ -27,14 +38,13 @@ module UMAA
     {
       struct ResourceAllocationControlSession
       {
-      // The source identifier of the resource consumer in control of the resource
-
+      // The source identifier of the resource consumer in control of the resource.
       UMAA::Common::Measurement::NumericGUID controllingConsumer;
 
       // The absolute end time of the consumer's control. After this time is reached, the resource is available to be controlled by another process. If this field is empty, then the duration is assumed to be infinite.
-
       @optional UMAA::Common::Measurement::DateTime endTime;
       };
+
 
     };
   };

@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,10 +19,17 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
 #ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_MASTSTATUS_MASTREPORTTYPE
 #define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_MASTSTATUS_MASTREPORTTYPE
 
-#include "UMAA/Common/MaritimeEnumeration/EnumerationSets.idl"
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
 #include "UMAA/Common/Measurement/Measurements.idl"
 module UMAA
 {
@@ -26,22 +37,19 @@ module UMAA
   {
     module MastStatus
     {
-      const string MastReport_TOPIC = "UMAA::EO::MastStatus::MastReport";
-      @topic(name="UMAA::EO::MastStatus::MastReport")
+      const string MastReportTopic = "UMAA::EO::MastStatus::MastReport";
       struct MastReportType
       {
       // The state of the mast.
+      UMAA::Common::MaritimeEnumeration::MastStateEnumModule::MastStateEnumType state;
 
-      UMAA::Common::MaritimeEnumeration::MastStateEnumType::MastStateEnumType state;
+      // The time at which the data is valid.
+      UMAA::Common::Measurement::DateTime timeStamp;
 
       // The unique identifier for the source.
-
       @key UMAA::Common::Measurement::NumericGUID source;
-
-      // The time at which the data was derived.
-
-      UMAA::Common::Measurement::DateTime timeStamp;
       };
+
 
     };
   };

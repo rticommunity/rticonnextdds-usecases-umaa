@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,9 +19,17 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
 #ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESTATUS_SPEEDSTATUS_SPEEDREPORTTYPE
 #define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESTATUS_SPEEDSTATUS_SPEEDREPORTTYPE
 
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
 #include "UMAA/Common/Measurement/Measurements.idl"
 module UMAA
 {
@@ -25,34 +37,31 @@ module UMAA
   {
     module SpeedStatus
     {
-      const string SpeedReport_TOPIC = "UMAA::SA::SpeedStatus::SpeedReport";
-      @topic(name="UMAA::SA::SpeedStatus::SpeedReport")
+      const string SpeedReportTopic = "UMAA::SA::SpeedStatus::SpeedReport";
       struct SpeedReportType
       {
-      // The engine RPM of the unmanned platform.
-
+      // The engine RPM of the vehicle.
       @optional UMAA::Common::Measurement::EngineSpeed engineRPM;
 
-      // The value of speed over the ground of the unmanned platform.
+      // Describes the speed mode.
+      @optional UMAA::Common::MaritimeEnumeration::VehicleSpeedModeEnumModule::VehicleSpeedModeEnumType mode;
 
+      // The value of speed over the ground of the vehicle.
       @optional UMAA::Common::Measurement::GroundSpeed speedOverGround;
 
-      // The value of speed through air of the unmanned platform.
-
+      // The value of speed through air of the vehicle.
       @optional UMAA::Common::Measurement::IndicatedAirspeed speedThroughAir;
 
-      // The value of speed through water of the unmanned platform.
+      // The value of speed through water of the vehicle.
+      @optional UMAA::Common::Measurement::SpeedLocalWaterMass speedThroughWater;
 
-      @optional UMAA::Common::Measurement::Speed_LocalWaterMass speedThroughWater;
+      // The time at which the data is valid.
+      UMAA::Common::Measurement::DateTime timeStamp;
 
       // The unique identifier for the source.
-
       @key UMAA::Common::Measurement::NumericGUID source;
-
-      // The time at which the data was derived.
-
-      UMAA::Common::Measurement::DateTime timeStamp;
       };
+
 
     };
   };

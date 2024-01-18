@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,10 +19,17 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
 #ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_SENSOR_MANAGEMENT_GPSSTATUS_GPSCLOCKTYPE
 #define _LDM_MDE_PRIMARY_MISSION_CONTROL_SENSOR_MANAGEMENT_GPSSTATUS_GPSCLOCKTYPE
 
-#include "UMAA/Common/MaritimeEnumeration/EnumerationSets.idl"
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
 #include "UMAA/Common/Measurement/Measurements.idl"
 #include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
 module UMAA
@@ -30,61 +41,48 @@ module UMAA
       struct GPSClockType
       {
       // The clock's time bias.
-
-      @optional UMAA::Common::PrimitiveConstrained::NanosecondsCount bias;
+      UMAA::Common::PrimitiveConstrained::NanosecondsCount bias;
 
       // The clock's bias uncertainty (1-Sigma).
-
-      @optional UMAA::Common::PrimitiveConstrained::NanosecondsCount biasUncertianty;
+      UMAA::Common::PrimitiveConstrained::NanosecondsCount biasUncertainty;
 
       // The clock's drift.
-
-      @optional UMAA::Common::PrimitiveConstrained::NanosecondsDrift drift;
+      UMAA::Common::PrimitiveConstrained::NanosecondsDrift drift;
 
       // The clock's drift uncertainty (1-Sigma).
-
-      @optional UMAA::Common::PrimitiveConstrained::NanosecondsDrift driftUncertainty;
+      UMAA::Common::PrimitiveConstrained::NanosecondsDrift driftUncertainty;
 
       // The clock's elapsed real-time of this clock since system boot.
-
-      @optional UMAA::Common::PrimitiveConstrained::NanosecondsCount elapsedRealtime;
+      UMAA::Common::PrimitiveConstrained::NanosecondsCount elapsedRealtime;
 
       // The estimate of the relative precision of the alignment of the elapsedRealtime timestamp (68% confidence).
-
-      @optional UMAA::Common::PrimitiveConstrained::NanosecondsCount elapsedRealtimeUncertainty;
+      UMAA::Common::PrimitiveConstrained::NanosecondsCount elapsedRealtimeUncertainty;
 
       // The difference between hardware clock inside GPS receiver and the true GPS time since 0000Z, January 6, 1980.
-
-      @optional UMAA::Common::PrimitiveConstrained::NanosecondsCount fullBias;
+      UMAA::Common::PrimitiveConstrained::NanosecondsCount fullBias;
 
       // The count of hardware clock discontinuities.
-
-      @optional UMAA::Common::PrimitiveConstrained::NanosecondsCount hardwareClockDiscontinuityCount;
+      UMAA::Common::PrimitiveConstrained::NanosecondsCount hardwareClockDiscontinuityCount;
 
       // The leap second associated with the clock's time.
-
-      @optional UMAA::Common::Measurement::Count leapSecond;
+      UMAA::Common::Measurement::Count leapSecond;
 
       // The reference carrier frequency in Hz.
-
-      @optional UMAA::Common::Measurement::RadioFrequency_Hertz referenceCarrierFrequency;
+      UMAA::Common::Measurement::RadioFrequencyHertz referenceCarrierFrequency;
 
       // The reference code type.
-
-      @optional UMAA::Common::PrimitiveConstrained::StringShortDescription referenceCodeTypeFor;
+      UMAA::Common::PrimitiveConstrained::StringShortDescription referenceCodeTypeFor;
 
       // The reference constellation type.
-
-      @optional UMAA::Common::MaritimeEnumeration::GPSConstellationEnumType::GPSConstellationEnumType referenceConstellationType;
+      UMAA::Common::MaritimeEnumeration::GPSConstellationEnumModule::GPSConstellationEnumType referenceConstellationType;
 
       // The receiver internal hardware clock value.
+      UMAA::Common::Measurement::Count time;
 
-      @optional UMAA::Common::Measurement::Count time;
-
-      // The clock's time uncertainty (1-Sigma).
-
-      @optional UMAA::Common::Measurement::Size_Numeral timeUncertainty;
+      // The time figure of merit (TFOM) denotes the quality of the time solution as an enumeration representing an estimated time error range with respect to UTC (1 sigma).
+      UMAA::Common::MaritimeEnumeration::TFOMEnumModule::TFOMEnumType timeFigureOfMerit;
       };
+
 
     };
   };

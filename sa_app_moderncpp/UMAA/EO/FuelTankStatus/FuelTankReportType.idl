@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,6 +19,13 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
 #ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_FUELTANKSTATUS_FUELTANKREPORTTYPE
 #define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_FUELTANKSTATUS_FUELTANKREPORTTYPE
 
@@ -26,26 +37,22 @@ module UMAA
   {
     module FuelTankStatus
     {
-      const string FuelTankReport_TOPIC = "UMAA::EO::FuelTankStatus::FuelTankReport";
-      @topic(name="UMAA::EO::FuelTankStatus::FuelTankReport")
+      const string FuelTankReportTopic = "UMAA::EO::FuelTankStatus::FuelTankReport";
       struct FuelTankReportType
       {
-      // The amount of fuel remaining in the tank
+      // The amount of fuel remaining in the tank.
+      UMAA::Common::Measurement::VolumePercent fuelLevel;
 
-      UMAA::Common::Measurement::Volume_Percent fuelLevel;
+      // The detection of water in the fuel. This will be true when the detected water is above specified threshold.
+      @optional boolean waterInFuel;
 
-      // The detection of water in the fuel
-
-      boolean waterInFuel;
+      // The time at which the data is valid.
+      UMAA::Common::Measurement::DateTime timeStamp;
 
       // The unique identifier for the source.
-
       @key UMAA::Common::Measurement::NumericGUID source;
-
-      // The time at which the data was derived.
-
-      UMAA::Common::Measurement::DateTime timeStamp;
       };
+
 
     };
   };

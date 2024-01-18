@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -14,6 +18,13 @@
 
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
+
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
 
 #ifndef _LDM_REFINEMENTS_ENUMERATIONSETS_ENUMERATIONSETS
 #define _LDM_REFINEMENTS_ENUMERATIONSETS_ENUMERATIONSETS
@@ -33,7 +44,7 @@ module UMAA
     {
 
 
-        module AutomationEnumType
+        module AutomationEnumModule
         {
           enum AutomationEnumType
           {
@@ -45,19 +56,29 @@ module UMAA
 
         typedef boolean BooleanEnumType;
 
-        module BuiltInTestStatusEnumType
+        module BuiltInTestStatusEnumModule
         {
           enum BuiltInTestStatusEnumType
           {
-              BIT_SUSPENDED, // The built-in test (BIT) has been suspended.
               BIT_FAILED, // The built-in test (BIT) has failed.
               BIT_PASSED, // The built-in test (BIT) has passed.
-              RUNNING_BIT, // The built-in test (BIT) is current executing.
-              OFF_ABORT // The built-in test (BIT) is off or has been aborted.
+              BIT_SUSPENDED, // The built-in test (BIT) has been suspended.
+              OFF_ABORT, // The built-in test (BIT) is off or has been aborted.
+              RUNNING_BIT // The built-in test (BIT) is current executing.
           };
         };
 
-        module IRPolarityEnumType
+        module EmitterOperationalStateEnumModule
+        {
+          enum EmitterOperationalStateEnumType
+          {
+              ALL_EMITTERS_OFF, // All emitters are turned off or disabled.
+              EMISSIONS_RESTORED, // The state of emitters is restored.
+              NOT_ALL_EMMITTERS_OFF // Some emitters are turned off or disabled.
+          };
+        };
+
+        module IRPolarityEnumModule
         {
           enum IRPolarityEnumType
           {
@@ -66,7 +87,7 @@ module UMAA
           };
         };
 
-        module LineSegmentEnumType
+        module LineSegmentEnumModule
         {
           enum LineSegmentEnumType
           {
@@ -75,7 +96,7 @@ module UMAA
           };
         };
 
-        module NetworkProtocolEnumType
+        module NetworkProtocolEnumModule
         {
           enum NetworkProtocolEnumType
           {
@@ -86,7 +107,7 @@ module UMAA
           };
         };
 
-        module OnOffStatusEnumType
+        module OnOffStatusEnumModule
         {
           enum OnOffStatusEnumType
           {
@@ -95,7 +116,7 @@ module UMAA
           };
         };
 
-        module PlanActionEnumType
+        module PlanActionEnumModule
         {
           enum PlanActionEnumType
           {
@@ -109,48 +130,48 @@ module UMAA
           };
         };
 
-        module PowerStatusEnumType
+        module PowerStatusEnumModule
         {
           enum PowerStatusEnumType
           {
+              EMERGENCY_POWER, // Power for the device is requested/reported to use emergency power.
               POWER_OFF, // Power for the device is requested/reported to be off.
               POWER_ON, // Power for the device is requested/reported to be on.
-              EMERGENCY_POWER, // Power for the device is requested/reported to use emergency power.
               POWER_STANDBY // Power for the device is requested/reported to use standby power.
           };
         };
 
-        module PrecipitationEnumType
+        module PrecipitationEnumModule
         {
           enum PrecipitationEnumType
           {
-              THUNDERSTORMS, // A rain or snow shower in which there is lightning. Thunder is always caused by lightning. In general, the upward and downward winds, updrafts and downdrafts, in thunderstorms are more violent than those in ordinary showers.
+              DRIZZLE, // Precipitation that consists of numerous minute droplets of water less than 0.5 mm in diameter that reach the Earth's surface.
               FOG, // Fog is water droplets suspended in the air at or above the Earth's surface.
               HAZE, // Haze is an aggregation in the atmosphere of very fine, widely dispersed, solid or liquid particles, or both, giving the air an opalescent appearance that subdues colors.
-              SNOW, // Precipitation in the form of ice crystals formed directly from the freezing [deposition] of the water vapor in the air.
-              DRIZZLE, // Precipitation that consists of numerous minute droplets of water less than 0.5 mm in diameter that reach the Earth's surface.
               RAIN, // Precipitation that falls to earth in droplets of water more than 0.5 mm in diameter.
-              SHOWERS // Rain that falls intermittently over a small area. The rain from an individual shower can be heavy or light, but doesn't cover a large area or last more than an hour or so.
+              SHOWERS, // Rain that falls intermittently over a small area. The rain from an individual shower can be heavy or light, but doesn't cover a large area or last more than an hour or so.
+              SNOW, // Precipitation in the form of ice crystals formed directly from the freezing [deposition] of the water vapor in the air.
+              THUNDERSTORMS // A rain or snow shower in which there is lightning. Thunder is always caused by lightning. In general, the upward and downward winds, updrafts and downdrafts, in thunderstorms are more violent than those in ordinary showers.
           };
         };
 
-        module ResourceAllocationStatusEnumType
+        module ResourceAllocationStatusEnumModule
         {
           enum ResourceAllocationStatusEnumType
           {
-              FORCED_ALLOCATION, // The resource allocation is forced.
-              FORCED_ALLOCATION_W_LAUNCH_RECOVERY, // The resource allocation with launch and recovery is forced.
               ALLOCATED, // The resource is allocated.
               ALLOCATED_W_LAUNCH_RECOVERY, // The resource is allocated with launch and recovery.
               AVAILABLE, // The resource is available.
+              FAULT, // There was a fault in the resource allocation.
+              FORCED_ALLOCATION, // The resource allocation is forced.
+              FORCED_ALLOCATION_W_LAUNCH_RECOVERY, // The resource allocation with launch and recovery is forced.
               RELEASED, // The resource is released.
               TEMPORARILY_UNAVAILABLE, // The resource is temporarily unavailable.
-              UNAVAILABLE, // The resource is unavailable.
-              FAULT // There was a fault in the resource allocation.
+              UNAVAILABLE // The resource is unavailable.
           };
         };
 
-        module SpecificLOIEnumType
+        module SpecificLOIEnumModule
         {
           enum SpecificLOIEnumType
           {

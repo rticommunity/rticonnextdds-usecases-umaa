@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,6 +19,13 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
 #ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_RESOURCEALLOCATION_RESOURCEALLOCATIONPRIORITYREPORTTYPE
 #define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_RESOURCEALLOCATION_RESOURCEALLOCATIONPRIORITYREPORTTYPE
 
@@ -26,31 +37,20 @@ module UMAA
   {
     module ResourceAllocation
     {
-      const string ResourceAllocationPriorityReport_TOPIC = "UMAA::SO::ResourceAllocation::ResourceAllocationPriorityReport";
-      @topic(name="UMAA::SO::ResourceAllocation::ResourceAllocationPriorityReport")
+      const string ResourceAllocationPriorityReportTopic = "UMAA::SO::ResourceAllocation::ResourceAllocationPriorityReport";
       struct ResourceAllocationPriorityReportType
       {
-      // The unique identifier for the source.
+      // The priority ordering of resource consumers for each resource defined by ResourceAllocation.
+      sequence<UMAA::SO::ResourceAllocation::ResourceAllocationPriorityInfo,32> priorities;
 
-      @key UMAA::Common::Measurement::NumericGUID source;
-
-      // The time at which the data was derived.
-
+      // The time at which the data is valid.
       UMAA::Common::Measurement::DateTime timeStamp;
 
-      //UMAA::Common::Measurement::NumericGUID
-      UMAA::Common::Measurement::NumericGUID prioritiesSetID;
+      // The unique identifier for the source.
+      @key UMAA::Common::Measurement::NumericGUID source;
       };
 
-      const string ResourceAllocationPriorityReport_PrioritiesSet_TOPIC = "UMAA::SO::ResourceAllocation::ResourceAllocationPriorityReport_PrioritiesSet";
-      @topic(name="UMAA::SO::ResourceAllocation::ResourceAllocationPriorityReport_PrioritiesSet")
-      struct ResourceAllocationPriorityReportType_PrioritiesSet : ResourceAllocationPriorityInfo
-      {
-        // NOTE: Ties this element back to the same prioritiesSetID in a ResourceAllocationPriorityReportType the collection of all
-        //  elements in the topic with the same sourceId constitutes the "set"
-        @key UMAA::Common::Measurement::NumericGUID prioritiesSetID;
-        UMAA::Common::Measurement::DateTime prioritiesTimestamp;
-      };
+
     };
   };
 };

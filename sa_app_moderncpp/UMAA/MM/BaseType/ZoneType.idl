@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,51 +19,37 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
 #ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_ZONETYPE
 #define _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_ZONETYPE
 
-#include "UMAA/Common/MaritimeEnumeration/EnumerationSets.idl"
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
 #include "UMAA/Common/Measurement/Measurements.idl"
-#include "UMAA/Common/Measurement/Polygon_Volume.idl"
-#include "UMAA/MM/BaseType/PlanningZoneType.idl"
-#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/MM/BaseType/WaterspaceVolumeType.idl"
 module UMAA
 {
   module MM
   {
     module BaseType
     {
-      module ZoneType_Specializations
-      {
-          enum ZoneType_Selectors
-          {
-              PLANNINGZONETYPE_SELECT
-          };
-
-          union ZoneType_Union switch (ZoneType_Selectors)
-          {
-                case PLANNINGZONETYPE_SELECT: UMAA::MM::BaseType::PlanningZoneType PlanningZoneType_data;
-          };
-
-      };
       struct ZoneType
       {
       // Defines the zone.
-
-      UMAA::Common::Measurement::Polygon_Volume zone;
+      UMAA::MM::BaseType::WaterspaceVolumeType zone;
 
       // Defines the type of zone, i.e., keep in, keep out, etc.
-
-      UMAA::Common::MaritimeEnumeration::ZoneKindEnumType::ZoneKindEnumType zoneKind;
-
-      // Union to capture specializations of ZoneType
-
-      ZoneType_Specializations::ZoneType_Union ZoneType_subtypes;
+      UMAA::Common::MaritimeEnumeration::ZoneKindEnumModule::ZoneKindEnumType zoneKind;
 
       // Defines an identifier associated with each defined zone. This zoneID does not have to match the source zoneID from the WaterspacePlan.
-
       @key UMAA::Common::Measurement::NumericGUID zoneID;
       };
+
 
     };
   };

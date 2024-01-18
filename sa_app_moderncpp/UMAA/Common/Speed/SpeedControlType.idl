@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,8 +19,15 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
-#ifndef _LDM_MDE_SPEED_SPEEDCONTROLTYPE
-#define _LDM_MDE_SPEED_SPEEDCONTROLTYPE
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_SPEED_SPEEDCONTROLTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_SPEED_SPEEDCONTROLTYPE
 
 #include "UMAA/Common/Speed/EngineRPM.idl"
 #include "UMAA/Common/Speed/SpeedOverGround.idl"
@@ -29,36 +40,38 @@ module UMAA
   {
     module Speed
     {
-      module SpeedControlType_Specializations
-      {
-          enum SpeedControlType_Selectors
-          {
-              SPEEDOVERGROUND_SELECT,
-              SPEEDTHROUGHWATER_SELECT,
-              VEHICLESPEEDMODE_SELECT,
-              ENGINERPM_SELECT,
-              SPEEDTHROUGHAIR_SELECT
-          };
+        enum SpeedControlTypeEnum
+        {
+            SPEEDOVERGROUND_D,
+            SPEEDTHROUGHWATER_D,
+            VEHICLESPEEDMODE_D,
+            ENGINERPM_D,
+            SPEEDTHROUGHAIR_D
+        };
 
-          union SpeedControlType_Union switch (SpeedControlType_Selectors)
-          {
-                case SPEEDOVERGROUND_SELECT: UMAA::Common::Speed::SpeedOverGround SpeedOverGround_data;
-                case SPEEDTHROUGHWATER_SELECT: UMAA::Common::Speed::SpeedThroughWater SpeedThroughWater_data;
-                case VEHICLESPEEDMODE_SELECT: UMAA::Common::Speed::VehicleSpeedMode VehicleSpeedMode_data;
-                case ENGINERPM_SELECT: UMAA::Common::Speed::EngineRPM EngineRPM_data;
-                case SPEEDTHROUGHAIR_SELECT: UMAA::Common::Speed::SpeedThroughAir SpeedThroughAir_data;
-          };
+        union SpeedControlTypeUnion switch (SpeedControlTypeEnum)
+        {
+              case SPEEDOVERGROUND_D:
+                UMAA::Common::Speed::SpeedOverGround SpeedOverGroundVariant;
+              case SPEEDTHROUGHWATER_D:
+                UMAA::Common::Speed::SpeedThroughWater SpeedThroughWaterVariant;
+              case VEHICLESPEEDMODE_D:
+                UMAA::Common::Speed::VehicleSpeedMode VehicleSpeedModeVariant;
+              case ENGINERPM_D:
+                UMAA::Common::Speed::EngineRPM EngineRPMVariant;
+              case SPEEDTHROUGHAIR_D:
+                UMAA::Common::Speed::SpeedThroughAir SpeedThroughAirVariant;
+        };
 
-      };
       struct SpeedControlType
       {
       // Union to capture specializations of SpeedControlType
-
-      SpeedControlType_Specializations::SpeedControlType_Union SpeedControlType_subtypes;
+      SpeedControlTypeUnion SpeedControlTypeSubtypes;
       };
+
 
     };
   };
 };
 
-#endif // _LDM_MDE_SPEED_SPEEDCONTROLTYPE
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_SPEED_SPEEDCONTROLTYPE

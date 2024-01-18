@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,10 +19,17 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
 #ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_CONTACTMANEUVERINFLUENCESTATUS_CONTACTMANEUVERINFLUENCEREPORTTYPE
 #define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_CONTACTMANEUVERINFLUENCESTATUS_CONTACTMANEUVERINFLUENCEREPORTTYPE
 
-#include "UMAA/Common/MaritimeEnumeration/EnumerationSets.idl"
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
 #include "UMAA/Common/Measurement/Measurements.idl"
 module UMAA
 {
@@ -26,26 +37,22 @@ module UMAA
   {
     module ContactManeuverInfluenceStatus
     {
-      const string ContactManeuverInfluenceReport_TOPIC = "UMAA::MO::ContactManeuverInfluenceStatus::ContactManeuverInfluenceReport";
-      @topic(name="UMAA::MO::ContactManeuverInfluenceStatus::ContactManeuverInfluenceReport")
+      const string ContactManeuverInfluenceReportTopic = "UMAA::MO::ContactManeuverInfluenceStatus::ContactManeuverInfluenceReport";
       struct ContactManeuverInfluenceReportType
       {
-      // An identifier of the contact
-
+      // An identifier of the contact.
       UMAA::Common::Measurement::NumericGUID contactID;
 
-      // Specifies the maneuvers the unmanned platform is taking in response to a contact
+      // Specifies the maneuvers the vehicle is taking in response to a contact.
+      UMAA::Common::MaritimeEnumeration::ContactManeuverInfluenceEnumModule::ContactManeuverInfluenceEnumType maneuver;
 
-      UMAA::Common::MaritimeEnumeration::ContactManeuverInfluenceEnumType::ContactManeuverInfluenceEnumType maneuver;
+      // The time at which the data is valid.
+      UMAA::Common::Measurement::DateTime timeStamp;
 
       // The unique identifier for the source.
-
       @key UMAA::Common::Measurement::NumericGUID source;
-
-      // The time at which the data was derived.
-
-      UMAA::Common::Measurement::DateTime timeStamp;
       };
+
 
     };
   };

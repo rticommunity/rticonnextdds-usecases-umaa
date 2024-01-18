@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,10 +19,16 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
 #ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_BATTERYSTATUS_BATTERYCELLDATATYPE
 #define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_BATTERYSTATUS_BATTERYCELLDATATYPE
 
-#include "UMAA/Common/Measurement/Measurements.idl"
 #include "UMAA/Common/Measurement/Measurements.idl"
 module UMAA
 {
@@ -29,17 +39,15 @@ module UMAA
       struct BatteryCellDataType
       {
       // The runtime current of the battery cell.
-
       UMAA::Common::Measurement::PowerBusCurrent current;
 
       // The temperature of the battery cell.
-
       UMAA::Common::Measurement::Temperature temperature;
 
       // The voltage of the battery cell.
-
       UMAA::Common::Measurement::PowerBusVoltage voltage;
       };
+
 
     };
   };

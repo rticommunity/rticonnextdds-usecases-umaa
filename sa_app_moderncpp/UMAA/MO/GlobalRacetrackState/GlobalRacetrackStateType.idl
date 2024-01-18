@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,8 +19,15 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
-#ifndef _LDM_MDE_GLOBALRACETRACKSTATE_GLOBALRACETRACKSTATETYPE
-#define _LDM_MDE_GLOBALRACETRACKSTATE_GLOBALRACETRACKSTATETYPE
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_GLOBALRACETRACKSTATE_GLOBALRACETRACKSTATETYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_GLOBALRACETRACKSTATE_GLOBALRACETRACKSTATETYPE
 
 #include "UMAA/MO/GlobalRacetrackState/GlobalRacetrackPatternType.idl"
 #include "UMAA/MO/GlobalRacetrackState/GlobalRacetrackTransitType.idl"
@@ -26,30 +37,29 @@ module UMAA
   {
     module GlobalRacetrackState
     {
-      module GlobalRacetrackStateType_Specializations
-      {
-          enum GlobalRacetrackStateType_Selectors
-          {
-              GLOBALRACETRACKPATTERNTYPE_SELECT,
-              GLOBALRACETRACKTRANSITTYPE_SELECT
-          };
+        enum GlobalRacetrackStateTypeEnum
+        {
+            GLOBALRACETRACKPATTERN_D,
+            GLOBALRACETRACKTRANSIT_D
+        };
 
-          union GlobalRacetrackStateType_Union switch (GlobalRacetrackStateType_Selectors)
-          {
-                case GLOBALRACETRACKPATTERNTYPE_SELECT: UMAA::MO::GlobalRacetrackState::GlobalRacetrackPatternType GlobalRacetrackPatternType_data;
-                case GLOBALRACETRACKTRANSITTYPE_SELECT: UMAA::MO::GlobalRacetrackState::GlobalRacetrackTransitType GlobalRacetrackTransitType_data;
-          };
+        union GlobalRacetrackStateTypeUnion switch (GlobalRacetrackStateTypeEnum)
+        {
+              case GLOBALRACETRACKPATTERN_D:
+                UMAA::MO::GlobalRacetrackState::GlobalRacetrackPatternType GlobalRacetrackPatternVariant;
+              case GLOBALRACETRACKTRANSIT_D:
+                UMAA::MO::GlobalRacetrackState::GlobalRacetrackTransitType GlobalRacetrackTransitVariant;
+        };
 
-      };
       struct GlobalRacetrackStateType
       {
       // Union to capture specializations of GlobalRacetrackStateType
-
-      GlobalRacetrackStateType_Specializations::GlobalRacetrackStateType_Union GlobalRacetrackStateType_subtypes;
+      GlobalRacetrackStateTypeUnion GlobalRacetrackStateTypeSubtypes;
       };
+
 
     };
   };
 };
 
-#endif // _LDM_MDE_GLOBALRACETRACKSTATE_GLOBALRACETRACKSTATETYPE
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_GLOBALRACETRACKSTATE_GLOBALRACETRACKSTATETYPE

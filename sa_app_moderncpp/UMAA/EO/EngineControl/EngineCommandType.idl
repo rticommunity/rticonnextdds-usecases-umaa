@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,11 +19,18 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
 #ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_ENGINECONTROL_ENGINECOMMANDTYPE
 #define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_ENGINECONTROL_ENGINECOMMANDTYPE
 
 #include "UMAA/Common/Enumeration/EnumerationSets.idl"
-#include "UMAA/Common/MaritimeEnumeration/EnumerationSets.idl"
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
 #include "UMAA/Common/Measurement/Measurements.idl"
 #include "UMAA/Common/Propulsion/PropulsionType.idl"
 module UMAA
@@ -28,38 +39,31 @@ module UMAA
   {
     module EngineControl
     {
-      const string EngineCommand_TOPIC = "UMAA::EO::EngineControl::EngineCommand";
-      @topic(name="UMAA::EO::EngineControl::EngineCommand")
+      const string EngineCommandTopic = "UMAA::EO::EngineControl::EngineCommand";
       struct EngineCommandType
       {
-      // The desired glow plug state
+      // The desired glow plug state.
+      @optional UMAA::Common::Enumeration::OnOffStatusEnumModule::OnOffStatusEnumType plugState;
 
-      @optional UMAA::Common::Enumeration::OnOffStatusEnumType::OnOffStatusEnumType plugState;
+      // The desired propulsive value of the engine, when the commanded state is ON.
+      @optional UMAA::Common::Propulsion::PropulsionType propulsion;
 
-      // The desired propulsive value of the engine.
+      // The desired power state of the subsystem.
+      UMAA::Common::MaritimeEnumeration::IgnitionControlEnumModule::IgnitionControlEnumType state;
 
-      UMAA::Common::Propulsion::PropulsionType propulsion;
-
-      // The desired power state of the subsystem
-
-      UMAA::Common::MaritimeEnumeration::IgnitionStateEnumType::IgnitionStateEnumType state;
+      // The time at which the data is valid.
+      UMAA::Common::Measurement::DateTime timeStamp;
 
       // The unique identifier for the source.
-
       @key UMAA::Common::Measurement::NumericGUID source;
 
-      // The unique identifier for the destination.
-
-      @key UMAA::Common::Measurement::NumericGUID destination;
-
       // The unique identifier for the session.
-
       @key UMAA::Common::Measurement::NumericGUID sessionID;
 
-      // The time at which the data was derived.
-
-      UMAA::Common::Measurement::DateTime timeStamp;
+      // The unique identifier for the destination.
+      @key UMAA::Common::Measurement::NumericGUID destination;
       };
+
 
     };
   };

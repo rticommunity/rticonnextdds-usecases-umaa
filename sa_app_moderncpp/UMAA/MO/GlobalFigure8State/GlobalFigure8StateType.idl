@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,8 +19,15 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
-#ifndef _LDM_MDE_GLOBALFIGURE8STATE_GLOBALFIGURE8STATETYPE
-#define _LDM_MDE_GLOBALFIGURE8STATE_GLOBALFIGURE8STATETYPE
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_GLOBALFIGURE8STATE_GLOBALFIGURE8STATETYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_GLOBALFIGURE8STATE_GLOBALFIGURE8STATETYPE
 
 #include "UMAA/MO/GlobalFigure8State/GlobalFigure8PatternType.idl"
 #include "UMAA/MO/GlobalFigure8State/GlobalFigure8TransitType.idl"
@@ -26,30 +37,29 @@ module UMAA
   {
     module GlobalFigure8State
     {
-      module GlobalFigure8StateType_Specializations
-      {
-          enum GlobalFigure8StateType_Selectors
-          {
-              GLOBALFIGURE8PATTERNTYPE_SELECT,
-              GLOBALFIGURE8TRANSITTYPE_SELECT
-          };
+        enum GlobalFigure8StateTypeEnum
+        {
+            GLOBALFIGURE8PATTERN_D,
+            GLOBALFIGURE8TRANSIT_D
+        };
 
-          union GlobalFigure8StateType_Union switch (GlobalFigure8StateType_Selectors)
-          {
-                case GLOBALFIGURE8PATTERNTYPE_SELECT: UMAA::MO::GlobalFigure8State::GlobalFigure8PatternType GlobalFigure8PatternType_data;
-                case GLOBALFIGURE8TRANSITTYPE_SELECT: UMAA::MO::GlobalFigure8State::GlobalFigure8TransitType GlobalFigure8TransitType_data;
-          };
+        union GlobalFigure8StateTypeUnion switch (GlobalFigure8StateTypeEnum)
+        {
+              case GLOBALFIGURE8PATTERN_D:
+                UMAA::MO::GlobalFigure8State::GlobalFigure8PatternType GlobalFigure8PatternVariant;
+              case GLOBALFIGURE8TRANSIT_D:
+                UMAA::MO::GlobalFigure8State::GlobalFigure8TransitType GlobalFigure8TransitVariant;
+        };
 
-      };
       struct GlobalFigure8StateType
       {
       // Union to capture specializations of GlobalFigure8StateType
-
-      GlobalFigure8StateType_Specializations::GlobalFigure8StateType_Union GlobalFigure8StateType_subtypes;
+      GlobalFigure8StateTypeUnion GlobalFigure8StateTypeSubtypes;
       };
+
 
     };
   };
 };
 
-#endif // _LDM_MDE_GLOBALFIGURE8STATE_GLOBALFIGURE8STATETYPE
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_GLOBALFIGURE8STATE_GLOBALFIGURE8STATETYPE

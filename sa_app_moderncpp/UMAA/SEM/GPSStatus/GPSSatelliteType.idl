@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,14 +19,20 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
 #ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_SENSOR_MANAGEMENT_GPSSTATUS_GPSSATELLITETYPE
 #define _LDM_MDE_PRIMARY_MISSION_CONTROL_SENSOR_MANAGEMENT_GPSSTATUS_GPSSATELLITETYPE
 
 #include "UMAA/Common/Enumeration/EnumerationSets.idl"
-#include "UMAA/Common/MaritimeEnumeration/EnumerationSets.idl"
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
 #include "UMAA/Common/Measurement/Measurements.idl"
 #include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
-#include "UMAA/Common/Measurement/Measurements.idl"
 module UMAA
 {
   module SEM
@@ -32,45 +42,36 @@ module UMAA
       struct GPSSatelliteType
       {
       // The carrier-to-noise density at the antenna of the satellite.
-
-      @optional UMAA::Common::PrimitiveConstrained::CarrierToNoiseDensityRatio antennaCarrierNoiseDensity;
+      UMAA::Common::PrimitiveConstrained::CarrierToNoiseDensityRatio antennaCarrierNoiseDensity;
 
       // The azimuth of the satellite.
-
-      @optional UMAA::Common::Measurement::Angle azimuth;
+      UMAA::Common::Measurement::Angle azimuth;
 
       // The baseband carrier-to-noise density of the satellite.
-
-      @optional UMAA::Common::PrimitiveConstrained::CarrierToNoiseDensityRatio basebandCarrierNoiseDensity;
+      UMAA::Common::PrimitiveConstrained::CarrierToNoiseDensityRatio basebandCarrierNoiseDensity;
 
       // The carrier frequency of the signal tracked.
-
-      @optional UMAA::Common::Measurement::RadioFrequency_Hertz carrierFrequency;
+      UMAA::Common::Measurement::RadioFrequencyHertz carrierFrequency;
 
       // The constellation type of the satellite.
-
-      @optional UMAA::Common::MaritimeEnumeration::GPSConstellationEnumType::GPSConstellationEnumType constellationType;
+      UMAA::Common::MaritimeEnumeration::GPSConstellationEnumModule::GPSConstellationEnumType constellationType;
 
       // Whether the satellite has almanac data.
-
-      @optional boolean containsAlmanacData;
+      boolean containsAlmanacData;
 
       // The elevation of the satellite.
+      UMAA::Common::Measurement::Angle elevation;
 
-      @optional UMAA::Common::Measurement::Angle elevation;
-
-      // Whether the satellite has ephemeris data
-
-      @optional boolean ephemerisData;
+      // Whether the satellite has ephemeris data.
+      boolean ephemerisData;
 
       // The identification number for the satellite.
-
-      @optional UMAA::Common::Measurement::NumericGUID satelliteId;
+      UMAA::Common::PrimitiveConstrained::NaturalNumberCount satelliteID;
 
       // Whether the satellite was used in the calculation of the most recent position fix.
-
-      @optional boolean usedInFix;
+      boolean usedInFix;
       };
+
 
     };
   };

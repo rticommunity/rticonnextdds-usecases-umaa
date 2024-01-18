@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,13 +19,22 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
 #ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_GLOBALVECTORCONTROL_GLOBALVECTORCOMMANDTYPE
 #define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_GLOBALVECTORCONTROL_GLOBALVECTORCOMMANDTYPE
 
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
 #include "UMAA/Common/Measurement/ElevationType.idl"
 #include "UMAA/Common/Measurement/Measurements.idl"
-#include "UMAA/Common/Measurement/Orientation3D_Tolerance.idl"
-#include "UMAA/Common/Orientation/OrientationType.idl"
+#include "UMAA/Common/Orientation/DirectionRequirementType.idl"
+#include "UMAA/Common/Orientation/PitchYNEDRequirement.idl"
+#include "UMAA/Common/Requirements/DateTimeRequirement.idl"
 #include "UMAA/Common/Speed/SpeedControlType.idl"
 module UMAA
 {
@@ -29,54 +42,40 @@ module UMAA
   {
     module GlobalVectorControl
     {
-      const string GlobalVectorCommand_TOPIC = "UMAA::MO::GlobalVectorControl::GlobalVectorCommand";
-      @topic(name="UMAA::MO::GlobalVectorControl::GlobalVectorCommand")
+      const string GlobalVectorCommandTopic = "UMAA::MO::GlobalVectorControl::GlobalVectorCommand";
       struct GlobalVectorCommandType
       {
-      // The desired reference frame used for vehicle orientation commands.
+      // The desired angle of the vehicle when traversing to the requested elevation for UUVs.
+      @optional UMAA::Common::Orientation::PitchYNEDRequirement depthChangePitch;
 
-      UMAA::Common::Orientation::OrientationType attitude;
+      // The direction the vehicle is traveling regardless of its attitude.
+      UMAA::Common::Orientation::DirectionRequirementType direction;
 
-      // The allowable attitude tolerance.
+      // Specifies the vehicle direction mode.
+      UMAA::Common::MaritimeEnumeration::DirectionModeEnumModule::DirectionModeEnumType directionMode;
 
-      UMAA::Common::Measurement::Orientation3D_Tolerance attitudeTolerance;
-
-      // Specifies the elevation of the vector.
-
+      // Specifies the elevation of the vector. This value is 0 for USVs.
       UMAA::Common::Measurement::ElevationType elevation;
 
-      // The amount of elevation offset allowed relative to the commanded elevation.
+      // Specifies the end of the command execution time period for the vector; if not specified runs indefinitely until command is changed externally or another terminating condition occurs.
+      @optional UMAA::Common::Requirements::DateTimeRequirement endTime;
 
-      UMAA::Common::Measurement::Distance elevationTolerance;
-
-      // Specifies the end of the valid time period for the loiter; if not specified runs indefinitely until command is changed externally.
-
-      @optional UMAA::Common::Measurement::DateTime endTime;
-
-      // The desired speed of the unmanned platform.
-
+      // The desired speed of the vehicle.
       UMAA::Common::Speed::SpeedControlType speed;
 
-      // The amount of speed error allowed relative to the commanded speed.
-
-      UMAA::Common::Measurement::GroundSpeed speedTolerance;
+      // The time at which the data is valid.
+      UMAA::Common::Measurement::DateTime timeStamp;
 
       // The unique identifier for the source.
-
       @key UMAA::Common::Measurement::NumericGUID source;
 
-      // The unique identifier for the destination.
-
-      @key UMAA::Common::Measurement::NumericGUID destination;
-
       // The unique identifier for the session.
-
       @key UMAA::Common::Measurement::NumericGUID sessionID;
 
-      // The time at which the data was derived.
-
-      UMAA::Common::Measurement::DateTime timeStamp;
+      // The unique identifier for the destination.
+      @key UMAA::Common::Measurement::NumericGUID destination;
       };
+
 
     };
   };

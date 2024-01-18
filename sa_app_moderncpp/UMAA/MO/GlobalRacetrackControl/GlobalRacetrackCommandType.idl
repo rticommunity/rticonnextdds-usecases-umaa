@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,101 +19,78 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
 #ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_GLOBALRACETRACKCONTROL_GLOBALRACETRACKCOMMANDTYPE
 #define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_GLOBALRACETRACKCONTROL_GLOBALRACETRACKCOMMANDTYPE
 
-#include "UMAA/Common/MaritimeEnumeration/EnumerationSets.idl"
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
 #include "UMAA/Common/Measurement/ElevationType.idl"
+#include "UMAA/Common/Measurement/GeoPosition2D.idl"
 #include "UMAA/Common/Measurement/Measurements.idl"
-#include "UMAA/Common/Measurement/Position2D.idl"
-#include "UMAA/Common/Orientation/HeadingType.idl"
-#include "UMAA/Common/VariableSpeedControl/VariableSpeedControlType.idl"
+#include "UMAA/Common/Orientation/DirectionRequirementType.idl"
+#include "UMAA/Common/Requirements/DateTimeRequirement.idl"
+#include "UMAA/Common/Speed/SpeedControlType.idl"
 module UMAA
 {
   module MO
   {
     module GlobalRacetrackControl
     {
-      const string GlobalRacetrackCommand_TOPIC = "UMAA::MO::GlobalRacetrackControl::GlobalRacetrackCommand";
-      @topic(name="UMAA::MO::GlobalRacetrackControl::GlobalRacetrackCommand")
+      const string GlobalRacetrackCommandTopic = "UMAA::MO::GlobalRacetrackControl::GlobalRacetrackCommand";
       struct GlobalRacetrackCommandType
       {
       // The amount of error in position allowed from the pattern being executed.
-
       UMAA::Common::Measurement::Distance crossTrackTolerance;
 
-      // The optional elevation used for the unmanned maritime platform.
-
+      // The elevation used for the vehicle. This value is 0 for USVs.
       UMAA::Common::Measurement::ElevationType elevation;
 
-      // The amount of elevation offset allowed relative to the commanded loitering elevation.
+      // Specifies the end of the command execution time period for the pattern; if not specified runs indefinitely until command is changed externally.
+      @optional UMAA::Common::Requirements::DateTimeRequirement endTime;
 
-      UMAA::Common::Measurement::Distance elevationTolerance;
-
-      // Specifies the end of the valid time period for the loiter; if not specified runs indefinitely until command is changed externally.
-
-      @optional UMAA::Common::Measurement::DateTime endTime;
-
-      // Describes the length between the semicircles at either end of the racetrack the unmanned platform should stay in.
-
+      // Describes the length between the semicircles at either end of the racetrack the vehicle should stay in.
       UMAA::Common::Measurement::Distance length;
 
-      // The orientation of the racetrack, measured perpendicular to the length axis. If not specified, aligns with True North.
+      // Defines the orientation of the racetrack, measured perpendicular to the length axis.
+      UMAA::Common::Orientation::DirectionRequirementType orientation;
 
-      UMAA::Common::Orientation::HeadingType orientation;
+      // The desired racetrack position of the vehicle in the global coordinate system.
+      UMAA::Common::Measurement::GeoPosition2D position;
 
-      // The desired loiter position (latitude, longitude) of the unmanned platform in the global coordinate system. When not specified, means at current location.
-
-      @optional UMAA::Common::Measurement::Position2D position;
-
-      // Describes the radius of the semicircles at either end of the racetrack the unmanned platform should stay in.
-
+      // Describes the radius of the semicircles at either end of the racetrack the vehicle should stay in.
       UMAA::Common::Measurement::Distance radius;
 
-      // The desired speed to loiter of the unmanned platform.
+      // The desired speed of the vehicle.
+      UMAA::Common::Speed::SpeedControlType speed;
 
-      UMAA::Common::VariableSpeedControl::VariableSpeedControlType speed;
-
-      // The amount of speed error allowed relative to the commanded pattern execution speed.
-
-      UMAA::Common::Measurement::GroundSpeed speedTolerance;
-
-      // The elevation used while driving to the loiter track (USVs must specify 0 as it is a required field).
-
+      // The elevation used while driving to the racetrack. Surface-based vehicles must specify this value as 0.
       UMAA::Common::Measurement::ElevationType transitElevation;
 
-      // The amount of elevation error allowed relative to the commanded transit elevation.
+      // The speed at which one drives to the racetrack.
+      UMAA::Common::Speed::SpeedControlType transitSpeed;
 
-      UMAA::Common::Measurement::Distance transitElevationTolerance;
+      // The desired turn direction for the racetrack pattern of the vehicle.
+      UMAA::Common::MaritimeEnumeration::WaterTurnDirectionEnumModule::WaterTurnDirectionEnumType turnDirection;
 
-      // The speed at which one drives to the loiter track.
-
-      UMAA::Common::VariableSpeedControl::VariableSpeedControlType transitSpeed;
-
-      // The amount of speed error allowed relative to the transit speed.
-
-      UMAA::Common::Measurement::GroundSpeed transitSpeedTolerance;
-
-      // The desired turn direction for the loiter of the unmanned platform.
-
-      UMAA::Common::MaritimeEnumeration::WaterTurnDirectionEnumType::WaterTurnDirectionEnumType turnDirection;
+      // The time at which the data is valid.
+      UMAA::Common::Measurement::DateTime timeStamp;
 
       // The unique identifier for the source.
-
       @key UMAA::Common::Measurement::NumericGUID source;
 
-      // The unique identifier for the destination.
-
-      @key UMAA::Common::Measurement::NumericGUID destination;
-
       // The unique identifier for the session.
-
       @key UMAA::Common::Measurement::NumericGUID sessionID;
 
-      // The time at which the data was derived.
-
-      UMAA::Common::Measurement::DateTime timeStamp;
+      // The unique identifier for the destination.
+      @key UMAA::Common::Measurement::NumericGUID destination;
       };
+
 
     };
   };

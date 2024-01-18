@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,8 +19,15 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
-#ifndef _LDM_MDE_ELEVATION_BALLASTMASSTYPE
-#define _LDM_MDE_ELEVATION_BALLASTMASSTYPE
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ELEVATION_BALLASTMASSTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ELEVATION_BALLASTMASSTYPE
 
 #include "UMAA/Common/Measurement/Measurements.idl"
 module UMAA
@@ -27,13 +38,13 @@ module UMAA
     {
       struct BallastMassType
       {
-      // specifies the desired filled or empty level the ballast tank measured by mass
-
+      // Specifies the desired filled or empty level the ballast tank measured by mass.
       UMAA::Common::Measurement::Mass mass;
       };
+
 
     };
   };
 };
 
-#endif // _LDM_MDE_ELEVATION_BALLASTMASSTYPE
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ELEVATION_BALLASTMASSTYPE

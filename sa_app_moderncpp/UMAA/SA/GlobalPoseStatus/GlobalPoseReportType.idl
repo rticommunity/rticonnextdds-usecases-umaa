@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,75 +19,72 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
 #ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESTATUS_GLOBALPOSESTATUS_GLOBALPOSEREPORTTYPE
 #define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESTATUS_GLOBALPOSESTATUS_GLOBALPOSEREPORTTYPE
 
-#include "UMAA/Common/MaritimeEnumeration/EnumerationSets.idl"
-#include "UMAA/Common/Measurement/Altitude_AGL.idl"
-#include "UMAA/Common/Measurement/Altitude_MSL.idl"
-#include "UMAA/Common/Measurement/CovarianceOrientationType.idl"
-#include "UMAA/Common/Measurement/CovariancePositionPositionType.idl"
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
+#include "UMAA/Common/Measurement/CovariancePositionNEDType.idl"
+#include "UMAA/Common/Measurement/CovarOrientationType.idl"
+#include "UMAA/Common/Measurement/GeoPosition2D.idl"
 #include "UMAA/Common/Measurement/Measurements.idl"
-#include "UMAA/Common/Measurement/Orientation3D.idl"
-#include "UMAA/Common/Measurement/Position2D.idl"
+#include "UMAA/Common/Orientation/Orientation3DNEDType.idl"
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
 module UMAA
 {
   module SA
   {
     module GlobalPoseStatus
     {
-      const string GlobalPoseReport_TOPIC = "UMAA::SA::GlobalPoseStatus::GlobalPoseReport";
-      @topic(name="UMAA::SA::GlobalPoseStatus::GlobalPoseReport")
+      const string GlobalPoseReportTopic = "UMAA::SA::GlobalPoseStatus::GlobalPoseReport";
       struct GlobalPoseReportType
       {
-      // The current altitude mean-sea-level of the unmanned platform.
+      // The current orthometric height above the Geoid (Mean Sea Level) of the vehicle.
+      @optional UMAA::Common::Measurement::MSLAltitude altitude;
 
-      @optional UMAA::Common::Measurement::Altitude_MSL altitude;
+      // The current height above ground level of the vehicle.
+      @optional UMAA::Common::Measurement::DistanceAGL altitudeAGL;
 
-      // The current altitude above-ground-level of the unmanned platform.
+      // The current height above the sea floor of the vehicle.
+      @optional UMAA::Common::Measurement::DistanceASF altitudeASF;
 
-      @optional UMAA::Common::Measurement::Altitude_AGL altitudeAGL;
+      // The current geodetic height above the ellipsoid of the vehicle.
+      @optional UMAA::Common::PrimitiveConstrained::GeodeticAltitude altitudeGeodetic;
 
-      // The current altitude above-sea-floor of the unmanned platform.
+      // The current orientation (roll, pitch, yaw) of the vehicle.
+      UMAA::Common::Orientation::Orientation3DNEDType attitude;
 
-      @optional UMAA::Common::Measurement::Distance_ASF altitudeASF;
+      // The current error covariance value of the attitude data.
+      @optional UMAA::Common::Measurement::CovarOrientationType attitudeCovariance;
 
-      // The current orientation (roll, pitch, yaw) of the unmanned platform.
+      // The current course angle used for the vehicle.
+      UMAA::Common::Measurement::CourseTrueNorth course;
 
-      UMAA::Common::Measurement::Orientation3D attitude;
+      // The current depth of the maritime vehicle.
+      @optional UMAA::Common::Measurement::DistanceBSL depth;
 
-      // The current covariance value of the orientation data.
+      // The desired navigation solution (estimated or measured).
+      UMAA::Common::MaritimeEnumeration::NavigationSolutionEnumModule::NavigationSolutionEnumType navigationSolution;
 
-      UMAA::Common::Measurement::CovarianceOrientationType attitudeCovariance;
+      // The current position of the vehicle.
+      UMAA::Common::Measurement::GeoPosition2D position;
 
-      // The current optional course angle used for the unmanned platform.
+      // The current error covariance value of the position data.
+      @optional UMAA::Common::Measurement::CovariancePositionNEDType positionCovariance;
 
-      UMAA::Common::Measurement::Course_TrueNorth course;
-
-      // The current depth of the maritime unmanned platform.
-
-      @optional UMAA::Common::Measurement::Distance_BSL depth;
-
-      // The desired navigation solution (estimated or measured)
-
-      UMAA::Common::MaritimeEnumeration::NavigationSolutionEnumType::NavigationSolutionEnumType navigationSolution;
-
-      // The current position (latitude, longitude) of the unmanned platform
-
-      UMAA::Common::Measurement::Position2D position;
-
-      // The current covariance value of the validity of the position data.
-
-      UMAA::Common::Measurement::CovariancePositionPositionType positionCovariance;
+      // The time at which the data is valid.
+      UMAA::Common::Measurement::DateTime timeStamp;
 
       // The unique identifier for the source.
-
       @key UMAA::Common::Measurement::NumericGUID source;
-
-      // The time at which the data was derived.
-
-      UMAA::Common::Measurement::DateTime timeStamp;
       };
+
 
     };
   };

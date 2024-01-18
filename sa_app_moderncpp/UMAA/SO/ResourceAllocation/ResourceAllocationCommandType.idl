@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,6 +19,13 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
 #ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_RESOURCEALLOCATION_RESOURCEALLOCATIONCOMMANDTYPE
 #define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_RESOURCEALLOCATION_RESOURCEALLOCATIONCOMMANDTYPE
 
@@ -25,34 +36,28 @@ module UMAA
   {
     module ResourceAllocation
     {
-      const string ResourceAllocationCommand_TOPIC = "UMAA::SO::ResourceAllocation::ResourceAllocationCommand";
-      @topic(name="UMAA::SO::ResourceAllocation::ResourceAllocationCommand")
+      const string ResourceAllocationCommandTopic = "UMAA::SO::ResourceAllocation::ResourceAllocationCommand";
       struct ResourceAllocationCommandType
       {
       // Specifies the end of the valid time period for the control session. Once the control session ends, the resource will become available for other requesters to control. If this field is empty, then the duration is assumed to be infinite.
+      @optional UMAA::Common::Measurement::DurationSeconds duration;
 
-      @optional UMAA::Common::Measurement::Duration_Seconds duration;
+      // The identifier of the resource to control.
+      UMAA::Common::Measurement::NumericGUID resourceID;
 
-      // The unique identifier for the source.
-
-      @key UMAA::Common::Measurement::NumericGUID source;
-
-      // The unique identifier for the destination.
-
-      @key UMAA::Common::Measurement::NumericGUID destination;
-
-      // The unique identifier for the session.
-
-      @key UMAA::Common::Measurement::NumericGUID sessionID;
-
-      // The time at which the data was derived.
-
+      // The time at which the data is valid.
       UMAA::Common::Measurement::DateTime timeStamp;
 
-      // The identifier of the resource to attempt control of
+      // The unique identifier for the source.
+      @key UMAA::Common::Measurement::NumericGUID source;
 
-      @key UMAA::Common::Measurement::NumericGUID resourceId;
+      // The unique identifier for the session.
+      @key UMAA::Common::Measurement::NumericGUID sessionID;
+
+      // The unique identifier for the destination.
+      @key UMAA::Common::Measurement::NumericGUID destination;
       };
+
 
     };
   };

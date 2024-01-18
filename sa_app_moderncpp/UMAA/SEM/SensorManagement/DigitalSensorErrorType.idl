@@ -1,8 +1,12 @@
 /**
  *
- * DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
  *
- */  
+ */
 
 /**
  *
@@ -15,10 +19,17 @@
 // WARNING: THIS CODE IS AUTO-GENERATED
 //   DO NOT EDIT
 
+/**
+  *
+  * Version: 5.2.1
+  * MDE Version: 5.0.1
+  *
+  */
+
 #ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_SENSOR_MANAGEMENT_BASETYPE_DIGITALSENSORERRORTYPE
 #define _LDM_MDE_PRIMARY_MISSION_CONTROL_SENSOR_MANAGEMENT_BASETYPE_DIGITALSENSORERRORTYPE
 
-#include "UMAA/Common/MaritimeEnumeration/EnumerationSets.idl"
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
 #include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
 module UMAA
 {
@@ -29,13 +40,12 @@ module UMAA
       struct DigitalSensorErrorType
       {
       // Error code reports when the specified digital sensor configuration is set to be invalid.
+      UMAA::Common::MaritimeEnumeration::DigitalSensorErrorCodeEnumModule::DigitalSensorErrorCodeEnumType errorCode;
 
-      UMAA::Common::MaritimeEnumeration::DigitalSensorErrorCodeEnumType::DigitalSensorErrorCodeEnumType errorCode;
-
-      // A description of the invalid digital sensor configuration setting
-
+      // A description of the invalid digital sensor configuration setting.
       UMAA::Common::PrimitiveConstrained::StringShortDescription errorMessage;
       };
+
 
     };
   };
