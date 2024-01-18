@@ -19,7 +19,7 @@
 
 
 // Include header for Compiled Type
-#include "UMAA/SA/CTDStatus/CTDReportType.hpp"  
+#include "UMAA/SA/VelocityStatus/VelocityReportType.hpp"  
 
 #include "application.hpp"  // Argument parsing
 #include "umaa_sa_consts.hpp"
@@ -27,13 +27,13 @@
 using namespace application;
 using namespace dds::core::xtypes;
 
-unsigned int process_ctd_data(
-        dds::sub::DataReader<UMAA::SA::CTDStatus::CTDReportType> &reader)
+unsigned int process_velocity_data(
+        dds::sub::DataReader<UMAA::SA::VelocityStatus::VelocityReportType> &reader)
 {
     // Take all samples.  Samples are loaned to application, loan is
     // returned when LoanedSamples destructor called.
     unsigned int samples_read = 0;
-    dds::sub::LoanedSamples<UMAA::SA::CTDStatus::CTDReportType> samples =
+    dds::sub::LoanedSamples<UMAA::SA::VelocityStatus::VelocityReportType> samples =
             reader.take();
     for (const auto &sample : samples) {
         if (sample.info().valid()) {
@@ -63,13 +63,13 @@ unsigned int process_speed_data(dds::sub::DataReader<DynamicData> &reader)
 
 void run_example(unsigned int domain_id, unsigned int sample_count)
 {
-    // ----------------- BEGIN COMPILED TYPES REGISTRATION----------------------
+    // ----------------- START COMPILED TYPES REGISTRATION----------------------
     // By registering the type here we will use the compiled type instead of
     // DynamicData Make sure to register the type first before creating the
     // participant Connext will automatically see if a compiled type has been
     // registered for use before looking up a Dynamic Data type reference in xml
-    rti::domain::register_type<UMAA::SA::CTDStatus::CTDReportType>(
-            "CTDReportType");
+    rti::domain::register_type<UMAA::SA::VelocityStatus::VelocityReportType>(
+            "VelocityReportType");
 
     //------------------ END COMPILED TYPES REGISTRATION-----------------------
 
@@ -102,28 +102,28 @@ void run_example(unsigned int domain_id, unsigned int sample_count)
 
     //--------------------START COMPILED TYPES USAGE----------------------------
     // Lookup the DataReader
-    dds::sub::DataReader<UMAA::SA::CTDStatus::CTDReportType> ctd_report_reader =
+    dds::sub::DataReader<UMAA::SA::VelocityStatus::VelocityReportType> velocity_report_reader =
             rti::sub::find_datareader_by_name<
-                    dds::sub::DataReader<UMAA::SA::CTDStatus::CTDReportType>>(
+                    dds::sub::DataReader<UMAA::SA::VelocityStatus::VelocityReportType>>(
                     participant,
-                    CTDREPORTREADER);
+                    VELOCITYREPORTREADER);
 
     // Enable the reader
-    ctd_report_reader.enable();
+    velocity_report_reader.enable();
 
     // Obtain the DataReader's Status Condition
-    dds::core::cond::StatusCondition ctd_status_condition(ctd_report_reader);
+    dds::core::cond::StatusCondition velocity_status_condition(velocity_report_reader);
 
     // Enable the 'data available' status.
-    ctd_status_condition.enabled_statuses(
+    velocity_status_condition.enabled_statuses(
             dds::core::status::StatusMask::data_available());
 
     // Associate a handler with the status condition. This will run when the
     // condition is triggered, in the context of the dispatch call (see below)
     unsigned int samples_read = 0;
-    ctd_status_condition.extensions().handler(
-            [&ctd_report_reader, &samples_read]() {
-                samples_read += process_ctd_data(ctd_report_reader);
+    velocity_status_condition.extensions().handler(
+            [&velocity_report_reader, &samples_read]() {
+                samples_read += process_velocity_data(velocity_report_reader);
             });
     //--------------------END COMPILED TYPES USAGE------------------------------
 
@@ -162,7 +162,7 @@ void run_example(unsigned int domain_id, unsigned int sample_count)
 
     // Create a WaitSet and attach the StatusConditions
     dds::core::cond::WaitSet waitset;
-    waitset += ctd_status_condition;
+    waitset += velocity_status_condition;
     waitset += speed_status_condition;
 
     while (!shutdown_requested && samples_read < sample_count) {

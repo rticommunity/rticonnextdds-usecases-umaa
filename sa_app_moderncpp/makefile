@@ -96,7 +96,7 @@ objs/$(TARGET_ARCH)/% : objs/$(TARGET_ARCH)/%.o
 		$(UMAA_HOME)/UMAA/Common/Enumeration/objs/$(TARGET_ARCH)/*.o\
 		$(UMAA_HOME)/UMAA/Common/OrderedEnumeration/objs/$(TARGET_ARCH)/*.o\
 		$(UMAA_HOME)/UMAA/Common/PrimitiveConstrained/objs/$(TARGET_ARCH)/*.o\
-		$(UMAA_HOME)/UMAA/SA/CTDStatus/objs/$(TARGET_ARCH)/*.o\
+		$(UMAA_HOME)/UMAA/SA/VelocityStatus/objs/$(TARGET_ARCH)/*.o\
 		$(LIBS)
 
 # Compiler

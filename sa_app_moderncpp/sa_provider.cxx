@@ -21,7 +21,7 @@
 #include "umaa_sa_consts.hpp"
 
 // Include header for Compiled Type
-#include "UMAA/SA/CTDStatus/CTDReportType.hpp"  
+#include "UMAA/SA/VelocityStatus/VelocityReportType.hpp"  
 
 using namespace application;
 using namespace dds::core::xtypes;
@@ -33,8 +33,8 @@ void run_example(unsigned int domain_id, unsigned int sample_count)
     // DynamicData Make sure to register the type first before creating the
     // participant Connext will automatically see if a compiled type has been
     // registered for use before looking up a Dynamic Data type reference in xml
-    rti::domain::register_type<UMAA::SA::CTDStatus::CTDReportType>(
-            "CTDReportType");
+    rti::domain::register_type<UMAA::SA::VelocityStatus::VelocityReportType>(
+            "VelocityReportType");
 
     //-------------END COMPILED TYPES REGISTRATION------------------------------
 
@@ -68,18 +68,18 @@ void run_example(unsigned int domain_id, unsigned int sample_count)
 
     //-----------------START COMPILED TYPES USAGE-------------------------------
     // Lookup the DataWriter
-    dds::pub::DataWriter<UMAA::SA::CTDStatus::CTDReportType> ctd_report_writer =
+    dds::pub::DataWriter<UMAA::SA::VelocityStatus::VelocityReportType> velocity_report_writer =
             rti::pub::find_datawriter_by_name<
-                    dds::pub::DataWriter<UMAA::SA::CTDStatus::CTDReportType>>(
+                    dds::pub::DataWriter<UMAA::SA::VelocityStatus::VelocityReportType>>(
                     participant,
-                    CTDREPORTWRITER);
+                    VELOCITYREPORTWRITER);
 
     // Enable the writer
-    ctd_report_writer.enable();
+    velocity_report_writer.enable();
 
 
-    // Create data ctd_report_sample for writing
-    UMAA::SA::CTDStatus::CTDReportType ctd_report_sample;
+    // Create data velocity_report_sample for writing
+    UMAA::SA::VelocityStatus::VelocityReportType velocity_report_sample;
     UMAA::Common::Measurement::NumericGUID source_id;
     source_id.fill(5);
     //------------------END COMPILED TYPES USAGE--------------------------------
@@ -114,20 +114,17 @@ void run_example(unsigned int domain_id, unsigned int sample_count)
         try {
             rand = std::rand() % 5;
 
-            // Fill and Write CTD Report Sample
-            ctd_report_sample.conductivity(28 + rand);
-            ctd_report_sample.depth(counter);
-            ctd_report_sample.source(source_id);
-            ctd_report_writer.write(ctd_report_sample);
-
-            printf("Publishing CTD conductivity : %.2f \n",
-                   ctd_report_sample.conductivity());
-            printf("Publishing CTD depth: %.2f \n", ctd_report_sample.depth());
+            // Fill and Write Velocity Report Sample
+            velocity_report_sample.velocity().eastSpeed(28 + rand);
+            velocity_report_sample.source(source_id);
+            velocity_report_writer.write(velocity_report_sample);
+            printf("Publishing Velocity East Speed : %.2f \n",
+                   velocity_report_sample.velocity().eastSpeed());
 
             // Fill and write Speed Report
             speed_report_sample.value("speedThroughWater", 0.2 + rand);
             speed_report_writer.write(speed_report_sample);
-            printf("Publishing Vehicle Speed: %.2f \n",
+            printf("Publishing Speed Through Water: %.2f \n",
                    speed_report_sample.value<double>("speedThroughWater"));
 
             // increment

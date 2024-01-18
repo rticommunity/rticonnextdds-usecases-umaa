@@ -16,7 +16,7 @@ to use the software.
     xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/current/rti_dds_profiles.xsd"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-    <!--  The naming schema for all entities is basename + suffix i.e AccellerationReport + Writer   -->
+    <!--  The naming schema for all entities is basename + suffix i.e CompartmentReport + Writer   -->
 
 
     <!-- SA Data types file -->
@@ -84,7 +84,6 @@ to use the software.
         </qos_profile>
 
         <!--This is where we assign our base profiles to each Topic -->
-        <qos_profile name="AccelerationReportQOS" base_name="ReliableStreaming" /> 
         <qos_profile name="CompartmentConfigReportQOS" base_name="ReliableStreaming" /> 
         <qos_profile name="CompartmentReportQOS" base_name="ReliableStreaming" /> 
         <qos_profile name="ContactCOLREGSClassificationStatusReportQOS" base_name="ReliableStreaming" /> 
@@ -92,7 +91,6 @@ to use the software.
         <qos_profile name="ContactReportQOS" base_name="ReliableStreaming" /> 
         <qos_profile name="ContactReportType_ContactsSetQOS" base_name="ReliableStreaming" /> 
         <qos_profile name="ContactVisualClassificationStatusReportQOS" base_name="ReliableStreaming" /> 
-        <qos_profile name="CTDReportQOS" base_name="PeriodicData" /> 
         <qos_profile name="DateTimeReportQOS" base_name="ReliableStreaming" /> 
         <qos_profile name="ECEFPoseReportQOS" base_name="PeriodicData" /> 
         <qos_profile name="FeatureImageRemovedReportQOS" base_name="ReliableStreaming" /> 
@@ -133,9 +131,6 @@ to use the software.
         <domain name="UMAADomain0" domain_id="0">
 
             <!-- Register the types -->
-            <register_type name="AccelerationReportType" 
-            type_ref="UMAA::SA::AccelerationStatus::AccelerationReportType"/>
-
             <register_type name="CompartmentConfigReportType" 
             type_ref="UMAA::SA::CompartmentConfig::CompartmentConfigReportType"/>
 
@@ -156,9 +151,6 @@ to use the software.
 
             <register_type name="ContactVisualClassificationStatusReportType" 
             type_ref="UMAA::SA::ContactVisualClassificationStatus::ContactVisualClassificationStatusReportType"/>
-
-            <register_type name="CTDReportType" 
-            type_ref="UMAA::SA::CTDStatus::CTDReportType"/>
 
             <register_type name="DateTimeReportType" 
             type_ref="UMAA::SA::DateTimeStatus::DateTimeReportType"/>
@@ -261,9 +253,6 @@ to use the software.
            
 
             <!-- Associate the topics to the types-->
-            <topic name="UMAA::SA::AccelerationStatus::AccelerationReport" 
-            register_type_ref="AccelerationReportType" />
-
             <topic name="UMAA::SA::CompartmentConfig::CompartmentConfigReport"
             register_type_ref="CompartmentConfigReportType" />
 
@@ -285,8 +274,6 @@ to use the software.
             <topic
                 name="UMAA::SA::ContactVisualClassificationStatus::ContactVisualClassificationStatusReport"
                 register_type_ref="ContactVisualClassificationStatusReportType" />
-
-            <topic name="UMAA::SA::CTDStatus::CTDReport" register_type_ref="CTDReportType" />
 
             <topic name="UMAA::SA::DateTimeStatus::DateTimeReport"
                 register_type_ref="DateTimeReportType" />
@@ -394,20 +381,13 @@ to use the software.
             <domain_participant_qos base_name="UMAAQOSLibrary::ParticipantQOS"/>
 
             <!-- Publisher/Subscribers created for each reader/writer for future Partitioning support -->
-             <publisher name="AccellerationReportPublisher">
-                <data_writer name="AccellerationReportWriter"
-                    topic_ref="UMAA::SA::AccelerationStatus::AccelerationReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::AccelerationReportQOS">
-
-                        <!-- Override QOS at datawriter_qos/datareader_qos level if necessary -->
-                        
-                    </datawriter_qos>
-                </data_writer>
-            </publisher>
             <publisher name="CompartmentConfigReportPublisher">
                 <data_writer name="CompartmentConfigReportWriter"
                     topic_ref="UMAA::SA::CompartmentConfig::CompartmentConfigReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::CompartmentConfigReportQOS"/>
+                    <datawriter_qos base_name="UMAAQOSLibrary::CompartmentConfigReportQOS">
+                        
+                        <!-- Override QOS at datawriter_qos/datareader_qos level if necessary -->
+                    </datawriter_qos>
                 </data_writer>
             </publisher>
             <publisher name="CompartmentReportPublisher">
@@ -444,12 +424,6 @@ to use the software.
                 <data_writer name="ContactVisualClassificationStatusReportWriter"
                     topic_ref="UMAA::SA::ContactVisualClassificationStatus::ContactVisualClassificationStatusReport">
                     <datawriter_qos base_name="UMAAQOSLibrary::ContactVisualClassificationStatusReportQOS" />
-                </data_writer>
-            </publisher>
-            <publisher name="CTDReportPublisher">
-                <data_writer name="CTDReportWriter" 
-                    topic_ref="UMAA::SA::CTDStatus::CTDReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::CTDReportQOS" />
                 </data_writer>
             </publisher>
             <publisher name="DateTimeReportPublisher">
@@ -669,12 +643,6 @@ to use the software.
                     <datawriter_qos base_name="UMAAQOSLibrary::GlobalDeadReckoningCommandQOS" />
                 </data_writer>
             </publisher>
-            <subscriber name="AccelerationReportSubscriber">
-                <data_reader name="AccellerationReportReader"
-                    topic_ref="UMAA::SA::AccelerationStatus::AccelerationReport">
-                    <datareader_qos base_name="UMAAQOSLibrary::AccelerationReportQOS" />
-                </data_reader>
-            </subscriber>
             <subscriber name="CompartmentConfigReportSubscriber">
                 <data_reader name="CompartmentConfigReportReader"
                     topic_ref="UMAA::SA::CompartmentConfig::CompartmentConfigReport">
@@ -715,12 +683,6 @@ to use the software.
                 <data_reader name="ContactVisualClassificationStatusReportReader"
                     topic_ref="UMAA::SA::ContactVisualClassificationStatus::ContactVisualClassificationStatusReport">
                     <datareader_qos base_name="UMAAQOSLibrary::ContactVisualClassificationStatusReportQOS" />
-                </data_reader>
-            </subscriber>
-            <subscriber name="CTDReportSubscriber">
-                <data_reader name="CTDReportReader" 
-                    topic_ref="UMAA::SA::CTDStatus::CTDReport">
-                    <datareader_qos base_name="UMAAQOSLibrary::CTDReportQOS" />
                 </data_reader>
             </subscriber>
             <subscriber name="DateTimeReportSubscriber">

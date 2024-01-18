@@ -7,7 +7,6 @@ const string SA_USER = "UMAAParticipantLibrary::SAUser";
 
 
 // Writers
-const string ACCELLERATIONREPORTWRITER = "AccellerationReportPublisher::AccellerationReportWriter";
 const string COMPAUTMENTCONFIGREPORTWRITER = "CompartmentConfigReportPublisher::CompartmentConfigReportWriter";
 const string COMPARTMENTCONFIGWRITER = "CompartmentConfigPublisher::CompartmentConfigWriter";
 const string CONTACTCOLREGSCLASSIFICATIONSTATUSREPORTWRITER = "ContactCOLREGSClassificationStatusReportPublisher::ContactCOLREGSClassificationStatusReportWriter";
@@ -15,7 +14,6 @@ const string CONTACTREMOVEDREPORTWRITER = "ContactRemovedReportPublisher::Contac
 const string CONTACTREPORTWRITER = "ContactReportPublisher::ContactReportWriter";
 const string CONTACTREPORT_CONTACTSSETWRITER = "ContactReport_ContactsSetPublisher::ContactReport_ContactsSetWriter";
 const string CONTACTVISUALCLASSIFICATIONSTATUSREPORTWRITER = "ContactVisualClassificationStatusReportPublisher::ContactVisualClassificationStatusReportWriter";
-const string CTDREPORTWRITER = "CTDReportPublisher::CTDReportWriter";
 const string DATETIMEREPORTWRITER = "DateTimeReportPublisher::DateTimeReportWriter";
 const string ECEFPOSEREPORTWRITER = "ECEFPoseReportPublisher::ECEFPoseReportWriter";
 const string FEATUREIMAGEREMOVEDREPORTWRITER = "FeatureImageRemovedReportPublisher::FeatureImageRemovedReportWriter";
@@ -52,7 +50,6 @@ const string GLOBALDEADRECKONINGCOMMANDWRITER = "GlobalDeadReckoningCommandPubli
 
 
 //Readers
-const string ACCELLERATIONREPORTREADER = "AccellerationReportSubscriber::AccellerationReportReader";
 const string COMPARTMENTCONFIGREPORTREADER = "CompartmentConfigReportSubscriber::CompartmentConfigReportReader";
 const string COMPARTMENTCONFIGREADER = "CompartmentConfigSubscriber::CompartmentConfigReader";
 const string CONTACTCOLREGSCLASSIFICATIONSTATUSREPORTREADER = "ContactCOLREGSClassificationStatusReportSubscriber::ContactCOLREGSClassificationStatusReportReader";
@@ -60,7 +57,6 @@ const string CONTACTREMOVEDREPORTREADER = "ContactRemovedReportSubscriber::Conta
 const string CONTACTREPORTREADER = "ContactReportSubscriber::ContactReportReader";
 const string CONTACTREPORT_CONTACTSSETREADER = "ContactReport_ContactsSetSubscriber::ContactReport_ContactsSetReader";
 const string CONTACTVISUALCLASSIFICATIONSTATUSREPORTREADER = "ContactVisualClassificationStatusReportSubscriber::ContactVisualClassificationStatusReportReader";
-const string CTDREPORTREADER = "CTDReportSubscriber::CTDReportReader";
 const string DATETIMEREPORTREADER = "DateTimeReportSubscriber::DateTimeReportReader";
 const string ECEFPOSEREPORTREADER = "ECEFPoseReportSubscriber::ECEFPoseReportReader";
 const string FEATUREIMAGEREMOVEDREPORTREADER = "FeatureImageRemovedReportSubscriber::FeatureImageRemovedReportReader";
@@ -96,7 +92,6 @@ const string LOCALDEADRECKONINGCOMMANDREADER = "Subscriber::LocalDeadReckoningCo
 const string GLOBALDEADRECKONINGCOMMANDREADER = "Subscriber::GlobalDeadReckoningCommandReader";
 
 // Types
-const string ACCELERATIONREPORTTYPE = "UMAA::SA::AccelerationStatus::AccelerationReportType";
 const string COMPARTMENTCONFIGREPORTTYPE = "UMAA::SA::CompartmentConfig::CompartmentConfigReportType";
 const string COMPARTMENTREPORTTYPE = "UMAA::SA::CompartmentStatus::CompartmentReportType";
 const string CONTACTCOLREGSCLASSIFICATIONSTATUSREPORTTYPE = "UMAA::SA::ContactCOLREGSClassificationStatus::ContactCOLREGSClassificationStatusReportType";
@@ -104,7 +99,6 @@ const string CONTACTREMOVEDREPORTTYPE = "UMAA::SA::ContactStatus::ContactRemoved
 const string CONTACTREPORTTYPE = "UMAA::SA::ContactStatus::ContactReportType";
 const string CONTACTREPORTTYPE_CONTACTSSET = "UMAA::SA::ContactStatus::ContactReportType_ContactsSet";
 const string CONTACTVISUALCLASSIFICATIONSTATUSREPORTTYPE = "UMAA::SA::ContactVisualClassificationStatus::ContactVisualClassificationStatusReportType";
-const string CTDREPORTTYPE = "UMAA::SA::CTDStatus::CTDReportType";
 const string DATETIMEREPORTTYPE = "UMAA::SA::DateTimeStatus::DateTimeReportType";
 const string ECEFPOSEREPORTTYPE = "UMAA::SA::ECEFPoseStatus::ECEFPoseReportType";
 const string FEATUREIMAGEREMOVEDREPORTTYPE = "UMAA::SA::FeatureImageStatus::FeatureImageRemovedReportType";
