@@ -267,8 +267,8 @@ module UMAA
 
 
         const double Density_MIN = 0.0;
-        const double Density_MAX =  3e17;
-        typedef double Density; // fractionDigits=3 maxInclusive=3e17 minInclusive=0 units=KilogramPerCubicMeter referenceFrame=Counting
+        const double Density_MAX =  300000000000000000;
+        typedef double Density; // fractionDigits=3 maxInclusive=300000000000000000 minInclusive=0 units=KilogramPerCubicMeter referenceFrame=Counting
 
         const double Distance_MIN = 0.0;
         const double Distance_MAX = 401056000.0;
@@ -307,8 +307,8 @@ module UMAA
         typedef double Force; // fractionDigits=3 maxInclusive=100000000 minInclusive=0 units=Newton referenceFrame=Counting
 
         const double FrequencyHertz_MIN = 0.0;
-        const double FrequencyHertz_MAX =  1e10;
-        typedef double FrequencyHertz; // fractionDigits=6 maxInclusive=1e10 minInclusive=0.0 units=Hertz referenceFrame=Counting
+        const double FrequencyHertz_MAX =  10000000000;
+        typedef double FrequencyHertz; // fractionDigits=6 maxInclusive=10000000000 minInclusive=0.0 units=Hertz referenceFrame=Counting
 
         const double GroundSpeed_MIN = -299792458.0;
         const double GroundSpeed_MAX = 299792458.0;
@@ -367,8 +367,8 @@ module UMAA
         typedef double PressureKiloPascals; // fractionDigits=3 maxInclusive=51200 minInclusive=0 units=KiloPascal referenceFrame=STP
 
         const double RadioFrequencyHertz_MIN = 0.0;
-        const double RadioFrequencyHertz_MAX =  1e10;
-        typedef double RadioFrequencyHertz; // fractionDigits=6 maxInclusive=1e10 minInclusive=0.0 units=Hertz referenceFrame=Counting
+        const double RadioFrequencyHertz_MAX =  10000000000;
+        typedef double RadioFrequencyHertz; // fractionDigits=6 maxInclusive=10000000000 minInclusive=0.0 units=Hertz referenceFrame=Counting
 
         const double RelativeAngle_MIN = -3.1415926535897932;
         const double RelativeAngle_MAX =  3.1415926535897932;
@@ -392,9 +392,9 @@ module UMAA
         const long SizeBytes_MAX =  1000000000;
         typedef long SizeBytes; // maxInclusive=1000000000 minInclusive=0 units=Byte referenceFrame=Counting fractionDigits=0
 
-        const double SizeNumeral_MIN = -1e12;
-        const double SizeNumeral_MAX =  1e12;
-        typedef double SizeNumeral; // referenceFrame=Counting units=N/A minInclusive=-1e12 maxInclusive=1e12 fractionDigits=3
+        const double SizeNumeral_MIN = -1000000000000;
+        const double SizeNumeral_MAX =  1000000000000;
+        typedef double SizeNumeral; // referenceFrame=Counting units=N/A minInclusive=-1000000000000 maxInclusive=1000000000000 fractionDigits=3
 
         const double Speed_MIN = 0.0;
         const double Speed_MAX = 299792458.0;
