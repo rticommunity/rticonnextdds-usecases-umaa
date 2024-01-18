@@ -16,9 +16,6 @@ to use the software.
     xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/current/rti_dds_profiles.xsd"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-    <!--  The naming schema for all entities is basename + suffix i.e CompartmentReport + Writer   -->
-
-
     <!-- SA Data types file -->
     <types>
         <include file="UMAA_SA_types.xml"/>
@@ -84,46 +81,21 @@ to use the software.
         </qos_profile>
 
         <!--This is where we assign our base profiles to each Topic -->
-        <qos_profile name="CompartmentConfigReportQOS" base_name="ReliableStreaming" /> 
-        <qos_profile name="CompartmentReportQOS" base_name="ReliableStreaming" /> 
-        <qos_profile name="ContactCOLREGSClassificationStatusReportQOS" base_name="ReliableStreaming" /> 
-        <qos_profile name="ContactRemovedReportQOS" base_name="ReliableStreaming" /> 
+        <qos_profile name="ContactCOLREGSClassificationReportQOS" base_name="ReliableStreaming" /> 
         <qos_profile name="ContactReportQOS" base_name="ReliableStreaming" /> 
-        <qos_profile name="ContactReportType_ContactsSetQOS" base_name="ReliableStreaming" /> 
-        <qos_profile name="ContactVisualClassificationStatusReportQOS" base_name="ReliableStreaming" /> 
+        <qos_profile name="ContactVisualClassificationReportQOS" base_name="ReliableStreaming" /> 
         <qos_profile name="DateTimeReportQOS" base_name="ReliableStreaming" /> 
         <qos_profile name="ECEFPoseReportQOS" base_name="PeriodicData" /> 
-        <qos_profile name="FeatureImageRemovedReportQOS" base_name="ReliableStreaming" /> 
-        <qos_profile name="FeatureImageReportQOS" base_name="ReliableStreaming" /> 
-        <qos_profile name="GlobalDeadReckoningCommandReportQOS" base_name="StrictReliable" /> 
-        <qos_profile name="GlobalDeadReckoningCommandStatusQOS" base_name="StrictReliable" /> 
-        <qos_profile name="GlobalDeadReckoningCommandQOS" base_name="StrictReliable" /> 
-        <qos_profile name="GlobalPoseConfigReportQOS" base_name="ReliableStreaming" /> 
         <qos_profile name="GlobalPoseReportQOS" base_name="ReliableStreaming" /> 
-        <qos_profile name="ImageRemovedReportQOS" base_name="ReliableStreaming" /> 
-        <qos_profile name="ImageReportQOS" base_name="ReliableStreaming" /> 
-        <qos_profile name="LocalDeadReckoningCommandReportQOS" base_name="StrictReliable" /> 
-        <qos_profile name="LocalDeadReckoningCommandStatusQOS" base_name="StrictReliable" /> 
-        <qos_profile name="LocalDeadReckoningCommandQOS" base_name="StrictReliable" /> 
-        <qos_profile name="LocalPoseReportQOS" base_name="ReliableStreaming" /> 
-        <qos_profile name="NEDVelocityReportQOS" base_name="ReliableStreaming" /> 
-        <qos_profile name="PathReporterSpecsReportQOS" base_name="ReliableStreaming" /> 
-        <qos_profile name="PathReporterReportQOS" base_name="ReliableStreaming" /> 
-        <qos_profile name="RangeConfigReportQOS" base_name="ReliableStreaming" /> 
-        <qos_profile name="RangeSpecsReportQOS" base_name="ReliableStreaming" /> 
-        <qos_profile name="RangeReportQOS" base_name="ReliableStreaming" /> 
-        <qos_profile name="SeaStatusReportQOS" base_name="PeriodicData" /> 
+        <qos_profile name="MagneticVariationSpecsReportQOS" base_name="ReliableStreaming" /> 
+        <qos_profile name="MagneticVariationReportQOS" base_name="ReliableStreaming" />
+        <qos_profile name="SeaStateReportQOS" base_name="PeriodicData" /> 
         <qos_profile name="SpeedReportQOS" base_name="PeriodicData" /> 
-        <qos_profile name="StillImageConfigReportQOS" base_name="ReliableStreaming" /> 
-        <qos_profile name="StillImageSpecsReportQOS" base_name="ReliableStreaming" /> 
-        <qos_profile name="StillImageReportQOS" base_name="ReliableStreaming" /> 
         <qos_profile name="TranslationalShipMotionReportQOS" base_name="ReliableStreaming" /> 
         <qos_profile name="VehicleNavigationModeReportQOS" base_name="ReliableStreaming" /> 
         <qos_profile name="VelocityReportQOS" base_name="ReliableStreaming" /> 
-        <qos_profile name="WaterCurrentStatusReportQOS" base_name="PeriodicData" /> 
+        <qos_profile name="WaterCurrentReportQOS" base_name="PeriodicData" /> 
         <qos_profile name="WaterspaceReportQOS" base_name="PeriodicData" /> 
-        <qos_profile name="WeatherStatusReportQOS" base_name="PeriodicData" /> 
-        <qos_profile name="WindStatusReportQOS" base_name="PeriodicData" /> 
     </qos_library>
 
     <!-- Domain and Topic Library -->
@@ -131,26 +103,14 @@ to use the software.
         <domain name="UMAADomain0" domain_id="0">
 
             <!-- Register the types -->
-            <register_type name="CompartmentConfigReportType" 
-            type_ref="UMAA::SA::CompartmentConfig::CompartmentConfigReportType"/>
-
-            <register_type name="CompartmentReportType" 
-            type_ref="UMAA::SA::CompartmentStatus::CompartmentReportType"/>
-
-            <register_type name="ContactCOLREGSClassificationStatusReportType" 
-            type_ref="UMAA::SA::ContactCOLREGSClassificationStatus::ContactCOLREGSClassificationStatusReportType"/>
-
-            <register_type name="ContactRemovedReportType" 
-            type_ref="UMAA::SA::ContactStatus::ContactRemovedReportType"/>
+            <register_type name="ContactCOLREGSClassificationReportType" 
+            type_ref="UMAA::SA::ContactCOLREGSClassificationStatus::ContactCOLREGSClassificationReportType"/>
 
             <register_type name="ContactReportType" 
-            type_ref="UMAA::SA::ContactStatus::ContactReportType"/>
+            type_ref="UMAA::SA::ContactReport::ContactReportType"/>
 
-            <register_type name="ContactReportType_ContactsSet" 
-            type_ref="UMAA::SA::ContactStatus::ContactReportType_ContactsSet"/>
-
-            <register_type name="ContactVisualClassificationStatusReportType" 
-            type_ref="UMAA::SA::ContactVisualClassificationStatus::ContactVisualClassificationStatusReportType"/>
+            <register_type name="ContactVisualClassificationReportType" 
+            type_ref="UMAA::SA::ContactVisualClassificationStatus::ContactVisualClassificationReportType"/>
 
             <register_type name="DateTimeReportType" 
             type_ref="UMAA::SA::DateTimeStatus::DateTimeReportType"/>
@@ -158,122 +118,45 @@ to use the software.
             <register_type name="ECEFPoseReportType" 
             type_ref="UMAA::SA::ECEFPoseStatus::ECEFPoseReportType"/>
 
-            <register_type name="FeatureImageRemovedReportType" 
-            type_ref="UMAA::SA::FeatureImageStatus::FeatureImageRemovedReportType"/>
-
-            <register_type name="FeatureImageReportType" 
-            type_ref="UMAA::SA::FeatureImageStatus::FeatureImageReportType"/>
-
-            <register_type name="GlobalDeadReckoningCommandReportType" 
-            type_ref="UMAA::SA::GlobalDeadReckoning::GlobalDeadReckoningCommandReportType"/>
-
-            <register_type name="GlobalDeadReckoningCommandStatusType" 
-            type_ref="UMAA::SA::GlobalDeadReckoning::GlobalDeadReckoningCommandStatusType"/>
-
-            <register_type name="GlobalDeadReckoningCommandType" 
-            type_ref="UMAA::SA::GlobalDeadReckoning::GlobalDeadReckoningCommandType"/>
-
-            <register_type name="GlobalPoseConfigReportType" 
-            type_ref="UMAA::SA::GlobalPoseConfig::GlobalPoseConfigReportType"/>
-
             <register_type name="GlobalPoseReportType" 
             type_ref="UMAA::SA::GlobalPoseStatus::GlobalPoseReportType"/>
+            
+            <register_type name="MagneticVariationSpecsReportType" 
+            type_ref="UMAA::SA::MagneticVariationSpecs::MagneticVariationSpecsReportType"/>
+                        
+            <register_type name="MagneticVariationReportType" 
+            type_ref="UMAA::SA::MagneticVariationStatus::MagneticVariationReportType"/>
 
-            <register_type name="ImageRemovedReportType" 
-            type_ref="UMAA::SA::FeatureImageStatus::FeatureImageRemovedReportType"/>
-
-            <register_type name="ImageReportType" 
-            type_ref="UMAA::SA::ImageStatus::ImageReportType"/>
-
-            <register_type name="LocalDeadReckoningCommandReportType" 
-            type_ref="UMAA::SA::LocalDeadReckoning::LocalDeadReckoningCommandReportType"/>
-
-            <register_type name="LocalDeadReckoningCommandStatusType" 
-            type_ref="UMAA::SA::LocalDeadReckoning::LocalDeadReckoningCommandStatusType"/>
-
-            <register_type name="LocalDeadReckoningCommandType" 
-            type_ref="UMAA::SA::LocalDeadReckoning::LocalDeadReckoningCommandType"/>
-
-            <register_type name="LocalPoseReportType" 
-            type_ref="UMAA::SA::LocalPoseStatus::LocalPoseReportType"/>
-
-            <register_type name="NEDVelocityReportType" 
-            type_ref="UMAA::SA::NEDVelocityStatus::NEDVelocityReportType"/>
-
-            <register_type name="PathReporterSpecsReportType" 
-            type_ref="UMAA::SA::PathReporterSpecs::PathReporterSpecsReportType"/>
-
-            <register_type name="PathReporterReportType" 
-            type_ref="UMAA::SA::PathReporterStatus::PathReporterReportType"/>
-
-            <register_type name="RangeConfigReportType" 
-            type_ref="UMAA::SA::RangeConfig::RangeConfigReportType"/>
-
-            <register_type name="RangeSpecsReportType" 
-            type_ref="UMAA::SA::RangeSpecs::RangeSpecsReportType"/>
-
-            <register_type name="RangeReportType" 
-            type_ref="UMAA::SA::RangeStatus::RangeReportType"/>
-
-            <register_type name="SeaStatusReportType" 
-            type_ref="UMAA::SA::SeaStatus::SeaStatusReportType"/>
-
+            <register_type name="SeaStateReportType" 
+            type_ref="UMAA::SA::SeaStateReport::SeaStateReportType"/>
+            
             <register_type name="SpeedReportType" 
             type_ref="UMAA::SA::SpeedStatus::SpeedReportType"/>
-
-            <register_type name="StillImageConfigReportType" 
-            type_ref="UMAA::SA::StillImageConfig::StillImageConfigReportType"/>
-
-            <register_type name="StillImageSpecsReportType" 
-            type_ref="UMAA::SA::StillImageSpecs::StillImageSpecsReportType"/>
-
-            <register_type name="StillImageReportType" 
-            type_ref="UMAA::SA::StillImageStatus::StillImageReportType"/>
 
             <register_type name="TranslationalShipMotionReportType" 
             type_ref="UMAA::SA::TranslationalShipMotionStatus::TranslationalShipMotionReportType"/>
 
-            <register_type name="VehicleNavigationModeReportType" 
-            type_ref="UMAA::SA::VehicleNavigationModeStatus::VehicleNavigationModeReportType"/>
-
             <register_type name="VelocityReportType" 
             type_ref="UMAA::SA::VelocityStatus::VelocityReportType"/>
 
-            <register_type name="WaterCurrentStatusReportType" 
-            type_ref="UMAA::SA::WaterCurrentStatus::WaterCurrentStatusReportType"/>
+            <register_type name="WaterCurrentReportType" 
+            type_ref="UMAA::SA::WaterCurrentStatus::WaterCurrentReportType"/>
 
             <register_type name="WaterspaceReportType" 
             type_ref="UMAA::SA::WaterspaceStatus::WaterspaceReportType"/>
-
-            <register_type name="WeatherStatusReportType" 
-            type_ref="UMAA::SA::WeatherStatus::WeatherStatusReportType"/>
-
-            <register_type name="WindStatusReportType" 
-            type_ref="UMAA::SA::WindStatus::WindStatusReportType"/>
            
 
             <!-- Associate the topics to the types-->
-            <topic name="UMAA::SA::CompartmentConfig::CompartmentConfigReport"
-            register_type_ref="CompartmentConfigReportType" />
-
-            <topic name="UMAA::SA::CompartmentStatus::CompartmentReport"
-            register_type_ref="CompartmentReportType" />
             <topic
-                name="UMAA::SA::ContactCOLREGSClassificationStatus::ContactCOLREGSClassificationStatusReport"
-                register_type_ref="ContactCOLREGSClassificationStatusReportType" />
+                name="UMAA::SA::ContactCOLREGSClassificationStatus::ContactCOLREGSClassificationReport"
+                register_type_ref="ContactCOLREGSClassificationReportType" />
 
-            <topic name="UMAA::SA::ContactStatus::ContactRemovedReport"
-                register_type_ref="ContactRemovedReportType" />
-
-            <topic name="UMAA::SA::ContactStatus::ContactReport"
+            <topic name="UMAA::SA::ContactReport::ContactReport"
                 register_type_ref="ContactReportType" />
 
-            <topic name="UMAA::SA::ContactStatus::ContactReportType_ContactsSet"
-                register_type_ref="ContactReportType_ContactsSet" />
-
             <topic
-                name="UMAA::SA::ContactVisualClassificationStatus::ContactVisualClassificationStatusReport"
-                register_type_ref="ContactVisualClassificationStatusReportType" />
+                name="UMAA::SA::ContactVisualClassificationStatus::ContactVisualClassificationReport"
+                register_type_ref="ContactVisualClassificationReportType" />
 
             <topic name="UMAA::SA::DateTimeStatus::DateTimeReport"
                 register_type_ref="DateTimeReportType" />
@@ -281,95 +164,31 @@ to use the software.
             <topic name="UMAA::SA::ECEFPoseStatus::ECEFPoseReport"
                 register_type_ref="ECEFPoseReportType" />
 
-            <topic name="UMAA::SA::FeatureImageStatus::FeatureImageRemovedReport"
-                register_type_ref="FeatureImageRemovedReportType" />
-
-            <topic name="UMAA::SA::FeatureImageStatus::FeatureImageReport"
-                register_type_ref="FeatureImageReportType" />
-
-            <topic name="UMAA::SA::GlobalDeadReckoning::GlobalDeadReckoningCommandReport"
-                register_type_ref="GlobalDeadReckoningCommandReportType" />
-
-            <topic name="UMAA::SA::GlobalDeadReckoning::GlobalDeadReckoningCommandStatus"
-                register_type_ref="GlobalDeadReckoningCommandStatusType" />
-
-            <topic name="UMAA::SA::GlobalDeadReckoning::GlobalDeadReckoningCommand"
-                register_type_ref="GlobalDeadReckoningCommandType" />
-
-            <topic name="UMAA::SA::GlobalPoseConfig::GlobalPoseConfigReport"
-                register_type_ref="GlobalPoseConfigReportType" />
-
             <topic name="UMAA::SA::GlobalPoseStatus::GlobalPoseReport"
-                register_type_ref="GlobalPoseReportType" />
+            register_type_ref="GlobalPoseReportType" />
+            
+            <topic name="UMAA::SA::MagneticVariationSpecs::MagneticVariationSpecsReport"
+                register_type_ref="MagneticVariationSpecsReportType" />
 
-            <topic name="UMAA::SA::ImageStatus::ImageRemovedReport"
-                register_type_ref="ImageRemovedReportType" />
+            <topic name="UMAA::SA::MagneticVariationStatus::MagneticVariationReport"
+                register_type_ref="MagneticVariationReportType" />
 
-            <topic name="UMAA::SA::ImageStatus::ImageReport" register_type_ref="ImageReportType" />
-
-            <topic name="UMAA::SA::LocalDeadReckoning::LocalDeadReckoningCommandReport"
-                register_type_ref="LocalDeadReckoningCommandReportType" />
-
-            <topic name="UMAA::SA::LocalDeadReckoning::LocalDeadReckoningCommandStatus"
-                register_type_ref="LocalDeadReckoningCommandStatusType" />
-
-            <topic name="UMAA::SA::LocalDeadReckoning::LocalDeadReckoningCommand"
-                register_type_ref="LocalDeadReckoningCommandType" />
-
-            <topic name="UMAA::SA::LocalPoseStatus::LocalPoseReport"
-                register_type_ref="LocalPoseReportType" />
-
-            <topic name="UMAA::SA::NEDVelocityStatus::NEDVelocityReport"
-                register_type_ref="NEDVelocityReportType" />
-
-            <topic name="UMAA::SA::PathReporterSpecs::PathReporterSpecsReport"
-                register_type_ref="PathReporterSpecsReportType" />
-
-            <topic name="UMAA::SA::PathReporterStatus::PathReporterReport"
-                register_type_ref="PathReporterReportType" />
-
-            <topic name="UMAA::SA::RangeConfig::RangeConfigReport"
-                register_type_ref="RangeConfigReportType" />
-
-            <topic name="UMAA::SA::RangeSpecs::RangeSpecsReport"
-                register_type_ref="RangeSpecsReportType" />
-
-            <topic name="UMAA::SA::RangeStatus::RangeReport" register_type_ref="RangeReportType" />
-
-            <topic name="UMAA::SA::SeaStatus::SeaStatusReport"
-                register_type_ref="SeaStatusReportType" />
+            <topic name="UMAA::SA::SeaStateReport::SeaStateReport" register_type_ref="SeaStateReportType" />
 
             <topic name="UMAA::SA::SpeedStatus::SpeedReport" register_type_ref="SpeedReportType" />
-
-            <topic name="UMAA::SA::StillImageConfig::StillImageConfigReport"
-                register_type_ref="StillImageConfigReportType" />
-
-            <topic name="UMAA::SA::StillImageSpecs::StillImageSpecsReport"
-                register_type_ref="StillImageSpecsReportType" />
-
-            <topic name="UMAA::SA::StillImageStatus::StillImageReport"
-                register_type_ref="StillImageReportType" />
 
             <topic name="UMAA::SA::TranslationalShipMotionStatus::TranslationalShipMotionReport"
                 register_type_ref="TranslationalShipMotionReportType" />
 
-            <topic name="UMAA::SA::VehicleNavigationModeStatus::VehicleNavigationModeReport"
-                register_type_ref="VehicleNavigationModeReportType" />
-
             <topic name="UMAA::SA::VelocityStatus::VelocityReport"
                 register_type_ref="VelocityReportType" />
 
-            <topic name="UMAA::SA::WaterCurrentStatus::WaterCurrentStatusReport"
-                register_type_ref="WaterCurrentStatusReportType" />
+            <topic name="UMAA::SA::WaterCurrentStatus::WaterCurrentReport"
+                register_type_ref="WaterCurrentReportType" />
 
             <topic name="UMAA::SA::WaterspaceStatus::WaterspaceReport"
                 register_type_ref="WaterspaceReportType" />
 
-            <topic name="UMAA::SA::WeatherStatus::WeatherStatusReport"
-                register_type_ref="WeatherStatusReportType" />
-
-            <topic name="UMAA::SA::WindStatus::WindStatusReport"
-                register_type_ref="WindStatusReportType" />
         </domain>
     </domain_library>
 
@@ -381,49 +200,25 @@ to use the software.
             <domain_participant_qos base_name="UMAAQOSLibrary::ParticipantQOS"/>
 
             <!-- Publisher/Subscribers created for each reader/writer for future Partitioning support -->
-            <publisher name="CompartmentConfigReportPublisher">
-                <data_writer name="CompartmentConfigReportWriter"
-                    topic_ref="UMAA::SA::CompartmentConfig::CompartmentConfigReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::CompartmentConfigReportQOS">
+            <publisher name="ContactCOLREGSClassificationReportPublisher">
+                <data_writer name="ContactCOLREGSClassificationReportWriter"
+                    topic_ref="UMAA::SA::ContactCOLREGSClassificationStatus::ContactCOLREGSClassificationReport">
+                    <datawriter_qos base_name="UMAAQOSLibrary::ContactCOLREGSClassificationReportQOS">
                         
                         <!-- Override QOS at datawriter_qos/datareader_qos level if necessary -->
                     </datawriter_qos>
                 </data_writer>
             </publisher>
-            <publisher name="CompartmentReportPublisher">
-                <data_writer name="CompartmentReportWriter"
-                    topic_ref="UMAA::SA::CompartmentStatus::CompartmentReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::CompartmentReportQOS"/>
-                </data_writer>
-            </publisher>
-            <publisher name="ContactCOLREGSClassificationStatusReportPublisher">
-                <data_writer name="ContactCOLREGSClassificationStatusReportWriter"
-                    topic_ref="UMAA::SA::ContactCOLREGSClassificationStatus::ContactCOLREGSClassificationStatusReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::ContactCOLREGSClassificationStatusReportQOS"/>
-                </data_writer>
-            </publisher>
-            <publisher name="ContactRemovedReportPublisher">
-                <data_writer name="ContactRemovedReportWriter"
-                    topic_ref="UMAA::SA::ContactStatus::ContactRemovedReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::ContactRemovedReportQOS" />
-                </data_writer>
-            </publisher>
             <publisher name="ContactReportPublisher">
                 <data_writer name="ContactReportWriter"
-                    topic_ref="UMAA::SA::ContactStatus::ContactReport">
+                    topic_ref="UMAA::SA::ContactReport::ContactReport">
                     <datawriter_qos base_name="UMAAQOSLibrary::ContactReportQOS"/>
                 </data_writer>
             </publisher>
-            <publisher name="ContactReport_ContactsSetPublisher">
-                <data_writer name="ContactReport_ContactsSetWriter"
-                    topic_ref="UMAA::SA::ContactStatus::ContactReportType_ContactsSet">
-                    <datawriter_qos base_name="UMAAQOSLibrary::ContactReportType_ContactsSetQOS"/>
-                </data_writer>
-            </publisher>
-            <publisher name="ContactVisualClassificationStatusReportPublisher">
-                <data_writer name="ContactVisualClassificationStatusReportWriter"
-                    topic_ref="UMAA::SA::ContactVisualClassificationStatus::ContactVisualClassificationStatusReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::ContactVisualClassificationStatusReportQOS" />
+            <publisher name="ContactVisualClassificationReportPublisher">
+                <data_writer name="ContactVisualClassificationReportWriter"
+                    topic_ref="UMAA::SA::ContactVisualClassificationStatus::ContactVisualClassificationReport">
+                    <datawriter_qos base_name="UMAAQOSLibrary::ContactVisualClassificationReportQOS" />
                 </data_writer>
             </publisher>
             <publisher name="DateTimeReportPublisher">
@@ -438,112 +233,28 @@ to use the software.
                     <datawriter_qos base_name="UMAAQOSLibrary::ECEFPoseReportQOS"/>
                 </data_writer>
             </publisher>
-            <publisher name="FeatureImageRemovedReportPublisher">
-                <data_writer name="FeatureImageRemovedReportWriter"
-                    topic_ref="UMAA::SA::FeatureImageStatus::FeatureImageRemovedReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::FeatureImageRemovedReportQOS"/>
-                </data_writer>
-            </publisher>
-            <publisher name="FeatureImageReportPublisher">
-                <data_writer name="FeatureImageReportWriter"
-                    topic_ref="UMAA::SA::FeatureImageStatus::FeatureImageReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::FeatureImageReportQOS" />
-                </data_writer>
-            </publisher>
-            <publisher name="GlobalDeadReckoningCommandReportPublisher">
-                <data_writer name="GlobalDeadReckoningCommandReportWriter"
-                    topic_ref="UMAA::SA::GlobalDeadReckoning::GlobalDeadReckoningCommandReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::GlobalDeadReckoningCommandReportQOS"/>
-                </data_writer>
-            </publisher>
-            <publisher name="GlobalDeadReckoningCommandStatusPublisher">
-                <data_writer name="GlobalDeadReckoningCommandStatusWriter"
-                    topic_ref="UMAA::SA::GlobalDeadReckoning::GlobalDeadReckoningCommandStatus">
-                    <datawriter_qos base_name="UMAAQOSLibrary::GlobalDeadReckoningCommandStatusQOS" />
-                </data_writer>
-            </publisher>
-            <publisher name="GlobalPoseConfigReportPublisher">
-                <data_writer name="GlobalPoseConfigReportWriter"
-                    topic_ref="UMAA::SA::GlobalPoseConfig::GlobalPoseConfigReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::GlobalPoseConfigReportQOS" />
-                </data_writer>
-            </publisher>
             <publisher name="GlobalPoseReportPublisher">
                 <data_writer name="GlobalPoseReportWriter"
                     topic_ref="UMAA::SA::GlobalPoseStatus::GlobalPoseReport">
                     <datawriter_qos base_name="UMAAQOSLibrary::GlobalPoseReportQOS"/>
                 </data_writer>
             </publisher>
-            <publisher name="ImageRemovedReportPublisher">
-                <data_writer name="ImageRemovedReportWriter"
-                    topic_ref="UMAA::SA::ImageStatus::ImageRemovedReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::ImageRemovedReportQOS" />
+            <publisher name="MagneticVariationSpecsReportPublisher">
+                <data_writer name="MagneticVariationSpecsReportWriter"
+                    topic_ref="UMAA::SA::MagneticVariationSpecs::MagneticVariationSpecsReport">
+                    <datawriter_qos base_name="UMAAQOSLibrary::MagneticVariationSpecsReportQOS"/>
                 </data_writer>
             </publisher>
-            <publisher name="ImageReportPublisher">
-                <data_writer name="ImageReportWriter" 
-                    topic_ref="UMAA::SA::ImageStatus::ImageReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::ImageReportQOS"/>
+            <publisher name="MagneticVariationReportPublisher">
+                <data_writer name="MagneticVariationReportWriter"
+                    topic_ref="UMAA::SA::MagneticVariationStatus::MagneticVariationReport">
+                    <datawriter_qos base_name="UMAAQOSLibrary::MagneticVariationReportQOS"/>
                 </data_writer>
             </publisher>
-            <publisher name="LocalDeadReckoningCommandReportPublisher">
-                <data_writer name="LocalDeadReckoningCommandReportWriter"
-                    topic_ref="UMAA::SA::LocalDeadReckoning::LocalDeadReckoningCommandReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::LocalDeadReckoningCommandReportQOS"/>
-                </data_writer>
-            </publisher>
-            <publisher name="LocalDeadReckoningCommandStatusPublisher">
-                <data_writer name="LocalDeadReckoningCommandStatusWriter"
-                    topic_ref="UMAA::SA::LocalDeadReckoning::LocalDeadReckoningCommandStatus">
-                    <datawriter_qos base_name="UMAAQOSLibrary::LocalDeadReckoningCommandStatusQOS" />
-                </data_writer>
-            </publisher>
-            <publisher name="LocalPoseReportPublisher">
-                <data_writer name="LocalPoseReportWriter"
-                    topic_ref="UMAA::SA::LocalPoseStatus::LocalPoseReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::LocalPoseReportQOS" />
-                </data_writer>
-            </publisher>
-            <publisher name="NEDVelocityReportPublisher">
-                <data_writer name="NEDVelocityReportWriter"
-                    topic_ref="UMAA::SA::NEDVelocityStatus::NEDVelocityReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::NEDVelocityReportQOS"/>
-                </data_writer>
-            </publisher>
-            <publisher name="PathReporterSpecsReportPublisher">
-                <data_writer name="PathReporterSpecsReportWriter"
-                    topic_ref="UMAA::SA::PathReporterSpecs::PathReporterSpecsReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::PathReporterSpecsReportQOS"/>
-                </data_writer>
-            </publisher>
-            <publisher name="PathReporterReportPublisher">
-                <data_writer name="PathReporterReportWriter"
-                    topic_ref="UMAA::SA::PathReporterStatus::PathReporterReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::PathReporterReportQOS"/>
-                </data_writer>
-            </publisher>
-            <publisher name="RangeConfigReportPublisher">
-                <data_writer name="RangeConfigReportWriter"
-                    topic_ref="UMAA::SA::RangeConfig::RangeConfigReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::RangeConfigReportQOS"/>
-                </data_writer>
-            </publisher>
-            <publisher name="RangeSpecsReportPublisher">
-                <data_writer name="RangeSpecsReportWriter"
-                    topic_ref="UMAA::SA::RangeSpecs::RangeSpecsReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::RangeSpecsReportQOS"/>
-                </data_writer>
-            </publisher>
-            <publisher name="RangeReportPublisher">
-                <data_writer name="RangeReportWriter" 
-                    topic_ref="UMAA::SA::RangeStatus::RangeReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::RangeReportQOS"/>
-                </data_writer>
-            </publisher>
-            <publisher name="SeaStatusReportPublisher">
-                <data_writer name="SeaStatusReportWriter"
-                    topic_ref="UMAA::SA::SeaStatus::SeaStatusReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::SeaStatusReportQOS"/>
+            <publisher name="SeaStateReportPublisher">
+                <data_writer name="SeaStateReportWriter" 
+                    topic_ref="UMAA::SA::SeaStateReport::SeaStateReport">
+                    <datawriter_qos base_name="UMAAQOSLibrary::SeaStateReportQOS"/>
                 </data_writer>
             </publisher>
             <publisher name="SpeedReportPublisher">
@@ -552,34 +263,10 @@ to use the software.
                     <datawriter_qos base_name="UMAAQOSLibrary::SpeedReportQOS"/>
                 </data_writer>
             </publisher>
-            <publisher name="StillImageConfigReportPublisher">
-                <data_writer name="StillImageConfigReportWriter"
-                    topic_ref="UMAA::SA::StillImageConfig::StillImageConfigReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::StillImageConfigReportQOS"/>
-                </data_writer>
-            </publisher>
-            <publisher name="StillImageSpecsReportPublisher">
-                <data_writer name="StillImageSpecsReportWriter"
-                    topic_ref="UMAA::SA::StillImageSpecs::StillImageSpecsReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::StillImageSpecsReportQOS"/>
-                </data_writer>
-            </publisher>
-            <publisher name="StillImageReportPublisher">
-                <data_writer name="StillImageReportWriter"
-                    topic_ref="UMAA::SA::StillImageStatus::StillImageReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::StillImageReportQOS" />
-                </data_writer>
-            </publisher>
             <publisher name="TranslationalShipMotionReportPublisher">
                 <data_writer name="TranslationalShipMotionReportWriter"
                     topic_ref="UMAA::SA::TranslationalShipMotionStatus::TranslationalShipMotionReport">
                     <datawriter_qos base_name="UMAAQOSLibrary::TranslationalShipMotionReportQOS" />
-                </data_writer>
-            </publisher>
-            <publisher name="VehicleNavigationModeReportPublisher">
-                <data_writer name="VehicleNavigationModeReportWriter"
-                    topic_ref="UMAA::SA::VehicleNavigationModeStatus::VehicleNavigationModeReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::VehicleNavigationModeReportQOS"/>
                 </data_writer>
             </publisher>
             <publisher name="VelocityReportPublisher">
@@ -588,10 +275,10 @@ to use the software.
                     <datawriter_qos base_name="UMAAQOSLibrary::VelocityReportQOS"/>
                 </data_writer>
             </publisher>
-            <publisher name="WaterCurrentStatusReportPublisher">
-                <data_writer name="WaterCurrentStatusReportWriter"
-                    topic_ref="UMAA::SA::WaterCurrentStatus::WaterCurrentStatusReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::WaterCurrentStatusReportQOS" />
+            <publisher name="WaterCurrentReportPublisher">
+                <data_writer name="WaterCurrentReportWriter"
+                    topic_ref="UMAA::SA::WaterCurrentStatus::WaterCurrentReport">
+                    <datawriter_qos base_name="UMAAQOSLibrary::WaterCurrentReportQOS" />
                 </data_writer>
             </publisher>
             <publisher name="WaterspaceReportPublisher">
@@ -600,30 +287,6 @@ to use the software.
                     <datawriter_qos base_name="UMAAQOSLibrary::WaterspaceReportQOS"/>
                 </data_writer>
             </publisher>
-            <publisher name="WeatherStatusReportPublisher">
-                <data_writer name="WeatherStatusReportWriter"
-                    topic_ref="UMAA::SA::WeatherStatus::WeatherStatusReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::WeatherStatusReportQOS" />
-                </data_writer>
-            </publisher>
-            <publisher name="WindStatusReportPublisher">
-                <data_writer name="WindStatusReportWriter" topic_ref="UMAA::SA::WindStatus::WindStatusReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::WindStatusReportQOS" />
-                </data_writer>
-            </publisher>
-
-            <subscriber name="LocalDeadReckoningCommandSubscriber">
-                <data_reader name="LocalDeadReckoningCommandReader"
-                    topic_ref="UMAA::SA::LocalDeadReckoning::LocalDeadReckoningCommand">
-                    <datareader_qos base_name="UMAAQOSLibrary::LocalDeadReckoningCommandQOS"  />
-                </data_reader>
-            </subscriber>
-            <subscriber name="GlobalDeadReckoningCommandSubscriber">
-                <data_reader name="GlobalDeadReckoningCommandReader"
-                    topic_ref="UMAA::SA::GlobalDeadReckoning::GlobalDeadReckoningCommand">
-                    <datareader_qos base_name="UMAAQOSLibrary::GlobalDeadReckoningCommandQOS" />
-                </data_reader>
-            </subscriber>
 
         </domain_participant>
 
@@ -631,58 +294,22 @@ to use the software.
         <domain_participant name="SAUser" domain_ref="UMAASADomainLibrary::UMAADomain0">
             <domain_participant_qos base_name="UMAAQOSLibrary::ParticipantQOS"/>
 
-            <publisher name="LocalDeadReckoningCommandPublisher">
-                <data_writer name="LocalDeadReckoningCommandWriter"
-                    topic_ref="UMAA::SA::LocalDeadReckoning::LocalDeadReckoningCommand">
-                    <datawriter_qos base_name="UMAAQOSLibrary::LocalDeadReckoningCommandQOS" />
-                </data_writer>
-            </publisher>
-            <publisher name="GlobalDeadReckoningCommandPublisher">
-                <data_writer name="GlobalDeadReckoningCommandWriter"
-                    topic_ref="UMAA::SA::GlobalDeadReckoning::GlobalDeadReckoningCommand">
-                    <datawriter_qos base_name="UMAAQOSLibrary::GlobalDeadReckoningCommandQOS" />
-                </data_writer>
-            </publisher>
-            <subscriber name="CompartmentConfigReportSubscriber">
-                <data_reader name="CompartmentConfigReportReader"
-                    topic_ref="UMAA::SA::CompartmentConfig::CompartmentConfigReport">
-                    <datareader_qos base_name="UMAAQOSLibrary::CompartmentConfigReportQOS" />
-                </data_reader>
-            </subscriber>
-            <subscriber name="CompartmentReportSubscriber">
-                <data_reader name="CompartmentConfigReader"
-                    topic_ref="UMAA::SA::CompartmentStatus::CompartmentReport">
-                    <datareader_qos base_name="UMAAQOSLibrary::CompartmentReportQOS" />
-                </data_reader>
-            </subscriber>
-            <subscriber name="ContactCOLREGSClassificationStatusReportSubscriber">
-                <data_reader name="ContactCOLREGSClassificationStatusReportReader"
-                    topic_ref="UMAA::SA::ContactCOLREGSClassificationStatus::ContactCOLREGSClassificationStatusReport">
-                    <datareader_qos base_name="UMAAQOSLibrary::ContactCOLREGSClassificationStatusReportQOS" />
-                </data_reader>
-            </subscriber>
-            <subscriber name="ContactRemovedReportSubscriber">
-                <data_reader name="ContactRemovedReportReader"
-                    topic_ref="UMAA::SA::ContactStatus::ContactRemovedReport">
-                    <datareader_qos base_name="UMAAQOSLibrary::ContactRemovedReportQOS" />
+            <subscriber name="ContactCOLREGSClassificationReportSubscriber">
+                <data_reader name="ContactCOLREGSClassificationReportReader"
+                    topic_ref="UMAA::SA::ContactCOLREGSClassificationStatus::ContactCOLREGSClassificationReport">
+                    <datareader_qos base_name="UMAAQOSLibrary::ContactCOLREGSClassificationReportQOS" />
                 </data_reader>
             </subscriber>
             <subscriber name="ContactReportSubscriber">
                 <data_reader name="ContactReportReader"
-                    topic_ref="UMAA::SA::ContactStatus::ContactReport">
+                    topic_ref="UMAA::SA::ContactReport::ContactReport">
                     <datareader_qos base_name="UMAAQOSLibrary::ContactReportQOS" />
                 </data_reader>
             </subscriber>
-            <subscriber name="ContactReport_ContactsSetSubscriber">
-                <data_reader name="ContactReport_ContactsSetReader"
-                    topic_ref="UMAA::SA::ContactStatus::ContactReportType_ContactsSet">
-                    <datareader_qos base_name="UMAAQOSLibrary::ContactReportType_ContactsSetQOS" />
-                </data_reader>
-            </subscriber>
-            <subscriber name="ContactVisualClassificationStatusReportSubscriber">
-                <data_reader name="ContactVisualClassificationStatusReportReader"
-                    topic_ref="UMAA::SA::ContactVisualClassificationStatus::ContactVisualClassificationStatusReport">
-                    <datareader_qos base_name="UMAAQOSLibrary::ContactVisualClassificationStatusReportQOS" />
+            <subscriber name="ContactVisualClassificationReportSubscriber">
+                <data_reader name="ContactVisualClassificationReportReader"
+                    topic_ref="UMAA::SA::ContactVisualClassificationStatus::ContactVisualClassificationReport">
+                    <datareader_qos base_name="UMAAQOSLibrary::ContactVisualClassificationReportQOS" />
                 </data_reader>
             </subscriber>
             <subscriber name="DateTimeReportSubscriber">
@@ -697,112 +324,28 @@ to use the software.
                     <datareader_qos base_name="UMAAQOSLibrary::ECEFPoseReportQOS" />
                 </data_reader>
             </subscriber>
-            <subscriber name="FeatureImageRemovedReportSubscriber">
-                <data_reader name="FeatureImageRemovedReportReader"
-                    topic_ref="UMAA::SA::FeatureImageStatus::FeatureImageRemovedReport">
-                    <datareader_qos base_name="UMAAQOSLibrary::FeatureImageRemovedReportQOS" />
-                </data_reader>
-            </subscriber>
-            <subscriber name="FeatureImageReportSubscriber">
-                <data_reader name="FeatureImageReportReader"
-                    topic_ref="UMAA::SA::FeatureImageStatus::FeatureImageReport">
-                    <datareader_qos base_name="UMAAQOSLibrary::FeatureImageReportQOS" />
-                </data_reader>
-            </subscriber>
-            <subscriber name="GlobalDeadReckoningCommandReportSubscriber">
-                <data_reader name="GlobalDeadReckoningCommandReportReader"
-                    topic_ref="UMAA::SA::GlobalDeadReckoning::GlobalDeadReckoningCommandReport">
-                    <datareader_qos base_name="UMAAQOSLibrary::GlobalDeadReckoningCommandReportQOS"/>
-                </data_reader>
-            </subscriber>
-            <subscriber name="GlobalDeadReckoningCommandStatusSubscriber">
-                <data_reader name="GlobalDeadReckoningCommandStatusReader"
-                    topic_ref="UMAA::SA::GlobalDeadReckoning::GlobalDeadReckoningCommandStatus">
-                    <datareader_qos base_name="UMAAQOSLibrary::GlobalDeadReckoningCommandStatusQOS"/>
-                </data_reader>
-            </subscriber>
-            <subscriber name="GlobalPoseConfigReportSubscriber">
-                <data_reader name="GlobalPoseConfigReportReader"
-                    topic_ref="UMAA::SA::GlobalPoseConfig::GlobalPoseConfigReport">
-                    <datareader_qos base_name="UMAAQOSLibrary::GlobalPoseConfigReportQOS"/>
-                </data_reader>
-            </subscriber>
             <subscriber name="GlobalPoseReportSubscriber">
                 <data_reader name="GlobalPoseReportReader"
                     topic_ref="UMAA::SA::GlobalPoseStatus::GlobalPoseReport">
                     <datareader_qos base_name="UMAAQOSLibrary::GlobalPoseReportQOS" />
                 </data_reader>
             </subscriber>
-            <subscriber name="ImageRemovedReportSubscriber">
-                <data_reader name="ImageRemovedReportReader"
-                    topic_ref="UMAA::SA::ImageStatus::ImageRemovedReport">
-                    <datareader_qos base_name="UMAAQOSLibrary::ImageRemovedReportQOS" />
+            <subscriber name="MagneticVariationSpecsReportSubscriber">
+                <data_reader name="MagneticVariationSpecsReportReader"
+                    topic_ref="UMAA::SA::MagneticVariationSpecs::MagneticVariationSpecsReport">
+                    <datareader_qos base_name="UMAAQOSLibrary::MagneticVariationSpecsReportQOS"/>
                 </data_reader>
             </subscriber>
-            <subscriber name="ImageReportSubscriber">
-                <data_reader name="ImageReportReader" 
-                    topic_ref="UMAA::SA::ImageStatus::ImageReport">
-                    <datareader_qos base_name="UMAAQOSLibrary::ImageReportQOS" />
+            <subscriber name="MagneticVariationReportSubscriber">
+                <data_reader name="MagneticVariationReportReader"
+                    topic_ref="UMAA::SA::MagneticVariationStatus::MagneticVariationReport">
+                    <datareader_qos base_name="UMAAQOSLibrary::MagneticVariationReportQOS"/>
                 </data_reader>
             </subscriber>
-            <subscriber name="LocalDeadReckoningCommandReportSubscriber">
-                <data_reader name="LocalDeadReckoningCommandReportReader"
-                    topic_ref="UMAA::SA::LocalDeadReckoning::LocalDeadReckoningCommandReport">
-                    <datareader_qos base_name="UMAAQOSLibrary::LocalDeadReckoningCommandReportQOS" />
-                </data_reader>
-            </subscriber>
-            <subscriber name="LocalDeadReckoningCommandStatusSubscriber">
-                <data_reader name="LocalDeadReckoningCommandStatusReader"
-                    topic_ref="UMAA::SA::LocalDeadReckoning::LocalDeadReckoningCommandStatus">
-                    <datareader_qos base_name="UMAAQOSLibrary::LocalDeadReckoningCommandStatusQOS" />
-                </data_reader>
-            </subscriber>
-            <subscriber name="LocalPoseReportSubscriber">
-                <data_reader name="LocalPoseReportReader"
-                    topic_ref="UMAA::SA::LocalPoseStatus::LocalPoseReport">
-                    <datareader_qos base_name="UMAAQOSLibrary::LocalPoseReportQOS" />
-                </data_reader>
-            </subscriber>
-            <subscriber name="NEDVelocityReportSubscriber">
-                <data_reader name="NEDVelocityReportReader"
-                    topic_ref="UMAA::SA::NEDVelocityStatus::NEDVelocityReport">
-                    <datareader_qos base_name="UMAAQOSLibrary::NEDVelocityReportQOS" />
-                </data_reader>
-            </subscriber>
-            <subscriber name="PathReporterSpecsReportSubscriber">
-                <data_reader name="PathReporterSpecsReportReader"
-                    topic_ref="UMAA::SA::PathReporterSpecs::PathReporterSpecsReport">
-                    <datareader_qos base_name="UMAAQOSLibrary::PathReporterSpecsReportQOS" />
-                </data_reader>
-            </subscriber>
-            <subscriber name="PathReporterReportSubscriber">
-                <data_reader name="PathReporterReportReader"
-                    topic_ref="UMAA::SA::PathReporterStatus::PathReporterReport">
-                    <datareader_qos base_name="UMAAQOSLibrary::PathReporterReportQOS"/>
-                </data_reader>
-            </subscriber>
-            <subscriber name="RangeConfigReportSubscriber">
-                <data_reader name="RangeConfigReportReader"
-                    topic_ref="UMAA::SA::RangeConfig::RangeConfigReport">
-                    <datareader_qos base_name="UMAAQOSLibrary::RangeConfigReportQOS"/>
-                </data_reader>
-            </subscriber>
-            <subscriber name="RangeSpecsReportSubscriber">
-                <data_reader name="RangeSpecsReportReader"
-                    topic_ref="UMAA::SA::RangeSpecs::RangeSpecsReport">
-                    <datareader_qos base_name="UMAAQOSLibrary::RangeSpecsReportQOS"/>
-                </data_reader>
-            </subscriber>
-            <subscriber name="RangeReportSubscriber">
-                <data_reader name="RangeReportReader" 
-                    topic_ref="UMAA::SA::RangeStatus::RangeReport">
-                    <datareader_qos base_name="UMAAQOSLibrary::RangeReportQOS"/>
-                </data_reader>
-            </subscriber>
-            <subscriber name="SeaStatusReportSubscriber">
-                <data_reader name="SeaStatusReportReader"
-                    topic_ref="UMAA::SA::SeaStatus::SeaStatusReport">
-                    <datareader_qos base_name="UMAAQOSLibrary::SeaStatusReportQOS"/>
+            <subscriber name="SeaStateReportSubscriber">
+                <data_reader name="SeaStateReportReader" 
+                    topic_ref="UMAA::SA::SeaStateReport::SeaStateReport">
+                    <datareader_qos base_name="UMAAQOSLibrary::SeaStateReportQOS"/>
                 </data_reader>
             </subscriber>
             <subscriber name="SpeedReportSubscriber">
@@ -811,34 +354,10 @@ to use the software.
                     <datareader_qos base_name="UMAAQOSLibrary::SpeedReportQOS"/>
                 </data_reader>
             </subscriber>
-            <subscriber name="StillImageConfigReportSubscriber">
-                <data_reader name="StillImageConfigReportReader"
-                    topic_ref="UMAA::SA::StillImageConfig::StillImageConfigReport">
-                    <datareader_qos base_name="UMAAQOSLibrary::StillImageConfigReportQOS" />
-                </data_reader>
-            </subscriber>
-            <subscriber name="StillImageSpecsReportSubscriber">
-                <data_reader name="StillImageSpecsReportReader"
-                    topic_ref="UMAA::SA::StillImageSpecs::StillImageSpecsReport">
-                    <datareader_qos base_name="UMAAQOSLibrary::StillImageSpecsReportQOS" />
-                </data_reader>
-            </subscriber>
-            <subscriber name="StillImageReportSubscriber">
-                <data_reader name="StillImageReportReader"
-                    topic_ref="UMAA::SA::StillImageStatus::StillImageReport">
-                    <datareader_qos base_name="UMAAQOSLibrary::StillImageReportQOS" />
-                </data_reader>
-            </subscriber>
             <subscriber name="TranslationalShipMotionReportSubscriber">
                 <data_reader name="TranslationalShipMotionReportReader"
                     topic_ref="UMAA::SA::TranslationalShipMotionStatus::TranslationalShipMotionReport">
                     <datareader_qos base_name="UMAAQOSLibrary::TranslationalShipMotionReportQOS" />
-                </data_reader>
-            </subscriber>
-            <subscriber name="VehicleNavigationModeReportSubscriber">
-                <data_reader name="VehicleNavigationModeReportReader"
-                    topic_ref="UMAA::SA::VehicleNavigationModeStatus::VehicleNavigationModeReport">
-                    <datareader_qos base_name="UMAAQOSLibrary::VehicleNavigationModeReportQOS" />
                 </data_reader>
             </subscriber>
             <subscriber name="VelocityReportSubscriber">
@@ -847,28 +366,16 @@ to use the software.
                     <datareader_qos base_name="UMAAQOSLibrary::VelocityReportQOS" />
                 </data_reader>
             </subscriber>
-            <subscriber name="WaterCurrentStatusReportSubscriber">
-                <data_reader name="WaterCurrentStatusReportReader"
-                    topic_ref="UMAA::SA::WaterCurrentStatus::WaterCurrentStatusReport">
-                    <datareader_qos base_name="UMAAQOSLibrary::WaterCurrentStatusReportQOS" />
+            <subscriber name="WaterCurrentReportSubscriber">
+                <data_reader name="WaterCurrentReportReader"
+                    topic_ref="UMAA::SA::WaterCurrentStatus::WaterCurrentReport">
+                    <datareader_qos base_name="UMAAQOSLibrary::WaterCurrentReportQOS" />
                 </data_reader>
             </subscriber>
             <subscriber name="WaterspaceReportSubscriber">
                 <data_reader name="WaterspaceReportReader"
                     topic_ref="UMAA::SA::WaterspaceStatus::WaterspaceReport">
                     <datareader_qos base_name="UMAAQOSLibrary::WaterspaceReportQOS"/>
-                </data_reader>
-            </subscriber>
-            <subscriber name="WeatherStatusReportSubscriber">
-                <data_reader name="WeatherStatusReportReader"
-                    topic_ref="UMAA::SA::WeatherStatus::WeatherStatusReport">
-                    <datareader_qos base_name="UMAAQOSLibrary::WeatherStatusReportQOS" />
-                </data_reader>
-            </subscriber>
-            <subscriber name="WindStatusReportSubscriber">
-                <data_reader name="WindStatusReportReader"
-                    topic_ref="UMAA::SA::WindStatus::WindStatusReport">
-                    <datareader_qos base_name="UMAAQOSLibrary::WindStatusReportQOS" />
                 </data_reader>
             </subscriber>
 

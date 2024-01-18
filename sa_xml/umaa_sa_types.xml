@@ -21,46 +21,19 @@ to use the software.
 
     <!-- SA Data types files. Reference converted XML files in UMAA directory-->
     <types>
-        <include file="$(UMAA_HOME)/UMAA/SA/AccelerationStatus/AccelerationReportType.xml" />
-        <include file="$(UMAA_HOME)/UMAA/SA/CompartmentConfig/CompartmentConfigReportType.xml" />
-        <include file="$(UMAA_HOME)/UMAA/SA/CompartmentStatus/CompartmentReportType.xml" />
-        <include file="$(UMAA_HOME)/UMAA/SA/ContactCOLREGSClassificationStatus/ContactCOLREGSClassificationStatusReportType.xml" />
-        <include file="$(UMAA_HOME)/UMAA/SA/ContactStatus/ContactRemovedReportType.xml" />
-        <include file="$(UMAA_HOME)/UMAA/SA/ContactStatus/ContactReportType.xml" />
-        <include file="$(UMAA_HOME)/UMAA/SA/ContactVisualClassificationStatus/ContactVisualClassificationStatusReportType.xml" />
-        <include file="$(UMAA_HOME)/UMAA/SA/CTDStatus/CTDReportType.xml" />
+        <include file="$(UMAA_HOME)/UMAA/SA/ContactCOLREGSClassificationStatus/ContactCOLREGSClassificationReportType.xml" />
+        <include file="$(UMAA_HOME)/UMAA/SA/ContactReport/ContactReportType.xml" />
+        <include file="$(UMAA_HOME)/UMAA/SA/ContactVisualClassificationStatus/ContactVisualClassificationReportType.xml" />
         <include file="$(UMAA_HOME)/UMAA/SA/DateTimeStatus/DateTimeReportType.xml" />
         <include file="$(UMAA_HOME)/UMAA/SA/ECEFPoseStatus/ECEFPoseReportType.xml" />
-        <include file="$(UMAA_HOME)/UMAA/SA/FeatureImageStatus/FeatureImageRemovedReportType.xml" />
-        <include file="$(UMAA_HOME)/UMAA/SA/FeatureImageStatus/FeatureImageReportType.xml" />
-        <include file="$(UMAA_HOME)/UMAA/SA/GlobalDeadReckoning/GlobalDeadReckoningCommandReportType.xml" />
-        <include file="$(UMAA_HOME)/UMAA/SA/GlobalDeadReckoning/GlobalDeadReckoningCommandStatusType.xml" />
-        <include file="$(UMAA_HOME)/UMAA/SA/GlobalDeadReckoning/GlobalDeadReckoningCommandType.xml" />
-        <include file="$(UMAA_HOME)/UMAA/SA/GlobalPoseConfig/GlobalPoseConfigReportType.xml" />
         <include file="$(UMAA_HOME)/UMAA/SA/GlobalPoseStatus/GlobalPoseReportType.xml" />
-        <include file="$(UMAA_HOME)/UMAA/SA/FeatureImageStatus/FeatureImageRemovedReportType.xml" />
-        <include file="$(UMAA_HOME)/UMAA/SA/ImageStatus/ImageReportType.xml" />
-        <include file="$(UMAA_HOME)/UMAA/SA/LocalDeadReckoning/LocalDeadReckoningCommandReportType.xml" />
-        <include file="$(UMAA_HOME)/UMAA/SA/LocalDeadReckoning/LocalDeadReckoningCommandStatusType.xml" />
-        <include file="$(UMAA_HOME)/UMAA/SA/LocalDeadReckoning/LocalDeadReckoningCommandType.xml" />
-        <include file="$(UMAA_HOME)/UMAA/SA/LocalPoseStatus/LocalPoseReportType.xml" />
-        <include file="$(UMAA_HOME)/UMAA/SA/NEDVelocityStatus/NEDVelocityReportType.xml" />
-        <include file="$(UMAA_HOME)/UMAA/SA/PathReporterSpecs/PathReporterSpecsReportType.xml" />
-        <include file="$(UMAA_HOME)/UMAA/SA/PathReporterStatus/PathReporterReportType.xml" />
-        <include file="$(UMAA_HOME)/UMAA/SA/RangeConfig/RangeConfigReportType.xml" />
-        <include file="$(UMAA_HOME)/UMAA/SA/RangeSpecs/RangeSpecsReportType.xml" />
-        <include file="$(UMAA_HOME)/UMAA/SA/RangeStatus/RangeReportType.xml" />
-        <include file="$(UMAA_HOME)/UMAA/SA/SeaStatus/SeaStatusReportType.xml" />
+        <include file="$(UMAA_HOME)/UMAA/SA/MagneticVariationSpecs/MagneticVariationSpecsReportType.xml" />
+        <include file="$(UMAA_HOME)/UMAA/SA/MagneticVariationStatus/MagneticVariationReportType.xml" />
+        <include file="$(UMAA_HOME)/UMAA/SA/SeaStateReport/SeaStateReportType.xml" />
         <include file="$(UMAA_HOME)/UMAA/SA/SpeedStatus/SpeedReportType.xml" />
-        <include file="$(UMAA_HOME)/UMAA/SA/StillImageConfig/StillImageConfigReportType.xml" />
-        <include file="$(UMAA_HOME)/UMAA/SA/StillImageSpecs/StillImageSpecsReportType.xml" />
-        <include file="$(UMAA_HOME)/UMAA/SA/StillImageStatus/StillImageReportType.xml" />
         <include file="$(UMAA_HOME)/UMAA/SA/TranslationalShipMotionStatus/TranslationalShipMotionReportType.xml" />
-        <include file="$(UMAA_HOME)/UMAA/SA/VehicleNavigationModeStatus/VehicleNavigationModeReportType.xml" />
         <include file="$(UMAA_HOME)/UMAA/SA/VelocityStatus/VelocityReportType.xml" />
-        <include file="$(UMAA_HOME)/UMAA/SA/WaterCurrentStatus/WaterCurrentStatusReportType.xml" />
+        <include file="$(UMAA_HOME)/UMAA/SA/WaterCurrentStatus/WaterCurrentReportType.xml" />
         <include file="$(UMAA_HOME)/UMAA/SA/WaterspaceStatus/WaterspaceReportType.xml" />
-        <include file="$(UMAA_HOME)/UMAA/SA/WeatherStatus/WeatherStatusReportType.xml" />
-        <include file="$(UMAA_HOME)/UMAA/SA/WindStatus/WindStatusReportType.xml" />
     </types>
 </dds>
