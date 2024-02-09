@@ -18,7 +18,7 @@ to use the software.
 
     <!-- SA Data types file -->
     <types>
-        <include file="UMAA_SA_types.xml"/>
+        <include file="umaa_sa_types.xml"/>
     </types>
 
 
@@ -290,8 +290,8 @@ to use the software.
 
         </domain_participant>
 
-        <!-- Define the entities for the SA USER - Associate with Topics and QOS -->
-        <domain_participant name="SAUser" domain_ref="UMAASADomainLibrary::UMAADomain0">
+        <!-- Define the entities for the SA Consumer - Associate with Topics and QOS -->
+        <domain_participant name="SAConsumer" domain_ref="UMAASADomainLibrary::UMAADomain0">
             <domain_participant_qos base_name="UMAAQOSLibrary::ParticipantQOS"/>
 
             <subscriber name="ContactCOLREGSClassificationReportSubscriber">

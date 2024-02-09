@@ -75,7 +75,7 @@ SOURCES =
 
 COMMONSOURCES = $(notdir $(SOURCES))
 
-EXEC          = sa_provider sa_user
+EXEC          = sa_provider sa_consumer
 DIRECTORIES   = objs.dir objs/$(TARGET_ARCH).dir
 COMMONOBJS    = $(COMMONSOURCES:%.cxx=objs/$(TARGET_ARCH)/%.o) 
 
@@ -97,6 +97,7 @@ objs/$(TARGET_ARCH)/% : objs/$(TARGET_ARCH)/%.o
 		$(UMAA_HOME)/UMAA/Common/OrderedEnumeration/objs/$(TARGET_ARCH)/*.o\
 		$(UMAA_HOME)/UMAA/Common/PrimitiveConstrained/objs/$(TARGET_ARCH)/*.o\
 		$(UMAA_HOME)/UMAA/SA/VelocityStatus/objs/$(TARGET_ARCH)/*.o\
+		$(UMAA_HOME)/UMAA/SA/WaterCurrentStatus/objs/$(TARGET_ARCH)/*.o\
 		$(LIBS)
 
 # Compiler

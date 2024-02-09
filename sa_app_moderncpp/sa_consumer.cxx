@@ -19,7 +19,9 @@
 
 
 // Include header for Compiled Type
-#include "UMAA/SA/VelocityStatus/VelocityReportType.hpp"  
+#include "UMAA/SA/VelocityStatus/VelocityReportType.hpp"
+#include "UMAA/SA/WaterCurrentStatus/WaterCurrentReportType.hpp"
+
 
 #include "application.hpp"  // Argument parsing
 #include "umaa_sa_consts.hpp"
@@ -32,8 +34,30 @@ unsigned int process_velocity_data(
 {
     // Take all samples.  Samples are loaned to application, loan is
     // returned when LoanedSamples destructor called.
+    std::cout << "RECEIVED VELOCITY DATA" << std::endl;
+
     unsigned int samples_read = 0;
     dds::sub::LoanedSamples<UMAA::SA::VelocityStatus::VelocityReportType> samples =
+            reader.take();
+    for (const auto &sample : samples) {
+        if (sample.info().valid()) {
+            samples_read++;
+            std::cout << sample.data() << std::endl;
+        }
+    }
+
+    return samples_read;
+}
+
+unsigned int process_watercurrent_data(
+        dds::sub::DataReader<UMAA::SA::WaterCurrentStatus::WaterCurrentReportType> &reader)
+{
+    // Take all samples.  Samples are loaned to application, loan is
+    // returned when LoanedSamples destructor called.
+    std::cout << "RECEIVED WATERCURRENT DATA" << std::endl;
+
+    unsigned int samples_read = 0;
+    dds::sub::LoanedSamples<UMAA::SA::WaterCurrentStatus::WaterCurrentReportType> samples =
             reader.take();
     for (const auto &sample : samples) {
         if (sample.info().valid()) {
@@ -49,6 +73,8 @@ unsigned int process_speed_data(dds::sub::DataReader<DynamicData> &reader)
 {
     // Take all samples.  Samples are loaned to application, loan is
     // returned when LoanedSamples destructor called.
+    std::cout << "RECEIVED SPEED DATA" << std::endl;
+
     unsigned int samples_read = 0;
     dds::sub::LoanedSamples<DynamicData> samples = reader.take();
     for (const auto &sample : samples) {
@@ -70,6 +96,9 @@ void run_example(unsigned int domain_id, unsigned int sample_count)
     // registered for use before looking up a Dynamic Data type reference in xml
     rti::domain::register_type<UMAA::SA::VelocityStatus::VelocityReportType>(
             "VelocityReportType");
+
+    rti::domain::register_type<UMAA::SA::WaterCurrentStatus::WaterCurrentReportType>(
+            "WaterCurrentReportType");
 
     //------------------ END COMPILED TYPES REGISTRATION-----------------------
 
@@ -97,7 +126,7 @@ void run_example(unsigned int domain_id, unsigned int sample_count)
     // participant, registers the types, and creates the child publisher,
     // subscriber, reader and writer.
     dds::domain::DomainParticipant participant =
-            qos_provider->create_participant_from_config(SA_USER);
+            qos_provider->create_participant_from_config(SA_CONSUMER);
 
 
     //--------------------START COMPILED TYPES USAGE----------------------------
@@ -108,23 +137,48 @@ void run_example(unsigned int domain_id, unsigned int sample_count)
                     participant,
                     VELOCITYREPORTREADER);
 
+    dds::sub::DataReader<UMAA::SA::WaterCurrentStatus::WaterCurrentReportType> watercurrent_report_reader =
+            rti::sub::find_datareader_by_name<
+                    dds::sub::DataReader<UMAA::SA::WaterCurrentStatus::WaterCurrentReportType>>(
+                    participant,
+                    WATERCURRENTREPORTREADER);
+
+    
+
     // Enable the reader
     velocity_report_reader.enable();
+    watercurrent_report_reader.enable();
 
     // Obtain the DataReader's Status Condition
     dds::core::cond::StatusCondition velocity_status_condition(velocity_report_reader);
+
+    dds::core::cond::StatusCondition watercurrent_status_condition(watercurrent_report_reader);
 
     // Enable the 'data available' status.
     velocity_status_condition.enabled_statuses(
             dds::core::status::StatusMask::data_available());
 
+    watercurrent_status_condition.enabled_statuses(
+            dds::core::status::StatusMask::data_available());
+
+    
+
     // Associate a handler with the status condition. This will run when the
     // condition is triggered, in the context of the dispatch call (see below)
-    unsigned int samples_read = 0;
+    
+    unsigned int velocity_samples_read = 0;
     velocity_status_condition.extensions().handler(
-            [&velocity_report_reader, &samples_read]() {
-                samples_read += process_velocity_data(velocity_report_reader);
+            [&velocity_report_reader, &velocity_samples_read]() {
+                velocity_samples_read += process_velocity_data(velocity_report_reader);
             });
+
+    unsigned int watercurrent_samples_read = 0;
+    watercurrent_status_condition.extensions().handler(
+            [&watercurrent_report_reader, &watercurrent_samples_read]() {
+                watercurrent_samples_read += process_watercurrent_data(watercurrent_report_reader);
+            });
+
+
     //--------------------END COMPILED TYPES USAGE------------------------------
 
 
@@ -152,9 +206,10 @@ void run_example(unsigned int domain_id, unsigned int sample_count)
 
     // Associate a handler with the status condition. This will run when the
     // condition is triggered, in the context of the dispatch call (see below)
+    unsigned int speed_samples_read = 0;
     speed_status_condition.extensions().handler(
-            [&speed_report_reader, &samples_read]() {
-                samples_read += process_speed_data(speed_report_reader);
+            [&speed_report_reader, &speed_samples_read]() {
+                speed_samples_read += process_speed_data(speed_report_reader);
             });
 
     //------------------END DYNAMIC TYPES USAGE---------------------------------
@@ -164,11 +219,12 @@ void run_example(unsigned int domain_id, unsigned int sample_count)
     dds::core::cond::WaitSet waitset;
     waitset += velocity_status_condition;
     waitset += speed_status_condition;
+    waitset += watercurrent_status_condition;
 
-    while (!shutdown_requested && samples_read < sample_count) {
+    while (!shutdown_requested) {
         // Dispatch will call the handlers associated to the WaitSet conditions
         // when they activate
-        std::cout << "SA USER sleeping for 4 sec..." << std::endl;
+        std::cout << "SA CONSUMER sleeping for 4 sec..." << std::endl;
 
         waitset.dispatch(dds::core::Duration(4));  // Wait up to 4s each time
     }

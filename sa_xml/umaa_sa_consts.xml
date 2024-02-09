@@ -17,7 +17,7 @@ to use the software.
 <types>
 <const name="SA_XML_FILE" type="string" value="&quot;../sa_xml/UMAA_SA.xml&quot;"/>
 <const name="SA_PROVIDER" type="string" value="&quot;UMAAParticipantLibrary::SAProvider&quot;"/>
-<const name="SA_USER" type="string" value="&quot;UMAAParticipantLibrary::SAUser&quot;"/>
+<const name="SA_CONSUMER" type="string" value="&quot;UMAAParticipantLibrary::SAConsumer&quot;"/>
 <const name="ACCELLERATIONREPORTWRITER" type="string" value="&quot;AccellerationReportPublisher::AccellerationReportWriter&quot;"/>
 <const name="COMPAUTMENTCONFIGREPORTWRITER" type="string" value="&quot;CompartmentConfigReportPublisher::CompartmentConfigReportWriter&quot;"/>
 <const name="COMPARTMENTCONFIGWRITER" type="string" value="&quot;CompartmentConfigPublisher::CompartmentConfigWriter&quot;"/>

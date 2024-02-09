@@ -3,11 +3,11 @@ const string SA_XML_FILE = "../sa_xml/umaa_sa_entities.xml";
 
 // Participants
 const string SA_PROVIDER = "UMAAParticipantLibrary::SAProvider";
-const string SA_USER = "UMAAParticipantLibrary::SAUser";
+const string SA_CONSUMER = "UMAAParticipantLibrary::SAConsumer";
 
 
 // Writers
-const string COMPAUTMENTCONFIGREPORTWRITER = "CompartmentConfigReportPublisher::CompartmentConfigReportWriter";
+const string COMPARTMENTCONFIGREPORTWRITER = "CompartmentConfigReportPublisher::CompartmentConfigReportWriter";
 const string COMPARTMENTCONFIGWRITER = "CompartmentConfigPublisher::CompartmentConfigWriter";
 const string CONTACTCOLREGSCLASSIFICATIONSTATUSREPORTWRITER = "ContactCOLREGSClassificationStatusReportPublisher::ContactCOLREGSClassificationStatusReportWriter";
 const string CONTACTREMOVEDREPORTWRITER = "ContactRemovedReportPublisher::ContactRemovedReportWriter";
@@ -41,7 +41,7 @@ const string STILLIMAGEREPORTWRITER = "StillImageReportPublisher::StillImageRepo
 const string TRANSLATIONALSHIPMOTIONREPORTWRITER = "TranslationalShipMotionReportPublisher::TranslationalShipMotionReportWriter";
 const string VEHICLENAVIGATIONMODEREPORTWRITER = "VehicleNavigationModeReportPublisher::VehicleNavigationModeReportWriter";
 const string VELOCITYREPORTWRITER = "VelocityReportPublisher::VelocityReportWriter";
-const string WATERCURRENTSTATUSREPORTWRITER = "WaterCurrentStatusReportPublisher::WaterCurrentStatusReportWriter";
+const string WATERCURRENTREPORTWRITER = "WaterCurrentReportPublisher::WaterCurrentReportWriter";
 const string WATERSPACEREPORTWRITER = "WaterspaceReportPublisher::WaterspaceReportWriter";
 const string WEATHERSTATUSREPORTWRITER = "WeatherStatusReportPublisher::WeatherStatusReportWriter";
 const string WINDSTATUSREPORTWRITER = "WindStatusReportPublisher::WindStatusReportWriter";

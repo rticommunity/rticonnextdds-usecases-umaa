@@ -21,7 +21,9 @@
 #include "umaa_sa_consts.hpp"
 
 // Include header for Compiled Type
-#include "UMAA/SA/VelocityStatus/VelocityReportType.hpp"  
+#include "UMAA/SA/VelocityStatus/VelocityReportType.hpp" 
+#include "UMAA/SA/WaterCurrentStatus/WaterCurrentReportType.hpp"
+
 
 using namespace application;
 using namespace dds::core::xtypes;
@@ -35,6 +37,9 @@ void run_example(unsigned int domain_id, unsigned int sample_count)
     // registered for use before looking up a Dynamic Data type reference in xml
     rti::domain::register_type<UMAA::SA::VelocityStatus::VelocityReportType>(
             "VelocityReportType");
+
+    rti::domain::register_type<UMAA::SA::WaterCurrentStatus::WaterCurrentReportType>(
+            "WaterCurrentReportType");
 
     //-------------END COMPILED TYPES REGISTRATION------------------------------
 
@@ -74,14 +79,22 @@ void run_example(unsigned int domain_id, unsigned int sample_count)
                     participant,
                     VELOCITYREPORTWRITER);
 
-    // Enable the writer
+    dds::pub::DataWriter<UMAA::SA::WaterCurrentStatus::WaterCurrentReportType> watercurrent_report_writer =
+            rti::pub::find_datawriter_by_name<
+                    dds::pub::DataWriter<UMAA::SA::WaterCurrentStatus::WaterCurrentReportType>>(
+                    participant,
+                    WATERCURRENTREPORTWRITER);
+
+
+    // Enable the writers
     velocity_report_writer.enable();
+    watercurrent_report_writer.enable();
 
 
-    // Create data velocity_report_sample for writing
+    // Create data data samples for writing
     UMAA::SA::VelocityStatus::VelocityReportType velocity_report_sample;
-    UMAA::Common::Measurement::NumericGUID source_id;
-    source_id.fill(5);
+    UMAA::SA::WaterCurrentStatus::WaterCurrentReportType watercurrent_report_sample;
+
     //------------------END COMPILED TYPES USAGE--------------------------------
 
 
@@ -116,10 +129,16 @@ void run_example(unsigned int domain_id, unsigned int sample_count)
 
             // Fill and Write Velocity Report Sample
             velocity_report_sample.velocity().eastSpeed(28 + rand);
-            velocity_report_sample.source(source_id);
             velocity_report_writer.write(velocity_report_sample);
             printf("Publishing Velocity East Speed : %.2f \n",
                    velocity_report_sample.velocity().eastSpeed());
+
+            // Fill and Write Water Current Report Sample
+            watercurrent_report_sample.currentSet(8.0);
+            watercurrent_report_writer.write(watercurrent_report_sample);
+            printf("Publishing WaterCurrent : %.2f \n",
+                   watercurrent_report_sample.currentSet());
+
 
             // Fill and write Speed Report
             speed_report_sample.value("speedThroughWater", 0.2 + rand);
