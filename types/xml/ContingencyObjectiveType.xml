@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.2.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="./EnumerationSets.xml"/>
+<include file="./MaritimeEnumerationSets.xml"/>
+<include file="./GeoPosition2D.xml"/>
+<include file="./Measurements.xml"/>
+<include file="./ConstrainedTypes.xml"/>
+<include file="./DateTimeRequirement.xml"/>
+<module name="UMAA">
+  <module name="MM">
+    <module name="BaseType">
+      <struct name= "ContingencyObjectiveType">
+        <member name="altitude" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::GeodeticAltitude"/>
+        <member name="altitudeAGL" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DistanceAGL"/>
+        <member name="altitudeASF" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DistanceASF"/>
+        <member name="behavior" type="nonBasic"  nonBasicTypeName= "UMAA::Common::MaritimeEnumeration::ContingencyBehaviorEnumModule::ContingencyBehaviorEnumType"/>
+        <member name="depth" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DistanceBSL"/>
+        <member name="DTEDAltitude" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance"/>
+        <member name="mode" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::StringShortDescription"/>
+        <member name="position" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::GeoPosition2D"/>
+        <member name="radius" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance"/>
+        <member name="safeAltitude" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance"/>
+        <member name="safeAltitudeOffset" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance"/>
+        <member name="speed" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Speed"/>
+        <member name="vehicleRunTime" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DurationHours"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

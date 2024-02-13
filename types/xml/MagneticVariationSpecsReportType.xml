@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.2.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="./Measurements.xml"/>
+<include file="./MagneticDeviationType.xml"/>
+<module name="UMAA">
+  <module name="SA">
+    <module name="MagneticVariationSpecs">
+      <const name="MagneticVariationSpecsReportTopic" type="string" value="&quot;UMAA::SA::MagneticVariationSpecs::MagneticVariationSpecsReport&quot;"/>
+      <struct name= "MagneticVariationSpecsReportType">
+        <member name="magneticDeviation" sequenceMaxLength="360" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Orientation::MagneticDeviationType"/>
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

@@ -13,20 +13,22 @@ if [[ -z "${NDDSHOME}" ]]; then
     exit 1;
 fi
 
-# Strip out version number
-dds_vers=$(echo "$NDDSHOME" | grep -o '[0-9]' | head -1)
-echo "USING DDS VERSION: " $dds_vers
+# Check UMAA_TYPES variable
+if [[ -z "${UMAA_TYPES}" ]]; then
+    echo "Must set the UMAA_TYPES environment variable "
+    exit 1;
+fi
+
 
 echo "Generating XML type files"
-if [[ $dds_vers == 6 ]]; 
-then
-    echo "Backwards compatible mode"
-    find $UMAA_HOME/UMAA $UMAA_HOME/BasicTypes -maxdepth 5 -mindepth 1  -type f \
-    -iname '*.idl' -print -exec rtiddsgen -I $UMAA_HOME -convertToXML {} \;
-else # Use recursion flag if > 7.x
-    rtiddsgen -I $UMAA_HOME -convertToXML -inputIdl $UMAA_HOME/UMAA $UMAA_HOME/BasicTypes -r
+find $UMAA_TYPES/idl/UMAA $UMAA_TYPES/idl/BasicTypes -maxdepth 5 -mindepth 1  -type f \
+-iname '*.idl' -print -exec rtiddsgen -I $UMAA_TYPES/idl -convertToXML {} -d $UMAA_TYPES/xml \;
 
-fi
+# Flatten includes to same folder
+echo "Modifying xml files"
+find $UMAA_TYPES/xml -type f -iname '*.xml' -print \
+-exec sed -i -r 's/<include.*(\/.*\/)/<include file=".\1/g' {} \;
+
 
 duration=$SECONDS
 echo "$(($duration / 60)) minutes and $(($duration % 60)) seconds elapsed."
