@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# This script just iterates through all the folders in the $UMAA_HOME directory, 
-# creates the typefiles, then modifies the generated makefiles to add the $UMAA_HOME
+# This script just iterates through all the folders in the $UMAA_IDL directory, 
+# creates the typefiles, then modifies the generated makefiles to add the $UMAA_IDL
 # to the list of includes, and finally calls make on all the modified makefiles.
 
 dir=$PWD
@@ -21,6 +21,12 @@ if [[ -z "${NDDSHOME}" ]]; then
     exit 1;
 fi
 
+# Check UMAA_IDL variable
+if [[ -z "${UMAA_IDL}" ]]; then
+    echo "Must set the UMAA_IDL environment variable "
+    exit 1;
+fi
+
 # Strip out version number
 dds_vers=$(echo "$NDDSHOME" | grep -o '[0-9]' | head -1)
 echo "USING DDS VERSION: " $dds_vers
@@ -34,21 +40,20 @@ if [[ "$cpp_vers" == "c++98" ]]; then
     fi
 fi
 
-
 # Find all IDL files and call rtiddsgen on them
 echo "Generating type files"
-find $UMAA_HOME -maxdepth 5 -mindepth 1  -type f \
-    -iname '*.idl' -print -exec rtiddsgen -I $UMAA_HOME -language $cpp_vers \
+find $UMAA_IDL/UMAA $UMAA_IDL/BasicTypes -maxdepth 5 -mindepth 1  -type f \
+    -iname '*.idl' -print -exec rtiddsgen -I $UMAA_IDL -language $cpp_vers \
     -update typeFiles -update makefiles -platform $NDDSTARGET $cond_arg {} \;
 
-# Find all generated makefiles and add the UMAA_HOME include to them
+# Find all generated makefiles and add the UMAA_IDL include to them
 echo "Modifying makefiles"
-find $UMAA_HOME/UMAA $UMAA_HOME/BasicTypes -maxdepth 5 -mindepth 1  -type f \
-    -iname 'makefile_*' -print -exec sed -i 's/INCLUDES = -I./INCLUDES = -I${UMAA_HOME}'/g {} \;
+find $UMAA_IDL/UMAA $UMAA_IDL/BasicTypes -maxdepth 5 -mindepth 1  -type f \
+    -iname 'makefile_*' -print -exec sed -i 's/INCLUDES = -I./INCLUDES = -I${UMAA_IDL}'/g {} \;
 
 # Call make on all generated makefiles
 echo "Building types"
-find $UMAA_HOME/UMAA $UMAA_HOME/BasicTypes -maxdepth 5 -mindepth 1  -type f \
+find $UMAA_IDL/UMAA $UMAA_IDL/BasicTypes -maxdepth 5 -mindepth 1  -type f \
     -iname 'makefile_*' -print -execdir make -f {} \;
 
 duration=$SECONDS
