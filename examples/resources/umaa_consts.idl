@@ -1,0 +1,23 @@
+// Resources
+const string UMAA_ENTITIES = "../components/umaa_entities.xml";
+
+// Participants
+const string ANCHORCONTROLLER = "UMAAParticipantLibrary::AnchorController";
+const string AUTONOMY = "UMAAParticipantLibrary::Autonomy";
+
+
+//Topics
+const string ANCHORREPORTWRITER = "AnchorReportPublisher::AnchorReportWriter";
+const string ANCHORREPORTREADER = "AnchorReportSubscriber::AnchorReportReader";
+
+const string ANCHORCOMMANDSTATUSWRITER = "AnchorCommandStatusPublisher::AnchorCommandStatusWriter";
+const string ANCHORCOMMANDSTATUSREADER = "AnchorCommandStatusSubscriber::AnchorCommandStatusReader";
+
+const string ANCHORCOMMANDWRITER = "AnchorCommandPublisher::AnchorCommandWriter";
+const string ANCHORCOMMANDREADER = "AnchorCommandSubscriber::AnchorCommandReader";
+
+const string SPEEDREPORTWRITER = "SpeedReportPublisher::SpeedReportWriter";
+const string SPEEDREPORTREADER = "SpeedReportSubscriber::SpeedReportReader";
+
+
+
