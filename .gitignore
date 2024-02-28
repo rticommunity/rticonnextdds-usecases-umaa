@@ -1,3 +1,5 @@
 .vscode/c_cpp_properties.json
 .clang-tidy
 .clang-format
+examples/build
+.vscode/settings.json
