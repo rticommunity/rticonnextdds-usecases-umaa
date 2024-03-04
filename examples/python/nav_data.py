@@ -16,12 +16,12 @@ import argparse
 def publisher_main(sample_count):
     # Set Default QOS Provider
     params = dds.QosProviderParams()
-    params.url_profile = ["../components/umaa_entities.xml"]
+    params.url_profile = ["./resources/umaa_components.xml"]
     dds.QosProvider.default_provider_params = params
 
     
     # Set the QOS file
-    qos_provider = dds.QosProvider("../components/umaa_entities.xml")
+    qos_provider = dds.QosProvider("./resources/umaa_components.xml")
 
     # Create Participant
     participant = qos_provider.create_participant_from_config("UMAAParticipantLibrary::NavData")

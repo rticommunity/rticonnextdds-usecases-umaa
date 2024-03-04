@@ -15,7 +15,7 @@
 #include <rti/rti.hpp> // include all base plus extensions
 
 #include "application.hpp"  // Argument parsing
-#include "umaa_consts.hpp"
+#include "../build/src/umaa_consts.hpp" 
 
 using namespace application;
 
@@ -102,7 +102,7 @@ void run_example(unsigned int domain_id, unsigned int sample_count)
     // https://community.rti.com/static/documentation/connext-dds/6.1.2/doc/api/connext_dds/api_cpp2/classdds_1_1core_1_1QosProvider.html#DefaultQosProvider
     // This allows us to control Logging through XML as needed
     QosProviderParams params;
-    params.url_profile({ UMAA_ENTITIES });
+    params.url_profile({ UMAA_COMPONENTS });
     params.ignore_environment_profile(true);
     params.ignore_user_profile(true);
 

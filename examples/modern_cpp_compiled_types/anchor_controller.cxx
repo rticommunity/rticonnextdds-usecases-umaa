@@ -15,13 +15,13 @@
 
 #include <rti/rti.hpp> // include all base plus extensions
 
-// Include headers for Compiled Types
-#include "../../types/idl/UMAA/EO/AnchorControl/AnchorCommandType.hpp"
-#include "../../types/idl/UMAA/EO/AnchorStatus/AnchorReportType.hpp"
-#include "../../types/idl/UMAA/EO/AnchorControl/AnchorCommandStatusType.hpp"
+// Include generated headers for Compiled Types
+#include "../build/src/UMAA/EO/AnchorControl/AnchorCommandType.hpp"
+#include "../build/src/UMAA/EO/AnchorStatus/AnchorReportType.hpp"
+#include "../build/src/UMAA/EO/AnchorControl/AnchorCommandStatusType.hpp"
 
 #include "application.hpp"  // Argument parsing
-#include "umaa_consts.hpp" // Consts for UMAA entities
+#include "../build/src/umaa_consts.hpp" // Consts for UMAA entities
 
 using namespace application;
 using namespace UMAA::EO::AnchorControl;
@@ -71,7 +71,7 @@ void run_example(unsigned int domain_id, unsigned int sample_count)
     // https://community.rti.com/static/documentation/connext-dds/6.1.2/doc/api/connext_dds/api_cpp2/classdds_1_1core_1_1QosProvider.html#DefaultQosProvider
     // This allows us to control Logging through XML as needed
     QosProviderParams params;
-    params.url_profile({ UMAA_ENTITIES });
+    params.url_profile({ UMAA_COMPONENTS });
     params.ignore_environment_profile(true);
     params.ignore_user_profile(true);
 
@@ -119,7 +119,7 @@ void run_example(unsigned int domain_id, unsigned int sample_count)
     AnchorReportType anchor_report_sample;
 
     
-    int rope_length;
+    int rope_length = 0;
     string anchor_state_string;
     while (!shutdown_requested) {
 
