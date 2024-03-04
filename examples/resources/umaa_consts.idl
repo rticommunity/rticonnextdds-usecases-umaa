@@ -1,5 +1,5 @@
 // Resources
-const string UMAA_ENTITIES = "../components/umaa_entities.xml";
+const string UMAA_COMPONENTS = "./resources/umaa_components.xml";
 
 // Participants
 const string ANCHORCONTROLLER = "UMAAParticipantLibrary::AnchorController";
