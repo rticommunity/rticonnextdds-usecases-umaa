@@ -3,179 +3,198 @@
 This repo is intended to hold helper scripts/example applications  
 to assist in development when using Connext along with the UMAA standard. 
 
+--------------------------------------------------------------------------------
+# UMAA Application examples
+--------------------------------------------------------------------------------
+
+These example applications simulate a few components using types and services 
+from the public UMAA 5.2.1 standard. The intention here was to minimize application 
+code and highlight the ease of access to the writers/readers and their usage.
+
+Note: These components are purely for reference purposes(Not defined by UMAA as they 
+are not public yet).
+
+The resources/umaa_components.xml file contains the configurations for the behavior(QOS), 
+topics, domains and types of the Connext databus.
+
+It takes advantage of Connext’s exclusive XML-Based Application Creation framework 
+to define and manage all of the messaging entities with XML files.
+
+Customers are encouraged to reach out to the RTI Services team to assist with any  
+implementation of the latest Release which is Distro D(CUI controlled).
+
+## Prerequisites
+
+- Linux-based OS or WSL.
+- Connext 7.3.0/Python API setup for Python Scripts
+
+## Tested compatibility
+- Ubuntu 20.04
+- Connext 6.1.2/Connext 7.3.0
+
+## Configure
+
+```sh
+cd examples/
+cmake -B build -DCMAKE_BUILD_TYPE=Release
+```
+
+## Build
+
+```sh
+cmake --build ./build --config Release
+```
+Note: Will take ~ 15 minutes as it is compiling all the idl types into a shared library.
+
+
+## Run
+
+### anchor_controller
+
+```sh
+./build/anchor_controller
+```
+
+The Anchor Controller app includes a simple state machine to manage "lowering and raising".
+
+It uses compiled data types and listeners to read data.
+
+Note: The commands aren't keyed and don't follow the UMAA command state pattern 
+as that is outside the scope of this example.
+
+| Subscribers | Publishers|
+| ------------| ------------|
+|  | UMAA::EO::AnchorStatus::AnchorReport |
+|  | UMAA::EO::AnchorControl::AnchorCommandStatus |
+| UMAA::EO::AnchorControl::AnchorCommand |  |
+
+
+### autonomy
+
+```sh
+./build/autonomy
+```
+
+The Autonomy app looks for a few different topics to have writers publishing 
+for it to have "comms" to the Anchor Controller and NavData applications. 
+(Namely: "AnchorReport", and "SpeedStatus")
+
+It also looks for the "Anchor Payout" value to be 0, to indicate the Anchor is 
+raised and ready for a mission.
+
+It uses DynamicData types and a waitset to read it's data. It also uses listeners 
+to pickup events from the databus such as "subscription_matched".
+
+| Subscribers | Publishers|
+| ------------| ------------|
+| UMAA::EO::AnchorStatus::AnchorReport |   |
+| UMAA::EO::AnchorControl::AnchorCommandStatus  |  |
+| UMAA::SA::SpeedStatus::SpeedReport|  |      
+
+
+### nav_data
+
+```sh
+python ./python/nav_data.py
+```
+
+This will just write an arbitrary value to the `speedThroughWater` value.
+
+
+| Subscribers | Publishers|
+| ------------| ------------|
+|  |  UMAA::SA::SpeedStatus::SpeedReport |
+
+
+### gui
+
+This can be used to send a command to the anchor controller to "raise"/"lower".
+
+Pass in the enum values per command:
+- LOWER: 0
+- RAISE: 1
+- STOP: 2
+
+Example for "Raise":
+
+```sh
+python python/gui.py -c 1
+```
+
+| Subscribers | Publishers|
+| ------------| ------------|
+|  |  UMAA::EO::AnchorControl::AnchorCommand |
+
 
 --------------------------------------------------------------------------------
 # SCRIPTS
 --------------------------------------------------------------------------------
-These scripts are meant to assist in your workflow when generating xml files or  
-compiling your type objects.
+These scripts are meant to assist in your workflow when converting the idl
+files to xml.
 
 Tested compatibility:  
-- UMAA IDL files: 3.0.1, 5.2.1
-- Ubuntu 18.04
-- Connext: 6.1.2, 7.2
+- UMAA IDL files: 6.0.1
+- Ubuntu 20.04
+- Windows 11
+- Connext: 6.1.2, 7.3.0
 
 ## LINUX
 
-### 1. Set Environment Variables
+### Configure
 - Make sure you have followed the setup guide for your Connext installation, 
 including setting the NDDSHOME variable.
 
-- Set the environment variable $NDDSTARGET for your platform. IE:
+- Set the environment variable $UMAA_TYPES to the target folder:
 ```sh
-export NDDSTARGET=x64Linux4gcc7.3.0
-```
-- Set the environment variable $UMAA_HOME to the target folder:
-```sh
-export UMAA_HOME="<PATH_TO_UMAA_IDL_REPO>"
+export UMAA_TYPES="<PATH_TO_UMAA_IDL_REPO>"
 ```
 **Note: Ensure a pre-processor is in your PATH environment variable.**  
 The default is `cpp`. Reference the [RTI code generator](https://community.rti.com/static/documentation/connext-dds/6.1.2/doc/manuals/connext_dds_professional/code_generator/users_manual/index.htm) documentation for more info.
 
+### Usage
 
-### 2. Go to folder
-```sh
-cd scripts/linux
-```
+#### Generate in place:
 
-### 3. Create XML type files
-**Note: 1-5 minutes**
-Run the following command:
 ```sh
-./convert_umaa_xml.sh
+scripts/convert_umaa_xml.sh
 ```
+- Convert idl files recursively through all sub folders
+- Place xml file in same location as idl file.
 
-### 4. Compile Type Objects
-**Note: 20-30 minutes**
-Run the following script depending on your choice:
+#### Flatten to /xml folder:
 
-#### Modern CPP
 ```sh
-./build_umaa_objects_cpp.sh c++11
+scripts/convert_umaa_xml.sh flatten
 ```
-#### Traditional CPP
-```sh
-./build_umaa_objects_cpp.sh c++98
-```
-**Note: The "-qualifiedEnumerator" flag will be added when generating code for c++98.**  
-Reference the [RTI code generator](https://community.rti.com/static/documentation/connext-dds/6.1.2/doc/manuals/connext_dds_professional/code_generator/users_manual/index.htm) documentation for more info.
+- Convert idl files recursively through all sub folders
+- Generate the xml files into an `/xml` folder relative to the `$UMAA_TYPES` directory.
+- Edit include paths to remove folders (Example: "./umaa_type.idl")
 ________________________________________________________________________________
 
 ## WINDOWS
 
-### 1. Set Environment Variables
+### Configure
 
 - Make sure you have followed the setup guide for your Connext installation,  
 including setting the NDDSHOME variable by running the setup script.
 
-- Set the environment variable $UMAA_HOME to the target folder:
+- Set the environment variable %UMAA_TYPES% to the target folder:
 ```sh
-SET UMAA_HOME="<PATH_TO_UMAA_IDL_REPO>"
+SET UMAA_TYPES="<PATH_TO_UMAA_IDL_REPO>"
 ```
 
 **Note: Ensure a pre-processor is in your PATH environment variable.**  
 The default is `cp.exe`. Reference the [RTI code generator](https://community.rti.com/static/documentation/connext-dds/6.1.2/doc/manuals/connext_dds_professional/code_generator/users_manual/index.htm) documentation for more info.
 
 
-### 2. Go to folder
+### Usage
+
+#### Generate in place:
+
 ```sh
-cd scripts\windows
+scripts/convert_umaa_xml.bat
 ```
+- Convert idl files recursively through all sub folders
+- Place xml file in same location as idl file.
 
-### 3. Create XML type files :wrench:
-
-Run the following script:
-```sh
-gen_all_xml.bat
-```
-
---------------------------------------------------------------------------------
-# UMAA Application examples
---------------------------------------------------------------------------------
-
-RTI has developed some example code and xml files for the UMAA SA service as a  
-guide to be used when developing against the UMAA standard using Connext.
-
-These examples include the UMAA 3.0.1 release idl files and are intended as a reference only.
-
-Customers are encouraged to reach out to the RTI Services team to assist with any  
-implementation of the latest Release which is Distro D(CUI controlled).
-
-XML-based app creation as a framework was chosen for the following reasons:  
-
-- A low code option with entities defined in an external xml artifact that can be  
-    managed by a Systems Engineering group  
-- XML artifacts can be used in tandem with external tools(Simulink/System Designer)  
-- Decouple configuration management from platform/language
-
-Follow the readme in the desired `sa_app_*` folder for more.
-
---------------------------------------------------------------------------------
-# UMAA Infrastructure examples
---------------------------------------------------------------------------------
-## Prerequisite
-1. Follow the above instructions to set up the environment, compile types, and convert  
-the IDL files to XML.
-
-2. Follow the chosen readme to setup and run an example SA Provider service.
-
-3. Navigate to the `UMAA_HOME` directory.
-**NOTE: If referencing the type files, the infrastructure service must be run from the `UMAA_HOME` directory.**
-
---------------------------------------------------------------------------------
-
-## Routing Service
-Complete `Prerequisite` above first.
-
-### Use Case:
-Segment the internal vehicle databus from the UMAA C2 environment.
-
-This example routes all UMAA::SA topic messages from the vehicle domain to the UMAA domain.
-
-This assists in scenarios where you might want to apply separate QOS  
-policies(Security/Transport etc) for internal traffic vs external.
-
-This also improves performance/discovery time by minimizing the amount of endpoints  
-on the same databus.
-
-By including the type files for the SA Service and registering them, the reference xml  
-file is setup for the scenario where type objects have been disabled from discovery.
-
-#### Run the following command: 
-```
-rtiroutingservice -cfgFile <PATH_TO_REPO>umaa_case_code/sa_xml/umaa_sa_routing_service.xml -cfgName bridge_vehicle_umaa_sa 
-```
-
---------------------------------------------------------------------------------
-
-## Recording Service
-Complete `Prerequisite` above first.
-
-### Use Case:
-Record all UMAA::SA messages from the vehicle domain.
-
-This profile is setup to record to the XCDR format. 
-
-If desired, the file can be converted to the JSON format using the RTI converter tool.
-
-By including the type files for the SA Service and registering them, the reference xml  
-file is setup for the scenario where type objects have been disabled from discovery.
-
-#### Run the following command: 
-```
-rtirecordingservice -cfgFile <PATH_TO_REPO>umaa_case_code/sa_xml/umaa_sa_recording_service.xml -cfgName record_vehicle_umaa_sa 
-```
-
---------------------------------------------------------------------------------
-
-## Admin Console
-Complete `Prerequisite` above first.
-
-### Use Case:
-Use Admin Console to subscribe to your topics when type propagation is disabled.
-
-1. Right click on the desired topic under the DDS "Logical View" perspective in  
-the top left corner and select `subscribe`.
-2. Add the desired XML type file under the `Types XML files` section.
-3. Add the `UMAA_HOME` directory under the `Include Directories` section.
 
