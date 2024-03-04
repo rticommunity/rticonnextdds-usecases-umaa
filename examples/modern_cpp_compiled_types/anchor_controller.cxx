@@ -13,15 +13,15 @@
 #include <algorithm>
 #include <iostream>
 
-#include <rti/rti.hpp> // include all base plus extensions
+#include <rti/rti.hpp>  // include all base plus extensions
 
 // Include generated headers for Compiled Types
 #include "../build/src/UMAA/EO/AnchorControl/AnchorCommandType.hpp"
 #include "../build/src/UMAA/EO/AnchorStatus/AnchorReportType.hpp"
 #include "../build/src/UMAA/EO/AnchorControl/AnchorCommandStatusType.hpp"
 
-#include "application.hpp"  // Argument parsing
-#include "../build/src/umaa_consts.hpp" // Consts for UMAA entities
+#include "application.hpp"               // Argument parsing
+#include "../build/src/umaa_consts.hpp"  // Consts for UMAA entities
 
 using namespace application;
 using namespace UMAA::EO::AnchorControl;
@@ -32,12 +32,11 @@ using namespace UMAA::Common::MaritimeEnumeration;
 using namespace rti::all;
 
 auto anchor_cmd = AnchorActionEnumModule::AnchorActionEnumType::STOP;
-auto anchor_cmd_status = CommandStatusEnumModule::CommandStatusEnumType::COMPLETED;
+auto anchor_cmd_status =
+        CommandStatusEnumModule::CommandStatusEnumType::COMPLETED;
 auto anchor_state = AnchorStateEnumModule::AnchorStateEnumType::STOWED;
 
-class AnchorCommandListener
-        : public NoOpDataReaderListener<AnchorCommandType> {
-   
+class AnchorCommandListener : public NoOpDataReaderListener<AnchorCommandType> {
     virtual void on_data_available(DataReader<AnchorCommandType> &reader)
     {
         LoanedSamples<AnchorCommandType> samples = reader.take();
@@ -45,13 +44,15 @@ class AnchorCommandListener
             // If the reference we get is valid data, it means we have actual
             // data available, otherwise we got metadata.
             if (sample.info().valid()) {
-                //std::cout << "Received Command: " << sample.data().action() << std::endl;
+                // std::cout << "Received Command: " << sample.data().action()
+                // << std::endl;
                 anchor_cmd = sample.data().action();
-                anchor_cmd_status = CommandStatusEnumModule::CommandStatusEnumType::COMMANDED;
+                anchor_cmd_status = CommandStatusEnumModule::
+                        CommandStatusEnumType::COMMANDED;
 
 
             } else {
-                //std::cout << "  Got metadata" << std::endl;
+                // std::cout << "  Got metadata" << std::endl;
             }
         }
     }
@@ -94,7 +95,7 @@ void run_example(unsigned int domain_id, unsigned int sample_count)
 
 
     // Lookup the readers
-    auto anchor_command_reader = 
+    auto anchor_command_reader =
             find_datareader_by_name<DataReader<AnchorCommandType>>(
                     participant,
                     ANCHORCOMMANDREADER);
@@ -108,7 +109,7 @@ void run_example(unsigned int domain_id, unsigned int sample_count)
             find_datawriter_by_name<DataWriter<AnchorReportType>>(
                     participant,
                     ANCHORREPORTWRITER);
-    
+
 
     // Add listeners to our readers
     auto anchor_command_listener = std::make_shared<AnchorCommandListener>();
@@ -118,82 +119,90 @@ void run_example(unsigned int domain_id, unsigned int sample_count)
     AnchorCommandStatusType anchor_command_sample;
     AnchorReportType anchor_report_sample;
 
-    
+
     int rope_length = 0;
     string anchor_state_string;
     while (!shutdown_requested) {
-
-        switch(anchor_state)
-        {
-            case AnchorStateEnumModule::AnchorStateEnumType::STOWED:
-                if (anchor_cmd == AnchorActionEnumModule::AnchorActionEnumType::LOWER)
-                {
-                    anchor_state = AnchorStateEnumModule::AnchorStateEnumType::LOWERING;
-                    break;
-                }
-                anchor_cmd_status = CommandStatusEnumModule::CommandStatusEnumType::COMPLETED;
-                anchor_state_string ="ANCHOR STOWED";
+        switch (anchor_state) {
+        case AnchorStateEnumModule::AnchorStateEnumType::STOWED:
+            if (anchor_cmd
+                == AnchorActionEnumModule::AnchorActionEnumType::LOWER) {
+                anchor_state =
+                        AnchorStateEnumModule::AnchorStateEnumType::LOWERING;
                 break;
-            case AnchorStateEnumModule::AnchorStateEnumType::LOWERING:
-                if (anchor_cmd == AnchorActionEnumModule::AnchorActionEnumType::STOP)
-                {
-                    anchor_state = AnchorStateEnumModule::AnchorStateEnumType::STOPPED;
-                    break;
-                }
-                if (anchor_cmd == AnchorActionEnumModule::AnchorActionEnumType::RAISE)
-                {
-                    anchor_state = AnchorStateEnumModule::AnchorStateEnumType::RAISING;
-                    break;
-                }
-                if (rope_length == 20)
-                {
-                    anchor_state = AnchorStateEnumModule::AnchorStateEnumType::DEPLOYED;
-                    break;
-                }
-                anchor_state_string ="LOWERING ANCHOR";
-                rope_length++;
+            }
+            anchor_cmd_status =
+                    CommandStatusEnumModule::CommandStatusEnumType::COMPLETED;
+            anchor_state_string = "ANCHOR STOWED";
+            break;
+        case AnchorStateEnumModule::AnchorStateEnumType::LOWERING:
+            if (anchor_cmd
+                == AnchorActionEnumModule::AnchorActionEnumType::STOP) {
+                anchor_state =
+                        AnchorStateEnumModule::AnchorStateEnumType::STOPPED;
                 break;
-            case AnchorStateEnumModule::AnchorStateEnumType::DEPLOYED:
-                if (anchor_cmd == AnchorActionEnumModule::AnchorActionEnumType::RAISE)
-                {
-                    anchor_state = AnchorStateEnumModule::AnchorStateEnumType::RAISING;
-                    break;
-                }
-                anchor_cmd_status = CommandStatusEnumModule::CommandStatusEnumType::COMPLETED;
-                anchor_state_string ="ANCHOR DEPLOYED";
+            }
+            if (anchor_cmd
+                == AnchorActionEnumModule::AnchorActionEnumType::RAISE) {
+                anchor_state =
+                        AnchorStateEnumModule::AnchorStateEnumType::RAISING;
                 break;
-            case AnchorStateEnumModule::AnchorStateEnumType::STOPPED:
-                if (anchor_cmd == AnchorActionEnumModule::AnchorActionEnumType::RAISE)
-                {
-                    anchor_state = AnchorStateEnumModule::AnchorStateEnumType::RAISING;
-                    break;
-                }
-                if (anchor_cmd == AnchorActionEnumModule::AnchorActionEnumType::LOWER)
-                {
-                    anchor_state = AnchorStateEnumModule::AnchorStateEnumType::LOWERING;
-                    break;
-                }
-                anchor_state_string ="ANCHOR STOPPED";
+            }
+            if (rope_length == 20) {
+                anchor_state =
+                        AnchorStateEnumModule::AnchorStateEnumType::DEPLOYED;
                 break;
-            case AnchorStateEnumModule::AnchorStateEnumType::RAISING:
-                if (anchor_cmd == AnchorActionEnumModule::AnchorActionEnumType::STOP)
-                {
-                    anchor_state = AnchorStateEnumModule::AnchorStateEnumType::STOPPED;
-                    break;
-                }
-                if (anchor_cmd == AnchorActionEnumModule::AnchorActionEnumType::LOWER)
-                {
-                    anchor_state = AnchorStateEnumModule::AnchorStateEnumType::LOWERING;
-                    break;
-                }
-                if (rope_length == 0)
-                {
-                    anchor_state = AnchorStateEnumModule::AnchorStateEnumType::STOWED;
-                    break;
-                }
-                anchor_state_string ="RAISING ANCHOR";
-                rope_length--;
+            }
+            anchor_state_string = "LOWERING ANCHOR";
+            rope_length++;
+            break;
+        case AnchorStateEnumModule::AnchorStateEnumType::DEPLOYED:
+            if (anchor_cmd
+                == AnchorActionEnumModule::AnchorActionEnumType::RAISE) {
+                anchor_state =
+                        AnchorStateEnumModule::AnchorStateEnumType::RAISING;
                 break;
+            }
+            anchor_cmd_status =
+                    CommandStatusEnumModule::CommandStatusEnumType::COMPLETED;
+            anchor_state_string = "ANCHOR DEPLOYED";
+            break;
+        case AnchorStateEnumModule::AnchorStateEnumType::STOPPED:
+            if (anchor_cmd
+                == AnchorActionEnumModule::AnchorActionEnumType::RAISE) {
+                anchor_state =
+                        AnchorStateEnumModule::AnchorStateEnumType::RAISING;
+                break;
+            }
+            if (anchor_cmd
+                == AnchorActionEnumModule::AnchorActionEnumType::LOWER) {
+                anchor_state =
+                        AnchorStateEnumModule::AnchorStateEnumType::LOWERING;
+                break;
+            }
+            anchor_state_string = "ANCHOR STOPPED";
+            break;
+        case AnchorStateEnumModule::AnchorStateEnumType::RAISING:
+            if (anchor_cmd
+                == AnchorActionEnumModule::AnchorActionEnumType::STOP) {
+                anchor_state =
+                        AnchorStateEnumModule::AnchorStateEnumType::STOPPED;
+                break;
+            }
+            if (anchor_cmd
+                == AnchorActionEnumModule::AnchorActionEnumType::LOWER) {
+                anchor_state =
+                        AnchorStateEnumModule::AnchorStateEnumType::LOWERING;
+                break;
+            }
+            if (rope_length == 0) {
+                anchor_state =
+                        AnchorStateEnumModule::AnchorStateEnumType::STOWED;
+                break;
+            }
+            anchor_state_string = "RAISING ANCHOR";
+            rope_length--;
+            break;
         }
 
         // Write out statuses
@@ -205,16 +214,18 @@ void run_example(unsigned int domain_id, unsigned int sample_count)
 
 
         // Print out
-        std::cout << "\033[0m------------------------------------------------" << std::endl;
-        std::cout << "ANCHOR PAYOUT: " << rope_length << "                   " << std::endl;
+        std::cout << "\033[0m------------------------------------------------"
+                  << std::endl;
+        std::cout << "ANCHOR PAYOUT: " << rope_length << "                   "
+                  << std::endl;
         std::cout << "LAST COMMAND: " << anchor_cmd << std::endl;
         std::cout << "ANCHOR STATE: " << anchor_state << std::endl;
-        std::cout << "\033[0m------------------------------------------------" << std::endl;
+        std::cout << "\033[0m------------------------------------------------"
+                  << std::endl;
         // Move back up
         std::cout << "\033[5A";
 
         rti::util::sleep(Duration(1));
-
     }
 }
 

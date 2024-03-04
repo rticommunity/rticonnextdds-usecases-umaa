@@ -12,10 +12,10 @@
 
 #include <iostream>
 
-#include <rti/rti.hpp> // include all base plus extensions
+#include <rti/rti.hpp>  // include all base plus extensions
 
 #include "application.hpp"  // Argument parsing
-#include "../build/src/umaa_consts.hpp" 
+#include "../build/src/umaa_consts.hpp"
 
 using namespace application;
 
@@ -28,24 +28,21 @@ bool anchor_comms;
 bool mission_status;
 bool anchor_up;
 
-class SpeedReportListener
-        : public NoOpDataReaderListener<DynamicData> {
-   
-    virtual void on_subscription_matched(DataReader<DynamicData> &reader, 
-        const dds::core::status::SubscriptionMatchedStatus &status)
+class SpeedReportListener : public NoOpDataReaderListener<DynamicData> {
+    virtual void on_subscription_matched(
+            DataReader<DynamicData> &reader,
+            const dds::core::status::SubscriptionMatchedStatus &status)
     {
         // current_count() returns an int, we are just casting it to a bool
         // as we are only looking to see if there is at least one writer
         speed_comms = status.current_count();
-
     }
 };
 
-class AnchorReportListener
-        : public NoOpDataReaderListener<DynamicData> {
-   
-    virtual void on_subscription_matched(DataReader<DynamicData> &reader, 
-        const dds::core::status::SubscriptionMatchedStatus &status)
+class AnchorReportListener : public NoOpDataReaderListener<DynamicData> {
+    virtual void on_subscription_matched(
+            DataReader<DynamicData> &reader,
+            const dds::core::status::SubscriptionMatchedStatus &status)
     {
         anchor_comms = status.current_count();
     }
@@ -62,10 +59,9 @@ unsigned int process_speed_data(dds::sub::DataReader<DynamicData> &reader)
     for (const auto &sample : samples) {
         if (sample.info().valid()) {
             samples_read++;
-            //std::cout << sample.data() << std::endl;
+            // std::cout << sample.data() << std::endl;
 
             // Process data here;
-
         }
     }
 
@@ -85,7 +81,6 @@ unsigned int process_anchor_data(dds::sub::DataReader<DynamicData> &reader)
 
             // If ropeLengthPaidOut is 0, then the anchor is up
             anchor_up = !sample.data().value<double>("ropeLengthPaidOut");
-
         }
     }
 
@@ -124,10 +119,11 @@ void run_example(unsigned int domain_id, unsigned int sample_count)
 
     // Find the DataReaders defined in the xml
     auto speed_report_reader = find_datareader_by_name<DataReader<DynamicData>>(
-                    participant,
-                    SPEEDREPORTREADER);
+            participant,
+            SPEEDREPORTREADER);
 
-    auto anchor_report_reader = find_datareader_by_name<DataReader<DynamicData>>(
+    auto anchor_report_reader =
+            find_datareader_by_name<DataReader<DynamicData>>(
                     participant,
                     ANCHORREPORTREADER);
 
@@ -151,18 +147,17 @@ void run_example(unsigned int domain_id, unsigned int sample_count)
             });
 
     unsigned int anchor_samples_read = 0;
-    anchor_status_condition.extensions().handler(
-            [&anchor_report_reader, &anchor_samples_read]() {
-                anchor_samples_read += process_anchor_data(anchor_report_reader);
-            });
-    
-  
+    anchor_status_condition.extensions().handler([&anchor_report_reader,
+                                                  &anchor_samples_read]() {
+        anchor_samples_read += process_anchor_data(anchor_report_reader);
+    });
+
+
     // Create a WaitSet and attach the StatusConditions
     dds::core::cond::WaitSet waitset;
     waitset += speed_status_condition;
     waitset += anchor_status_condition;
 
-    
 
     // Create Status Mask for listener
     dds::core::status::StatusMask mask;
@@ -182,36 +177,42 @@ void run_example(unsigned int domain_id, unsigned int sample_count)
 
 
     while (!shutdown_requested) {
-
-         // Print out
+        // Print out
         mission_status = anchor_comms && speed_comms && anchor_up;
-        std::cout << "\033[0m------------------------------------------------" << std::endl;
+        std::cout << "\033[0m------------------------------------------------"
+                  << std::endl;
         if (mission_status)
-            std::cout << "\033[32mMISSION READY                              " << std::endl;
+            std::cout << "\033[32mMISSION READY                              "
+                      << std::endl;
         else
-            std::cout << "\033[31mMISSION FAULTED                            " << std::endl;
+            std::cout << "\033[31mMISSION FAULTED                            "
+                      << std::endl;
         if (speed_comms)
-            std::cout << "\033[32mSPEED COMMS:  TRUE                         " << std::endl;
+            std::cout << "\033[32mSPEED COMMS:  TRUE                         "
+                      << std::endl;
         else
-            std::cout << "\033[31mSPEED COMMS:  FALSE                        " << std::endl;
-        if(anchor_comms)
-            std::cout << "\033[32mANCHOR COMMS: TRUE                         " << std::endl;
+            std::cout << "\033[31mSPEED COMMS:  FALSE                        "
+                      << std::endl;
+        if (anchor_comms)
+            std::cout << "\033[32mANCHOR COMMS: TRUE                         "
+                      << std::endl;
         else
-            std::cout << "\033[31mANCHOR COMMS: FALSE                        " << std::endl;
+            std::cout << "\033[31mANCHOR COMMS: FALSE                        "
+                      << std::endl;
         if (anchor_up)
-            std::cout << "\033[32mANCHOR UP:    TRUE                         " << std::endl;
-        else    
-            std::cout << "\033[31mANCHOR UP:    FALSE                        " << std::endl;
-        std::cout << "\033[0m------------------------------------------------" << std::endl;
-        std::cout << "\033[6A"; // move back up
-
-
+            std::cout << "\033[32mANCHOR UP:    TRUE                         "
+                      << std::endl;
+        else
+            std::cout << "\033[31mANCHOR UP:    FALSE                        "
+                      << std::endl;
+        std::cout << "\033[0m------------------------------------------------"
+                  << std::endl;
+        std::cout << "\033[6A";  // move back up
 
 
         // Dispatch will call the handlers associated to the WaitSet conditions
         // when they activate
         waitset.dispatch(dds::core::Duration(4));  // Wait up to 4s each time
-
     }
 }
 
