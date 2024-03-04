@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="./LocalRegularPolygonPatternType.xml"/>
+<include file="./LocalRegularPolygonTransitType.xml"/>
+<module name="UMAA">
+  <module name="MO">
+    <module name="LocalRegularPolygonState">
+      <enum name="LocalRegularPolygonStateTypeEnum">
+        <enumerator name="LOCALREGULARPOLYGONTRANSIT_D"/>
+        <enumerator name="LOCALREGULARPOLYGONPATTERN_D"/>
+      </enum> 
+      <union name="LocalRegularPolygonStateTypeUnion">
+<discriminator type="nonBasic" nonBasicTypeName="UMAA::MO::LocalRegularPolygonState::LocalRegularPolygonStateTypeEnum"/>
+<case>
+        <caseDiscriminator value="(UMAA::MO::LocalRegularPolygonState::LOCALREGULARPOLYGONTRANSIT_D)"/>
+<member name="LocalRegularPolygonTransitVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MO::LocalRegularPolygonState::LocalRegularPolygonTransitType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::MO::LocalRegularPolygonState::LOCALREGULARPOLYGONPATTERN_D)"/>
+<member name="LocalRegularPolygonPatternVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MO::LocalRegularPolygonState::LocalRegularPolygonPatternType"/>
+</case>
+      </union>
+      <struct name= "LocalRegularPolygonStateType">
+        <member name="LocalRegularPolygonStateTypeSubtypes" type="nonBasic"  nonBasicTypeName= "UMAA::MO::LocalRegularPolygonState::LocalRegularPolygonStateTypeUnion"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

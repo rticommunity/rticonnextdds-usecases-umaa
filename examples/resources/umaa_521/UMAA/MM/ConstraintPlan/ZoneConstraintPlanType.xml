@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/LargeSetMetadata.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<include file="UMAA/Common/PrimitiveConstrained/ConstrainedTypes.xml"/>
+<include file="UMAA/MM/BaseType/ZoneType.xml"/>
+<module name="UMAA">
+  <module name="MM">
+    <module name="ConstraintPlan">
+      <struct name= "ZoneConstraintPlanType">
+        <member name="zoneSetMetadata" type="nonBasic"  nonBasicTypeName= "UMAA::Common::LargeSetMetadata"/>
+      </struct>
+      <const name="ZoneConstraintPlanZoneSetElementTopic" type="string" value="&quot;UMAA::MM::ConstraintPlan::ZoneConstraintPlanZoneSetElement&quot;"/>
+      <struct name= "ZoneConstraintPlanTypeZoneSetElement">
+        <member name="element" type="nonBasic"  nonBasicTypeName= "UMAA::MM::BaseType::ZoneType"/>
+        <member name="setID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID"/>
+        <member name="elementID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="elementTimestamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

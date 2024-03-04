@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<module name="UMAA">
+  <module name="EO">
+    <module name="EngineControl">
+      <const name="EngineCommandStatusTopic" type="string" value="&quot;UMAA::EO::EngineControl::EngineCommandStatus&quot;"/>
+      <struct name= "EngineCommandStatusType">
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="sessionID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="commandStatus" type="nonBasic"  nonBasicTypeName= "UMAA::Common::MaritimeEnumeration::CommandStatusEnumModule::CommandStatusEnumType"/>
+        <member name="commandStatusReason" type="nonBasic"  nonBasicTypeName= "UMAA::Common::MaritimeEnumeration::CommandStatusReasonEnumModule::CommandStatusReasonEnumType"/>
+        <member name="logMessage" stringMaxLength="4095" type="string"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

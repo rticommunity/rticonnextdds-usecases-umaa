@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="./ElevationType.xml"/>
+<include file="./Polygon.xml"/>
+<module name="UMAA">
+  <module name="MM">
+    <module name="BaseType">
+      <struct name= "WaterspaceVolumeType">
+        <member name="area" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Polygon"/>
+        <member name="ceiling" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::ElevationType"/>
+        <member name="floor" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::ElevationType"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

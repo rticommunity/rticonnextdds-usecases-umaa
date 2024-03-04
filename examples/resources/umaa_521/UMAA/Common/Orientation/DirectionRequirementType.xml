@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/Orientation/DirectionCurrentRequirement.xml"/>
+<include file="UMAA/Common/Orientation/DirectionMagneticNorthRequirement.xml"/>
+<include file="UMAA/Common/Orientation/DirectionTrueNorthRequirement.xml"/>
+<include file="UMAA/Common/Orientation/DirectionWindRequirement.xml"/>
+<module name="UMAA">
+  <module name="Common">
+    <module name="Orientation">
+      <enum name="DirectionRequirementTypeEnum">
+        <enumerator name="DIRECTIONCURRENTREQUIREMENT_D"/>
+        <enumerator name="DIRECTIONTRUENORTHREQUIREMENT_D"/>
+        <enumerator name="DIRECTIONWINDREQUIREMENT_D"/>
+        <enumerator name="DIRECTIONMAGNETICNORTHREQUIREMENT_D"/>
+      </enum> 
+      <union name="DirectionRequirementTypeUnion">
+<discriminator type="nonBasic" nonBasicTypeName="UMAA::Common::Orientation::DirectionRequirementTypeEnum"/>
+<case>
+        <caseDiscriminator value="(UMAA::Common::Orientation::DIRECTIONCURRENTREQUIREMENT_D)"/>
+<member name="DirectionCurrentRequirementVariant" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Orientation::DirectionCurrentRequirement"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::Common::Orientation::DIRECTIONTRUENORTHREQUIREMENT_D)"/>
+<member name="DirectionTrueNorthRequirementVariant" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Orientation::DirectionTrueNorthRequirement"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::Common::Orientation::DIRECTIONWINDREQUIREMENT_D)"/>
+<member name="DirectionWindRequirementVariant" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Orientation::DirectionWindRequirement"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::Common::Orientation::DIRECTIONMAGNETICNORTHREQUIREMENT_D)"/>
+<member name="DirectionMagneticNorthRequirementVariant" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Orientation::DirectionMagneticNorthRequirement"/>
+</case>
+      </union>
+      <struct name= "DirectionRequirementType">
+        <member name="DirectionRequirementTypeSubtypes" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Orientation::DirectionRequirementTypeUnion"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

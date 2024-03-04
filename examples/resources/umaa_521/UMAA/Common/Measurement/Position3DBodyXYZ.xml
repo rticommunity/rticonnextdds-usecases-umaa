@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/PrimitiveConstrained/ConstrainedTypes.xml"/>
+<module name="UMAA">
+  <module name="Common">
+    <module name="Measurement">
+      <struct name= "Position3DBodyXYZ">
+        <member name="xAxis" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::XPosition"/>
+        <member name="yAxis" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::YPosition"/>
+        <member name="zAxis" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::ZPosition"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

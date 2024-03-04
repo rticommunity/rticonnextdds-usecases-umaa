@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="./EnumerationSets.xml"/>
+<include file="./Measurements.xml"/>
+<include file="./ConstrainedTypes.xml"/>
+<include file="./DateTimeRequirement.xml"/>
+<include file="./ContingencyObjectiveType.xml"/>
+<include file="./DeploymentObjectiveType.xml"/>
+<include file="./DriftObjectiveType.xml"/>
+<include file="./ExpObjectiveType.xml"/>
+<include file="./Figure8ObjectiveType.xml"/>
+<include file="./HoverObjectiveType.xml"/>
+<include file="./RacetrackObjectiveType.xml"/>
+<include file="./RecoveryObjectiveType.xml"/>
+<include file="./RegularPolygonObjectiveType.xml"/>
+<include file="./RouteObjectiveType.xml"/>
+<include file="./StationkeepObjectiveType.xml"/>
+<module name="UMAA">
+  <module name="MM">
+    <module name="BaseType">
+      <enum name="ObjectiveTypeEnum">
+        <enumerator name="REGULARPOLYGONOBJECTIVE_D"/>
+        <enumerator name="RECOVERYOBJECTIVE_D"/>
+        <enumerator name="DEPLOYMENTOBJECTIVE_D"/>
+        <enumerator name="STATIONKEEPOBJECTIVE_D"/>
+        <enumerator name="ROUTEOBJECTIVE_D"/>
+        <enumerator name="EXPOBJECTIVE_D"/>
+        <enumerator name="DRIFTOBJECTIVE_D"/>
+        <enumerator name="FIGURE8OBJECTIVE_D"/>
+        <enumerator name="HOVEROBJECTIVE_D"/>
+        <enumerator name="RACETRACKOBJECTIVE_D"/>
+        <enumerator name="CONTINGENCYOBJECTIVE_D"/>
+      </enum> 
+      <union name="ObjectiveTypeUnion">
+<discriminator type="nonBasic" nonBasicTypeName="UMAA::MM::BaseType::ObjectiveTypeEnum"/>
+<case>
+        <caseDiscriminator value="(UMAA::MM::BaseType::REGULARPOLYGONOBJECTIVE_D)"/>
+<member name="RegularPolygonObjectiveVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MM::BaseType::RegularPolygonObjectiveType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::MM::BaseType::RECOVERYOBJECTIVE_D)"/>
+<member name="RecoveryObjectiveVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MM::BaseType::RecoveryObjectiveType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::MM::BaseType::DEPLOYMENTOBJECTIVE_D)"/>
+<member name="DeploymentObjectiveVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MM::BaseType::DeploymentObjectiveType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::MM::BaseType::STATIONKEEPOBJECTIVE_D)"/>
+<member name="StationkeepObjectiveVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MM::BaseType::StationkeepObjectiveType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::MM::BaseType::ROUTEOBJECTIVE_D)"/>
+<member name="RouteObjectiveVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MM::BaseType::RouteObjectiveType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::MM::BaseType::EXPOBJECTIVE_D)"/>
+<member name="ExpObjectiveVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MM::BaseType::ExpObjectiveType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::MM::BaseType::DRIFTOBJECTIVE_D)"/>
+<member name="DriftObjectiveVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MM::BaseType::DriftObjectiveType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::MM::BaseType::FIGURE8OBJECTIVE_D)"/>
+<member name="Figure8ObjectiveVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MM::BaseType::Figure8ObjectiveType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::MM::BaseType::HOVEROBJECTIVE_D)"/>
+<member name="HoverObjectiveVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MM::BaseType::HoverObjectiveType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::MM::BaseType::RACETRACKOBJECTIVE_D)"/>
+<member name="RacetrackObjectiveVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MM::BaseType::RacetrackObjectiveType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::MM::BaseType::CONTINGENCYOBJECTIVE_D)"/>
+<member name="ContingencyObjectiveVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MM::BaseType::ContingencyObjectiveType"/>
+</case>
+      </union>
+      <struct name= "ObjectiveType">
+        <member name="approvalRequired" type="boolean"/>
+        <member name="childObjectiveIDs" sequenceMaxLength="256" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID"/>
+        <member name="name" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::StringShortDescription"/>
+        <member name="objectiveDescription" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::StringShortDescription"/>
+        <member name="parentObjectiveID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" optional="true"/>
+        <member name="priority" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Priority"/>
+        <member name="triggerID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" optional="true"/>
+        <member name="ObjectiveTypeSubtypes" type="nonBasic"  nonBasicTypeName= "UMAA::MM::BaseType::ObjectiveTypeUnion"/>
+        <member name="objectiveID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

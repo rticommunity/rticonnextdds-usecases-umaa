@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/MO/LocalDriftState/LocalRegionDriftType.xml"/>
+<include file="UMAA/MO/LocalDriftState/LocalTransitDriftType.xml"/>
+<module name="UMAA">
+  <module name="MO">
+    <module name="LocalDriftState">
+      <enum name="LocalDriftStateTypeEnum">
+        <enumerator name="LOCALTRANSITDRIFT_D"/>
+        <enumerator name="LOCALREGIONDRIFT_D"/>
+      </enum> 
+      <union name="LocalDriftStateTypeUnion">
+<discriminator type="nonBasic" nonBasicTypeName="UMAA::MO::LocalDriftState::LocalDriftStateTypeEnum"/>
+<case>
+        <caseDiscriminator value="(UMAA::MO::LocalDriftState::LOCALTRANSITDRIFT_D)"/>
+<member name="LocalTransitDriftVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MO::LocalDriftState::LocalTransitDriftType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::MO::LocalDriftState::LOCALREGIONDRIFT_D)"/>
+<member name="LocalRegionDriftVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MO::LocalDriftState::LocalRegionDriftType"/>
+</case>
+      </union>
+      <struct name= "LocalDriftStateType">
+        <member name="LocalDriftStateTypeSubtypes" type="nonBasic"  nonBasicTypeName= "UMAA::MO::LocalDriftState::LocalDriftStateTypeUnion"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

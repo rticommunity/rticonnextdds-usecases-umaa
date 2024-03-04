@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="./Measurements.xml"/>
+<include file="./ConstrainedTypes.xml"/>
+<include file="./EndTimeTriggerType.xml"/>
+<include file="./ExpTriggerType.xml"/>
+<include file="./LogicalANDTriggerType.xml"/>
+<include file="./LogicalNOTTriggerType.xml"/>
+<include file="./LogicalORTriggerType.xml"/>
+<include file="./MissionStateTriggerType.xml"/>
+<include file="./ObjectiveStateTriggerType.xml"/>
+<include file="./StartTimeTriggerType.xml"/>
+<include file="./TaskStateTriggerType.xml"/>
+<include file="./TimePeriodTriggerType.xml"/>
+<include file="./ZoneTriggerType.xml"/>
+<module name="UMAA">
+  <module name="MM">
+    <module name="Trigger">
+      <enum name="TriggerTypeEnum">
+        <enumerator name="MISSIONSTATETRIGGER_D"/>
+        <enumerator name="TASKSTATETRIGGER_D"/>
+        <enumerator name="TIMEPERIODTRIGGER_D"/>
+        <enumerator name="EXPTRIGGER_D"/>
+        <enumerator name="STARTTIMETRIGGER_D"/>
+        <enumerator name="ZONETRIGGER_D"/>
+        <enumerator name="LOGICALANDTRIGGER_D"/>
+        <enumerator name="ENDTIMETRIGGER_D"/>
+        <enumerator name="LOGICALNOTTRIGGER_D"/>
+        <enumerator name="LOGICALORTRIGGER_D"/>
+        <enumerator name="OBJECTIVESTATETRIGGER_D"/>
+      </enum> 
+      <union name="TriggerTypeUnion">
+<discriminator type="nonBasic" nonBasicTypeName="UMAA::MM::Trigger::TriggerTypeEnum"/>
+<case>
+        <caseDiscriminator value="(UMAA::MM::Trigger::MISSIONSTATETRIGGER_D)"/>
+<member name="MissionStateTriggerVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MM::Trigger::MissionStateTriggerType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::MM::Trigger::TASKSTATETRIGGER_D)"/>
+<member name="TaskStateTriggerVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MM::Trigger::TaskStateTriggerType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::MM::Trigger::TIMEPERIODTRIGGER_D)"/>
+<member name="TimePeriodTriggerVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MM::Trigger::TimePeriodTriggerType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::MM::Trigger::EXPTRIGGER_D)"/>
+<member name="ExpTriggerVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MM::Trigger::ExpTriggerType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::MM::Trigger::STARTTIMETRIGGER_D)"/>
+<member name="StartTimeTriggerVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MM::Trigger::StartTimeTriggerType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::MM::Trigger::ZONETRIGGER_D)"/>
+<member name="ZoneTriggerVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MM::Trigger::ZoneTriggerType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::MM::Trigger::LOGICALANDTRIGGER_D)"/>
+<member name="LogicalANDTriggerVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MM::Trigger::LogicalANDTriggerType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::MM::Trigger::ENDTIMETRIGGER_D)"/>
+<member name="EndTimeTriggerVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MM::Trigger::EndTimeTriggerType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::MM::Trigger::LOGICALNOTTRIGGER_D)"/>
+<member name="LogicalNOTTriggerVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MM::Trigger::LogicalNOTTriggerType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::MM::Trigger::LOGICALORTRIGGER_D)"/>
+<member name="LogicalORTriggerVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MM::Trigger::LogicalORTriggerType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::MM::Trigger::OBJECTIVESTATETRIGGER_D)"/>
+<member name="ObjectiveStateTriggerVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MM::Trigger::ObjectiveStateTriggerType"/>
+</case>
+      </union>
+      <struct name= "TriggerType">
+        <member name="name" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::StringShortDescription"/>
+        <member name="TriggerTypeSubtypes" type="nonBasic"  nonBasicTypeName= "UMAA::MM::Trigger::TriggerTypeUnion"/>
+        <member name="triggerID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

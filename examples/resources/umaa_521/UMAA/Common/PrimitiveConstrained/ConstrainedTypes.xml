@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="BasicTypes/Quaternion.xml"/>
+<module name="UMAA">
+  <module name="Common">
+    <module name="PrimitiveConstrained">
+      <const name="AccelerationLocalWaterMass_MIN" type="float64" value="-299792458.0"/>
+      <const name="AccelerationLocalWaterMass_MAX" type="float64" value="299792458.0"/>
+      <typedef name="AccelerationLocalWaterMass" type="float64"/>
+      <const name="AirTemperature_MIN" type="float64" value="-100.0"/>
+      <const name="AirTemperature_MAX" type="float64" value="100.0"/>
+      <typedef name="AirTemperature" type="float64"/>
+      <const name="ApertureDiameter_MIN" type="float64" value="0.0"/>
+      <typedef name="ApertureDiameter" type="float64"/>
+      <const name="CameraZoomLevel_MIN" type="float64" value="0.0"/>
+      <const name="CameraZoomLevel_MAX" type="float64" value="100.0"/>
+      <typedef name="CameraZoomLevel" type="float64"/>
+      <const name="CarrierToNoiseDensityRatio_MIN" type="float64" value="0.0"/>
+      <const name="CarrierToNoiseDensityRatio_MAX" type="float64" value="1000000.0"/>
+      <typedef name="CarrierToNoiseDensityRatio" type="float64"/>
+      <const name="CovarAngleAngle_MIN" type="float64" value="-1000000000.0"/>
+      <const name="CovarAngleAngle_MAX" type="float64" value="1000000000.0"/>
+      <typedef name="CovarAngleAngle" type="float64"/>
+      <const name="CovarDisAngle_MIN" type="float64" value="-1000000000.0"/>
+      <const name="CovarDisAngle_MAX" type="float64" value="1000000000.0"/>
+      <typedef name="CovarDisAngle" type="float64"/>
+      <const name="CovarDisDis_MIN" type="float64" value="-1000000000.0"/>
+      <const name="CovarDisDis_MAX" type="float64" value="1000000000.0"/>
+      <typedef name="CovarDisDis" type="float64"/>
+      <typedef name="CovarOrientationRate" type="float64"/>
+      <typedef name="CovarPosPosECEF" type="float64"/>
+      <typedef name="CovarPosPosNED" type="float64"/>
+      <const name="DewPointTemperature_MIN" type="float64" value="-100.0"/>
+      <const name="DewPointTemperature_MAX" type="float64" value="100.0"/>
+      <typedef name="DewPointTemperature" type="float64"/>
+      <const name="DigitalAudioSensitivityCount_MIN" type="float64" value="0.0"/>
+      <const name="DigitalAudioSensitivityCount_MAX" type="float64" value="100.0"/>
+      <typedef name="DigitalAudioSensitivityCount" type="float64"/>
+      <const name="EastPosition_MIN" type="float64" value="-100000.0"/>
+      <const name="EastPosition_MAX" type="float64" value="100000.0"/>
+      <typedef name="EastPosition" type="float64"/>
+      <const name="FocalLength_MIN" type="float64" value="-10000.0"/>
+      <const name="FocalLength_MAX" type="float64" value="10000.0"/>
+      <typedef name="FocalLength" type="float64"/>
+      <const name="GeodeticAltitude_MIN" type="float64" value="-10000.0"/>
+      <const name="GeodeticAltitude_MAX" type="float64" value="700000.0"/>
+      <typedef name="GeodeticAltitude" type="float64"/>
+      <const name="H264VideoCommsRateMegabitsPerSecond_MIN" type="float64" value="0.0"/>
+      <const name="H264VideoCommsRateMegabitsPerSecond_MAX" type="float64" value="65535.0"/>
+      <typedef name="H264VideoCommsRateMegabitsPerSecond" type="float64"/>
+      <const name="H264VideoCount_MIN" type="float64" value="0.0"/>
+      <const name="H264VideoCount_MAX" type="float64" value="65535.0"/>
+      <typedef name="H264VideoCount" type="float64"/>
+      <const name="Left_MIN" type="float64" value="-20000000.0"/>
+      <const name="Left_MAX" type="float64" value="20000000.0"/>
+      <typedef name="Left" type="float64"/>
+      <const name="MaxEngineOilPressure_MIN" type="float64" value="0.0"/>
+      <const name="MaxEngineOilPressure_MAX" type="float64" value="512.0"/>
+      <typedef name="MaxEngineOilPressure" type="float64"/>
+      <const name="MinMaxRangeType_MIN" type="float64" value="0.0"/>
+      <const name="MinMaxRangeType_MAX" type="float64" value="100000.0"/>
+      <typedef name="MinMaxRangeType" type="float64"/>
+      <typedef name="MMSI" stringMaxLength="9" type="string"/>
+      <const name="NanosecondsCount_MIN" type="int64" value="-9223372036854775807"/>
+      <const name="NanosecondsCount_MAX" type="int64" value="9223372036854775807"/>
+      <typedef name="NanosecondsCount" type="int64"/>
+      <const name="NanosecondsDrift_MIN" type="int32" value="-2147483648"/>
+      <const name="NanosecondsDrift_MAX" type="int32" value="2147483647"/>
+      <typedef name="NanosecondsDrift" type="int32"/>
+      <const name="NaturalNumberCount_MIN" type="float64" value="0.0"/>
+      <const name="NaturalNumberCount_MAX" type="float64" value="9223372036854775807.0"/>
+      <typedef name="NaturalNumberCount" type="float64"/>
+      <const name="NorthPosition_MIN" type="float64" value="-100000.0"/>
+      <const name="NorthPosition_MAX" type="float64" value="100000.0"/>
+      <typedef name="NorthPosition" type="float64"/>
+      <typedef name="PanTiltJointAngleRate" type="float64"/>
+      <const name="PrismaticJointSpeed_MIN" type="float64" value="-5.0"/>
+      <const name="PrismaticJointSpeed_MAX" type="float64" value="5.0"/>
+      <typedef name="PrismaticJointSpeed" type="float64"/>
+      <const name="RangeTypeFrequency_MIN" type="float64" value="0.0"/>
+      <const name="RangeTypeFrequency_MAX" type="float64" value="1000.0"/>
+      <typedef name="RangeTypeFrequency" type="float64"/>
+      <typedef name="Ratio" type="float64"/>
+      <typedef name="RevoluteJointAngleMeasurement" type="float64"/>
+      <const name="ShutterSpeed_MIN" type="float64" value="0.0"/>
+      <typedef name="ShutterSpeed" type="float64"/>
+      <const name="SignalToNoiseRatio_MIN" type="float64" value="0.0"/>
+      <const name="SignalToNoiseRatio_MAX" type="float64" value="100.0"/>
+      <typedef name="SignalToNoiseRatio" type="float64"/>
+      <const name="SpeedBSLAcceleration_MIN" type="float64" value="-299792458.0"/>
+      <const name="SpeedBSLAcceleration_MAX" type="float64" value="299792458.0"/>
+      <typedef name="SpeedBSLAcceleration" type="float64"/>
+      <typedef name="StringLongDescription" stringMaxLength="4095" type="string"/>
+      <typedef name="StringShortDescription" stringMaxLength="1023" type="string"/>
+      <const name="TimeBetweenBlasts_MIN" type="float64" value="1.0"/>
+      <const name="TimeBetweenBlasts_MAX" type="float64" value="255.0"/>
+      <typedef name="TimeBetweenBlasts" type="float64"/>
+      <typedef name="UniformResourceIdentifier" stringMaxLength="2047" type="string"/>
+      <const name="VideoIlluminatorBeamWidth_MIN" type="float64" value="0.0"/>
+      <const name="VideoIlluminatorBeamWidth_MAX" type="float64" value="6.28318530718"/>
+      <typedef name="VideoIlluminatorBeamWidth" type="float64"/>
+      <const name="VideoIlluminatorIntensityLevel_MIN" type="float64" value="0.0"/>
+      <const name="VideoIlluminatorIntensityLevel_MAX" type="float64" value="100.0"/>
+      <typedef name="VideoIlluminatorIntensityLevel" type="float64"/>
+      <const name="WaterTemperature_MIN" type="float64" value="-22.0"/>
+      <const name="WaterTemperature_MAX" type="float64" value="100.0"/>
+      <typedef name="WaterTemperature" type="float64"/>
+      <const name="WeatherBarometricPressure_MIN" type="float64" value="600.0"/>
+      <const name="WeatherBarometricPressure_MAX" type="float64" value="1200.0"/>
+      <typedef name="WeatherBarometricPressure" type="float64"/>
+      <typedef name="XPosition" type="float64"/>
+      <typedef name="YPosition" type="float64"/>
+      <const name="ZPosition_MIN" type="float64" value="-100000.0"/>
+      <const name="ZPosition_MAX" type="float64" value="100000.0"/>
+      <typedef name="ZPosition" type="float64"/>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

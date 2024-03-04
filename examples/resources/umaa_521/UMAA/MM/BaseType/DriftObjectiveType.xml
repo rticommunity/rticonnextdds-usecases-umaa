@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/Enumeration/EnumerationSets.xml"/>
+<include file="UMAA/Common/Measurement/ElevationType.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<include file="UMAA/Common/Position/GeoPosition2DRequirement.xml"/>
+<include file="UMAA/Common/PrimitiveConstrained/ConstrainedTypes.xml"/>
+<include file="UMAA/Common/Requirements/DateTimeRequirement.xml"/>
+<include file="UMAA/Common/Speed/SpeedControlType.xml"/>
+<module name="UMAA">
+  <module name="MM">
+    <module name="BaseType">
+      <struct name= "DriftObjectiveType">
+        <member name="driftTolerance" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance"/>
+        <member name="duration" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DurationSeconds" optional="true"/>
+        <member name="elevation" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::ElevationType"/>
+        <member name="position" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Position::GeoPosition2DRequirement" optional="true"/>
+        <member name="speed" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Speed::SpeedControlType"/>
+        <member name="transitElevation" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::ElevationType"/>
+        <member name="transitSpeed" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Speed::SpeedControlType"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

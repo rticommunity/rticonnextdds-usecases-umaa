@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="./AlphaXPlatformType.xml"/>
+<include file="./BetaYPlatformType.xml"/>
+<include file="./GammaZPlatformType.xml"/>
+<module name="UMAA">
+  <module name="Common">
+    <module name="Orientation">
+      <struct name= "Orientation3DPlatformType">
+        <member name="alpha" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Orientation::AlphaXPlatformType"/>
+        <member name="beta" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Orientation::BetaYPlatformType"/>
+        <member name="gamma" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Orientation::GammaZPlatformType"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

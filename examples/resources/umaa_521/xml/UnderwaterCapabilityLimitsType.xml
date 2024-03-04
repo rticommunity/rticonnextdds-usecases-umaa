@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="./Measurements.xml"/>
+<include file="./OrientationAcceleration3D.xml"/>
+<include file="./ConstrainedTypes.xml"/>
+<module name="UMAA">
+  <module name="EO">
+    <module name="UVPlatformSpecs">
+      <struct name= "UnderwaterCapabilityLimitsType">
+        <member name="cruisingSpeed" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::SpeedLocalWaterMass" optional="true"/>
+        <member name="maxAcceleration" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::AccelerationLocalWaterMass" optional="true"/>
+        <member name="maxAttitudeAcceleration" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::OrientationAcceleration3D" optional="true"/>
+        <member name="maxAttitudeDeceleration" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::OrientationAcceleration3D" optional="true"/>
+        <member name="maxDeceleration" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::AccelerationLocalWaterMass" optional="true"/>
+        <member name="maxDepthAcceleration" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::SpeedBSLAcceleration" optional="true"/>
+        <member name="maxDepthChangeRate" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::SpeedBSL" optional="true"/>
+        <member name="maxForwardSpeed" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::SpeedLocalWaterMass" optional="true"/>
+        <member name="maxPitchRate" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::PitchRate" optional="true"/>
+        <member name="maxReverseSpeed" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::SpeedLocalWaterMass" optional="true"/>
+        <member name="maxTowingSpeed" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::SpeedLocalWaterMass" optional="true"/>
+        <member name="maxTowingTurnAcceleration" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::AngleAcceleration" optional="true"/>
+        <member name="maxTowingTurnRate" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::TurnRate" optional="true"/>
+        <member name="maxTurnAcceleration" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::AngleAcceleration" optional="true"/>
+        <member name="maxTurnRate" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::TurnRate" optional="true"/>
+        <member name="maxVehicleDepth" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DistanceBSL" optional="true"/>
+        <member name="minSpeedInMedium" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::SpeedLocalWaterMass" optional="true"/>
+        <member name="minTowingSpeed" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::SpeedLocalWaterMass" optional="true"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

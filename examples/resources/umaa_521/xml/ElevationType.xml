@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="./AltitudeAGLType.xml"/>
+<include file="./AltitudeASFType.xml"/>
+<include file="./AltitudeGeodeticType.xml"/>
+<include file="./AltitudeMSLType.xml"/>
+<include file="./DepthType.xml"/>
+<module name="UMAA">
+  <module name="Common">
+    <module name="Measurement">
+      <enum name="ElevationTypeEnum">
+        <enumerator name="ALTITUDEAGL_D"/>
+        <enumerator name="ALTITUDEMSL_D"/>
+        <enumerator name="ALTITUDEGEODETIC_D"/>
+        <enumerator name="ALTITUDEASF_D"/>
+        <enumerator name="DEPTH_D"/>
+      </enum> 
+      <union name="ElevationTypeUnion">
+<discriminator type="nonBasic" nonBasicTypeName="UMAA::Common::Measurement::ElevationTypeEnum"/>
+<case>
+        <caseDiscriminator value="(UMAA::Common::Measurement::ALTITUDEAGL_D)"/>
+<member name="AltitudeAGLVariant" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::AltitudeAGLType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::Common::Measurement::ALTITUDEMSL_D)"/>
+<member name="AltitudeMSLVariant" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::AltitudeMSLType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::Common::Measurement::ALTITUDEGEODETIC_D)"/>
+<member name="AltitudeGeodeticVariant" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::AltitudeGeodeticType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::Common::Measurement::ALTITUDEASF_D)"/>
+<member name="AltitudeASFVariant" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::AltitudeASFType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::Common::Measurement::DEPTH_D)"/>
+<member name="DepthVariant" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DepthType"/>
+</case>
+      </union>
+      <struct name= "ElevationType">
+        <member name="ElevationTypeSubtypes" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::ElevationTypeUnion"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

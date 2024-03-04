@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="./Measurements.xml"/>
+<include file="./SurfaceCapabilityLimitsType.xml"/>
+<include file="./UnderwaterCapabilityLimitsType.xml"/>
+<module name="UMAA">
+  <module name="EO">
+    <module name="UVPlatformSpecs">
+      <const name="UVPlatformCapabilitiesReportTopic" type="string" value="&quot;UMAA::EO::UVPlatformSpecs::UVPlatformCapabilitiesReport&quot;"/>
+      <struct name= "UVPlatformCapabilitiesReportType">
+        <member name="minWaterDepth" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DistanceBSL"/>
+        <member name="surfaceCapabilities" type="nonBasic"  nonBasicTypeName= "UMAA::EO::UVPlatformSpecs::SurfaceCapabilityLimitsType"/>
+        <member name="towingCapacity" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::MassMetricTon"/>
+        <member name="underwaterCapabilities" type="nonBasic"  nonBasicTypeName= "UMAA::EO::UVPlatformSpecs::UnderwaterCapabilityLimitsType" optional="true"/>
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

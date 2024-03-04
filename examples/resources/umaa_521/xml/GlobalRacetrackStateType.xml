@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="./GlobalRacetrackPatternType.xml"/>
+<include file="./GlobalRacetrackTransitType.xml"/>
+<module name="UMAA">
+  <module name="MO">
+    <module name="GlobalRacetrackState">
+      <enum name="GlobalRacetrackStateTypeEnum">
+        <enumerator name="GLOBALRACETRACKPATTERN_D"/>
+        <enumerator name="GLOBALRACETRACKTRANSIT_D"/>
+      </enum> 
+      <union name="GlobalRacetrackStateTypeUnion">
+<discriminator type="nonBasic" nonBasicTypeName="UMAA::MO::GlobalRacetrackState::GlobalRacetrackStateTypeEnum"/>
+<case>
+        <caseDiscriminator value="(UMAA::MO::GlobalRacetrackState::GLOBALRACETRACKPATTERN_D)"/>
+<member name="GlobalRacetrackPatternVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MO::GlobalRacetrackState::GlobalRacetrackPatternType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::MO::GlobalRacetrackState::GLOBALRACETRACKTRANSIT_D)"/>
+<member name="GlobalRacetrackTransitVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MO::GlobalRacetrackState::GlobalRacetrackTransitType"/>
+</case>
+      </union>
+      <struct name= "GlobalRacetrackStateType">
+        <member name="GlobalRacetrackStateTypeSubtypes" type="nonBasic"  nonBasicTypeName= "UMAA::MO::GlobalRacetrackState::GlobalRacetrackStateTypeUnion"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="./Measurements.xml"/>
+<include file="./ConstrainedTypes.xml"/>
+<include file="./DepthRateConstraintPlanType.xml"/>
+<include file="./EmitterPresetConstraintPlanType.xml"/>
+<include file="./ExpConstraintType.xml"/>
+<include file="./HeadingSectorConstraintPlanType.xml"/>
+<include file="./MaxDepthConstraintPlanType.xml"/>
+<include file="./MaxSpeedConstraintPlanType.xml"/>
+<include file="./MinDepthConstraintPlanType.xml"/>
+<include file="./MinSpeedConstraintPlanType.xml"/>
+<include file="./PitchRateConstraintPlanType.xml"/>
+<include file="./ResourceConstraintPlanType.xml"/>
+<include file="./TurnRateConstraintPlanType.xml"/>
+<include file="./ZoneConstraintPlanType.xml"/>
+<module name="UMAA">
+  <module name="MM">
+    <module name="ConstraintPlan">
+      <enum name="ConstraintPlanTypeEnum">
+        <enumerator name="EMITTERPRESETCONSTRAINTPLAN_D"/>
+        <enumerator name="MINDEPTHCONSTRAINTPLAN_D"/>
+        <enumerator name="TURNRATECONSTRAINTPLAN_D"/>
+        <enumerator name="DEPTHRATECONSTRAINTPLAN_D"/>
+        <enumerator name="MAXDEPTHCONSTRAINTPLAN_D"/>
+        <enumerator name="ZONECONSTRAINTPLAN_D"/>
+        <enumerator name="PITCHRATECONSTRAINTPLAN_D"/>
+        <enumerator name="MAXSPEEDCONSTRAINTPLAN_D"/>
+        <enumerator name="EXPCONSTRAINT_D"/>
+        <enumerator name="RESOURCECONSTRAINTPLAN_D"/>
+        <enumerator name="HEADINGSECTORCONSTRAINTPLAN_D"/>
+        <enumerator name="MINSPEEDCONSTRAINTPLAN_D"/>
+      </enum> 
+      <union name="ConstraintPlanTypeUnion">
+<discriminator type="nonBasic" nonBasicTypeName="UMAA::MM::ConstraintPlan::ConstraintPlanTypeEnum"/>
+<case>
+        <caseDiscriminator value="(UMAA::MM::ConstraintPlan::EMITTERPRESETCONSTRAINTPLAN_D)"/>
+<member name="EmitterPresetConstraintPlanVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MM::ConstraintPlan::EmitterPresetConstraintPlanType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::MM::ConstraintPlan::MINDEPTHCONSTRAINTPLAN_D)"/>
+<member name="MinDepthConstraintPlanVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MM::ConstraintPlan::MinDepthConstraintPlanType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::MM::ConstraintPlan::TURNRATECONSTRAINTPLAN_D)"/>
+<member name="TurnRateConstraintPlanVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MM::ConstraintPlan::TurnRateConstraintPlanType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::MM::ConstraintPlan::DEPTHRATECONSTRAINTPLAN_D)"/>
+<member name="DepthRateConstraintPlanVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MM::ConstraintPlan::DepthRateConstraintPlanType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::MM::ConstraintPlan::MAXDEPTHCONSTRAINTPLAN_D)"/>
+<member name="MaxDepthConstraintPlanVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MM::ConstraintPlan::MaxDepthConstraintPlanType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::MM::ConstraintPlan::ZONECONSTRAINTPLAN_D)"/>
+<member name="ZoneConstraintPlanVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MM::ConstraintPlan::ZoneConstraintPlanType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::MM::ConstraintPlan::PITCHRATECONSTRAINTPLAN_D)"/>
+<member name="PitchRateConstraintPlanVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MM::ConstraintPlan::PitchRateConstraintPlanType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::MM::ConstraintPlan::MAXSPEEDCONSTRAINTPLAN_D)"/>
+<member name="MaxSpeedConstraintPlanVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MM::ConstraintPlan::MaxSpeedConstraintPlanType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::MM::ConstraintPlan::EXPCONSTRAINT_D)"/>
+<member name="ExpConstraintVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MM::ConstraintPlan::ExpConstraintType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::MM::ConstraintPlan::RESOURCECONSTRAINTPLAN_D)"/>
+<member name="ResourceConstraintPlanVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MM::ConstraintPlan::ResourceConstraintPlanType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::MM::ConstraintPlan::HEADINGSECTORCONSTRAINTPLAN_D)"/>
+<member name="HeadingSectorConstraintPlanVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MM::ConstraintPlan::HeadingSectorConstraintPlanType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::MM::ConstraintPlan::MINSPEEDCONSTRAINTPLAN_D)"/>
+<member name="MinSpeedConstraintPlanVariant" type="nonBasic"  nonBasicTypeName= "UMAA::MM::ConstraintPlan::MinSpeedConstraintPlanType"/>
+</case>
+      </union>
+      <struct name= "ConstraintPlanType">
+        <member name="name" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::StringShortDescription"/>
+        <member name="triggerID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID"/>
+        <member name="ConstraintPlanTypeSubtypes" type="nonBasic"  nonBasicTypeName= "UMAA::MM::ConstraintPlan::ConstraintPlanTypeUnion"/>
+        <member name="constraintID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

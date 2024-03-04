@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/Measurement/ElevationType.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<include file="UMAA/Common/Position/GeoPosition2DRequirement.xml"/>
+<include file="UMAA/Common/Requirements/DateTimeRequirement.xml"/>
+<include file="UMAA/Common/Speed/SpeedControlType.xml"/>
+<module name="UMAA">
+  <module name="MO">
+    <module name="GlobalDriftControl">
+      <const name="GlobalDriftCommandTopic" type="string" value="&quot;UMAA::MO::GlobalDriftControl::GlobalDriftCommand&quot;"/>
+      <struct name= "GlobalDriftCommandType">
+        <member name="driftTolerance" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance"/>
+        <member name="elevation" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::ElevationType"/>
+        <member name="endTime" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Requirements::DateTimeRequirement" optional="true"/>
+        <member name="position" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Position::GeoPosition2DRequirement"/>
+        <member name="speed" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Speed::SpeedControlType"/>
+        <member name="transitElevation" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::ElevationType"/>
+        <member name="transitSpeed" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Speed::SpeedControlType"/>
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="sessionID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="destination" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

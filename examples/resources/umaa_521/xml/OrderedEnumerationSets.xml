@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="./Quaternion.xml"/>
+<directive kind="copyC">#undef ERROR</directive>
+<directive kind="copyC">#undef VARIABLE_PITCH</directive>
+<directive kind="copyC">#undef DELETE</directive>
+<directive kind="copyC">#undef PLATFORM</directive>
+<module name="UMAA">
+  <module name="Common">
+    <module name="OrderedEnumeration">
+      <module name="CloudCoverEnumModule">
+        <enum name="CloudCoverEnumType">
+          <enumerator name="BROKEN"/>
+          <enumerator name="CLEAR"/>
+          <enumerator name="FEW"/>
+          <enumerator name="OVERCAST"/>
+          <enumerator name="SCATTERED"/>
+        </enum> 
+      </module>
+      <module name="SeaStateEnumModule">
+        <enum name="SeaStateEnumType">
+          <enumerator name="CALM_GLOSSY"/>
+          <enumerator name="CALM_RIPPLED"/>
+          <enumerator name="HIGH"/>
+          <enumerator name="MODERATE"/>
+          <enumerator name="PHENOMENAL"/>
+          <enumerator name="ROUGH"/>
+          <enumerator name="SLIGHT"/>
+          <enumerator name="SMOOTH"/>
+          <enumerator name="VERY_HIGH"/>
+          <enumerator name="VERY_ROUGH"/>
+        </enum> 
+      </module>
+      <module name="WeatherSeverityEnumModule">
+        <enum name="WeatherSeverityEnumType">
+          <enumerator name="EXTREME"/>
+          <enumerator name="LIGHT"/>
+          <enumerator name="MODERATE"/>
+          <enumerator name="NONE"/>
+          <enumerator name="SEVERE"/>
+        </enum> 
+      </module>
+    </module>
+  </module>
+</module>
+</types>
+</dds>
