@@ -33,9 +33,6 @@ find_package(RTIConnextDDS
         core
 )
 
-set ( CMAKE_BUILD_TYPE "release")
-message (BUILD_TYPE: ${CMAKE_BUILD_TYPE})
-
 
 if(NOT TARGET rtiddsgen_umaa_types)
 add_custom_target(rtiddsgen_umaa_types ALL)
