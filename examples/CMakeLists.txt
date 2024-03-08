@@ -14,6 +14,7 @@ cmake_minimum_required(VERSION 3.11)
 project(umaa_case_code)
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+set(BUILD_SHARED_LIBS ON)
 
 
 # Add the folder where the FindRTIConnextDDS.cmake file is placed to the
