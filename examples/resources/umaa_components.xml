@@ -17,12 +17,17 @@ to use the software.
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
 
-    <!-- Include XML type files for DynamicData option -->
-    <types>
+    <!-- Include XML type files individally for DynamicData option -->
+    <!-- <types>
         <include file="./umaa_521/xml/AnchorCommandStatusType.xml"/>
         <include file="./umaa_521/xml/AnchorCommandType.xml"/>
         <include file="./umaa_521/xml/AnchorReportType.xml"/>
         <include file="./umaa_521/xml/SpeedReportType.xml"/>
+    </types> -->
+
+    <!-- Include ALL UMAA XML type files for DynamicData option -->
+    <types>
+        <include file="umaa_521/xml/include_all.xml"/>
     </types>
 
 
