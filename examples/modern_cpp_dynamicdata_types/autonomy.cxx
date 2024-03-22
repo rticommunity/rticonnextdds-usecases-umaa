@@ -1,5 +1,5 @@
 /*
- * (c) Copyright, Real-Time Innovations, 2020.  All rights reserved.
+ * (c) Copyright, Real-Time Innovations, 2024.  All rights reserved.
  * RTI grants Licensee a license to use, modify, compile, and create derivative
  * works of the software solely for use with RTI Connext DDS. Licensee may
  * redistribute copies of the software provided that all such copies are subject
@@ -15,13 +15,12 @@
 #include <rti/rti.hpp>  // include all base plus extensions
 
 #include "application.hpp"  // Argument parsing
-#include "../build/src/umaa_consts.hpp"
+#include "umaa_consts.hpp"
 
 using namespace application;
 
 // Include all rti namespaces. Done for easier legibility.
 using namespace rti::all;
-
 
 bool speed_comms;
 bool anchor_comms;
@@ -90,11 +89,6 @@ unsigned int process_anchor_data(dds::sub::DataReader<DynamicData> &reader)
 
 void run_example(unsigned int domain_id, unsigned int sample_count)
 {
-    // We're going to configure the default QoS Provider to load our own xml
-    // and to ignore the NDDS_QOS_PROFILES environment variable and the file
-    // USER_QOS_PROFILES.xml
-    // Reference:
-    // https://community.rti.com/static/documentation/connext-dds/6.1.2/doc/api/connext_dds/api_cpp2/classdds_1_1core_1_1QosProvider.html#DefaultQosProvider
     // This allows us to control Logging through XML as needed
     QosProviderParams params;
     params.url_profile({ UMAA_COMPONENTS });

@@ -3,9 +3,7 @@
 This repo is intended to hold helper scripts/example applications  
 to assist in development when using Connext along with the UMAA standard. 
 
---------------------------------------------------------------------------------
-# UMAA Application examples
---------------------------------------------------------------------------------
+## UMAA Application examples
 
 These example applications simulate a few components using types and services 
 from the public UMAA 5.2.1 standard. The intention here was to minimize application 
@@ -23,23 +21,39 @@ to define and manage all of the messaging entities with XML files.
 Customers are encouraged to reach out to the RTI Services team to assist with any  
 implementation of the latest Release which is Distro D(CUI controlled).
 
-## Prerequisites
+### Prerequisites
 
 - Linux-based OS or WSL.
 - Connext 7.3.0/Python API setup for Python Scripts
 
-## Tested compatibility
+### Tested compatibility
 - Ubuntu 20.04
 - Connext 6.1.2/Connext 7.3.0
 
-## Configure
+### Cloning Repository
+
+To clone the repository you will need to run `git clone` as follows to download
+both the repository and its submodule dependencies:
+
+```bash
+git clone --recurse-submodule https://github.com/rticommunity/rticonnextdds-usecases-umaa.git
+```
+
+If you forget to clone the repository with `--recurse-submodule`, simply run
+the following command to pull all the dependencies:
+
+```bash
+git submodule update --init --recursive
+```
+
+### Configure
 
 ```sh
 cd examples/
 cmake -B build -DCMAKE_BUILD_TYPE=Release
 ```
 
-## Build
+### Build
 
 ```sh
 cmake --build ./build --config Release
@@ -47,9 +61,9 @@ cmake --build ./build --config Release
 Note: Will take ~ 15 minutes as it is compiling all the idl types into a shared library.
 
 
-## Run
+### Run
 
-### anchor_controller
+#### anchor_controller
 
 ```sh
 ./build/anchor_controller
@@ -69,7 +83,7 @@ as that is outside the scope of this example.
 | UMAA::EO::AnchorControl::AnchorCommand |  |
 
 
-### autonomy
+#### autonomy
 
 ```sh
 ./build/autonomy
@@ -92,7 +106,7 @@ to pickup events from the databus such as "subscription_matched".
 | UMAA::SA::SpeedStatus::SpeedReport|  |      
 
 
-### nav_data
+#### nav_data
 
 ```sh
 python ./python/nav_data.py
@@ -106,7 +120,7 @@ This will just write an arbitrary value to the `speedThroughWater` value.
 |  |  UMAA::SA::SpeedStatus::SpeedReport |
 
 
-### gui
+#### gui
 
 This can be used to send a command to the anchor controller to "raise"/"lower".
 
@@ -126,9 +140,8 @@ python python/gui.py -c 1
 |  |  UMAA::EO::AnchorControl::AnchorCommand |
 
 
---------------------------------------------------------------------------------
-# SCRIPTS
---------------------------------------------------------------------------------
+## SCRIPTS
+
 These scripts are meant to assist in your workflow when converting the idl
 files to xml.
 
@@ -138,22 +151,24 @@ Tested compatibility:
 - Windows 11
 - Connext: 6.1.2, 7.3.0
 
-## LINUX
+### LINUX
 
-### Configure
+#### Configure
 - Make sure you have followed the setup guide for your Connext installation, 
 including setting the NDDSHOME variable.
 
 - Set the environment variable $UMAA_TYPES to the target folder:
+
 ```sh
 export UMAA_TYPES="<PATH_TO_UMAA_IDL_REPO>"
 ```
+
 **Note: Ensure a pre-processor is in your PATH environment variable.**  
 The default is `cpp`. Reference the [RTI code generator](https://community.rti.com/static/documentation/connext-dds/6.1.2/doc/manuals/connext_dds_professional/code_generator/users_manual/index.htm) documentation for more info.
 
-### Usage
+#### Usage
 
-#### Generate in place:
+##### Generate in place:
 
 ```sh
 scripts/convert_umaa_xml.sh
@@ -161,7 +176,7 @@ scripts/convert_umaa_xml.sh
 - Convert idl files recursively through all sub folders
 - Place xml file in same location as idl file.
 
-#### Flatten to /xml folder:
+##### Flatten to /xml folder:
 
 ```sh
 scripts/convert_umaa_xml.sh flatten
@@ -171,9 +186,9 @@ scripts/convert_umaa_xml.sh flatten
 - Edit include paths to remove folders (Example: "./umaa_type.idl")
 ________________________________________________________________________________
 
-## WINDOWS
+### WINDOWS
 
-### Configure
+#### Configure
 
 - Make sure you have followed the setup guide for your Connext installation,  
 including setting the NDDSHOME variable by running the setup script.
@@ -187,14 +202,12 @@ SET UMAA_TYPES="<PATH_TO_UMAA_IDL_REPO>"
 The default is `cp.exe`. Reference the [RTI code generator](https://community.rti.com/static/documentation/connext-dds/6.1.2/doc/manuals/connext_dds_professional/code_generator/users_manual/index.htm) documentation for more info.
 
 
-### Usage
+#### Usage
 
-#### Generate in place:
+##### Generate in place:
 
 ```sh
 scripts/convert_umaa_xml.bat
 ```
 - Convert idl files recursively through all sub folders
 - Place xml file in same location as idl file.
-
-
