@@ -1,5 +1,5 @@
 #
-# (c) 2019 Copyright, Real-Time Innovations, Inc.  All rights reserved.
+# (c) 2024 Copyright, Real-Time Innovations, Inc.  All rights reserved.
 #
 # RTI grants Licensee a license to use, modify, compile, and create derivative
 # works of the Software.  Licensee has the right to distribute object form
@@ -58,10 +58,6 @@ set (_UMAA_CONST_IDL "${CMAKE_CURRENT_SOURCE_DIR}/resources/umaa_consts.idl")
 file(GLOB_RECURSE _UMAA_TYPES RELATIVE ${_UMAA_IDL_FOLDER} ${_UMAA_IDL_FOLDER}*.idl)
 
 
-# Use Code Server
-# set (CONNEXTDDS_USE_CODEGEN_SERVER ON)
-
-
 foreach(_idl IN LISTS _UMAA_TYPES)
     string(CONCAT _idl_PATH ${_UMAA_IDL_FOLDER} ${_idl})
     get_filename_component(_idl_FOLDER ${_idl} DIRECTORY)
@@ -87,16 +83,15 @@ foreach(_idl IN LISTS _UMAA_TYPES)
 endforeach()
 
 ## Create shared library for UMAA Types
-add_library(
-    umaa_types_lib SHARED 
-    ${_UMAA_GENERATED})
-target_link_libraries(
-    umaa_types_lib 
-    RTIConnextDDS::cpp2_api)
+add_library(umaa_types_lib SHARED 
+    ${_UMAA_GENERATED}
+)
+target_link_libraries(umaa_types_lib RTIConnextDDS::cpp2_api)
 target_include_directories(umaa_types_lib PUBLIC 
-    "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/src/>")
+    "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/src/>"
+)
+set_property(TARGET umaa_types_lib PROPERTY CXX_STANDARD 11)
 add_dependencies(umaa_types_lib rtiddsgen_umaa_types)
-
 
 # Call rtiddsgen on the IDL const file
 connextdds_rtiddsgen_run(
@@ -109,37 +104,41 @@ connextdds_rtiddsgen_run(
 
 # ## Add target for UMAA consts file
 add_custom_target(rtiddsgen_umaa_consts
-    DEPENDS ${UMAA_CONSTS_CXX11_SOURCES})
+    DEPENDS ${UMAA_CONSTS_CXX11_SOURCES}
+)
 
 
 # Create the target for the Anchor Controller executable
 add_executable(anchor_controller
     "${CMAKE_CURRENT_SOURCE_DIR}/modern_cpp_compiled_types/anchor_controller.cxx"
     "${CMAKE_CURRENT_SOURCE_DIR}/modern_cpp_compiled_types/application.hpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/build/src/umaa_consts.hpp"
+    "${CMAKE_CURRENT_BINARY_DIR}/src/umaa_consts.hpp"
 )
+target_link_libraries(anchor_controller
+    PRIVATE
+        RTIConnextDDS::cpp2_api
+        umaa_types_lib
+)
+target_include_directories(anchor_controller PRIVATE 
+    "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/src/>"
+)
+set_property(TARGET anchor_controller PROPERTY CXX_STANDARD 11)
 add_dependencies(anchor_controller rtiddsgen_umaa_consts)
 
-# Link against the ConnextDDS and umaa_types_lib Libraries
-target_link_libraries(
-    anchor_controller
-    PRIVATE
-    RTIConnextDDS::cpp2_api
-    umaa_types_lib
-)
 
 # Create the target for the autonomy executable
 add_executable(autonomy
     "${CMAKE_CURRENT_SOURCE_DIR}/modern_cpp_dynamicdata_types/autonomy.cxx"
     "${CMAKE_CURRENT_SOURCE_DIR}/modern_cpp_dynamicdata_types/application.hpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/build/src/umaa_consts.hpp"
+    "${CMAKE_CURRENT_BINARY_DIR}/src/umaa_consts.hpp"
 )
-add_dependencies(autonomy rtiddsgen_umaa_consts)
-
-# Link against the ConnextDDS libraries
-target_link_libraries(
-    autonomy
+target_link_libraries(autonomy
     PRIVATE
-    RTIConnextDDS::cpp2_api
+        RTIConnextDDS::cpp2_api
 )
-
+target_include_directories(autonomy
+    PRIVATE 
+        "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/src/>"
+)
+set_property(TARGET autonomy PROPERTY CXX_STANDARD 11)
+add_dependencies(autonomy rtiddsgen_umaa_consts)

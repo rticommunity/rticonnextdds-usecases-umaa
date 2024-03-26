@@ -1,5 +1,5 @@
 /*
- * (c) Copyright, Real-Time Innovations, 2020.  All rights reserved.
+ * (c) Copyright, Real-Time Innovations, 2024.  All rights reserved.
  * RTI grants Licensee a license to use, modify, compile, and create derivative
  * works of the software solely for use with RTI Connext DDS. Licensee may
  * redistribute copies of the software provided that all such copies are subject
@@ -16,12 +16,12 @@
 #include <rti/rti.hpp>  // include all base plus extensions
 
 // Include generated headers for Compiled Types
-#include "../build/src/UMAA/EO/AnchorControl/AnchorCommandType.hpp"
-#include "../build/src/UMAA/EO/AnchorStatus/AnchorReportType.hpp"
-#include "../build/src/UMAA/EO/AnchorControl/AnchorCommandStatusType.hpp"
+#include "UMAA/EO/AnchorControl/AnchorCommandType.hpp"
+#include "UMAA/EO/AnchorStatus/AnchorReportType.hpp"
+#include "UMAA/EO/AnchorControl/AnchorCommandStatusType.hpp"
 
 #include "application.hpp"               // Argument parsing
-#include "../build/src/umaa_consts.hpp"  // Consts for UMAA entities
+#include "umaa_consts.hpp"  // Consts for UMAA entities
 
 using namespace application;
 using namespace UMAA::EO::AnchorControl;
@@ -49,10 +49,6 @@ class AnchorCommandListener : public NoOpDataReaderListener<AnchorCommandType> {
                 anchor_cmd = sample.data().action();
                 anchor_cmd_status = CommandStatusEnumModule::
                         CommandStatusEnumType::COMMANDED;
-
-
-            } else {
-                // std::cout << "  Got metadata" << std::endl;
             }
         }
     }
@@ -65,11 +61,6 @@ void run_example(unsigned int domain_id, unsigned int sample_count)
     register_type<AnchorCommandStatusType>("AnchorCommandStatusType");
     register_type<AnchorReportType>("AnchorReportType");
 
-    // We're going to configure the default QoS Provider to load our own xml
-    // and to ignore the NDDS_QOS_PROFILES environment variable and the file
-    // USER_QOS_PROFILES.xml
-    // Reference:
-    // https://community.rti.com/static/documentation/connext-dds/6.1.2/doc/api/connext_dds/api_cpp2/classdds_1_1core_1_1QosProvider.html#DefaultQosProvider
     // This allows us to control Logging through XML as needed
     QosProviderParams params;
     params.url_profile({ UMAA_COMPONENTS });
@@ -82,17 +73,14 @@ void run_example(unsigned int domain_id, unsigned int sample_count)
     // QosProvider::Default().
     default_qos_provider_params(params);
 
-
     // Create the QOS provider from the default.
     auto qos_provider = QosProvider::Default();
-
 
     // Create the participant as defined in the xml file.  This instantiates the
     // participant, registers the types, and creates the child publisher,
     // subscriber, reader and writer.
     DomainParticipant participant =
             qos_provider->create_participant_from_config(ANCHORCONTROLLER);
-
 
     // Lookup the readers
     auto anchor_command_reader =
@@ -110,7 +98,6 @@ void run_example(unsigned int domain_id, unsigned int sample_count)
                     participant,
                     ANCHORREPORTWRITER);
 
-
     // Add listeners to our readers
     auto anchor_command_listener = std::make_shared<AnchorCommandListener>();
     anchor_command_reader.set_listener(anchor_command_listener);
@@ -121,7 +108,7 @@ void run_example(unsigned int domain_id, unsigned int sample_count)
 
 
     int rope_length = 0;
-    string anchor_state_string;
+    std::string anchor_state_string;
     while (!shutdown_requested) {
         switch (anchor_state) {
         case AnchorStateEnumModule::AnchorStateEnumType::STOWED:
