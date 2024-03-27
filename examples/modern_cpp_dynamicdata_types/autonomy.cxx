@@ -22,33 +22,57 @@ using namespace application;
 // Include all rti namespaces. Done for easier legibility.
 using namespace rti::all;
 
-bool speed_comms;
-bool anchor_comms;
-bool mission_status;
-bool anchor_up;
+struct AutonomyState {
+    bool speed_comms = false;
+    bool anchor_comms = false;
+    bool mission_status = false;
+    bool anchor_up = false;
+};
 
 class SpeedReportListener : public NoOpDataReaderListener<DynamicData> {
+    
+    AutonomyState &autonomy_state;
+
+    public:
+        SpeedReportListener(AutonomyState &autonomy_state_)
+                : autonomy_state(autonomy_state_)
+        {
+        }
+
+
     virtual void on_subscription_matched(
             DataReader<DynamicData> &reader,
             const dds::core::status::SubscriptionMatchedStatus &status)
     {
         // current_count() returns an int, we are just casting it to a bool
         // as we are only looking to see if there is at least one writer
-        speed_comms = status.current_count();
+        autonomy_state.speed_comms = status.current_count();
     }
 };
 
 class AnchorReportListener : public NoOpDataReaderListener<DynamicData> {
+    
+    AutonomyState &autonomy_state;
+
+    public:
+        AnchorReportListener(AutonomyState &autonomy_state_)
+                : autonomy_state(autonomy_state_)
+        {
+        }
+
+
     virtual void on_subscription_matched(
             DataReader<DynamicData> &reader,
             const dds::core::status::SubscriptionMatchedStatus &status)
     {
-        anchor_comms = status.current_count();
+        autonomy_state.anchor_comms = status.current_count();
     }
 };
 
 
-unsigned int process_speed_data(dds::sub::DataReader<DynamicData> &reader)
+unsigned int process_speed_data(
+        dds::sub::DataReader<DynamicData> &reader,
+        AutonomyState &autonomy_state)
 {
     // Take all samples.  Samples are loaned to application, loan is
     // returned when LoanedSamples destructor called.
@@ -67,7 +91,9 @@ unsigned int process_speed_data(dds::sub::DataReader<DynamicData> &reader)
     return samples_read;
 }
 
-unsigned int process_anchor_data(dds::sub::DataReader<DynamicData> &reader)
+unsigned int process_anchor_data(
+        dds::sub::DataReader<DynamicData> &reader,
+        AutonomyState &autonomy_state)
 {
     // Take all samples.  Samples are loaned to application, loan is
     // returned when LoanedSamples destructor called.
@@ -77,9 +103,12 @@ unsigned int process_anchor_data(dds::sub::DataReader<DynamicData> &reader)
     for (const auto &sample : samples) {
         if (sample.info().valid()) {
             samples_read++;
+            std::cout << sample.data() << std::endl;
 
             // If ropeLengthPaidOut is 0, then the anchor is up
-            anchor_up = !sample.data().value<double>("ropeLengthPaidOut");
+            autonomy_state.anchor_up =
+                    !sample.data().value<double>("ropeLengthPaidOut");
+
         }
     }
 
@@ -87,11 +116,13 @@ unsigned int process_anchor_data(dds::sub::DataReader<DynamicData> &reader)
 }
 
 
-void run_example(unsigned int domain_id, unsigned int sample_count)
+void run_example(unsigned int domain_id, std::string config)
 {
+    AutonomyState autonomy_state;
+
     // This allows us to control Logging through XML as needed
     QosProviderParams params;
-    params.url_profile({ UMAA_COMPONENTS });
+    params.url_profile({ config });
     params.ignore_environment_profile(true);
     params.ignore_user_profile(true);
 
@@ -136,22 +167,20 @@ void run_example(unsigned int domain_id, unsigned int sample_count)
     // condition is triggered, in the context of the dispatch call (see below)
     unsigned int speed_samples_read = 0;
     speed_status_condition.extensions().handler(
-            [&speed_report_reader, &speed_samples_read]() {
-                speed_samples_read += process_speed_data(speed_report_reader);
+            [&speed_report_reader, &speed_samples_read, &autonomy_state]() {
+                speed_samples_read += process_speed_data(speed_report_reader, autonomy_state);
             });
 
     unsigned int anchor_samples_read = 0;
-    anchor_status_condition.extensions().handler([&anchor_report_reader,
-                                                  &anchor_samples_read]() {
-        anchor_samples_read += process_anchor_data(anchor_report_reader);
+    anchor_status_condition.extensions().handler(
+        [&anchor_report_reader, &anchor_samples_read, &autonomy_state]() {
+        anchor_samples_read += process_anchor_data(anchor_report_reader, autonomy_state);
     });
-
 
     // Create a WaitSet and attach the StatusConditions
     dds::core::cond::WaitSet waitset;
     waitset += speed_status_condition;
     waitset += anchor_status_condition;
-
 
     // Create Status Mask for listener
     dds::core::status::StatusMask mask;
@@ -162,38 +191,41 @@ void run_example(unsigned int domain_id, unsigned int sample_count)
     // Remove the Data available flag as we handle in the waitset
     mask &= ~dds::core::status::StatusMask::data_available();
 
-
     // Set listeners
-    auto speed_report_listener = std::make_shared<SpeedReportListener>();
+    auto speed_report_listener = 
+            std::make_shared<SpeedReportListener>(autonomy_state);
     speed_report_reader.set_listener(speed_report_listener, mask);
-    auto anchor_report_listener = std::make_shared<AnchorReportListener>();
+    auto anchor_report_listener =
+            std::make_shared<AnchorReportListener>(autonomy_state);
     anchor_report_reader.set_listener(anchor_report_listener, mask);
 
 
     while (!shutdown_requested) {
+
         // Print out
-        mission_status = anchor_comms && speed_comms && anchor_up;
+        autonomy_state.mission_status = autonomy_state.anchor_comms
+                && autonomy_state.speed_comms && autonomy_state.anchor_up;
         std::cout << "\033[0m------------------------------------------------"
                   << std::endl;
-        if (mission_status)
+        if (autonomy_state.mission_status)
             std::cout << "\033[32mMISSION READY                              "
                       << std::endl;
         else
             std::cout << "\033[31mMISSION FAULTED                            "
                       << std::endl;
-        if (speed_comms)
+        if (autonomy_state.speed_comms)
             std::cout << "\033[32mSPEED COMMS:  TRUE                         "
                       << std::endl;
         else
             std::cout << "\033[31mSPEED COMMS:  FALSE                        "
                       << std::endl;
-        if (anchor_comms)
+        if (autonomy_state.anchor_comms)
             std::cout << "\033[32mANCHOR COMMS: TRUE                         "
                       << std::endl;
         else
             std::cout << "\033[31mANCHOR COMMS: FALSE                        "
                       << std::endl;
-        if (anchor_up)
+        if (autonomy_state.anchor_up)
             std::cout << "\033[32mANCHOR UP:    TRUE                         "
                       << std::endl;
         else
@@ -226,7 +258,7 @@ int main(int argc, char *argv[])
 
 
     try {
-        run_example(arguments.domain_id, arguments.sample_count);
+        run_example(arguments.domain_id, arguments.config);
     } catch (const std::exception &ex) {
         // This will catch DDS exceptions
         std::cerr << "Exception in run_example(): " << ex.what() << std::endl;

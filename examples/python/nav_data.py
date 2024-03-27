@@ -13,15 +13,14 @@ import time
 import argparse
 
 
-def publisher_main(sample_count):
+def publisher_main(file):
     # Set Default QOS Provider
     params = dds.QosProviderParams()
-    params.url_profile = ["./resources/umaa_components.xml"]
+    params.url_profile = [file]
     dds.QosProvider.default_provider_params = params
 
-    
     # Set the QOS file
-    qos_provider = dds.QosProvider("./resources/umaa_components.xml")
+    qos_provider = dds.QosProvider(file)
 
     # Create Participant
     participant = qos_provider.create_participant_from_config("UMAAParticipantLibrary::NavData")
@@ -29,19 +28,15 @@ def publisher_main(sample_count):
     # Create Writer
     writer = dds.DynamicData.DataWriter(participant.find_datawriter("SpeedReportPublisher::SpeedReportWriter"))
 
-    # Enable WriterS
-    writer.enable()
-
     sample = writer.create_data()
     sample["speedThroughWater"] = 10
 
     # write data samples in a loop
-    count = 0
-    while (sample_count == 0) or (count < sample_count):
+    while (True):
         time.sleep(1)
         writer.write(sample)
         print("Writing Speed Data: {}".format(sample["speedThroughWater"]))
-        count += 1
+
 
 
 if __name__ == "__main__":
@@ -51,10 +46,9 @@ if __name__ == "__main__":
     print("RTI Connext DDS UMAA Example: NavData")
 
     parser.add_argument(
-        "-c", "--count", type=int, default=0, help="Number of samples to send"
+       "-f", "--file", type=str, default="./resources/umaa_components.xml", help="XML Config file"
     )
 
     args = parser.parse_args()
-    assert args.count >= 0
 
-    publisher_main(args.count)
+    publisher_main(args.file)

@@ -1,5 +1,5 @@
 /*
- * (c) Copyright, Real-Time Innovations, 2020.  All rights reserved.
+ * (c) Copyright, Real-Time Innovations, 2024.  All rights reserved.
  * RTI grants Licensee a license to use, modify, compile, and create derivative
  * works of the software solely for use with RTI Connext DDS. Licensee may
  * redistribute copies of the software provided that all such copies are subject
@@ -16,6 +16,7 @@
 #include <iostream>
 #include <csignal>
 #include <dds/core/ddscore.hpp>
+#include "umaa_consts.hpp"
 
 
 namespace application {
@@ -46,7 +47,7 @@ enum class ParseReturn {
 struct ApplicationArguments {
     ParseReturn parse_result;
     unsigned int domain_id;
-    unsigned int sample_count;
+    std::string config;
     rti::config::Verbosity verbosity;
 };
 
@@ -57,7 +58,9 @@ inline ApplicationArguments parse_arguments(int argc, char *argv[])
     bool show_usage = false;
     ParseReturn parse_result = ParseReturn::ok;
     unsigned int domain_id = 0;
-    unsigned int sample_count = (std::numeric_limits<unsigned int>::max)();
+
+    // set default config file
+    std::string config = UMAA_COMPONENTS;
     rti::config::Verbosity verbosity = rti::config::Verbosity::EXCEPTION;
 
     while (arg_processing < argc) {
@@ -66,10 +69,10 @@ inline ApplicationArguments parse_arguments(int argc, char *argv[])
                 || strcmp(argv[arg_processing], "--domain") == 0)) {
             domain_id = atoi(argv[arg_processing + 1]);
             arg_processing += 2;
-        } else if ((argc > arg_processing + 1)
-                && (strcmp(argv[arg_processing], "-s") == 0
-                || strcmp(argv[arg_processing], "--sample-count") == 0)) {
-            sample_count = atoi(argv[arg_processing + 1]);
+        } else if ((argc > arg_processing + 1) 
+            && (strcmp(argv[arg_processing], "-f") == 0
+            || strcmp(argv[arg_processing], "--file") == 0)) {
+            config = argv[arg_processing + 1];
             arg_processing += 2;
         } else if ((argc > arg_processing + 1)
                 && (strcmp(argv[arg_processing], "-v") == 0
@@ -80,7 +83,7 @@ inline ApplicationArguments parse_arguments(int argc, char *argv[])
             arg_processing += 2;
         } else if (strcmp(argv[arg_processing], "-h") == 0
                 || strcmp(argv[arg_processing], "--help") == 0) {
-            std::cout << "Example application." << std::endl;
+            std::cout << "Example Anchor Controller application." << std::endl;
             show_usage = true;
             parse_result = ParseReturn::exit;
             break;
@@ -92,20 +95,20 @@ inline ApplicationArguments parse_arguments(int argc, char *argv[])
         }
     }
     if (show_usage) {
-        std::cout << "Usage:\n"\
-                    "    -d, --domain       <int>   Domain ID this application will\n" \
-                    "                               subscribe in.  \n"
-                    "                               Default: 0\n"\
-                    "    -s, --sample-count <int>   Number of samples to receive before\n"\
-                    "                               cleanly shutting down. \n"
-                    "                               Default: infinite\n"
-                    "    -v, --verbosity    <int>   How much debugging output to show.\n"\
-                    "                               Range: 0-5 \n"
-                    "                               Default: 0"
+        std::cout << "Usage:\n"
+                     "    -d, --domain     <int>     Domain ID this application will\n"
+                     "                               subscribe in.\n"
+                     "                               Default: 0\n"
+                     "    -f, --file       <string>  XML Config file defining components\n"
+                     "                               used to create DDS entities. \n"
+                     "                               Default: './resources/umaa_components.xml'\n"
+                     "    -v, --verbosity  <int>     How much debugging output to show.\n"
+                     "                               Range: 0-5 \n"
+                     "                               Default: 0"
                 << std::endl;
     }
 
-    return { parse_result, domain_id, sample_count, verbosity };
+    return { parse_result, domain_id, config, verbosity };
 }
 
 }  // namespace application

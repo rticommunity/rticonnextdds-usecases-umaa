@@ -63,32 +63,66 @@ Note: Will take ~ 15 minutes as it is compiling all the idl types into a shared 
 
 ### Run
 
-#### anchor_controller
-
-```sh
-./build/anchor_controller
+#### anchor_controller (Modern CPP)
+--------------------------------------------------------------------------------
+##### Options:
+```
+    -d, --domain     <int>     Domain ID this application will
+                               subscribe in.
+                               Default: 0
+    -f, --file       <string>  XML Config file defining components
+                               used to create DDS entities. 
+                               Default: './resources/umaa_components.xml'
+    -v, --verbosity  <int>     How much debugging output to show.
+                               Range: 0-5 
+                               Default: 0
 ```
 
+##### Example:
+```sh
+./build/anchor_controller -f ./resources/umaa_components.xml
+```
+
+##### Overview:
 The Anchor Controller app includes a simple state machine to manage "lowering and raising".
+This is intended to be used as a reference when developing with Connext and UMAA types.
 
 It uses compiled data types and listeners to read data.
 
-Note: The commands aren't keyed and don't follow the UMAA command state pattern 
+Note: The commands don't follow the UMAA command state pattern 
 as that is outside the scope of this example.
 
+##### Topics:
 | Subscribers | Publishers|
 | ------------| ------------|
 |  | UMAA::EO::AnchorStatus::AnchorReport |
 |  | UMAA::EO::AnchorControl::AnchorCommandStatus |
 | UMAA::EO::AnchorControl::AnchorCommand |  |
 
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
-#### autonomy
-
-```sh
-./build/autonomy
+#### autonomy (Modern CPP)
+--------------------------------------------------------------------------------
+##### Options:
+```
+    -d, --domain     <int>     Domain ID this application will
+                               subscribe in.
+                               Default: 0
+    -f, --file       <string>  XML Config file defining components
+                               used to create DDS entities. 
+                               Default: './resources/umaa_components.xml'
+    -v, --verbosity  <int>     How much debugging output to show.
+                               Range: 0-5 
+                               Default: 0
 ```
 
+##### Example:
+```sh
+./build/autonomy -f ./resources/umaa_components.xml
+```
+
+##### Overview:
 The Autonomy app looks for a few different topics to have writers publishing 
 for it to have "comms" to the Anchor Controller and NavData applications. 
 (Namely: "AnchorReport", and "SpeedStatus")
@@ -99,46 +133,71 @@ raised and ready for a mission.
 It uses DynamicData types and a waitset to read it's data. It also uses listeners 
 to pickup events from the databus such as "subscription_matched".
 
+##### Topics:
 | Subscribers | Publishers|
 | ------------| ------------|
 | UMAA::EO::AnchorStatus::AnchorReport |   |
 | UMAA::EO::AnchorControl::AnchorCommandStatus  |  |
 | UMAA::SA::SpeedStatus::SpeedReport|  |      
 
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
-#### nav_data
-
-```sh
-python ./python/nav_data.py
+#### nav_data (Python)
+--------------------------------------------------------------------------------
+##### Options: 
+```
+  -h, --help            show this help message and exit
+  -f FILE, --file FILE  XML Config file
 ```
 
+##### Example:
+```sh
+python ./python/nav_data.py -f ./resources/umaa_components.xml
+```
+
+##### Overview:
 This will just write an arbitrary value to the `speedThroughWater` value.
 
-
+##### Topics:
 | Subscribers | Publishers|
 | ------------| ------------|
 |  |  UMAA::SA::SpeedStatus::SpeedReport |
 
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
-#### gui
+#### gui (Python)
+--------------------------------------------------------------------------------
+##### Options:
+```
+  -h, --help            show this help message and exit
+  -c COMMAND, --command COMMAND
+                        Anchor command
+  -f FILE, --file FILE  XML Config file
+```
 
-This can be used to send a command to the anchor controller to "raise"/"lower".
-
-Pass in the enum values per command:
+Command Values:
 - LOWER: 0
 - RAISE: 1
 - STOP: 2
 
-Example for "Raise":
+##### Example for "Raise":
 
 ```sh
 python python/gui.py -c 1
 ```
 
+##### Overview:
+This can be used to send a command to the anchor controller to "raise"/"lower".
+
+##### Topics:
 | Subscribers | Publishers|
 | ------------| ------------|
 |  |  UMAA::EO::AnchorControl::AnchorCommand |
 
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## SCRIPTS
 

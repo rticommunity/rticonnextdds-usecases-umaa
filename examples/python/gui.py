@@ -13,15 +13,16 @@ import time
 import argparse
 
 
-def publisher_main(command):
+def publisher_main(command, file):
+
     # Set Default QOS Provider
     params = dds.QosProviderParams()
-    params.url_profile = ["./resources/umaa_components.xml"]
+    params.url_profile = [file]
     dds.QosProvider.default_provider_params = params
 
     
     # Set the QOS file
-    qos_provider = dds.QosProvider("./resources/umaa_components.xml")
+    qos_provider = dds.QosProvider(file)
 
     # Create Participant
     participant = qos_provider.create_participant_from_config("UMAAParticipantLibrary::GUI")
@@ -42,6 +43,8 @@ def publisher_main(command):
     # Couple secs for repair if needed
     time.sleep(2)
 
+    print("Shutting down")
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
@@ -50,10 +53,13 @@ if __name__ == "__main__":
     print("RTI Connext DDS UMAA Example: GUI")
 
     parser.add_argument(
-        "-c", "--command", type=int, default=0, help="Anchor command"
+        "-c", "--command", type=int, default=0, help="Anchor command",
+    )
+    parser.add_argument(
+       "-f", "--file", type=str, default="./resources/umaa_components.xml", help="XML Config file"
     )
 
     args = parser.parse_args()
     assert args.command >= 0
 
-    publisher_main(args.command)
+    publisher_main(args.command, args.file)
