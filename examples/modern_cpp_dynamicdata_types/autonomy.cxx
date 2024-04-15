@@ -103,11 +103,12 @@ unsigned int process_anchor_data(
     for (const auto &sample : samples) {
         if (sample.info().valid()) {
             samples_read++;
-            std::cout << sample.data() << std::endl;
+            //std::cout << sample.data() << std::endl;
 
             // If ropeLengthPaidOut is 0, then the anchor is up
+            // There is a typo in the UMAA defined IDL for 5.2.1
             autonomy_state.anchor_up =
-                    !sample.data().value<double>("ropeLengthPaidOut");
+                    !sample.data().value<double>("rodeLengthPaidOut");
 
         }
     }

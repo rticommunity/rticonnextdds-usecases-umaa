@@ -15,7 +15,7 @@ are not public yet).
 The resources/umaa_components.xml file contains the configurations for the behavior(QOS), 
 topics, domains and types of the Connext databus.
 
-It takes advantage of Connext’s exclusive XML-Based Application Creation framework 
+It takes advantage of Connext’s XML-Based Application Creation framework 
 to define and manage all of the messaging entities with XML files.
 
 Customers are encouraged to reach out to the RTI Services team to assist with any  

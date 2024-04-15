@@ -41,7 +41,7 @@ module UMAA
       struct AnchorReportType
       {
       // The current length of chain/rope that is paid out.
-      UMAA::Common::Measurement::Distance ropeLengthPaidOut;
+      UMAA::Common::Measurement::Distance rodeLengthPaidOut;
 
       // The current operational state of the anchor.
       UMAA::Common::MaritimeEnumeration::AnchorStateEnumModule::AnchorStateEnumType state;

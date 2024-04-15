@@ -79,7 +79,7 @@ void run_example(unsigned int domain_id, std::string config)
 {
     AnchorState anchor_state;
 
-    // Register the compiled types
+    // Must Register all the compiled types used
     register_type<AnchorCommandType>("AnchorCommandType");
     register_type<AnchorCommandStatusType>("AnchorCommandStatusType");
     register_type<AnchorReportType>("AnchorReportType");
@@ -211,7 +211,8 @@ void run_example(unsigned int domain_id, std::string config)
         anchor_command_sample.commandStatus(anchor_state.current_cmd_status);
         anchor_command_status_writer.write(anchor_command_sample);
 
-        anchor_report_sample.ropeLengthPaidOut(anchor_state.rope_length);
+        // This is a spelling error in the underlying IDL
+        anchor_report_sample.rodeLengthPaidOut(anchor_state.rope_length);
         anchor_report_sample.state(anchor_state.position);
         anchor_report_writer.write(anchor_report_sample);
 
