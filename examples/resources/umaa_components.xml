@@ -106,8 +106,9 @@ to use the software.
     </qos_library>
 
     <!-- Domain and Topic Library -->
-    <domain_library name="UMAASADomainLibrary">
-        <domain name="UMAADomain0" domain_id="0">
+    <domain_library name="UMAADomainLibrary">
+        <!-- Recommended to not use default Domain ID of 0 -->
+        <domain name="UMAADomain1" domain_id="1">
 
             <!-- Register the types -->
             <register_type name="AnchorReportType"
@@ -147,7 +148,7 @@ to use the software.
 
 
         <!-- Define the entities for the Anchor Controller - Associate with Topics and QOS -->
-        <domain_participant name="AnchorController" domain_ref="UMAASADomainLibrary::UMAADomain0">
+        <domain_participant name="AnchorController" domain_ref="UMAADomainLibrary::UMAADomain1">
             <domain_participant_qos base_name="UMAAQOSLibrary::ParticipantQOS"/>
 
             <!-- Publisher/Subscribers created for each reader/writer for future Partitioning support -->
@@ -155,7 +156,7 @@ to use the software.
                 <data_writer name="AnchorReportWriter"
                     topic_ref="UMAA::EO::AnchorStatus::AnchorReport">
                     <datawriter_qos base_name="UMAAQOSLibrary::AnchorReportQOS">
-                        
+
                         <!-- Override QOS at datawriter_qos/datareader_qos level if necessary -->
                     </datawriter_qos>
                 </data_writer>
@@ -182,7 +183,7 @@ to use the software.
         </domain_participant>
 
         <!-- Define the entities for the Autonomy Component - Associate with Topics and QOS -->
-        <domain_participant name="Autonomy" domain_ref="UMAASADomainLibrary::UMAADomain0">
+        <domain_participant name="Autonomy" domain_ref="UMAADomainLibrary::UMAADomain1">
             <domain_participant_qos base_name="UMAAQOSLibrary::ParticipantQOS"/>
 
             <subscriber name="AnchorReportSubscriber">
@@ -206,7 +207,7 @@ to use the software.
         </domain_participant>
 
         <!-- Define the entities for the NavData Component - Associate with Topics and QOS -->
-        <domain_participant name="NavData" domain_ref="UMAASADomainLibrary::UMAADomain0">
+        <domain_participant name="NavData" domain_ref="UMAADomainLibrary::UMAADomain1">
             <domain_participant_qos base_name="UMAAQOSLibrary::ParticipantQOS"/>
 
             <publisher name="SpeedReportPublisher">
@@ -218,7 +219,7 @@ to use the software.
         </domain_participant>
 
         <!-- Define the entities for the GUI Component - Associate with Topics and QOS -->
-        <domain_participant name="GUI" domain_ref="UMAASADomainLibrary::UMAADomain0">
+        <domain_participant name="GUI" domain_ref="UMAADomainLibrary::UMAADomain1">
             <domain_participant_qos base_name="UMAAQOSLibrary::ParticipantQOS"/>
 
             <publisher name="AnchorCommandPublisher">
