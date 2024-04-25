@@ -11,9 +11,10 @@ import rti.connextdds as dds
 from rti.types.builtin import String
 import time
 import argparse
+import random
 
 
-def publisher_main(file):
+def publisher_main(file, source_id):
     # Set Default QOS Provider
     params = dds.QosProviderParams()
     params.url_profile = [file]
@@ -25,17 +26,63 @@ def publisher_main(file):
     # Create Participant
     participant = qos_provider.create_participant_from_config("UMAAParticipantLibrary::NavData")
 
-    # Create Writer
-    writer = dds.DynamicData.DataWriter(participant.find_datawriter("SpeedReportPublisher::SpeedReportWriter"))
+    # Create Writers
+    speed_report_writer = dds.DynamicData.DataWriter(participant.find_datawriter("SpeedReportPublisher::SpeedReportWriter"))
+    globalpose_report_writer = dds.DynamicData.DataWriter(participant.find_datawriter("GlobalPoseReportPublisher::GlobalPoseReportWriter"))
+    velocity_report_writer = dds.DynamicData.DataWriter(participant.find_datawriter("VelocityReportPublisher::VelocityReportWriter"))
+    shipmotion_report_writer = dds.DynamicData.DataWriter(participant.find_datawriter("TranslationalShipMotionReportPublisher::TranslationalShipMotionReportWriter"))
+    watercurrent_report_writer = dds.DynamicData.DataWriter(participant.find_datawriter("WaterCurrentReportPublisher::WaterCurrentReportWriter"))
 
-    sample = writer.create_data()
-    sample["speedThroughWater"] = 10
+    source_guid = []
+    for x in range(16):
+        source_guid.append(source_id)
+
+    speed_report_sample = speed_report_writer.create_data()
+    speed_report_sample["source"] = source_guid
+
+    globalpose_report_sample = globalpose_report_writer.create_data()
+    globalpose_report_sample["source"] = source_guid
+
+    velocity_report_sample = velocity_report_writer.create_data()
+    velocity_report_sample["source"] = source_guid
+
+    shipmotion_report_sample = shipmotion_report_writer.create_data()
+    shipmotion_report_sample["source"] = source_guid
+
+    watercurrent_report_sample = watercurrent_report_writer.create_data()
+    watercurrent_report_sample["source"] = source_guid
 
     # write data samples in a loop
     while (True):
         time.sleep(1)
-        writer.write(sample)
-        print("Writing Speed Data: {}".format(sample["speedThroughWater"]))
+
+        # write global pose
+        globalpose_report_sample["position.geodeticLatitude"] = 42.361145
+        globalpose_report_sample["position.geodeticLongitude"] = -71.057083
+        globalpose_report_writer.write(globalpose_report_sample)
+        print("Writing GlobalPose data Lat: {}".format(globalpose_report_sample["position.geodeticLatitude"]))
+        print("Writing GlobalPose data Long: {}".format(globalpose_report_sample["position.geodeticLongitude"]))
+        
+        # write speed
+        speed_report_sample["speedThroughWater"] = random.randrange(0, 20, 2)
+        speed_report_writer.write(speed_report_sample)
+        print("Writing Speed Data: {}".format(speed_report_sample["speedThroughWater"]))
+
+        velocity_report_sample["velocity.eastSpeed"] = random.randrange(-20, 20, 2)
+        velocity_report_sample["velocity.northSpeed"] = random.randrange(-20, 20, 2)
+        velocity_report_writer.write(velocity_report_sample)
+        print("Writing Velocity data")
+
+        # write ship motion
+        shipmotion_report_sample["heave"] = random.randrange(0, 5, 1)
+        shipmotion_report_sample["sway"] = random.randrange(0, 5, 1)
+        shipmotion_report_writer.write(shipmotion_report_sample)
+        print("Writing Ship Motion")
+
+        # write watercurrent
+        watercurrent_report_sample["currentDrift"] = random.randrange(0, 20, 2)
+        watercurrent_report_writer.write(watercurrent_report_sample)
+        print("Writing Speed Data: {}".format(watercurrent_report_sample["currentDrift"]))
 
 
 
@@ -48,7 +95,11 @@ if __name__ == "__main__":
     parser.add_argument(
        "-f", "--file", type=str, default="./resources/umaa_components.xml", help="XML Config file"
     )
+    parser.add_argument(
+       "--source_id", type=int, default=0, help="Source ID"
+    )
+           
 
     args = parser.parse_args()
 
-    publisher_main(args.file)
+    publisher_main(args.file, args.source_id)
