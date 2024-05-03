@@ -103,3 +103,4 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     publisher_main(args.file, args.source_id)
+    
