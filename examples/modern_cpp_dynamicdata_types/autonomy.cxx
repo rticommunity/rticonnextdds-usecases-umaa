@@ -82,6 +82,8 @@ unsigned int process_speed_data(
     for (const auto &sample : samples) {
         if (sample.info().valid()) {
             samples_read++;
+
+            // Uncomment line below to print out all samples
             // std::cout << sample.data() << std::endl;
 
             // Process data here;
@@ -103,10 +105,13 @@ unsigned int process_anchor_data(
     for (const auto &sample : samples) {
         if (sample.info().valid()) {
             samples_read++;
+
+            // Uncomment line below to print out all samples
             //std::cout << sample.data() << std::endl;
 
             // If ropeLengthPaidOut is 0, then the anchor is up
             // There is a typo in the UMAA defined IDL for 5.2.1
+            //TODO update if fixed in new IDL set
             autonomy_state.anchor_up =
                     !sample.data().value<double>("rodeLengthPaidOut");
 

@@ -65,8 +65,9 @@ class AnchorCommandListener : public NoOpDataReaderListener<AnchorCommandType> {
             // If the reference we get is valid data, it means we have actual
             // data available, otherwise we got metadata.
             if (sample.info().valid()) {
-                // std::cout << "Received Command: " << sample.data().action()
-                // << std::endl;
+
+                // Uncomment lines below to print out all samples
+                // std::cout << sample.data().action() << std::endl;
                 anchor_state.current_cmd = sample.data().action();
                 anchor_state.current_cmd_status = CommandStatusEnumModule::
                         CommandStatusEnumType::COMMANDED;

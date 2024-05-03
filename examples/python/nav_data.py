@@ -15,6 +15,7 @@ import random
 
 
 def publisher_main(file, source_id):
+
     # Set Default QOS Provider
     params = dds.QosProviderParams()
     params.url_profile = [file]
@@ -33,9 +34,8 @@ def publisher_main(file, source_id):
     shipmotion_report_writer = dds.DynamicData.DataWriter(participant.find_datawriter("TranslationalShipMotionReportPublisher::TranslationalShipMotionReportWriter"))
     watercurrent_report_writer = dds.DynamicData.DataWriter(participant.find_datawriter("WaterCurrentReportPublisher::WaterCurrentReportWriter"))
 
-    source_guid = []
-    for x in range(16):
-        source_guid.append(source_id)
+    # Create a "GUID" from the source_id arg
+    source_guid = [source_id for d in range(16)]
 
     speed_report_sample = speed_report_writer.create_data()
     speed_report_sample["source"] = source_guid
@@ -66,7 +66,7 @@ def publisher_main(file, source_id):
         # write speed
         speed_report_sample["speedThroughWater"] = random.randrange(0, 20, 2)
         speed_report_writer.write(speed_report_sample)
-        print("Writing Speed Data: {}".format(speed_report_sample["speedThroughWater"]))
+        print(f'Writing Speed Data: {speed_report_sample["speedThroughWater"]}')
 
         velocity_report_sample["velocity.eastSpeed"] = random.randrange(-20, 20, 2)
         velocity_report_sample["velocity.northSpeed"] = random.randrange(-20, 20, 2)
@@ -82,7 +82,7 @@ def publisher_main(file, source_id):
         # write watercurrent
         watercurrent_report_sample["currentDrift"] = random.randrange(0, 20, 2)
         watercurrent_report_writer.write(watercurrent_report_sample)
-        print("Writing Speed Data: {}".format(watercurrent_report_sample["currentDrift"]))
+        print(f'Writing Speed Data: {watercurrent_report_sample["currentDrift"]}')
 
 
 
