@@ -60,7 +60,7 @@ def publisher_main(file, source_id):
         globalpose_report_sample["position.geodeticLatitude"] = 42.361145
         globalpose_report_sample["position.geodeticLongitude"] = -71.057083
         globalpose_report_writer.write(globalpose_report_sample)
-        print("Writing GlobalPose data Lat: {}".format(globalpose_report_sample["position.geodeticLatitude"]))
+        print(f'Writing GlobalPose data Lat: {globalpose_report_sample["position.geodeticLatitude"]}')
         print("Writing GlobalPose data Long: {}".format(globalpose_report_sample["position.geodeticLongitude"]))
         
         # write speed
