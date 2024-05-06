@@ -8,7 +8,7 @@
     <module name="AnchorStatus">
       <const name="AnchorReportTopic" type="string" value="&quot;UMAA::EO::AnchorStatus::AnchorReport&quot;"/>
       <struct name= "AnchorReportType">
-        <member name="ropeLengthPaidOut" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance"/>
+        <member name="rodeLengthPaidOut" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance"/>
         <member name="state" type="nonBasic"  nonBasicTypeName= "UMAA::Common::MaritimeEnumeration::AnchorStateEnumModule::AnchorStateEnumType"/>
         <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
         <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
