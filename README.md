@@ -44,7 +44,7 @@ These example applications simulate a few components using types and services
 from the public UMAA 5.2.1 standard. The intention here was to minimize application 
 code and highlight the ease of access to the writers/readers and their usage.
 
-*NOTE: These components are purely for reference purposes(UMAA defined components are not public yet).*
+***NOTE:*** *These components are purely for reference purposes(UMAA defined components are not public yet).*
 
 The resources/umaa_components.xml file contains the configurations for the behavior(QOS), 
 topics, domains and types of the Connext databus.
@@ -92,7 +92,7 @@ cmake -B build -DCMAKE_BUILD_TYPE=Release
 ```sh
 cmake --build ./build --config Release
 ```
-*NOTE: Will take ~ 15 minutes as it is compiling all the idl types into a shared library.*
+***NOTE:*** *Will take ~ 15 minutes as it is compiling all the idl types into a shared library.*
 
 
 ### Run
@@ -123,7 +123,7 @@ This is intended to be used as a reference when developing with Connext and UMAA
 
 It uses compiled data types and listeners to read data.
 
-*NOTE: The commands don't follow the UMAA command state pattern("Flow Control") as that is outside the scope of this example.*
+***NOTE:*** *The commands don't follow the UMAA command state pattern("Flow Control") as that is outside the scope of this example.*
 
 ##### Topics:
 | Subscribers | Publishers|
@@ -255,7 +255,7 @@ including setting the NDDSHOME variable.
 export UMAA_TYPES="<PATH_TO_UMAA_IDL_REPO>"
 ```
 
-*NOTE: Ensure a pre-processor is in your PATH environment variable.  
+***NOTE:*** *Ensure a pre-processor is in your PATH environment variable.  
 The default is `cpp`. Reference the [RTI code generator](https://community.rti.com/static/documentation/connext-dds/6.1.2/doc/manuals/connext_dds_professional/code_generator/users_manual/index.htm) documentation for more info.*  
 
 #### Usage
@@ -290,7 +290,7 @@ including setting the NDDSHOME variable by running the setup script.
 SET UMAA_TYPES="<PATH_TO_UMAA_IDL_REPO>"
 ```
 
-**Note: Ensure a pre-processor is in your PATH environment variable.**  
+***NOTE:*** *Ensure a pre-processor is in your PATH environment variable.**  
 The default is `cp.exe`. Reference the [RTI code generator](https://community.rti.com/static/documentation/connext-dds/6.1.2/doc/manuals/connext_dds_professional/code_generator/users_manual/index.htm) documentation for more info.
 
 
