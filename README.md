@@ -1,16 +1,50 @@
 # UMAA CASE+CODE
 
-This repo is intended to hold helper scripts/example applications  
-to assist in development when using Connext along with the UMAA standard. 
+## UMAA Standard
+Latest Version: 6.0 Distro D(CUI controlled)  
+UMAA standard referenced: 5.2.1 (Public)
+[Download from AUVSI](https://www.auvsi.org/unmanned-maritime-autonomy-architecture)
 
-## UMAA Application examples
+The UMAA standard defines the following(as of 6.0):  
+- Data model(>200 data types in an IDL format)
+- No QOS (Exception: Large Collections- PRESENTATION)
+- Required Topics(“Interfaces”) per “Service”.
+- Application level:  
+  - Command state machine/handshaking("Flow Control")
+  - Large data set synchronization("Large Collections")
+  - Type inheritance("Generic/Specified Types")
 
+The UMAA standard also defines some "Components", which are a collection of "Interfaces" derived from the UMAA MBSE model. These Components are currently not for public release and are not required as of 6.0.
+
+## Overview
+The intention of this initial Case+Code release was to provide some reference examples focusing on the Connext infrastructure/various API’s interacting, and minimizing setup friction with some utilities:  
+- XML App Creation used with the following API's
+  - Python API
+  - Modern C++ with DynamicData Types
+  - Modern C++ with Compiled Types
+- CMAKE file using `rticonnextdds-cmake-utils` modules for code generation of large type sets
+- Recommended best practices for assigning QOS to topics
+- XML Debug snippets
+- Utilities
+  - Windows: Convert recursively to XML for 6.2.1 compatibility
+  - Linux: Convert recursively to XML plus flatten includes to single folder
+
+The application level requirements are outside of the current scope but we hope for this to be an ongoing development as we democratize best practices/lessons learned across our various customers.
+
+## Use Cases
+1. I want to configure/manage all of my DDS entities external to the source code by just looking up entities defined in XML.  
+This will minimize boilerplate code, provide a configuration layer, and minimize configuration conflicts. [XML App Creation](#xml-app-creation)
+2. I want to convert my UMAA IDL files to xml and flatten the includes to a single folder, generating a composite includes file in the process.  This is so I can pull types into either System Designer or other modeling tools, use with DynamicData, or include when disabling type propagation. [XML Scripts](#xml-scripts)
+3. I want to use CMAKE and `rtiddsgen` to build a shared library of UMAA types using modules created by RTI as reference. [CMAKE modules](#cmake-modules)
+
+
+
+## XML App Creation
 These example applications simulate a few components using types and services 
 from the public UMAA 5.2.1 standard. The intention here was to minimize application 
 code and highlight the ease of access to the writers/readers and their usage.
 
-Note: These components are purely for reference purposes(Not defined by UMAA as they 
-are not public yet).
+*NOTE: These components are purely for reference purposes(UMAA defined components are not public yet).*
 
 The resources/umaa_components.xml file contains the configurations for the behavior(QOS), 
 topics, domains and types of the Connext databus.
@@ -58,12 +92,12 @@ cmake -B build -DCMAKE_BUILD_TYPE=Release
 ```sh
 cmake --build ./build --config Release
 ```
-Note: Will take ~ 15 minutes as it is compiling all the idl types into a shared library.
+*NOTE: Will take ~ 15 minutes as it is compiling all the idl types into a shared library.*
 
 
 ### Run
 
-#### anchor_controller (Modern CPP)
+#### anchor_controller (Modern CPP, Compiled Types)
 --------------------------------------------------------------------------------
 ##### Options:
 ```
@@ -89,8 +123,7 @@ This is intended to be used as a reference when developing with Connext and UMAA
 
 It uses compiled data types and listeners to read data.
 
-Note: The commands don't follow the UMAA command state pattern 
-as that is outside the scope of this example.
+*NOTE: The commands don't follow the UMAA command state pattern("Flow Control") as that is outside the scope of this example.*
 
 ##### Topics:
 | Subscribers | Publishers|
@@ -102,7 +135,7 @@ as that is outside the scope of this example.
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-#### autonomy (Modern CPP)
+#### autonomy (Modern CPP, DynamicData Types)
 --------------------------------------------------------------------------------
 ##### Options:
 ```
@@ -143,7 +176,7 @@ to pickup events from the databus such as "subscription_matched".
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-#### nav_data (Python)
+#### nav_data (Python, DynamicData Types)
 --------------------------------------------------------------------------------
 ##### Options: 
 ```
@@ -199,7 +232,7 @@ This can be used to send a command to the anchor controller to "raise"/"lower".
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-## SCRIPTS
+## XML SCRIPTS
 
 These scripts are meant to assist in your workflow when converting the idl
 files to xml.
@@ -222,8 +255,8 @@ including setting the NDDSHOME variable.
 export UMAA_TYPES="<PATH_TO_UMAA_IDL_REPO>"
 ```
 
-**Note: Ensure a pre-processor is in your PATH environment variable.**  
-The default is `cpp`. Reference the [RTI code generator](https://community.rti.com/static/documentation/connext-dds/6.1.2/doc/manuals/connext_dds_professional/code_generator/users_manual/index.htm) documentation for more info.
+*NOTE: Ensure a pre-processor is in your PATH environment variable.  
+The default is `cpp`. Reference the [RTI code generator](https://community.rti.com/static/documentation/connext-dds/6.1.2/doc/manuals/connext_dds_professional/code_generator/users_manual/index.htm) documentation for more info.*  
 
 #### Usage
 
@@ -270,3 +303,13 @@ scripts/convert_umaa_xml.bat
 ```
 - Convert idl files recursively through all sub folders
 - Place xml file in same location as idl file.
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+
+## CMAKE modules
+
+This repo pulls in a git submodule from [rticonnextdds-cmake-utils](https://github.com/rticommunity/rticonnextdds-cmake-utils) into the /examples/resources folder.  
+
+The `rticonnextdds-cmake-utils` repo provides convenient CMAKE utils to call `rtiddsgen` and pass in idl files as an argument. 
+Use /examples/CMakeLists.txt as a reference for creating a shared library for your UMAA IDL set. 
