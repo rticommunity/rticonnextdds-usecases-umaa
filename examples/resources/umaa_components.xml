@@ -16,6 +16,15 @@ to use the software.
     xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/current/rti_dds_profiles.xsd"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
+    <!-- For 6.1.2.14+ can set default variable here or can set as Environment Variable  
+         Use ENV variables with the syntax: $(ANCHOR_CONTROLLER_GUID)                               
+    <configuration_variables> 
+        <element> 
+            <name>ANCHOR_CONTROLLER_GUID</name> 
+            <value>05 05 05 05 05 05 05 05 05 05 05 05 05 05 05 05</value> 
+        </element> 
+    </configuration_variables> -->
+
 
     <!-- Include XML type files individally for DynamicData option -->
     <!-- <types>
@@ -51,7 +60,7 @@ to use the software.
             
             <domain_participant_qos>
 
-                <!-- Default transport is UDPv4 | SHMEM, uncomment to disable SHMEM and have all data go over loopback-->   
+                <!-- Default transport is UDPv4 | SHMEM, uncomment to disable SHMEM and have all data go over loopback-->
                 <!-- <transport_builtin>
                     <mask>UDPv4</mask>
                 </transport_builtin> -->
@@ -181,9 +190,21 @@ to use the software.
                 </data_writer>
             </publisher>
             <subscriber name="AnchorCommandSubscriber">
-                <data_reader name="AnchorCommandReader"
-                    topic_ref="UMAA::EO::AnchorControl::AnchorCommand">
-                    <datareader_qos base_name="UMAAQOSLibrary::AnchorCommandQOS" />
+                <data_reader name="AnchorCommandReader" topic_ref="UMAA::EO::AnchorControl::AnchorCommand">
+
+                    <!-- Here we are passing the Anchor Controller "GUID" to the Content Filter Topic  
+                        so we only get messages addressed to this GUID  
+                    -->
+                    <content_filter name="src" kind="builtin.sql">
+                        <!-- Can optionally use an ENV variable if desired
+                        <expression> destination = &amp;hex($(ANCHOR_CONTROLLER_GUID)) </expression> -->
+                        <expression>
+                            destination = &amp;hex(05 05 05 05 05 05 05 05 05 05 05 05 05 05 05 05)
+                        </expression>
+                    </content_filter>
+
+                    <datareader_qos base_name="UMAAQOSLibrary::AnchorCommandQOS"/>
+
                 </data_reader>
             </subscriber>
         </domain_participant>

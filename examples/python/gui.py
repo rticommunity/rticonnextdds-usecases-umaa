@@ -13,7 +13,7 @@ import time
 import argparse
 
 
-def publisher_main(command, file):
+def publisher_main(command, file, dest):
 
     # Set Default QOS Provider
     params = dds.QosProviderParams()
@@ -33,12 +33,18 @@ def publisher_main(command, file):
     # Give a sec for discovery
     time.sleep(1)
 
+    # Create a "GUID" from the destination id arg
+    dest_guid = [dest for d in range(16)]
+    
+
     sample = writer.create_data()
+    sample["destination"] = dest_guid
     sample["action"] = command
 
     # write data samples in a loop
     writer.write(sample)
-    print("Writing Anchor Command: {}".format(sample["action"]))
+    print(f'Writing Anchor Command: {sample["action"]}')
+    print(f'Sending to Destination ID: {sample["destination[0]"]}')
 
     # Couple secs for repair if needed
     time.sleep(2)
@@ -58,8 +64,11 @@ if __name__ == "__main__":
     parser.add_argument(
        "-f", "--file", type=str, default="./resources/umaa_components.xml", help="XML Config file"
     )
+    parser.add_argument(
+       "-d", "--dest", type=int, default=5, help="Destination ID"
+    )
 
     args = parser.parse_args()
     assert args.command >= 0
 
-    publisher_main(args.command, args.file)
+    publisher_main(args.command, args.file, args.dest)

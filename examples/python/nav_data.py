@@ -96,11 +96,11 @@ if __name__ == "__main__":
        "-f", "--file", type=str, default="./resources/umaa_components.xml", help="XML Config file"
     )
     parser.add_argument(
-       "--source_id", type=int, default=0, help="Source ID"
+       "-s", "--source", type=int, default=0, help="Source ID"
     )
            
 
     args = parser.parse_args()
 
-    publisher_main(args.file, args.source_id)
+    publisher_main(args.file, args.source)
     

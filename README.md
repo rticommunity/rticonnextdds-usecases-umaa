@@ -36,6 +36,7 @@ The application level requirements are outside of the current scope but we hope 
 This will minimize boilerplate code, provide a configuration layer, and minimize configuration conflicts. [XML App Creation](#xml-app-creation)
 2. I want to convert my UMAA IDL files to xml and flatten the includes to a single folder, generating a composite includes file in the process.  This is so I can pull types into either System Designer or other modeling tools, use with DynamicData, or include when disabling type propagation. [XML Scripts](#xml-scripts)
 3. I want to use CMAKE and `rtiddsgen` to build a shared library of UMAA types using modules created by RTI as reference. [CMAKE modules](#cmake-modules)
+4. I want to filter the messages coming into my application based on the UMAA Destination ID. This can be configurable and require no compilation to change. [Content Filtered Topics](#content-filtered-topics)
 
 
 
@@ -215,10 +216,10 @@ Command Values:
 - RAISE: 1
 - STOP: 2
 
-##### Example for "Raise":
+##### Example for the "Lower" command:
 
 ```sh
-python python/gui.py -c 1
+python python/gui.py -c 0
 ```
 
 ##### Overview:
@@ -228,6 +229,9 @@ This can be used to send a command to the anchor controller to "raise"/"lower".
 | Subscribers | Publishers|
 | ------------| ------------|
 |  |  UMAA::EO::AnchorControl::AnchorCommand |
+
+
+[Back to Use Cases](#use-cases)
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -303,6 +307,9 @@ scripts/convert_umaa_xml.bat
 ```
 - Convert idl files recursively through all sub folders
 - Place xml file in same location as idl file.
+
+[Back to Use Cases](#use-cases)
+
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
@@ -313,3 +320,63 @@ This repo pulls in a git submodule from [rticonnextdds-cmake-utils](https://gith
 
 The `rticonnextdds-cmake-utils` repo provides convenient CMAKE utils to call `rtiddsgen` and pass in idl files as an argument. 
 Use /examples/CMakeLists.txt as a reference for creating a shared library for your UMAA IDL set. 
+
+[Back to Use Cases](#use-cases)
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+
+## Content Filtered Topics
+
+By using Content Filtered Topics in tandem with XML-Application creation we are able to conveniently  
+filter messages going into a specific data reader using the UMAA Destination ID field.
+
+### Pre-Requisites
+Complete all build/setup as necessary in the [XML App Creation](#xml-app-creation) section. 
+
+### Run
+
+Reference the file umaa_components.xml for the section where the  
+"AnchorCommandReader" is defined. 
+
+You will see the filter defined in XML for a "GUID" value.
+```
+<data_reader name="AnchorCommandReader" topic_ref="UMAA::EO::AnchorControl::AnchorCommand">
+
+                    <!-- Here we are passing the Anchor Controller "GUID" to the Content Filter Topic  
+                        so we only get messages addressed to this GUID  
+                    -->
+                    <content_filter name="src" kind="builtin.sql">
+                        <!-- Can optionally use an ENV variable if desired
+                        <expression> destination = &amp;hex($(ANCHOR_CONTROLLER_GUID)) </expression> -->
+                        <expression>
+                            destination = &amp;hex(05 05 05 05 05 05 05 05 05 05 05 05 05 05 05 05)
+                        </expression>
+                    </content_filter>
+
+                    <datareader_qos base_name="UMAAQOSLibrary::AnchorCommandQOS"/>
+
+                </data_reader>
+```
+Run the Anchor Controller application.  
+
+##### Example:
+```sh
+./build/anchor_controller -f ./resources/umaa_components.xml
+```
+
+Now run the "GUI" Python script to send a command to the Anchor Controller.
+You can use the `-d` flag to change the value that populates the destination "GUID".
+
+##### Example for the "Lower" command to Destination ID populated by the value "5":
+
+```sh
+python python/gui.py -c 1 -d 5
+```
+
+You should see the Anchor Controller app respond to these commands.  
+By changing the `-d` flag value 
+you can test alternate values and verify filtering of data.
+
+[Back to Use Cases](#use-cases)
