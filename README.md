@@ -361,11 +361,12 @@ Run the Anchor Controller application.
 
 ```sh
 ./build/anchor_controller -f ./resources/umaa_components.xml
+```
 
 Now run the "GUI" Python script to send a command to the Anchor Controller.
 You can use the `-d` flag to change the value that populates the destination "GUID".
 
-##### Example for the "Lower" command to Destination ID populated by the value "5":
+##### Example for "Lower" command to Destination ID "5":
 
 ```sh
 python python/gui.py -c 1 -d 5
