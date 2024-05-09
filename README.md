@@ -358,9 +358,9 @@ You will see the filter defined in XML for a "GUID" value.
 Run the Anchor Controller application.  
 
 ##### Example:
+
 ```sh
 ./build/anchor_controller -f ./resources/umaa_components.xml
-```
 
 Now run the "GUI" Python script to send a command to the Anchor Controller.
 You can use the `-d` flag to change the value that populates the destination "GUID".
