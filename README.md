@@ -32,8 +32,7 @@ The intention of this initial Case+Code release was to provide some reference ex
 The application level requirements are outside of the current scope but we hope for this to be an ongoing development as we democratize best practices/lessons learned across our various customers.
 
 ## Use Cases
-1. I want to configure/manage all of my DDS entities external to the source code by just looking up entities defined in XML.  
-This will minimize boilerplate code, provide a configuration layer, and minimize configuration conflicts. [XML App Creation](#xml-app-creation)
+1. I want to configure/manage all of my DDS entities external to the source code by just looking up entities defined in XML. This will minimize boilerplate code, provide a configuration layer, and minimize configuration conflicts. [XML App Creation](#xml-app-creation)
 2. I want to convert my UMAA IDL files to xml and flatten the includes to a single folder, generating a composite includes file in the process.  This is so I can pull types into either System Designer or other modeling tools, use with DynamicData, or include when disabling type propagation. [XML Scripts](#xml-scripts)
 3. I want to use CMAKE and `rtiddsgen` to build a shared library of UMAA types using modules created by RTI as reference. [CMAKE modules](#cmake-modules)
 4. I want to filter the messages coming into my application based on the UMAA Destination ID. This can be configurable and require no compilation to change. [Content Filtered Topics](#content-filtered-topics)
