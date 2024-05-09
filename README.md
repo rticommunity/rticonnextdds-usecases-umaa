@@ -342,21 +342,18 @@ Reference the file umaa_components.xml for the section where the
 You will see the filter defined in XML for a "GUID" value.
 ```
 <data_reader name="AnchorCommandReader" topic_ref="UMAA::EO::AnchorControl::AnchorCommand">
-
-                    <!-- Here we are passing the Anchor Controller "GUID" to the Content Filter Topic  
-                        so we only get messages addressed to this GUID  
-                    -->
-                    <content_filter name="src" kind="builtin.sql">
-                        <!-- Can optionally use an ENV variable if desired
-                        <expression> destination = &amp;hex($(ANCHOR_CONTROLLER_GUID)) </expression> -->
-                        <expression>
-                            destination = &amp;hex(05 05 05 05 05 05 05 05 05 05 05 05 05 05 05 05)
-                        </expression>
-                    </content_filter>
-
-                    <datareader_qos base_name="UMAAQOSLibrary::AnchorCommandQOS"/>
-
-                </data_reader>
+    <!-- Here we are passing the Anchor Controller "GUID" to the Content Filter Topic
+        so we only get messages addressed to this GUID
+    -->
+    <content_filter name="src" kind="builtin.sql">
+        <!-- Can optionally use an ENV variable if desired
+        <expression> destination = &amp;hex($(ANCHOR_CONTROLLER_GUID)) </expression> -->
+        <expression>
+            destination = &amp;hex(05 05 05 05 05 05 05 05 05 05 05 05 05 05 05 05)
+        </expression>
+    </content_filter>
+    <datareader_qos base_name="UMAAQOSLibrary::AnchorCommandQOS"/>
+</data_reader>
 ```
 Run the Anchor Controller application.  
 
