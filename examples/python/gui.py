@@ -72,3 +72,4 @@ if __name__ == "__main__":
     assert args.command >= 0
 
     publisher_main(args.command, args.file, args.dest)
+    
