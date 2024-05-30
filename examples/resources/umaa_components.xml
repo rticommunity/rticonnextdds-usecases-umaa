@@ -45,7 +45,7 @@ to use the software.
 
     <!-- QOS Library -->
     <qos_library name="UMAAQOSLibrary">
-        <qos_profile name="ParticipantQOS" is_default_participant_factory_profile = "true" is_default_qos="true"> 
+        <qos_profile name="UMAADefaultParticipantQOS" is_default_participant_factory_profile = "true" is_default_qos="true"> 
             <participant_factory_qos>
 
                 <!-- Control logging verbosity and category here -->
@@ -92,18 +92,19 @@ to use the software.
             </domain_participant_qos>
         </qos_profile>
 
-        <!-- This is where we assign our base profiles to each Topic QOS and override if necessary -->
-        <qos_profile name="AnchorReportQOS" base_name="BuiltinQosLib::Pattern.ReliableStreaming">
-            <!-- Override QOS here for this specific topic -->
+        <!-- This is where we create our QOS profiles and inherit from a Builtin QOS Profile as a starting point.
+            We identify the Builtin QOS profile to use by associating the likely data patterns.
+            UMAA will be defining QOS profiles in the future so this is just an example of how the association
+            would be made.
+            We can then use Topic Filters to automaitcally assign this QOS as needed per Topic name.
+        -->
+        <qos_profile name="UMAAReportQOS" base_name="BuiltinQosLib::Pattern.PeriodicData">
+            <!-- Override QOS here for this specific QOS if desired -->
+
         </qos_profile>
-        <qos_profile name="AnchorCommandStatusQOS" base_name="BuiltinQosLib::Pattern.ReliableStreaming" />
-        <qos_profile name="AnchorCommandQOS" base_name="BuiltinQosLib::Pattern.Event" />
-        <qos_profile name="SpeedReportQOS" base_name="BuiltinQosLib::Pattern.PeriodicData" />
-        <qos_profile name="GlobalPoseReportQOS" base_name="BuiltinQosLib::Pattern.PeriodicData" />
-        <qos_profile name="VelocityReportQOS" base_name="BuiltinQosLib::Pattern.PeriodicData" />
-        <qos_profile name="TranslationalShipMotionReportQOS" base_name="BuiltinQosLib::Pattern.PeriodicData" />
-        <qos_profile name="WaterCurrentReportQOS" base_name="BuiltinQosLib::Pattern.PeriodicData" />
- 
+        <qos_profile name="UMAACommandStatusQOS" base_name="BuiltinQosLib::Pattern.ReliableStreaming"/>
+        <qos_profile name="UMAACommandQOS" base_name="BuiltinQosLib::Pattern.Event" />
+
     </qos_library>
 
     <!-- Domain and Topic Library -->
@@ -115,54 +116,77 @@ to use the software.
             <register_type name="AnchorReportType"
                 type_ref="UMAA::EO::AnchorStatus::AnchorReportType" />
 
-            <register_type name="AnchorCommandStatusType"
+            <register_type
+                name="AnchorCommandStatusType"
                 type_ref="UMAA::EO::AnchorControl::AnchorCommandStatusType" />
 
-            <register_type name="AnchorCommandType"
+            <register_type
+                name="AnchorCommandType"
                 type_ref="UMAA::EO::AnchorControl::AnchorCommandType" />
 
-            <register_type name="SpeedReportType"
+            <register_type
+                name="SpeedReportType"
                 type_ref="UMAA::SA::SpeedStatus::SpeedReportType" />
 
-            <register_type name="GlobalPoseReportType"
+            <register_type
+                name="GlobalPoseReportType"
                 type_ref="UMAA::SA::GlobalPoseStatus::GlobalPoseReportType" />
 
-            <register_type name="VelocityReportType"
+            <register_type
+                name="VelocityReportType"
                 type_ref="UMAA::SA::VelocityStatus::VelocityReportType" />
 
-            <register_type name="TranslationalShipMotionReportType"
+            <register_type
+                name="TranslationalShipMotionReportType"
                 type_ref="UMAA::SA::TranslationalShipMotionStatus::TranslationalShipMotionReportType" />
 
-            <register_type name="WaterCurrentReportType"
+            <register_type
+                name="WaterCurrentReportType"
                 type_ref="UMAA::SA::WaterCurrentStatus::WaterCurrentReportType" />
+
+            <register_type
+                name="GPSReportType"
+                type_ref="UMAA::SEM::GPSStatus::GPSReportType" />
 
 
             <!-- Associate the topics to the types-->
-            <topic name="UMAA::EO::AnchorStatus::AnchorReport"
+            <topic
+                name="UMAA::EO::AnchorStatus::AnchorReport"
                 register_type_ref="AnchorReportType" />
 
-            <topic name="UMAA::EO::AnchorControl::AnchorCommandStatus"
+            <topic
+                name="UMAA::EO::AnchorControl::AnchorCommandStatus"
                 register_type_ref="AnchorCommandStatusType" />
 
-            <topic name="UMAA::EO::AnchorControl::AnchorCommand"
+            <topic
+                name="UMAA::EO::AnchorControl::AnchorCommand"
                 register_type_ref="AnchorCommandType" />
 
-            <topic name="UMAA::SA::SpeedStatus::SpeedReport"
+            <topic
+                name="UMAA::SA::SpeedStatus::SpeedReport"
                 register_type_ref="SpeedReportType" />
 
-            <topic name="UMAA::SA::GlobalPoseStatus::GlobalPoseReport"
+            <topic
+                name="UMAA::SA::GlobalPoseStatus::GlobalPoseReport"
                 register_type_ref="GlobalPoseReportType" />
 
-            <topic name="UMAA::SA::VelocityStatus::VelocityReport"
+            <topic
+                name="UMAA::SA::VelocityStatus::VelocityReport"
                 register_type_ref="VelocityReportType" />
 
-            <topic name="UMAA::SA::TranslationalShipMotionStatus::TranslationalShipMotionReport"
+            <topic
+                name="UMAA::SA::TranslationalShipMotionStatus::TranslationalShipMotionReport"
                 register_type_ref="TranslationalShipMotionReportType" />
 
-            <topic name="UMAA::SA::WaterCurrentStatus::WaterCurrentReport"
+            <topic
+                name="UMAA::SA::WaterCurrentStatus::WaterCurrentReport"
                 register_type_ref="WaterCurrentReportType" />
 
-        </domain>
+            <topic
+                name="UMAA::SEM::GPSStatus::GPSReport"
+                register_type_ref="GPSReportType"/> 
+            
+            </domain>
     </domain_library>
 
     <!-- Participant library -->
@@ -172,21 +196,23 @@ to use the software.
 
         <!-- Define the entities for the Anchor Controller - Associate with Topics and QOS -->
         <domain_participant name="AnchorController" domain_ref="UMAADomainLibrary::UMAADomain1">
-            <domain_participant_qos base_name="UMAAQOSLibrary::ParticipantQOS"/>
+            <domain_participant_qos base_name="UMAAQOSLibrary::UMAADefaultParticipantQOS" />
 
-            <!-- Publisher/Subscribers created for each reader/writer for future Partitioning support -->
+            <!-- Publisher/Subscribers created for each reader/writer for two reasons:
+                1. Compensate for visualization bug in 6.1.2- Resolved in 7.3.0
+                2. Future Partitioning support at Publisher/Subscriber level (If desired)
+                Can wrap all writers/readers in single publisher/subscriber if none of the above applies.
+            -->
             <publisher name="AnchorReportPublisher">
                 <data_writer name="AnchorReportWriter"
                     topic_ref="UMAA::EO::AnchorStatus::AnchorReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::AnchorReportQOS">
-                        <!-- Override QOS at individual datawriter_qos/datareader_qos level here if necessary -->
-                    </datawriter_qos>
+                    <datawriter_qos base_name="UMAAQOSLibrary::UMAAReportQOS"/>
                 </data_writer>
             </publisher>
             <publisher name="AnchorCommandStatusPublisher">
                 <data_writer name="AnchorCommandStatusWriter"
                     topic_ref="UMAA::EO::AnchorControl::AnchorCommandStatus">
-                    <datawriter_qos base_name="UMAAQOSLibrary::AnchorCommandStatusQOS"/>
+                    <datawriter_qos base_name="UMAAQOSLibrary::UMAACommandStatusQOS" />
                 </data_writer>
             </publisher>
             <subscriber name="AnchorCommandSubscriber">
@@ -202,8 +228,7 @@ to use the software.
                             destination = &amp;hex(05 05 05 05 05 05 05 05 05 05 05 05 05 05 05 05)
                         </expression>
                     </content_filter>
-
-                    <datareader_qos base_name="UMAAQOSLibrary::AnchorCommandQOS"/>
+                    <datareader_qos base_name="UMAAQOSLibrary::UMAACommandQOS" />
 
                 </data_reader>
             </subscriber>
@@ -211,74 +236,86 @@ to use the software.
 
         <!-- Define the entities for the Autonomy Component - Associate with Topics and QOS -->
         <domain_participant name="Autonomy" domain_ref="UMAADomainLibrary::UMAADomain1">
-            <domain_participant_qos base_name="UMAAQOSLibrary::ParticipantQOS"/>
+            <domain_participant_qos base_name="UMAAQOSLibrary::UMAADefaultParticipantQOS" />
 
             <subscriber name="AnchorReportSubscriber">
                 <data_reader name="AnchorReportReader"
                     topic_ref="UMAA::EO::AnchorStatus::AnchorReport">
-                    <datareader_qos base_name="UMAAQOSLibrary::AnchorReportQOS" />
+                    <datareader_qos base_name="UMAAQOSLibrary::UMAAReportQOS" />
                 </data_reader>
             </subscriber>
             <subscriber name="AnchorCommandStatusSubscriber">
                 <data_reader name="AnchorCommandStatusReader"
                     topic_ref="UMAA::EO::AnchorControl::AnchorCommandStatus">
-                    <datareader_qos base_name="UMAAQOSLibrary::AnchorCommandStatusQOS" />
+                    <datareader_qos base_name="UMAAQOSLibrary::UMAACommandStatusQOS" />
                 </data_reader>
             </subscriber>
             <subscriber name="SpeedReportSubscriber">
                 <data_reader name="SpeedReportReader"
                     topic_ref="UMAA::SA::SpeedStatus::SpeedReport">
-                    <datareader_qos base_name="UMAAQOSLibrary::SpeedReportQOS" />
+                    <datareader_qos base_name="UMAAQOSLibrary::UMAAReportQOS" />
                 </data_reader>
             </subscriber>              
         </domain_participant>
 
         <!-- Define the entities for the NavData Component - Associate with Topics and QOS -->
         <domain_participant name="NavData" domain_ref="UMAADomainLibrary::UMAADomain1">
-            <domain_participant_qos base_name="UMAAQOSLibrary::ParticipantQOS" />
+            <domain_participant_qos base_name="UMAAQOSLibrary::UMAADefaultParticipantQOS" />
 
             <publisher name="SpeedReportPublisher">
                 <data_writer name="SpeedReportWriter"
                     topic_ref="UMAA::SA::SpeedStatus::SpeedReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::SpeedReportQOS" />
+                    <datawriter_qos base_name="UMAAQOSLibrary::UMAAReportQOS" />
                 </data_writer>
             </publisher>
             <publisher name="GlobalPoseReportPublisher">
                 <data_writer name="GlobalPoseReportWriter"
                     topic_ref="UMAA::SA::GlobalPoseStatus::GlobalPoseReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::GlobalPoseReportQOS" />
+                    <datawriter_qos base_name="UMAAQOSLibrary::UMAAReportQOS" />
                 </data_writer>
             </publisher>
             <publisher name="VelocityReportPublisher">
                 <data_writer name="VelocityReportWriter"
                     topic_ref="UMAA::SA::VelocityStatus::VelocityReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::VelocityReportQOS" />
+                    <datawriter_qos base_name="UMAAQOSLibrary::UMAAReportQOS" />
                 </data_writer>
             </publisher>
             <publisher name="TranslationalShipMotionReportPublisher">
                 <data_writer name="TranslationalShipMotionReportWriter"
                     topic_ref="UMAA::SA::TranslationalShipMotionStatus::TranslationalShipMotionReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::TranslationalShipMotionReportQOS" />
+                    <datawriter_qos base_name="UMAAQOSLibrary::UMAAReportQOS" />
                 </data_writer>
             </publisher>
             <publisher name="WaterCurrentReportPublisher">
                 <data_writer name="WaterCurrentReportWriter"
                     topic_ref="UMAA::SA::WaterCurrentStatus::WaterCurrentReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::WaterCurrentReportQOS" />
+                    <datawriter_qos base_name="UMAAQOSLibrary::UMAAReportQOS" />
                 </data_writer>
             </publisher>
         </domain_participant>
 
         <!-- Define the entities for the GUI Component - Associate with Topics and QOS -->
         <domain_participant name="GUI" domain_ref="UMAADomainLibrary::UMAADomain1">
-            <domain_participant_qos base_name="UMAAQOSLibrary::ParticipantQOS"/>
+            <domain_participant_qos base_name="UMAAQOSLibrary::UMAADefaultParticipantQOS" />
 
             <publisher name="AnchorCommandPublisher">
                 <data_writer name="AnchorCommandWriter"
                     topic_ref="UMAA::EO::AnchorControl::AnchorCommand">
-                    <datawriter_qos base_name="UMAAQOSLibrary::AnchorCommandQOS"/>
+                    <datawriter_qos base_name="UMAAQOSLibrary::UMAACommandQOS" />
                 </data_writer>
             </publisher>    
+        </domain_participant>
+
+        <!-- Define the entities for the GPS driver Component - Associate with Topics and QOS -->
+        <domain_participant name="GPS" domain_ref="UMAADomainLibrary::UMAADomain1">
+            <domain_participant_qos base_name="UMAAQOSLibrary::UMAADefaultParticipantQOS" />
+
+            <publisher name="GPSReportPublisher">
+                <data_writer name="GPSReportWriter"
+                    topic_ref="UMAA::SEM::GPSStatus::GPSReport">
+                    <datawriter_qos base_name="UMAAQOSLibrary::UMAAReportQOS" />
+                </data_writer>
+            </publisher>
         </domain_participant>
     
     </domain_participant_library>
