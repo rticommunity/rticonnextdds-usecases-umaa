@@ -85,19 +85,21 @@ void run_example(unsigned int domain_id, std::string config)
     register_type<AnchorCommandStatusType>("AnchorCommandStatusType");
     register_type<AnchorReportType>("AnchorReportType");
 
-    // This allows us to control Logging through XML as needed
+    // If we want to configure Logging with XML we set the QOS for the 
+    // Default Domain Participant Factory. This XML is configured using the 
+    // Default QOS Provider. By setting the QOS for this singleton all of the created 
+    // Participants will use this QOS.
+
+    // Start by creating a QOS Provider Parameters object
     QosProviderParams params;
     params.url_profile({ config });
     params.ignore_environment_profile(true);
     params.ignore_user_profile(true);
 
-
-    // To ensure that the new configuration takes effect before any other
-    // profiles are loaded, set the new parameters before accessing
-    // QosProvider::Default().
+    // Set the values for the Default Qos Provider using the Parameters object.
     default_qos_provider_params(params);
 
-    // Create the QOS provider from the default.
+    // Create the QOS provider from the Default.
     auto qos_provider = QosProvider::Default();
 
     // Create the participant as defined in the xml file.  This instantiates the
@@ -226,6 +228,7 @@ void run_example(unsigned int domain_id, std::string config)
         std::cout << "LAST COMMAND: " << anchor_state.current_cmd << std::endl;
         std::cout << "ANCHOR STATE: " << anchor_state.status_string
                   << std::endl;
+               
         std::cout << "\033[0m------------------------------------------------"
                   << std::endl;
         // Move back up
@@ -246,8 +249,8 @@ int main(int argc, char *argv[])
     }
     setup_signal_handlers();
 
-    // Sets Connext verbosity to help debugging
-    Logger::instance().verbosity(arguments.verbosity);
+    // Uncomment here to set the logging verbosity programatically
+    // Logger::instance().verbosity(arguments.verbosity);
 
     try {
         run_example(arguments.domain_id, arguments.config);

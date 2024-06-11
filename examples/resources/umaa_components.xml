@@ -12,9 +12,8 @@ any incidental or consequential damages arising out of the use or inability
 to use the software.
 -->
 
-<dds version="7.1.0"
-    xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/current/rti_dds_profiles.xsd"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<dds xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/current/rti_dds_profiles.xsd"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
     <!-- For 6.1.2.14+ can set default variable here or can set as Environment Variable  
          Use ENV variables with the syntax: $(ANCHOR_CONTROLLER_GUID)                               
@@ -25,8 +24,7 @@ to use the software.
         </element> 
     </configuration_variables> -->
 
-
-    <!-- Include XML type files individally for DynamicData option -->
+    <!-- Include XML type files individually for DynamicData Types option -->
     <!-- <types>
         <include file="./umaa_521/xml/AnchorCommandStatusType.xml"/>
         <include file="./umaa_521/xml/AnchorCommandType.xml"/>
@@ -34,7 +32,7 @@ to use the software.
         <include file="./umaa_521/xml/SpeedReportType.xml"/>
     </types> -->
 
-    <!-- Include ALL UMAA XML type files for DynamicData option 
+    <!-- Include ALL UMAA XML type files for DynamicData Types option 
          The impact is a small delay on startup when parsing all the xml files 
          This is done for example purposes so you can add additional types dynamically without
          adjusting the include list. Can optimize by just selecting necessary files per example above  -->
@@ -47,8 +45,7 @@ to use the software.
     <qos_library name="UMAAQOSLibrary">
         <qos_profile name="UMAADefaultParticipantQOS" is_default_participant_factory_profile = "true" is_default_qos="true"> 
             <participant_factory_qos>
-
-                <!-- Control logging verbosity and category here -->
+                <!-- Control logging verbosity here -->
                 <logging>
                     <verbosity>ERROR</verbosity>
                     <category>ALL</category>

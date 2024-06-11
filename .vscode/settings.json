@@ -54,5 +54,7 @@
         "bit": "cpp",
         "numeric": "cpp",
         "random": "cpp"
-    }
+    },
+    "cmake.sourceDirectory": "${workspaceFolder}/examples",
+    "cmake.buildDirectory": "${workspaceFolder}/examples/build"
 }

@@ -16,18 +16,19 @@ import random
 
 def publisher_main(file, source_id):
 
-    # Set Default QOS Provider
+    # The Default QOS provider is set to allow us to configure logging through XML.
+    # Not necessary if setting logging verbosity programatically.
     params = dds.QosProviderParams()
     params.url_profile = [file]
     dds.QosProvider.default_provider_params = params
 
-    # Set the QOS file
+    # Set the XML file into the regular QOS provider to access all of our components etc.
     qos_provider = dds.QosProvider(file)
 
-    # Create Participant
+    # Lookup the Participant we defined in our XML file
     participant = qos_provider.create_participant_from_config("UMAAParticipantLibrary::NavData")
 
-    # Create Writers
+    # Lookup the Writers
     speed_report_writer = dds.DynamicData.DataWriter(participant.find_datawriter("SpeedReportPublisher::SpeedReportWriter"))
     globalpose_report_writer = dds.DynamicData.DataWriter(participant.find_datawriter("GlobalPoseReportPublisher::GlobalPoseReportWriter"))
     velocity_report_writer = dds.DynamicData.DataWriter(participant.find_datawriter("VelocityReportPublisher::VelocityReportWriter"))
