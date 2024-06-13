@@ -11,9 +11,10 @@ import rti.connextdds as dds
 from rti.types.builtin import String
 import time
 import argparse
+import random
 
 
-def publisher_main(command, file, dest):
+def publisher_main(file, source_id):
 
     # The Default QOS provider is set to allow us to configure logging through XML.
     # Not necessary if setting logging verbosity programatically.
@@ -25,51 +26,46 @@ def publisher_main(command, file, dest):
     qos_provider = dds.QosProvider(file)
 
     # Lookup the Participant we defined in our XML file
-    participant = qos_provider.create_participant_from_config("UMAAParticipantLibrary::GUI")
+    participant = qos_provider.create_participant_from_config("UMAAParticipantLibrary::GPS")
 
     # Lookup the writer we defined in our XML file
-    writer = dds.DynamicData.DataWriter(participant.find_datawriter("AnchorCommandPublisher::AnchorCommandWriter"))
+    gps_report_writer = dds.DynamicData.DataWriter(participant.find_datawriter("GPSReportPublisher::GPSReportWriter"))
 
-    # Give a sec for discovery
-    time.sleep(1)
 
-    # Create a "GUID" from the destination id arg
-    dest_guid = [dest for d in range(16)]
-    
+    # Create a "GUID" from the source_id arg
+    source_guid = [source_id for d in range(16)]
 
-    sample = writer.create_data()
-    sample["destination"] = dest_guid
-    sample["action"] = command
+    gps_report_sample = gps_report_writer.create_data()
+    gps_report_sample["source"] = source_guid
 
     # write data samples in a loop
-    writer.write(sample)
-    print(f'Writing Anchor Command: {sample["action"]}')
-    print(f'Sending to Destination ID: {sample["destination[0]"]}')
+    while (True):
+        time.sleep(1)
 
-    # Couple secs for repair if needed
-    time.sleep(2)
+        # Example to index into a sequence of sub types
+        gps_report_sample["satellites[1].azimuth"] = 120
+        gps_report_sample["satellites[5].elevation"] = 7
 
-    print("Shutting down")
+        gps_report_writer.write(gps_report_sample)
+
+        print('Writing GPS Report')
+        
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="RTI Connext DDS UMAA Example: GUI"
+        description="RTI Connext DDS UMAA Example: NavData"
     )
-    print("RTI Connext DDS UMAA Example: GUI")
+    print("RTI Connext DDS UMAA Example: NavData")
 
-    parser.add_argument(
-        "-c", "--command", type=int, default=0, help="Anchor command",
-    )
     parser.add_argument(
        "-f", "--file", type=str, default="./resources/umaa_components.xml", help="XML Config file"
     )
     parser.add_argument(
-       "-d", "--dest", type=int, default=5, help="Destination ID"
+       "-s", "--source", type=int, default=0, help="Source ID"
     )
+           
 
     args = parser.parse_args()
-    assert args.command >= 0
 
-    publisher_main(args.command, args.file, args.dest)
-    
+    publisher_main(args.file, args.source)

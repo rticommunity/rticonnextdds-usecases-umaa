@@ -2,3 +2,4 @@
 .clang-tidy
 .clang-format
 examples/build/*
+.vscode/settings.json
