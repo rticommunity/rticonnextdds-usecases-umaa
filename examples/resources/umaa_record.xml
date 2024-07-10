@@ -21,9 +21,13 @@
                         umaa_xcdr
                     </execution_dir_expression>
 
-                    <!-- This creates a sequence of 101 files at 1GB each 
+                    <!-- 
+                    This creates a sequence of 101 files at 1GB each 
                     When the recording service reaches the end of the sequence it will reset the index to 0 and record over the first file. 
-                    Currently when the service is restarted/power is lost the index will reset to 0 as well. -->
+                    
+                    NOTE: Currently when the service is restarted/power is lost the index will reset to 0 as well. 
+                    RECORD-1479 is currently being worked on to resolve this feature gap 
+                    -->
                     <filename_expression>
                         umaa_xcdr-%auto:0-100%-log-filtered.db
                     </filename_expression>
