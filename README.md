@@ -32,14 +32,28 @@ The intention of this initial Case+Code release was to provide some reference ex
 The application level requirements are outside of the current scope but we hope for this to be an ongoing development as we democratize best practices/lessons learned across our various customers.
 
 ## Use Cases
+
+### Systems
 1. I want to configure/manage all of my DDS entities external to the source code by just looking up entities defined in XML. This will minimize boilerplate code, provide a configuration layer, and minimize configuration conflicts. [XML App Creation](#xml-app-creation)
-2. I want to develop using the Modern C++ API, Compiled Types, and XML App Creation. [Modern CPP Compiled Types](#modern-cpp-compiled-types)
-3. I want to develop using the Modern C++ API, DynamicData Types, and XML App Creation. [Modern CPP DynamicData Types](#modern-cpp-dynamicdata-types)
-4. I want to develop using the Python API, DynamicData Types, and XML App Creation. [Python DynamicData Types](#python-dynamicdata-types)
-5. I want to filter the messages coming into my application based on the UMAA Destination ID. This can be configurable and require no compilation to change. [Content Filtered Topics](#content-filtered-topics)
-6. I want to index into a subtype inside of a sequence using the Python API and DynamicData. [DynamicData indexing](#dynamicdata-indexing)
-7. I want to convert my UMAA IDL files to xml and flatten the includes to a single folder, generating a composite includes file in the process.  This is so I can pull types into either System Designer or other modeling tools, use with DynamicData, or include when disabling type propagation. [XML Scripts](#xml-scripts)
-8. I want to use CMAKE and `rtiddsgen` to build a shared library of UMAA types using modules created by RTI as reference. [CMAKE modules](#cmake-modules)
+2. I want to filter the messages coming into my application based on the UMAA Destination ID. This can be configurable and require no compilation to change. [Content Filtered Topics](#content-filtered-topics)
+3. I want to convert my UMAA IDL files to xml and flatten the includes to a single folder, generating a composite includes file in the process.  This is so I can pull types into either System Designer or other modeling tools, use with DynamicData, or include when disabling type propagation. [XML Scripts](#xml-scripts)
+
+### Software
+1. I want to develop using the Modern C++ API, Compiled Types, and XML App Creation. [Modern CPP Compiled Types](#modern-cpp-compiled-types)
+2. I want to develop using the Modern C++ API, DynamicData Types, and XML App Creation. [Modern CPP DynamicData Types](#modern-cpp-dynamicdata-types)
+
+### Test/Simulation
+1. I want to develop using the Python API, DynamicData Types, and XML App Creation. [Python DynamicData Types](#python-dynamicdata-types)
+2. I want to index into a subtype inside of a sequence using the Python API and DynamicData. [DynamicData indexing](#dynamicdata-indexing)
+
+### Build Tools
+1. I want to use CMAKE and `rtiddsgen` to build a shared library of UMAA types using modules created by RTI as reference. [CMAKE modules](#cmake-modules)
+
+### Infrastructure
+1. I want to have a "black box" recording running on my vehicle and capturing selected DDS traffic. [Recording Service](#recording-service)
+
+
+
 
 ## XML App Creation
 These example applications simulate a few components using types and services 
@@ -53,9 +67,6 @@ topics, domains and types of the Connext databus.
 
 It takes advantage of Connext’s XML-Based Application Creation framework 
 to define and manage all of the messaging entities with XML files.
-
-Customers are encouraged to reach out to the RTI Services team to assist with any  
-implementation of the latest Release which is Distro D(CUI controlled).
 
 ### Prerequisites
 
@@ -393,6 +404,38 @@ This repo pulls in a git submodule from [rticonnextdds-cmake-utils](https://gith
 
 The `rticonnextdds-cmake-utils` repo provides convenient CMAKE utils to call `rtiddsgen` and pass in idl files as an argument. 
 Use /examples/CMakeLists.txt as a reference for creating a shared library for your UMAA IDL set. 
+
+[Back to Use Cases](#use-cases)
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+
+## Recording Service
+
+Connext includes a recording service that can capture selected DDS traffic and store in a SQLite database to allow for 
+playback/conversion at a later date.
+
+[Recording Service Manual] (https://community.rti.com/static/documentation/connext-dds/7.3.0/doc/manuals/connext_dds_professional/services/recording_service/index.html)
+
+A reference config file has been created to cover 2 scenarios "deploy" and "debug" with some assumptions made for both.
+
+#### Usage
+
+- You can use the `rtisetenv*.sh` scripts located in `PATH_TO_CONNEXT_INSTALL/resource/scripts/` to put the `bin` folder into your PATH.
+
+##### Start Recording in "Deploy" mode:
+
+```sh
+<PATH_TO_CONNEXT_INSTALL>/bin/rtirecordingservice -cfgName deploy -cfgFile <PATH_TO_FILE>/umaa_record.xml
+```
+
+##### Start Recording in "Debug" mode:
+
+```sh
+<PATH_TO_CONNEXT_INSTALL>/bin/rtirecordingservice -cfgName debug -cfgFile <PATH_TO_FILE>/umaa_record.xml
+```
+
 
 [Back to Use Cases](#use-cases)
 
