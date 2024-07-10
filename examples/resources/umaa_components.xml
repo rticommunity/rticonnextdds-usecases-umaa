@@ -15,22 +15,22 @@ to use the software.
 <dds xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/current/rti_dds_profiles.xsd"
      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-    <!-- For 6.1.2.14+ can set default variable here or can set as Environment Variable  
-         Use ENV variables with the syntax: $(ANCHOR_CONTROLLER_GUID)                               
+    <!-- You can assign ENV variables in 3 ways to use within this file.
+     - Using the <configuration_variables> tag for defaults (For Connext > 6.1.2.14+)
+     - Using command line i.e. -DANCHOR_CONTROLLER_GUID=05 05 05 05 05 05 05 05 05 05 05 05 05 05 05 05
+     - Using a bash script i.e. export ANCHOR_CONTROLLER_GUID=05 05 05 05 05 05 05 05 05 05 05 05 05 05 05 05
+    
+    Use ENV variables with the syntax: $(ANCHOR_CONTROLLER_GUID) -->                           
     <configuration_variables> 
         <element> 
             <name>ANCHOR_CONTROLLER_GUID</name> 
             <value>05 05 05 05 05 05 05 05 05 05 05 05 05 05 05 05</value> 
+        </element>
+        <element>
+            <name>VEHICLE_DOMAIN_ID</name>
+            <value>1</value>
         </element> 
-    </configuration_variables> -->
-
-    <!-- Include XML type files individually for DynamicData Types option -->
-    <!-- <types>
-        <include file="./umaa_521/xml/AnchorCommandStatusType.xml"/>
-        <include file="./umaa_521/xml/AnchorCommandType.xml"/>
-        <include file="./umaa_521/xml/AnchorReportType.xml"/>
-        <include file="./umaa_521/xml/SpeedReportType.xml"/>
-    </types> -->
+    </configuration_variables>
 
     <!-- Include ALL UMAA XML type files for DynamicData Types option 
          The impact is a small delay on startup when parsing all the xml files 
@@ -43,8 +43,9 @@ to use the software.
 
     <!-- QOS Library -->
     <qos_library name="UMAAQOSLibrary">
-        <qos_profile name="UMAADefaultParticipantQOS" is_default_participant_factory_profile = "true" is_default_qos="true"> 
+        <qos_profile name="UMAADefaultParticipantQOS" is_default_participant_factory_profile = "true"> 
             <participant_factory_qos>
+
                 <!-- Control logging verbosity here -->
                 <logging>
                     <verbosity>ERROR</verbosity>
@@ -80,34 +81,77 @@ to use the software.
                     <!-- Increase the default for some of the larger types -->
                     <type_object_max_serialized_length>10000</type_object_max_serialized_length>
 
-                    <!-- Uncomment below to disable type propagation during discovery if necessary -->
-                    <!-- <type_code_max_serialized_length>0</type_code_max_serialized_length>
-                    <type_object_max_deserialized_length>0</type_object_max_deserialized_length>  -->
-
-                </resource_limits>              
+                  </resource_limits>              
 
             </domain_participant_qos>
         </qos_profile>
 
-        <!-- This is where we create our QOS profiles and inherit from a Builtin QOS Profile as a starting point.
+        <!-- 
+            This is where we create our QOS profiles and inherit from a Builtin QOS Profile as a starting point.
+
             We identify the Builtin QOS profile to use by associating the likely data patterns.
-            UMAA will be defining QOS profiles in the future so this is just an example of how the association
-            would be made.
-            We can then use Topic Filters to automaitcally assign this QOS as needed per Topic name.
+
+            We can then use the "topic_filter" tag to automatically assign the desired QOS as needed per Topic suffix.
+
+            NOTE: Currently there are no official required UMAA QOS settings. 
+            You would need to synchronize QOS with the other party you are communicating with. 
+            The below is just for reference of the simplest mechanisms/best practices to implement.
         -->
-        <qos_profile name="UMAAReportQOS" base_name="BuiltinQosLib::Pattern.PeriodicData">
-            <!-- Override QOS here for this specific QOS if desired -->
+
+        <!-- This Profile is designed for aperiodic data that we want to ensure delivery -->
+        <qos_profile name="CommandsProfile" base_name="BuiltinQosLib::Pattern.LastValueCache">
+            <!-- Reliability: RELIABLE
+            Durability: TRANSIENT LOCAL
+            History: KEEP LAST
+            Depth: 1
+            Liveliness: INF
+            Deadline: INF -->
+
+            <!-- Override QOS here if desired -->
 
         </qos_profile>
-        <qos_profile name="UMAACommandStatusQOS" base_name="BuiltinQosLib::Pattern.ReliableStreaming"/>
-        <qos_profile name="UMAACommandQOS" base_name="BuiltinQosLib::Pattern.Event" />
+
+        <!-- This profile is designed for Periodic data that is high rate -->
+        <qos_profile name="StatsProfile" base_name="BuiltinQosLib::Pattern.PeriodicData">
+            <!-- Reliability: BEST EFFORT
+            Durability: VOLATILE
+            History: KEEP LAST
+            Depth: 100
+            Liveliness: INF
+            Deadline: DW (4), DR(10) -->
+
+            <!-- Override QOS here if desired -->
+
+        </qos_profile>
+
+        <qos_profile name="BaseQOS">
+
+            <!-- We can use the Topic suffixes to automatically assign QOS using the "topic_filter" tag.
+
+             All the datawriters/datareaders defined in the <domain_participant> sections are assigned to this BaseQOS
+             Then depending on their suffix the selected QOS will be applied.
+
+             These filters will need to be defined based on the behavior of data going over the Topics i.e.
+             not all *Report Topics might be sending periodic data -->
+
+            <datawriter_qos topic_filter="*Command" base_name="CommandsProfile" />
+            <datareader_qos topic_filter="*Command" base_name="CommandsProfile" />
+
+            <datawriter_qos topic_filter="*Report" base_name="StatsProfile" />
+            <datareader_qos topic_filter="*Report" base_name="StatsProfile" />
+
+            <datawriter_qos topic_filter="*CommandStatus" base_name="CommandsProfile" />
+            <datareader_qos topic_filter="*CommandStatus" base_name="CommandsProfile" />
+
+
+          </qos_profile>
 
     </qos_library>
 
     <!-- Domain and Topic Library -->
     <domain_library name="UMAADomainLibrary">
         <!-- Recommended to not use default Domain ID of 0 -->
-        <domain name="UMAADomain1" domain_id="1">
+        <domain name="VehicleDomain" domain_id="$(VEHICLE_DOMAIN_ID)">
 
             <!-- Register the types -->
             <register_type name="AnchorReportType"
@@ -192,7 +236,7 @@ to use the software.
     <domain_participant_library name="UMAAParticipantLibrary">
 
         <!-- Define the entities for the Anchor Controller - Associate with Topics and QOS -->
-        <domain_participant name="AnchorController" domain_ref="UMAADomainLibrary::UMAADomain1">
+        <domain_participant name="AnchorController" domain_ref="UMAADomainLibrary::VehicleDomain">
             <domain_participant_qos base_name="UMAAQOSLibrary::UMAADefaultParticipantQOS" />
 
             <!-- Publisher/Subscribers created for each reader/writer for two reasons:
@@ -203,13 +247,13 @@ to use the software.
             <publisher name="AnchorReportPublisher">
                 <data_writer name="AnchorReportWriter"
                     topic_ref="UMAA::EO::AnchorStatus::AnchorReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::UMAAReportQOS"/>
+                    <datawriter_qos base_name="UMAAQOSLibrary::BaseQOS"/>
                 </data_writer>
             </publisher>
             <publisher name="AnchorCommandStatusPublisher">
                 <data_writer name="AnchorCommandStatusWriter"
                     topic_ref="UMAA::EO::AnchorControl::AnchorCommandStatus">
-                    <datawriter_qos base_name="UMAAQOSLibrary::UMAACommandStatusQOS" />
+                    <datawriter_qos base_name="UMAAQOSLibrary::BaseQOS" />
                 </data_writer>
             </publisher>
             <subscriber name="AnchorCommandSubscriber">
@@ -225,92 +269,92 @@ to use the software.
                             destination = &amp;hex(05 05 05 05 05 05 05 05 05 05 05 05 05 05 05 05)
                         </expression>
                     </content_filter>
-                    <datareader_qos base_name="UMAAQOSLibrary::UMAACommandQOS" />
+                    <datareader_qos base_name="UMAAQOSLibrary::BaseQOS" />
 
                 </data_reader>
             </subscriber>
         </domain_participant>
 
         <!-- Define the entities for the Autonomy Component - Associate with Topics and QOS -->
-        <domain_participant name="Autonomy" domain_ref="UMAADomainLibrary::UMAADomain1">
+        <domain_participant name="Autonomy" domain_ref="UMAADomainLibrary::VehicleDomain">
             <domain_participant_qos base_name="UMAAQOSLibrary::UMAADefaultParticipantQOS" />
 
             <subscriber name="AnchorReportSubscriber">
                 <data_reader name="AnchorReportReader"
                     topic_ref="UMAA::EO::AnchorStatus::AnchorReport">
-                    <datareader_qos base_name="UMAAQOSLibrary::UMAAReportQOS" />
+                    <datareader_qos base_name="UMAAQOSLibrary::BaseQOS" />
                 </data_reader>
             </subscriber>
             <subscriber name="AnchorCommandStatusSubscriber">
                 <data_reader name="AnchorCommandStatusReader"
                     topic_ref="UMAA::EO::AnchorControl::AnchorCommandStatus">
-                    <datareader_qos base_name="UMAAQOSLibrary::UMAACommandStatusQOS" />
+                    <datareader_qos base_name="UMAAQOSLibrary::BaseQOS" />
                 </data_reader>
             </subscriber>
             <subscriber name="SpeedReportSubscriber">
                 <data_reader name="SpeedReportReader"
                     topic_ref="UMAA::SA::SpeedStatus::SpeedReport">
-                    <datareader_qos base_name="UMAAQOSLibrary::UMAAReportQOS" />
+                    <datareader_qos base_name="UMAAQOSLibrary::BaseQOS" />
                 </data_reader>
             </subscriber>              
         </domain_participant>
 
         <!-- Define the entities for the NavData Component - Associate with Topics and QOS -->
-        <domain_participant name="NavData" domain_ref="UMAADomainLibrary::UMAADomain1">
+        <domain_participant name="NavData" domain_ref="UMAADomainLibrary::VehicleDomain">
             <domain_participant_qos base_name="UMAAQOSLibrary::UMAADefaultParticipantQOS" />
 
             <publisher name="SpeedReportPublisher">
                 <data_writer name="SpeedReportWriter"
                     topic_ref="UMAA::SA::SpeedStatus::SpeedReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::UMAAReportQOS" />
+                    <datawriter_qos base_name="UMAAQOSLibrary::BaseQOS" />
                 </data_writer>
             </publisher>
             <publisher name="GlobalPoseReportPublisher">
                 <data_writer name="GlobalPoseReportWriter"
                     topic_ref="UMAA::SA::GlobalPoseStatus::GlobalPoseReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::UMAAReportQOS" />
+                    <datawriter_qos base_name="UMAAQOSLibrary::BaseQOS" />
                 </data_writer>
             </publisher>
             <publisher name="VelocityReportPublisher">
                 <data_writer name="VelocityReportWriter"
                     topic_ref="UMAA::SA::VelocityStatus::VelocityReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::UMAAReportQOS" />
+                    <datawriter_qos base_name="UMAAQOSLibrary::BaseQOS" />
                 </data_writer>
             </publisher>
             <publisher name="TranslationalShipMotionReportPublisher">
                 <data_writer name="TranslationalShipMotionReportWriter"
                     topic_ref="UMAA::SA::TranslationalShipMotionStatus::TranslationalShipMotionReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::UMAAReportQOS" />
+                    <datawriter_qos base_name="UMAAQOSLibrary::BaseQOS" />
                 </data_writer>
             </publisher>
             <publisher name="WaterCurrentReportPublisher">
                 <data_writer name="WaterCurrentReportWriter"
                     topic_ref="UMAA::SA::WaterCurrentStatus::WaterCurrentReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::UMAAReportQOS" />
+                    <datawriter_qos base_name="UMAAQOSLibrary::BaseQOS" />
                 </data_writer>
             </publisher>
         </domain_participant>
 
         <!-- Define the entities for the GUI Component - Associate with Topics and QOS -->
-        <domain_participant name="GUI" domain_ref="UMAADomainLibrary::UMAADomain1">
+        <domain_participant name="GUI" domain_ref="UMAADomainLibrary::VehicleDomain">
             <domain_participant_qos base_name="UMAAQOSLibrary::UMAADefaultParticipantQOS" />
 
             <publisher name="AnchorCommandPublisher">
                 <data_writer name="AnchorCommandWriter"
                     topic_ref="UMAA::EO::AnchorControl::AnchorCommand">
-                    <datawriter_qos base_name="UMAAQOSLibrary::UMAACommandQOS" />
+                    <datawriter_qos base_name="UMAAQOSLibrary::BaseQOS" />
                 </data_writer>
             </publisher>    
         </domain_participant>
 
         <!-- Define the entities for the GPS driver Component - Associate with Topics and QOS -->
-        <domain_participant name="GPS" domain_ref="UMAADomainLibrary::UMAADomain1">
+        <domain_participant name="GPS" domain_ref="UMAADomainLibrary::VehicleDomain">
             <domain_participant_qos base_name="UMAAQOSLibrary::UMAADefaultParticipantQOS" />
 
             <publisher name="GPSReportPublisher">
                 <data_writer name="GPSReportWriter"
                     topic_ref="UMAA::SEM::GPSStatus::GPSReport">
-                    <datawriter_qos base_name="UMAAQOSLibrary::UMAAReportQOS" />
+                    <datawriter_qos base_name="UMAAQOSLibrary::BaseQOS" />
                 </data_writer>
             </publisher>
         </domain_participant>
