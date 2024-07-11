@@ -17,8 +17,8 @@ to use the software.
 
     <!-- You can assign ENV variables in 3 ways to use within this file.
      - Using the <configuration_variables> tag for defaults (For Connext > 6.1.2.14+)
-     - Using command line i.e. -DANCHOR_CONTROLLER_GUID=05 05 05 05 05 05 05 05 05 05 05 05 05 05 05 05
-     - Using a bash script i.e. export ANCHOR_CONTROLLER_GUID=05 05 05 05 05 05 05 05 05 05 05 05 05 05 05 05
+     - Using command line i.e. -DANCHOR_CONTROLLER_GUID="05 05 05 05 05 05 05 05 05 05 05 05 05 05 05 05"
+     - Using a bash script i.e. export ANCHOR_CONTROLLER_GUID="05 05 05 05 05 05 05 05 05 05 05 05 05 05 05 05"
     
     Use ENV variables with the syntax: $(ANCHOR_CONTROLLER_GUID) -->                           
     <configuration_variables> 
