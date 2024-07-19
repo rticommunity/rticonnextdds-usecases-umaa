@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="./AltitudeAGLRequirementVariantType.xml"/>
+<include file="./AltitudeASFRequirementVariantType.xml"/>
+<include file="./AltitudeGeodeticRequirementVariantType.xml"/>
+<include file="./AltitudeMSLRequirementVariantType.xml"/>
+<include file="./AltitudeRateASFRequirementVariantType.xml"/>
+<include file="./DepthRateRequirementVariantType.xml"/>
+<include file="./DepthRequirementVariantType.xml"/>
+<module name="UMAA">
+  <module name="Common">
+    <module name="Measurement">
+      <enum name="ElevationRequirementVariantTypeEnum">
+        <enumerator name="ALTITUDEAGLREQUIREMENTVARIANT_D"/>
+        <enumerator name="ALTITUDEASFREQUIREMENTVARIANT_D"/>
+        <enumerator name="ALTITUDEGEODETICREQUIREMENTVARIANT_D"/>
+        <enumerator name="ALTITUDEMSLREQUIREMENTVARIANT_D"/>
+        <enumerator name="ALTITUDERATEASFREQUIREMENTVARIANT_D"/>
+        <enumerator name="DEPTHRATEREQUIREMENTVARIANT_D"/>
+        <enumerator name="DEPTHREQUIREMENTVARIANT_D"/>
+      </enum> 
+      <union name="ElevationRequirementVariantTypeUnion" nested="true">
+<discriminator type="nonBasic" nonBasicTypeName="UMAA::Common::Measurement::ElevationRequirementVariantTypeEnum"/>
+<case>
+        <caseDiscriminator value="(UMAA::Common::Measurement::ALTITUDEAGLREQUIREMENTVARIANT_D)"/>
+<member name="AltitudeAGLRequirementVariantVariant" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::AltitudeAGLRequirementVariantType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::Common::Measurement::ALTITUDEASFREQUIREMENTVARIANT_D)"/>
+<member name="AltitudeASFRequirementVariantVariant" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::AltitudeASFRequirementVariantType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::Common::Measurement::ALTITUDEGEODETICREQUIREMENTVARIANT_D)"/>
+<member name="AltitudeGeodeticRequirementVariantVariant" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::AltitudeGeodeticRequirementVariantType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::Common::Measurement::ALTITUDEMSLREQUIREMENTVARIANT_D)"/>
+<member name="AltitudeMSLRequirementVariantVariant" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::AltitudeMSLRequirementVariantType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::Common::Measurement::ALTITUDERATEASFREQUIREMENTVARIANT_D)"/>
+<member name="AltitudeRateASFRequirementVariantVariant" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::AltitudeRateASFRequirementVariantType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::Common::Measurement::DEPTHRATEREQUIREMENTVARIANT_D)"/>
+<member name="DepthRateRequirementVariantVariant" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DepthRateRequirementVariantType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::Common::Measurement::DEPTHREQUIREMENTVARIANT_D)"/>
+<member name="DepthRequirementVariantVariant" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DepthRequirementVariantType"/>
+</case>
+      </union>
+      <struct name= "ElevationRequirementVariantType" nested="true">
+        <member name="ElevationRequirementVariantTypeSubtypes" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::ElevationRequirementVariantTypeUnion"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

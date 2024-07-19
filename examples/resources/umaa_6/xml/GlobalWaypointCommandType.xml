@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="./LargeListMetadata.xml"/>
+<include file="./IdentifierType.xml"/>
+<include file="./Measurements.xml"/>
+<include file="./GlobalWaypointType.xml"/>
+<module name="UMAA">
+  <module name="MO">
+    <module name="GlobalWaypointControl">
+      <const name="GlobalWaypointCommandTypeTopic" type="string" value="&quot;UMAA::MO::GlobalWaypointControl::GlobalWaypointCommandType&quot;"/>
+      <struct name= "GlobalWaypointCommandType">
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::IdentifierType" key="true"/>
+        <member name="sessionID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="destination" type="nonBasic"  nonBasicTypeName= "UMAA::Common::IdentifierType" key="true"/>
+        <member name="waypointsListMetadata" type="nonBasic"  nonBasicTypeName= "UMAA::Common::LargeListMetadata"/>
+      </struct>
+      <const name="GlobalWaypointCommandTypeWaypointsListElementTopic" type="string" value="&quot;UMAA::MO::GlobalWaypointControl::GlobalWaypointCommandTypeWaypointsListElement&quot;"/>
+      <struct name= "GlobalWaypointCommandTypeWaypointsListElement">
+        <member name="element" type="nonBasic"  nonBasicTypeName= "UMAA::MO::GlobalWaypointControl::GlobalWaypointType"/>
+        <member name="listID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="elementID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="elementTimestamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+        <member name="nextElementID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" optional="true"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

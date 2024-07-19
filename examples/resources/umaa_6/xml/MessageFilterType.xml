@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/CO/Filter/AllFilterType.xml"/>
+<include file="UMAA/CO/Filter/DecimateStructureFilterType.xml"/>
+<include file="UMAA/CO/Filter/SendOnlyIfChangedFilterType.xml"/>
+<module name="UMAA">
+  <module name="CO">
+    <module name="Filter">
+      <enum name="MessageFilterTypeEnum">
+        <enumerator name="ALLFILTER_D"/>
+        <enumerator name="DECIMATESTRUCTUREFILTER_D"/>
+        <enumerator name="SENDONLYIFCHANGEDFILTER_D"/>
+      </enum> 
+      <union name="MessageFilterTypeUnion" nested="true">
+<discriminator type="nonBasic" nonBasicTypeName="UMAA::CO::Filter::MessageFilterTypeEnum"/>
+<case>
+        <caseDiscriminator value="(UMAA::CO::Filter::ALLFILTER_D)"/>
+<member name="AllFilterVariant" type="nonBasic"  nonBasicTypeName= "UMAA::CO::Filter::AllFilterType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::CO::Filter::DECIMATESTRUCTUREFILTER_D)"/>
+<member name="DecimateStructureFilterVariant" type="nonBasic"  nonBasicTypeName= "UMAA::CO::Filter::DecimateStructureFilterType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::CO::Filter::SENDONLYIFCHANGEDFILTER_D)"/>
+<member name="SendOnlyIfChangedFilterVariant" type="nonBasic"  nonBasicTypeName= "UMAA::CO::Filter::SendOnlyIfChangedFilterType"/>
+</case>
+      </union>
+      <struct name= "MessageFilterType" nested="true">
+        <member name="MessageFilterTypeSubtypes" type="nonBasic"  nonBasicTypeName= "UMAA::CO::Filter::MessageFilterTypeUnion"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

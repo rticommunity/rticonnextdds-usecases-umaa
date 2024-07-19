@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/LargeListMetadata.xml"/>
+<include file="UMAA/Common/IdentifierType.xml"/>
+<include file="UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<include file="UMAA/EO/BatteryStatus/BatteryCellDataType.xml"/>
+<module name="UMAA">
+  <module name="EO">
+    <module name="BatteryStatus">
+      <const name="BatteryReportTypeTopic" type="string" value="&quot;UMAA::EO::BatteryStatus::BatteryReportType&quot;"/>
+      <struct name= "BatteryReportType">
+        <member name="chargeRemaining" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::EnergyPercent" optional="true"/>
+        <member name="current" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::PowerBusCurrent" optional="true"/>
+        <member name="energyUsageRate" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::ElectricalPower" optional="true"/>
+        <member name="hours" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DurationHours" optional="true"/>
+        <member name="state" type="nonBasic"  nonBasicTypeName= "UMAA::Common::MaritimeEnumeration::PowerPlantStateEnumModule::PowerPlantStateEnumType"/>
+        <member name="temp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Temperature" optional="true"/>
+        <member name="voltage" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::PowerBusVoltage" optional="true"/>
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::IdentifierType" key="true"/>
+        <member name="cellsListMetadata" type="nonBasic"  nonBasicTypeName= "UMAA::Common::LargeListMetadata"/>
+      </struct>
+      <const name="BatteryReportTypeCellsListElementTopic" type="string" value="&quot;UMAA::EO::BatteryStatus::BatteryReportTypeCellsListElement&quot;"/>
+      <struct name= "BatteryReportTypeCellsListElement">
+        <member name="element" type="nonBasic"  nonBasicTypeName= "UMAA::EO::BatteryStatus::BatteryCellDataType"/>
+        <member name="listID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="elementID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="elementTimestamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+        <member name="nextElementID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" optional="true"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

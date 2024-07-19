@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="./EnumerationSets.xml"/>
+<include file="./IdentifierType.xml"/>
+<include file="./Measurements.xml"/>
+<module name="UMAA">
+  <module name="SO">
+    <module name="BITReport">
+      <const name="BITReportTypeTopic" type="string" value="&quot;UMAA::SO::BITReport::BITReportType&quot;"/>
+      <struct name= "BITReportType">
+        <member name="commandBITAvailable" type="boolean"/>
+        <member name="timeOfLastBIT" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime" optional="true"/>
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::IdentifierType" key="true"/>
+        <member name="resourceID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::IdentifierType" key="true"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

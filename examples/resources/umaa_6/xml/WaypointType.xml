@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="./DistanceRequirementType.xml"/>
+<include file="./ElevationRequirementVariantType.xml"/>
+<include file="./GeoPosition2D.xml"/>
+<include file="./Measurements.xml"/>
+<include file="./Orientation3DNEDRequirement.xml"/>
+<include file="./ConstrainedTypes.xml"/>
+<include file="./SpeedVariantType.xml"/>
+<module name="UMAA">
+  <module name="MM">
+    <module name="BaseType">
+      <struct name= "WaypointType" nested="true">
+        <member name="attitude" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Orientation::Orientation3DNEDRequirement" optional="true"/>
+        <member name="captureRadius" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Distance::DistanceRequirementType"/>
+        <member name="elevation" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::ElevationRequirementVariantType" optional="true"/>
+        <member name="name" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::StringShortDescription" optional="true"/>
+        <member name="position" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::GeoPosition2D"/>
+        <member name="speed" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Speed::SpeedVariantType" optional="true"/>
+        <member name="trackTolerance" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Distance::DistanceRequirementType" optional="true"/>
+        <member name="waypointID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>
