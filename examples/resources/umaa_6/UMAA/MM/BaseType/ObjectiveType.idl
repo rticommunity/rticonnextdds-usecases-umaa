@@ -1,0 +1,101 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_OBJECTIVETYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_OBJECTIVETYPE
+
+#include "UMAA/Common/Enumeration/EnumerationSets.idl"
+#include "UMAA/Common/IdentifierType.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
+#include "UMAA/Common/Time/DateTimeRequirementType.idl"
+#include "UMAA/MM/BaseType/StateTriggerType.idl"
+module UMAA
+{
+  module MM
+  {
+    module BaseType
+    {
+      /**
+        * This is a base structure that all specialization objectives are inherited from. Each specialized objective structure shall be used to define or report its own specialized data.
+        *
+        * This structure has the following specializations:
+        * UMAA::MM::BaseType::VectorObjectiveType
+        * UMAA::MM::BaseType::CircleObjectiveType
+        * UMAA::MM::BaseType::RouteObjectiveType
+        * UMAA::MM::BaseType::ScreenRandomWalkObjectiveType
+        * UMAA::MM::BaseType::Figure8ObjectiveType
+        * UMAA::MM::BaseType::HoverObjectiveType
+        * UMAA::MM::BaseType::FreeFloatObjectiveType
+        * UMAA::MM::BaseType::RegularPolygonObjectiveType
+        * UMAA::MM::BaseType::StationkeepObjectiveType
+        * UMAA::MM::BaseType::ExpObjectiveType
+        * UMAA::MM::BaseType::DriftObjectiveType
+        * UMAA::MM::BaseType::RacetrackObjectiveType
+        * UMAA::MM::BaseType::AreaRandomWalkObjectiveType
+      */
+    @nested
+    struct ObjectiveType
+    {
+      // An indication whether approval is required for the specified objective within a mission.
+      boolean approvalRequired;
+
+      // A reference to a conditional that must be kept true during objective execution by completing/executing one or more actions. If not specified, then no duringCondition exists for the objective.
+      @optional UMAA::Common::Measurement::NumericGUID duringConditionID;
+
+      // A short name for the objective.
+      UMAA::Common::PrimitiveConstrained::StringShortDescription name;
+
+      // A description of the objective.
+      UMAA::Common::PrimitiveConstrained::StringShortDescription objectiveDescription;
+
+      // Unique identifier for the objective within a mission.
+      UMAA::Common::Measurement::NumericGUID objectiveID;
+
+      // Specifies the desired importance for completing the objective in order to handle the case where a plan cannot be generated to complete all objectives. For this case, objective priority is used to determine what objectives(s) to drop from the plan. Objectives with the lowest priority must be dropped before objectives with a higher priority. If multiple objectives have the lowest priority, then the order in which they are dropped is not defined by their priority and must be determined by some other mechanism.
+      UMAA::Common::Measurement::Priority objectivePriority;
+
+      // A reference to a conditional that must be made true prior to executing the objective by completing one or more actions. If not specified, then no precondition exists for the objective.
+      @optional UMAA::Common::Measurement::NumericGUID preconditionID;
+
+      // If defined, specifies a list of preferred resource(s) to execute the objective in order of preference. A preferred resource must be used if a valid plan can be generated. Otherwise, if a valid plan cannot be generated then another resource may be used (i.e., the inability to use a preferred resource when alternatives are available is not a cause for failure).
+      sequence<UMAA::Common::IdentifierType,16> preferredResourceID;
+
+      // Specifies the conditional statement that when true attempts to change the current state. Each trigger is evaluated individually, meaning if multiple triggers are defined with the same state, then their conditional statements are treated as if they are logically OR'd.
+      sequence<UMAA::MM::BaseType::StateTriggerType,16> stateTrigger;
+
+      // ID to capture specializations of ObjectiveType.
+      UMAA::Common::Measurement::NumericGUID specializationID;
+
+      // This field identifies the timestamp that signals the end of an atomic update to the instance of the specialization.
+      UMAA::Common::Measurement::DateTime specializationTimestamp;
+
+      // Topic to capture specializations of ObjectiveType.
+      UMAA::Common::PrimitiveConstrained::StringShortDescription specializationTopic;
+    };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_OBJECTIVETYPE
+

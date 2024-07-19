@@ -1,0 +1,72 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_GLOBALWAYPOINTCONTROL_GLOBALWAYPOINTTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_GLOBALWAYPOINTCONTROL_GLOBALWAYPOINTTYPE
+
+#include "UMAA/Common/Distance/DistanceRequirementType.idl"
+#include "UMAA/Common/Measurement/ElevationRequirementVariantType.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/Orientation/Orientation3DNEDRequirement.idl"
+#include "UMAA/Common/Position/GeoPosition2DRequirement.idl"
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
+#include "UMAA/Common/Speed/VariableSpeedVariantType.idl"
+module UMAA
+{
+  module MO
+  {
+    module GlobalWaypointControl
+    {
+      /**
+        * The structure is used to describe a waypoint in a global reference frame.
+        */
+      @nested
+      struct GlobalWaypointType
+      {
+      // The desired orientation (roll, pitch, yaw) of the vehicle as arriving at the waypoint.
+      @optional UMAA::Common::Orientation::Orientation3DNEDRequirement attitude;
+
+      // The target elevation used for the vehicle when reaching the waypoint. If not provided, any elevation at the waypoint is acceptable. Changes in elevation will be achieved as quickly as possible on the way to the waypoint.
+      @optional UMAA::Common::Measurement::ElevationRequirementVariantType elevation;
+
+      // A short name for the waypoint.
+      @optional UMAA::Common::PrimitiveConstrained::StringShortDescription name;
+
+      // The desired waypoint position in the global coordinate system.
+      UMAA::Common::Position::GeoPosition2DRequirement position;
+
+      // The desired transit speed to the waypoint of the vehicle with reference to the medium, the ground, the air, RPM, or true speed.
+      UMAA::Common::Speed::VariableSpeedVariantType speed;
+
+      // The desired tolerance of the path measured by distance from the waypoint position ignoring elevation. If defined, the vehicle must maintain track; if not defined, there is no need to maintain track. Use the vehicle position at time of command to define the track for the first waypoint.
+      @optional UMAA::Common::Distance::DistanceRequirementType trackTolerance;
+
+      // The desired id to keep track of the waypoint.
+      UMAA::Common::Measurement::NumericGUID waypointID;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_GLOBALWAYPOINTCONTROL_GLOBALWAYPOINTTYPE
+

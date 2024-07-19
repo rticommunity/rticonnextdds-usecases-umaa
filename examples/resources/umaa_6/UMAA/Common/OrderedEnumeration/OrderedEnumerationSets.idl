@@ -1,0 +1,86 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_REFINEMENTS_ENUMERATIONSETS_ORDEREDENUMERATIONSETS_ORDEREDENUMERATIONSETS
+#define _LDM_REFINEMENTS_ENUMERATIONSETS_ORDEREDENUMERATIONSETS_ORDEREDENUMERATIONSETS
+
+
+//@copy-c #undef ERROR
+//@copy-c #undef VARIABLE_PITCH
+//@copy-c #undef DELETE
+//@copy-c #undef PLATFORM
+
+module UMAA
+{
+  module Common
+  {
+    module OrderedEnumeration
+    {
+
+
+        module CloudCoverEnumModule
+        {
+          enum CloudCoverEnumType
+          {
+              BROKEN, // Cloud cover is from five-eighths to seven-eighths of the sky.
+              CLEAR, // There are no clouds below 12,000 ft (zero-eighths of the sky).
+              FEW, // Cloud cover is from one-eighth to two-eights of the sky.
+              OVERCAST, // Cloud cover is complete (eight-eighths of the sky).
+              SCATTERED // Cloud cover is from three-eighths to four-eighths of the sky.
+          };
+        };
+
+        module SeaStateEnumModule
+        {
+          enum SeaStateEnumType
+          {
+              CALM_GLOSSY, // The sea state is calm glassy, which is characterized by wave height of 0 meters and a World Meteorological Organization (WMO) sea state code of 0.
+              CALM_RIPPLED, // The sea state is calm rippled, which is characterized by wave heights of 0 to 0.1 meters and a World Meteorological Organization (WMO) sea state code of 1.
+              HIGH, // The sea state is high, which is characterized by wave heights of 6 to 9 meters and a World Meteorological Organization (WMO) sea state code of 7.
+              MODERATE, // The sea state is moderate, which is characterized by wave heights of 1.25 to 2.5 meters and a World Meteorological Organization (WMO) sea state code of 4.
+              PHENOMENAL, // The sea state is phenomenal, which is characterized by wave heights of over 14 meters and a World Meteorological Organization (WMO) sea state code of 9.
+              ROUGH, // The sea state is rough, which is characterized by wave heights of 2.5 to 4 meters and a World Meteorological Organization (WMO) sea state code of 5.
+              SLIGHT, // The sea state is slight, which is characterized by wave heights of 0.5 to 1.25 meters and a World Meteorological Organization (WMO) sea state code of 3.
+              SMOOTH, // The sea state is smooth, which is characterized by wave heights of 0.1 to 0.5 meters and a World Meteorological Organization (WMO) sea state code of 2.
+              VERY_HIGH, // The sea state is very high, which is characterized by wave heights of 9 to 14 meters and a World Meteorological Organization (WMO) sea state code of 8.
+              VERY_ROUGH // The sea state is very rough, which is characterized by wave heights of 4 to 6 meters and a World Meteorological Organization (WMO) sea state code of 6.
+          };
+        };
+
+        module WeatherSeverityEnumModule
+        {
+          enum WeatherSeverityEnumType
+          {
+              EXTREME, // The adverse weather conditions are extreme.
+              LIGHT, // The adverse weather conditions are light.
+              MODERATE, // The adverse weather conditions are moderate.
+              NONE, // There is no adverse weather.
+              SEVERE // The adverse weather conditions are severe.
+          };
+        };
+
+
+    };
+  };
+};
+
+#endif // _LDM_REFINEMENTS_ENUMERATIONSETS_ORDEREDENUMERATIONSETS_ORDEREDENUMERATIONSETS
+

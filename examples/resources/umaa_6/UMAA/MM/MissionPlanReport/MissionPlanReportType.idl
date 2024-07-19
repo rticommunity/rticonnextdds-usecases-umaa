@@ -1,0 +1,86 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_MISSIONPLANREPORT_MISSIONPLANREPORTTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_MISSIONPLANREPORT_MISSIONPLANREPORTTYPE
+
+#include "UMAA/Common/LargeSetMetadata.idl"
+#include "UMAA/Common/IdentifierType.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/MM/BaseType/MissionPlanType.idl"
+#include "UMAA/MM/Constraint/ConstraintType.idl"
+module UMAA
+{
+  module MM
+  {
+    module MissionPlanReport
+    {
+    
+      const string MissionPlanReportTypeTopic = "UMAA::MM::MissionPlanReport::MissionPlanReportType";
+  
+      /**
+        * This structure is used to report current mission plan(s).
+        */
+    
+      struct MissionPlanReportType
+      {
+      // The origination time of the data being conveyed in the message, or as close to the data or command generation time as is reasonably possible.
+      UMAA::Common::Measurement::DateTime timeStamp;
+
+      // The unique identifier of the originating source of the command interface.
+      @key UMAA::Common::IdentifierType source;
+      UMAA::Common::LargeSetMetadata constraintsSetMetadata;
+      UMAA::Common::LargeSetMetadata missionPlanSetMetadata;
+      };
+
+      const string MissionPlanReportTypeConstraintsSetElementTopic = "UMAA::MM::MissionPlanReport::MissionPlanReportTypeConstraintsSetElement";
+      // Defines the large set element type that wraps UMAA::MM::Constraint::ConstraintType
+      struct MissionPlanReportTypeConstraintsSetElement
+      {
+        // The value of the set element.
+        UMAA::MM::Constraint::ConstraintType element;
+        // NOTE: Ties this element back to the set metadata with the same setID, which is the collection of all elements in the topic with the same sourceId.
+        @key UMAA::Common::Measurement::NumericGUID setID;
+        // NOTE: Uniquely identifies this element within the set and universally across any large collection that currently exists on the DDS bus.
+        @key UMAA::Common::Measurement::NumericGUID elementID;
+        // The timestamp of this element.
+        UMAA::Common::Measurement::DateTime elementTimestamp;
+      };
+      const string MissionPlanReportTypeMissionPlanSetElementTopic = "UMAA::MM::MissionPlanReport::MissionPlanReportTypeMissionPlanSetElement";
+      // Defines the large set element type that wraps UMAA::MM::BaseType::MissionPlanType
+      struct MissionPlanReportTypeMissionPlanSetElement
+      {
+        // The value of the set element.
+        UMAA::MM::BaseType::MissionPlanType element;
+        // NOTE: Ties this element back to the set metadata with the same setID, which is the collection of all elements in the topic with the same sourceId.
+        @key UMAA::Common::Measurement::NumericGUID setID;
+        // NOTE: Uniquely identifies this element within the set and universally across any large collection that currently exists on the DDS bus.
+        @key UMAA::Common::Measurement::NumericGUID elementID;
+        // The timestamp of this element.
+        UMAA::Common::Measurement::DateTime elementTimestamp;
+      };
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_MISSIONPLANREPORT_MISSIONPLANREPORTTYPE
+

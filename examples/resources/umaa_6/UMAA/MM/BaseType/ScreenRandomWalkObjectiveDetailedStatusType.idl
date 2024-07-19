@@ -1,0 +1,71 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_SCREENRANDOMWALKOBJECTIVEDETAILEDSTATUSTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_SCREENRANDOMWALKOBJECTIVEDETAILEDSTATUSTYPE
+
+#include "UMAA/Common/Enumeration/EnumerationSets.idl"
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
+module UMAA
+{
+  module MM
+  {
+    module BaseType
+    {
+
+    const string ScreenRandomWalkObjectiveDetailedStatusTypeTopic = "UMAA::MM::BaseType::ScreenRandomWalkObjectiveDetailedStatusType";
+
+      /**
+        * This structure provides a detailed execution status for the screen random walk objective.
+        *
+        * This structure is a specialization of UMAA::MM::BaseType::ObjectiveDetailedStatusType.
+        */
+    
+      struct ScreenRandomWalkObjectiveDetailedStatusType
+      {
+      // Indicates that the area requested is currently achieved. Achievement may be lost and regained resulting in multiple changes to this attribute.
+      boolean isAreaAchieved;
+
+      // Is system currently executing screen random walk (True = system is executing screen random walk, False = system is in transit).
+      boolean isInPattern;
+
+      // Defines the absolute time at which the screen random walk is estimated to be achieved or was actually first achieved.
+      UMAA::Common::Measurement::DateTime timePatternAchieved;
+
+      // Defines the absolute time at which the screen random walk is estimated to be completed (optional in case duration is not specified).
+      @optional UMAA::Common::Measurement::DateTime timePatternCompleted;
+
+      // This field identifies the timestamp that signals the end of an atomic update to the instance of the specialization. NOTE: Ties this element back to the specializationID in ObjectiveDetailedStatusType generalization.
+      UMAA::Common::Measurement::DateTime specializationReferenceTimestamp;
+
+      // NOTE: Ties this element back to the ObjectiveDetailedStatusType generalization.
+      @key UMAA::Common::Measurement::NumericGUID specializationReferenceID;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_SCREENRANDOMWALKOBJECTIVEDETAILEDSTATUSTYPE
+

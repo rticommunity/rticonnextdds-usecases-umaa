@@ -1,0 +1,8 @@
+# PathReporterStatus
+The purpose of this service is to provide a mechanism for reporting the past and/or future expected path of the vehicle. The service is used in cooperation with Global Waypoint Driver, Local Waypoint Driver, Global Waypoint List Driver, Local Waypoint List Driver, Global Pose Sensor and/or Local Pose Sensor. The amount of data reported may be limited by specifying a maximum number of data points, maximum time, maximum distance, and/or path resolution, within the limits of the implementation's reported capabilities. Note that the historical path is assumed to be represented by a FIFO queue. As a result, the Report Path message may be limited by the storage capabilities of the underlying implementation to reporting only the most recent data, e.g. the points nearest the current position. Older data may be discarded as needed by the implementation. Such limits should be specified by the PathReporterSpecs service. Also, note that the future path may be valid only at that instance in time. It represents the current planned path, at the given resolution. However, some waypoint drivers may frequently update the planned path, based on new information about the environment. As a result, planned path information may quickly become stale. Furthermore, the planned path represents the actual path the vehicle expects to follow. It does not replace the Waypoint Driver's Query Waypoint messages. Rather, it provides additional information about how the vehicle plans to achieve the desired waypoints.
+
+## Requests
+
+## Responses
+### reportPathReporter (PathReporterReportType)
+This operation is used to report the current path.

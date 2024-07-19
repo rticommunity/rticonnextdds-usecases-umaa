@@ -1,0 +1,80 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_DYNAMIC_WATERSPACE_ENVIRONMENT_SOUNDVELOCITY_POSETYPE
+#define _LDM_MDE_DYNAMIC_WATERSPACE_ENVIRONMENT_SOUNDVELOCITY_POSETYPE
+
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
+#include "UMAA/Common/Measurement/CovariancePositionNEDType.idl"
+#include "UMAA/Common/Measurement/GeoPosition2D.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/Orientation/Orientation3DNEDType.idl"
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
+module UMAA
+{
+  module Common
+  {
+    module Environment
+    {
+      /**
+        * Specifies current position and orientation in the global coordinate system.
+        */
+      @nested
+      struct PoseType
+      {
+      // The current orthometric height above the Geoid (Mean Sea Level) of the vehicle.
+      @optional UMAA::Common::Measurement::MSLAltitude altitude;
+
+      // The current height above ground level of the vehicle.
+      @optional UMAA::Common::Measurement::DistanceAGL altitudeAGL;
+
+      // The current height above the sea floor of the vehicle.
+      @optional UMAA::Common::Measurement::DistanceASF altitudeASF;
+
+      // The current geodetic height above the ellipsoid of the vehicle.
+      @optional UMAA::Common::PrimitiveConstrained::GeodeticAltitude altitudeGeodetic;
+
+      // The current orientation (roll, pitch, yaw) of the vehicle.
+      UMAA::Common::Orientation::Orientation3DNEDType attitude;
+
+      // The current course angle of the vehicle.
+      UMAA::Common::Measurement::CourseTrueNorth course;
+
+      // The current depth of the maritime vehicle.
+      @optional UMAA::Common::Measurement::DistanceBSL depth;
+
+      // The desired navigation solution (estimated or measured).
+      UMAA::Common::MaritimeEnumeration::NavigationSolutionEnumModule::NavigationSolutionEnumType navigationSolution;
+
+      // The current position of the vehicle.
+      UMAA::Common::Measurement::GeoPosition2D position;
+
+      // The current error covariance value of the position data.
+      @optional UMAA::Common::Measurement::CovariancePositionNEDType positionCovariance;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_DYNAMIC_WATERSPACE_ENVIRONMENT_SOUNDVELOCITY_POSETYPE
+

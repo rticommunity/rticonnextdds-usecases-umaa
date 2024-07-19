@@ -1,0 +1,48 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_BASISELEMENTS_PRIMITIVETYPES_COORDINATE_AXES_GEOGRAPHIC_COORDINATE_AXES_GEOGRAPHICCOORDINATEAXES
+#define _LDM_BASISELEMENTS_PRIMITIVETYPES_COORDINATE_AXES_GEOGRAPHIC_COORDINATE_AXES_GEOGRAPHICCOORDINATEAXES
+
+
+module UMAA
+{
+  module Common
+  {
+    module MeasurementCoordinate
+    {
+
+
+        const double GeodeticLatitude_MIN = -90.0;
+        const double GeodeticLatitude_MAX =  90.0;
+        typedef double GeodeticLatitude; // axisAbbrev=Latitude axisDirection=north/south axisUnit=Degrees maximumValue=90.0 minimumValue=-90.0 rangeMeaning=exact resolution=0.0000000001
+
+        const double GeodeticLongitude_MIN = -180.0;
+        const double GeodeticLongitude_MAX =  180.0;
+        typedef double GeodeticLongitude; // axisAbbrev=Longitude axisDirection=east axisUnit=Degrees maximumValue=180.0 minimumValue=-180.0 rangeMeaning=wraparound resolution=0.0000000001
+
+
+    };
+  };
+};
+
+#endif // _LDM_BASISELEMENTS_PRIMITIVETYPES_COORDINATE_AXES_GEOGRAPHIC_COORDINATE_AXES_GEOGRAPHICCOORDINATEAXES
+

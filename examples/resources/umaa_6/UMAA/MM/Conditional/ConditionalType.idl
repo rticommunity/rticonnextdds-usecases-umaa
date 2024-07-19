@@ -1,0 +1,82 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_CONDITIONAL_CONDITIONALTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_CONDITIONAL_CONDITIONALTYPE
+
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
+module UMAA
+{
+  module MM
+  {
+    module Conditional
+    {
+      /**
+        * This structure defines common attributes across all conditionals.
+        *
+        * This structure has the following specializations:
+        * UMAA::MM::Conditional::TimeConditionalType
+        * UMAA::MM::Conditional::LogicalORConditionalType
+        * UMAA::MM::Conditional::HeadingSectorConditionalType
+        * UMAA::MM::Conditional::WaterZoneConditionalType
+        * UMAA::MM::Conditional::DepthRateConditionalType
+        * UMAA::MM::Conditional::MissionStateConditionalType
+        * UMAA::MM::Conditional::DepthConditionalType
+        * UMAA::MM::Conditional::TaskStateConditionalType
+        * UMAA::MM::Conditional::YawRateConditionalType
+        * UMAA::MM::Conditional::ObjectiveStateConditionalType
+        * UMAA::MM::Conditional::RollRateConditionalType
+        * UMAA::MM::Conditional::PitchRateConditionalType
+        * UMAA::MM::Conditional::ConstraintViolatedConditionalType
+        * UMAA::MM::Conditional::LogicalANDConditionalType
+        * UMAA::MM::Conditional::EmitterPresetConditionalType
+        * UMAA::MM::Conditional::LogicalNOTConditionalType
+        * UMAA::MM::Conditional::ExpConditionalType
+        * UMAA::MM::Conditional::SpeedConditionalType
+        * UMAA::MM::Conditional::RelativeSpeedConditionalType
+      */
+    @nested
+    struct ConditionalType
+    {
+      // Defines a unique identifier for the conditional.
+      UMAA::Common::Measurement::NumericGUID conditionalID;
+
+      // Defines a short name for the conditional.
+      UMAA::Common::PrimitiveConstrained::StringShortDescription name;
+
+      // ID to capture specializations of ConditionalType.
+      UMAA::Common::Measurement::NumericGUID specializationID;
+
+      // This field identifies the timestamp that signals the end of an atomic update to the instance of the specialization.
+      UMAA::Common::Measurement::DateTime specializationTimestamp;
+
+      // Topic to capture specializations of ConditionalType.
+      UMAA::Common::PrimitiveConstrained::StringShortDescription specializationTopic;
+    };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_CONDITIONAL_CONDITIONALTYPE
+

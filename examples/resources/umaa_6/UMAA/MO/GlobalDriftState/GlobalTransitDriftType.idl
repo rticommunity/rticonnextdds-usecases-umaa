@@ -1,0 +1,51 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_GLOBALDRIFTSTATE_GLOBALTRANSITDRIFTTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_GLOBALDRIFTSTATE_GLOBALTRANSITDRIFTTYPE
+
+#include "UMAA/Common/Enumeration/EnumerationSets.idl"
+module UMAA
+{
+  module MO
+  {
+    module GlobalDriftState
+    {
+      /**
+        * Indicates that vehicle is in transit to the global drift region.
+        */
+      @nested
+      struct GlobalTransitDriftType
+      {
+      // Indicates if the transit elevation requested is within the system configured tolerances.
+      boolean elevationAchieved;
+
+      // Indicates if the transit speed requested is within the system configured tolerances.
+      boolean speedAchieved;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_GLOBALDRIFTSTATE_GLOBALTRANSITDRIFTTYPE
+

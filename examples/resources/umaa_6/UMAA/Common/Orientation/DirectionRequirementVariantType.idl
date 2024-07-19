@@ -1,0 +1,76 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ORIENTATION_DIRECTIONREQUIREMENTVARIANTTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ORIENTATION_DIRECTIONREQUIREMENTVARIANTTYPE
+
+#include "UMAA/Common/Orientation/DirectionCurrentRequirementVariantType.idl"
+#include "UMAA/Common/Orientation/DirectionMagneticNorthRequirementVariantType.idl"
+#include "UMAA/Common/Orientation/DirectionTrueNorthRequirementVariantType.idl"
+#include "UMAA/Common/Orientation/DirectionTurnRateRequirementVariantType.idl"
+#include "UMAA/Common/Orientation/DirectionWindRequirementVariantType.idl"
+module UMAA
+{
+  module Common
+  {
+    module Orientation
+    {
+        enum DirectionRequirementVariantTypeEnum
+        {
+            DIRECTIONCURRENTREQUIREMENTVARIANT_D,
+            DIRECTIONMAGNETICNORTHREQUIREMENTVARIANT_D,
+            DIRECTIONTRUENORTHREQUIREMENTVARIANT_D,
+            DIRECTIONTURNRATEREQUIREMENTVARIANT_D,
+            DIRECTIONWINDREQUIREMENTVARIANT_D
+        };
+
+        @nested
+        union DirectionRequirementVariantTypeUnion switch (DirectionRequirementVariantTypeEnum)
+        {
+              case DIRECTIONCURRENTREQUIREMENTVARIANT_D:
+                UMAA::Common::Orientation::DirectionCurrentRequirementVariantType DirectionCurrentRequirementVariantVariant;
+              case DIRECTIONMAGNETICNORTHREQUIREMENTVARIANT_D:
+                UMAA::Common::Orientation::DirectionMagneticNorthRequirementVariantType DirectionMagneticNorthRequirementVariantVariant;
+              case DIRECTIONTRUENORTHREQUIREMENTVARIANT_D:
+                UMAA::Common::Orientation::DirectionTrueNorthRequirementVariantType DirectionTrueNorthRequirementVariantVariant;
+              case DIRECTIONTURNRATEREQUIREMENTVARIANT_D:
+                UMAA::Common::Orientation::DirectionTurnRateRequirementVariantType DirectionTurnRateRequirementVariantVariant;
+              case DIRECTIONWINDREQUIREMENTVARIANT_D:
+                UMAA::Common::Orientation::DirectionWindRequirementVariantType DirectionWindRequirementVariantVariant;
+        };
+      
+      /**
+        * Direction of the vehicle motion or pattern being performed.
+        */
+      @nested
+      struct DirectionRequirementVariantType
+      {
+      // Union to capture specializations of DirectionRequirementVariantType
+      DirectionRequirementVariantTypeUnion DirectionRequirementVariantTypeSubtypes;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ORIENTATION_DIRECTIONREQUIREMENTVARIANTTYPE
+

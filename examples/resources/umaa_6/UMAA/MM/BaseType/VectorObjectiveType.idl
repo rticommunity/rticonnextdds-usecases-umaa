@@ -1,0 +1,84 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_VECTOROBJECTIVETYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_VECTOROBJECTIVETYPE
+
+#include "UMAA/Common/Enumeration/EnumerationSets.idl"
+#include "UMAA/Common/IdentifierType.idl"
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
+#include "UMAA/Common/Measurement/ElevationRequirementVariantType.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/Orientation/DirectionRequirementVariantType.idl"
+#include "UMAA/Common/Orientation/PitchYNEDType.idl"
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
+#include "UMAA/Common/Speed/SpeedRequirementVariantType.idl"
+#include "UMAA/Common/Time/DateTimeRequirementType.idl"
+#include "UMAA/MM/BaseType/StateTriggerType.idl"
+module UMAA
+{
+  module MM
+  {
+    module BaseType
+    {
+
+    const string VectorObjectiveTypeTopic = "UMAA::MM::BaseType::VectorObjectiveType";
+
+      /**
+        * This structure is used to describe a clearly defined goal specifying the action(s) required for the vector objective to achieve the specified speed, direction of travel, and altitude or depth of the vehicle. The vector objective is achieved by having the vehicle execute the vector maneuver at a defined elevation (or current elevation if not defined) as specified by direction, directionMode, and speed. The vector can be configured by setting an optional depthChangePitch. Direction, elevation, and speed include optional tolerances for their values. If specified, the vehicle is allowed to operate within these tolerances without having the objective fail. Otherwise, if any tolerances are violated after the objective is initially achieved, then the objective is considered to have failed. If a tolerance is not specified for any of these attributes, then it is a "best effort" to maintain the specified value for that attribute, and is therefore not considered a cause for the objective to fail. If the duration attribute is not specified, the action(s) should continue indefinitely, or until interrupted by some other action.
+        *
+        * This structure is a specialization of UMAA::MM::BaseType::ObjectiveType.
+        */
+    
+      struct VectorObjectiveType
+      {
+      // Defines the desired angle of the vehicle when traversing to the requested elevation for UUVs.
+      @optional UMAA::Common::Orientation::PitchYNEDType depthChangePitch;
+
+      // Defines the vehicle direction to maintain while executing the vector maneuver.
+      UMAA::Common::Orientation::DirectionRequirementVariantType direction;
+
+      // Defines the direction mode while executing the vector maneuver.
+      UMAA::Common::MaritimeEnumeration::DirectionModeEnumModule::DirectionModeEnumType directionMode;
+
+      // Defines the duration to execute the global vector. If not specified, then duration is not used to determine when the vector maneuver is complete.
+      @optional UMAA::Common::Measurement::DurationSeconds duration;
+
+      // Defines the vehicle elevation to maintain while executing the vector maneuver. If not specified, the maneuver is performed at the current elevation.
+      @optional UMAA::Common::Measurement::ElevationRequirementVariantType elevation;
+
+      // Defines the vehicle speed to maintain while executing the vector maneuver.
+      UMAA::Common::Speed::SpeedRequirementVariantType speed;
+
+      // This field identifies the timestamp that signals the end of an atomic update to the instance of the specialization. NOTE: Ties this element back to the specializationID in ObjectiveType generalization.
+      UMAA::Common::Measurement::DateTime specializationReferenceTimestamp;
+
+      // NOTE: Ties this element back to the ObjectiveType generalization.
+      @key UMAA::Common::Measurement::NumericGUID specializationReferenceID;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_VECTOROBJECTIVETYPE
+

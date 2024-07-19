@@ -1,0 +1,66 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESTATUS_TRANSLATIONALSHIPMOTIONSTATUS_TRANSLATIONALSHIPMOTIONREPORTTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESTATUS_TRANSLATIONALSHIPMOTIONSTATUS_TRANSLATIONALSHIPMOTIONREPORTTYPE
+
+#include "UMAA/Common/IdentifierType.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/MeasurementCoordinate/EngineeringCoordinateAxes.idl"
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
+module UMAA
+{
+  module SA
+  {
+    module TranslationalShipMotionStatus
+    {
+    
+      const string TranslationalShipMotionReportTypeTopic = "UMAA::SA::TranslationalShipMotionStatus::TranslationalShipMotionReportType";
+  
+      /**
+        * This structure is used to define the data parameters of the translational motion message.
+        */
+    
+      struct TranslationalShipMotionReportType
+      {
+      // The linear vertical motion of the ship. Positive heave is down (toward the water bottom); a vehicle increasing draft is moving in the positive heave direction.
+      @optional UMAA::Common::MeasurementCoordinate::Down heave;
+
+      // The linear longitudinal motion of the ship. Positive surge is forward of the vehicle.
+      @optional UMAA::Common::MeasurementCoordinate::Forward surge;
+
+      // The linear transverse motion of the ship. Positive sway is to the port side of the vehicle.
+      @optional UMAA::Common::PrimitiveConstrained::Left sway;
+
+      // The origination time of the data being conveyed in the message, or as close to the data or command generation time as is reasonably possible.
+      UMAA::Common::Measurement::DateTime timeStamp;
+
+      // The unique identifier of the originating source of the command interface.
+      @key UMAA::Common::IdentifierType source;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESTATUS_TRANSLATIONALSHIPMOTIONSTATUS_TRANSLATIONALSHIPMOTIONREPORTTYPE
+

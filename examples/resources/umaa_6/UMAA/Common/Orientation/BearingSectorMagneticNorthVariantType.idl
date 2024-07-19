@@ -1,0 +1,51 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ORIENTATION_BEARINGSECTORMAGNETICNORTHVARIANTTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ORIENTATION_BEARINGSECTORMAGNETICNORTHVARIANTTYPE
+
+#include "UMAA/Common/Measurement/Measurements.idl"
+module UMAA
+{
+  module Common
+  {
+    module Orientation
+    {
+      /**
+        * This structure defines a bearing sector, which is defined to be the sector created by rotating in a positive sense from the startBearing to the endBearing. The bearing sector is defined relative to a guide (e.g., contact) location with respect to magnetic north.
+        */
+      @nested
+      struct BearingSectorMagneticNorthVariantType
+      {
+      // Provides the end bearing of the bearing sector. The endBearing is defined relative to a guide location with respect to magnetic north.
+      UMAA::Common::Measurement::HeadingMagneticNorth endBearing;
+
+      // Provides the start bearing of the bearing sector. The startBearing is defined relative to a guide location with respect to magnetic north.
+      UMAA::Common::Measurement::HeadingMagneticNorth startBearing;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ORIENTATION_BEARINGSECTORMAGNETICNORTHVARIANTTYPE
+

@@ -1,0 +1,176 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_REFINEMENTS_BASISELEMENTS_PRIMITIVETYPES_CONSTRAINEDTYPES_CONSTRAINEDTYPES
+#define _LDM_MDE_REFINEMENTS_BASISELEMENTS_PRIMITIVETYPES_CONSTRAINEDTYPES_CONSTRAINEDTYPES
+
+
+module UMAA
+{
+  module Common
+  {
+    module PrimitiveConstrained
+    {
+
+
+        const double AccelerationLocalWaterMass_MIN = -299792458.0;
+        const double AccelerationLocalWaterMass_MAX = 299792458.0;
+        typedef double AccelerationLocalWaterMass; // maxInclusive=299792458 minInclusive=-299792458 units=MeterPerSecondSquared
+
+        const double AirTemperature_MIN = -100.0;
+        const double AirTemperature_MAX = 100.0;
+        typedef double AirTemperature; // maxInclusive=100 minInclusive=-100 units=Celsius
+
+        const double AngleAcceleration_MIN = -10000.0;
+        const double AngleAcceleration_MAX = 10000.0;
+        typedef double AngleAcceleration; // maxInclusive=10000 minInclusive=-10000 units=RadiansPerSecondSquared
+
+        const double BearingAngle_MIN = -6.28318530718;
+        const double BearingAngle_MAX =  6.28318530718;
+        typedef double BearingAngle; // maxInclusive=6.28318530718 minInclusive=-6.28318530718 units=Radian
+
+        const double CarrierToNoiseDensityRatio_MIN = 0.0;
+        const double CarrierToNoiseDensityRatio_MAX = 1000000.0;
+        typedef double CarrierToNoiseDensityRatio; // maxInclusive=1000000 minInclusive=0 units=DecibelHertz
+
+        const long ColorComponent_MIN = 0;
+        const long ColorComponent_MAX =  255;
+        typedef long ColorComponent; // maxInclusive=255 minInclusive=0
+
+        typedef double ContactUncertainty;
+
+        const double CovarAccelPlatformXYZ_MIN = -10000.0;
+        const double CovarAccelPlatformXYZ_MAX = 10000.0;
+        typedef double CovarAccelPlatformXYZ; // maxInclusive=10000 minInclusive=-10000 referenceFrame=PlatformXYZ units=MetersSquaredPerSecondsSquaredSquared
+
+        const double CovarOrientationAccelPlatformXYZ_MIN = -100.0;
+        const double CovarOrientationAccelPlatformXYZ_MAX = 100.0;
+        typedef double CovarOrientationAccelPlatformXYZ; // maxInclusive=100 minInclusive=-100 referenceFrame=PlatformXYZ units=RadiansSquaredPerSecondsSquaredSquared
+
+        const double CovarOrientationNED_MIN = -10000.0;
+        const double CovarOrientationNED_MAX = 10000.0;
+        typedef double CovarOrientationNED; // maxInclusive=10000 minInclusive=-10000 referenceFrame=NED units=RadiansSquared
+
+        const double CovarOrientationVelNED_MIN = -10000.0;
+        const double CovarOrientationVelNED_MAX = 10000.0;
+        typedef double CovarOrientationVelNED; // maxInclusive=10000 minInclusive=-10000 referenceFrame=NED units=RadiansSquaredPerSecondSquared
+
+        const double CovarPosECEF_MIN = -10000.0;
+        const double CovarPosECEF_MAX = 10000.0;
+        typedef double CovarPosECEF; // maxInclusive=10000 minInclusive=-10000 referenceFrame=ECEF units=MetersSquared
+
+        const double CovarPosNED_MIN = -10000.0;
+        const double CovarPosNED_MAX = 10000.0;
+        typedef double CovarPosNED; // maxInclusive=10000 minInclusive=-10000 referenceFrame=NED units=MetersSquared
+
+        const double CovarPosVelNED_MIN = -10000.0;
+        const double CovarPosVelNED_MAX = 10000.0;
+        typedef double CovarPosVelNED; // maxInclusive=10000 minInclusive=-10000 referenceFrame=NED units=MetersSquaredPerSecond
+
+        const double CovarVelNED_MIN = -10000.0;
+        const double CovarVelNED_MAX = 10000.0;
+        typedef double CovarVelNED; // maxInclusive=10000 minInclusive=-10000 referenceFrame=NED units=MetersSquaredPerSecondSquared
+
+        const double DewPointTemperature_MIN = -100.0;
+        const double DewPointTemperature_MAX = 100.0;
+        typedef double DewPointTemperature; // maxInclusive=100 minInclusive=-100 units=Celsius
+
+        const double GeodeticAltitude_MIN = -10000.0;
+        const double GeodeticAltitude_MAX = 700000.0;
+        typedef double GeodeticAltitude; // maxInclusive=700000 minInclusive=-10000 units=Meter axisAbbrev=Altitude axisDirection=up axisUnit=Meter rangeMeaning=exact resolution=0.0000000001
+
+        const double IlluminatorBeamWidth_MIN = 0.0;
+        const double IlluminatorBeamWidth_MAX =  6.28318530718;
+        typedef double IlluminatorBeamWidth; // maxInclusive=6.28318530718 minInclusive=0 units=Radian
+
+        const double IlluminatorIntensityLevel_MIN = 0.0;
+        const double IlluminatorIntensityLevel_MAX = 100.0;
+        typedef double IlluminatorIntensityLevel; // maxInclusive=100 minInclusive=0
+
+        const double Left_MIN = -20000000.0;
+        const double Left_MAX = 20000000.0;
+        typedef double Left; // maxInclusive=20000000 minInclusive=-20000000 units=Meter axisAbbrev=Y axisDirection=port axisUnit=Meter rangeMeaning=exact resolution=0.001
+
+        const double MaxEngineOilPressure_MIN = 0.0;
+        const double MaxEngineOilPressure_MAX = 512.0;
+        typedef double MaxEngineOilPressure; // maxInclusive=512 minInclusive=0 units=KiloPascal
+
+        typedef string<9> MMSI; // length=9
+
+        const long long NanosecondsCount_MIN = -9223372036854775807;
+        const long long NanosecondsCount_MAX =  9223372036854775807;
+        typedef long long NanosecondsCount; // maxInclusive=9223372036854775807 minInclusive=-9223372036854775807 units=Nanoseconds type=long long
+
+        const long NanosecondsDrift_MIN = -2147483648;
+        const long NanosecondsDrift_MAX =  2147483647;
+        typedef long NanosecondsDrift; // maxInclusive=2147483647 minInclusive=-2147483648 units=NanosecondsPerSecond
+
+        const double NaturalNumberCount_MIN = 0.0;
+        const double NaturalNumberCount_MAX = 9223372036854775807.0;
+        typedef double NaturalNumberCount; // maxInclusive=9223372036854775807 minInclusive=0 units=Integer
+
+        const double PeakSoundPressureLevel_MIN = -400.0;
+        const double PeakSoundPressureLevel_MAX = 400.0;
+        typedef double PeakSoundPressureLevel; // maxInclusive=400 minInclusive=-400 units=Decibel
+
+        typedef double Ratio;
+
+        const double SignalToNoiseRatio_MIN = 0.0;
+        const double SignalToNoiseRatio_MAX = 100.0;
+        typedef double SignalToNoiseRatio; // maxInclusive=100 minInclusive=0 units=Decibel
+
+        const double SpeedBSLAcceleration_MIN = -299792458.0;
+        const double SpeedBSLAcceleration_MAX = 299792458.0;
+        typedef double SpeedBSLAcceleration; // maxInclusive=299792458 minInclusive=-299792458 units=MeterPerSecondSquared
+
+        typedef string<4095> StringLongDescription; // length=4095
+
+        typedef string<64> StringName; // length=64
+
+        typedef string<1023> StringShortDescription; // length=1023
+
+        typedef string<256> StringValue; // length=256
+
+        typedef string<2047> UniformResourceIdentifier; // length=2047
+
+        const double WaterTemperature_MIN = -22.0;
+        const double WaterTemperature_MAX = 100.0;
+        typedef double WaterTemperature; // maxInclusive=100 minInclusive=-22 units=Celsius
+
+        const double WeatherBarometricPressure_MIN = 600.0;
+        const double WeatherBarometricPressure_MAX = 1200.0;
+        typedef double WeatherBarometricPressure; // maxInclusive=1200 minInclusive=600 units=Millibar
+
+        typedef double XPosition; // units=Meter
+
+        typedef double YPosition; // units=Meter
+
+        const double ZPosition_MIN = -100000.0;
+        const double ZPosition_MAX = 100000.0;
+        typedef double ZPosition; // maxInclusive=100000 minInclusive=-100000 units=Meter
+
+
+    };
+  };
+};
+
+#endif // _LDM_MDE_REFINEMENTS_BASISELEMENTS_PRIMITIVETYPES_CONSTRAINEDTYPES_CONSTRAINEDTYPES
+

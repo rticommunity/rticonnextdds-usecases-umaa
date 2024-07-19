@@ -1,0 +1,52 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_RESOURCEALLOCATION_RESOURCEALLOCATIONCONTROLSESSION
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_RESOURCEALLOCATION_RESOURCEALLOCATIONCONTROLSESSION
+
+#include "UMAA/Common/IdentifierType.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+module UMAA
+{
+  module SO
+  {
+    module ResourceAllocation
+    {
+      /**
+        * This structure is used to define attributes related to the current controller of a resource.
+        */
+      @nested
+      struct ResourceAllocationControlSession
+      {
+      // The source identifier of the resource consumer in control of the resource.
+      UMAA::Common::IdentifierType controllingConsumer;
+
+      // The absolute end time of the consumer's control. After this time is reached, the resource is available to be controlled by another process. If this field is empty, then the duration is assumed to be infinite.
+      @optional UMAA::Common::Measurement::DateTime endTime;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_RESOURCEALLOCATION_RESOURCEALLOCATIONCONTROLSESSION
+

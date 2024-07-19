@@ -1,0 +1,83 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_PROCESSINGUNITSTATUS_PROCESSINGUNITREPORTTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_PROCESSINGUNITSTATUS_PROCESSINGUNITREPORTTYPE
+
+#include "UMAA/Common/IdentifierType.idl"
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+module UMAA
+{
+  module SO
+  {
+    module ProcessingUnitStatus
+    {
+    
+      const string ProcessingUnitReportTypeTopic = "UMAA::SO::ProcessingUnitStatus::ProcessingUnitReportType";
+  
+      /**
+        * This structure is used to report the processing unit status.
+        */
+    
+      struct ProcessingUnitReportType
+      {
+      // The processor average utilization during the last fifteen minutes.
+      @optional UMAA::Common::Measurement::Percent load15MinuteAverage;
+
+      // The processor average utilization during the last minute.
+      @optional UMAA::Common::Measurement::Percent load1MinuteAverage;
+
+      // The processor average utilization during the last five minutes.
+      @optional UMAA::Common::Measurement::Percent load5MinuteAverage;
+
+      // The number of processes awaiting I/O.
+      @optional UMAA::Common::Measurement::Count numberOfBlockedProcesses;
+
+      // The number of processes.
+      @optional UMAA::Common::Measurement::Count numberOfProcesses;
+
+      // The number of currently running processes.
+      @optional UMAA::Common::Measurement::Count numberOfRunningProcesses;
+
+      // The current average temperature of all processor cores.
+      @optional UMAA::Common::Measurement::Temperature processorTemperature;
+
+      // Processor type.
+      UMAA::Common::MaritimeEnumeration::ProcessingUnitEnumModule::ProcessingUnitEnumType type;
+
+      // The current processor uptime.
+      @optional UMAA::Common::Measurement::DurationSeconds uptime;
+
+      // The origination time of the data being conveyed in the message, or as close to the data or command generation time as is reasonably possible.
+      UMAA::Common::Measurement::DateTime timeStamp;
+
+      // The unique identifier of the originating source of the command interface.
+      @key UMAA::Common::IdentifierType source;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_PROCESSINGUNITSTATUS_PROCESSINGUNITREPORTTYPE
+

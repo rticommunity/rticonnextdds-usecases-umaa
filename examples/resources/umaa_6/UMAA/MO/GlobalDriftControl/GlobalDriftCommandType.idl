@@ -1,0 +1,87 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_GLOBALDRIFTCONTROL_GLOBALDRIFTCOMMANDTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_GLOBALDRIFTCONTROL_GLOBALDRIFTCOMMANDTYPE
+
+#include "UMAA/Common/Distance/DistanceRequirementType.idl"
+#include "UMAA/Common/IdentifierType.idl"
+#include "UMAA/Common/Measurement/ElevationRequirementVariantType.idl"
+#include "UMAA/Common/Measurement/ElevationVariantType.idl"
+#include "UMAA/Common/Measurement/GeoPosition2D.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/Speed/SpeedVariantType.idl"
+module UMAA
+{
+  module MO
+  {
+    module GlobalDriftControl
+    {
+    
+      const string GlobalDriftCommandTypeTopic = "UMAA::MO::GlobalDriftControl::GlobalDriftCommandType";
+  
+      /**
+        * This structure is used to command the vehicle to perform a global drift relative to a contact.
+        */
+    
+      struct GlobalDriftCommandType
+      {
+      // Defines the drift radius that specifies the maximum distance from the reference position the vehicle is allowed to drift.
+      UMAA::Common::Distance::DistanceRequirementType driftRadius;
+
+      // Defines the elevation to maintain when within the driftTolerance of the drift position. If not specified, it is performed at the current elevation.
+      @optional UMAA::Common::Measurement::ElevationRequirementVariantType elevation;
+
+      // Specifies the end of the command execution time period for the drift operation. If not specified, the command runs indefinitely until externally changed.
+      @optional UMAA::Common::Measurement::DateTime endTime;
+
+      // Defines the reference position for drifting.
+      UMAA::Common::Measurement::GeoPosition2D position;
+
+      // The desired speed to return to the drift position when the drift tolerance is exceeded.
+      UMAA::Common::Speed::SpeedVariantType speed;
+
+      // The elevation used when driving back to get within the driftTolerance of the drift position. If not specified, it is performed at the current elevation.
+      @optional UMAA::Common::Measurement::ElevationVariantType transitElevation;
+
+      // The speed at which one drives to get within the driftTolerance of the drift position.
+      UMAA::Common::Speed::SpeedVariantType transitSpeed;
+
+      // The origination time of the data being conveyed in the message, or as close to the data or command generation time as is reasonably possible.
+      UMAA::Common::Measurement::DateTime timeStamp;
+
+      // The unique identifier of the originating source of the command interface.
+      @key UMAA::Common::IdentifierType source;
+
+      // The unique identifier for the session.
+      @key UMAA::Common::Measurement::NumericGUID sessionID;
+
+      // The unique identifier of the destination of the command interface.
+      @key UMAA::Common::IdentifierType destination;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_GLOBALDRIFTCONTROL_GLOBALDRIFTCOMMANDTYPE
+

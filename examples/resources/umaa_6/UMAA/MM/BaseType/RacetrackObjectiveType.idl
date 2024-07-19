@@ -1,0 +1,105 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_RACETRACKOBJECTIVETYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_RACETRACKOBJECTIVETYPE
+
+#include "UMAA/Common/Distance/DistanceRequirementType.idl"
+#include "UMAA/Common/Enumeration/EnumerationSets.idl"
+#include "UMAA/Common/IdentifierType.idl"
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
+#include "UMAA/Common/Measurement/ElevationRequirementVariantType.idl"
+#include "UMAA/Common/Measurement/ElevationVariantType.idl"
+#include "UMAA/Common/Measurement/GeoPosition2D.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/Orientation/DirectionVariantType.idl"
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
+#include "UMAA/Common/Speed/SpeedRequirementVariantType.idl"
+#include "UMAA/Common/Speed/SpeedVariantType.idl"
+#include "UMAA/Common/Time/DateTimeRequirementType.idl"
+#include "UMAA/MM/BaseType/StateTriggerType.idl"
+module UMAA
+{
+  module MM
+  {
+    module BaseType
+    {
+
+    const string RacetrackObjectiveTypeTopic = "UMAA::MM::BaseType::RacetrackObjectiveType";
+
+      /**
+        * This structure is used to describe a clearly defined goal specifying the action(s) required for following the racetrack pattern. The racetrack objective is achieved by having the vehicle execute the racetrack maneuver at a defined elevation (or current elevation if not defined) as specified by the reference position, length, radius and orientation, with the defined speed, trackTolerance and turnDirection. If position is not specified, then the current vehicle position is used as the reference position for the racetrack pattern. Elevation, speed, and trackTolerance include optional tolerances for their values. If specified, the vehicle is allowed to operate within these tolerances without having the objective fail. Otherwise, if any tolerances are violated after the objective is initially achieved, then the objective is considered to have failed. If a tolerance is not specified for any of these attributes, then it is a "best effort" to maintain the specified value for that attribute, and is therefore not considered a cause for the objective to fail. If both the duration attribute and the loops attribute are defined, complete the action(s) at whichever attribute condition completes first. If neither the duration attribute nor the loops attribute is specified, the action(s) should continue indefinitely, or until interrupted by some other action.
+        *
+        * This structure is a specialization of UMAA::MM::BaseType::ObjectiveType.
+        */
+    
+      struct RacetrackObjectiveType
+      {
+      // After the transit portion of the objective is complete, defines the duration to execute the remaining pattern portion of the objective. If not specified, duration is not used to determine when the racetrack maneuver is complete.
+      @optional UMAA::Common::Measurement::DurationSeconds duration;
+
+      // Defines the vehicle elevation to maintain while executing the racetrack maneuver. If not specified, the maneuver is performed at the current elevation.
+      @optional UMAA::Common::Measurement::ElevationRequirementVariantType elevation;
+
+      // Defines the length between the semicircles at either end for the racetrack pattern.
+      UMAA::Common::Measurement::Distance length;
+
+      // Defines the number of loops around the racetrack pattern to execute; if not specified, the loops attribute is not used to determine when the racetrack maneuver is complete.
+      @optional UMAA::Common::Measurement::SizeReal loops;
+
+      // Defines the orientation of the racetrack, measured perpendicular to the length axis.
+      UMAA::Common::Orientation::DirectionVariantType orientation;
+
+      // Defines the reference position for the racetrack pattern. If not specified, the reference position is the current vehicle position.
+      @optional UMAA::Common::Measurement::GeoPosition2D position;
+
+      // Defines the radius of the semicircles for the racetrack pattern.
+      UMAA::Common::Measurement::Distance radius;
+
+      // Defines the vehicle speed to maintain while executing the racetrack maneuver.
+      UMAA::Common::Speed::SpeedRequirementVariantType speed;
+
+      // Defines the maximum allowable cross track error while executing the racetrack maneuver.
+      UMAA::Common::Distance::DistanceRequirementType trackTolerance;
+
+      // Defines the elevation used while transiting to the racetrack pattern location before transitioning to the racetrack maneuver. If not specified, transit at the current elevation.
+      @optional UMAA::Common::Measurement::ElevationVariantType transitElevation;
+
+      // Defines the speed used while transiting to the racetrack pattern location before transitioning to the racetrack maneuver.
+      UMAA::Common::Speed::SpeedVariantType transitSpeed;
+
+      // Defines the turn direction while executing the racetrack maneuver.
+      UMAA::Common::MaritimeEnumeration::WaterTurnDirectionEnumModule::WaterTurnDirectionEnumType turnDirection;
+
+      // This field identifies the timestamp that signals the end of an atomic update to the instance of the specialization. NOTE: Ties this element back to the specializationID in ObjectiveType generalization.
+      UMAA::Common::Measurement::DateTime specializationReferenceTimestamp;
+
+      // NOTE: Ties this element back to the ObjectiveType generalization.
+      @key UMAA::Common::Measurement::NumericGUID specializationReferenceID;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_RACETRACKOBJECTIVETYPE
+

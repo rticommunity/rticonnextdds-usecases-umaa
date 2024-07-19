@@ -1,0 +1,48 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_PROPULSION_PROPULSIVEEFFORTTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_PROPULSION_PROPULSIVEEFFORTTYPE
+
+#include "UMAA/Common/Measurement/Measurements.idl"
+module UMAA
+{
+  module Common
+  {
+    module Propulsion
+    {
+      /**
+        * Defines the propulsive value as an effort.
+        */
+      @nested
+      struct PropulsiveEffortType
+      {
+      // The desired propulsive effort, as a percent value. Negative values will cause motion in the port direction for fixed bow or stern thrusters.
+      UMAA::Common::Measurement::Effort propulsiveEffort;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_PROPULSION_PROPULSIVEEFFORTTYPE
+

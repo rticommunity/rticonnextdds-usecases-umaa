@@ -1,0 +1,116 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_BATTERYSPECS_BATTERYSPECSREPORTTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_BATTERYSPECS_BATTERYSPECSREPORTTYPE
+
+#include "UMAA/Common/IdentifierType.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
+module UMAA
+{
+  module EO
+  {
+    module BatterySpecs
+    {
+    
+      const string BatterySpecsReportTypeTopic = "UMAA::EO::BatterySpecs::BatterySpecsReportType";
+  
+      /**
+        * This structure is used to report the specifications of the battery system.
+        */
+    
+      struct BatterySpecsReportType
+      {
+      // The minimum safe voltage of a cell in the battery system.
+      UMAA::Common::Measurement::PowerBusVoltage cellMinimumVoltage;
+
+      // The Coulombs available by the battery system when fully charged.
+      UMAA::Common::Measurement::Charge maxCapacity;
+
+      // The maximum charging current of the battery system.
+      UMAA::Common::Measurement::PowerBusCurrent maxChargingCurrent;
+
+      // The maximum charging temperature.
+      UMAA::Common::Measurement::Temperature maxChargingTemp;
+
+      // The maximum output current of the battery system.
+      UMAA::Common::Measurement::PowerBusCurrent maxOutputCurrent;
+
+      // The maximum pulse charge that can be handled based on specified duration.
+      @optional UMAA::Common::Measurement::BatteryCurrent maxPulsedChargeCurrent;
+
+      // The maximum time that the pulse charge current can be handled.
+      @optional UMAA::Common::Measurement::BatteryCurrentDuration maxPulsedChargeCurrentDuration;
+
+      // The maximum storage temperature.
+      UMAA::Common::Measurement::Temperature maxStorageTemp;
+
+      // The maximum operating temperature.
+      UMAA::Common::Measurement::Temperature maxTemperature;
+
+      // The maximum voltage of the battery system.
+      UMAA::Common::Measurement::PowerBusVoltage maxVoltage;
+
+      // The number of charge cycles before the battery is under the minimum charge specification.
+      @optional UMAA::Common::Measurement::BatteryCycles minChargeCycles;
+
+      // The minimum charging temperature.
+      UMAA::Common::Measurement::Temperature minChargingTemp;
+
+      // The minimum storage temperature.
+      UMAA::Common::Measurement::Temperature minStorageTemp;
+
+      // The minimum operating temperature.
+      UMAA::Common::Measurement::Temperature minTemperature;
+
+      // The minimum voltage of the battery system.
+      UMAA::Common::Measurement::PowerBusVoltage minVoltage;
+
+      // The description of the battery system.
+      UMAA::Common::PrimitiveConstrained::StringShortDescription name;
+
+      // The nominal capacity at 1C rate.
+      UMAA::Common::Measurement::AmpHours nominalCapacity;
+
+      // The nominal energy at 1C rate.
+      UMAA::Common::Measurement::WattHours nominalEnergy;
+
+      // The nominal voltage of the battery system.
+      UMAA::Common::Measurement::PowerBusVoltage nominalVoltage;
+
+      // The maximum current discharge for up to 10 seconds.
+      UMAA::Common::Measurement::PowerBusCurrent peakDischargeCurrent;
+
+      // The origination time of the data being conveyed in the message, or as close to the data or command generation time as is reasonably possible.
+      UMAA::Common::Measurement::DateTime timeStamp;
+
+      // The unique identifier of the originating source of the command interface.
+      @key UMAA::Common::IdentifierType source;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_BATTERYSPECS_BATTERYSPECSREPORTTYPE
+

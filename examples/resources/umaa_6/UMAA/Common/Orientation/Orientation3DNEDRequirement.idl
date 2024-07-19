@@ -1,0 +1,56 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ORIENTATION_ORIENTATION3DNEDREQUIREMENT
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ORIENTATION_ORIENTATION3DNEDREQUIREMENT
+
+#include "UMAA/Common/Orientation/PitchYNEDRequirement.idl"
+#include "UMAA/Common/Orientation/RollXNEDRequirement.idl"
+#include "UMAA/Common/Orientation/YawZNEDRequirement.idl"
+module UMAA
+{
+  module Common
+  {
+    module Orientation
+    {
+      /**
+        * A requirement that describes a desired 3D orientation in a NED coordinate system.
+        */
+      @nested
+      struct Orientation3DNEDRequirement
+      {
+      // Defines a pitch relative to the NED coordinate system.
+      @optional UMAA::Common::Orientation::PitchYNEDRequirement pitchY;
+
+      // Defines a roll relative to the NED coordinate system.
+      @optional UMAA::Common::Orientation::RollXNEDRequirement rollX;
+
+      // Defines a yaw relative to the NED coordinate system.
+      UMAA::Common::Orientation::YawZNEDRequirement yawZ;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ORIENTATION_ORIENTATION3DNEDREQUIREMENT
+

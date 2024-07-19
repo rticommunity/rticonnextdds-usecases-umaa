@@ -1,0 +1,72 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_CONDITIONAL_WATERZONECONDITIONALTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_CONDITIONAL_WATERZONECONDITIONALTYPE
+
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
+#include "UMAA/Common/Measurement/ElevationVariantType.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
+#include "UMAA/MM/BaseType/ShapeVariantType.idl"
+module UMAA
+{
+  module MM
+  {
+    module Conditional
+    {
+
+    const string WaterZoneConditionalTypeTopic = "UMAA::MM::Conditional::WaterZoneConditionalType";
+
+      /**
+        * This structure defines a water zone conditional. The conditional is true when all zones in the set are determined to be true; each zone is true when the vehicle location, provided by GlobalPoseReportType, is either inside or outside the defined volume as indicated by the zoneKind.
+        *
+        * This structure is a specialization of UMAA::MM::Conditional::ConditionalType.
+        */
+    
+      struct WaterZoneConditionalType
+      {
+      // Describes the plane relative to the mean sea level that intersects the highest point or plane of the polygon.
+      UMAA::Common::Measurement::ElevationVariantType ceiling;
+
+      // Describes the plane relative to the mean sea level that intersects the lowest point or plane of the polygon.
+      UMAA::Common::Measurement::ElevationVariantType floor;
+
+      // Defines the zone that is used to compare with the current vehicle location.
+      sequence<UMAA::MM::BaseType::ShapeVariantType,16> zone;
+
+      // Defines the type of zone, i.e., inside/outside
+      UMAA::Common::MaritimeEnumeration::WaterZoneKindEnumModule::WaterZoneKindEnumType zoneKind;
+
+      // This field identifies the timestamp that signals the end of an atomic update to the instance of the specialization. NOTE: Ties this element back to the specializationID in ConditionalType generalization.
+      UMAA::Common::Measurement::DateTime specializationReferenceTimestamp;
+
+      // NOTE: Ties this element back to the ConditionalType generalization.
+      @key UMAA::Common::Measurement::NumericGUID specializationReferenceID;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_CONDITIONAL_WATERZONECONDITIONALTYPE
+
