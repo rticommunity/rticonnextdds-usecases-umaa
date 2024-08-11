@@ -1,0 +1,2807 @@
+<?xml version="1.0"?>
+<!--
+(c) Copyright, Real-Time Innovations, 2024.  All rights reserved.
+RTI grants Licensee a license to use, modify, compile, and create derivative
+works of the software solely for use with RTI Connext DDS. Licensee may
+redistribute copies of the software provided that all such copies are subject
+to this license. The software is provided "as is", with no warranty of any
+type, including any warranty for fitness for any purpose. RTI is under no
+obligation to maintain or support the software. RTI shall not be liable for
+any incidental or consequential damages arising out of the use or inability
+to use the software.
+-->
+
+<dds xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/current/rti_dds_profiles.xsd"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <types>
+        <include file="../types/xml/include_all.xml" />
+    </types>
+
+    <domain_participant_library name="umaa_components_lib">
+
+        <domain_participant name="base">
+            <register_type
+                name="AccelerationReportType"
+                type_ref="UMAA::SA::AccelerationStatus::AccelerationReportType"/>
+            <topic
+                name="UMAA::SA::AccelerationStatus::AccelerationReportType"
+                register_type_ref="AccelerationReportType"/>
+
+            <register_type
+                name="ActiveConstraintsCommandAckReportType"
+                type_ref="UMAA::MM::ActiveConstraintsControl::ActiveConstraintsCommandAckReportType"/>
+            <topic
+                name="UMAA::MM::ActiveConstraintsControl::ActiveConstraintsCommandAckReportType"
+                register_type_ref="ActiveConstraintsCommandAckReportType"/>
+
+            <register_type
+                name="ActiveConstraintsCommandStatusType"
+                type_ref="UMAA::MM::ActiveConstraintsControl::ActiveConstraintsCommandStatusType"/>
+            <topic
+                name="UMAA::MM::ActiveConstraintsControl::ActiveConstraintsCommandStatusType"
+                register_type_ref="ActiveConstraintsCommandStatusType"/>
+
+            <register_type
+                name="ActiveConstraintsCommandType"
+                type_ref="UMAA::MM::ActiveConstraintsControl::ActiveConstraintsCommandType"/>
+            <topic
+                name="UMAA::MM::ActiveConstraintsControl::ActiveConstraintsCommandType"
+                register_type_ref="ActiveConstraintsCommandType"/>
+
+            <register_type
+                name="AnchorCommandAckReportType"
+                type_ref="UMAA::EO::AnchorControl::AnchorCommandAckReportType"/>
+            <topic
+                name="UMAA::EO::AnchorControl::AnchorCommandAckReportType"
+                register_type_ref="AnchorCommandAckReportType"/>
+
+            <register_type
+                name="AnchorCommandStatusType"
+                type_ref="UMAA::EO::AnchorControl::AnchorCommandStatusType"/>
+            <topic
+                name="UMAA::EO::AnchorControl::AnchorCommandStatusType"
+                register_type_ref="AnchorCommandStatusType"/>
+
+            <register_type
+                name="AnchorCommandType"
+                type_ref="UMAA::EO::AnchorControl::AnchorCommandType"/>
+            <topic
+                name="UMAA::EO::AnchorControl::AnchorCommandType"
+                register_type_ref="AnchorCommandType"/>
+
+            <register_type
+                name="AnchorReportType"
+                type_ref="UMAA::EO::AnchorStatus::AnchorReportType"/>
+            <topic
+                name="UMAA::EO::AnchorStatus::AnchorReportType"
+                register_type_ref="AnchorReportType"/>
+
+            <register_type
+                name="AnchorSpecsReportType"
+                type_ref="UMAA::EO::AnchorSpecs::AnchorSpecsReportType"/>
+            <topic
+                name="UMAA::EO::AnchorSpecs::AnchorSpecsReportType"
+                register_type_ref="AnchorSpecsReportType"/>
+
+            <register_type
+                name="AreaRandomWalkObjectiveDetailedStatusType"
+                type_ref="UMAA::MM::BaseType::AreaRandomWalkObjectiveDetailedStatusType"/>
+            <topic
+                name="UMAA::MM::BaseType::AreaRandomWalkObjectiveDetailedStatusType"
+                register_type_ref="AreaRandomWalkObjectiveDetailedStatusType"/>
+
+            <register_type
+                name="AreaRandomWalkObjectiveType"
+                type_ref="UMAA::MM::BaseType::AreaRandomWalkObjectiveType"/>
+            <topic
+                name="UMAA::MM::BaseType::AreaRandomWalkObjectiveType"
+                register_type_ref="AreaRandomWalkObjectiveType"/>
+
+            <register_type
+                name="BallastPumpCommandAckReportType"
+                type_ref="UMAA::EO::BallastTank::BallastPumpCommandAckReportType"/>
+            <topic
+                name="UMAA::EO::BallastTank::BallastPumpCommandAckReportType"
+                register_type_ref="BallastPumpCommandAckReportType"/>
+
+            <register_type
+                name="BallastPumpCommandStatusType"
+                type_ref="UMAA::EO::BallastTank::BallastPumpCommandStatusType"/>
+            <topic
+                name="UMAA::EO::BallastTank::BallastPumpCommandStatusType"
+                register_type_ref="BallastPumpCommandStatusType"/>
+
+            <register_type
+                name="BallastPumpCommandType"
+                type_ref="UMAA::EO::BallastTank::BallastPumpCommandType"/>
+            <topic
+                name="UMAA::EO::BallastTank::BallastPumpCommandType"
+                register_type_ref="BallastPumpCommandType"/>
+
+            <register_type
+                name="BallastPumpReportType"
+                type_ref="UMAA::EO::BallastTank::BallastPumpReportType"/>
+            <topic
+                name="UMAA::EO::BallastTank::BallastPumpReportType"
+                register_type_ref="BallastPumpReportType"/>
+
+            <register_type
+                name="BallastPumpSpecsReportType"
+                type_ref="UMAA::EO::BallastTank::BallastPumpSpecsReportType"/>
+            <topic
+                name="UMAA::EO::BallastTank::BallastPumpSpecsReportType"
+                register_type_ref="BallastPumpSpecsReportType"/>
+
+            <register_type
+                name="BallastTankCommandAckReportType"
+                type_ref="UMAA::EO::BallastTank::BallastTankCommandAckReportType"/>
+            <topic
+                name="UMAA::EO::BallastTank::BallastTankCommandAckReportType"
+                register_type_ref="BallastTankCommandAckReportType"/>
+
+            <register_type
+                name="BallastTankCommandStatusType"
+                type_ref="UMAA::EO::BallastTank::BallastTankCommandStatusType"/>
+            <topic
+                name="UMAA::EO::BallastTank::BallastTankCommandStatusType"
+                register_type_ref="BallastTankCommandStatusType"/>
+
+            <register_type
+                name="BallastTankCommandType"
+                type_ref="UMAA::EO::BallastTank::BallastTankCommandType"/>
+            <topic
+                name="UMAA::EO::BallastTank::BallastTankCommandType"
+                register_type_ref="BallastTankCommandType"/>
+
+            <register_type
+                name="BallastTankReportType"
+                type_ref="UMAA::EO::BallastTank::BallastTankReportType"/>
+            <topic
+                name="UMAA::EO::BallastTank::BallastTankReportType"
+                register_type_ref="BallastTankReportType"/>
+
+            <register_type
+                name="BallastTankSpecsReportType"
+                type_ref="UMAA::EO::BallastTank::BallastTankSpecsReportType"/>
+            <topic
+                name="UMAA::EO::BallastTank::BallastTankSpecsReportType"
+                register_type_ref="BallastTankSpecsReportType"/>
+
+            <register_type
+                name="BatteryReportType"
+                type_ref="UMAA::EO::BatteryStatus::BatteryReportType"/>
+            <topic
+                name="UMAA::EO::BatteryStatus::BatteryReportType"
+                register_type_ref="BatteryReportType"/>
+
+            <register_type
+                name="BatteryReportTypeCellsListElement"
+                type_ref="UMAA::EO::BatteryStatus::BatteryReportTypeCellsListElement"/>
+            <topic
+                name="UMAA::EO::BatteryStatus::BatteryReportTypeCellsListElement"
+                register_type_ref="BatteryReportTypeCellsListElement"/>
+
+            <register_type
+                name="BatterySpecsReportType"
+                type_ref="UMAA::EO::BatterySpecs::BatterySpecsReportType"/>
+            <topic
+                name="UMAA::EO::BatterySpecs::BatterySpecsReportType"
+                register_type_ref="BatterySpecsReportType"/>
+
+            <register_type
+                name="BilgePumpReportType"
+                type_ref="UMAA::EO::BilgePumpStatus::BilgePumpReportType"/>
+            <topic
+                name="UMAA::EO::BilgePumpStatus::BilgePumpReportType"
+                register_type_ref="BilgePumpReportType"/>
+
+            <register_type
+                name="BITCancelConfigCommandStatusType"
+                type_ref="UMAA::SO::BITConfig::BITCancelConfigCommandStatusType"/>
+            <topic
+                name="UMAA::SO::BITConfig::BITCancelConfigCommandStatusType"
+                register_type_ref="BITCancelConfigCommandStatusType"/>
+
+            <register_type
+                name="BITCancelConfigType"
+                type_ref="UMAA::SO::BITConfig::BITCancelConfigType"/>
+            <topic
+                name="UMAA::SO::BITConfig::BITCancelConfigType"
+                register_type_ref="BITCancelConfigType"/>
+
+            <register_type
+                name="BITCommandAckReportType"
+                type_ref="UMAA::SO::BITControl::BITCommandAckReportType"/>
+            <topic
+                name="UMAA::SO::BITControl::BITCommandAckReportType"
+                register_type_ref="BITCommandAckReportType"/>
+
+            <register_type
+                name="BITCommandStatusType"
+                type_ref="UMAA::SO::BITControl::BITCommandStatusType"/>
+            <topic
+                name="UMAA::SO::BITControl::BITCommandStatusType"
+                register_type_ref="BITCommandStatusType"/>
+
+            <register_type
+                name="BITCommandType"
+                type_ref="UMAA::SO::BITControl::BITCommandType"/>
+            <topic
+                name="UMAA::SO::BITControl::BITCommandType"
+                register_type_ref="BITCommandType"/>
+
+            <register_type
+                name="BITConfigAckReportType"
+                type_ref="UMAA::SO::BITConfig::BITConfigAckReportType"/>
+            <topic
+                name="UMAA::SO::BITConfig::BITConfigAckReportType"
+                register_type_ref="BITConfigAckReportType"/>
+
+            <register_type
+                name="BITConfigCommandStatusType"
+                type_ref="UMAA::SO::BITConfig::BITConfigCommandStatusType"/>
+            <topic
+                name="UMAA::SO::BITConfig::BITConfigCommandStatusType"
+                register_type_ref="BITConfigCommandStatusType"/>
+
+            <register_type
+                name="BITConfigCommandType"
+                type_ref="UMAA::SO::BITConfig::BITConfigCommandType"/>
+            <topic
+                name="UMAA::SO::BITConfig::BITConfigCommandType"
+                register_type_ref="BITConfigCommandType"/>
+
+            <register_type
+                name="BITConfigReportType"
+                type_ref="UMAA::SO::BITConfig::BITConfigReportType"/>
+            <topic
+                name="UMAA::SO::BITConfig::BITConfigReportType"
+                register_type_ref="BITConfigReportType"/>
+
+            <register_type
+                name="BITExecutionStatusReportType"
+                type_ref="UMAA::SO::BITControl::BITExecutionStatusReportType"/>
+            <topic
+                name="UMAA::SO::BITControl::BITExecutionStatusReportType"
+                register_type_ref="BITExecutionStatusReportType"/>
+
+            <register_type
+                name="BITReportType"
+                type_ref="UMAA::SO::BITReport::BITReportType"/>
+            <topic
+                name="UMAA::SO::BITReport::BITReportType"
+                register_type_ref="BITReportType"/>
+
+            <register_type
+                name="BITSpecsReportType"
+                type_ref="UMAA::SO::BITSpecs::BITSpecsReportType"/>
+            <topic
+                name="UMAA::SO::BITSpecs::BITSpecsReportType"
+                register_type_ref="BITSpecsReportType"/>
+
+            <register_type
+                name="CircleObjectiveDetailedStatusType"
+                type_ref="UMAA::MM::BaseType::CircleObjectiveDetailedStatusType"/>
+            <topic
+                name="UMAA::MM::BaseType::CircleObjectiveDetailedStatusType"
+                register_type_ref="CircleObjectiveDetailedStatusType"/>
+
+            <register_type
+                name="CircleObjectiveType"
+                type_ref="UMAA::MM::BaseType::CircleObjectiveType"/>
+            <topic
+                name="UMAA::MM::BaseType::CircleObjectiveType"
+                register_type_ref="CircleObjectiveType"/>
+
+            <register_type
+                name="ClearDataCommandAckReportType"
+                type_ref="UMAA::SO::ClearDataControl::ClearDataCommandAckReportType"/>
+            <topic
+                name="UMAA::SO::ClearDataControl::ClearDataCommandAckReportType"
+                register_type_ref="ClearDataCommandAckReportType"/>
+
+            <register_type
+                name="ClearDataCommandStatusType"
+                type_ref="UMAA::SO::ClearDataControl::ClearDataCommandStatusType"/>
+            <topic
+                name="UMAA::SO::ClearDataControl::ClearDataCommandStatusType"
+                register_type_ref="ClearDataCommandStatusType"/>
+
+            <register_type
+                name="ClearDataCommandType"
+                type_ref="UMAA::SO::ClearDataControl::ClearDataCommandType"/>
+            <topic
+                name="UMAA::SO::ClearDataControl::ClearDataCommandType"
+                register_type_ref="ClearDataCommandType"/>
+
+            <register_type
+                name="ClientControlReportType"
+                type_ref="UMAA::MM::ControlTransfer::ClientControlReportType"/>
+            <topic
+                name="UMAA::MM::ControlTransfer::ClientControlReportType"
+                register_type_ref="ClientControlReportType"/>
+
+            <register_type
+                name="ClientControlTransferReportType"
+                type_ref="UMAA::MM::ControlTransfer::ClientControlTransferReportType"/>
+            <topic
+                name="UMAA::MM::ControlTransfer::ClientControlTransferReportType"
+                register_type_ref="ClientControlTransferReportType"/>
+
+            <register_type
+                name="ClientIDReportType"
+                type_ref="UMAA::SO::ControlSystemID::ClientIDReportType"/>
+            <topic
+                name="UMAA::SO::ControlSystemID::ClientIDReportType"
+                register_type_ref="ClientIDReportType"/>
+
+            <register_type
+                name="CommsChannelAddMessageCancelConfigCommandStatusType"
+                type_ref="UMAA::CO::CommsChannelConfig::CommsChannelAddMessageCancelConfigCommandStatusType"/>
+            <topic
+                name="UMAA::CO::CommsChannelConfig::CommsChannelAddMessageCancelConfigCommandStatusType"
+                register_type_ref="CommsChannelAddMessageCancelConfigCommandStatusType"/>
+
+            <register_type
+                name="CommsChannelAddMessageCancelConfigType"
+                type_ref="UMAA::CO::CommsChannelConfig::CommsChannelAddMessageCancelConfigType"/>
+            <topic
+                name="UMAA::CO::CommsChannelConfig::CommsChannelAddMessageCancelConfigType"
+                register_type_ref="CommsChannelAddMessageCancelConfigType"/>
+
+            <register_type
+                name="CommsChannelAddMessageConfigAckReportType"
+                type_ref="UMAA::CO::CommsChannelConfig::CommsChannelAddMessageConfigAckReportType"/>
+            <topic
+                name="UMAA::CO::CommsChannelConfig::CommsChannelAddMessageConfigAckReportType"
+                register_type_ref="CommsChannelAddMessageConfigAckReportType"/>
+
+            <register_type
+                name="CommsChannelAddMessageConfigCommandStatusType"
+                type_ref="UMAA::CO::CommsChannelConfig::CommsChannelAddMessageConfigCommandStatusType"/>
+            <topic
+                name="UMAA::CO::CommsChannelConfig::CommsChannelAddMessageConfigCommandStatusType"
+                register_type_ref="CommsChannelAddMessageConfigCommandStatusType"/>
+
+            <register_type
+                name="CommsChannelAddMessageConfigCommandType"
+                type_ref="UMAA::CO::CommsChannelConfig::CommsChannelAddMessageConfigCommandType"/>
+            <topic
+                name="UMAA::CO::CommsChannelConfig::CommsChannelAddMessageConfigCommandType"
+                register_type_ref="CommsChannelAddMessageConfigCommandType"/>
+
+            <register_type
+                name="CommsChannelClearAllCommandAckReportType"
+                type_ref="UMAA::CO::CommsChannelControl::CommsChannelClearAllCommandAckReportType"/>
+            <topic
+                name="UMAA::CO::CommsChannelControl::CommsChannelClearAllCommandAckReportType"
+                register_type_ref="CommsChannelClearAllCommandAckReportType"/>
+
+            <register_type
+                name="CommsChannelClearAllCommandStatusType"
+                type_ref="UMAA::CO::CommsChannelControl::CommsChannelClearAllCommandStatusType"/>
+            <topic
+                name="UMAA::CO::CommsChannelControl::CommsChannelClearAllCommandStatusType"
+                register_type_ref="CommsChannelClearAllCommandStatusType"/>
+
+            <register_type
+                name="CommsChannelClearAllCommandType"
+                type_ref="UMAA::CO::CommsChannelControl::CommsChannelClearAllCommandType"/>
+            <topic
+                name="UMAA::CO::CommsChannelControl::CommsChannelClearAllCommandType"
+                register_type_ref="CommsChannelClearAllCommandType"/>
+
+            <register_type
+                name="CommsChannelClearMessageCommandAckReportType"
+                type_ref="UMAA::CO::CommsChannelControl::CommsChannelClearMessageCommandAckReportType"/>
+            <topic
+                name="UMAA::CO::CommsChannelControl::CommsChannelClearMessageCommandAckReportType"
+                register_type_ref="CommsChannelClearMessageCommandAckReportType"/>
+
+            <register_type
+                name="CommsChannelClearMessageCommandStatusType"
+                type_ref="UMAA::CO::CommsChannelControl::CommsChannelClearMessageCommandStatusType"/>
+            <topic
+                name="UMAA::CO::CommsChannelControl::CommsChannelClearMessageCommandStatusType"
+                register_type_ref="CommsChannelClearMessageCommandStatusType"/>
+
+            <register_type
+                name="CommsChannelClearMessageCommandType"
+                type_ref="UMAA::CO::CommsChannelControl::CommsChannelClearMessageCommandType"/>
+            <topic
+                name="UMAA::CO::CommsChannelControl::CommsChannelClearMessageCommandType"
+                register_type_ref="CommsChannelClearMessageCommandType"/>
+
+            <register_type
+                name="CommsChannelConfigReportType"
+                type_ref="UMAA::CO::CommsChannelConfig::CommsChannelConfigReportType"/>
+            <topic
+                name="UMAA::CO::CommsChannelConfig::CommsChannelConfigReportType"
+                register_type_ref="CommsChannelConfigReportType"/>
+
+            <register_type
+                name="CommsChannelConfigReportTypeMessageConfigsSetElement"
+                type_ref="UMAA::CO::CommsChannelConfig::CommsChannelConfigReportTypeMessageConfigsSetElement"/>
+            <topic
+                name="UMAA::CO::CommsChannelConfig::CommsChannelConfigReportTypeMessageConfigsSetElement"
+                register_type_ref="CommsChannelConfigReportTypeMessageConfigsSetElement"/>
+
+            <register_type
+                name="CommsChannelDataEncodingReportType"
+                type_ref="UMAA::CO::CommsChannelDataEncodingReport::CommsChannelDataEncodingReportType"/>
+            <topic
+                name="UMAA::CO::CommsChannelDataEncodingReport::CommsChannelDataEncodingReportType"
+                register_type_ref="CommsChannelDataEncodingReportType"/>
+
+            <register_type
+                name="CommsChannelDeleteMessageCancelConfigCommandStatusType"
+                type_ref="UMAA::CO::CommsChannelConfig::CommsChannelDeleteMessageCancelConfigCommandStatusType"/>
+            <topic
+                name="UMAA::CO::CommsChannelConfig::CommsChannelDeleteMessageCancelConfigCommandStatusType"
+                register_type_ref="CommsChannelDeleteMessageCancelConfigCommandStatusType"/>
+
+            <register_type
+                name="CommsChannelDeleteMessageCancelConfigType"
+                type_ref="UMAA::CO::CommsChannelConfig::CommsChannelDeleteMessageCancelConfigType"/>
+            <topic
+                name="UMAA::CO::CommsChannelConfig::CommsChannelDeleteMessageCancelConfigType"
+                register_type_ref="CommsChannelDeleteMessageCancelConfigType"/>
+
+            <register_type
+                name="CommsChannelDeleteMessageConfigAckReportType"
+                type_ref="UMAA::CO::CommsChannelConfig::CommsChannelDeleteMessageConfigAckReportType"/>
+            <topic
+                name="UMAA::CO::CommsChannelConfig::CommsChannelDeleteMessageConfigAckReportType"
+                register_type_ref="CommsChannelDeleteMessageConfigAckReportType"/>
+
+            <register_type
+                name="CommsChannelDeleteMessageConfigCommandStatusType"
+                type_ref="UMAA::CO::CommsChannelConfig::CommsChannelDeleteMessageConfigCommandStatusType"/>
+            <topic
+                name="UMAA::CO::CommsChannelConfig::CommsChannelDeleteMessageConfigCommandStatusType"
+                register_type_ref="CommsChannelDeleteMessageConfigCommandStatusType"/>
+
+            <register_type
+                name="CommsChannelDeleteMessageConfigCommandType"
+                type_ref="UMAA::CO::CommsChannelConfig::CommsChannelDeleteMessageConfigCommandType"/>
+            <topic
+                name="UMAA::CO::CommsChannelConfig::CommsChannelDeleteMessageConfigCommandType"
+                register_type_ref="CommsChannelDeleteMessageConfigCommandType"/>
+
+            <register_type
+                name="CommsChannelEnvironmentReportType"
+                type_ref="UMAA::CO::CommsChannelEnvironmentReport::CommsChannelEnvironmentReportType"/>
+            <topic
+                name="UMAA::CO::CommsChannelEnvironmentReport::CommsChannelEnvironmentReportType"
+                register_type_ref="CommsChannelEnvironmentReportType"/>
+
+            <register_type
+                name="CommsChannelPowerCancelConfigCommandStatusType"
+                type_ref="UMAA::CO::CommsChannelPowerConfig::CommsChannelPowerCancelConfigCommandStatusType"/>
+            <topic
+                name="UMAA::CO::CommsChannelPowerConfig::CommsChannelPowerCancelConfigCommandStatusType"
+                register_type_ref="CommsChannelPowerCancelConfigCommandStatusType"/>
+
+            <register_type
+                name="CommsChannelPowerCancelConfigType"
+                type_ref="UMAA::CO::CommsChannelPowerConfig::CommsChannelPowerCancelConfigType"/>
+            <topic
+                name="UMAA::CO::CommsChannelPowerConfig::CommsChannelPowerCancelConfigType"
+                register_type_ref="CommsChannelPowerCancelConfigType"/>
+
+            <register_type
+                name="CommsChannelPowerConfigAckReportType"
+                type_ref="UMAA::CO::CommsChannelPowerConfig::CommsChannelPowerConfigAckReportType"/>
+            <topic
+                name="UMAA::CO::CommsChannelPowerConfig::CommsChannelPowerConfigAckReportType"
+                register_type_ref="CommsChannelPowerConfigAckReportType"/>
+
+            <register_type
+                name="CommsChannelPowerConfigCommandStatusType"
+                type_ref="UMAA::CO::CommsChannelPowerConfig::CommsChannelPowerConfigCommandStatusType"/>
+            <topic
+                name="UMAA::CO::CommsChannelPowerConfig::CommsChannelPowerConfigCommandStatusType"
+                register_type_ref="CommsChannelPowerConfigCommandStatusType"/>
+
+            <register_type
+                name="CommsChannelPowerConfigCommandType"
+                type_ref="UMAA::CO::CommsChannelPowerConfig::CommsChannelPowerConfigCommandType"/>
+            <topic
+                name="UMAA::CO::CommsChannelPowerConfig::CommsChannelPowerConfigCommandType"
+                register_type_ref="CommsChannelPowerConfigCommandType"/>
+
+            <register_type
+                name="CommsChannelPowerConfigReportType"
+                type_ref="UMAA::CO::CommsChannelPowerConfig::CommsChannelPowerConfigReportType"/>
+            <topic
+                name="UMAA::CO::CommsChannelPowerConfig::CommsChannelPowerConfigReportType"
+                register_type_ref="CommsChannelPowerConfigReportType"/>
+
+            <register_type
+                name="CommsChannelPowerReportType"
+                type_ref="UMAA::CO::CommsChannelPowerReport::CommsChannelPowerReportType"/>
+            <topic
+                name="UMAA::CO::CommsChannelPowerReport::CommsChannelPowerReportType"
+                register_type_ref="CommsChannelPowerReportType"/>
+
+            <register_type
+                name="CommsChannelReceiverReportType"
+                type_ref="UMAA::CO::CommsChannelStatus::CommsChannelReceiverReportType"/>
+            <topic
+                name="UMAA::CO::CommsChannelStatus::CommsChannelReceiverReportType"
+                register_type_ref="CommsChannelReceiverReportType"/>
+
+            <register_type
+                name="CommsChannelReceiverStatisticsReportType"
+                type_ref="UMAA::CO::CommsChannelStatus::CommsChannelReceiverStatisticsReportType"/>
+            <topic
+                name="UMAA::CO::CommsChannelStatus::CommsChannelReceiverStatisticsReportType"
+                register_type_ref="CommsChannelReceiverStatisticsReportType"/>
+
+            <register_type
+                name="CommsChannelReportType"
+                type_ref="UMAA::CO::CommsChannelStatus::CommsChannelReportType"/>
+            <topic
+                name="UMAA::CO::CommsChannelStatus::CommsChannelReportType"
+                register_type_ref="CommsChannelReportType"/>
+
+            <register_type
+                name="CommsChannelResetCommandAckReportType"
+                type_ref="UMAA::CO::CommsChannelControl::CommsChannelResetCommandAckReportType"/>
+            <topic
+                name="UMAA::CO::CommsChannelControl::CommsChannelResetCommandAckReportType"
+                register_type_ref="CommsChannelResetCommandAckReportType"/>
+
+            <register_type
+                name="CommsChannelResetCommandStatusType"
+                type_ref="UMAA::CO::CommsChannelControl::CommsChannelResetCommandStatusType"/>
+            <topic
+                name="UMAA::CO::CommsChannelControl::CommsChannelResetCommandStatusType"
+                register_type_ref="CommsChannelResetCommandStatusType"/>
+
+            <register_type
+                name="CommsChannelResetCommandType"
+                type_ref="UMAA::CO::CommsChannelControl::CommsChannelResetCommandType"/>
+            <topic
+                name="UMAA::CO::CommsChannelControl::CommsChannelResetCommandType"
+                register_type_ref="CommsChannelResetCommandType"/>
+
+            <register_type
+                name="CommsChannelSenderReportType"
+                type_ref="UMAA::CO::CommsChannelStatus::CommsChannelSenderReportType"/>
+            <topic
+                name="UMAA::CO::CommsChannelStatus::CommsChannelSenderReportType"
+                register_type_ref="CommsChannelSenderReportType"/>
+
+            <register_type
+                name="CommsChannelSenderReportTypeQueuedMessagesListElement"
+                type_ref="UMAA::CO::CommsChannelStatus::CommsChannelSenderReportTypeQueuedMessagesListElement"/>
+            <topic
+                name="UMAA::CO::CommsChannelStatus::CommsChannelSenderReportTypeQueuedMessagesListElement"
+                register_type_ref="CommsChannelSenderReportTypeQueuedMessagesListElement"/>
+
+            <register_type
+                name="CommsChannelSenderStatisticsReportType"
+                type_ref="UMAA::CO::CommsChannelStatus::CommsChannelSenderStatisticsReportType"/>
+            <topic
+                name="UMAA::CO::CommsChannelStatus::CommsChannelSenderStatisticsReportType"
+                register_type_ref="CommsChannelSenderStatisticsReportType"/>
+
+            <register_type
+                name="CommsChannelShutdownCommandAckReportType"
+                type_ref="UMAA::CO::CommsChannelControl::CommsChannelShutdownCommandAckReportType"/>
+            <topic
+                name="UMAA::CO::CommsChannelControl::CommsChannelShutdownCommandAckReportType"
+                register_type_ref="CommsChannelShutdownCommandAckReportType"/>
+
+            <register_type
+                name="CommsChannelShutdownCommandStatusType"
+                type_ref="UMAA::CO::CommsChannelControl::CommsChannelShutdownCommandStatusType"/>
+            <topic
+                name="UMAA::CO::CommsChannelControl::CommsChannelShutdownCommandStatusType"
+                register_type_ref="CommsChannelShutdownCommandStatusType"/>
+
+            <register_type
+                name="CommsChannelShutdownCommandType"
+                type_ref="UMAA::CO::CommsChannelControl::CommsChannelShutdownCommandType"/>
+            <topic
+                name="UMAA::CO::CommsChannelControl::CommsChannelShutdownCommandType"
+                register_type_ref="CommsChannelShutdownCommandType"/>
+
+            <register_type
+                name="CommsChannelSpecsReportType"
+                type_ref="UMAA::CO::CommsChannelSpecs::CommsChannelSpecsReportType"/>
+            <topic
+                name="UMAA::CO::CommsChannelSpecs::CommsChannelSpecsReportType"
+                register_type_ref="CommsChannelSpecsReportType"/>
+
+            <register_type
+                name="CommsChannelStartupCommandAckReportType"
+                type_ref="UMAA::CO::CommsChannelControl::CommsChannelStartupCommandAckReportType"/>
+            <topic
+                name="UMAA::CO::CommsChannelControl::CommsChannelStartupCommandAckReportType"
+                register_type_ref="CommsChannelStartupCommandAckReportType"/>
+
+            <register_type
+                name="CommsChannelStartupCommandStatusType"
+                type_ref="UMAA::CO::CommsChannelControl::CommsChannelStartupCommandStatusType"/>
+            <topic
+                name="UMAA::CO::CommsChannelControl::CommsChannelStartupCommandStatusType"
+                register_type_ref="CommsChannelStartupCommandStatusType"/>
+
+            <register_type
+                name="CommsChannelStartupCommandType"
+                type_ref="UMAA::CO::CommsChannelControl::CommsChannelStartupCommandType"/>
+            <topic
+                name="UMAA::CO::CommsChannelControl::CommsChannelStartupCommandType"
+                register_type_ref="CommsChannelStartupCommandType"/>
+
+            <register_type
+                name="CommsChannelSystemTimeReportType"
+                type_ref="UMAA::CO::CommsChannelSystemTimeReport::CommsChannelSystemTimeReportType"/>
+            <topic
+                name="UMAA::CO::CommsChannelSystemTimeReport::CommsChannelSystemTimeReportType"
+                register_type_ref="CommsChannelSystemTimeReportType"/>
+
+            <register_type
+                name="CompartmentConfigReportType"
+                type_ref="UMAA::SA::CompartmentConfig::CompartmentConfigReportType"/>
+            <topic
+                name="UMAA::SA::CompartmentConfig::CompartmentConfigReportType"
+                register_type_ref="CompartmentConfigReportType"/>
+
+            <register_type
+                name="CompartmentReportType"
+                type_ref="UMAA::SA::CompartmentStatus::CompartmentReportType"/>
+            <topic
+                name="UMAA::SA::CompartmentStatus::CompartmentReportType"
+                register_type_ref="CompartmentReportType"/>
+
+            <register_type
+                name="ConditionalAddCommandAckReportType"
+                type_ref="UMAA::MM::ConditionalControl::ConditionalAddCommandAckReportType"/>
+            <topic
+                name="UMAA::MM::ConditionalControl::ConditionalAddCommandAckReportType"
+                register_type_ref="ConditionalAddCommandAckReportType"/>
+
+            <register_type
+                name="ConditionalAddCommandStatusType"
+                type_ref="UMAA::MM::ConditionalControl::ConditionalAddCommandStatusType"/>
+            <topic
+                name="UMAA::MM::ConditionalControl::ConditionalAddCommandStatusType"
+                register_type_ref="ConditionalAddCommandStatusType"/>
+
+            <register_type
+                name="ConditionalAddCommandType"
+                type_ref="UMAA::MM::ConditionalControl::ConditionalAddCommandType"/>
+            <topic
+                name="UMAA::MM::ConditionalControl::ConditionalAddCommandType"
+                register_type_ref="ConditionalAddCommandType"/>
+
+            <register_type
+                name="ConditionalDeleteCommandAckReportType"
+                type_ref="UMAA::MM::ConditionalControl::ConditionalDeleteCommandAckReportType"/>
+            <topic
+                name="UMAA::MM::ConditionalControl::ConditionalDeleteCommandAckReportType"
+                register_type_ref="ConditionalDeleteCommandAckReportType"/>
+
+            <register_type
+                name="ConditionalDeleteCommandStatusType"
+                type_ref="UMAA::MM::ConditionalControl::ConditionalDeleteCommandStatusType"/>
+            <topic
+                name="UMAA::MM::ConditionalControl::ConditionalDeleteCommandStatusType"
+                register_type_ref="ConditionalDeleteCommandStatusType"/>
+
+            <register_type
+                name="ConditionalDeleteCommandType"
+                type_ref="UMAA::MM::ConditionalControl::ConditionalDeleteCommandType"/>
+            <topic
+                name="UMAA::MM::ConditionalControl::ConditionalDeleteCommandType"
+                register_type_ref="ConditionalDeleteCommandType"/>
+
+            <register_type
+                name="ConditionalReportType"
+                type_ref="UMAA::MM::ConditionalReport::ConditionalReportType"/>
+            <topic
+                name="UMAA::MM::ConditionalReport::ConditionalReportType"
+                register_type_ref="ConditionalReportType"/>
+
+            <register_type
+                name="ConditionalReportTypeConditionalsSetElement"
+                type_ref="UMAA::MM::ConditionalReport::ConditionalReportTypeConditionalsSetElement"/>
+            <topic
+                name="UMAA::MM::ConditionalReport::ConditionalReportTypeConditionalsSetElement"
+                register_type_ref="ConditionalReportTypeConditionalsSetElement"/>
+
+            <register_type
+                name="ConditionalStateReportType"
+                type_ref="UMAA::MM::ConditionalStateReport::ConditionalStateReportType"/>
+            <topic
+                name="UMAA::MM::ConditionalStateReport::ConditionalStateReportType"
+                register_type_ref="ConditionalStateReportType"/>
+
+            <register_type
+                name="ConstraintViolatedConditionalType"
+                type_ref="UMAA::MM::Conditional::ConstraintViolatedConditionalType"/>
+            <topic
+                name="UMAA::MM::Conditional::ConstraintViolatedConditionalType"
+                register_type_ref="ConstraintViolatedConditionalType"/>
+
+            <register_type
+                name="ContactCategoryReportType"
+                type_ref="UMAA::SA::ContactCategoryReport::ContactCategoryReportType"/>
+            <topic
+                name="UMAA::SA::ContactCategoryReport::ContactCategoryReportType"
+                register_type_ref="ContactCategoryReportType"/>
+
+            <register_type
+                name="ContactCOLREGSClassificationReportType"
+                type_ref="UMAA::SA::ContactCOLREGSClassificationStatus::ContactCOLREGSClassificationReportType"/>
+            <topic
+                name="UMAA::SA::ContactCOLREGSClassificationStatus::ContactCOLREGSClassificationReportType"
+                register_type_ref="ContactCOLREGSClassificationReportType"/>
+
+            <register_type
+                name="ContactFilterCancelConfigCommandStatusType"
+                type_ref="UMAA::SA::ContactFilterConfig::ContactFilterCancelConfigCommandStatusType"/>
+            <topic
+                name="UMAA::SA::ContactFilterConfig::ContactFilterCancelConfigCommandStatusType"
+                register_type_ref="ContactFilterCancelConfigCommandStatusType"/>
+
+            <register_type
+                name="ContactFilterCancelConfigType"
+                type_ref="UMAA::SA::ContactFilterConfig::ContactFilterCancelConfigType"/>
+            <topic
+                name="UMAA::SA::ContactFilterConfig::ContactFilterCancelConfigType"
+                register_type_ref="ContactFilterCancelConfigType"/>
+
+            <register_type
+                name="ContactFilterConfigAckReportType"
+                type_ref="UMAA::SA::ContactFilterConfig::ContactFilterConfigAckReportType"/>
+            <topic
+                name="UMAA::SA::ContactFilterConfig::ContactFilterConfigAckReportType"
+                register_type_ref="ContactFilterConfigAckReportType"/>
+
+            <register_type
+                name="ContactFilterConfigCommandStatusType"
+                type_ref="UMAA::SA::ContactFilterConfig::ContactFilterConfigCommandStatusType"/>
+            <topic
+                name="UMAA::SA::ContactFilterConfig::ContactFilterConfigCommandStatusType"
+                register_type_ref="ContactFilterConfigCommandStatusType"/>
+
+            <register_type
+                name="ContactFilterConfigCommandType"
+                type_ref="UMAA::SA::ContactFilterConfig::ContactFilterConfigCommandType"/>
+            <topic
+                name="UMAA::SA::ContactFilterConfig::ContactFilterConfigCommandType"
+                register_type_ref="ContactFilterConfigCommandType"/>
+
+            <register_type
+                name="ContactIdentityReportType"
+                type_ref="UMAA::SA::ContactIdentityReport::ContactIdentityReportType"/>
+            <topic
+                name="UMAA::SA::ContactIdentityReport::ContactIdentityReportType"
+                register_type_ref="ContactIdentityReportType"/>
+
+            <register_type
+                name="ContactManeuverInfluenceReportType"
+                type_ref="UMAA::MO::ContactManeuverInfluenceStatus::ContactManeuverInfluenceReportType"/>
+            <topic
+                name="UMAA::MO::ContactManeuverInfluenceStatus::ContactManeuverInfluenceReportType"
+                register_type_ref="ContactManeuverInfluenceReportType"/>
+
+            <register_type
+                name="ContactReportType"
+                type_ref="UMAA::SA::ContactReport::ContactReportType"/>
+            <topic
+                name="UMAA::SA::ContactReport::ContactReportType"
+                register_type_ref="ContactReportType"/>
+
+            <register_type
+                name="ContactReportTypeContactsSetElement"
+                type_ref="UMAA::SA::ContactReport::ContactReportTypeContactsSetElement"/>
+            <topic
+                name="UMAA::SA::ContactReport::ContactReportTypeContactsSetElement"
+                register_type_ref="ContactReportTypeContactsSetElement"/>
+
+            <register_type
+                name="ContactVisualClassificationReportType"
+                type_ref="UMAA::SA::ContactVisualClassificationStatus::ContactVisualClassificationReportType"/>
+            <topic
+                name="UMAA::SA::ContactVisualClassificationStatus::ContactVisualClassificationReportType"
+                register_type_ref="ContactVisualClassificationReportType"/>
+
+            <register_type
+                name="ControlSystemControlReportType"
+                type_ref="UMAA::MM::ControlTransfer::ControlSystemControlReportType"/>
+            <topic
+                name="UMAA::MM::ControlTransfer::ControlSystemControlReportType"
+                register_type_ref="ControlSystemControlReportType"/>
+
+            <register_type
+                name="ControlSystemIDCommandAckReportType"
+                type_ref="UMAA::SO::ControlSystemID::ControlSystemIDCommandAckReportType"/>
+            <topic
+                name="UMAA::SO::ControlSystemID::ControlSystemIDCommandAckReportType"
+                register_type_ref="ControlSystemIDCommandAckReportType"/>
+
+            <register_type
+                name="ControlSystemIDCommandStatusType"
+                type_ref="UMAA::SO::ControlSystemID::ControlSystemIDCommandStatusType"/>
+            <topic
+                name="UMAA::SO::ControlSystemID::ControlSystemIDCommandStatusType"
+                register_type_ref="ControlSystemIDCommandStatusType"/>
+
+            <register_type
+                name="ControlSystemIDCommandType"
+                type_ref="UMAA::SO::ControlSystemID::ControlSystemIDCommandType"/>
+            <topic
+                name="UMAA::SO::ControlSystemID::ControlSystemIDCommandType"
+                register_type_ref="ControlSystemIDCommandType"/>
+
+            <register_type
+                name="ControlSystemIDReportType"
+                type_ref="UMAA::SO::ControlSystemID::ControlSystemIDReportType"/>
+            <topic
+                name="UMAA::SO::ControlSystemID::ControlSystemIDReportType"
+                register_type_ref="ControlSystemIDReportType"/>
+
+            <register_type
+                name="ControlSystemTransferReportType"
+                type_ref="UMAA::MM::ControlTransfer::ControlSystemTransferReportType"/>
+            <topic
+                name="UMAA::MM::ControlTransfer::ControlSystemTransferReportType"
+                register_type_ref="ControlSystemTransferReportType"/>
+
+            <register_type
+                name="CoordinationSituationalSignalReportType"
+                type_ref="UMAA::MO::CoordinationSituationalSignalStatus::CoordinationSituationalSignalReportType"/>
+            <topic
+                name="UMAA::MO::CoordinationSituationalSignalStatus::CoordinationSituationalSignalReportType"
+                register_type_ref="CoordinationSituationalSignalReportType"/>
+
+            <register_type
+                name="DateTimeReportType"
+                type_ref="UMAA::SA::DateTimeStatus::DateTimeReportType"/>
+            <topic
+                name="UMAA::SA::DateTimeStatus::DateTimeReportType"
+                register_type_ref="DateTimeReportType"/>
+
+            <register_type
+                name="DeploymentObjectiveDetailedStatusType"
+                type_ref="UMAA::MM::BaseType::DeploymentObjectiveDetailedStatusType"/>
+            <topic
+                name="UMAA::MM::BaseType::DeploymentObjectiveDetailedStatusType"
+                register_type_ref="DeploymentObjectiveDetailedStatusType"/>
+
+            <register_type
+                name="DeploymentObjectiveType"
+                type_ref="UMAA::MM::BaseType::DeploymentObjectiveType"/>
+            <topic
+                name="UMAA::MM::BaseType::DeploymentObjectiveType"
+                register_type_ref="DeploymentObjectiveType"/>
+
+            <register_type
+                name="DepthConditionalType"
+                type_ref="UMAA::MM::Conditional::DepthConditionalType"/>
+            <topic
+                name="UMAA::MM::Conditional::DepthConditionalType"
+                register_type_ref="DepthConditionalType"/>
+
+            <register_type
+                name="DepthRateConditionalType"
+                type_ref="UMAA::MM::Conditional::DepthRateConditionalType"/>
+            <topic
+                name="UMAA::MM::Conditional::DepthRateConditionalType"
+                register_type_ref="DepthRateConditionalType"/>
+
+            <register_type
+                name="DriftObjectiveDetailedStatusType"
+                type_ref="UMAA::MM::BaseType::DriftObjectiveDetailedStatusType"/>
+            <topic
+                name="UMAA::MM::BaseType::DriftObjectiveDetailedStatusType"
+                register_type_ref="DriftObjectiveDetailedStatusType"/>
+
+            <register_type
+                name="DriftObjectiveType"
+                type_ref="UMAA::MM::BaseType::DriftObjectiveType"/>
+            <topic
+                name="UMAA::MM::BaseType::DriftObjectiveType"
+                register_type_ref="DriftObjectiveType"/>
+
+            <register_type
+                name="ECEFPoseReportType"
+                type_ref="UMAA::SA::ECEFPoseStatus::ECEFPoseReportType"/>
+            <topic
+                name="UMAA::SA::ECEFPoseStatus::ECEFPoseReportType"
+                register_type_ref="ECEFPoseReportType"/>
+
+            <register_type
+                name="EmitterCommandAckReportType"
+                type_ref="UMAA::SO::EmitterControl::EmitterCommandAckReportType"/>
+            <topic
+                name="UMAA::SO::EmitterControl::EmitterCommandAckReportType"
+                register_type_ref="EmitterCommandAckReportType"/>
+
+            <register_type
+                name="EmitterCommandStatusType"
+                type_ref="UMAA::SO::EmitterControl::EmitterCommandStatusType"/>
+            <topic
+                name="UMAA::SO::EmitterControl::EmitterCommandStatusType"
+                register_type_ref="EmitterCommandStatusType"/>
+
+            <register_type
+                name="EmitterCommandType"
+                type_ref="UMAA::SO::EmitterControl::EmitterCommandType"/>
+            <topic
+                name="UMAA::SO::EmitterControl::EmitterCommandType"
+                register_type_ref="EmitterCommandType"/>
+
+            <register_type
+                name="EmitterPresetCancelConfigCommandStatusType"
+                type_ref="UMAA::SO::EmitterPresetConfig::EmitterPresetCancelConfigCommandStatusType"/>
+            <topic
+                name="UMAA::SO::EmitterPresetConfig::EmitterPresetCancelConfigCommandStatusType"
+                register_type_ref="EmitterPresetCancelConfigCommandStatusType"/>
+
+            <register_type
+                name="EmitterPresetCancelConfigType"
+                type_ref="UMAA::SO::EmitterPresetConfig::EmitterPresetCancelConfigType"/>
+            <topic
+                name="UMAA::SO::EmitterPresetConfig::EmitterPresetCancelConfigType"
+                register_type_ref="EmitterPresetCancelConfigType"/>
+
+            <register_type
+                name="EmitterPresetCommandAckReportType"
+                type_ref="UMAA::SO::EmitterPresetControl::EmitterPresetCommandAckReportType"/>
+            <topic
+                name="UMAA::SO::EmitterPresetControl::EmitterPresetCommandAckReportType"
+                register_type_ref="EmitterPresetCommandAckReportType"/>
+
+            <register_type
+                name="EmitterPresetCommandStatusType"
+                type_ref="UMAA::SO::EmitterPresetControl::EmitterPresetCommandStatusType"/>
+            <topic
+                name="UMAA::SO::EmitterPresetControl::EmitterPresetCommandStatusType"
+                register_type_ref="EmitterPresetCommandStatusType"/>
+
+            <register_type
+                name="EmitterPresetCommandType"
+                type_ref="UMAA::SO::EmitterPresetControl::EmitterPresetCommandType"/>
+            <topic
+                name="UMAA::SO::EmitterPresetControl::EmitterPresetCommandType"
+                register_type_ref="EmitterPresetCommandType"/>
+
+            <register_type
+                name="EmitterPresetConditionalType"
+                type_ref="UMAA::MM::Conditional::EmitterPresetConditionalType"/>
+            <topic
+                name="UMAA::MM::Conditional::EmitterPresetConditionalType"
+                register_type_ref="EmitterPresetConditionalType"/>
+
+            <register_type
+                name="EmitterPresetConfigAckReportType"
+                type_ref="UMAA::SO::EmitterPresetConfig::EmitterPresetConfigAckReportType"/>
+            <topic
+                name="UMAA::SO::EmitterPresetConfig::EmitterPresetConfigAckReportType"
+                register_type_ref="EmitterPresetConfigAckReportType"/>
+
+            <register_type
+                name="EmitterPresetConfigCommandStatusType"
+                type_ref="UMAA::SO::EmitterPresetConfig::EmitterPresetConfigCommandStatusType"/>
+            <topic
+                name="UMAA::SO::EmitterPresetConfig::EmitterPresetConfigCommandStatusType"
+                register_type_ref="EmitterPresetConfigCommandStatusType"/>
+
+            <register_type
+                name="EmitterPresetConfigCommandType"
+                type_ref="UMAA::SO::EmitterPresetConfig::EmitterPresetConfigCommandType"/>
+            <topic
+                name="UMAA::SO::EmitterPresetConfig::EmitterPresetConfigCommandType"
+                register_type_ref="EmitterPresetConfigCommandType"/>
+
+            <register_type
+                name="EmitterPresetConfigReportType"
+                type_ref="UMAA::SO::EmitterPresetConfig::EmitterPresetConfigReportType"/>
+            <topic
+                name="UMAA::SO::EmitterPresetConfig::EmitterPresetConfigReportType"
+                register_type_ref="EmitterPresetConfigReportType"/>
+
+            <register_type
+                name="EmitterPresetReportType"
+                type_ref="UMAA::SO::EmitterPresetReport::EmitterPresetReportType"/>
+            <topic
+                name="UMAA::SO::EmitterPresetReport::EmitterPresetReportType"
+                register_type_ref="EmitterPresetReportType"/>
+
+            <register_type
+                name="EmitterReportType"
+                type_ref="UMAA::SO::EmitterReport::EmitterReportType"/>
+            <topic
+                name="UMAA::SO::EmitterReport::EmitterReportType"
+                register_type_ref="EmitterReportType"/>
+
+            <register_type
+                name="EmitterSpecsReportType"
+                type_ref="UMAA::SO::EmitterSpecs::EmitterSpecsReportType"/>
+            <topic
+                name="UMAA::SO::EmitterSpecs::EmitterSpecsReportType"
+                register_type_ref="EmitterSpecsReportType"/>
+
+            <register_type
+                name="EngineCommandAckReportType"
+                type_ref="UMAA::EO::EngineControl::EngineCommandAckReportType"/>
+            <topic
+                name="UMAA::EO::EngineControl::EngineCommandAckReportType"
+                register_type_ref="EngineCommandAckReportType"/>
+
+            <register_type
+                name="EngineCommandStatusType"
+                type_ref="UMAA::EO::EngineControl::EngineCommandStatusType"/>
+            <topic
+                name="UMAA::EO::EngineControl::EngineCommandStatusType"
+                register_type_ref="EngineCommandStatusType"/>
+
+            <register_type
+                name="EngineCommandType"
+                type_ref="UMAA::EO::EngineControl::EngineCommandType"/>
+            <topic
+                name="UMAA::EO::EngineControl::EngineCommandType"
+                register_type_ref="EngineCommandType"/>
+
+            <register_type
+                name="EngineReportType"
+                type_ref="UMAA::EO::EngineStatus::EngineReportType"/>
+            <topic
+                name="UMAA::EO::EngineStatus::EngineReportType"
+                register_type_ref="EngineReportType"/>
+
+            <register_type
+                name="EngineSpecsReportType"
+                type_ref="UMAA::EO::EngineSpecs::EngineSpecsReportType"/>
+            <topic
+                name="UMAA::EO::EngineSpecs::EngineSpecsReportType"
+                register_type_ref="EngineSpecsReportType"/>
+
+            <register_type
+                name="ExpConditionalType"
+                type_ref="UMAA::MM::Conditional::ExpConditionalType"/>
+            <topic
+                name="UMAA::MM::Conditional::ExpConditionalType"
+                register_type_ref="ExpConditionalType"/>
+
+            <register_type
+                name="ExpObjectiveDetailedStatusType"
+                type_ref="UMAA::MM::BaseType::ExpObjectiveDetailedStatusType"/>
+            <topic
+                name="UMAA::MM::BaseType::ExpObjectiveDetailedStatusType"
+                register_type_ref="ExpObjectiveDetailedStatusType"/>
+
+            <register_type
+                name="ExpObjectiveType"
+                type_ref="UMAA::MM::BaseType::ExpObjectiveType"/>
+            <topic
+                name="UMAA::MM::BaseType::ExpObjectiveType"
+                register_type_ref="ExpObjectiveType"/>
+
+            <register_type
+                name="Figure8ObjectiveDetailedStatusType"
+                type_ref="UMAA::MM::BaseType::Figure8ObjectiveDetailedStatusType"/>
+            <topic
+                name="UMAA::MM::BaseType::Figure8ObjectiveDetailedStatusType"
+                register_type_ref="Figure8ObjectiveDetailedStatusType"/>
+
+            <register_type
+                name="Figure8ObjectiveType"
+                type_ref="UMAA::MM::BaseType::Figure8ObjectiveType"/>
+            <topic
+                name="UMAA::MM::BaseType::Figure8ObjectiveType"
+                register_type_ref="Figure8ObjectiveType"/>
+
+            <register_type
+                name="FileSystemReportType"
+                type_ref="UMAA::SO::FileSystemStatus::FileSystemReportType"/>
+            <topic
+                name="UMAA::SO::FileSystemStatus::FileSystemReportType"
+                register_type_ref="FileSystemReportType"/>
+
+            <register_type
+                name="FinCommandType"
+                type_ref="UMAA::EO::FinsControl::FinCommandType"/>
+            <topic
+                name="UMAA::EO::FinsControl::FinCommandType"
+                register_type_ref="FinCommandType"/>
+
+            <register_type
+                name="FinsCommandAckReportType"
+                type_ref="UMAA::EO::FinsControl::FinsCommandAckReportType"/>
+            <topic
+                name="UMAA::EO::FinsControl::FinsCommandAckReportType"
+                register_type_ref="FinsCommandAckReportType"/>
+
+            <register_type
+                name="FinsCommandStatusType"
+                type_ref="UMAA::EO::FinsControl::FinsCommandStatusType"/>
+            <topic
+                name="UMAA::EO::FinsControl::FinsCommandStatusType"
+                register_type_ref="FinsCommandStatusType"/>
+
+            <register_type
+                name="FinsCommandType"
+                type_ref="UMAA::EO::FinsControl::FinsCommandType"/>
+            <topic
+                name="UMAA::EO::FinsControl::FinsCommandType"
+                register_type_ref="FinsCommandType"/>
+
+            <register_type
+                name="FinsSpecsReportType"
+                type_ref="UMAA::EO::FinsSpecs::FinsSpecsReportType"/>
+            <topic
+                name="UMAA::EO::FinsSpecs::FinsSpecsReportType"
+                register_type_ref="FinsSpecsReportType"/>
+
+            <register_type
+                name="FLSCommandAckReportType"
+                type_ref="UMAA::SEM::FLSControl::FLSCommandAckReportType"/>
+            <topic
+                name="UMAA::SEM::FLSControl::FLSCommandAckReportType"
+                register_type_ref="FLSCommandAckReportType"/>
+
+            <register_type
+                name="FLSCommandStatusType"
+                type_ref="UMAA::SEM::FLSControl::FLSCommandStatusType"/>
+            <topic
+                name="UMAA::SEM::FLSControl::FLSCommandStatusType"
+                register_type_ref="FLSCommandStatusType"/>
+
+            <register_type
+                name="FLSCommandType"
+                type_ref="UMAA::SEM::FLSControl::FLSCommandType"/>
+            <topic
+                name="UMAA::SEM::FLSControl::FLSCommandType"
+                register_type_ref="FLSCommandType"/>
+
+            <register_type
+                name="FLSPreCalcCommandAckReportType"
+                type_ref="UMAA::SEM::FLSPreCalcControl::FLSPreCalcCommandAckReportType"/>
+            <topic
+                name="UMAA::SEM::FLSPreCalcControl::FLSPreCalcCommandAckReportType"
+                register_type_ref="FLSPreCalcCommandAckReportType"/>
+
+            <register_type
+                name="FLSPreCalcCommandStatusType"
+                type_ref="UMAA::SEM::FLSPreCalcControl::FLSPreCalcCommandStatusType"/>
+            <topic
+                name="UMAA::SEM::FLSPreCalcControl::FLSPreCalcCommandStatusType"
+                register_type_ref="FLSPreCalcCommandStatusType"/>
+
+            <register_type
+                name="FLSPreCalcCommandType"
+                type_ref="UMAA::SEM::FLSPreCalcControl::FLSPreCalcCommandType"/>
+            <topic
+                name="UMAA::SEM::FLSPreCalcControl::FLSPreCalcCommandType"
+                register_type_ref="FLSPreCalcCommandType"/>
+
+            <register_type
+                name="FreeFloatCommandAckReportType"
+                type_ref="UMAA::MO::FreeFloatControl::FreeFloatCommandAckReportType"/>
+            <topic
+                name="UMAA::MO::FreeFloatControl::FreeFloatCommandAckReportType"
+                register_type_ref="FreeFloatCommandAckReportType"/>
+
+            <register_type
+                name="FreeFloatCommandStatusType"
+                type_ref="UMAA::MO::FreeFloatControl::FreeFloatCommandStatusType"/>
+            <topic
+                name="UMAA::MO::FreeFloatControl::FreeFloatCommandStatusType"
+                register_type_ref="FreeFloatCommandStatusType"/>
+
+            <register_type
+                name="FreeFloatCommandType"
+                type_ref="UMAA::MO::FreeFloatControl::FreeFloatCommandType"/>
+            <topic
+                name="UMAA::MO::FreeFloatControl::FreeFloatCommandType"
+                register_type_ref="FreeFloatCommandType"/>
+
+            <register_type
+                name="FreeFloatExecutionStatusReportType"
+                type_ref="UMAA::MO::FreeFloatControl::FreeFloatExecutionStatusReportType"/>
+            <topic
+                name="UMAA::MO::FreeFloatControl::FreeFloatExecutionStatusReportType"
+                register_type_ref="FreeFloatExecutionStatusReportType"/>
+
+            <register_type
+                name="FreeFloatObjectiveType"
+                type_ref="UMAA::MM::BaseType::FreeFloatObjectiveType"/>
+            <topic
+                name="UMAA::MM::BaseType::FreeFloatObjectiveType"
+                register_type_ref="FreeFloatObjectiveType"/>
+
+            <register_type
+                name="FuelTankReportType"
+                type_ref="UMAA::EO::FuelTankStatus::FuelTankReportType"/>
+            <topic
+                name="UMAA::EO::FuelTankStatus::FuelTankReportType"
+                register_type_ref="FuelTankReportType"/>
+
+            <register_type
+                name="FuelTankSpecsReportType"
+                type_ref="UMAA::EO::FuelTankSpecs::FuelTankSpecsReportType"/>
+            <topic
+                name="UMAA::EO::FuelTankSpecs::FuelTankSpecsReportType"
+                register_type_ref="FuelTankSpecsReportType"/>
+
+            <register_type
+                name="GeneratorReportType"
+                type_ref="UMAA::EO::GeneratorStatus::GeneratorReportType"/>
+            <topic
+                name="UMAA::EO::GeneratorStatus::GeneratorReportType"
+                register_type_ref="GeneratorReportType"/>
+
+            <register_type
+                name="GeneratorSpecsReportType"
+                type_ref="UMAA::EO::GeneratorSpecs::GeneratorSpecsReportType"/>
+            <topic
+                name="UMAA::EO::GeneratorSpecs::GeneratorSpecsReportType"
+                register_type_ref="GeneratorSpecsReportType"/>
+
+            <register_type
+                name="GlobalDriftCommandAckReportType"
+                type_ref="UMAA::MO::GlobalDriftControl::GlobalDriftCommandAckReportType"/>
+            <topic
+                name="UMAA::MO::GlobalDriftControl::GlobalDriftCommandAckReportType"
+                register_type_ref="GlobalDriftCommandAckReportType"/>
+
+            <register_type
+                name="GlobalDriftCommandStatusType"
+                type_ref="UMAA::MO::GlobalDriftControl::GlobalDriftCommandStatusType"/>
+            <topic
+                name="UMAA::MO::GlobalDriftControl::GlobalDriftCommandStatusType"
+                register_type_ref="GlobalDriftCommandStatusType"/>
+
+            <register_type
+                name="GlobalDriftCommandType"
+                type_ref="UMAA::MO::GlobalDriftControl::GlobalDriftCommandType"/>
+            <topic
+                name="UMAA::MO::GlobalDriftControl::GlobalDriftCommandType"
+                register_type_ref="GlobalDriftCommandType"/>
+
+            <register_type
+                name="GlobalDriftExecutionStatusReportType"
+                type_ref="UMAA::MO::GlobalDriftControl::GlobalDriftExecutionStatusReportType"/>
+            <topic
+                name="UMAA::MO::GlobalDriftControl::GlobalDriftExecutionStatusReportType"
+                register_type_ref="GlobalDriftExecutionStatusReportType"/>
+
+            <register_type
+                name="GlobalHoverCommandAckReportType"
+                type_ref="UMAA::MO::GlobalHoverControl::GlobalHoverCommandAckReportType"/>
+            <topic
+                name="UMAA::MO::GlobalHoverControl::GlobalHoverCommandAckReportType"
+                register_type_ref="GlobalHoverCommandAckReportType"/>
+
+            <register_type
+                name="GlobalHoverCommandStatusType"
+                type_ref="UMAA::MO::GlobalHoverControl::GlobalHoverCommandStatusType"/>
+            <topic
+                name="UMAA::MO::GlobalHoverControl::GlobalHoverCommandStatusType"
+                register_type_ref="GlobalHoverCommandStatusType"/>
+
+            <register_type
+                name="GlobalHoverCommandType"
+                type_ref="UMAA::MO::GlobalHoverControl::GlobalHoverCommandType"/>
+            <topic
+                name="UMAA::MO::GlobalHoverControl::GlobalHoverCommandType"
+                register_type_ref="GlobalHoverCommandType"/>
+
+            <register_type
+                name="GlobalHoverExecutionStatusReportType"
+                type_ref="UMAA::MO::GlobalHoverControl::GlobalHoverExecutionStatusReportType"/>
+            <topic
+                name="UMAA::MO::GlobalHoverControl::GlobalHoverExecutionStatusReportType"
+                register_type_ref="GlobalHoverExecutionStatusReportType"/>
+
+            <register_type
+                name="GlobalPoseCancelConfigCommandStatusType"
+                type_ref="UMAA::SA::GlobalPoseConfig::GlobalPoseCancelConfigCommandStatusType"/>
+            <topic
+                name="UMAA::SA::GlobalPoseConfig::GlobalPoseCancelConfigCommandStatusType"
+                register_type_ref="GlobalPoseCancelConfigCommandStatusType"/>
+
+            <register_type
+                name="GlobalPoseCancelConfigType"
+                type_ref="UMAA::SA::GlobalPoseConfig::GlobalPoseCancelConfigType"/>
+            <topic
+                name="UMAA::SA::GlobalPoseConfig::GlobalPoseCancelConfigType"
+                register_type_ref="GlobalPoseCancelConfigType"/>
+
+            <register_type
+                name="GlobalPoseConfigAckReportType"
+                type_ref="UMAA::SA::GlobalPoseConfig::GlobalPoseConfigAckReportType"/>
+            <topic
+                name="UMAA::SA::GlobalPoseConfig::GlobalPoseConfigAckReportType"
+                register_type_ref="GlobalPoseConfigAckReportType"/>
+
+            <register_type
+                name="GlobalPoseConfigCommandStatusType"
+                type_ref="UMAA::SA::GlobalPoseConfig::GlobalPoseConfigCommandStatusType"/>
+            <topic
+                name="UMAA::SA::GlobalPoseConfig::GlobalPoseConfigCommandStatusType"
+                register_type_ref="GlobalPoseConfigCommandStatusType"/>
+
+            <register_type
+                name="GlobalPoseConfigCommandType"
+                type_ref="UMAA::SA::GlobalPoseConfig::GlobalPoseConfigCommandType"/>
+            <topic
+                name="UMAA::SA::GlobalPoseConfig::GlobalPoseConfigCommandType"
+                register_type_ref="GlobalPoseConfigCommandType"/>
+
+            <register_type
+                name="GlobalPoseConfigReportType"
+                type_ref="UMAA::SA::GlobalPoseConfig::GlobalPoseConfigReportType"/>
+            <topic
+                name="UMAA::SA::GlobalPoseConfig::GlobalPoseConfigReportType"
+                register_type_ref="GlobalPoseConfigReportType"/>
+
+            <register_type
+                name="GlobalPoseReportType"
+                type_ref="UMAA::SA::GlobalPoseStatus::GlobalPoseReportType"/>
+            <topic
+                name="UMAA::SA::GlobalPoseStatus::GlobalPoseReportType"
+                register_type_ref="GlobalPoseReportType"/>
+
+            <register_type
+                name="GlobalVectorCommandAckReportType"
+                type_ref="UMAA::MO::GlobalVectorControl::GlobalVectorCommandAckReportType"/>
+            <topic
+                name="UMAA::MO::GlobalVectorControl::GlobalVectorCommandAckReportType"
+                register_type_ref="GlobalVectorCommandAckReportType"/>
+
+            <register_type
+                name="GlobalVectorCommandStatusType"
+                type_ref="UMAA::MO::GlobalVectorControl::GlobalVectorCommandStatusType"/>
+            <topic
+                name="UMAA::MO::GlobalVectorControl::GlobalVectorCommandStatusType"
+                register_type_ref="GlobalVectorCommandStatusType"/>
+
+            <register_type
+                name="GlobalVectorCommandType"
+                type_ref="UMAA::MO::GlobalVectorControl::GlobalVectorCommandType"/>
+            <topic
+                name="UMAA::MO::GlobalVectorControl::GlobalVectorCommandType"
+                register_type_ref="GlobalVectorCommandType"/>
+
+            <register_type
+                name="GlobalVectorExecutionStatusReportType"
+                type_ref="UMAA::MO::GlobalVectorControl::GlobalVectorExecutionStatusReportType"/>
+            <topic
+                name="UMAA::MO::GlobalVectorControl::GlobalVectorExecutionStatusReportType"
+                register_type_ref="GlobalVectorExecutionStatusReportType"/>
+
+            <register_type
+                name="GlobalWaypointCommandAckReportType"
+                type_ref="UMAA::MO::GlobalWaypointControl::GlobalWaypointCommandAckReportType"/>
+            <topic
+                name="UMAA::MO::GlobalWaypointControl::GlobalWaypointCommandAckReportType"
+                register_type_ref="GlobalWaypointCommandAckReportType"/>
+
+            <register_type
+                name="GlobalWaypointCommandStatusType"
+                type_ref="UMAA::MO::GlobalWaypointControl::GlobalWaypointCommandStatusType"/>
+            <topic
+                name="UMAA::MO::GlobalWaypointControl::GlobalWaypointCommandStatusType"
+                register_type_ref="GlobalWaypointCommandStatusType"/>
+
+            <register_type
+                name="GlobalWaypointCommandType"
+                type_ref="UMAA::MO::GlobalWaypointControl::GlobalWaypointCommandType"/>
+            <topic
+                name="UMAA::MO::GlobalWaypointControl::GlobalWaypointCommandType"
+                register_type_ref="GlobalWaypointCommandType"/>
+
+            <register_type
+                name="GlobalWaypointCommandTypeWaypointsListElement"
+                type_ref="UMAA::MO::GlobalWaypointControl::GlobalWaypointCommandTypeWaypointsListElement"/>
+            <topic
+                name="UMAA::MO::GlobalWaypointControl::GlobalWaypointCommandTypeWaypointsListElement"
+                register_type_ref="GlobalWaypointCommandTypeWaypointsListElement"/>
+
+            <register_type
+                name="GlobalWaypointExecutionStatusReportType"
+                type_ref="UMAA::MO::GlobalWaypointControl::GlobalWaypointExecutionStatusReportType"/>
+            <topic
+                name="UMAA::MO::GlobalWaypointControl::GlobalWaypointExecutionStatusReportType"
+                register_type_ref="GlobalWaypointExecutionStatusReportType"/>
+
+            <register_type
+                name="GPSReportType"
+                type_ref="UMAA::SEM::GPSStatus::GPSReportType"/>
+            <topic
+                name="UMAA::SEM::GPSStatus::GPSReportType"
+                register_type_ref="GPSReportType"/>
+
+            <register_type
+                name="HazardAvoidanceConfigReportType"
+                type_ref="UMAA::MO::HazardAvoidanceConfig::HazardAvoidanceConfigReportType"/>
+            <topic
+                name="UMAA::MO::HazardAvoidanceConfig::HazardAvoidanceConfigReportType"
+                register_type_ref="HazardAvoidanceConfigReportType"/>
+
+            <register_type
+                name="HeadingSectorConditionalType"
+                type_ref="UMAA::MM::Conditional::HeadingSectorConditionalType"/>
+            <topic
+                name="UMAA::MM::Conditional::HeadingSectorConditionalType"
+                register_type_ref="HeadingSectorConditionalType"/>
+
+            <register_type
+                name="HealthReportType"
+                type_ref="UMAA::SO::HealthReport::HealthReportType"/>
+            <topic
+                name="UMAA::SO::HealthReport::HealthReportType"
+                register_type_ref="HealthReportType"/>
+
+            <register_type
+                name="HeartbeatPulseReportType"
+                type_ref="UMAA::SO::HeartbeatPulseStatus::HeartbeatPulseReportType"/>
+            <topic
+                name="UMAA::SO::HeartbeatPulseStatus::HeartbeatPulseReportType"
+                register_type_ref="HeartbeatPulseReportType"/>
+
+            <register_type
+                name="HoverObjectiveDetailedStatusType"
+                type_ref="UMAA::MM::BaseType::HoverObjectiveDetailedStatusType"/>
+            <topic
+                name="UMAA::MM::BaseType::HoverObjectiveDetailedStatusType"
+                register_type_ref="HoverObjectiveDetailedStatusType"/>
+
+            <register_type
+                name="HoverObjectiveType"
+                type_ref="UMAA::MM::BaseType::HoverObjectiveType"/>
+            <topic
+                name="UMAA::MM::BaseType::HoverObjectiveType"
+                register_type_ref="HoverObjectiveType"/>
+
+            <register_type
+                name="IlluminatorCommandAckReportType"
+                type_ref="UMAA::SEM::IlluminatorControl::IlluminatorCommandAckReportType"/>
+            <topic
+                name="UMAA::SEM::IlluminatorControl::IlluminatorCommandAckReportType"
+                register_type_ref="IlluminatorCommandAckReportType"/>
+
+            <register_type
+                name="IlluminatorCommandStatusType"
+                type_ref="UMAA::SEM::IlluminatorControl::IlluminatorCommandStatusType"/>
+            <topic
+                name="UMAA::SEM::IlluminatorControl::IlluminatorCommandStatusType"
+                register_type_ref="IlluminatorCommandStatusType"/>
+
+            <register_type
+                name="IlluminatorCommandType"
+                type_ref="UMAA::SEM::IlluminatorControl::IlluminatorCommandType"/>
+            <topic
+                name="UMAA::SEM::IlluminatorControl::IlluminatorCommandType"
+                register_type_ref="IlluminatorCommandType"/>
+
+            <register_type
+                name="IlluminatorReportType"
+                type_ref="UMAA::SEM::IlluminatorStatus::IlluminatorReportType"/>
+            <topic
+                name="UMAA::SEM::IlluminatorStatus::IlluminatorReportType"
+                register_type_ref="IlluminatorReportType"/>
+
+            <register_type
+                name="IlluminatorSpecsReportType"
+                type_ref="UMAA::SEM::IlluminatorSpecs::IlluminatorSpecsReportType"/>
+            <topic
+                name="UMAA::SEM::IlluminatorSpecs::IlluminatorSpecsReportType"
+                register_type_ref="IlluminatorSpecsReportType"/>
+
+            <register_type
+                name="InertialSensorCommandAckReportType"
+                type_ref="UMAA::SEM::InertialSensorControl::InertialSensorCommandAckReportType"/>
+            <topic
+                name="UMAA::SEM::InertialSensorControl::InertialSensorCommandAckReportType"
+                register_type_ref="InertialSensorCommandAckReportType"/>
+
+            <register_type
+                name="InertialSensorCommandStatusType"
+                type_ref="UMAA::SEM::InertialSensorControl::InertialSensorCommandStatusType"/>
+            <topic
+                name="UMAA::SEM::InertialSensorControl::InertialSensorCommandStatusType"
+                register_type_ref="InertialSensorCommandStatusType"/>
+
+            <register_type
+                name="InertialSensorCommandType"
+                type_ref="UMAA::SEM::InertialSensorControl::InertialSensorCommandType"/>
+            <topic
+                name="UMAA::SEM::InertialSensorControl::InertialSensorCommandType"
+                register_type_ref="InertialSensorCommandType"/>
+
+            <register_type
+                name="InertialSensorReportType"
+                type_ref="UMAA::SEM::InertialSensorStatus::InertialSensorReportType"/>
+            <topic
+                name="UMAA::SEM::InertialSensorStatus::InertialSensorReportType"
+                register_type_ref="InertialSensorReportType"/>
+
+            <register_type
+                name="LandmarkReportType"
+                type_ref="UMAA::SA::LandmarkReport::LandmarkReportType"/>
+            <topic
+                name="UMAA::SA::LandmarkReport::LandmarkReportType"
+                register_type_ref="LandmarkReportType"/>
+
+            <register_type
+                name="LogicalANDConditionalType"
+                type_ref="UMAA::MM::Conditional::LogicalANDConditionalType"/>
+            <topic
+                name="UMAA::MM::Conditional::LogicalANDConditionalType"
+                register_type_ref="LogicalANDConditionalType"/>
+
+            <register_type
+                name="LogicalNOTConditionalType"
+                type_ref="UMAA::MM::Conditional::LogicalNOTConditionalType"/>
+            <topic
+                name="UMAA::MM::Conditional::LogicalNOTConditionalType"
+                register_type_ref="LogicalNOTConditionalType"/>
+
+            <register_type
+                name="LogicalORConditionalType"
+                type_ref="UMAA::MM::Conditional::LogicalORConditionalType"/>
+            <topic
+                name="UMAA::MM::Conditional::LogicalORConditionalType"
+                register_type_ref="LogicalORConditionalType"/>
+
+            <register_type
+                name="LogReportType"
+                type_ref="UMAA::SO::LogReport::LogReportType"/>
+            <topic
+                name="UMAA::SO::LogReport::LogReportType"
+                register_type_ref="LogReportType"/>
+
+            <register_type
+                name="MagneticVariationReportType"
+                type_ref="UMAA::SA::MagneticVariationStatus::MagneticVariationReportType"/>
+            <topic
+                name="UMAA::SA::MagneticVariationStatus::MagneticVariationReportType"
+                register_type_ref="MagneticVariationReportType"/>
+
+            <register_type
+                name="MagneticVariationSpecsReportType"
+                type_ref="UMAA::SA::MagneticVariationSpecs::MagneticVariationSpecsReportType"/>
+            <topic
+                name="UMAA::SA::MagneticVariationSpecs::MagneticVariationSpecsReportType"
+                register_type_ref="MagneticVariationSpecsReportType"/>
+
+            <register_type
+                name="MapSegmentCommandAckReportType"
+                type_ref="UMAA::SEM::MapSegmentControl::MapSegmentCommandAckReportType"/>
+            <topic
+                name="UMAA::SEM::MapSegmentControl::MapSegmentCommandAckReportType"
+                register_type_ref="MapSegmentCommandAckReportType"/>
+
+            <register_type
+                name="MapSegmentCommandStatusType"
+                type_ref="UMAA::SEM::MapSegmentControl::MapSegmentCommandStatusType"/>
+            <topic
+                name="UMAA::SEM::MapSegmentControl::MapSegmentCommandStatusType"
+                register_type_ref="MapSegmentCommandStatusType"/>
+
+            <register_type
+                name="MapSegmentCommandType"
+                type_ref="UMAA::SEM::MapSegmentControl::MapSegmentCommandType"/>
+            <topic
+                name="UMAA::SEM::MapSegmentControl::MapSegmentCommandType"
+                register_type_ref="MapSegmentCommandType"/>
+
+            <register_type
+                name="MastCommandAckReportType"
+                type_ref="UMAA::EO::MastControl::MastCommandAckReportType"/>
+            <topic
+                name="UMAA::EO::MastControl::MastCommandAckReportType"
+                register_type_ref="MastCommandAckReportType"/>
+
+            <register_type
+                name="MastCommandStatusType"
+                type_ref="UMAA::EO::MastControl::MastCommandStatusType"/>
+            <topic
+                name="UMAA::EO::MastControl::MastCommandStatusType"
+                register_type_ref="MastCommandStatusType"/>
+
+            <register_type
+                name="MastCommandType"
+                type_ref="UMAA::EO::MastControl::MastCommandType"/>
+            <topic
+                name="UMAA::EO::MastControl::MastCommandType"
+                register_type_ref="MastCommandType"/>
+
+            <register_type
+                name="MastReportType"
+                type_ref="UMAA::EO::MastStatus::MastReportType"/>
+            <topic
+                name="UMAA::EO::MastStatus::MastReportType"
+                register_type_ref="MastReportType"/>
+
+            <register_type
+                name="MemoryReportType"
+                type_ref="UMAA::SO::MemoryStatus::MemoryReportType"/>
+            <topic
+                name="UMAA::SO::MemoryStatus::MemoryReportType"
+                register_type_ref="MemoryReportType"/>
+
+            <register_type
+                name="MessageFilterCancelConfigCommandStatusType"
+                type_ref="UMAA::CO::MessageFilterConfig::MessageFilterCancelConfigCommandStatusType"/>
+            <topic
+                name="UMAA::CO::MessageFilterConfig::MessageFilterCancelConfigCommandStatusType"
+                register_type_ref="MessageFilterCancelConfigCommandStatusType"/>
+
+            <register_type
+                name="MessageFilterCancelConfigType"
+                type_ref="UMAA::CO::MessageFilterConfig::MessageFilterCancelConfigType"/>
+            <topic
+                name="UMAA::CO::MessageFilterConfig::MessageFilterCancelConfigType"
+                register_type_ref="MessageFilterCancelConfigType"/>
+
+            <register_type
+                name="MessageFilterConfigAckReportType"
+                type_ref="UMAA::CO::MessageFilterConfig::MessageFilterConfigAckReportType"/>
+            <topic
+                name="UMAA::CO::MessageFilterConfig::MessageFilterConfigAckReportType"
+                register_type_ref="MessageFilterConfigAckReportType"/>
+
+            <register_type
+                name="MessageFilterConfigCommandStatusType"
+                type_ref="UMAA::CO::MessageFilterConfig::MessageFilterConfigCommandStatusType"/>
+            <topic
+                name="UMAA::CO::MessageFilterConfig::MessageFilterConfigCommandStatusType"
+                register_type_ref="MessageFilterConfigCommandStatusType"/>
+
+            <register_type
+                name="MessageFilterConfigCommandType"
+                type_ref="UMAA::CO::MessageFilterConfig::MessageFilterConfigCommandType"/>
+            <topic
+                name="UMAA::CO::MessageFilterConfig::MessageFilterConfigCommandType"
+                register_type_ref="MessageFilterConfigCommandType"/>
+
+            <register_type
+                name="MissionPlanAssignmentCommandAckReportType"
+                type_ref="UMAA::MM::MissionPlanAssignmentControl::MissionPlanAssignmentCommandAckReportType"/>
+            <topic
+                name="UMAA::MM::MissionPlanAssignmentControl::MissionPlanAssignmentCommandAckReportType"
+                register_type_ref="MissionPlanAssignmentCommandAckReportType"/>
+
+            <register_type
+                name="MissionPlanAssignmentCommandStatusType"
+                type_ref="UMAA::MM::MissionPlanAssignmentControl::MissionPlanAssignmentCommandStatusType"/>
+            <topic
+                name="UMAA::MM::MissionPlanAssignmentControl::MissionPlanAssignmentCommandStatusType"
+                register_type_ref="MissionPlanAssignmentCommandStatusType"/>
+
+            <register_type
+                name="MissionPlanAssignmentCommandType"
+                type_ref="UMAA::MM::MissionPlanAssignmentControl::MissionPlanAssignmentCommandType"/>
+            <topic
+                name="UMAA::MM::MissionPlanAssignmentControl::MissionPlanAssignmentCommandType"
+                register_type_ref="MissionPlanAssignmentCommandType"/>
+
+            <register_type
+                name="MissionPlanAssignmentReportType"
+                type_ref="UMAA::MM::MissionPlanAssignmentReport::MissionPlanAssignmentReportType"/>
+            <topic
+                name="UMAA::MM::MissionPlanAssignmentReport::MissionPlanAssignmentReportType"
+                register_type_ref="MissionPlanAssignmentReportType"/>
+
+            <register_type
+                name="MissionPlanConstraintAddCommandAckReportType"
+                type_ref="UMAA::MM::MissionPlanConstraintControl::MissionPlanConstraintAddCommandAckReportType"/>
+            <topic
+                name="UMAA::MM::MissionPlanConstraintControl::MissionPlanConstraintAddCommandAckReportType"
+                register_type_ref="MissionPlanConstraintAddCommandAckReportType"/>
+
+            <register_type
+                name="MissionPlanConstraintAddCommandStatusType"
+                type_ref="UMAA::MM::MissionPlanConstraintControl::MissionPlanConstraintAddCommandStatusType"/>
+            <topic
+                name="UMAA::MM::MissionPlanConstraintControl::MissionPlanConstraintAddCommandStatusType"
+                register_type_ref="MissionPlanConstraintAddCommandStatusType"/>
+
+            <register_type
+                name="MissionPlanConstraintAddCommandType"
+                type_ref="UMAA::MM::MissionPlanConstraintControl::MissionPlanConstraintAddCommandType"/>
+            <topic
+                name="UMAA::MM::MissionPlanConstraintControl::MissionPlanConstraintAddCommandType"
+                register_type_ref="MissionPlanConstraintAddCommandType"/>
+
+            <register_type
+                name="MissionPlanConstraintDeleteCommandAckReportType"
+                type_ref="UMAA::MM::MissionPlanConstraintControl::MissionPlanConstraintDeleteCommandAckReportType"/>
+            <topic
+                name="UMAA::MM::MissionPlanConstraintControl::MissionPlanConstraintDeleteCommandAckReportType"
+                register_type_ref="MissionPlanConstraintDeleteCommandAckReportType"/>
+
+            <register_type
+                name="MissionPlanConstraintDeleteCommandStatusType"
+                type_ref="UMAA::MM::MissionPlanConstraintControl::MissionPlanConstraintDeleteCommandStatusType"/>
+            <topic
+                name="UMAA::MM::MissionPlanConstraintControl::MissionPlanConstraintDeleteCommandStatusType"
+                register_type_ref="MissionPlanConstraintDeleteCommandStatusType"/>
+
+            <register_type
+                name="MissionPlanConstraintDeleteCommandType"
+                type_ref="UMAA::MM::MissionPlanConstraintControl::MissionPlanConstraintDeleteCommandType"/>
+            <topic
+                name="UMAA::MM::MissionPlanConstraintControl::MissionPlanConstraintDeleteCommandType"
+                register_type_ref="MissionPlanConstraintDeleteCommandType"/>
+
+            <register_type
+                name="MissionPlanExecutionCommandAckReportType"
+                type_ref="UMAA::MM::MissionPlanExecutionControl::MissionPlanExecutionCommandAckReportType"/>
+            <topic
+                name="UMAA::MM::MissionPlanExecutionControl::MissionPlanExecutionCommandAckReportType"
+                register_type_ref="MissionPlanExecutionCommandAckReportType"/>
+
+            <register_type
+                name="MissionPlanExecutionCommandStatusType"
+                type_ref="UMAA::MM::MissionPlanExecutionControl::MissionPlanExecutionCommandStatusType"/>
+            <topic
+                name="UMAA::MM::MissionPlanExecutionControl::MissionPlanExecutionCommandStatusType"
+                register_type_ref="MissionPlanExecutionCommandStatusType"/>
+
+            <register_type
+                name="MissionPlanExecutionCommandType"
+                type_ref="UMAA::MM::MissionPlanExecutionControl::MissionPlanExecutionCommandType"/>
+            <topic
+                name="UMAA::MM::MissionPlanExecutionControl::MissionPlanExecutionCommandType"
+                register_type_ref="MissionPlanExecutionCommandType"/>
+
+            <register_type
+                name="MissionPlanExecutionReportType"
+                type_ref="UMAA::MM::MissionPlanExecutionStatus::MissionPlanExecutionReportType"/>
+            <topic
+                name="UMAA::MM::MissionPlanExecutionStatus::MissionPlanExecutionReportType"
+                register_type_ref="MissionPlanExecutionReportType"/>
+
+            <register_type
+                name="MissionPlanMissionAddCommandAckReportType"
+                type_ref="UMAA::MM::MissionPlanMissionControl::MissionPlanMissionAddCommandAckReportType"/>
+            <topic
+                name="UMAA::MM::MissionPlanMissionControl::MissionPlanMissionAddCommandAckReportType"
+                register_type_ref="MissionPlanMissionAddCommandAckReportType"/>
+
+            <register_type
+                name="MissionPlanMissionAddCommandStatusType"
+                type_ref="UMAA::MM::MissionPlanMissionControl::MissionPlanMissionAddCommandStatusType"/>
+            <topic
+                name="UMAA::MM::MissionPlanMissionControl::MissionPlanMissionAddCommandStatusType"
+                register_type_ref="MissionPlanMissionAddCommandStatusType"/>
+
+            <register_type
+                name="MissionPlanMissionAddCommandType"
+                type_ref="UMAA::MM::MissionPlanMissionControl::MissionPlanMissionAddCommandType"/>
+            <topic
+                name="UMAA::MM::MissionPlanMissionControl::MissionPlanMissionAddCommandType"
+                register_type_ref="MissionPlanMissionAddCommandType"/>
+
+            <register_type
+                name="MissionPlanMissionClearCommandAckReportType"
+                type_ref="UMAA::MM::MissionPlanMissionControl::MissionPlanMissionClearCommandAckReportType"/>
+            <topic
+                name="UMAA::MM::MissionPlanMissionControl::MissionPlanMissionClearCommandAckReportType"
+                register_type_ref="MissionPlanMissionClearCommandAckReportType"/>
+
+            <register_type
+                name="MissionPlanMissionClearCommandStatusType"
+                type_ref="UMAA::MM::MissionPlanMissionControl::MissionPlanMissionClearCommandStatusType"/>
+            <topic
+                name="UMAA::MM::MissionPlanMissionControl::MissionPlanMissionClearCommandStatusType"
+                register_type_ref="MissionPlanMissionClearCommandStatusType"/>
+
+            <register_type
+                name="MissionPlanMissionClearCommandType"
+                type_ref="UMAA::MM::MissionPlanMissionControl::MissionPlanMissionClearCommandType"/>
+            <topic
+                name="UMAA::MM::MissionPlanMissionControl::MissionPlanMissionClearCommandType"
+                register_type_ref="MissionPlanMissionClearCommandType"/>
+
+            <register_type
+                name="MissionPlanMissionDeleteCommandAckReportType"
+                type_ref="UMAA::MM::MissionPlanMissionControl::MissionPlanMissionDeleteCommandAckReportType"/>
+            <topic
+                name="UMAA::MM::MissionPlanMissionControl::MissionPlanMissionDeleteCommandAckReportType"
+                register_type_ref="MissionPlanMissionDeleteCommandAckReportType"/>
+
+            <register_type
+                name="MissionPlanMissionDeleteCommandStatusType"
+                type_ref="UMAA::MM::MissionPlanMissionControl::MissionPlanMissionDeleteCommandStatusType"/>
+            <topic
+                name="UMAA::MM::MissionPlanMissionControl::MissionPlanMissionDeleteCommandStatusType"
+                register_type_ref="MissionPlanMissionDeleteCommandStatusType"/>
+
+            <register_type
+                name="MissionPlanMissionDeleteCommandType"
+                type_ref="UMAA::MM::MissionPlanMissionControl::MissionPlanMissionDeleteCommandType"/>
+            <topic
+                name="UMAA::MM::MissionPlanMissionControl::MissionPlanMissionDeleteCommandType"
+                register_type_ref="MissionPlanMissionDeleteCommandType"/>
+
+            <register_type
+                name="MissionPlanObjectiveAddCommandAckReportType"
+                type_ref="UMAA::MM::MissionPlanObjectiveControl::MissionPlanObjectiveAddCommandAckReportType"/>
+            <topic
+                name="UMAA::MM::MissionPlanObjectiveControl::MissionPlanObjectiveAddCommandAckReportType"
+                register_type_ref="MissionPlanObjectiveAddCommandAckReportType"/>
+
+            <register_type
+                name="MissionPlanObjectiveAddCommandStatusType"
+                type_ref="UMAA::MM::MissionPlanObjectiveControl::MissionPlanObjectiveAddCommandStatusType"/>
+            <topic
+                name="UMAA::MM::MissionPlanObjectiveControl::MissionPlanObjectiveAddCommandStatusType"
+                register_type_ref="MissionPlanObjectiveAddCommandStatusType"/>
+
+            <register_type
+                name="MissionPlanObjectiveAddCommandType"
+                type_ref="UMAA::MM::MissionPlanObjectiveControl::MissionPlanObjectiveAddCommandType"/>
+            <topic
+                name="UMAA::MM::MissionPlanObjectiveControl::MissionPlanObjectiveAddCommandType"
+                register_type_ref="MissionPlanObjectiveAddCommandType"/>
+
+            <register_type
+                name="MissionPlanObjectiveDeleteCommandAckReportType"
+                type_ref="UMAA::MM::MissionPlanObjectiveControl::MissionPlanObjectiveDeleteCommandAckReportType"/>
+            <topic
+                name="UMAA::MM::MissionPlanObjectiveControl::MissionPlanObjectiveDeleteCommandAckReportType"
+                register_type_ref="MissionPlanObjectiveDeleteCommandAckReportType"/>
+
+            <register_type
+                name="MissionPlanObjectiveDeleteCommandStatusType"
+                type_ref="UMAA::MM::MissionPlanObjectiveControl::MissionPlanObjectiveDeleteCommandStatusType"/>
+            <topic
+                name="UMAA::MM::MissionPlanObjectiveControl::MissionPlanObjectiveDeleteCommandStatusType"
+                register_type_ref="MissionPlanObjectiveDeleteCommandStatusType"/>
+
+            <register_type
+                name="MissionPlanObjectiveDeleteCommandType"
+                type_ref="UMAA::MM::MissionPlanObjectiveControl::MissionPlanObjectiveDeleteCommandType"/>
+            <topic
+                name="UMAA::MM::MissionPlanObjectiveControl::MissionPlanObjectiveDeleteCommandType"
+                register_type_ref="MissionPlanObjectiveDeleteCommandType"/>
+
+            <register_type
+                name="MissionPlanReportType"
+                type_ref="UMAA::MM::MissionPlanReport::MissionPlanReportType"/>
+            <topic
+                name="UMAA::MM::MissionPlanReport::MissionPlanReportType"
+                register_type_ref="MissionPlanReportType"/>
+
+            <register_type
+                name="MissionPlanReportTypeConstraintsSetElement"
+                type_ref="UMAA::MM::MissionPlanReport::MissionPlanReportTypeConstraintsSetElement"/>
+            <topic
+                name="UMAA::MM::MissionPlanReport::MissionPlanReportTypeConstraintsSetElement"
+                register_type_ref="MissionPlanReportTypeConstraintsSetElement"/>
+
+            <register_type
+                name="MissionPlanReportTypeMissionPlanSetElement"
+                type_ref="UMAA::MM::MissionPlanReport::MissionPlanReportTypeMissionPlanSetElement"/>
+            <topic
+                name="UMAA::MM::MissionPlanReport::MissionPlanReportTypeMissionPlanSetElement"
+                register_type_ref="MissionPlanReportTypeMissionPlanSetElement"/>
+
+            <register_type
+                name="MissionPlanTaskAddCommandAckReportType"
+                type_ref="UMAA::MM::MissionPlanTaskControl::MissionPlanTaskAddCommandAckReportType"/>
+            <topic
+                name="UMAA::MM::MissionPlanTaskControl::MissionPlanTaskAddCommandAckReportType"
+                register_type_ref="MissionPlanTaskAddCommandAckReportType"/>
+
+            <register_type
+                name="MissionPlanTaskAddCommandStatusType"
+                type_ref="UMAA::MM::MissionPlanTaskControl::MissionPlanTaskAddCommandStatusType"/>
+            <topic
+                name="UMAA::MM::MissionPlanTaskControl::MissionPlanTaskAddCommandStatusType"
+                register_type_ref="MissionPlanTaskAddCommandStatusType"/>
+
+            <register_type
+                name="MissionPlanTaskAddCommandType"
+                type_ref="UMAA::MM::MissionPlanTaskControl::MissionPlanTaskAddCommandType"/>
+            <topic
+                name="UMAA::MM::MissionPlanTaskControl::MissionPlanTaskAddCommandType"
+                register_type_ref="MissionPlanTaskAddCommandType"/>
+
+            <register_type
+                name="MissionPlanTaskDeleteCommandAckReportType"
+                type_ref="UMAA::MM::MissionPlanTaskControl::MissionPlanTaskDeleteCommandAckReportType"/>
+            <topic
+                name="UMAA::MM::MissionPlanTaskControl::MissionPlanTaskDeleteCommandAckReportType"
+                register_type_ref="MissionPlanTaskDeleteCommandAckReportType"/>
+
+            <register_type
+                name="MissionPlanTaskDeleteCommandStatusType"
+                type_ref="UMAA::MM::MissionPlanTaskControl::MissionPlanTaskDeleteCommandStatusType"/>
+            <topic
+                name="UMAA::MM::MissionPlanTaskControl::MissionPlanTaskDeleteCommandStatusType"
+                register_type_ref="MissionPlanTaskDeleteCommandStatusType"/>
+
+            <register_type
+                name="MissionPlanTaskDeleteCommandType"
+                type_ref="UMAA::MM::MissionPlanTaskControl::MissionPlanTaskDeleteCommandType"/>
+            <topic
+                name="UMAA::MM::MissionPlanTaskControl::MissionPlanTaskDeleteCommandType"
+                register_type_ref="MissionPlanTaskDeleteCommandType"/>
+
+            <register_type
+                name="MissionPlanTypeTaskPlansSetElement"
+                type_ref="UMAA::MM::BaseType::MissionPlanTypeTaskPlansSetElement"/>
+            <topic
+                name="UMAA::MM::BaseType::MissionPlanTypeTaskPlansSetElement"
+                register_type_ref="MissionPlanTypeTaskPlansSetElement"/>
+
+            <register_type
+                name="MissionStateConditionalType"
+                type_ref="UMAA::MM::Conditional::MissionStateConditionalType"/>
+            <topic
+                name="UMAA::MM::Conditional::MissionStateConditionalType"
+                register_type_ref="MissionStateConditionalType"/>
+
+            <register_type
+                name="ObjectiveAssignmentCommandAckReportType"
+                type_ref="UMAA::MM::ObjectiveAssignmentControl::ObjectiveAssignmentCommandAckReportType"/>
+            <topic
+                name="UMAA::MM::ObjectiveAssignmentControl::ObjectiveAssignmentCommandAckReportType"
+                register_type_ref="ObjectiveAssignmentCommandAckReportType"/>
+
+            <register_type
+                name="ObjectiveAssignmentCommandStatusType"
+                type_ref="UMAA::MM::ObjectiveAssignmentControl::ObjectiveAssignmentCommandStatusType"/>
+            <topic
+                name="UMAA::MM::ObjectiveAssignmentControl::ObjectiveAssignmentCommandStatusType"
+                register_type_ref="ObjectiveAssignmentCommandStatusType"/>
+
+            <register_type
+                name="ObjectiveAssignmentCommandType"
+                type_ref="UMAA::MM::ObjectiveAssignmentControl::ObjectiveAssignmentCommandType"/>
+            <topic
+                name="UMAA::MM::ObjectiveAssignmentControl::ObjectiveAssignmentCommandType"
+                register_type_ref="ObjectiveAssignmentCommandType"/>
+
+            <register_type
+                name="ObjectiveAssignmentReportType"
+                type_ref="UMAA::MM::ObjectiveAssignmentReport::ObjectiveAssignmentReportType"/>
+            <topic
+                name="UMAA::MM::ObjectiveAssignmentReport::ObjectiveAssignmentReportType"
+                register_type_ref="ObjectiveAssignmentReportType"/>
+
+            <register_type
+                name="ObjectiveExecutionCommandAckReportType"
+                type_ref="UMAA::MM::ObjectiveExecutionControl::ObjectiveExecutionCommandAckReportType"/>
+            <topic
+                name="UMAA::MM::ObjectiveExecutionControl::ObjectiveExecutionCommandAckReportType"
+                register_type_ref="ObjectiveExecutionCommandAckReportType"/>
+
+            <register_type
+                name="ObjectiveExecutionCommandStatusType"
+                type_ref="UMAA::MM::ObjectiveExecutionControl::ObjectiveExecutionCommandStatusType"/>
+            <topic
+                name="UMAA::MM::ObjectiveExecutionControl::ObjectiveExecutionCommandStatusType"
+                register_type_ref="ObjectiveExecutionCommandStatusType"/>
+
+            <register_type
+                name="ObjectiveExecutionCommandType"
+                type_ref="UMAA::MM::ObjectiveExecutionControl::ObjectiveExecutionCommandType"/>
+            <topic
+                name="UMAA::MM::ObjectiveExecutionControl::ObjectiveExecutionCommandType"
+                register_type_ref="ObjectiveExecutionCommandType"/>
+
+            <register_type
+                name="ObjectiveExecutionReportType"
+                type_ref="UMAA::MM::ObjectiveExecutionStatus::ObjectiveExecutionReportType"/>
+            <topic
+                name="UMAA::MM::ObjectiveExecutionStatus::ObjectiveExecutionReportType"
+                register_type_ref="ObjectiveExecutionReportType"/>
+
+            <register_type
+                name="ObjectiveExecutorCommandAckReportType"
+                type_ref="UMAA::MM::ObjectiveExecutorControl::ObjectiveExecutorCommandAckReportType"/>
+            <topic
+                name="UMAA::MM::ObjectiveExecutorControl::ObjectiveExecutorCommandAckReportType"
+                register_type_ref="ObjectiveExecutorCommandAckReportType"/>
+
+            <register_type
+                name="ObjectiveExecutorCommandStatusType"
+                type_ref="UMAA::MM::ObjectiveExecutorControl::ObjectiveExecutorCommandStatusType"/>
+            <topic
+                name="UMAA::MM::ObjectiveExecutorControl::ObjectiveExecutorCommandStatusType"
+                register_type_ref="ObjectiveExecutorCommandStatusType"/>
+
+            <register_type
+                name="ObjectiveExecutorCommandType"
+                type_ref="UMAA::MM::ObjectiveExecutorControl::ObjectiveExecutorCommandType"/>
+            <topic
+                name="UMAA::MM::ObjectiveExecutorControl::ObjectiveExecutorCommandType"
+                register_type_ref="ObjectiveExecutorCommandType"/>
+
+            <register_type
+                name="ObjectiveExecutorExecutionStatusReportType"
+                type_ref="UMAA::MM::ObjectiveExecutorControl::ObjectiveExecutorExecutionStatusReportType"/>
+            <topic
+                name="UMAA::MM::ObjectiveExecutorControl::ObjectiveExecutorExecutionStatusReportType"
+                register_type_ref="ObjectiveExecutorExecutionStatusReportType"/>
+
+            <register_type
+                name="ObjectiveExecutorStateCommandAckReportType"
+                type_ref="UMAA::MM::ObjectiveExecutorControl::ObjectiveExecutorStateCommandAckReportType"/>
+            <topic
+                name="UMAA::MM::ObjectiveExecutorControl::ObjectiveExecutorStateCommandAckReportType"
+                register_type_ref="ObjectiveExecutorStateCommandAckReportType"/>
+
+            <register_type
+                name="ObjectiveExecutorStateCommandStatusType"
+                type_ref="UMAA::MM::ObjectiveExecutorControl::ObjectiveExecutorStateCommandStatusType"/>
+            <topic
+                name="UMAA::MM::ObjectiveExecutorControl::ObjectiveExecutorStateCommandStatusType"
+                register_type_ref="ObjectiveExecutorStateCommandStatusType"/>
+
+            <register_type
+                name="ObjectiveExecutorStateCommandType"
+                type_ref="UMAA::MM::ObjectiveExecutorControl::ObjectiveExecutorStateCommandType"/>
+            <topic
+                name="UMAA::MM::ObjectiveExecutorControl::ObjectiveExecutorStateCommandType"
+                register_type_ref="ObjectiveExecutorStateCommandType"/>
+
+            <register_type
+                name="ObjectiveStateConditionalType"
+                type_ref="UMAA::MM::Conditional::ObjectiveStateConditionalType"/>
+            <topic
+                name="UMAA::MM::Conditional::ObjectiveStateConditionalType"
+                register_type_ref="ObjectiveStateConditionalType"/>
+
+            <register_type
+                name="OperationalModeCommandAckReportType"
+                type_ref="UMAA::MM::OperationalModeControl::OperationalModeCommandAckReportType"/>
+            <topic
+                name="UMAA::MM::OperationalModeControl::OperationalModeCommandAckReportType"
+                register_type_ref="OperationalModeCommandAckReportType"/>
+
+            <register_type
+                name="OperationalModeCommandStatusType"
+                type_ref="UMAA::MM::OperationalModeControl::OperationalModeCommandStatusType"/>
+            <topic
+                name="UMAA::MM::OperationalModeControl::OperationalModeCommandStatusType"
+                register_type_ref="OperationalModeCommandStatusType"/>
+
+            <register_type
+                name="OperationalModeCommandType"
+                type_ref="UMAA::MM::OperationalModeControl::OperationalModeCommandType"/>
+            <topic
+                name="UMAA::MM::OperationalModeControl::OperationalModeCommandType"
+                register_type_ref="OperationalModeCommandType"/>
+
+            <register_type
+                name="OperationalModeReportType"
+                type_ref="UMAA::MM::OperationalModeStatus::OperationalModeReportType"/>
+            <topic
+                name="UMAA::MM::OperationalModeStatus::OperationalModeReportType"
+                register_type_ref="OperationalModeReportType"/>
+
+            <register_type
+                name="OrientationReportType"
+                type_ref="UMAA::SA::OrientationStatus::OrientationReportType"/>
+            <topic
+                name="UMAA::SA::OrientationStatus::OrientationReportType"
+                register_type_ref="OrientationReportType"/>
+
+            <register_type
+                name="PassiveContactReportType"
+                type_ref="UMAA::SA::PassiveContactReport::PassiveContactReportType"/>
+            <topic
+                name="UMAA::SA::PassiveContactReport::PassiveContactReportType"
+                register_type_ref="PassiveContactReportType"/>
+
+            <register_type
+                name="PassiveContactReportTypeContactsSetElement"
+                type_ref="UMAA::SA::PassiveContactReport::PassiveContactReportTypeContactsSetElement"/>
+            <topic
+                name="UMAA::SA::PassiveContactReport::PassiveContactReportTypeContactsSetElement"
+                register_type_ref="PassiveContactReportTypeContactsSetElement"/>
+
+            <register_type
+                name="PathReporterReportType"
+                type_ref="UMAA::SA::PathReporterStatus::PathReporterReportType"/>
+            <topic
+                name="UMAA::SA::PathReporterStatus::PathReporterReportType"
+                register_type_ref="PathReporterReportType"/>
+
+            <register_type
+                name="PathReporterReportTypeHistoricalGlobalPathsListElement"
+                type_ref="UMAA::SA::PathReporterStatus::PathReporterReportTypeHistoricalGlobalPathsListElement"/>
+            <topic
+                name="UMAA::SA::PathReporterStatus::PathReporterReportTypeHistoricalGlobalPathsListElement"
+                register_type_ref="PathReporterReportTypeHistoricalGlobalPathsListElement"/>
+
+            <register_type
+                name="PathReporterReportTypeHistoricalLocalPathsListElement"
+                type_ref="UMAA::SA::PathReporterStatus::PathReporterReportTypeHistoricalLocalPathsListElement"/>
+            <topic
+                name="UMAA::SA::PathReporterStatus::PathReporterReportTypeHistoricalLocalPathsListElement"
+                register_type_ref="PathReporterReportTypeHistoricalLocalPathsListElement"/>
+
+            <register_type
+                name="PathReporterReportTypePlannedGlobalPathsListElement"
+                type_ref="UMAA::SA::PathReporterStatus::PathReporterReportTypePlannedGlobalPathsListElement"/>
+            <topic
+                name="UMAA::SA::PathReporterStatus::PathReporterReportTypePlannedGlobalPathsListElement"
+                register_type_ref="PathReporterReportTypePlannedGlobalPathsListElement"/>
+
+            <register_type
+                name="PathReporterReportTypePlannedLocalPathsListElement"
+                type_ref="UMAA::SA::PathReporterStatus::PathReporterReportTypePlannedLocalPathsListElement"/>
+            <topic
+                name="UMAA::SA::PathReporterStatus::PathReporterReportTypePlannedLocalPathsListElement"
+                register_type_ref="PathReporterReportTypePlannedLocalPathsListElement"/>
+
+            <register_type
+                name="PathReporterSpecsReportType"
+                type_ref="UMAA::SA::PathReporterSpecs::PathReporterSpecsReportType"/>
+            <topic
+                name="UMAA::SA::PathReporterSpecs::PathReporterSpecsReportType"
+                register_type_ref="PathReporterSpecsReportType"/>
+
+            <register_type
+                name="PitchRateConditionalType"
+                type_ref="UMAA::MM::Conditional::PitchRateConditionalType"/>
+            <topic
+                name="UMAA::MM::Conditional::PitchRateConditionalType"
+                register_type_ref="PitchRateConditionalType"/>
+
+            <register_type
+                name="PowerCommandAckReportType"
+                type_ref="UMAA::EO::PowerControl::PowerCommandAckReportType"/>
+            <topic
+                name="UMAA::EO::PowerControl::PowerCommandAckReportType"
+                register_type_ref="PowerCommandAckReportType"/>
+
+            <register_type
+                name="PowerCommandStatusType"
+                type_ref="UMAA::EO::PowerControl::PowerCommandStatusType"/>
+            <topic
+                name="UMAA::EO::PowerControl::PowerCommandStatusType"
+                register_type_ref="PowerCommandStatusType"/>
+
+            <register_type
+                name="PowerCommandType"
+                type_ref="UMAA::EO::PowerControl::PowerCommandType"/>
+            <topic
+                name="UMAA::EO::PowerControl::PowerCommandType"
+                register_type_ref="PowerCommandType"/>
+
+            <register_type
+                name="PowerReportType"
+                type_ref="UMAA::EO::PowerStatus::PowerReportType"/>
+            <topic
+                name="UMAA::EO::PowerStatus::PowerReportType"
+                register_type_ref="PowerReportType"/>
+
+            <register_type
+                name="PrimitiveDriverCommandAckReportType"
+                type_ref="UMAA::MO::PrimitiveDriverControl::PrimitiveDriverCommandAckReportType"/>
+            <topic
+                name="UMAA::MO::PrimitiveDriverControl::PrimitiveDriverCommandAckReportType"
+                register_type_ref="PrimitiveDriverCommandAckReportType"/>
+
+            <register_type
+                name="PrimitiveDriverCommandStatusType"
+                type_ref="UMAA::MO::PrimitiveDriverControl::PrimitiveDriverCommandStatusType"/>
+            <topic
+                name="UMAA::MO::PrimitiveDriverControl::PrimitiveDriverCommandStatusType"
+                register_type_ref="PrimitiveDriverCommandStatusType"/>
+
+            <register_type
+                name="PrimitiveDriverCommandType"
+                type_ref="UMAA::MO::PrimitiveDriverControl::PrimitiveDriverCommandType"/>
+            <topic
+                name="UMAA::MO::PrimitiveDriverControl::PrimitiveDriverCommandType"
+                register_type_ref="PrimitiveDriverCommandType"/>
+
+            <register_type
+                name="PrimitiveDriverExecutionStatusReportType"
+                type_ref="UMAA::MO::PrimitiveDriverControl::PrimitiveDriverExecutionStatusReportType"/>
+            <topic
+                name="UMAA::MO::PrimitiveDriverControl::PrimitiveDriverExecutionStatusReportType"
+                register_type_ref="PrimitiveDriverExecutionStatusReportType"/>
+
+            <register_type
+                name="ProcessingUnitReportType"
+                type_ref="UMAA::SO::ProcessingUnitStatus::ProcessingUnitReportType"/>
+            <topic
+                name="UMAA::SO::ProcessingUnitStatus::ProcessingUnitReportType"
+                register_type_ref="ProcessingUnitReportType"/>
+
+            <register_type
+                name="PropulsorCommandType"
+                type_ref="UMAA::EO::PropulsorsControl::PropulsorCommandType"/>
+            <topic
+                name="UMAA::EO::PropulsorsControl::PropulsorCommandType"
+                register_type_ref="PropulsorCommandType"/>
+
+            <register_type
+                name="PropulsorsCommandAckReportType"
+                type_ref="UMAA::EO::PropulsorsControl::PropulsorsCommandAckReportType"/>
+            <topic
+                name="UMAA::EO::PropulsorsControl::PropulsorsCommandAckReportType"
+                register_type_ref="PropulsorsCommandAckReportType"/>
+
+            <register_type
+                name="PropulsorsCommandStatusType"
+                type_ref="UMAA::EO::PropulsorsControl::PropulsorsCommandStatusType"/>
+            <topic
+                name="UMAA::EO::PropulsorsControl::PropulsorsCommandStatusType"
+                register_type_ref="PropulsorsCommandStatusType"/>
+
+            <register_type
+                name="PropulsorsCommandType"
+                type_ref="UMAA::EO::PropulsorsControl::PropulsorsCommandType"/>
+            <topic
+                name="UMAA::EO::PropulsorsControl::PropulsorsCommandType"
+                register_type_ref="PropulsorsCommandType"/>
+
+            <register_type
+                name="PropulsorsSpecsReportType"
+                type_ref="UMAA::EO::PropulsorsSpecs::PropulsorsSpecsReportType"/>
+            <topic
+                name="UMAA::EO::PropulsorsSpecs::PropulsorsSpecsReportType"
+                register_type_ref="PropulsorsSpecsReportType"/>
+
+            <register_type
+                name="RacetrackObjectiveDetailedStatusType"
+                type_ref="UMAA::MM::BaseType::RacetrackObjectiveDetailedStatusType"/>
+            <topic
+                name="UMAA::MM::BaseType::RacetrackObjectiveDetailedStatusType"
+                register_type_ref="RacetrackObjectiveDetailedStatusType"/>
+
+            <register_type
+                name="RacetrackObjectiveType"
+                type_ref="UMAA::MM::BaseType::RacetrackObjectiveType"/>
+            <topic
+                name="UMAA::MM::BaseType::RacetrackObjectiveType"
+                register_type_ref="RacetrackObjectiveType"/>
+
+            <register_type
+                name="RecordingSpecsReportType"
+                type_ref="UMAA::SO::RecordingSpecs::RecordingSpecsReportType"/>
+            <topic
+                name="UMAA::SO::RecordingSpecs::RecordingSpecsReportType"
+                register_type_ref="RecordingSpecsReportType"/>
+
+            <register_type
+                name="RecordingStatusReportType"
+                type_ref="UMAA::SO::RecordingStatus::RecordingStatusReportType"/>
+            <topic
+                name="UMAA::SO::RecordingStatus::RecordingStatusReportType"
+                register_type_ref="RecordingStatusReportType"/>
+
+            <register_type
+                name="RecoveryObjectiveDetailedStatusType"
+                type_ref="UMAA::MM::BaseType::RecoveryObjectiveDetailedStatusType"/>
+            <topic
+                name="UMAA::MM::BaseType::RecoveryObjectiveDetailedStatusType"
+                register_type_ref="RecoveryObjectiveDetailedStatusType"/>
+
+            <register_type
+                name="RecoveryObjectiveType"
+                type_ref="UMAA::MM::BaseType::RecoveryObjectiveType"/>
+            <topic
+                name="UMAA::MM::BaseType::RecoveryObjectiveType"
+                register_type_ref="RecoveryObjectiveType"/>
+
+            <register_type
+                name="RegularPolygonObjectiveDetailedStatusType"
+                type_ref="UMAA::MM::BaseType::RegularPolygonObjectiveDetailedStatusType"/>
+            <topic
+                name="UMAA::MM::BaseType::RegularPolygonObjectiveDetailedStatusType"
+                register_type_ref="RegularPolygonObjectiveDetailedStatusType"/>
+
+            <register_type
+                name="RegularPolygonObjectiveType"
+                type_ref="UMAA::MM::BaseType::RegularPolygonObjectiveType"/>
+            <topic
+                name="UMAA::MM::BaseType::RegularPolygonObjectiveType"
+                register_type_ref="RegularPolygonObjectiveType"/>
+
+            <register_type
+                name="RelativeContactReportType"
+                type_ref="UMAA::SA::RelativeContactReport::RelativeContactReportType"/>
+            <topic
+                name="UMAA::SA::RelativeContactReport::RelativeContactReportType"
+                register_type_ref="RelativeContactReportType"/>
+
+            <register_type
+                name="RelativeSpeedConditionalType"
+                type_ref="UMAA::MM::Conditional::RelativeSpeedConditionalType"/>
+            <topic
+                name="UMAA::MM::Conditional::RelativeSpeedConditionalType"
+                register_type_ref="RelativeSpeedConditionalType"/>
+
+            <register_type
+                name="ResourceAllocationCommandAckReportType"
+                type_ref="UMAA::SO::ResourceAllocation::ResourceAllocationCommandAckReportType"/>
+            <topic
+                name="UMAA::SO::ResourceAllocation::ResourceAllocationCommandAckReportType"
+                register_type_ref="ResourceAllocationCommandAckReportType"/>
+
+            <register_type
+                name="ResourceAllocationCommandStatusType"
+                type_ref="UMAA::SO::ResourceAllocation::ResourceAllocationCommandStatusType"/>
+            <topic
+                name="UMAA::SO::ResourceAllocation::ResourceAllocationCommandStatusType"
+                register_type_ref="ResourceAllocationCommandStatusType"/>
+
+            <register_type
+                name="ResourceAllocationCommandType"
+                type_ref="UMAA::SO::ResourceAllocation::ResourceAllocationCommandType"/>
+            <topic
+                name="UMAA::SO::ResourceAllocation::ResourceAllocationCommandType"
+                register_type_ref="ResourceAllocationCommandType"/>
+
+            <register_type
+                name="ResourceAllocationConfigReportType"
+                type_ref="UMAA::SO::ResourceAllocation::ResourceAllocationConfigReportType"/>
+            <topic
+                name="UMAA::SO::ResourceAllocation::ResourceAllocationConfigReportType"
+                register_type_ref="ResourceAllocationConfigReportType"/>
+
+            <register_type
+                name="ResourceAllocationConfigReportTypeResourcesSetElement"
+                type_ref="UMAA::SO::ResourceAllocation::ResourceAllocationConfigReportTypeResourcesSetElement"/>
+            <topic
+                name="UMAA::SO::ResourceAllocation::ResourceAllocationConfigReportTypeResourcesSetElement"
+                register_type_ref="ResourceAllocationConfigReportTypeResourcesSetElement"/>
+
+            <register_type
+                name="ResourceAllocationPriorityCommandAckReportType"
+                type_ref="UMAA::SO::ResourceAllocation::ResourceAllocationPriorityCommandAckReportType"/>
+            <topic
+                name="UMAA::SO::ResourceAllocation::ResourceAllocationPriorityCommandAckReportType"
+                register_type_ref="ResourceAllocationPriorityCommandAckReportType"/>
+
+            <register_type
+                name="ResourceAllocationPriorityCommandStatusType"
+                type_ref="UMAA::SO::ResourceAllocation::ResourceAllocationPriorityCommandStatusType"/>
+            <topic
+                name="UMAA::SO::ResourceAllocation::ResourceAllocationPriorityCommandStatusType"
+                register_type_ref="ResourceAllocationPriorityCommandStatusType"/>
+
+            <register_type
+                name="ResourceAllocationPriorityCommandType"
+                type_ref="UMAA::SO::ResourceAllocation::ResourceAllocationPriorityCommandType"/>
+            <topic
+                name="UMAA::SO::ResourceAllocation::ResourceAllocationPriorityCommandType"
+                register_type_ref="ResourceAllocationPriorityCommandType"/>
+
+            <register_type
+                name="ResourceAllocationPriorityReportType"
+                type_ref="UMAA::SO::ResourceAllocation::ResourceAllocationPriorityReportType"/>
+            <topic
+                name="UMAA::SO::ResourceAllocation::ResourceAllocationPriorityReportType"
+                register_type_ref="ResourceAllocationPriorityReportType"/>
+
+            <register_type
+                name="ResourceAllocationReportType"
+                type_ref="UMAA::SO::ResourceAllocation::ResourceAllocationReportType"/>
+            <topic
+                name="UMAA::SO::ResourceAllocation::ResourceAllocationReportType"
+                register_type_ref="ResourceAllocationReportType"/>
+
+            <register_type
+                name="ResourceAuthorizationReportType"
+                type_ref="UMAA::SO::ResourceIdentification::ResourceAuthorizationReportType"/>
+            <topic
+                name="UMAA::SO::ResourceIdentification::ResourceAuthorizationReportType"
+                register_type_ref="ResourceAuthorizationReportType"/>
+
+            <register_type
+                name="RollRateConditionalType"
+                type_ref="UMAA::MM::Conditional::RollRateConditionalType"/>
+            <topic
+                name="UMAA::MM::Conditional::RollRateConditionalType"
+                register_type_ref="RollRateConditionalType"/>
+
+            <register_type
+                name="RouteObjectiveDetailedStatusType"
+                type_ref="UMAA::MM::BaseType::RouteObjectiveDetailedStatusType"/>
+            <topic
+                name="UMAA::MM::BaseType::RouteObjectiveDetailedStatusType"
+                register_type_ref="RouteObjectiveDetailedStatusType"/>
+
+            <register_type
+                name="RouteObjectiveDetailedStatusTypeWaypointDetailedStatusSetElement"
+                type_ref="UMAA::MM::BaseType::RouteObjectiveDetailedStatusTypeWaypointDetailedStatusSetElement"/>
+            <topic
+                name="UMAA::MM::BaseType::RouteObjectiveDetailedStatusTypeWaypointDetailedStatusSetElement"
+                register_type_ref="RouteObjectiveDetailedStatusTypeWaypointDetailedStatusSetElement"/>
+
+            <register_type
+                name="RouteObjectiveType"
+                type_ref="UMAA::MM::BaseType::RouteObjectiveType"/>
+            <topic
+                name="UMAA::MM::BaseType::RouteObjectiveType"
+                register_type_ref="RouteObjectiveType"/>
+
+            <register_type
+                name="RouteObjectiveTypeWaypointsListElement"
+                type_ref="UMAA::MM::BaseType::RouteObjectiveTypeWaypointsListElement"/>
+            <topic
+                name="UMAA::MM::BaseType::RouteObjectiveTypeWaypointsListElement"
+                register_type_ref="RouteObjectiveTypeWaypointsListElement"/>
+
+            <register_type
+                name="SASCancelConfigCommandStatusType"
+                type_ref="UMAA::SEM::SASConfig::SASCancelConfigCommandStatusType"/>
+            <topic
+                name="UMAA::SEM::SASConfig::SASCancelConfigCommandStatusType"
+                register_type_ref="SASCancelConfigCommandStatusType"/>
+
+            <register_type
+                name="SASCancelConfigType"
+                type_ref="UMAA::SEM::SASConfig::SASCancelConfigType"/>
+            <topic
+                name="UMAA::SEM::SASConfig::SASCancelConfigType"
+                register_type_ref="SASCancelConfigType"/>
+
+            <register_type
+                name="SASCommandAckReportType"
+                type_ref="UMAA::SEM::SASControl::SASCommandAckReportType"/>
+            <topic
+                name="UMAA::SEM::SASControl::SASCommandAckReportType"
+                register_type_ref="SASCommandAckReportType"/>
+
+            <register_type
+                name="SASCommandStatusType"
+                type_ref="UMAA::SEM::SASControl::SASCommandStatusType"/>
+            <topic
+                name="UMAA::SEM::SASControl::SASCommandStatusType"
+                register_type_ref="SASCommandStatusType"/>
+
+            <register_type
+                name="SASCommandType"
+                type_ref="UMAA::SEM::SASControl::SASCommandType"/>
+            <topic
+                name="UMAA::SEM::SASControl::SASCommandType"
+                register_type_ref="SASCommandType"/>
+
+            <register_type
+                name="SASConfigAckReportType"
+                type_ref="UMAA::SEM::SASConfig::SASConfigAckReportType"/>
+            <topic
+                name="UMAA::SEM::SASConfig::SASConfigAckReportType"
+                register_type_ref="SASConfigAckReportType"/>
+
+            <register_type
+                name="SASConfigCommandStatusType"
+                type_ref="UMAA::SEM::SASConfig::SASConfigCommandStatusType"/>
+            <topic
+                name="UMAA::SEM::SASConfig::SASConfigCommandStatusType"
+                register_type_ref="SASConfigCommandStatusType"/>
+
+            <register_type
+                name="SASConfigCommandType"
+                type_ref="UMAA::SEM::SASConfig::SASConfigCommandType"/>
+            <topic
+                name="UMAA::SEM::SASConfig::SASConfigCommandType"
+                register_type_ref="SASConfigCommandType"/>
+
+            <register_type
+                name="SASConfigReportType"
+                type_ref="UMAA::SEM::SASConfig::SASConfigReportType"/>
+            <topic
+                name="UMAA::SEM::SASConfig::SASConfigReportType"
+                register_type_ref="SASConfigReportType"/>
+
+            <register_type
+                name="SASStatusReportType"
+                type_ref="UMAA::SEM::SASStatus::SASStatusReportType"/>
+            <topic
+                name="UMAA::SEM::SASStatus::SASStatusReportType"
+                register_type_ref="SASStatusReportType"/>
+
+            <register_type
+                name="ScreenRandomWalkObjectiveDetailedStatusType"
+                type_ref="UMAA::MM::BaseType::ScreenRandomWalkObjectiveDetailedStatusType"/>
+            <topic
+                name="UMAA::MM::BaseType::ScreenRandomWalkObjectiveDetailedStatusType"
+                register_type_ref="ScreenRandomWalkObjectiveDetailedStatusType"/>
+
+            <register_type
+                name="ScreenRandomWalkObjectiveType"
+                type_ref="UMAA::MM::BaseType::ScreenRandomWalkObjectiveType"/>
+            <topic
+                name="UMAA::MM::BaseType::ScreenRandomWalkObjectiveType"
+                register_type_ref="ScreenRandomWalkObjectiveType"/>
+
+            <register_type
+                name="SeaStateReportType"
+                type_ref="UMAA::SA::SeaStateReport::SeaStateReportType"/>
+            <topic
+                name="UMAA::SA::SeaStateReport::SeaStateReportType"
+                register_type_ref="SeaStateReportType"/>
+
+            <register_type
+                name="SoundVelocityProfileReportType"
+                type_ref="UMAA::SA::SoundVelocityProfileReport::SoundVelocityProfileReportType"/>
+            <topic
+                name="UMAA::SA::SoundVelocityProfileReport::SoundVelocityProfileReportType"
+                register_type_ref="SoundVelocityProfileReportType"/>
+
+            <register_type
+                name="SpeedConditionalType"
+                type_ref="UMAA::MM::Conditional::SpeedConditionalType"/>
+            <topic
+                name="UMAA::MM::Conditional::SpeedConditionalType"
+                register_type_ref="SpeedConditionalType"/>
+
+            <register_type
+                name="SpeedReportType"
+                type_ref="UMAA::SA::SpeedStatus::SpeedReportType"/>
+            <topic
+                name="UMAA::SA::SpeedStatus::SpeedReportType"
+                register_type_ref="SpeedReportType"/>
+
+            <register_type
+                name="StationkeepObjectiveDetailedStatusType"
+                type_ref="UMAA::MM::BaseType::StationkeepObjectiveDetailedStatusType"/>
+            <topic
+                name="UMAA::MM::BaseType::StationkeepObjectiveDetailedStatusType"
+                register_type_ref="StationkeepObjectiveDetailedStatusType"/>
+
+            <register_type
+                name="StationkeepObjectiveType"
+                type_ref="UMAA::MM::BaseType::StationkeepObjectiveType"/>
+            <topic
+                name="UMAA::MM::BaseType::StationkeepObjectiveType"
+                register_type_ref="StationkeepObjectiveType"/>
+
+            <register_type
+                name="StillImageReportType"
+                type_ref="UMAA::SA::StillImageStatus::StillImageReportType"/>
+            <topic
+                name="UMAA::SA::StillImageStatus::StillImageReportType"
+                register_type_ref="StillImageReportType"/>
+
+            <register_type
+                name="SubsystemIDReportType"
+                type_ref="UMAA::SO::ResourceIdentification::SubsystemIDReportType"/>
+            <topic
+                name="UMAA::SO::ResourceIdentification::SubsystemIDReportType"
+                register_type_ref="SubsystemIDReportType"/>
+
+            <register_type
+                name="SyncDataCommandAckReportType"
+                type_ref="UMAA::SO::SyncDataControl::SyncDataCommandAckReportType"/>
+            <topic
+                name="UMAA::SO::SyncDataControl::SyncDataCommandAckReportType"
+                register_type_ref="SyncDataCommandAckReportType"/>
+
+            <register_type
+                name="SyncDataCommandStatusType"
+                type_ref="UMAA::SO::SyncDataControl::SyncDataCommandStatusType"/>
+            <topic
+                name="UMAA::SO::SyncDataControl::SyncDataCommandStatusType"
+                register_type_ref="SyncDataCommandStatusType"/>
+
+            <register_type
+                name="SyncDataCommandType"
+                type_ref="UMAA::SO::SyncDataControl::SyncDataCommandType"/>
+            <topic
+                name="UMAA::SO::SyncDataControl::SyncDataCommandType"
+                register_type_ref="SyncDataCommandType"/>
+
+            <register_type
+                name="TamperDetectionCommandAckReportType"
+                type_ref="UMAA::SO::TamperDetectionControl::TamperDetectionCommandAckReportType"/>
+            <topic
+                name="UMAA::SO::TamperDetectionControl::TamperDetectionCommandAckReportType"
+                register_type_ref="TamperDetectionCommandAckReportType"/>
+
+            <register_type
+                name="TamperDetectionCommandStatusType"
+                type_ref="UMAA::SO::TamperDetectionControl::TamperDetectionCommandStatusType"/>
+            <topic
+                name="UMAA::SO::TamperDetectionControl::TamperDetectionCommandStatusType"
+                register_type_ref="TamperDetectionCommandStatusType"/>
+
+            <register_type
+                name="TamperDetectionCommandType"
+                type_ref="UMAA::SO::TamperDetectionControl::TamperDetectionCommandType"/>
+            <topic
+                name="UMAA::SO::TamperDetectionControl::TamperDetectionCommandType"
+                register_type_ref="TamperDetectionCommandType"/>
+
+            <register_type
+                name="TamperDetectionReportType"
+                type_ref="UMAA::SO::TamperDetectionStatus::TamperDetectionReportType"/>
+            <topic
+                name="UMAA::SO::TamperDetectionStatus::TamperDetectionReportType"
+                register_type_ref="TamperDetectionReportType"/>
+
+            <register_type
+                name="TaskPlanAssignmentCommandAckReportType"
+                type_ref="UMAA::MM::TaskPlanAssignmentControl::TaskPlanAssignmentCommandAckReportType"/>
+            <topic
+                name="UMAA::MM::TaskPlanAssignmentControl::TaskPlanAssignmentCommandAckReportType"
+                register_type_ref="TaskPlanAssignmentCommandAckReportType"/>
+
+            <register_type
+                name="TaskPlanAssignmentCommandStatusType"
+                type_ref="UMAA::MM::TaskPlanAssignmentControl::TaskPlanAssignmentCommandStatusType"/>
+            <topic
+                name="UMAA::MM::TaskPlanAssignmentControl::TaskPlanAssignmentCommandStatusType"
+                register_type_ref="TaskPlanAssignmentCommandStatusType"/>
+
+            <register_type
+                name="TaskPlanAssignmentCommandType"
+                type_ref="UMAA::MM::TaskPlanAssignmentControl::TaskPlanAssignmentCommandType"/>
+            <topic
+                name="UMAA::MM::TaskPlanAssignmentControl::TaskPlanAssignmentCommandType"
+                register_type_ref="TaskPlanAssignmentCommandType"/>
+
+            <register_type
+                name="TaskPlanAssignmentReportType"
+                type_ref="UMAA::MM::TaskPlanAssignmentReport::TaskPlanAssignmentReportType"/>
+            <topic
+                name="UMAA::MM::TaskPlanAssignmentReport::TaskPlanAssignmentReportType"
+                register_type_ref="TaskPlanAssignmentReportType"/>
+
+            <register_type
+                name="TaskPlanExecutionCommandAckReportType"
+                type_ref="UMAA::MM::TaskPlanExecutionControl::TaskPlanExecutionCommandAckReportType"/>
+            <topic
+                name="UMAA::MM::TaskPlanExecutionControl::TaskPlanExecutionCommandAckReportType"
+                register_type_ref="TaskPlanExecutionCommandAckReportType"/>
+
+            <register_type
+                name="TaskPlanExecutionCommandStatusType"
+                type_ref="UMAA::MM::TaskPlanExecutionControl::TaskPlanExecutionCommandStatusType"/>
+            <topic
+                name="UMAA::MM::TaskPlanExecutionControl::TaskPlanExecutionCommandStatusType"
+                register_type_ref="TaskPlanExecutionCommandStatusType"/>
+
+            <register_type
+                name="TaskPlanExecutionCommandType"
+                type_ref="UMAA::MM::TaskPlanExecutionControl::TaskPlanExecutionCommandType"/>
+            <topic
+                name="UMAA::MM::TaskPlanExecutionControl::TaskPlanExecutionCommandType"
+                register_type_ref="TaskPlanExecutionCommandType"/>
+
+            <register_type
+                name="TaskPlanExecutionReportType"
+                type_ref="UMAA::MM::TaskPlanExecutionStatus::TaskPlanExecutionReportType"/>
+            <topic
+                name="UMAA::MM::TaskPlanExecutionStatus::TaskPlanExecutionReportType"
+                register_type_ref="TaskPlanExecutionReportType"/>
+
+            <register_type
+                name="TaskPlanTypeObjectivesSetElement"
+                type_ref="UMAA::MM::BaseType::TaskPlanTypeObjectivesSetElement"/>
+            <topic
+                name="UMAA::MM::BaseType::TaskPlanTypeObjectivesSetElement"
+                register_type_ref="TaskPlanTypeObjectivesSetElement"/>
+
+            <register_type
+                name="TaskStateConditionalType"
+                type_ref="UMAA::MM::Conditional::TaskStateConditionalType"/>
+            <topic
+                name="UMAA::MM::Conditional::TaskStateConditionalType"
+                register_type_ref="TaskStateConditionalType"/>
+
+            <register_type
+                name="TerrainReportType"
+                type_ref="UMAA::SA::TerrainReport::TerrainReportType"/>
+            <topic
+                name="UMAA::SA::TerrainReport::TerrainReportType"
+                register_type_ref="TerrainReportType"/>
+
+            <register_type
+                name="TimeConditionalType"
+                type_ref="UMAA::MM::Conditional::TimeConditionalType"/>
+            <topic
+                name="UMAA::MM::Conditional::TimeConditionalType"
+                register_type_ref="TimeConditionalType"/>
+
+            <register_type
+                name="TranslationalShipMotionReportType"
+                type_ref="UMAA::SA::TranslationalShipMotionStatus::TranslationalShipMotionReportType"/>
+            <topic
+                name="UMAA::SA::TranslationalShipMotionStatus::TranslationalShipMotionReportType"
+                register_type_ref="TranslationalShipMotionReportType"/>
+
+            <register_type
+                name="UVPlatformCapabilitiesReportType"
+                type_ref="UMAA::EO::UVPlatformSpecs::UVPlatformCapabilitiesReportType"/>
+            <topic
+                name="UMAA::EO::UVPlatformSpecs::UVPlatformCapabilitiesReportType"
+                register_type_ref="UVPlatformCapabilitiesReportType"/>
+
+            <register_type
+                name="UVPlatformSpecsReportType"
+                type_ref="UMAA::EO::UVPlatformSpecs::UVPlatformSpecsReportType"/>
+            <topic
+                name="UMAA::EO::UVPlatformSpecs::UVPlatformSpecsReportType"
+                register_type_ref="UVPlatformSpecsReportType"/>
+
+            <register_type
+                name="VectorObjectiveDetailedStatusType"
+                type_ref="UMAA::MM::BaseType::VectorObjectiveDetailedStatusType"/>
+            <topic
+                name="UMAA::MM::BaseType::VectorObjectiveDetailedStatusType"
+                register_type_ref="VectorObjectiveDetailedStatusType"/>
+
+            <register_type
+                name="VectorObjectiveType"
+                type_ref="UMAA::MM::BaseType::VectorObjectiveType"/>
+            <topic
+                name="UMAA::MM::BaseType::VectorObjectiveType"
+                register_type_ref="VectorObjectiveType"/>
+
+            <register_type
+                name="VehicleIDReportType"
+                type_ref="UMAA::SO::ResourceIdentification::VehicleIDReportType"/>
+            <topic
+                name="UMAA::SO::ResourceIdentification::VehicleIDReportType"
+                register_type_ref="VehicleIDReportType"/>
+
+            <register_type
+                name="VelocityReportType"
+                type_ref="UMAA::SA::VelocityStatus::VelocityReportType"/>
+            <topic
+                name="UMAA::SA::VelocityStatus::VelocityReportType"
+                register_type_ref="VelocityReportType"/>
+
+            <register_type
+                name="WaterCharacteristicsReportType"
+                type_ref="UMAA::SA::WaterCharacteristicsStatus::WaterCharacteristicsReportType"/>
+            <topic
+                name="UMAA::SA::WaterCharacteristicsStatus::WaterCharacteristicsReportType"
+                register_type_ref="WaterCharacteristicsReportType"/>
+
+            <register_type
+                name="WaterCurrentReportType"
+                type_ref="UMAA::SA::WaterCurrentStatus::WaterCurrentReportType"/>
+            <topic
+                name="UMAA::SA::WaterCurrentStatus::WaterCurrentReportType"
+                register_type_ref="WaterCurrentReportType"/>
+
+            <register_type
+                name="WaterZoneConditionalType"
+                type_ref="UMAA::MM::Conditional::WaterZoneConditionalType"/>
+            <topic
+                name="UMAA::MM::Conditional::WaterZoneConditionalType"
+                register_type_ref="WaterZoneConditionalType"/>
+
+            <register_type
+                name="WeatherReportType"
+                type_ref="UMAA::SA::WeatherStatus::WeatherReportType"/>
+            <topic
+                name="UMAA::SA::WeatherStatus::WeatherReportType"
+                register_type_ref="WeatherReportType"/>
+
+            <register_type
+                name="WindReportType"
+                type_ref="UMAA::SA::WindStatus::WindReportType"/>
+            <topic
+                name="UMAA::SA::WindStatus::WindReportType"
+                register_type_ref="WindReportType"/>
+
+            <register_type
+                name="YawRateConditionalType"
+                type_ref="UMAA::MM::Conditional::YawRateConditionalType"/>
+            <topic
+                name="UMAA::MM::Conditional::YawRateConditionalType"
+                register_type_ref="YawRateConditionalType"/>
+
+        </domain_participant>
+           
+    
+    </domain_participant_library>
+</dds>
