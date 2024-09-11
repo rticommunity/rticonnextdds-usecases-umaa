@@ -56,5 +56,6 @@
         "random": "cpp"
     },
     "cmake.sourceDirectory": "${workspaceFolder}/examples",
-    "cmake.buildDirectory": "${workspaceFolder}/examples/build"
+    "cmake.buildDirectory": "${workspaceFolder}/examples/build",
+    "python.analysis.extraPaths": ["${workspaceFolder}/examples/resources/umaa_6/gen_types/python"]
 }
