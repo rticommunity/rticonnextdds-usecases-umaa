@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="./LargeListMetadata.xml"/>
+<include file="./CommsChannelMessageType.xml"/>
+<include file="./IdentifierType.xml"/>
+<include file="./Measurements.xml"/>
+<module name="UMAA">
+  <module name="CO">
+    <module name="CommsChannelStatus">
+      <const name="CommsChannelSenderReportTypeTopic" type="string" value="&quot;UMAA::CO::CommsChannelStatus::CommsChannelSenderReportType&quot;"/>
+      <struct name= "CommsChannelSenderReportType">
+        <member name="bufferPercentFull" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Percent"/>
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::IdentifierType" key="true"/>
+        <member name="queuedMessagesListMetadata" type="nonBasic"  nonBasicTypeName= "UMAA::Common::LargeListMetadata"/>
+      </struct>
+      <const name="CommsChannelSenderReportTypeQueuedMessagesListElementTopic" type="string" value="&quot;UMAA::CO::CommsChannelStatus::CommsChannelSenderReportTypeQueuedMessagesListElement&quot;"/>
+      <struct name= "CommsChannelSenderReportTypeQueuedMessagesListElement">
+        <member name="element" type="nonBasic"  nonBasicTypeName= "UMAA::CO::CommsChannel::CommsChannelMessageType"/>
+        <member name="listID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="elementID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="elementTimestamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+        <member name="nextElementID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" optional="true"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="./CommsChannelSenderStatisticsType.xml"/>
+<include file="./IdentifierType.xml"/>
+<include file="./Measurements.xml"/>
+<module name="UMAA">
+  <module name="CO">
+    <module name="CommsChannelStatus">
+      <const name="CommsChannelSenderStatisticsReportTypeTopic" type="string" value="&quot;UMAA::CO::CommsChannelStatus::CommsChannelSenderStatisticsReportType&quot;"/>
+      <struct name= "CommsChannelSenderStatisticsReportType">
+        <member name="senderStatistics" sequenceMaxLength="256" type="nonBasic"  nonBasicTypeName= "UMAA::CO::CommsChannel::CommsChannelSenderStatisticsType"/>
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::IdentifierType" key="true"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>
