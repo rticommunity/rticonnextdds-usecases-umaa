@@ -1,0 +1,66 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_EXPOBJECTIVEDETAILEDSTATUSTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_EXPOBJECTIVEDETAILEDSTATUSTYPE
+
+#include "UMAA/Common/Enumeration/EnumerationSets.idl"
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
+#include "UMAA/MM/BaseType/KeyValueType.idl"
+module UMAA
+{
+  module MM
+  {
+    module BaseType
+    {
+
+    const string ExpObjectiveDetailedStatusTypeTopic = "UMAA::MM::BaseType::ExpObjectiveDetailedStatusType";
+
+      /**
+        * This structure provides a detailed execution status for the experimental objective.
+        *
+        * This structure is a specialization of UMAA::MM::BaseType::ObjectiveDetailedStatusType.
+        */
+    
+      struct ExpObjectiveDetailedStatusType
+      {
+      // Defines a set of key/value pairs for the experimental objective status.
+      sequence<UMAA::MM::BaseType::KeyValueType,170> expObjectiveStatus;
+
+      // Defines the absolute time at which the experimental objective is estimated to be completed.
+      UMAA::Common::Measurement::DateTime timeExpCompleted;
+
+      // This field identifies the timestamp that signals the end of an atomic update to the instance of the specialization. NOTE: Ties this element back to the specializationID in ObjectiveDetailedStatusType generalization.
+      UMAA::Common::Measurement::DateTime specializationReferenceTimestamp;
+
+      // NOTE: Ties this element back to the ObjectiveDetailedStatusType generalization.
+      @key UMAA::Common::Measurement::NumericGUID specializationReferenceID;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_EXPOBJECTIVEDETAILEDSTATUSTYPE
+

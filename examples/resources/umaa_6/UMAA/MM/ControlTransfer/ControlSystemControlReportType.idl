@@ -1,0 +1,65 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_RESOURCE_MANAGEMENT_CONTROLTRANSFER_CONTROLSYSTEMCONTROLREPORTTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_RESOURCE_MANAGEMENT_CONTROLTRANSFER_CONTROLSYSTEMCONTROLREPORTTYPE
+
+#include "UMAA/Common/Enumeration/EnumerationSets.idl"
+#include "UMAA/Common/IdentifierType.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+module UMAA
+{
+  module MM
+  {
+    module ControlTransfer
+    {
+    
+      const string ControlSystemControlReportTypeTopic = "UMAA::MM::ControlTransfer::ControlSystemControlReportType";
+  
+      /**
+        * This structure is used to report which control system is in control of a resource. A control system can be a control station or a system that is used to control a resource. A resource can be a vehicle, a system or a payload.
+        */
+    
+      struct ControlSystemControlReportType
+      {
+      // Value between 0 and 255 with 0 indicating no control and 255 being root access. The control arbiter may use this value to automatically force a control release or this value may be displayed to the controlling client user as an indication of control urgency.
+      UMAA::Common::Measurement::Count authorityLevel;
+
+      // A unique identification of a system that controls the vehicle or a payload. However, if status is AVAILABLE, controlSystemID should not be set.
+      UMAA::Common::IdentifierType controlSystemID;
+
+      // A control status of the vehicle, a system or a payload.
+      UMAA::Common::Enumeration::ResourceAllocationStatusEnumModule::ResourceAllocationStatusEnumType status;
+
+      // The origination time of the data being conveyed in the message, or as close to the data or command generation time as is reasonably possible.
+      UMAA::Common::Measurement::DateTime timeStamp;
+
+      // The unique identifier of the originating source of the command interface.
+      @key UMAA::Common::IdentifierType source;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_RESOURCE_MANAGEMENT_CONTROLTRANSFER_CONTROLSYSTEMCONTROLREPORTTYPE
+

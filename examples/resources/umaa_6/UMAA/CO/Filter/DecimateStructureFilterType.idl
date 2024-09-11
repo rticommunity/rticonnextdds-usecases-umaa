@@ -1,0 +1,52 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_COMMUNICATIONS_MANAGEMENT_FILTER_DECIMATESTRUCTUREFILTERTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_COMMUNICATIONS_MANAGEMENT_FILTER_DECIMATESTRUCTUREFILTERTYPE
+
+#include "UMAA/Common/Enumeration/EnumerationSets.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+module UMAA
+{
+  module CO
+  {
+    module Filter
+    {
+      /**
+        * This structure is used to specify a message filter that allows filtering by duration since previous message.
+        */
+      @nested
+      struct DecimateStructureFilterType
+      {
+      // If most recent one published was not sent due to waitTime not expired when published, but waitTime has since expired, send the most recent one after waitTime expires (When True, guarantees most recent one is received even if decimated - useful for intermittent messages. Set to False if some type of periodicity in the publishing is normal).
+      boolean setSendMostRecent;
+
+      // Once one is sent, do not send another one until waitTime expires (results in decimation of rapid rate messages).
+      UMAA::Common::Measurement::DurationSeconds waitTime;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_COMMUNICATIONS_MANAGEMENT_FILTER_DECIMATESTRUCTUREFILTERTYPE
+

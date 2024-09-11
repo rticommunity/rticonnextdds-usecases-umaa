@@ -1,0 +1,136 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_DYNAMIC_WATERSPACE_ENVIRONMENT_CONTACTREPORT_CONTACTTYPE
+#define _LDM_MDE_DYNAMIC_WATERSPACE_ENVIRONMENT_CONTACTREPORT_CONTACTTYPE
+
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
+#include "UMAA/Common/Measurement/CovariancePositionNEDType.idl"
+#include "UMAA/Common/Measurement/CovariancePositionVelocityNEDType.idl"
+#include "UMAA/Common/Measurement/CovarianceVelocityNEDType.idl"
+#include "UMAA/Common/Measurement/GeoPosition2D.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/Measurement/Velocity3DPlatformNEDType.idl"
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
+module UMAA
+{
+  module SA
+  {
+    module ContactReport
+    {
+      /**
+        * This structure is used to report the contact characteristics.
+        */
+      @nested
+      struct ContactType
+      {
+      // Height above ground level of the entity.
+      @optional UMAA::Common::Measurement::DistanceAGL altitudeAGL;
+
+      // Height above the sea floor of the entity.
+      @optional UMAA::Common::Measurement::DistanceASF altitudeASF;
+
+      // Geodetic height above the ellipsoid of the entity.
+      @optional UMAA::Common::PrimitiveConstrained::GeodeticAltitude altitudeGeodetic;
+
+      // Orthometric height above the Geoid (Mean Sea Level) of the entity.
+      @optional UMAA::Common::Measurement::MSLAltitude altitudeMSL;
+
+      // Designator assigned by licensing authority, or name of vehicle.
+      @optional UMAA::Common::PrimitiveConstrained::StringShortDescription callSign;
+
+      // Confidence in the classification of the contact.
+      @optional UMAA::Common::Measurement::Percent confidence;
+
+      // Identifier of the entity.
+      UMAA::Common::Measurement::NumericGUID contactID;
+
+      // Name of the contact.
+      UMAA::Common::PrimitiveConstrained::StringShortDescription contactName;
+
+      // Course of the contact.
+      @optional UMAA::Common::Measurement::CourseTrueNorth course;
+
+      // Distance below sea level of the entity.
+      @optional UMAA::Common::Measurement::DistanceBSL depth;
+
+      // Heading of the contact.
+      @optional UMAA::Common::Measurement::HeadingTrueNorthAngle heading;
+
+      // Height of the contact, intended to be the largest dimension orthogonal to length in the vertical plane.
+      @optional UMAA::Common::Measurement::Distance height;
+
+      // Length of the contact, intended to be the longest dimension of the shape.
+      @optional UMAA::Common::Measurement::Distance length;
+
+      // Nine digit numbers used by maritime digital selective calling (DSC), automatic identification systems (AIS) and certain other equipment to uniquely identify a ship or a coast radio station.
+      @optional UMAA::Common::PrimitiveConstrained::MMSI MMSINumber;
+
+      // Position of the entity.
+      UMAA::Common::Measurement::GeoPosition2D position;
+
+      // Current error covariance value of the entity position.
+      @optional UMAA::Common::Measurement::CovariancePositionNEDType positionCovariance;
+
+      // Current error covariance value of the entity position-velocity.
+      @optional UMAA::Common::Measurement::CovariancePositionVelocityNEDType positionVelocityCovariance;
+
+      // Quality of the relevant track. May represent a moving or fading average of the growth rate of the track and is useful for determining the track confidence or when to drop the track entirely.
+      @optional UMAA::Common::Measurement::Percent quality;
+
+      // Numeric code based on a hierarchical structure that provides the elements required to construct the basic symbol (defined in Appendix A of MIL-STD-2525D).
+      @optional UMAA::Common::PrimitiveConstrained::StringShortDescription SIDC;
+
+      // List of sources from which data was fused together to comprise this contact. If the contact was not fused from other contacts, this list is expected to be empty.
+      sequence<UMAA::Common::Measurement::NumericGUID,32> sourceContactID;
+
+      // Describes the data source indicator.
+      UMAA::Common::MaritimeEnumeration::SourceIndicatorEnumModule::SourceIndicatorEnumType sourceIndicator;
+
+      // Special maneuver indicator.
+      UMAA::Common::MaritimeEnumeration::SpecialManeuverIndicatorEnumModule::SpecialManeuverIndicatorEnumType specialManeuverIndicator;
+
+      // Speed over the ground of the contact.
+      UMAA::Common::Measurement::GroundSpeed speedOverGround;
+
+      // Time the contact was acquired.
+      UMAA::Common::Measurement::DateTime timeFirstAcquired;
+
+      // Time the contact was lost. For active tracks with continued detections, this value will not be provided. In the event detections are lost but the track is coasted, this value will identify the start time of coasting.
+      @optional UMAA::Common::Measurement::DateTime timeLost;
+
+      // Current linear velocity of the entity.
+      @optional UMAA::Common::Measurement::Velocity3DPlatformNEDType velocity;
+
+      // Current error covariance value of the entity velocity.
+      @optional UMAA::Common::Measurement::CovarianceVelocityNEDType velocityCovariance;
+
+      // Width of the contact, intended to be the largest dimension orthogonal to length in the horizontal plane.
+      @optional UMAA::Common::Measurement::Distance width;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_DYNAMIC_WATERSPACE_ENVIRONMENT_CONTACTREPORT_CONTACTTYPE
+

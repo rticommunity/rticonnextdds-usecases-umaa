@@ -1,0 +1,981 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_REFINEMENTS_ENUMERATIONSETS_MARITIMEENUMERATIONSETS
+#define _LDM_MDE_REFINEMENTS_ENUMERATIONSETS_MARITIMEENUMERATIONSETS
+
+
+//@copy-c #undef ERROR
+//@copy-c #undef VARIABLE_PITCH
+//@copy-c #undef DELETE
+//@copy-c #undef PLATFORM
+
+module UMAA
+{
+  module Common
+  {
+    module MaritimeEnumeration
+    {
+
+
+        module ActivationStateEnumModule
+        {
+          enum ActivationStateEnumType
+          {
+              ACTIVE, // Indicates sensor is actively pinging and/or acquiring.
+              ERROR, // Indicates sensor has detected an error that requires attention.
+              OFF, // Indicates sensor is unpowered.
+              READY, // Indicates sensor is configured and awaiting activation.
+              STANDBY // Indicates sensor is powered on but not configured.
+          };
+        };
+
+        module ActivationStateTargetEnumModule
+        {
+          enum ActivationStateTargetEnumType
+          {
+              ACTIVE, // Directs sensor to actively ping and/or acquire.
+              OFF, // Directs sensor to shutdown.
+              READY, // Directs sensor to process configuration and await activation.
+              STANDBY // Directs sensor to be powered on but not configured.
+          };
+        };
+
+        module AnchorActionEnumModule
+        {
+          enum AnchorActionEnumType
+          {
+              LOWER, // Lower the anchor.
+              RAISE, // Raise the anchor.
+              STOP // Stop anchor from lowering or raising.
+          };
+        };
+
+        module AnchorKindEnumModule
+        {
+          enum AnchorKindEnumType
+          {
+              COMMERCIAL_STOCKLESS, // Anchor type is commercial stockless.
+              DANFORTH, // Anchor type is danforth.
+              FOUR_FLUKE, // Anchor type is four-fluke.
+              GENERAL, // Anchor type is general.
+              LIGHTWEIGHT, // Anchor type is lightweight.
+              MARK_2_LWT, // Anchor type is mark 2 lightweight.
+              MARK_2_STOCKLESS, // Anchor type is mark 2 stockless.
+              MUSHROOM, // Anchor type is mushroom.
+              NAVY_TYPE_STOCK, // Anchor type is navy type stock.
+              NONMAGNETIC, // Anchor type is nonmagnetic.
+              STANDARD_NAVY_STOCKLESS, // Anchor type is standard navy stockless.
+              TWO_FLUKE_BALANCED_FLUKE, // Anchor type is two-fluke balanced fluke.
+              WEDGE_BLOCK_LWT // Anchor type is wedge block lightweight.
+          };
+        };
+
+        module AnchorLocationEnumModule
+        {
+          enum AnchorLocationEnumType
+          {
+              BOWER, // A bower anchor is carried on the bow.
+              KEEL, // A keel anchor is housed within the hull neer the keel.
+              STERN // A stern anchor is carried on the stern.
+          };
+        };
+
+        module AnchorRodeEnumModule
+        {
+          enum AnchorRodeEnumType
+          {
+              CHAIN, // Chain
+              ROPE // Rope
+          };
+        };
+
+        module AnchorStateEnumModule
+        {
+          enum AnchorStateEnumType
+          {
+              DEPLOYED, // Anchor is deployed.
+              LOWERING, // Anchor is lowering.
+              RAISING, // Anchor is raising.
+              STOPPED, // Anchor is neither DEPLOYED nor STOWED, but is not in the process of LOWERING or RAISING.
+              STOWED // Anchor is stowed.
+          };
+        };
+
+        module AutoOffModeEnumModule
+        {
+          enum AutoOffModeEnumType
+          {
+              DEACTIVATE, // Indicates that active elements should be turned off when abnormal conditions are indicated.
+              SHUTDOWN // Indicates that the sensor should be shutdown when abnormal conditions are indicated.
+          };
+        };
+
+        module BilgeStateEnumModule
+        {
+          enum BilgeStateEnumType
+          {
+              FAULT, // Fault
+              OFF, // Off
+              ON // On
+          };
+        };
+
+        module BufferPurgeOptionEnumModule
+        {
+          enum BufferPurgeOptionEnumType
+          {
+              DROP_LOWEST_PRIORITY, // Drop lowest priority message on the buffer.
+              DROP_MOST_RECENT, // Drop newest message on the buffer.
+              DROP_OLDEST // Drop oldest message on the buffer.
+          };
+        };
+
+        module COLREGSClassificationEnumModule
+        {
+          enum COLREGSClassificationEnumType
+          {
+              ANCHORED, // The vehicle is currently anchored.
+              CONSTRAINED_BY_DRAUGHT, // The vehicle is limited in its navigational capabilities by its draught.
+              FISHING, // The vehicle is fishing with nets, lines, trawls, or other fishing apparatus which restrict maneuverability. This does not include a vehicle fishing with trolling lines or other fishing apparatus which do not restrict maneuverability.
+              NON_VESSEL, // Contact is determined to not be a vehicle (buoy, land, etc.). COLREGS does not apply.
+              NOT_UNDER_COMMAND, // The vehicle, through some exceptional circumstance, is unable to maneuver as required by these rules and is therefore unable to keep out of the way of another vehicle.
+              POWER_DRIVEN_UNDERWAY, // The vehicle is propelled by machinery.
+              PUSHING, // The vehicle is engaged in a pushing operation such as severely restricts the pushing vehicle and her push in their ability to deviate from their course.
+              RESTRICTED_IN_ABILITY_TO_MANUEVER, // The vehicle is restricted in her ability to maneuver means a vehicle which, from the nature of her work, is restricted in her ability to maneuver as required by these rules and is therefore unable to keep out of the way of another vehicle.
+              SAILING, // The vehicle is under sail and propelling machinery, if fitted, is not being used.
+              TOWING // The vehicle is engaged in a towing operation that severely restricts the towing vehicle and her tow in their ability to deviate from their course.
+          };
+        };
+
+        module CommandStatusReasonEnumModule
+        {
+          enum CommandStatusReasonEnumType
+          {
+              CANCELED, // Indicates a transition to the CANCELED state when the command is canceled successfully.
+              INTERRUPTED, // Indicates a transition to the FAILED state when the command has been interrupted by a higher priority process.
+              OBJECTIVE_FAILED, // Indicates a transition to the FAILED state when the commanded resource is unable to achieve the command's objective due to external factors.
+              RESOURCE_FAILED, // Indicates a transition to the FAILED state when the commanded resource is unable to achieve the command's objective due to resource or platform failure.
+              RESOURCE_REJECTED, // Indicates a transition to the FAILED state when the commanded resource rejects the command for some reason.
+              SERVICE_FAILED, // Indicates a transition to the FAILED state when the commanded resource is unable to achieve the command's objective due to processing failure.
+              SUCCEEDED, // Indicates the conditions to proceed to this state have been met and a normal state transition has occurred.
+              TIMEOUT, // Indicates a transition to the FAILED state when the command is not acknowledged within some defined time bound.
+              UPDATED, // Indicates a transition back to the ISSUED state from a non-terminal state when the command has been updated.
+              VALIDATION_FAILED // Indicates a transition to the FAILED state when the command contains missing, out-of-bounds, or otherwise invalid parameters.
+          };
+        };
+
+        module CommsChannelOperationalStatusEnumModule
+        {
+          enum CommsChannelOperationalStatusEnumType
+          {
+              OFF, // The comms channel is off.
+              ON, // The comms channel is on.
+              OPERATIONAL // The comms channel is operational.
+          };
+        };
+
+        module ConditionalOperatorEnumModule
+        {
+          enum ConditionalOperatorEnumType
+          {
+              GREATER_THAN, // One value is greater than another value.
+              GREATER_THAN_OR_EQUAL_TO, // One value is greater than or equal to another value.
+              LESS_THAN, // One value is less than another value.
+              LESS_THAN_OR_EQUAL_TO // One value is less than or equal to another value.
+          };
+        };
+
+        module ContactManeuverInfluenceEnumModule
+        {
+          enum ContactManeuverInfluenceEnumType
+          {
+              COLLISION, // Maneuvering or not maneuvering where a determination that a collision, allision, or near-miss has occurred or is imminent.
+              COLLISION_AVOIDANCE, // Maneuvering to avoid a navigational hazard where the priority is to increase separation to avoid a likely collision or allision if no action is taken. Maneuvering requires no due regard to other influences, including mission objectives.
+              CROSSING_LEFT_COMPLIANT, // COLREGS crossing left where the other vehicle is determined to be compliant.
+              CROSSING_LEFT_NONCOMPLIANT, // COLREGS crossing left where the other vehicle is determined to be non-compliant.
+              CROSSING_RIGHT_COMPLIANT, // COLREGS crossing right where the other vehicle is determined to be compliant.
+              CROSSING_RIGHT_NONCOMPLIANT, // COLREGS crossing right where the other vehicle is determined to be non-compliant.
+              DYNAMIC_AVOIDANCE, // Maneuvering to avoid a dynamic contact where there is no obstacle avoidance influence other than maintaining a prescribed minimum standoff distance.
+              GUIDE, // Contact is guiding or informing maneuvering (e.g., guide vehicle for Stationkeep or cooperating swarm member).
+              HEAD_ON_COMPLIANT, // COLREGS head on where the other vehicle is determined to be compliant.
+              HEAD_ON_NONCOMPLIANT, // COLREGS head on where the other vehicle is determined to be non-compliant.
+              NONE, // The contact has been examined and it was determined it has no influence on the maneuvering of ownship.
+              OVERTAKEN_COMPLIANT, // COLREGS being overtaken where the other vehicle is determined to be compliant.
+              OVERTAKEN_NONCOMPLIANT, // COLREGS being overtaken where the other vehicle is determined to be non-compliant.
+              OVERTAKING_COMPLIANT, // COLREGS overtaking where the other vehicle is determined to be compliant.
+              OVERTAKING_NONCOMPLIANT, // COLREGS overtaking where the other vehicle is determined to be non-compliant.
+              PREEMPTIVE, // Maneuvering to avoid a perceived future state but not in direct response to configured obstacle avoidance thresholds.
+              STATIC_AVOIDANCE // Maneuvering to avoid a static contact where there is no obstacle avoidance influence other than maintaining a prescribed minimum standoff distance.
+          };
+        };
+
+        module ContingencyBehaviorEnumModule
+        {
+          enum ContingencyBehaviorEnumType
+          {
+              CONTINUE, // Continue the mission
+              FINISH, // Finish the mission
+              _HOME, // Return to home
+              LOITER, // Loiter
+              NONE, // None
+              VEHICLE_SPECIFIC // None of the above (specific to the vehicle)
+          };
+        };
+
+        module ContinuousTestEnumModule
+        {
+          enum ContinuousTestEnumType
+          {
+              DISABLED_NO_TEST, // Indicates that the continuous test is disabled, and/or that there is no continuous test.
+              FULL_TEST, // Indicates a full continuous test.
+              NON_INTRUSIVE_TESTS_ONLY // Indicates non-intrusive tests only.
+          };
+        };
+
+        module CoordinationSituationalSignalEnumModule
+        {
+          enum CoordinationSituationalSignalEnumType
+          {
+              AGREE_TO_BE_OVERTAKEN, // Vehicle is being overtaken.
+              ALTERING_COURSE_TO_PORT, // Vehicle is turning to port.
+              ALTERING_COURSE_TO_STARBOARD, // Vehicle is turning to starboard.
+              BLIND_BEND_SIGNAL, // Vehicle is maneuvering around a blind bend.
+              DANGER_SIGNAL, // Vehicle is in danger.
+              IN_DISTRESS_NEED_ASSISTANCE, // Vehicle is in distress and needs assistance.
+              NONE, // No signal active.
+              OPERATING_ASTERN_PROPULSION, // Vehicle is operating astern propulsion.
+              TO_OVERTAKE_LEAVE_VESSEL_TO_PORT, // Vehicle is maneuvering to overtake, leave vessel to port.
+              TO_OVERTAKE_LEAVE_VESSEL_TO_STARBOARD, // Vehicle is maneuvering to overtake, leave vessel to starboard.
+              VESSEL_LEAVING_DOCK, // Vehicle is leaving the dock.
+              VISIBILITY_RESTRICTED_VEHICLE_STOPPED, // Visibility restricted with vehicle stopped.
+              VISIBILITY_RESTRICTED_VEHICLE_UNDERWAY // Visibility restricted with vehicle underway.
+          };
+        };
+
+        module DirectionModeEnumModule
+        {
+          enum DirectionModeEnumType
+          {
+              COURSE, // Specifies that direction is the course of the vehicle, which is the direction of motion of the vehicle over the ground.
+              HEADING // Specifies that direction is the heading of the vehicle, which is the direction in which the vehicle's bow is pointing.
+          };
+        };
+
+        module DomainEnumModule
+        {
+          enum DomainEnumType
+          {
+              AIR, // Air
+              GROUND, // Surface, ground
+              SURFACE, // Surface, water
+              UNDERSEA // Undersea
+          };
+        };
+
+        module EmitterStateEnumModule
+        {
+          enum EmitterStateEnumType
+          {
+              ALLOWED, // Emissions are allowed.
+              SECURED // Emissions are secured, i.e. no emissions.
+          };
+        };
+
+        module EngineKindEnumModule
+        {
+          enum EngineKindEnumType
+          {
+              DIESEL, // A diesel engine.
+              GAS // A gas engine.
+          };
+        };
+
+        module ErrorCodeEnumModule
+        {
+          enum ErrorCodeEnumType
+          {
+              ACTUATOR, // Actuator
+              FILESYS, // File system
+              NONE, // None
+              POWER, // Power
+              PROCESSOR, // Processor
+              RAM, // RAM
+              ROM, // ROM
+              SENSOR, // Sensor
+              SOFTWARE // Software
+          };
+        };
+
+        module ErrorConditionEnumModule
+        {
+          enum ErrorConditionEnumType
+          {
+              ERROR, // An error condition is reported and expected to seriously compromise use of the reporting component or device.
+              FAIL, // An error condition is reported with severity indicating component or device failure.
+              INFO, // An error condition is reported, but impact on operation and performance is minimal.
+              NONE, // No error condition exists.
+              WARN // An error condition is reported and expected to have significant impact on component or device performance.
+          };
+        };
+
+        module FLSBeamwidthEnumModule
+        {
+          enum FLSBeamwidthEnumType
+          {
+              MEDIUM, // Beamwidth is medium.
+              NARROW, // Beamwidth is narrow.
+              WIDE // Beamwidth is wide.
+          };
+        };
+
+        module FLSConfigModeEnumModule
+        {
+          enum FLSConfigModeEnumType
+          {
+              DEV_TEST, // Put the sonar into a mode where the configuration is fully determined by the sonar. This allows the sonar developers to test new configurations without hijacking another configuration.
+              DIVE, // The vehicle is diving off the surface and needs to quickly get a look of the bottom to determine the terrains threat level.
+              PASSIVE_ONLY, // The sonar is configured to never make noise or actively ping but still listen for interesting acoustic emissions.
+              SEARCH_BOTTOM, // The sonar is configured to search the seafloor to find contacts and targets of interest. If this enum member is selected, additional configuration is required.
+              SEARCH_VOLUME, // The sonar is configured to search the volume (area between the surface and the seafloor) to find contacts and targets of interest. If this enum member is selected, additional configuration is required.
+              SURFACE, // The vehicle is coming to the surface. The sonar should investigate the surface to determine if it is clear of hazards.
+              TEST, // Put the sonar into a dedicated mode defined by the operator. Disables the sonar's ability to optimize. If this enum member is selected, additional configuration is required.
+              TRANSIT // The vehicle is intended to be transiting and thus doesn't have to operate at full capacity to save power. Vehicle believes it is in a safe environment or not collecting data.
+          };
+        };
+
+        module FLSWaveformLengthEnumModule
+        {
+          enum FLSWaveformLengthEnumType
+          {
+              _LONG, // Waveform length is long.
+              MEDIUM, // Waveform length is medium.
+              _SHORT, // Waveform length is short.
+              XSHORT // Waveform length is extra short.
+          };
+        };
+
+        module GPSConstellationEnumModule
+        {
+          enum GPSConstellationEnumType
+          {
+              BEIDOU, // The Beidou constellation.
+              GALILEO, // The Galileo constellation.
+              GLONASS, // The Glonass constellation.
+              GPS, // The GPS constellation.
+              IRNSS, // The IRNSS constellation.
+              QZSS, // The QZSS constellation.
+              SBAS, // The SBAS constellation.
+              UNKNOWN // An unknown constellation.
+          };
+        };
+
+        module HandoverResultEnumModule
+        {
+          enum HandoverResultEnumType
+          {
+              DEFERRED, // Control handover deferred temporarily by current controller
+              DENIED, // Control handover denied by current controller
+              GRANTED, // Control handover granted by current controller
+              INSUFFICIENT_AUTHORITY, // Control transfer requestor had insufficient authority to take control from current controller
+              NOT_AVAILABLE, // Vehicle is unavailable for control handover
+              TIMEOUT // Control handover timed out because current controller did not respond in the allotted time
+          };
+        };
+
+        module HeadingSectorKindEnumModule
+        {
+          enum HeadingSectorKindEnumType
+          {
+              INSIDE, // The heading sector kind is inside.
+              OUTSIDE // The heading sector kind is outside.
+          };
+        };
+
+        module HoverKindEnumModule
+        {
+          enum HoverKindEnumType
+          {
+              LAT_LON_PRIORITY, // Prioritize maintaining a latitude/longitude position
+              Z_PRIORITY // Prioritize maintaining an elevation
+          };
+        };
+
+        module IgnitionControlEnumModule
+        {
+          enum IgnitionControlEnumType
+          {
+              OFF, // Stop the engine.
+              RUN // Run the engine.
+          };
+        };
+
+        module IgnitionStateEnumModule
+        {
+          enum IgnitionStateEnumType
+          {
+              OFF, // The engine is off.
+              RUN, // The engine is running.
+              START // The engine is starting.
+          };
+        };
+
+        module IlluminatorStateEnumModule
+        {
+          enum IlluminatorStateEnumType
+          {
+              FLASHING, // Flashing
+              OFF, // Off
+              ON // On
+          };
+        };
+
+        module ImageFormatEnumModule
+        {
+          enum ImageFormatEnumType
+          {
+              ARW, // Sony Alpha RAW proprietary camera sensor output format
+              BMP, // BitMaP image
+              CR2_RAW, // Canon RAW 2 (version 2) proprietary camera sensor output format
+              DNG, // Digital NeGative image file, a royalty free Adobe format
+              GEOJPEG, // GEOreferenced JPEG
+              GEOTIFF, // GEOreferenced TIFF
+              GIF, // Graphics Interchange Format
+              GPR, // Go-Pro RAW proprietary camera sensor output format
+              JPEG, // Joint Photographic Experts Group (default if optionally specified)
+              NEF, // Nikon Electric Format RAW proprietary camera sensor output format
+              PGM, // Portable Gray Map
+              PNG, // Portable Network Graphic
+              PNM, // Portable aNy Map
+              PPM, // Portable Pixmap Format
+              TIFF // Tag Image File Format
+          };
+        };
+
+        module InertialSensorCmdEnumModule
+        {
+          enum InertialSensorCmdEnumType
+          {
+              BEST_ALIGN, // Align using the best technique as determined by the inertial sensor
+              GPS_ALIGN, // Align using a GPS position feed. This is the standard alignment method.
+              INIT, // Initializing state for the INU. This command is also used to restart or stop a running alignment.
+              SNAP_ALIGN, // Alignment is forced using parameters directly given as input starting values to the inertial sensor
+              STATIONARY_ALIGN, // Align assuming a zero velocity for the system.
+              TRANSFER_ALIGN // Align using non-GPS position source. Typically used when GPS is not available. For example, aligning in a torpedo tube with position fed from the host vessel.
+          };
+        };
+
+        module InertialSensorOpStatusEnumModule
+        {
+          enum InertialSensorOpStatusEnumType
+          {
+              BEST_ALIGNMENT_FAILURE, // Failure during self-determined best alignment
+              COARSE_BEST_ALIGNMENT, // Coarse self-determined best alignment
+              COARSE_GPS_ALIGNMENT, // Coarse GPS alignment
+              COARSE_STATIONARY_ALIGNMENT, // Coarse stationary alignment
+              COARSE_TRANSFER_ALIGNMENT, // Coarse transfer alignment
+              FINE_BEST_ALIGNMENT_COMPLETE, // Fine self-determined best alignment complete
+              FINE_BEST_ALIGNMENT_STARTED, // Fine self-determined best alignment started
+              FINE_GPS_ALIGNMENT_COMPLETE, // Fine GPS alignment complete
+              FINE_GPS_ALIGNMENT_STARTED, // Fine GPS alignment started
+              FINE_STATIONARY_ALIGNMENT_COMPLETE, // Fine stationary alignment complete
+              FINE_STATIONARY_ALIGNMENT_STARTED, // Fine stationary alignment started
+              FINE_TRANSFER_ALIGNMENT_COMPLETE, // Fine transfer alignment complete
+              FINE_TRANSFER_ALIGNMENT_STARTED, // Fine transfer alignment started
+              GPS_ALIGNMENT_FAILURE, // Failure during a GPS alignment
+              INERTIAL_SENSOR_FAILURE, // Inertial sensor failure
+              INIT, // Initializing
+              SNAP_ALIGNMENT_COMPLETE, // Snap alignment complete
+              SNAP_ALIGNMENT_FAILURE, // Failure during snap alignment
+              STATIONARY_ALIGNMENT_FAILURE, // Failure during stationary alignment
+              TRANSFER_ALIGNMENT_FAILURE // Failure during transfer alignment
+          };
+        };
+
+        module InitiatedTestEnumModule
+        {
+          enum InitiatedTestEnumType
+          {
+              DESTRUCTIVE, // Indicates a destructive test.
+              NON_DESTRUCTIVE // Indicates a non-destructive test.
+          };
+        };
+
+        module InterferenceEnumModule
+        {
+          enum InterferenceEnumType
+          {
+              ACOUSTIC, // Interference type is sound produced by a different sonar system.
+              NONACOUSTIC, // Interference type is non-sonar based noise.
+              UNKNOWN // Interference type is from an undetermined source.
+          };
+        };
+
+        module LandmarkEnumModule
+        {
+          enum LandmarkEnumType
+          {
+              CLUSTER_OBJECT, // Landmark is a cluster object.
+              LARGE_OBJECT, // Landmark is a large object.
+              MARKED, // Landmark is marked by a geographical tag.
+              TERRAIN // Landmark is terrain.
+          };
+        };
+
+        module LogLevelEnumModule
+        {
+          enum LogLevelEnumType
+          {
+              ERROR, // An error message level.
+              INFORMATION, // An informational message level.
+              WARNING // A warning message level.
+          };
+        };
+
+        module MastActionEnumModule
+        {
+          enum MastActionEnumType
+          {
+              LOWER, // set to lower the mast down
+              RAISE, // set to raise the mast up
+              STOP // set to stop the mast
+          };
+        };
+
+        module MastStateEnumModule
+        {
+          enum MastStateEnumType
+          {
+              DOWN, // set when the mast is down
+              MOVING_DOWN, // set when the mast is moving down
+              MOVING_UP, // set when the mast is moving up
+              STOPPED, // set when the mast is not in motion, but between fully up and fully down
+              UP // set when the mast is up
+          };
+        };
+
+        module CommandStatusEnumModule
+        {
+          enum CommandStatusEnumType
+          {
+              CANCELED, // The command was canceled by the requestor before the command completed successfully.
+              COMMANDED, // The command has been placed in the resource's command queue but has not yet been accepted.
+              COMPLETED, // The command has been completed successfully.
+              EXECUTING, // The command is being performed by the resource and has not yet been completed.
+              FAILED, // The command has been attempted, but was not successful.
+              ISSUED // The command has been issued to the resource (typically a sensor or streaming device), but processing has not yet commenced.
+          };
+        };
+
+        module TaskControlEnumModule
+        {
+          enum TaskControlEnumType
+          {
+              CANCEL, // Cancel the mission plan, mission task, or mission objective.
+              EXECUTION_APPROVED, // Approve the execution of the mission plan, mission task, or mission objective.
+              EXECUTION_NOT_APPROVED, // Reject the execution of the mission plan, mission task, or mission objective.
+              PAUSE, // Pause the execution of the approved mission plan, mission task, or mission objective.
+              PLAN, // Plan the mission plan, mission task, or mission objective.
+              QUEUE, // Queue the mission plan, mission task, or mission objective for execution.
+              RESTART, // Restart the execution of the mission plan, mission task, or mission objective.
+              RESUME // Resume the execution of the mission plan, mission task, or mission objective.
+          };
+        };
+
+        module TaskStateEnumModule
+        {
+          enum TaskStateEnumType
+          {
+              AWAITING_EXECUTION_APPROVAL, // The mission plan, mission task, or mission objective is awaiting execution approval.
+              CANCELED, // The mission plan, mission task, or mission objective has been cancelled.
+              CANCELING, // The mission plan, mission task, or mission objective is in the process of being cancelled.
+              COMPLETED, // The mission plan, mission task, or mission objective been completed. Collection tasks are considered complete when the resulting product is processed and disseminated. All other tasks are complete once the vehicle transitions from the executing state (vehicle releases weapon, stops jamming, etc.).
+              EXECUTING, // The mission plan, mission task, or mission objective has begun execution (slews sensor and begins collect, begins to prepare weapons for release, starts jamming, etc.). This state defines the point of no return for a mission plan, mission task, or mission objective. Once transitioning to this state, the mission plan, mission task, or mission objective can no longer be reallocated to another UxS or vehicle unless it transitions to the FAILED state.
+              EXECUTION_APPROVED, // The mission plan, mission task, or mission objective been approved for execution.
+              FAILED, // The mission plan, mission task, or mission objective has failed. The UxS node has determined that no vehicles within the UxS can achieve the mission plan, mission task, or mission objective.
+              NOT_PLANNED, // The mission plan, mission task, or mission objective has not been planned.
+              NOT_QUEUED, // The mission plan, mission task, or mission objective has not been queued for execution.
+              PAUSED, // Used to pause the execution of an approved mission plan, approved mission task, or approved mission objective.
+              PAUSING, // The mission plan, mission task, or mission objective is in the process of being paused.
+              PLANNED, // The mission plan, mission task, or mission objective has been planned, indicating that it is part of an approved and active detailed mission plan.
+              PLANNING, // The mission plan, mission task, or mission objective is still in the planning state.
+              QUEUED, // The mission plan, mission task, or mission objective has been queued for execution.
+              QUEUING, // The mission plan, mission task, or mission objective is being queued (e.g., uploading to vehicle) for execution.
+              RESTARTING, // The mission plan, mission task, or mission objective is in the process of being restarted.
+              RESUMING // The mission plan, mission task, or mission objective is in the process of being resumed.
+          };
+        };
+
+        module NavigationSolutionEnumModule
+        {
+          enum NavigationSolutionEnumType
+          {
+              ESTIMATED, // Interpolated, projected, and/or produced through computation.
+              GROUND_TRUTH, // Navigation solution from an external source that is considered to be correct.
+              MEASURED // Provided by a sensing system.
+          };
+        };
+
+        module ObjectiveExecutorControlEnumModule
+        {
+          enum ObjectiveExecutorControlEnumType
+          {
+              EXECUTE, // Execute the objective.
+              PAUSE, // Pause the execution of the objective.
+              RESUME // Resume the execution of a paused objective.
+          };
+        };
+
+        module ObjectiveExecutorStateEnumModule
+        {
+          enum ObjectiveExecutorStateEnumType
+          {
+              CANCELED, // The objective has been canceled.
+              CANCELING, // The objective is in the process of being canceled.
+              COMPLETED, // The objective been completed. Collection tasks are considered complete when the resulting product is processed and disseminated. All other tasks are complete once the vehicle transitions from the executing state (vehicle releases weapon, stops jamming, etc.).
+              EXECUTING, // The objective has begun execution (slews sensor and begins collect, begins to prepare weapons for release, starts jamming, etc.).
+              FAILED, // The objective has failed.
+              MODIFYING, // The objective executing is being modified.
+              PAUSED, // The objective's execution is paused.
+              PAUSING, // The objective is in the process of being paused.
+              QUEUED, // The system has queued the objective for future execution.
+              RESUMING // The objective is in the process of being resumed.
+          };
+        };
+
+        module ObjectiveExecutorStateReasonEnumModule
+        {
+          enum ObjectiveExecutorStateReasonEnumType
+          {
+              BUS_MSG_DISPOSE, // Indicates transition to CANCELING state due to dispose message.
+              BUS_MSG_UPDATE, // Indicates transition to MODIFYING state due to modification of bus message with same key as executing objective.
+              CANNOT_PERFORM_UNDER_CONSTRAINTS, // Indicates a transition to FAILED due to current system constraints.
+              COMMAND_VALIDATION_FAILED, // Indicates a transition to the FAILED state when the command contains missing, out-of-bounds, or otherwise invalid parameters.
+              COMMANDED, // Indicates transition due to incoming command.
+              INTERNAL_FAILURE, // Indicates transition to FAILED based on failure within the objective executor.
+              LOWER_SERVICE_FAILED, // Indicates transition to FAILED based on failure within lower level service leveraged by this objective executor.
+              LOWER_SERVICE_INTERRUPTED, // Indicates transition to FAILED or PAUSING based on lower level service being interrupted by higher priority request.
+              LOWER_SERVICE_REJECTED, // Indicates transition to FAILED based on rejection by lower level service when it was commanded by this objective executor.
+              LOWER_SERVICE_TIMEOUT, // Indicates transition to FAILED based on unresponsiveness of lower level service leveraged by this objective executor.
+              OBJECTIVE_REPLACED, // Indicates transition to FAILED due to another objective arriving at the objective executor.
+              SUCCEEDED // Indicates the conditions to proceed to this state have been met and a normal state transition has occurred.
+          };
+        };
+
+        module OperationalModeControlEnumModule
+        {
+          enum OperationalModeControlEnumType
+          {
+              AUTONOMOUS, // Sets the operational mode to an unmanned mode where the associated commands that are from the onboard autonomy are allowed to execute.
+              REMOTE, // Sets the operational mode to an unmanned mode where only the associated commands that are from the remote operator are allowed to execute.
+              STANDBY // Sets the operational mode to an unmanned mode where none of the associated commands are allowed to execute.
+          };
+        };
+
+        module OperationalModeEnumModule
+        {
+          enum OperationalModeEnumType
+          {
+              AUTONOMOUS, // Operating in an unmanned mode where operational commands from onboard autonomy are executed.
+              MANUAL, // Operating in a manned mode where no operational commands can be executed.
+              REMOTE, // Operating in an unmanned mode where only operational commands from a remote operator are allowed to execute.
+              STANDBY // Operating in an unmanned mode where no operational commands are allowed to execute.
+          };
+        };
+
+        module PassiveContactFeatureEnumModule
+        {
+          enum PassiveContactFeatureEnumType
+          {
+              BROADBAND, // Contact has a wide frequence spectrum.
+              NARROWBAND, // Contact has a narrow frequency spectrum.
+              TRANSIENT // Contact is transitory.
+          };
+        };
+
+        module PathWayEnumModule
+        {
+          enum PathWayEnumType
+          {
+              HISTORICAL_GLOBAL, // Historical global path
+              HISTORICAL_LOCAL, // Historical local path
+              PLANNED_GLOBAL, // Planned global path
+              PLANNED_LOCAL // Planned local path
+          };
+        };
+
+        module PowerOnTestEnumModule
+        {
+          enum PowerOnTestEnumType
+          {
+              DISABLED_NO_TEST, // Indicates that the power on test is disabled, and/or that there is no power on test.
+              FULL_TEST, // Indicates a full power on test.
+              QUICK_TEST // Indicates a quick power on test.
+          };
+        };
+
+        module PowerPlantStateEnumModule
+        {
+          enum PowerPlantStateEnumType
+          {
+              FAULT, // Faulted
+              OFF, // Off
+              ON // On
+          };
+        };
+
+        module PowerStateEnumModule
+        {
+          enum PowerStateEnumType
+          {
+              EMERGENCY_POWER, // Power for the resource is requested/reported to use emergency power.
+              POWER_OFF, // Power for the resource is requested/reported to be off.
+              POWER_ON, // Power for the resource is requested/reported to be on.
+              POWER_STANDBY // Power for the resource is requested/reported to use/be in stand-by mode or not fully powered up: for example if power is provided only to enable communications to the resource.
+          };
+        };
+
+        module ProcessingUnitEnumModule
+        {
+          enum ProcessingUnitEnumType
+          {
+              CPU, // Central Processing Unit
+              DSP, // Digital Signal Processing Unit
+              FPGA, // Field-Programmable Gate Array Unit
+              GPU, // Graphics Processing Unit
+              NPU, // Neural Processing Unit
+              PhPU, // Photonic Processing Unit
+              PPU, // Physics Processing Unit
+              QPU, // Quantum Processing Unit
+              SPU, // Synergistic Processing Unit
+              TPU, // Tensor Processing Unit
+              VPU // Vision Processing Unit
+          };
+        };
+
+        module PumpStateEnumModule
+        {
+          enum PumpStateEnumType
+          {
+              FAULT, // Faulted
+              OFF, // Off
+              ON_FORWARD, // Running forward direction
+              ON_REVERSE // Running reverse direction
+          };
+        };
+
+        module ReferenceFrameOriginEnumModule
+        {
+          enum ReferenceFrameOriginEnumType
+          {
+              BOW_WATERLINE_INTERSECTION, // Bow Waterline Intersection.
+              CENTER_OF_BUOYANCY, // Center of buoyancy.
+              CENTER_OF_GRAVITY, // Center of gravity.
+              INS_LOCATION, // INS Location
+              KEEL_TRANSOM_INTERSECTION // Keel transom intersection
+          };
+        };
+
+        module SourceIndicatorEnumModule
+        {
+          enum SourceIndicatorEnumType
+          {
+              ACTUAL, // Source of data is actual sensor data.
+              GROUND_TRUTH, // Source of data is ground truth.
+              SIMULATED, // Source of data is simulated sensor data.
+              TENTATIVE // Source of data is tentative sensor data.
+          };
+        };
+
+        module SpecialManeuverIndicatorEnumModule
+        {
+          enum SpecialManeuverIndicatorEnumType
+          {
+              ENGAGED, // The vessel is engaged in a special maneuver.
+              NOT_AVAILABLE, // The contact source is explicitly reporting that the special maneuver indicator is not available.
+              NOT_ENGAGED, // The vessel is not engaged in a special maneuver.
+              NOT_PROVIDED // The contact source is not able to determine this information.
+          };
+        };
+
+        module TamperDetectionStateEnumModule
+        {
+          enum TamperDetectionStateEnumType
+          {
+              ALWAYS_ENABLED_OR_CLEAR, // ALWAYS_ENABLED for reporting data; CLEAR for clearing the previous activities
+              DISABLED, // Disabled
+              ENABLED // Enabled
+          };
+        };
+
+        module TFOMEnumModule
+        {
+          enum TFOMEnumType
+          {
+              TFOM_1, // less than or equal to 1 nanosecond
+              TFOM_2, // greater than 1 nanosecond and less than or equal to 10 nanoseconds
+              TFOM_3, // greater than 10 nanoseconds and less than or equal to 100 nanoseconds
+              TFOM_4, // greater than 100 nanoseconds and less than or equal to 1 microsecond
+              TFOM_5, // greater than 1 microsecond and less than or equal to 10 microseconds
+              TFOM_6, // greater than 10 microseconds and less than or equal to 100 microseconds
+              TFOM_7, // greater than 100 microseconds and less than or equal to 1 millisecond
+              TFOM_8, // greater than 1 millisecond and less than or equal to 10 milliseconds
+              TFOM_9 // greater than 10 milliseconds
+          };
+        };
+
+        module TrackCategoryEnumModule
+        {
+          enum TrackCategoryEnumType
+          {
+              ADS_B_DIRECTIONAL_AIR, // Definition to be defined
+              ADS_B_DIRECTIONAL_SURFACE, // Definition to be defined
+              ADS_B_NONDIRECTIONAL_AIR, // Definition to be defined
+              ADS_B_NONDIRECTIONAL_SURFACE, // Definition to be defined
+              AIR, // Air
+              ASW, // Definition to be defined
+              EMERGENCY, // Emergency
+              EW, // Definition to be defined
+              LAND_POINT, // Land Point
+              LAND_TRACK, // Land Track
+              MP_AREA, // Definition to be defined
+              MP_LINE, // Definition to be defined
+              NA, // Definition to be defined
+              NO_STATEMENT, // Definition to be defined
+              POINTER, // Definition to be defined
+              REF_POINT, // Definition to be defined
+              SP_AREA, // Definition to be defined
+              SPACE, // Space
+              SUB_SURFACE, // Below the surface
+              SURFACE // Surface
+          };
+        };
+
+        module TrackIdentityEnumModule
+        {
+          enum TrackIdentityEnumType
+          {
+              ASSUMED_FRIEND, // A track which is assumed to be a friend because of its characteristics, behavior, or origin
+              FAKER, // A friendly track acting as a "suspect" track for exercise purposes only
+              FRIEND, // A track belonging to a declared friendly nation
+              HOSTILE, // A track which is eligible to be engaged
+              JOKER, // A friendly track acting as a "hostile" track for exercise purposes only
+              NEUTRAL, // A track whose characteristics, behavior, origin, or nationality indicate that it is neither supporting nor opposing friendly forces
+              PENDING, // A track for which identification is to be determined
+              SUSPECT, // A track which is potentially hostile because of its characteristics, behavior, origin or nationality
+              UNKNOWN // An evaluated track which has not been identified
+          };
+        };
+
+        module TriggerStateEnumModule
+        {
+          enum TriggerStateEnumType
+          {
+              CANCEL, // A canceling state.
+              PAUSE, // A pausing state.
+              PLAN, // A planning state.
+              QUEUE, // A queueing state.
+              RESTART, // A restarting state.
+              RESUME // A resuming state.
+          };
+        };
+
+        module VehicleSpeedModeEnumModule
+        {
+          enum VehicleSpeedModeEnumType
+          {
+              LRC, // Long Range Cruise. A speed that optimizes time, distance and fuel consumption for a vehicle (definition of "optimized" is subjective. Example: for a planing hull, this is usually the minimum planing speed, even though lower speeds can achieve longer endurance or range.)
+              MEC, // Maximum Endurance Cruise. The speed that maximizes the time a vehicle can travel.
+              MRC, // Maximum Range Cruise. The speed that maximizes the distance a vehicle can travel.
+              SLOW, // Slow speed. Minimum speed at which the vehicle can operate (definition of "operate" is subjective. Example: minimum speed to achieve maneuverability, engine idle speed/gear clutched in "idle ahead", etc.)
+              VEHICLE_SPECIFIC // Preset speed for the vehicle, that is in the range of speeds for the subject vehicle
+          };
+        };
+
+        module VisualClassificationEnumModule
+        {
+          enum VisualClassificationEnumType
+          {
+              AID_TO_NAVIGATION_CHANNEL_MARKER, // Channel marker used as an aid to navigation.
+              AID_TO_NAVIGATION_GENERAL, // General aid to navigation.
+              AID_TO_NAVIGATION_LARGE_BUOY, // Large buoy used as an aid to navigation.
+              AID_TO_NAVIGATION_LIGHTHOUSE, // Lighthouse used as an aid to navigation.
+              AID_TO_NAVIGATION_SMALL_BUOY, // Small buoy used as an aid to navigation.
+              LARGE_GENERAL_OBSTACLE, // Large general obstacle.
+              LARGE_VESSEL_CARGO, // Large cargo vehicle.
+              LARGE_VESSEL_GENERAL, // Large general vehicle.
+              LARGE_VESSEL_MILITARY, // Large military vehicle.
+              LARGE_VESSEL_OTHER, // Large vehicle that does not fit into other LARGE_VESSEL categories.
+              LARGE_VESSEL_PASSENGER, // Large passenger vehicle.
+              MEDIUM_VESSEL_FISHING, // Fishing vehicle.
+              MEDIUM_VESSEL_GENERAL, // Medium general vehicle.
+              MEDIUM_VESSEL_MILITARY, // Medium military vehicle.
+              MEDIUM_VESSEL_OTHER, // Medium vehicle that does not fit into other MEDIUM_VESSEL categories.
+              MEDIUM_VESSEL_TUG, // Tug vehicle.
+              MEDIUM_VESSEL_TUG_IN_TOW, // Tug vehicle towing another vehicle.
+              MEDIUM_VESSEL_YACHT, // Yacht.
+              SAILBOAT, // Sailboat.
+              SMALL_GENERAL_OBSTACLE, // Small general obstacle.
+              SMALL_VESSEL_GENERAL, // Small general vehicle.
+              SMALL_VESSEL_JET_SKI, // Jet ski.
+              SMALL_VESSEL_MILITARY, // Small military vehicle.
+              SMALL_VESSEL_OTHER, // Small vehicle that does not fit into other SMALL_VESSEL categories.
+              SMALL_VESSEL_POWER_BOAT // Power boat.
+          };
+        };
+
+        module WaterTurnDirectionEnumModule
+        {
+          enum WaterTurnDirectionEnumType
+          {
+              LEFT_TURN, // The vehicle will make left turns.
+              RIGHT_TURN // The vehicle will make right turns.
+          };
+        };
+
+        module WaterZoneKindEnumModule
+        {
+          enum WaterZoneKindEnumType
+          {
+              INSIDE, // Defines a zone that the vehicle is required to stay inside.
+              OUTSIDE // Defines a zone that the vehicle is required to stay outside.
+          };
+        };
+
+        module WaypointStateEnumModule
+        {
+          enum WaypointStateEnumType
+          {
+              ACHIEVED, // Waypoint is complete and achieved within tolerance.
+              COMPLETED, // Waypoint is complete, but not achieved within tolerance.
+              EXECUTING, // Waypoint is executing.
+              FAILED, // Waypoint failed to complete.
+              QUEUED // Waypoint is queued for execution.
+          };
+        };
+
+
+    };
+  };
+};
+
+#endif // _LDM_MDE_REFINEMENTS_ENUMERATIONSETS_MARITIMEENUMERATIONSETS
+

@@ -1,0 +1,51 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ORIENTATION_MAGNETICDEVIATIONTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ORIENTATION_MAGNETICDEVIATIONTYPE
+
+#include "UMAA/Common/Measurement/Measurements.idl"
+module UMAA
+{
+  module Common
+  {
+    module Orientation
+    {
+      /**
+        * This structure is used to describe the induced magnetic deviation at a specific heading for the vehicle.
+        */
+      @nested
+      struct MagneticDeviationType
+      {
+      // The vehicle heading with respect to true north.
+      UMAA::Common::Measurement::HeadingTrueNorthAngle heading;
+
+      // The difference in angle between measured magnetic north and actual magnetic north on the horizontal plane as a result of the vehicle's material properties.
+      UMAA::Common::Measurement::MagneticVariation magneticDeviation;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ORIENTATION_MAGNETICDEVIATIONTYPE
+

@@ -1,0 +1,78 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_SENSOR_MANAGEMENT_GPSSTATUS_GPSSATELLITETYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_SENSOR_MANAGEMENT_GPSSTATUS_GPSSATELLITETYPE
+
+#include "UMAA/Common/Enumeration/EnumerationSets.idl"
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
+module UMAA
+{
+  module SEM
+  {
+    module GPSStatus
+    {
+      /**
+        * Specifies an element that specifies the characteristics of a GPS satellite.
+        */
+      @nested
+      struct GPSSatelliteType
+      {
+      // The carrier-to-noise density at the antenna of the satellite.
+      UMAA::Common::PrimitiveConstrained::CarrierToNoiseDensityRatio antennaCarrierNoiseDensity;
+
+      // The azimuth of the satellite.
+      UMAA::Common::Measurement::Angle azimuth;
+
+      // The baseband carrier-to-noise density of the satellite.
+      UMAA::Common::PrimitiveConstrained::CarrierToNoiseDensityRatio basebandCarrierNoiseDensity;
+
+      // The carrier frequency of the signal tracked.
+      UMAA::Common::Measurement::RadioFrequencyHertz carrierFrequency;
+
+      // The constellation type of the satellite.
+      UMAA::Common::MaritimeEnumeration::GPSConstellationEnumModule::GPSConstellationEnumType constellationType;
+
+      // Whether the satellite has almanac data.
+      boolean containsAlmanacData;
+
+      // The elevation of the satellite.
+      UMAA::Common::Measurement::Angle elevation;
+
+      // Whether the satellite has ephemeris data.
+      boolean ephemerisData;
+
+      // The identification number for the satellite.
+      UMAA::Common::PrimitiveConstrained::NaturalNumberCount satelliteID;
+
+      // Whether the satellite was used in the calculation of the most recent position fix.
+      boolean usedInFix;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_SENSOR_MANAGEMENT_GPSSTATUS_GPSSATELLITETYPE
+

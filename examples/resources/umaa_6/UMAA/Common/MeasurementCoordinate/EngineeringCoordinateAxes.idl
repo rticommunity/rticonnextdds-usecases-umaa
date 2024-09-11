@@ -1,0 +1,60 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_BASISELEMENTS_PRIMITIVETYPES_COORDINATE_AXES_ENGINEERING_COORDINATE_AXES_ENGINEERINGCOORDINATEAXES
+#define _LDM_BASISELEMENTS_PRIMITIVETYPES_COORDINATE_AXES_ENGINEERING_COORDINATE_AXES_ENGINEERINGCOORDINATEAXES
+
+
+module UMAA
+{
+  module Common
+  {
+    module MeasurementCoordinate
+    {
+
+
+        const double Down_MIN = -50000.0;
+        const double Down_MAX = 50000.0;
+        typedef double Down; // axisAbbrev=Z axisDirection=down axisUnit=Meter maximumValue=50000 minimumValue=-50000 rangeMeaning=exact resolution=0.001
+
+        const double DownSpeed_MIN = -299792458.0;
+        const double DownSpeed_MAX = 299792458.0;
+        typedef double DownSpeed; // axisDirection=down axisUnit=MeterPerSecond maximumValue=299792458 minimumValue=-299792458 rangeMeaning=exact resolution=0.001 units=MeterPerSecond
+
+        const double EastSpeed_MIN = -299792458.0;
+        const double EastSpeed_MAX = 299792458.0;
+        typedef double EastSpeed; // axisDirection=east axisUnit=MeterPerSecond maximumValue=299792458 minimumValue=-299792458 rangeMeaning=exact resolution=0.001 units=MeterPerSecond
+
+        const double Forward_MIN = -20000000.0;
+        const double Forward_MAX = 20000000.0;
+        typedef double Forward; // axisAbbrev=X axisDirection=fore axisUnit=Meter maximumValue=20000000 minimumValue=-20000000 rangeMeaning=exact resolution=0.001
+
+        const double NorthSpeed_MIN = -299792458.0;
+        const double NorthSpeed_MAX = 299792458.0;
+        typedef double NorthSpeed; // axisDirection=north axisUnit=MeterPerSecond maximumValue=299792458 minimumValue=-299792458 rangeMeaning=exact resolution=0.001 units=MeterPerSecond
+
+
+    };
+  };
+};
+
+#endif // _LDM_BASISELEMENTS_PRIMITIVETYPES_COORDINATE_AXES_ENGINEERING_COORDINATE_AXES_ENGINEERINGCOORDINATEAXES
+

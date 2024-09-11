@@ -1,0 +1,78 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_SENSOR_MANAGEMENT_BASETYPE_FLSCONFIGTESTTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_SENSOR_MANAGEMENT_BASETYPE_FLSCONFIGTESTTYPE
+
+#include "UMAA/Common/Enumeration/EnumerationSets.idl"
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/MeasurementConstrained/MeasurementConstrainedTypes.idl"
+module UMAA
+{
+  module SEM
+  {
+    module BaseType
+    {
+      /**
+        * Specifies test configuration for the subsystem.
+        */
+      @nested
+      struct FLSConfigTestType
+      {
+      // Difference between the upper and lower frequencies for the receiver. Centered around the active frequency.
+      UMAA::Common::Measurement::FrequencyHertz activeBandwidth;
+
+      // Frequency used to center the active processing data stream.
+      UMAA::Common::Measurement::FrequencyHertz activeCenterFrequency;
+
+      // Attenuation required or power used by the transmitter.
+      UMAA::Common::Measurement::TransmitAttenuation attenuation;
+
+      // The difference between the upper and lower edges of the sonar beam.
+      UMAA::Common::MaritimeEnumeration::FLSBeamwidthEnumModule::FLSBeamwidthEnumType beamwidth;
+
+      // Difference between the upper and lower frequencies for the receiver. Centered around the passive frequency.
+      UMAA::Common::Measurement::FrequencyHertz passiveBandwidth;
+
+      // Frequency used to center the passive processing data stream.
+      UMAA::Common::Measurement::FrequencyHertz passiveCenterFrequency;
+
+      // Distance over which the sonar would like to make perceptions. Defines the maximum ping rate of the sonar.
+      UMAA::Common::Measurement::Distance range;
+
+      // Vertical steering Angle. Identical transmit and receive declination elevation.
+      UMAA::Common::MeasurementConstrained::AngleHalf steering;
+
+      // Indicates that the FLS will sweep from low to high frequencies.
+      boolean upSweep;
+
+      // The length of the transmitted waveform in time. The difference between beginning and end of transmission.
+      UMAA::Common::MaritimeEnumeration::FLSWaveformLengthEnumModule::FLSWaveformLengthEnumType waveformLength;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_SENSOR_MANAGEMENT_BASETYPE_FLSCONFIGTESTTYPE
+

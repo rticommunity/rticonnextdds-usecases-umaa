@@ -1,0 +1,71 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_GENERATORSPECS_GENERATORSPECSREPORTTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_GENERATORSPECS_GENERATORSPECSREPORTTYPE
+
+#include "UMAA/Common/IdentifierType.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
+module UMAA
+{
+  module EO
+  {
+    module GeneratorSpecs
+    {
+    
+      const string GeneratorSpecsReportTypeTopic = "UMAA::EO::GeneratorSpecs::GeneratorSpecsReportType";
+  
+      /**
+        * This structure is used to report the specifications of the generator of the vehicle.
+        */
+    
+      struct GeneratorSpecsReportType
+      {
+      // The maximum current supported by the generator.
+      UMAA::Common::Measurement::PowerBusCurrent maxCurrent;
+
+      // The maximum power this generator can produce.
+      UMAA::Common::Measurement::ElectricalPower maxPower;
+
+      // The name of the generator unit.
+      UMAA::Common::PrimitiveConstrained::StringShortDescription name;
+
+      // The amount of generated power over a long period of operation.
+      UMAA::Common::Measurement::ElectricalPower ratedPower;
+
+      // The highest voltage provided by the generator during normal operation.
+      UMAA::Common::Measurement::PowerBusVoltage ratedVoltage;
+
+      // The origination time of the data being conveyed in the message, or as close to the data or command generation time as is reasonably possible.
+      UMAA::Common::Measurement::DateTime timeStamp;
+
+      // The unique identifier of the originating source of the command interface.
+      @key UMAA::Common::IdentifierType source;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_GENERATORSPECS_GENERATORSPECSREPORTTYPE
+

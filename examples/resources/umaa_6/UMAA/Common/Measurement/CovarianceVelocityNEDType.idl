@@ -1,0 +1,63 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_REFINEMENTS_MEASUREMENTERRORS_COVARIANCEVELOCITYNEDTYPE
+#define _LDM_MDE_REFINEMENTS_MEASUREMENTERRORS_COVARIANCEVELOCITYNEDTYPE
+
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
+module UMAA
+{
+  module Common
+  {
+    module Measurement
+    {
+      /**
+        * Realizes ObservableError: an Entity that specifies a range of uncertainty for values of an Observable, usually an Observable associated with kinematics. They are used with a corresponding Observable as attributes of ResourceTypes which provide such state information. An ObservableError may be expressed as a lower and upper limit, delta values, or squares of the Observable, depending on the Frame of Reference and Coordinate Set used for the Observable. The number of values which constitutes the ObservableError is also dependent on the dimensionality of the Observable. Since Frame of Reference, Coordinates, and Dimensionality are determined in refinements specified in the Logical Data Model, the selection of attributes for specializations of this Entity are undefined in the CDM.
+        */
+      @nested
+      struct CovarianceVelocityNEDType
+      {
+      // Down-Down velocity-velocity error covariance.
+      @optional UMAA::Common::PrimitiveConstrained::CovarVelNED vdVd;
+
+      // East-Down velocity-velocity error covariance.
+      @optional UMAA::Common::PrimitiveConstrained::CovarVelNED veVd;
+
+      // East-East velocity-velocity error covariance.
+      UMAA::Common::PrimitiveConstrained::CovarVelNED veVe;
+
+      // North-Down velocity-velocity error covariance.
+      @optional UMAA::Common::PrimitiveConstrained::CovarVelNED vnVd;
+
+      // North-East velocity-velocity error covariance.
+      @optional UMAA::Common::PrimitiveConstrained::CovarVelNED vnVe;
+
+      // North-North velocity-velocity error covariance.
+      UMAA::Common::PrimitiveConstrained::CovarVelNED vnVn;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_REFINEMENTS_MEASUREMENTERRORS_COVARIANCEVELOCITYNEDTYPE
+

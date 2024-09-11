@@ -1,0 +1,87 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_ANCHORSPECS_ANCHORSPECSREPORTTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_ANCHORSPECS_ANCHORSPECSREPORTTYPE
+
+#include "UMAA/Common/IdentifierType.idl"
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
+module UMAA
+{
+  module EO
+  {
+    module AnchorSpecs
+    {
+    
+      const string AnchorSpecsReportTypeTopic = "UMAA::EO::AnchorSpecs::AnchorSpecsReportType";
+  
+      /**
+        * This structure is used to define the specification parameters of the anchor.
+        */
+    
+      struct AnchorSpecsReportType
+      {
+      // A description of the anchor.
+      UMAA::Common::PrimitiveConstrained::StringShortDescription anchorDescription;
+
+      // Defines the anchor holding power as determined by full scale anchor drag tests in a firm sand bottom.
+      UMAA::Common::Measurement::Mass anchorHoldingPower;
+
+      // The anchor holding power ratio is the ratio of the anchor holding power to the anchor size.
+      UMAA::Common::PrimitiveConstrained::Ratio anchorHoldingPowerRatio;
+
+      // Defines the type of anchor (e.g., commercial stockless, standard navy stockless, etc.).
+      UMAA::Common::MaritimeEnumeration::AnchorKindEnumModule::AnchorKindEnumType anchorKind;
+
+      // Defines the anchor location (i.e., bower anchor, stern anchor, keel anchor).
+      UMAA::Common::MaritimeEnumeration::AnchorLocationEnumModule::AnchorLocationEnumType anchorLocation;
+
+      // Defines the anchor size and is expressed in terms of the mass of the anchor.
+      UMAA::Common::Measurement::Mass anchorSize;
+
+      // The length of chain/rope that can be paid out by the anchoring system.
+      UMAA::Common::Measurement::Distance rodeLength;
+
+      // For a chain rode it defines the link or chain size (the nominal diameter of the link material in the grip area). For a rope rode it defines the diameter of the rope.
+      UMAA::Common::Measurement::Distance rodeSize;
+
+      // The rode type of the anchoring system.
+      UMAA::Common::MaritimeEnumeration::AnchorRodeEnumModule::AnchorRodeEnumType rodeType;
+
+      // The rated working load limit for the chain/rope of the anchoring system.
+      UMAA::Common::Measurement::Force rodeWorkingLoadLimit;
+
+      // The origination time of the data being conveyed in the message, or as close to the data or command generation time as is reasonably possible.
+      UMAA::Common::Measurement::DateTime timeStamp;
+
+      // The unique identifier of the originating source of the command interface.
+      @key UMAA::Common::IdentifierType source;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_ANCHORSPECS_ANCHORSPECSREPORTTYPE
+

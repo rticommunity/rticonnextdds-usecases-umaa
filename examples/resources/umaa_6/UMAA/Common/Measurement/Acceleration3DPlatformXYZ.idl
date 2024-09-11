@@ -1,0 +1,54 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_REFINEMENTS_MEASUREMENTSETS_ACCELERATION3DPLATFORMXYZ
+#define _LDM_MDE_REFINEMENTS_MEASUREMENTSETS_ACCELERATION3DPLATFORMXYZ
+
+#include "UMAA/Common/Measurement/Measurements.idl"
+module UMAA
+{
+  module Common
+  {
+    module Measurement
+    {
+      /**
+        * 
+        */
+      @nested
+      struct Acceleration3DPlatformXYZ
+      {
+      // Specifies the vehicle's rate of change of velocity with respect to time in the x-axis.
+      UMAA::Common::Measurement::AccelerationScalar xAccel;
+
+      // Specifies the vehicle's rate of change of velocity with respect to time in the y-axis.
+      UMAA::Common::Measurement::AccelerationScalar yAccel;
+
+      // Specifies the vehicle's rate of change of velocity with respect to time in the z-axis.
+      UMAA::Common::Measurement::AccelerationScalar zAccel;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_REFINEMENTS_MEASUREMENTSETS_ACCELERATION3DPLATFORMXYZ
+

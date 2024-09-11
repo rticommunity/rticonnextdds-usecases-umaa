@@ -1,0 +1,109 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_WINDSTATUS_WINDREPORTTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_WINDSTATUS_WINDREPORTTYPE
+
+#include "UMAA/Common/IdentifierType.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+module UMAA
+{
+  module SA
+  {
+    module WindStatus
+    {
+    
+      const string WindReportTypeTopic = "UMAA::SA::WindStatus::WindReportType";
+  
+      /**
+        * This structure is used to report the current wind status.
+        */
+    
+      struct WindReportType
+      {
+      // The average direction from which the wind blows, measured with respect to ship's centerline. The average is taken over some time window defined by the service provider.
+      @optional UMAA::Common::Measurement::RelativeAngle relativeAverageDirection;
+
+      // The average magnitude of the relative wind. The average is taken over some time window defined by the service provider.
+      @optional UMAA::Common::Measurement::Speed relativeAverageSpeed;
+
+      // The instantaneous direction from which the wind blows, measured with respect to ship's centerline.
+      @optional UMAA::Common::Measurement::RelativeAngle relativeInstantaneousDirection;
+
+      // The instantaneous magnitude of the relative wind.
+      @optional UMAA::Common::Measurement::Speed relativeInstantaneousSpeed;
+
+      // The maximum direction from which the wind blows, measured with respect to ship's centerline. The maximum is taken over some time window defined by the service provider. See relativeMinimumDirection for additional details.
+      @optional UMAA::Common::Measurement::RelativeAngle relativeMaximumDirection;
+
+      // The maximum magnitude of the relative wind. The maximum is taken over some time window defined by the service provider.
+      @optional UMAA::Common::Measurement::Speed relativeMaximumSpeed;
+
+      // The minimum direction from which the wind blows, measured with respect to ship's centerline. The minimum is taken over some time window defined by the service provider. The overall direction of the wind is contained between the relativeMinimumDirection and relativeMaximumDirection direction always traveling clockwise around the circle. Therefore if the relativeMinimumDirection value is greater than the relativeMaximumDirection value, it is assumed the angle crosses 0 degrees.
+      @optional UMAA::Common::Measurement::RelativeAngle relativeMinimumDirection;
+
+      // The minimum magnitude of the relative wind. The minimum is taken over some time window defined by the service provider.
+      @optional UMAA::Common::Measurement::Speed relativeMinimumSpeed;
+
+      // The component of the wind normal to the ship. A negative value indicates a port crosswind and a positive value indicates a starboard crosswind.
+      @optional UMAA::Common::Measurement::Speed straightDeckCrossSpeed;
+
+      // The component of the wind that is parallel to the ship. A negative value indicates a tailwind and a positive value indicates a headwind.
+      @optional UMAA::Common::Measurement::Speed straightDeckHeadSpeed;
+
+      // The average direction from which the wind blows, measured from true north. The average is taken over some time window defined by the service provider.
+      @optional UMAA::Common::Measurement::AzimuthTrueNorthAngle trueAverageDirection;
+
+      // The average magnitude of the true wind. The average is taken over some time window defined by the service provider.
+      @optional UMAA::Common::Measurement::GroundSpeed trueAverageSpeed;
+
+      // The instantaneous direction from which the wind blows, measured from true north.
+      @optional UMAA::Common::Measurement::AzimuthTrueNorthAngle trueInstantaneousDirection;
+
+      // The instantaneous magnitude of the true wind.
+      @optional UMAA::Common::Measurement::GroundSpeed trueInstantaneousSpeed;
+
+      // The maximum direction from which the wind blows, measured from true north. The maximum is taken over some time window defined by the service provider. See trueMinimumDirection for additional details.
+      @optional UMAA::Common::Measurement::AzimuthTrueNorthAngle trueMaximumDirection;
+
+      // The maximum magnitude of the true wind. The maximum is taken over some time window defined by the service provider.
+      @optional UMAA::Common::Measurement::GroundSpeed trueMaximumSpeed;
+
+      // The minimum direction from which the wind blows, measured from true north. The minimum is taken over some time window defined by the service provider. The overall direction of the wind is contained between the trueMinimumDirection and trueMaximumDirection direction always traveling clockwise around the circle. Therefore if the trueMinimumDirection value is greater than the trueMaximumDirection value, it is assumed the angle crosses 0 degrees.
+      @optional UMAA::Common::Measurement::AzimuthTrueNorthAngle trueMinimumDirection;
+
+      // The minimum magnitude of the true wind. The minimum is taken over some time window defined by the service provider.
+      @optional UMAA::Common::Measurement::GroundSpeed trueMinimumSpeed;
+
+      // The origination time of the data being conveyed in the message, or as close to the data or command generation time as is reasonably possible.
+      UMAA::Common::Measurement::DateTime timeStamp;
+
+      // The unique identifier of the originating source of the command interface.
+      @key UMAA::Common::IdentifierType source;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_WINDSTATUS_WINDREPORTTYPE
+

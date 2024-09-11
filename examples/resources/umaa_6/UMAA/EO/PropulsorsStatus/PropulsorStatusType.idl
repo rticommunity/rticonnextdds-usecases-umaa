@@ -1,0 +1,57 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_PROPULSORSSTATUS_PROPULSORSTATUSTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_PROPULSORSSTATUS_PROPULSORSTATUSTYPE
+
+#include "UMAA/Common/Measurement/Measurements.idl"
+module UMAA
+{
+  module EO
+  {
+    module PropulsorsStatus
+    {
+      /**
+        * This structure is used to report the current (i.e. feedback) propulsor configuration status values.
+        */
+      @nested
+      struct PropulsorStatusType
+      {
+      // Provides the current angle of a propulsor with one or two articulations.
+      @optional UMAA::Common::Measurement::GammaAnglePropulsor gamma;
+
+      // Provides the current angle of the propeller for propulsors with a variable pitch propeller.
+      @optional UMAA::Common::Measurement::PropellerPitchAnglePropulsor propellerPitch;
+
+      // Provides the current speed of the propulsor.
+      UMAA::Common::Measurement::FrequencyRPM propulsion;
+
+      // Provides the current angle of a propulsor with one or two articulations.
+      @optional UMAA::Common::Measurement::RhoAnglePropulsor rho;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_PROPULSORSSTATUS_PROPULSORSTATUSTYPE
+

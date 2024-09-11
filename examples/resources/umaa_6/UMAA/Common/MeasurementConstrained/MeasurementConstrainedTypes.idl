@@ -1,0 +1,44 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_BASISELEMENTS_PRIMITIVETYPES_CONSTRAINEDTYPES_MEASUREMENTCONSTRAINEDTYPES
+#define _LDM_BASISELEMENTS_PRIMITIVETYPES_CONSTRAINEDTYPES_MEASUREMENTCONSTRAINEDTYPES
+
+
+module UMAA
+{
+  module Common
+  {
+    module MeasurementConstrained
+    {
+
+
+        const double AngleHalf_MIN = -1.5707963267948966;
+        const double AngleHalf_MAX =  1.5707963267948966;
+        typedef double AngleHalf; // maxInclusive=1.5707963267948966 minInclusive=-1.5707963267948966 units=Radian
+
+
+    };
+  };
+};
+
+#endif // _LDM_BASISELEMENTS_PRIMITIVETYPES_CONSTRAINEDTYPES_MEASUREMENTCONSTRAINEDTYPES
+

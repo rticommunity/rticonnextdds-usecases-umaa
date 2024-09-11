@@ -1,0 +1,72 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ORIENTATION_DIRECTIONVARIANTTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ORIENTATION_DIRECTIONVARIANTTYPE
+
+#include "UMAA/Common/Orientation/DirectionCurrentVariantType.idl"
+#include "UMAA/Common/Orientation/DirectionMagneticNorthVariantType.idl"
+#include "UMAA/Common/Orientation/DirectionTrueNorthVariantType.idl"
+#include "UMAA/Common/Orientation/DirectionWindVariantType.idl"
+module UMAA
+{
+  module Common
+  {
+    module Orientation
+    {
+        enum DirectionVariantTypeEnum
+        {
+            DIRECTIONCURRENTVARIANT_D,
+            DIRECTIONMAGNETICNORTHVARIANT_D,
+            DIRECTIONTRUENORTHVARIANT_D,
+            DIRECTIONWINDVARIANT_D
+        };
+
+        @nested
+        union DirectionVariantTypeUnion switch (DirectionVariantTypeEnum)
+        {
+              case DIRECTIONCURRENTVARIANT_D:
+                UMAA::Common::Orientation::DirectionCurrentVariantType DirectionCurrentVariantVariant;
+              case DIRECTIONMAGNETICNORTHVARIANT_D:
+                UMAA::Common::Orientation::DirectionMagneticNorthVariantType DirectionMagneticNorthVariantVariant;
+              case DIRECTIONTRUENORTHVARIANT_D:
+                UMAA::Common::Orientation::DirectionTrueNorthVariantType DirectionTrueNorthVariantVariant;
+              case DIRECTIONWINDVARIANT_D:
+                UMAA::Common::Orientation::DirectionWindVariantType DirectionWindVariantVariant;
+        };
+      
+      /**
+        * Direction of the vehicle motion or pattern being performed.
+        */
+      @nested
+      struct DirectionVariantType
+      {
+      // Union to capture specializations of DirectionVariantType
+      DirectionVariantTypeUnion DirectionVariantTypeSubtypes;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ORIENTATION_DIRECTIONVARIANTTYPE
+

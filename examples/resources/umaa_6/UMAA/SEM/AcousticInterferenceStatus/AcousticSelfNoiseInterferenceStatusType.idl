@@ -1,0 +1,61 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_SENSOR_MANAGEMENT_ACOUSTICINTERFERENCESTATUS_ACOUSTICSELFNOISEINTERFERENCESTATUSTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_SENSOR_MANAGEMENT_ACOUSTICINTERFERENCESTATUS_ACOUSTICSELFNOISEINTERFERENCESTATUSTYPE
+
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+module UMAA
+{
+  module SEM
+  {
+    module AcousticInterferenceStatus
+    {
+      /**
+        * The structure is used to report the parameters of acoustic self noise interference.
+        */
+      @nested
+      struct AcousticSelfNoiseInterferenceStatusType
+      {
+      // The difference between the upper and lower frequencies for the interference signal.
+      @optional UMAA::Common::Measurement::FrequencyHertz bandwidth;
+
+      // Center of the upper and lower frequencies of the interference signal.
+      @optional UMAA::Common::Measurement::FrequencyHertz centerFrequency;
+
+      // Expected duration of the interference.
+      UMAA::Common::Measurement::DurationSeconds duration;
+
+      // Start time of interference.
+      UMAA::Common::Measurement::DateTime time;
+
+      // Type of interference. Used to help determine if the sonar needs to eliminate the time window of the interference.
+      @optional UMAA::Common::MaritimeEnumeration::InterferenceEnumModule::InterferenceEnumType type;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_SENSOR_MANAGEMENT_ACOUSTICINTERFERENCESTATUS_ACOUSTICSELFNOISEINTERFERENCESTATUSTYPE
+

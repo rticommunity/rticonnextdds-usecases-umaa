@@ -1,0 +1,55 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_STATETRIGGERTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_STATETRIGGERTYPE
+
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+module UMAA
+{
+  module MM
+  {
+    module BaseType
+    {
+      /**
+        * This structure is used to specify a mechanism that attempts to initiate a planned state for a Mission Plan, Task Plan, or Objective when its defined conditional expression is determined to transition to logically true.
+        */
+      @nested
+      struct StateTriggerType
+      {
+      // Uniquely identifies the conditional.
+      UMAA::Common::Measurement::NumericGUID conditionalID;
+
+      // Specifies the number of times the trigger can be used. If not included, assumed to be infinite.
+      @optional UMAA::Common::Measurement::Count count;
+
+      // Specifies the state of the trigger.
+      UMAA::Common::MaritimeEnumeration::TriggerStateEnumModule::TriggerStateEnumType state;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_STATETRIGGERTYPE
+

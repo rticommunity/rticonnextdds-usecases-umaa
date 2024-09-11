@@ -1,0 +1,64 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_BALLASTTANK_BALLASTPUMPFLOWRATETYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_BALLASTTANK_BALLASTPUMPFLOWRATETYPE
+
+#include "UMAA/EO/BallastTank/MassBallastFlowRateType.idl"
+#include "UMAA/EO/BallastTank/VolumeBallastFlowRateType.idl"
+module UMAA
+{
+  module EO
+  {
+    module BallastTank
+    {
+        enum BallastPumpFlowRateTypeEnum
+        {
+            MASSBALLASTFLOWRATE_D,
+            VOLUMEBALLASTFLOWRATE_D
+        };
+
+        @nested
+        union BallastPumpFlowRateTypeUnion switch (BallastPumpFlowRateTypeEnum)
+        {
+              case MASSBALLASTFLOWRATE_D:
+                UMAA::EO::BallastTank::MassBallastFlowRateType MassBallastFlowRateVariant;
+              case VOLUMEBALLASTFLOWRATE_D:
+                UMAA::EO::BallastTank::VolumeBallastFlowRateType VolumeBallastFlowRateVariant;
+        };
+      
+      /**
+        * The desired flow rate to fill or empty the ballast pump.
+        */
+      @nested
+      struct BallastPumpFlowRateType
+      {
+      // Union to capture specializations of BallastPumpFlowRateType
+      BallastPumpFlowRateTypeUnion BallastPumpFlowRateTypeSubtypes;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_BALLASTTANK_BALLASTPUMPFLOWRATETYPE
+

@@ -1,0 +1,84 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ELEVATION_ELEVATIONREQUIREMENTVARIANTTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ELEVATION_ELEVATIONREQUIREMENTVARIANTTYPE
+
+#include "UMAA/Common/Measurement/AltitudeAGLRequirementVariantType.idl"
+#include "UMAA/Common/Measurement/AltitudeASFRequirementVariantType.idl"
+#include "UMAA/Common/Measurement/AltitudeGeodeticRequirementVariantType.idl"
+#include "UMAA/Common/Measurement/AltitudeMSLRequirementVariantType.idl"
+#include "UMAA/Common/Measurement/AltitudeRateASFRequirementVariantType.idl"
+#include "UMAA/Common/Measurement/DepthRateRequirementVariantType.idl"
+#include "UMAA/Common/Measurement/DepthRequirementVariantType.idl"
+module UMAA
+{
+  module Common
+  {
+    module Measurement
+    {
+        enum ElevationRequirementVariantTypeEnum
+        {
+            ALTITUDEAGLREQUIREMENTVARIANT_D,
+            ALTITUDEASFREQUIREMENTVARIANT_D,
+            ALTITUDEGEODETICREQUIREMENTVARIANT_D,
+            ALTITUDEMSLREQUIREMENTVARIANT_D,
+            ALTITUDERATEASFREQUIREMENTVARIANT_D,
+            DEPTHRATEREQUIREMENTVARIANT_D,
+            DEPTHREQUIREMENTVARIANT_D
+        };
+
+        @nested
+        union ElevationRequirementVariantTypeUnion switch (ElevationRequirementVariantTypeEnum)
+        {
+              case ALTITUDEAGLREQUIREMENTVARIANT_D:
+                UMAA::Common::Measurement::AltitudeAGLRequirementVariantType AltitudeAGLRequirementVariantVariant;
+              case ALTITUDEASFREQUIREMENTVARIANT_D:
+                UMAA::Common::Measurement::AltitudeASFRequirementVariantType AltitudeASFRequirementVariantVariant;
+              case ALTITUDEGEODETICREQUIREMENTVARIANT_D:
+                UMAA::Common::Measurement::AltitudeGeodeticRequirementVariantType AltitudeGeodeticRequirementVariantVariant;
+              case ALTITUDEMSLREQUIREMENTVARIANT_D:
+                UMAA::Common::Measurement::AltitudeMSLRequirementVariantType AltitudeMSLRequirementVariantVariant;
+              case ALTITUDERATEASFREQUIREMENTVARIANT_D:
+                UMAA::Common::Measurement::AltitudeRateASFRequirementVariantType AltitudeRateASFRequirementVariantVariant;
+              case DEPTHRATEREQUIREMENTVARIANT_D:
+                UMAA::Common::Measurement::DepthRateRequirementVariantType DepthRateRequirementVariantVariant;
+              case DEPTHREQUIREMENTVARIANT_D:
+                UMAA::Common::Measurement::DepthRequirementVariantType DepthRequirementVariantVariant;
+        };
+      
+      /**
+        * The desired elevation used for the vehicle.
+        */
+      @nested
+      struct ElevationRequirementVariantType
+      {
+      // Union to capture specializations of ElevationRequirementVariantType
+      ElevationRequirementVariantTypeUnion ElevationRequirementVariantTypeSubtypes;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ELEVATION_ELEVATIONREQUIREMENTVARIANTTYPE
+
