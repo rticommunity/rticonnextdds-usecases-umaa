@@ -1,0 +1,68 @@
+UNMANNED MARITIME AUTONOMY ARCHITECTURE (UMAA) INTERFACE DEFINITION LANGUAGE (IDL) SOFTWARE TERMS OF USE (TOU) AGREEMENT
+
+IMPORTANT - READ THIS ENTIRE AGREEMENT BEFORE ACCESSING THE UNMANNED MARITIME AUTONOMY ARCHITECTURE (UMAA) SOFTWARE, TECHNICAL DATA, OR OTHER DOCUMENTATION FROM THE Association for Unmanned Vehicle Systems International (AUVSI) WEBSITE (WEBSITE). BY ACCESSING THE UMAA INTERFACE DEFINITION LANGUAGE (IDL) SOFTWARE, TECHNICAL DATA, OR OTHER DOCUMENTATION FROM THE WEBSITE, YOU AGREE TO BE BOUND BY THE TERMS OF USE STATED IN THIS AGREEMENT. DO NOT ACCESS THE UMAA IDL SOFTWARE AND DATA FROM THE WEBSITE UNTIL YOU HAVE CAREFULLY READ, UNDERSTOOD AND AGREED TO THE FOLLOWING TERMS OF USE. IF YOU DO NOT AGREE, DO NOT USE THE WEBSITE TO ACCESS THE SOFTWARE AND DATA.
+
+Article 1.0 Definitions.
+
+1.1 SOFTWARE: The UNMANNED MARITIME AUTONOMY ARCHITECTURE (UMAA) IDL software.
+
+1.2 DATA: Technical data and other documentation related to the UMAA IDL.
+
+1.3 GOVERNMENT: The Government of the United States of America represented by NAVSEA, PEO USC, PMS 406.
+
+1.4 YOU: The individuals, entities, or individuals as agents of entities or individuals (and any successors or assignees) that access the WEBSITE, obtain the SOFTWARE and DATA from the WEBSITE, and consent to THIS AGREEMENT as memorialized downloading the SOFTWARE and DATA.
+
+1.5 AUTHORIZED PARTIES: Individuals, entities, or individuals as agents of entities or individuals, who have access to the WEBSITE and the SOFTWARE and DATA, subject to any access restrictions imposed by AUVSI.
+
+1.6 WEBSITE: The AUVSI PUBLIC WEBSITE.
+
+1.7 THIS AGREEMENT: This Terms of Use Agreement that applies to the SOFTWARE and DATA accessed through the WEBSITE.
+
+Article 2.0 Introduction.
+
+2.1 The WEBSITE is intended to provide a data repository where computer software, technical data and other documentation related to the UMAA IDL, (hereinafter, SOFTWARE and DATA) can be accessed and downloaded by AUTHORIZED PARTIES.
+
+2.2 The WEBSITE is operated and maintained and administered by AUVSI. The SOFTWARE and DATA is placed on this website under the authorization of the GOVERNMENT.
+
+2.3 The SOFTWARE and DATA are UNCLASSIFIED and released under Distribution Statement A and the GOVERNMENT is interested in presenting the SOFTWARE and DATA to YOU, so that interested and AUTHORIZED PARTIES may be provided notice of SOFTWARE and DATA.
+
+2.4 The GOVERNMENT wants to ensure that all versions of the SOFTWARE and DATA are made reasonably available to all AUTHORIZED PARTIES who may have potential to participate in any GOVERNMENT sponsored or commercial effort. However, the GOVERNMENT places the following limitations on the use of the SOFTWARE and DATA by YOU and AUTHORIZED PARTIES that access the WEBSITE and obtain the SOFTWARE and DATA.
+
+Article 3.0 User Responsibilities.
+
+3.1 YOU may download and use the SOFTWARE and DATA as a result of being granted open access to the WEBSITE by AUVSI. However, the USER SHALL FLOW DOWN THIS AGREEMENT TO ANY ENTITY TO WHICH IT PROVIDES THE SOFTWARE and DATA. This Agreement shall apply to any entity that receives the SOFTWARE and DATA.
+
+3.1.1 Notwithstanding the requirements of 3.1, the GOVERNMENT recognizes that YOU retain ownership of and copyright in any modifications to the SOFTWARE and DATA that you develop through derivation of the SOFTWARE and DATA from the WEBSITE. YOU retain your right to use, modify, release and display such SOFTWARE and DATA for your own purposes.
+
+3.2 YOU may not combine the SOFTWARE and DATA that is computer software with any other additional computer software, whether Open Source Software (OSS) or otherwise, in a manner that might: (i) create, or purport to create, any GOVERNMENT licensing obligations with respect to the resulting SOFTWARE and DATA/additional computer software combination; or (ii) grant, or purport to grant, to any third party any rights to or immunities under GOVERNMENT rights in the SOFTWARE and DATA or other GOVERNMENT intellectual property.
+
+3.3 YOU may use the SOFTWARE and DATA in the preparation of proposals in response to GOVERNMENT Requests for Proposals. Please be advised, however, to the extent possible, that the GOVERNMENT has made and will make the same SOFTWARE and DATA available to all other eligible parties that are interested in competing in the procurement. With respect to GOVERNMENT contracts that already exist or may exist in the future, the SOFTWARE and DATA may be issued as Government Furnished Information or Government Furnished Property without prior notice to YOU.
+
+3.4 The disclosure of the SOFTWARE and DATA to YOU does not imply any relinquishment of GOVERNMENT rights that the GOVERNMENT may have in such SOFTWARE and DATA. Your access to the WEBSITE does not constitute a grant of any license, including any grant of license under any trademark, patent, or copyright on the SOFTWARE and DATA, or application for same.
+
+Article 4. General.
+
+4.1 THE SOFTWARE AND DATA ARE PROVIDED TO YOU "AS IS" WITHOUT ANY WARRANTY OF ANY KIND, EITHER EXPRESSED, IMPLIED, OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, ANY WARRANTY THAT THE SOFTWARE AND DATA WILL CONFORM TO SPECIFICATIONS, ANY IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR
+A PARTICULAR PURPOSE, OR FREEDOM FROM INFRINGEMENT, ANY WARRANTY THAT THE SOFTWARE AND DATA WILL BE ERROR FREE, OR ANY WARRANTY THAT DOCUMENTATION WILL CONFORM TO THE REST OF THE PROVIDED SOFTWARE AND DATA. FURTHER, GOVERNMENT DISCLAIMS ALL WARRANTIES AND LIABILITIES REGARDING THIRD-PARTY SOFTWARE, IF PRESENT IN THE SOFTWARE AND DATA.
+
+4.2 The GOVERNMENT cannot and will not make determinations on whether or not third party modifications to the SOFTWARE and DATA that YOU originally developed and contributed to the WEBSITE rise to the level of a protectable copyright. By accessing the SOFTWARE and DATA at the WEBSITE, you agree to indemnify and hold the GOVERNMENT harmless against any claim, loss or risk of loss for any infringement, including patent or copyright infringement, with respect to such third party modifications.
+
+4.3 Please contact the GOVERNMENT if you have suggestions on modifications or improvements to the SOFTWARE and DATA. However, any technical data or computer software included in such suggestions must be marked with any notices of proprietary information.
+
+4.4 THIS AGREEMENT does not replace or supersede any other written contracts and/or written agreements that you have or will have with the GOVERNMENT. You shall provide written notice to the GOVERNMENT of any inconsistencies between THIS AGREEMENT and the terms and conditions of your other written contracts and/or written agreements with the GOVERNMENT in advance of accepting THIS AGREEMENT. The GOVERNMENT retains the sole ability to determine the precedence or impact of any inconsistencies.
+
+4.5 THIS AGREEMENT constitutes the entire understanding of the parties with respect to the accessing of SOFTWARE and DATA on the WEBSITE. The GOVERNMENT may update the terms of THIS AGREEMENT from time to time without notice to you.
+
+4.6 Nothing in THIS AGREEMENT releases you from performance of any contractual requirements in any contracts or other agreements with the GOVERNMENT.
+
+4.7 If any provision of THIS AGREEMENT is held to be invalid or unenforceable under applicable law, it will not affect the validity or enforceability of the remainder of the terms of THIS AGREEMENT.
+
+4.8 THIS AGREEMENT will be subject to the Federal laws of the United States for all purposes, including, but not limited to, determining the validity of THIS AGREEMENT, the meaning of its provisions and the rights, obligations and remedies of the parties
+
+4.9 THIS AGREEMENT DOES NOT, IN ANY MANNER, CONSTITUTE AN ENDORSEMENT BY THE GOVERNMENT OF ANY RESULTS, RESULTING DESIGNS, HARDWARE, SOFTWARE OR ANY OTHER APPLICATIONS RESULTING FROM THE USE OF THE SOFTWARE AND DATA UNDER THIS AGREEMENT. THIS AGREEMENT DOES NOT OBLIGATE THE GOVERNMENT IN ANY WAY, SHAPE OR FORM TO AWARD FUTURE PROCUREMENTS TO YOU. PROVIDING THE SOFTWARE AND DATA DESCRIBED IN THIS AGREEMENT DOES NOT CONSTITUTE A REQUEST FOR PROPOSAL (RFP OR A PROMISE TO ISSUE AN RFP IN THE FUTURE). THIS AGREEMENT DOES NOT COMMIT THE GOVERNMENT TO CONTRACT FOR ANY SUPPLY OR SERVICE WHATSOEVER. FURTHER, THE GOVERNMENT IS NOT AT THIS TIME SEEKING PROPOSALS. YOU ARE ADVISED THAT THE GOVERNMENT WILL NOT PAY FOR ANY INFORMATION OR COSTS INCURRED AS A RESULT OF YOU ENTERING THIS AGREEMENT AND/OR YOUR USE OF THE SOFTWARE AND DATA. ALL COSTS ASSOCITED WITH ENTERING THIS AGREEMENT AND/OR YOUR USE OF THE SOFTWARE AND DATA IS SOLELY AT YOUR EXPENSE.
+
+4.10 LIABILITY: YOU agree to assume all risks, direct or consequential, from your use, storage, distribution, and disposal of the SOFTWARE and DATA. YOU agree to defend, indemnify, and hold harmless the GOVERNMENT from any loss, claim, damage, or liability, of any kind, which may arise from your use, storage, distribution, and disposal of the SOFTWARE and DATA. Your entire liability is as stated in the Federal Tort Claims Act, Section 2671 et seq.
+
+ARTICLE 5. TERMINATION.
+
+THIS AGREEMENT shall continue until terminated by the GOVERNMENT as provided in written notice to YOU. The written notice will provide instruction on further action if any, required by YOU in relation to THIS AGREEMENT and the SOFTWARE and DATA.
