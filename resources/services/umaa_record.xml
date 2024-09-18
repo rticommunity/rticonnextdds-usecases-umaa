@@ -43,7 +43,7 @@
         <domain_participant name="INTERNAL-VEH1">
             <domain_id>1</domain_id>
 
-            <!-- Register types here if needed -->
+            <!-- Register types here if needed i.e. if type propagation is disabled -->
             <!-- <register_type name="X" type_ref="X"/> -->
             
         </domain_participant>
