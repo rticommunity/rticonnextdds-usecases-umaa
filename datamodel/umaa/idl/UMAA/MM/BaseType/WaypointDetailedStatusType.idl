@@ -1,0 +1,74 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_WAYPOINTDETAILEDSTATUSTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_WAYPOINTDETAILEDSTATUSTYPE
+
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
+module UMAA
+{
+  module MM
+  {
+    module BaseType
+    {
+      /**
+        * This structure provides a detailed execution status for the waypoint.
+        */
+      @nested
+      struct WaypointDetailedStatusType
+      {
+      // The average cross track error for this track; optional if queued or cross track limit not specified.
+      @optional UMAA::Common::Measurement::Distance avgCrossTrackError;
+
+      // The average vehicle speed to the waypoint; optional if queued.
+      @optional UMAA::Common::Measurement::GroundSpeed avgSpeed;
+
+      // Human details about why the operation is not currently meeting waypoint.
+      UMAA::Common::PrimitiveConstrained::StringShortDescription errors;
+
+      // The explanation for what is being performed and the 'why' of any changes.
+      UMAA::Common::PrimitiveConstrained::StringShortDescription feedback;
+
+      // The maximum cross track error for this track; optional if queued or cross track limit not specified.
+      @optional UMAA::Common::Measurement::Distance maxCrossTrackError;
+
+      // The maximum vehicle speed to the waypoint; optional if queued.
+      @optional UMAA::Common::Measurement::GroundSpeed maxSpeed;
+
+      // The current execution state of the waypoint.
+      UMAA::Common::MaritimeEnumeration::WaypointStateEnumModule::WaypointStateEnumType state;
+
+      // Any warnings the operation should be aware of when performing this objective.
+      UMAA::Common::PrimitiveConstrained::StringShortDescription warnings;
+
+      // A unique identification of the waypoint.
+      UMAA::Common::Measurement::NumericGUID waypointID;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_WAYPOINTDETAILEDSTATUSTYPE
+

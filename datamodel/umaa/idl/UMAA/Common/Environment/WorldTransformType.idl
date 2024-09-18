@@ -1,0 +1,63 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_DYNAMIC_WATERSPACE_ENVIRONMENT_WORLDTRANSFORM_WORLDTRANSFORMTYPE
+#define _LDM_MDE_DYNAMIC_WATERSPACE_ENVIRONMENT_WORLDTRANSFORM_WORLDTRANSFORMTYPE
+
+#include "UMAA/Common/Measurement/Measurements.idl"
+module UMAA
+{
+  module Common
+  {
+    module Environment
+    {
+      /**
+        * This is a base structure used to report the image-to-world transform according to the ESRI world file standard.
+        */
+      @nested
+      struct WorldTransformType
+      {
+      // The pixel size in the x-direction in map units.
+      UMAA::Common::Measurement::Distance pixelSizex;
+
+      // The pixel size in the y-direction in map units.
+      UMAA::Common::Measurement::Distance pixelSizey;
+
+      // The rotation about the x-axis.
+      UMAA::Common::Measurement::Angle rotationx;
+
+      // The rotation about the y-axis.
+      UMAA::Common::Measurement::Angle rotationy;
+
+      // The x-coordinate of the center of the upper-left pixel of the image, given in the map frame.
+      UMAA::Common::Measurement::Distance upperLeftCoordinatex;
+
+      // The y-coordinate of the center of the upper-left pixel of the image, given in the map frame and expressed as a negative.
+      UMAA::Common::Measurement::Distance upperLeftCoordinatey;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_DYNAMIC_WATERSPACE_ENVIRONMENT_WORLDTRANSFORM_WORLDTRANSFORMTYPE
+

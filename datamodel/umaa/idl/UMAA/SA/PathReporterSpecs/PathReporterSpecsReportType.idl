@@ -1,0 +1,59 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESTATUS_PATHREPORTERSPECS_PATHREPORTERSPECSREPORTTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESTATUS_PATHREPORTERSPECS_PATHREPORTERSPECSREPORTTYPE
+
+#include "UMAA/Common/IdentifierType.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/SA/PathReporterSpecs/PathReporterType.idl"
+module UMAA
+{
+  module SA
+  {
+    module PathReporterSpecs
+    {
+    
+      const string PathReporterSpecsReportTypeTopic = "UMAA::SA::PathReporterSpecs::PathReporterSpecsReportType";
+  
+      /**
+        * This structure is used to report the capabilities the service supports. This implementation may support one or more paths, and specify further limitations on the constraints used in the QueryPath message. For example, an implementation may specify that it only supports a certain maximum number of points, and/or a fixed target resolution.
+        */
+    
+      struct PathReporterSpecsReportType
+      {
+      // A list of capabilities of path reporter.
+      sequence<UMAA::SA::PathReporterSpecs::PathReporterType,4> pathReporters;
+
+      // The origination time of the data being conveyed in the message, or as close to the data or command generation time as is reasonably possible.
+      UMAA::Common::Measurement::DateTime timeStamp;
+
+      // The unique identifier of the originating source of the command interface.
+      @key UMAA::Common::IdentifierType source;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESTATUS_PATHREPORTERSPECS_PATHREPORTERSPECSREPORTTYPE
+

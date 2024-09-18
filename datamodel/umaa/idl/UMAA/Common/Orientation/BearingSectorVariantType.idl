@@ -1,0 +1,68 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ORIENTATION_BEARINGSECTORVARIANTTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ORIENTATION_BEARINGSECTORVARIANTTYPE
+
+#include "UMAA/Common/Orientation/BearingSectorGuideCourseVariantType.idl"
+#include "UMAA/Common/Orientation/BearingSectorMagneticNorthVariantType.idl"
+#include "UMAA/Common/Orientation/BearingSectorTrueNorthVariantType.idl"
+module UMAA
+{
+  module Common
+  {
+    module Orientation
+    {
+        enum BearingSectorVariantTypeEnum
+        {
+            BEARINGSECTORGUIDECOURSEVARIANT_D,
+            BEARINGSECTORMAGNETICNORTHVARIANT_D,
+            BEARINGSECTORTRUENORTHVARIANT_D
+        };
+
+        @nested
+        union BearingSectorVariantTypeUnion switch (BearingSectorVariantTypeEnum)
+        {
+              case BEARINGSECTORGUIDECOURSEVARIANT_D:
+                UMAA::Common::Orientation::BearingSectorGuideCourseVariantType BearingSectorGuideCourseVariantVariant;
+              case BEARINGSECTORMAGNETICNORTHVARIANT_D:
+                UMAA::Common::Orientation::BearingSectorMagneticNorthVariantType BearingSectorMagneticNorthVariantVariant;
+              case BEARINGSECTORTRUENORTHVARIANT_D:
+                UMAA::Common::Orientation::BearingSectorTrueNorthVariantType BearingSectorTrueNorthVariantVariant;
+        };
+      
+      /**
+        * This structure defines a bearing sector, which is defined to be the sector created by rotating in a positive sense from the startBearing to the endBearing.
+        */
+      @nested
+      struct BearingSectorVariantType
+      {
+      // Union to capture specializations of BearingSectorVariantType
+      BearingSectorVariantTypeUnion BearingSectorVariantTypeSubtypes;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ORIENTATION_BEARINGSECTORVARIANTTYPE
+

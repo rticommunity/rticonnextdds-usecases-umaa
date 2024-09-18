@@ -1,0 +1,75 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_PRIMITIVEDRIVERCONTROL_PRIMITIVEDRIVERCOMMANDTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_PRIMITIVEDRIVERCONTROL_PRIMITIVEDRIVERCOMMANDTYPE
+
+#include "UMAA/Common/IdentifierType.idl"
+#include "UMAA/Common/Measurement/LinearEffort.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/Measurement/RotationalEffort.idl"
+module UMAA
+{
+  module MO
+  {
+    module PrimitiveDriverControl
+    {
+    
+      const string PrimitiveDriverCommandTypeTopic = "UMAA::MO::PrimitiveDriverControl::PrimitiveDriverCommandType";
+  
+      /**
+        * This structure is used to define the attributes used to control mobility in the vehicle coordinate frame. The command consists of a six element propulsive effort and a six element resistive effort. The six elements of each effort break down into three linear elements and three rotational elements, which are mapped to the three axis orthogonal coordinate frame of the vehicle. All elements of the message are not necessarily applicable to a particular vehicle.
+        */
+    
+      struct PrimitiveDriverCommandType
+      {
+      // The desired propulsive linear effort (X, Y, Z). Propulsive linear effort represents an action that results in a linear motion along the respective axis.
+      UMAA::Common::Measurement::LinearEffort propulsiveLinearEffort;
+
+      // The desired propulsive rotational effort (X, Y, Z). Propulsive rotational effort represents an action that results in a rotational motion about the respective axis.
+      UMAA::Common::Measurement::RotationalEffort propulsiveRotationalEffort;
+
+      // The desired resistive linear effort (X, Y, Z). Resistive linear effort represents an action that impedes linear motion along the respective axis.
+      UMAA::Common::Measurement::LinearEffort resistiveLinearEffort;
+
+      // The desired resistive rotational effort (X, Y, Z). Resistive rotational effort represents an action that impedes rotational motion about the respective axis.
+      UMAA::Common::Measurement::RotationalEffort resistiveRotationalEffort;
+
+      // The origination time of the data being conveyed in the message, or as close to the data or command generation time as is reasonably possible.
+      UMAA::Common::Measurement::DateTime timeStamp;
+
+      // The unique identifier of the originating source of the command interface.
+      @key UMAA::Common::IdentifierType source;
+
+      // The unique identifier for the session.
+      @key UMAA::Common::Measurement::NumericGUID sessionID;
+
+      // The unique identifier of the destination of the command interface.
+      @key UMAA::Common::IdentifierType destination;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_PRIMITIVEDRIVERCONTROL_PRIMITIVEDRIVERCOMMANDTYPE
+

@@ -1,0 +1,64 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_PROPULSION_PROPULSIONTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_PROPULSION_PROPULSIONTYPE
+
+#include "UMAA/Common/Propulsion/PropulsiveEffortType.idl"
+#include "UMAA/Common/Propulsion/PropulsiveRPMType.idl"
+module UMAA
+{
+  module Common
+  {
+    module Propulsion
+    {
+        enum PropulsionTypeEnum
+        {
+            PROPULSIVEEFFORT_D,
+            PROPULSIVERPM_D
+        };
+
+        @nested
+        union PropulsionTypeUnion switch (PropulsionTypeEnum)
+        {
+              case PROPULSIVEEFFORT_D:
+                UMAA::Common::Propulsion::PropulsiveEffortType PropulsiveEffortVariant;
+              case PROPULSIVERPM_D:
+                UMAA::Common::Propulsion::PropulsiveRPMType PropulsiveRPMVariant;
+        };
+      
+      /**
+        * Propulsion value in either effort or RPM.
+        */
+      @nested
+      struct PropulsionType
+      {
+      // Union to capture specializations of PropulsionType
+      PropulsionTypeUnion PropulsionTypeSubtypes;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_PROPULSION_PROPULSIONTYPE
+

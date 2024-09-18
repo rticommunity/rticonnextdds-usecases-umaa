@@ -1,0 +1,64 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_FREEFLOATOBJECTIVETYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_FREEFLOATOBJECTIVETYPE
+
+#include "UMAA/Common/Enumeration/EnumerationSets.idl"
+#include "UMAA/Common/IdentifierType.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
+#include "UMAA/Common/Time/DateTimeRequirementType.idl"
+#include "UMAA/MM/BaseType/StateTriggerType.idl"
+module UMAA
+{
+  module MM
+  {
+    module BaseType
+    {
+
+    const string FreeFloatObjectiveTypeTopic = "UMAA::MM::BaseType::FreeFloatObjectiveType";
+
+      /**
+        * The goal of the free float objective is to terminate all vehicle propulsion so that the vehicle is in a free float condition. The free float objective is achieved when all vehicle propulsion has been terminated.
+        *
+        * This structure is a specialization of UMAA::MM::BaseType::ObjectiveType.
+        */
+    
+      struct FreeFloatObjectiveType
+      {
+      // Defines the desired duration to free float; if not specified, runs indefinitely until it is interrupted (e.g., another objective takes precedence, it is canceled, etc.).
+      @optional UMAA::Common::Measurement::DurationSeconds duration;
+
+      // This field identifies the timestamp that signals the end of an atomic update to the instance of the specialization. NOTE: Ties this element back to the specializationID in ObjectiveType generalization.
+      UMAA::Common::Measurement::DateTime specializationReferenceTimestamp;
+
+      // NOTE: Ties this element back to the ObjectiveType generalization.
+      @key UMAA::Common::Measurement::NumericGUID specializationReferenceID;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_FREEFLOATOBJECTIVETYPE
+

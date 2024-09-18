@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="./EnumerationSets.xml"/>
+<include file="./IdentifierType.xml"/>
+<include file="./MaritimeEnumerationSets.xml"/>
+<include file="./Measurements.xml"/>
+<include file="./ConstrainedTypes.xml"/>
+<module name="UMAA">
+  <module name="EO">
+    <module name="EngineSpecs">
+      <const name="EngineSpecsReportTypeTopic" type="string" value="&quot;UMAA::EO::EngineSpecs::EngineSpecsReportType&quot;"/>
+      <struct name= "EngineSpecsReportType">
+        <member name="engineKind" type="nonBasic"  nonBasicTypeName= "UMAA::Common::MaritimeEnumeration::EngineKindEnumModule::EngineKindEnumType"/>
+        <member name="glowPlugTime" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DurationSeconds" optional="true"/>
+        <member name="maxCoolantLevel" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::VolumeCubicMeter"/>
+        <member name="maxCoolantPressure" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::PressureKiloPascals"/>
+        <member name="maxCoolantTemp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Temperature"/>
+        <member name="maxEngineTemp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Temperature"/>
+        <member name="maxGlowPlugTemp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Temperature" optional="true"/>
+        <member name="maxManifoldAirTemp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Temperature"/>
+        <member name="maxManifoldPressure" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::PressureKiloPascals"/>
+        <member name="maxOilPressure" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::MaxEngineOilPressure"/>
+        <member name="maxOilTemp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Temperature"/>
+        <member name="minCoolantLevel" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::VolumeCubicMeter"/>
+        <member name="minOilLevel" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::VolumeCubicMeter"/>
+        <member name="name" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::StringShortDescription"/>
+        <member name="oilCapacity" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::VolumeCubicMeter"/>
+        <member name="reverseRPMLowerLimit" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::EngineSpeed"/>
+        <member name="reverseRPMMaxLimit" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::EngineSpeed"/>
+        <member name="reverseRPMUpperLimit" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::EngineSpeed"/>
+        <member name="reversible" type="boolean"/>
+        <member name="RPMLowerLimit" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::EngineSpeed"/>
+        <member name="RPMMaxLimit" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::EngineSpeed"/>
+        <member name="RPMUpperLimit" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::EngineSpeed"/>
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::IdentifierType" key="true"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

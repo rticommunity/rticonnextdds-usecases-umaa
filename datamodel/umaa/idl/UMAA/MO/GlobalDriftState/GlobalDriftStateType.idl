@@ -1,0 +1,64 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_GLOBALDRIFTSTATE_GLOBALDRIFTSTATETYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_GLOBALDRIFTSTATE_GLOBALDRIFTSTATETYPE
+
+#include "UMAA/MO/GlobalDriftState/GlobalRegionDriftType.idl"
+#include "UMAA/MO/GlobalDriftState/GlobalTransitDriftType.idl"
+module UMAA
+{
+  module MO
+  {
+    module GlobalDriftState
+    {
+        enum GlobalDriftStateTypeEnum
+        {
+            GLOBALTRANSITDRIFT_D,
+            GLOBALREGIONDRIFT_D
+        };
+
+        @nested
+        union GlobalDriftStateTypeUnion switch (GlobalDriftStateTypeEnum)
+        {
+              case GLOBALTRANSITDRIFT_D:
+                UMAA::MO::GlobalDriftState::GlobalTransitDriftType GlobalTransitDriftVariant;
+              case GLOBALREGIONDRIFT_D:
+                UMAA::MO::GlobalDriftState::GlobalRegionDriftType GlobalRegionDriftVariant;
+        };
+      
+      /**
+        * State of the global drift. While first transiting to the drift position, the selector will be GlobalTransitDriftType until the position and elevation are first achieved within their respective tolerances. Once achieved, the union selector will change to GlobalRegionDriftType. The selector will not change as a result of any of the GlobalRegionDriftType achievements states being lost and regained as a result of tolerance settings being violated. This is true until the service determines that the elevation or drift tolerances are violated by a sufficient margin that it is more effective for the vehicle to return to transiting to the drift location. In that case, the GlobalRegionDriftType reverts to the GlobalTransitDriftType selector and those transit achievements then are actively set.
+        */
+      @nested
+      struct GlobalDriftStateType
+      {
+      // Union to capture specializations of GlobalDriftStateType
+      GlobalDriftStateTypeUnion GlobalDriftStateTypeSubtypes;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_GLOBALDRIFTSTATE_GLOBALDRIFTSTATETYPE
+

@@ -1,0 +1,419 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_REFINEMENTS_MEASUREMENTS_MEASUREMENTS
+#define _LDM_MDE_REFINEMENTS_MEASUREMENTS_MEASUREMENTS
+
+
+module UMAA
+{
+  module Common
+  {
+    module Measurement
+    {
+
+
+        const double AmpHours_MIN = 0.0;
+        const double AmpHours_MAX = 500.0;
+        typedef double AmpHours; // maxInclusive=500 minInclusive=0 units=AmpereHours
+
+        const double AngleAcceleration_MIN = -10000.0;
+        const double AngleAcceleration_MAX = 10000.0;
+        typedef double AngleAcceleration; // maxInclusive=10000 minInclusive=-10000 units=RadiansPerSecondSquared referenceFrame=PlatformXYZ
+
+        const double AzimuthTrueNorthAngle_MIN = -6.28318530718;
+        const double AzimuthTrueNorthAngle_MAX =  6.28318530718;
+        typedef double AzimuthTrueNorthAngle; // maxInclusive=6.28318530718 minInclusive=-6.28318530718 units=Radian referenceFrame=TrueNorth
+
+        const double BatteryCurrent_MIN = 0.0;
+        const double BatteryCurrent_MAX = 1000.0;
+        typedef double BatteryCurrent; // maxInclusive=1000 minInclusive=0 units=Ampere
+
+        const double BatteryCurrentDuration_MIN = 0.0;
+        const double BatteryCurrentDuration_MAX = 20.0;
+        typedef double BatteryCurrentDuration; // maxInclusive=20 minInclusive=0 units=Seconds
+
+        const double BatteryCycles_MIN = 0.0;
+        const double BatteryCycles_MAX = 10000.0;
+        typedef double BatteryCycles; // maxInclusive=10000 minInclusive=0
+        typedef octet BinaryValue[256];
+
+        typedef octet ByteValue;
+
+
+        const double Charge_MIN = 0.0;
+        const double Charge_MAX = 3600000.0;
+        typedef double Charge; // maxInclusive=3600000 minInclusive=0 units=Coulomb referenceFrame=Counting
+        typedef char CharValue;
+
+
+        typedef double Conductivity; // units=SiemensPerMeter referenceFrame=LocalWaterMass
+
+        const double DataTransferRate_MIN = 0.0;
+        typedef double DataTransferRate; // minInclusive=0 units=BytesPerSecond referenceFrame=Counting
+
+        const double DistanceASF_MIN = 0.0;
+        const double DistanceASF_MAX = 401056000.0;
+        typedef double DistanceASF; // maxInclusive=401056000 minInclusive=0 units=Meter referenceFrame=ASF
+
+        const double DistanceBSL_MIN = 0.0;
+        const double DistanceBSL_MAX = 10000.0;
+        typedef double DistanceBSL; // maxInclusive=10000 minInclusive=0 units=Meter referenceFrame=BSL
+
+        const double DistanceAGL_MIN = 0.0;
+        typedef double DistanceAGL; // minInclusive=0.0 units=Meter referenceFrame=AGL
+
+        typedef double DoubleValue; //
+
+        const double DurationMilliseconds_MIN = 0.0;
+        typedef double DurationMilliseconds; // minInclusive=0 units=Millisecond referenceFrame=Counting
+
+        const double Effort_MIN = -100.0;
+        const double Effort_MAX = 100.0;
+        typedef double Effort; // maxInclusive=100 minInclusive=-100 units=Percent referenceFrame=PlatformXYZ
+
+        const double ElectroMagneticFrequencyHertz_MIN = 0.0;
+        const double ElectroMagneticFrequencyHertz_MAX =  1e25;
+        typedef double ElectroMagneticFrequencyHertz; // maxInclusive=1e25 minInclusive=0 units=Hertz referenceFrame=Hertz
+
+        const double EnergyPercent_MIN = 0.0;
+        const double EnergyPercent_MAX = 1000.0;
+        typedef double EnergyPercent; // maxInclusive=1000 minInclusive=0 units=Percent referenceFrame=Counting
+
+        const long FrequencyRPM_MIN = -100000;
+        const long FrequencyRPM_MAX =  100000;
+        typedef long FrequencyRPM; // maxInclusive=100000 minInclusive=-100000 units=RevolutionsPerMinute referenceFrame=Counting
+
+        const double GammaAnglePropulsor_MIN = -6.28318530718;
+        const double GammaAnglePropulsor_MAX =  6.28318530718;
+        typedef double GammaAnglePropulsor; // maxInclusive=6.28318530718 minInclusive=-6.28318530718 units=Radian referenceFrame=PropulsorXYZ
+
+        const double HeadingCurrentDirection_MIN = -6.28318530718;
+        const double HeadingCurrentDirection_MAX =  6.28318530718;
+        typedef double HeadingCurrentDirection; // maxInclusive=6.28318530718 minInclusive=-6.28318530718 units=Radian referenceFrame=CurrentDirection
+
+        const double HeadingMagneticNorth_MIN = -6.28318530718;
+        const double HeadingMagneticNorth_MAX =  6.28318530718;
+        typedef double HeadingMagneticNorth; // maxInclusive=6.28318530718 minInclusive=-6.28318530718 units=Radian referenceFrame=MagneticNorth
+
+        const double HeadingTarget_MIN = -6.28318530718;
+        const double HeadingTarget_MAX =  6.28318530718;
+        typedef double HeadingTarget; // maxInclusive=6.28318530718 minInclusive=-6.28318530718 units=Radian referenceFrame=Target
+
+        const double HeadingWindDirection_MIN = -6.28318530718;
+        const double HeadingWindDirection_MAX =  6.28318530718;
+        typedef double HeadingWindDirection; // maxInclusive=6.28318530718 minInclusive=-6.28318530718 units=Radian referenceFrame=WindDirection
+
+        typedef long IntegerValue; //
+        typedef unsigned long long LargeCount;
+
+
+        const double MassMetricTon_MIN = 0.0;
+        const double MassMetricTon_MAX = 100000.0;
+        typedef double MassMetricTon; // maxInclusive=100000 minInclusive=0 units=MetricTon referenceFrame=Counting
+
+        typedef double MassFlowRate; // units=KilogramsPerSecond referenceFrame=Counting
+
+        const double MSLAltitude_MIN = 0.0;
+        typedef double MSLAltitude; // minInclusive=0.0 units=Meter referenceFrame=Altitude
+
+        const double PressurePercent_MIN = 0.0;
+        const double PressurePercent_MAX = 200.0;
+        typedef double PressurePercent; // maxInclusive=200 minInclusive=0 units=Percent referenceFrame=Counting
+
+        const long Priority_MIN = 0;
+        const long Priority_MAX =  255;
+        typedef long Priority; // maxInclusive=255 minInclusive=0
+
+        const double PropellerPitchAnglePropulsor_MIN = -6.28318530718;
+        const double PropellerPitchAnglePropulsor_MAX =  6.28318530718;
+        typedef double PropellerPitchAnglePropulsor; // maxInclusive=6.28318530718 minInclusive=-6.28318530718 units=Radian referenceFrame=PropulsorXYZ
+
+        const double RhoAnglePropulsor_MIN = -6.28318530718;
+        const double RhoAnglePropulsor_MAX =  6.28318530718;
+        typedef double RhoAnglePropulsor; // maxInclusive=6.28318530718 minInclusive=-6.28318530718 units=Radian referenceFrame=PropulsorXYZ
+
+        typedef double Salinity; // units=GramsPerKilogram referenceFrame=LocalWaterMass
+
+        const long SegmentID_MIN = 0;
+        const long SegmentID_MAX =  100000;
+        typedef long SegmentID; // maxInclusive=100000 minInclusive=0 referenceFrame=Counting
+
+        const long SidesCount_MIN = 3;
+        const long SidesCount_MAX =  255;
+        typedef long SidesCount; // maxInclusive=255 minInclusive=3
+        typedef unsigned long long SizeLargeBytes;
+
+
+        const double SpeedASF_MIN = -299792458.0;
+        const double SpeedASF_MAX = 299792458.0;
+        typedef double SpeedASF; // maxInclusive=299792458 minInclusive=-299792458 units=MeterPerSecond referenceFrame=ASF
+
+        const double SpeedBSL_MIN = -299792458.0;
+        const double SpeedBSL_MAX = 299792458.0;
+        typedef double SpeedBSL; // maxInclusive=299792458 minInclusive=-299792458 units=MeterPerSecond referenceFrame=BSL
+
+        const double SpeedLocalWaterMass_MIN = 0.0;
+        const double SpeedLocalWaterMass_MAX = 299792458.0;
+        typedef double SpeedLocalWaterMass; // maxInclusive=299792458 minInclusive=0 units=MeterPerSecond referenceFrame=LocalWaterMass
+
+        const long TransmitAttenuation_MIN = 0;
+        const long TransmitAttenuation_MAX =  18;
+        typedef long TransmitAttenuation; // maxInclusive=18 minInclusive=0 units=Decibel referenceFrame=Counting
+
+        const double Turbidity_MIN = 0.0;
+        typedef double Turbidity; // minInclusive=0.0 units=Nephelometric Turbidity Units (NTU) referenceFrame=Environment
+
+        const double VolumeCubicMeter_MIN = 0.0;
+        const double VolumeCubicMeter_MAX = 1000.0;
+        typedef double VolumeCubicMeter; // maxInclusive=1000 minInclusive=0 units=VolumeCubicMeter referenceFrame=Counting
+
+        const double VolumePercent_MIN = 0.0;
+        const double VolumePercent_MAX = 1000.0;
+        typedef double VolumePercent; // maxInclusive=1000 minInclusive=0 units=Percent referenceFrame=Counting
+
+        const double VolumetricFlowRate_MIN = -100000000.0;
+        const double VolumetricFlowRate_MAX = 100000000.0;
+        typedef double VolumetricFlowRate; // maxInclusive=100000000 minInclusive=-100000000 units=CubicMeterPerSecond referenceFrame=Counting
+
+        const double WattHours_MIN = 0.0;
+        const double WattHours_MAX = 900000.0;
+        typedef double WattHours; // maxInclusive=900000 minInclusive=0 units=WattHours
+
+        const double YawAngle_MIN = -6.28318530718;
+        const double YawAngle_MAX =  6.28318530718;
+        typedef double YawAngle; // maxInclusive=6.28318530718 minInclusive=-6.28318530718 referenceFrame=PlatformNED units=Radian
+
+
+    };
+  };
+};
+
+#endif // _LDM_MDE_REFINEMENTS_MEASUREMENTS_MEASUREMENTS
+
+
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_REFINEMENTS_MEASUREMENTS_MEASUREMENTS
+#define _LDM_REFINEMENTS_MEASUREMENTS_MEASUREMENTS
+
+
+module UMAA
+{
+  module Common
+  {
+    module Measurement
+    {
+
+
+        const double AccelerationScalar_MIN = -1310.68;
+        const double AccelerationScalar_MAX =  1310.68;
+        typedef double AccelerationScalar; // maxInclusive=1310.68 minInclusive=-1310.68 units=MeterPerSecondSquared referenceFrame=Counting
+
+        const double Angle_MIN = -3.1415926535897932;
+        const double Angle_MAX =  3.1415926535897932;
+        typedef double Angle; // maxInclusive=3.1415926535897932 minInclusive=-3.1415926535897932 units=Radian referenceFrame=Counting
+
+        const double AngleRate_MIN = -62.831;
+        const double AngleRate_MAX =  62.831;
+        typedef double AngleRate; // maxInclusive=62.831 minInclusive=-62.831 units=RadianPerSecond referenceFrame=Counting
+
+        const long Count_MIN = -2147483648;
+        const long Count_MAX =  2147483647;
+        typedef long Count; // referenceFrame=Counting minInclusive=-2147483648 maxInclusive=2147483647
+
+        const double CourseTrueNorth_MIN = -6.28318530718;
+        const double CourseTrueNorth_MAX =  6.28318530718;
+        typedef double CourseTrueNorth; // maxInclusive=6.28318530718 minInclusive=-6.28318530718 units=Radian referenceFrame=TrueNorth
+        const long long DateTimeSeconds_MIN = -9223372036854775807;
+        const long long DateTimeSeconds_MAX =  9223372036854775807;
+        typedef long long DateTimeSeconds; // maxInclusive=9223372036854775807 minInclusive=-9223372036854775807 units=Seconds
+        const long DateTimeNanoseconds_MIN = 0;
+        const long DateTimeNanoseconds_MAX =  999999999;
+        typedef long DateTimeNanoseconds; // maxInclusive=999999999 minInclusive=0 units=Nanoseconds
+        struct DateTime {
+          DateTimeSeconds seconds;
+          DateTimeNanoseconds nanoseconds;
+        };
+
+
+        const double Density_MIN = 0.0;
+        const double Density_MAX =  3e17;
+        typedef double Density; // maxInclusive=3e17 minInclusive=0 units=KilogramPerCubicMeter referenceFrame=Counting
+
+        const double Distance_MIN = 0.0;
+        const double Distance_MAX = 401056000.0;
+        typedef double Distance; // maxInclusive=401056000 minInclusive=0 units=Meter referenceFrame=Counting
+
+        const double DurationHours_MIN = 0.0;
+        const double DurationHours_MAX = 10505.0;
+        typedef double DurationHours; // maxInclusive=10505 minInclusive=0 units=Hour referenceFrame=Counting
+
+        const double DurationSeconds_MIN = 0.0;
+        const double DurationSeconds_MAX = 37817280.0;
+        typedef double DurationSeconds; // maxInclusive=37817280 minInclusive=0 units=Seconds referenceFrame=Counting
+
+        const double ElectricalPower_MIN = 0.0;
+        const double ElectricalPower_MAX = 100000000.0;
+        typedef double ElectricalPower; // maxInclusive=100000000 minInclusive=0 units=Watt referenceFrame=None
+
+        const double EngineSpeed_MIN = -100000.0;
+        const double EngineSpeed_MAX = 100000.0;
+        typedef double EngineSpeed; // referenceFrame=Counting units=RevolutionsPerMinute minInclusive=-100000 maxInclusive=100000
+
+        const double Force_MIN = 0.0;
+        const double Force_MAX = 100000000.0;
+        typedef double Force; // maxInclusive=100000000 minInclusive=0 units=Newton referenceFrame=Counting
+
+        const double FrequencyHertz_MIN = 0.0;
+        const double FrequencyHertz_MAX =  1e10;
+        typedef double FrequencyHertz; // maxInclusive=1e10 minInclusive=0.0 units=Hertz referenceFrame=Counting
+
+        const double GroundSpeed_MIN = -299792458.0;
+        const double GroundSpeed_MAX = 299792458.0;
+        typedef double GroundSpeed; // maxInclusive=299792458 minInclusive=-299792458 units=MeterPerSecond referenceFrame=Ground
+
+        const double HeadingTrueNorthAngle_MIN = -6.28318530718;
+        const double HeadingTrueNorthAngle_MAX =  6.28318530718;
+        typedef double HeadingTrueNorthAngle; // maxInclusive=6.28318530718 minInclusive=-6.28318530718 units=Radian referenceFrame=TrueNorth
+
+        const double IndicatedAirspeed_MIN = 0.0;
+        const double IndicatedAirspeed_MAX = 299792458.0;
+        typedef double IndicatedAirspeed; // maxInclusive=299792458 minInclusive=0 units=MeterPerSecond referenceFrame=LocalAirMass
+
+        const double MagneticVariation_MIN = -6.28318530718;
+        const double MagneticVariation_MAX =  6.28318530718;
+        typedef double MagneticVariation; // maxInclusive=6.28318530718 minInclusive=-6.28318530718 units=Radian referenceFrame=TrueNorth
+
+        const double Mass_MIN = 0.0;
+        const double Mass_MAX = 100000000.0;
+        typedef double Mass; // maxInclusive=100000000 minInclusive=0 units=Kilogram referenceFrame=Counting
+        typedef octet NumericGUID[16];
+
+
+        const double Percent_MIN = 0.0;
+        const double Percent_MAX = 1000.0;
+        typedef double Percent; // maxInclusive=1000 minInclusive=0 units=Percent referenceFrame=Counting
+
+        const double PitchHalfAngle_MIN = -1.5707963267948966;
+        const double PitchHalfAngle_MAX =  1.5707963267948966;
+        typedef double PitchHalfAngle; // maxInclusive=1.5707963267948966 minInclusive=-1.5707963267948966 units=Radian referenceFrame=PlatformNED
+
+        const double PitchAcceleration_MIN = -10000.0;
+        const double PitchAcceleration_MAX = 10000.0;
+        typedef double PitchAcceleration; // maxInclusive=10000 minInclusive=-10000 units=RadianPerSecondSquared referenceFrame=Counting
+
+        const double PitchRate_MIN = -32.767;
+        const double PitchRate_MAX =  32.767;
+        typedef double PitchRate; // maxInclusive=32.767 minInclusive=-32.767 units=RadianPerSecond referenceFrame=Counting
+
+        const double PowerBusCurrent_MIN = -100000.0;
+        const double PowerBusCurrent_MAX = 100000.0;
+        typedef double PowerBusCurrent; // maxInclusive=100000 minInclusive=-100000 units=Ampere referenceFrame=None
+
+        const double PowerBusVoltage_MIN = -100000.0;
+        const double PowerBusVoltage_MAX = 100000.0;
+        typedef double PowerBusVoltage; // maxInclusive=100000 minInclusive=-100000 units=Volt referenceFrame=None
+
+        const double PressureKiloPascals_MIN = 0.0;
+        const double PressureKiloPascals_MAX = 51200.0;
+        typedef double PressureKiloPascals; // maxInclusive=51200 minInclusive=0 units=KiloPascal referenceFrame=STP
+
+        const double PressurePascals_MIN = 0.0;
+        const double PressurePascals_MAX = 107558000.0;
+        typedef double PressurePascals; // maxInclusive=107558000 minInclusive=0 units=Pascal referenceFrame=STP
+
+        const double RadioFrequencyHertz_MIN = 0.0;
+        const double RadioFrequencyHertz_MAX =  1e10;
+        typedef double RadioFrequencyHertz; // maxInclusive=1e10 minInclusive=0.0 units=Hertz referenceFrame=Counting
+
+        const double RelativeAngle_MIN = -6.28318530718;
+        const double RelativeAngle_MAX =  6.28318530718;
+        typedef double RelativeAngle; // maxInclusive=6.28318530718 minInclusive=-6.28318530718 units=Radian referenceFrame=Counting
+
+        const double RelativeHumidity_MIN = 0.0;
+        const double RelativeHumidity_MAX = 1000.0;
+        typedef double RelativeHumidity; // maxInclusive=1000 minInclusive=0 units=Percent referenceFrame=LocalAirMass
+
+        const double RollAngle_MIN = -6.28318530718;
+        const double RollAngle_MAX =  6.28318530718;
+        typedef double RollAngle; // maxInclusive=6.28318530718 minInclusive=-6.28318530718 units=Radian referenceFrame=PlatformNED
+
+        const double RollAcceleration_MIN = -10000.0;
+        const double RollAcceleration_MAX = 10000.0;
+        typedef double RollAcceleration; // maxInclusive=10000 minInclusive=-10000 units=RadianPerSecondSquared referenceFrame=Counting
+
+        const double RollRate_MIN = -32.767;
+        const double RollRate_MAX =  32.767;
+        typedef double RollRate; // maxInclusive=32.767 minInclusive=-32.767 units=RadianPerSecond referenceFrame=Counting
+
+        const long SizeBytes_MIN = 0;
+        const long SizeBytes_MAX =  1000000000;
+        typedef long SizeBytes; // maxInclusive=1000000000 minInclusive=0 units=Byte referenceFrame=Counting
+
+        typedef double SizeReal; // units=None referenceFrame=Counting
+
+        const double Speed_MIN = 0.0;
+        const double Speed_MAX = 299792458.0;
+        typedef double Speed; // maxInclusive=299792458 minInclusive=0 units=MeterPerSecond referenceFrame=Counting
+
+        const double Temperature_MIN = -273.0;
+        const double Temperature_MAX = 1000.0;
+        typedef double Temperature; // maxInclusive=1000 minInclusive=-273 units=Celsius referenceFrame=Counting
+
+        const double TurnRate_MIN = -32.767;
+        const double TurnRate_MAX =  32.767;
+        typedef double TurnRate; // maxInclusive=32.767 minInclusive=-32.767 units=RadianPerSecond referenceFrame=Counting
+
+        const double YawAcceleration_MIN = -10000.0;
+        const double YawAcceleration_MAX = 10000.0;
+        typedef double YawAcceleration; // maxInclusive=10000 minInclusive=-10000 units=RadianPerSecondSquared referenceFrame=Counting
+
+        const double YawRate_MIN = -32.767;
+        const double YawRate_MAX =  32.767;
+        typedef double YawRate; // maxInclusive=32.767 minInclusive=-32.767 units=RadianPerSecond referenceFrame=Counting
+
+
+    };
+  };
+};
+
+#endif // _LDM_REFINEMENTS_MEASUREMENTS_MEASUREMENTS
+

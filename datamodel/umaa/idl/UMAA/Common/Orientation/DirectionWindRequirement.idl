@@ -1,0 +1,52 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ORIENTATION_DIRECTIONWINDREQUIREMENT
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ORIENTATION_DIRECTIONWINDREQUIREMENT
+
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/Orientation/DirectionToleranceType.idl"
+module UMAA
+{
+  module Common
+  {
+    module Orientation
+    {
+      /**
+        * A requirement that specifies the direction with respect to the direction of the wind, where 0 is defined to be the direction into the wind
+        */
+      @nested
+      struct DirectionWindRequirement
+      {
+      // Specifies the heading offset angle relative to the wind, where 0 is defined to be the direction into the wind.
+      UMAA::Common::Measurement::HeadingWindDirection direction;
+
+      // Specifies the heading reference angle tolerance relative to the wind direction, where 0 is defined to be the direction into the wind.
+      @optional UMAA::Common::Orientation::DirectionToleranceType directionTolerance;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ORIENTATION_DIRECTIONWINDREQUIREMENT
+

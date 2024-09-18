@@ -1,0 +1,107 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_REFINEMENTS_ENUMERATIONSETS_ENUMERATIONSETS
+#define _LDM_REFINEMENTS_ENUMERATIONSETS_ENUMERATIONSETS
+
+
+//@copy-c #undef ERROR
+//@copy-c #undef VARIABLE_PITCH
+//@copy-c #undef DELETE
+//@copy-c #undef PLATFORM
+
+module UMAA
+{
+  module Common
+  {
+    module Enumeration
+    {
+
+
+        typedef boolean BooleanEnumType;
+
+        module LineSegmentEnumModule
+        {
+          enum LineSegmentEnumType
+          {
+              GREAT_CIRCLE, // The line segment should be traversed as one following a great circle.  A great circle is the shortest distance between two points on the surface of a sphere, measured along the surface of the sphere.
+              RHUMB // The line segment should be traversed as one following a rhumb line.  A rhumb line represents an arc cross all meridians of longitude at the same angle (i.e. a path with constant bearing).
+          };
+        };
+
+        module OnOffStatusEnumModule
+        {
+          enum OnOffStatusEnumType
+          {
+              OFF, // The device or subsystem is off.
+              ON // The device or subsystem is on.
+          };
+        };
+
+        module PrecipitationEnumModule
+        {
+          enum PrecipitationEnumType
+          {
+              DRIZZLE, // Precipitation that consists of numerous minute droplets of water less than 0.5 mm in diameter that reach the Earth's surface.
+              FOG, // Fog is water droplets suspended in the air at or above the Earth's surface.
+              HAZE, // Haze is an aggregation in the atmosphere of very fine, widely dispersed, solid or liquid particles, or both, giving the air an opalescent appearance that subdues colors.
+              RAIN, // Precipitation that falls to earth in droplets of water more than 0.5 mm in diameter.
+              SHOWERS, // Rain that falls intermittently over a small area. The rain from an individual shower can be heavy or light, but doesn't cover a large area or last more than an hour or so.
+              SNOW, // Precipitation in the form of ice crystals formed directly from the freezing [deposition] of the water vapor in the air.
+              THUNDERSTORMS // A rain or snow shower in which there is lightning. Thunder is always caused by lightning. In general, the upward and downward winds, updrafts and downdrafts, in thunderstorms are more violent than those in ordinary showers.
+          };
+        };
+
+        module ResourceAllocationStatusEnumModule
+        {
+          enum ResourceAllocationStatusEnumType
+          {
+              ALLOCATED, // The resource is allocated.
+              ALLOCATED_W_LAUNCH_RECOVERY, // The resource is allocated with launch and recovery.
+              AVAILABLE, // The resource is available.
+              FAULT, // There was a fault in the resource allocation.
+              FORCED_ALLOCATION, // The resource allocation is forced.
+              FORCED_ALLOCATION_W_LAUNCH_RECOVERY, // The resource allocation with launch and recovery is forced.
+              RELEASED, // The resource is released.
+              TEMPORARILY_UNAVAILABLE, // The resource is temporarily unavailable.
+              UNAVAILABLE // The resource is unavailable.
+          };
+        };
+
+        module SpecificLOIEnumModule
+        {
+          enum SpecificLOIEnumType
+          {
+              LOI_1, // The data link level of interoperability (LOI)-1 is indirect receipt of UAV related data.
+              LOI_2, // The data link level of interoperability (LOI)-2 is direct receipt of ISR or other data where "direct" covers reception of UAV data by the UCS when it has direct communication with the UAV.
+              LOI_3, // The data link level of interoperability (LOI)-3 is control and monitoring of the UAV payload in additional to direct receipt of ISR or other data.
+              LOI_4, // The data link level of interoperability (LOI)-4 is control and monitoring of the UAV, less launch and recovery.
+              LOI_5 // The data link level of interoperability (LOI)-5 is control and monitoring of the UAV (LOI-4) plus launch and recovery functions.
+          };
+        };
+
+
+    };
+  };
+};
+
+#endif // _LDM_REFINEMENTS_ENUMERATIONSETS_ENUMERATIONSETS
+

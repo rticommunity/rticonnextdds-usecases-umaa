@@ -1,0 +1,87 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_FILESYSTEMSTATUS_FILESYSTEMREPORTTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_FILESYSTEMSTATUS_FILESYSTEMREPORTTYPE
+
+#include "UMAA/Common/Enumeration/EnumerationSets.idl"
+#include "UMAA/Common/IdentifierType.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
+module UMAA
+{
+  module SO
+  {
+    module FileSystemStatus
+    {
+    
+      const string FileSystemReportTypeTopic = "UMAA::SO::FileSystemStatus::FileSystemReportType";
+  
+      /**
+        * This structure is used to report the file system status.
+        */
+    
+      struct FileSystemReportType
+      {
+      // Number of free inodes for unprivileged users.
+      @optional UMAA::Common::Measurement::LargeCount availableInodes;
+
+      // Available space for unprivileged users.
+      @optional UMAA::Common::Measurement::SizeLargeBytes availableSpace;
+
+      // Number of free inodes on the file system.
+      @optional UMAA::Common::Measurement::LargeCount freeInodes;
+
+      // Free space on the file system.
+      @optional UMAA::Common::Measurement::SizeLargeBytes freeSpace;
+
+      // Number of inodes on the file system.
+      @optional UMAA::Common::Measurement::LargeCount inodes;
+
+      // The maximum file name length.
+      @optional UMAA::Common::Measurement::Count maxFilenameLength;
+
+      // The pathname of any file within the mounted file system
+      UMAA::Common::PrimitiveConstrained::StringShortDescription path;
+
+      // True if file system is working properly, False otherwise
+      boolean reachable;
+
+      // True if the path is read only, False otherwise.
+      @optional boolean _readOnly;
+
+      // Total space on the file system.
+      @optional UMAA::Common::Measurement::SizeLargeBytes totalSpace;
+
+      // The origination time of the data being conveyed in the message, or as close to the data or command generation time as is reasonably possible.
+      UMAA::Common::Measurement::DateTime timeStamp;
+
+      // The unique identifier of the originating source of the command interface.
+      @key UMAA::Common::IdentifierType source;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_FILESYSTEMSTATUS_FILESYSTEMREPORTTYPE
+

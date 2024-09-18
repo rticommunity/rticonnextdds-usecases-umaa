@@ -1,0 +1,92 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_AREARANDOMWALKOBJECTIVETYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_AREARANDOMWALKOBJECTIVETYPE
+
+#include "UMAA/Common/Enumeration/EnumerationSets.idl"
+#include "UMAA/Common/IdentifierType.idl"
+#include "UMAA/Common/Measurement/ElevationRequirementVariantType.idl"
+#include "UMAA/Common/Measurement/ElevationVariantType.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
+#include "UMAA/Common/Speed/SpeedVariantType.idl"
+#include "UMAA/Common/Time/DateTimeRequirementType.idl"
+#include "UMAA/MM/BaseType/PolygonAreaRequirementType.idl"
+#include "UMAA/MM/BaseType/StateTriggerType.idl"
+module UMAA
+{
+  module MM
+  {
+    module BaseType
+    {
+
+    const string AreaRandomWalkObjectiveTypeTopic = "UMAA::MM::BaseType::AreaRandomWalkObjectiveType";
+
+      /**
+        * The goal of the area random walk objective is to execute a random walk maneuver within a given area. This structure is used to specify the area where the random walk must be conducted. The area random walk objective is achieved by having the vehicle execute random vectors at a specified elevation (or current elevation if not specified) while maintaining the vehicle location within a defined area. The area is defined by specifying the vertices of a polygon, and the random vectors within this area can be configured by specifying min/max speeds and min/max time on course. Area and elevation include optional tolerances for their values. If specified, the vehicle is allowed to operate within these tolerances without having the objective fail. Otherwise, if any tolerances are violated after the objective is initially achieved, then the objective is considered to have failed. If a tolerance is not specified for any of these attributes, then it is a "best effort" to maintain the specified value for that attribute, and is therefore not considered a cause for the objective to fail. If the duration attribute is not specified, the action(s) should continue indefinitely, or until interrupted by some other action.
+        *
+        * This structure is a specialization of UMAA::MM::BaseType::ObjectiveType.
+        */
+    
+      struct AreaRandomWalkObjectiveType
+      {
+      // Defines the area the vehicle must stay in while executing the random walk maneuver.
+      UMAA::MM::BaseType::PolygonAreaRequirementType area;
+
+      // After the transit portion of the objective is complete, defines the duration to execute the random walk portion of the objective. If not specified, duration is not used to determine when the random walk maneuver is complete.
+      @optional UMAA::Common::Measurement::DurationSeconds duration;
+
+      // Defines the vehicle elevation to maintain while executing the random walk. If not specified, the maneuver is performed at the current elevation.
+      @optional UMAA::Common::Measurement::ElevationRequirementVariantType elevation;
+
+      // Defines the maximum vehicle speed on a given vector.
+      UMAA::Common::Speed::SpeedVariantType maxSpeed;
+
+      // Defines the maximum time spent on a given vector.
+      UMAA::Common::Measurement::DurationSeconds maxTimeOnCourse;
+
+      // Defines the minimum vehicle speed on a given vector.
+      UMAA::Common::Speed::SpeedVariantType minSpeed;
+
+      // Defines the minimum time spent on a given vector.
+      UMAA::Common::Measurement::DurationSeconds minTimeOnCourse;
+
+      // Defines the elevation used while transiting to the area before transitioning to the random walk maneuver. If not specified, transit at the current elevation.
+      @optional UMAA::Common::Measurement::ElevationVariantType transitElevation;
+
+      // Defines the speed used while transiting to the random walk area location before transitioning to the random walk maneuver.
+      UMAA::Common::Speed::SpeedVariantType transitSpeed;
+
+      // This field identifies the timestamp that signals the end of an atomic update to the instance of the specialization. NOTE: Ties this element back to the specializationID in ObjectiveType generalization.
+      UMAA::Common::Measurement::DateTime specializationReferenceTimestamp;
+
+      // NOTE: Ties this element back to the ObjectiveType generalization.
+      @key UMAA::Common::Measurement::NumericGUID specializationReferenceID;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_AREARANDOMWALKOBJECTIVETYPE
+

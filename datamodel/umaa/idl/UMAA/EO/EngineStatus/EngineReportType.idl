@@ -1,0 +1,114 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_ENGINESTATUS_ENGINEREPORTTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_ENGINESTATUS_ENGINEREPORTTYPE
+
+#include "UMAA/Common/Enumeration/EnumerationSets.idl"
+#include "UMAA/Common/IdentifierType.idl"
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+module UMAA
+{
+  module EO
+  {
+    module EngineStatus
+    {
+    
+      const string EngineReportTypeTopic = "UMAA::EO::EngineStatus::EngineReportType";
+  
+      /**
+        * This structure is used to report the current status of the engine of the vehicle.
+        */
+    
+      struct EngineReportType
+      {
+      // The engine coolant level.
+      @optional UMAA::Common::Measurement::VolumePercent coolantLevel;
+
+      // The engine coolant pressure.
+      @optional UMAA::Common::Measurement::PressureKiloPascals coolantPressure;
+
+      // The temperature of the engine coolant.
+      @optional UMAA::Common::Measurement::Temperature coolantTemp;
+
+      // The temperature of the engine.
+      @optional UMAA::Common::Measurement::Temperature engineTemp;
+
+      // The engine exhaust temperature.
+      @optional UMAA::Common::Measurement::Temperature exhaustTemp;
+
+      // The glow plug indicator state.
+      @optional boolean glowPlugIndicator;
+
+      // The glow plug state.
+      @optional UMAA::Common::Enumeration::OnOffStatusEnumModule::OnOffStatusEnumType glowPlugState;
+
+      // The glow plug temperature.
+      @optional UMAA::Common::Measurement::Temperature glowPlugTemp;
+
+      // The time remaining for the glow plug to be on.
+      @optional UMAA::Common::Measurement::DurationSeconds glowPlugTimeRemaining;
+
+      // The total runtime of the engine in its lifetime.
+      @optional UMAA::Common::Measurement::DurationHours hours;
+
+      // The engine manifold air temperature.
+      @optional UMAA::Common::Measurement::Temperature manifoldAirTemp;
+
+      // The engine manifold pressure.
+      @optional UMAA::Common::Measurement::PressureKiloPascals manifoldPressure;
+
+      // The engine oil level.
+      @optional UMAA::Common::Measurement::VolumePercent oilLevel;
+
+      // The engine oil pressure.
+      @optional UMAA::Common::Measurement::PressureKiloPascals oilPressure;
+
+      // The engine oil temperature.
+      @optional UMAA::Common::Measurement::Temperature oilTemp;
+
+      // The engine oil pressure.
+      @optional UMAA::Common::Measurement::PressurePercent percentOilPressure;
+
+      // The engine RPM.
+      @optional UMAA::Common::Measurement::EngineSpeed RPM;
+
+      // The current ignition state.
+      UMAA::Common::MaritimeEnumeration::IgnitionStateEnumModule::IgnitionStateEnumType state;
+
+      // The engine throttle. Negative values will be regarded as zero for non-reversible engines.
+      @optional UMAA::Common::Measurement::Effort throttle;
+
+      // The origination time of the data being conveyed in the message, or as close to the data or command generation time as is reasonably possible.
+      UMAA::Common::Measurement::DateTime timeStamp;
+
+      // The unique identifier of the originating source of the command interface.
+      @key UMAA::Common::IdentifierType source;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_ENGINESTATUS_ENGINEREPORTTYPE
+

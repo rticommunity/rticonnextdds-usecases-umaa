@@ -1,0 +1,74 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_BALLASTTANK_BALLASTTANKREPORTTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_BALLASTTANK_BALLASTTANKREPORTTYPE
+
+#include "UMAA/Common/Enumeration/EnumerationSets.idl"
+#include "UMAA/Common/IdentifierType.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+module UMAA
+{
+  module EO
+  {
+    module BallastTank
+    {
+    
+      const string BallastTankReportTypeTopic = "UMAA::EO::BallastTank::BallastTankReportType";
+  
+      /**
+        * This structure is used to report the current filled level of the ballast tanks.
+        */
+    
+      struct BallastTankReportType
+      {
+      // The current volume level.
+      @optional UMAA::Common::Measurement::VolumePercent level;
+
+      // The minimum allowable pressure of the ballast tank.
+      UMAA::Common::Measurement::PressureKiloPascals lowPressureLimit;
+
+      // The current mass level.
+      @optional UMAA::Common::Measurement::Mass mass;
+
+      // The current pressure of the ballast tank.
+      UMAA::Common::Measurement::PressureKiloPascals pressure;
+
+      // The maximum allowable pressure of the ballast tank.
+      UMAA::Common::Measurement::PressureKiloPascals pressureLimit;
+
+      // The status of ballast tank trim.
+      boolean trimActive;
+
+      // The origination time of the data being conveyed in the message, or as close to the data or command generation time as is reasonably possible.
+      UMAA::Common::Measurement::DateTime timeStamp;
+
+      // The unique identifier of the originating source of the command interface.
+      @key UMAA::Common::IdentifierType source;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_BALLASTTANK_BALLASTTANKREPORTTYPE
+

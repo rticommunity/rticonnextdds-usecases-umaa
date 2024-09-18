@@ -1,0 +1,92 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_HOVEROBJECTIVETYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_HOVEROBJECTIVETYPE
+
+#include "UMAA/Common/Distance/DistanceRequirementType.idl"
+#include "UMAA/Common/Enumeration/EnumerationSets.idl"
+#include "UMAA/Common/IdentifierType.idl"
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
+#include "UMAA/Common/Measurement/ElevationRequirementVariantType.idl"
+#include "UMAA/Common/Measurement/ElevationVariantType.idl"
+#include "UMAA/Common/Measurement/GeoPosition2D.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/Orientation/DirectionRequirementVariantType.idl"
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
+#include "UMAA/Common/Speed/SpeedVariantType.idl"
+#include "UMAA/Common/Time/DateTimeRequirementType.idl"
+#include "UMAA/MM/BaseType/StateTriggerType.idl"
+module UMAA
+{
+  module MM
+  {
+    module BaseType
+    {
+
+    const string HoverObjectiveTypeTopic = "UMAA::MM::BaseType::HoverObjectiveType";
+
+      /**
+        * This structure is used to describe a clearly defined goal specifying the action(s) required for hovering. The hover objective is achieved by having the vehicle actively maintain its position at a defined elevation (or current elevation if not defined) within the circle as defined by the reference position and hoverRadius, and optionally maintain a specified heading. If a position is not specified, then the current vehicle position is used as the reference position for hovering. If a heading is not specified, then the system is allowed to determine the best heading for hovering. Elevation, heading and hoverRadius include optional tolerances for their values. If specified, the vehicle is allowed to operate within these tolerances without having the objective fail. Otherwise, if any tolerances are violated after the objective is initially achieved, then the objective is considered to have failed. If a tolerance is not specified for any of these attributes, then it is a "best effort" to maintain the specified value for that attribute, and is therefore not considered a cause for the objective to fail. If the duration attribute is not specified, the action(s) should continue indefinitely, or until interrupted by some other action.
+        *
+        * This structure is a specialization of UMAA::MM::BaseType::ObjectiveType.
+        */
+    
+      struct HoverObjectiveType
+      {
+      // Defines the priority to hover at the specified reference position.
+      UMAA::Common::MaritimeEnumeration::HoverKindEnumModule::HoverKindEnumType controlPriority;
+
+      // After the transit portion of the objective is complete, defines the duration to execute the hovering portion of the objective. If not specified, duration is not used to determine when hovering is complete.
+      @optional UMAA::Common::Measurement::DurationSeconds duration;
+
+      // Defines the vehicle elevation to maintain while hovering. If not specified, the maneuver is performed at the current elevation.
+      @optional UMAA::Common::Measurement::ElevationRequirementVariantType elevation;
+
+      // Defines the heading for the vehicle to maintain while hovering. If not specified, the system will determine the best heading (e.g. current heading, into the wind/current, etc.) for hovering.
+      @optional UMAA::Common::Orientation::DirectionRequirementVariantType heading;
+
+      // Defines the maximum distance the vehicle position is allowed to be from the hover position and still considered to be achieved.
+      UMAA::Common::Distance::DistanceRequirementType hoverRadius;
+
+      // Defines the reference position for hovering. If not specified, the reference position is the current vehicle position.
+      @optional UMAA::Common::Measurement::GeoPosition2D position;
+
+      // Defines the elevation used while transiting to the hover location before transitioning to hovering. If not specified, transit at the current elevation.
+      @optional UMAA::Common::Measurement::ElevationVariantType transitElevation;
+
+      // Defines the speed used while transiting to the hover location before transitioning to hovering.
+      UMAA::Common::Speed::SpeedVariantType transitSpeed;
+
+      // This field identifies the timestamp that signals the end of an atomic update to the instance of the specialization. NOTE: Ties this element back to the specializationID in ObjectiveType generalization.
+      UMAA::Common::Measurement::DateTime specializationReferenceTimestamp;
+
+      // NOTE: Ties this element back to the ObjectiveType generalization.
+      @key UMAA::Common::Measurement::NumericGUID specializationReferenceID;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_HOVEROBJECTIVETYPE
+

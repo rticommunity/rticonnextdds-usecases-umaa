@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="./LargeSetMetadata.xml"/>
+<include file="./IdentifierType.xml"/>
+<include file="./Measurements.xml"/>
+<include file="./ConditionalType.xml"/>
+<module name="UMAA">
+  <module name="MM">
+    <module name="ConditionalReport">
+      <const name="ConditionalReportTypeTopic" type="string" value="&quot;UMAA::MM::ConditionalReport::ConditionalReportType&quot;"/>
+      <struct name= "ConditionalReportType">
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::IdentifierType" key="true"/>
+        <member name="conditionalsSetMetadata" type="nonBasic"  nonBasicTypeName= "UMAA::Common::LargeSetMetadata"/>
+      </struct>
+      <const name="ConditionalReportTypeConditionalsSetElementTopic" type="string" value="&quot;UMAA::MM::ConditionalReport::ConditionalReportTypeConditionalsSetElement&quot;"/>
+      <struct name= "ConditionalReportTypeConditionalsSetElement">
+        <member name="element" type="nonBasic"  nonBasicTypeName= "UMAA::MM::Conditional::ConditionalType"/>
+        <member name="setID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="elementID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="elementTimestamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

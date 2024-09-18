@@ -1,0 +1,71 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESTATUS_VELOCITYSTATUS_VELOCITYREPORTTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESTATUS_VELOCITYSTATUS_VELOCITYREPORTTYPE
+
+#include "UMAA/Common/IdentifierType.idl"
+#include "UMAA/Common/Measurement/CovarianceOrientationVelocityNEDType.idl"
+#include "UMAA/Common/Measurement/CovarianceVelocityNEDType.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/Measurement/OrientationVel3D.idl"
+#include "UMAA/Common/Measurement/Velocity3DPlatformNEDType.idl"
+module UMAA
+{
+  module SA
+  {
+    module VelocityStatus
+    {
+    
+      const string VelocityReportTypeTopic = "UMAA::SA::VelocityStatus::VelocityReportType";
+  
+      /**
+        * This structure is used to report the current linear velocity and rotational rate of the vehicle.
+        */
+    
+      struct VelocityReportType
+      {
+      // The current rotational rate of the vehicle.
+      UMAA::Common::Measurement::OrientationVel3D attitudeRate;
+
+      // The current error covariance value of the attitude rate of change data.
+      @optional UMAA::Common::Measurement::CovarianceOrientationVelocityNEDType attitudeRateCovariance;
+
+      // The current linear velocity (in the NED reference frame) of the vehicle.
+      UMAA::Common::Measurement::Velocity3DPlatformNEDType velocity;
+
+      // The current error covariance value of the velocity data.
+      @optional UMAA::Common::Measurement::CovarianceVelocityNEDType velocityCovariance;
+
+      // The origination time of the data being conveyed in the message, or as close to the data or command generation time as is reasonably possible.
+      UMAA::Common::Measurement::DateTime timeStamp;
+
+      // The unique identifier of the originating source of the command interface.
+      @key UMAA::Common::IdentifierType source;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESTATUS_VELOCITYSTATUS_VELOCITYREPORTTYPE
+

@@ -1,0 +1,54 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_REFINEMENTS_MEASUREMENTS_VELOCITY3DPLATFORMNEDTYPE
+#define _LDM_MDE_REFINEMENTS_MEASUREMENTS_VELOCITY3DPLATFORMNEDTYPE
+
+#include "UMAA/Common/MeasurementCoordinate/EngineeringCoordinateAxes.idl"
+module UMAA
+{
+  module Common
+  {
+    module Measurement
+    {
+      /**
+        * Specifies the velocity of the platform with vector components expressed in a North-East-Down coordinate system centered on the platform.
+        */
+      @nested
+      struct Velocity3DPlatformNEDType
+      {
+      // Specifies the down velocity vector in a North-East-Down coordinate system centered on the platform.
+      UMAA::Common::MeasurementCoordinate::DownSpeed downSpeed;
+
+      // Specifies the easting velocity vector in a North-East-Down coordinate system centered on the platform.
+      UMAA::Common::MeasurementCoordinate::EastSpeed eastSpeed;
+
+      // Specifies the northing velocity vector in a North-East-Down coordinate system centered on the platform.
+      UMAA::Common::MeasurementCoordinate::NorthSpeed northSpeed;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_REFINEMENTS_MEASUREMENTS_VELOCITY3DPLATFORMNEDTYPE
+

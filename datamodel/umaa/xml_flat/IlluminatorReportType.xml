@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="./IdentifierType.xml"/>
+<include file="./MaritimeEnumerationSets.xml"/>
+<include file="./Measurements.xml"/>
+<include file="./ConstrainedTypes.xml"/>
+<include file="./RGBType.xml"/>
+<module name="UMAA">
+  <module name="SEM">
+    <module name="IlluminatorStatus">
+      <const name="IlluminatorReportTypeTopic" type="string" value="&quot;UMAA::SEM::IlluminatorStatus::IlluminatorReportType&quot;"/>
+      <struct name= "IlluminatorReportType">
+        <member name="beamWidth" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::IlluminatorBeamWidth" optional="true"/>
+        <member name="color" type="nonBasic"  nonBasicTypeName= "UMAA::SEM::BaseType::RGBType" optional="true"/>
+        <member name="intensity" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::IlluminatorIntensityLevel" optional="true"/>
+        <member name="state" type="nonBasic"  nonBasicTypeName= "UMAA::Common::MaritimeEnumeration::IlluminatorStateEnumModule::IlluminatorStateEnumType"/>
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::IdentifierType" key="true"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

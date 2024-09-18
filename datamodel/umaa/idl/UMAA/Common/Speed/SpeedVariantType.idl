@@ -1,0 +1,76 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_SPEED_SPEEDVARIANTTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_SPEED_SPEEDVARIANTTYPE
+
+#include "UMAA/Common/Speed/AirSpeedVariantType.idl"
+#include "UMAA/Common/Speed/EngineRPMSpeedVariantType.idl"
+#include "UMAA/Common/Speed/GroundSpeedVariantType.idl"
+#include "UMAA/Common/Speed/VehicleSpeedModeVariantType.idl"
+#include "UMAA/Common/Speed/WaterSpeedVariantType.idl"
+module UMAA
+{
+  module Common
+  {
+    module Speed
+    {
+        enum SpeedVariantTypeEnum
+        {
+            AIRSPEEDVARIANT_D,
+            ENGINERPMSPEEDVARIANT_D,
+            GROUNDSPEEDVARIANT_D,
+            VEHICLESPEEDMODEVARIANT_D,
+            WATERSPEEDVARIANT_D
+        };
+
+        @nested
+        union SpeedVariantTypeUnion switch (SpeedVariantTypeEnum)
+        {
+              case AIRSPEEDVARIANT_D:
+                UMAA::Common::Speed::AirSpeedVariantType AirSpeedVariantVariant;
+              case ENGINERPMSPEEDVARIANT_D:
+                UMAA::Common::Speed::EngineRPMSpeedVariantType EngineRPMSpeedVariantVariant;
+              case GROUNDSPEEDVARIANT_D:
+                UMAA::Common::Speed::GroundSpeedVariantType GroundSpeedVariantVariant;
+              case VEHICLESPEEDMODEVARIANT_D:
+                UMAA::Common::Speed::VehicleSpeedModeVariantType VehicleSpeedModeVariantVariant;
+              case WATERSPEEDVARIANT_D:
+                UMAA::Common::Speed::WaterSpeedVariantType WaterSpeedVariantVariant;
+        };
+      
+      /**
+        * Speed of the vehicle.
+        */
+      @nested
+      struct SpeedVariantType
+      {
+      // Union to capture specializations of SpeedVariantType
+      SpeedVariantTypeUnion SpeedVariantTypeSubtypes;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_SPEED_SPEEDVARIANTTYPE
+

@@ -1,0 +1,58 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+#ifndef _UMAA_PSM_LARGECOLLECTION_LARGELISTMETADATA
+#define _UMAA_PSM_LARGECOLLECTION_LARGELISTMETADATA
+
+#include "UMAA/Common/Measurement/Measurements.idl"
+module UMAA
+{
+  module Common
+  {
+    struct LargeListMetadata
+    {
+      // Uniquely identifies the list this metadata relates to.
+      UMAA::Common::Measurement::NumericGUID listID;
+
+      // NOTE: This field references the element ID of the list element whose  
+      // reception signals the end of an atomic update to this list. This elementID
+      // must be used in conjunction with the updateElementTimestamp below to fully
+      // identify when the atomic update has completed and the list is stable.
+      UMAA::Common::Measurement::NumericGUID updateElementID;
+
+      // NOTE: This field identifies the elementTimestamp of the element, referenced above 
+      // by updateElementID, that signals the end of an atomic update to this list. This 
+      // field will be empty in the event that the element update results from a DDS dispose
+      @optional UMAA::Common::Measurement::DateTime updateElementTimestamp;
+
+      // NOTE: This field identifies the list element, tying to its elementID, that is
+      // sequentially first in the list. This is provided for convenience when iterating 
+      // through the linked list using the nextElementID field.
+      UMAA::Common::Measurement::NumericGUID startingElementID;
+
+      // NOTE: This field indicates the number of elements associated with this list
+      // after the atomic update is complete. 
+      long size; // maxInclusive=2147483647 minInclusive=0 units=N/A
+
+    };
+  };
+};
+
+#endif // _UMAA_PSM_LARGECOLLECTION_LARGELISTMETADATA

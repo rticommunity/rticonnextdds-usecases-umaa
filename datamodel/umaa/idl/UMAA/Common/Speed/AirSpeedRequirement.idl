@@ -1,0 +1,52 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_SPEED_AIRSPEEDREQUIREMENT
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_SPEED_AIRSPEEDREQUIREMENT
+
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/Speed/AirSpeedTolerance.idl"
+module UMAA
+{
+  module Common
+  {
+    module Speed
+    {
+      /**
+        * Defines the speed through air.
+        */
+      @nested
+      struct AirSpeedRequirement
+      {
+      // Specifies speed through air.
+      UMAA::Common::Measurement::IndicatedAirspeed speed;
+
+      // Specifies the tolerance for a speed through air.
+      @optional UMAA::Common::Speed::AirSpeedTolerance speedTolerance;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_SPEED_AIRSPEEDREQUIREMENT
+

@@ -1,0 +1,64 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_CONDITIONAL_YAWRATECONDITIONALTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_CONDITIONAL_YAWRATECONDITIONALTYPE
+
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
+module UMAA
+{
+  module MM
+  {
+    module Conditional
+    {
+
+    const string YawRateConditionalTypeTopic = "UMAA::MM::Conditional::YawRateConditionalType";
+
+      /**
+        * This structure defines a yaw rate conditional. The conditional is true when the current yawRate, provided in VelocityReportType, has the relationship specified in conditionalOp to the specified yawRate.
+        *
+        * This structure is a specialization of UMAA::MM::Conditional::ConditionalType.
+        */
+    
+      struct YawRateConditionalType
+      {
+      // Defines the relationship of the current yaw rate to the specified yaw rate that must be met in order for the conditional to be true.
+      UMAA::Common::MaritimeEnumeration::ConditionalOperatorEnumModule::ConditionalOperatorEnumType conditionalOp;
+
+      // Defines the value to compare with the current yaw rate.
+      UMAA::Common::Measurement::YawRate yawRate;
+
+      // This field identifies the timestamp that signals the end of an atomic update to the instance of the specialization. NOTE: Ties this element back to the specializationID in ConditionalType generalization.
+      UMAA::Common::Measurement::DateTime specializationReferenceTimestamp;
+
+      // NOTE: Ties this element back to the ConditionalType generalization.
+      @key UMAA::Common::Measurement::NumericGUID specializationReferenceID;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_CONDITIONAL_YAWRATECONDITIONALTYPE
+

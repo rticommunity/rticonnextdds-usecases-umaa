@@ -1,0 +1,92 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_EXPVALUETYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_EXPVALUETYPE
+
+#include "UMAA/MM/BaseType/ExpBinaryValueType.idl"
+#include "UMAA/MM/BaseType/ExpBooleanValueType.idl"
+#include "UMAA/MM/BaseType/ExpByteValueType.idl"
+#include "UMAA/MM/BaseType/ExpCharValueType.idl"
+#include "UMAA/MM/BaseType/ExpDateTimeValueType.idl"
+#include "UMAA/MM/BaseType/ExpDoubleValueType.idl"
+#include "UMAA/MM/BaseType/ExpIntegerValueType.idl"
+#include "UMAA/MM/BaseType/ExpLongLongValueType.idl"
+#include "UMAA/MM/BaseType/ExpStringValueType.idl"
+module UMAA
+{
+  module MM
+  {
+    module BaseType
+    {
+        enum ExpValueTypeEnum
+        {
+            EXPBINARYVALUE_D,
+            EXPBOOLEANVALUE_D,
+            EXPBYTEVALUE_D,
+            EXPCHARVALUE_D,
+            EXPDATETIMEVALUE_D,
+            EXPDOUBLEVALUE_D,
+            EXPINTEGERVALUE_D,
+            EXPLONGLONGVALUE_D,
+            EXPSTRINGVALUE_D
+        };
+
+        @nested
+        union ExpValueTypeUnion switch (ExpValueTypeEnum)
+        {
+              case EXPBINARYVALUE_D:
+                UMAA::MM::BaseType::ExpBinaryValueType ExpBinaryValueVariant;
+              case EXPBOOLEANVALUE_D:
+                UMAA::MM::BaseType::ExpBooleanValueType ExpBooleanValueVariant;
+              case EXPBYTEVALUE_D:
+                UMAA::MM::BaseType::ExpByteValueType ExpByteValueVariant;
+              case EXPCHARVALUE_D:
+                UMAA::MM::BaseType::ExpCharValueType ExpCharValueVariant;
+              case EXPDATETIMEVALUE_D:
+                UMAA::MM::BaseType::ExpDateTimeValueType ExpDateTimeValueVariant;
+              case EXPDOUBLEVALUE_D:
+                UMAA::MM::BaseType::ExpDoubleValueType ExpDoubleValueVariant;
+              case EXPINTEGERVALUE_D:
+                UMAA::MM::BaseType::ExpIntegerValueType ExpIntegerValueVariant;
+              case EXPLONGLONGVALUE_D:
+                UMAA::MM::BaseType::ExpLongLongValueType ExpLongLongValueVariant;
+              case EXPSTRINGVALUE_D:
+                UMAA::MM::BaseType::ExpStringValueType ExpStringValueVariant;
+        };
+      
+      /**
+        * This structure is used to define the value in a key/value pair.
+        */
+      @nested
+      struct ExpValueType
+      {
+      // Union to capture specializations of ExpValueType
+      ExpValueTypeUnion ExpValueTypeSubtypes;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_EXPVALUETYPE
+

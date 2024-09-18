@@ -1,0 +1,52 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_HAZARDAVOIDANCECONFIG_CONTACTHAZARDAVOIDANCETYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_HAZARDAVOIDANCECONFIG_CONTACTHAZARDAVOIDANCETYPE
+
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/MO/HazardAvoidanceConfig/COLREGSConfigurationType.idl"
+module UMAA
+{
+  module MO
+  {
+    module HazardAvoidanceConfig
+    {
+      /**
+        * This structure describes hazard avoidance configuration for the associated contact.
+        */
+      @nested
+      struct ContactHazardAvoidanceType
+      {
+      // The COLREGS configuration for the associated contact ID.  If not defined, COLREGS is turned off for this contact.
+      @optional UMAA::MO::HazardAvoidanceConfig::COLREGSConfigurationType colregsConfig;
+
+      // The distance from a contact, that is equal to the "standing order" for minimum separation, that shall not be violated by the vehicle.
+      UMAA::Common::Measurement::Distance minimumStandoff;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_HAZARDAVOIDANCECONFIG_CONTACTHAZARDAVOIDANCETYPE
+

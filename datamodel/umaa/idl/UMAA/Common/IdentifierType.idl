@@ -1,0 +1,48 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_BASETYPE_IDENTIFIERTYPE
+#define _LDM_MDE_BASETYPE_IDENTIFIERTYPE
+
+#include "UMAA/Common/Measurement/Measurements.idl"
+module UMAA
+{
+  module Common
+  {
+    /**
+      * This structure defines a two-level hierarchical identifier, where the parent is defined to be a group or collection of entities.
+      */
+    @nested
+    struct IdentifierType
+    {
+      // Provides the identifier of an entity.
+      UMAA::Common::Measurement::NumericGUID id;
+
+      // Provides the identifier of the parent, which is a group or collection of one or more entities. If the entity has no parent (it is the root of the tree), this value will be the Nil UUID.
+      UMAA::Common::Measurement::NumericGUID parentID;
+    };
+
+  
+  };
+};
+
+#endif // _LDM_MDE_BASETYPE_IDENTIFIERTYPE
+

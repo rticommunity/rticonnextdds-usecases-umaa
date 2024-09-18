@@ -1,0 +1,68 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_BITCONTROL_BITEXECUTIONSTATUSREPORTTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_BITCONTROL_BITEXECUTIONSTATUSREPORTTYPE
+
+#include "UMAA/Common/Enumeration/EnumerationSets.idl"
+#include "UMAA/Common/IdentifierType.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+module UMAA
+{
+  module SO
+  {
+    module BITControl
+    {
+    
+      const string BITExecutionStatusReportTypeTopic = "UMAA::SO::BITControl::BITExecutionStatusReportType";
+  
+      /**
+        * This structure is used to report the current status of a Built-In-Test (BIT).
+        */
+    
+      struct BITExecutionStatusReportType
+      {
+      // Provides the estimated time the BIT will be completed.
+      @optional UMAA::Common::Measurement::DateTime estimatedTestCompletion;
+
+      // Unique identifier of the health detail of the resource.
+      UMAA::Common::IdentifierType resourceID;
+
+      // Indicates that the BIT can be canceled after it has been started.
+      boolean testCancelable;
+
+      // The origination time of the data being conveyed in the message, or as close to the data or command generation time as is reasonably possible.
+      UMAA::Common::Measurement::DateTime timeStamp;
+
+      // The unique identifier of the originating source of the command interface.
+      @key UMAA::Common::IdentifierType source;
+
+      // The unique identifier for the session.
+      @key UMAA::Common::Measurement::NumericGUID sessionID;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_BITCONTROL_BITEXECUTIONSTATUSREPORTTYPE
+

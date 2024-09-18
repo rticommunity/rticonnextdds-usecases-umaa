@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="./Measurements.xml"/>
+<include file="./PropulsorStatusType.xml"/>
+<module name="UMAA">
+  <module name="EO">
+    <module name="PropulsorsStatus">
+      <struct name= "PropulsorsStatusType" nested="true">
+        <member name="propulsorStatus" sequenceMaxLength="16" type="nonBasic"  nonBasicTypeName= "UMAA::EO::PropulsorsStatus::PropulsorStatusType"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

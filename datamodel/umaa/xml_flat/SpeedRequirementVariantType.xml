@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="./AirSpeedRequirementVariantType.xml"/>
+<include file="./EngineRPMSpeedRequirementVariantType.xml"/>
+<include file="./GroundSpeedRequirementVariantType.xml"/>
+<include file="./VehicleSpeedModeRequirementVariantType.xml"/>
+<include file="./WaterSpeedRequirementVariantType.xml"/>
+<module name="UMAA">
+  <module name="Common">
+    <module name="Speed">
+      <enum name="SpeedRequirementVariantTypeEnum">
+        <enumerator name="AIRSPEEDREQUIREMENTVARIANT_D"/>
+        <enumerator name="ENGINERPMSPEEDREQUIREMENTVARIANT_D"/>
+        <enumerator name="GROUNDSPEEDREQUIREMENTVARIANT_D"/>
+        <enumerator name="VEHICLESPEEDMODEREQUIREMENTVARIANT_D"/>
+        <enumerator name="WATERSPEEDREQUIREMENTVARIANT_D"/>
+      </enum> 
+      <union name="SpeedRequirementVariantTypeUnion" nested="true">
+<discriminator type="nonBasic" nonBasicTypeName="UMAA::Common::Speed::SpeedRequirementVariantTypeEnum"/>
+<case>
+        <caseDiscriminator value="(UMAA::Common::Speed::AIRSPEEDREQUIREMENTVARIANT_D)"/>
+<member name="AirSpeedRequirementVariantVariant" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Speed::AirSpeedRequirementVariantType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::Common::Speed::ENGINERPMSPEEDREQUIREMENTVARIANT_D)"/>
+<member name="EngineRPMSpeedRequirementVariantVariant" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Speed::EngineRPMSpeedRequirementVariantType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::Common::Speed::GROUNDSPEEDREQUIREMENTVARIANT_D)"/>
+<member name="GroundSpeedRequirementVariantVariant" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Speed::GroundSpeedRequirementVariantType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::Common::Speed::VEHICLESPEEDMODEREQUIREMENTVARIANT_D)"/>
+<member name="VehicleSpeedModeRequirementVariantVariant" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Speed::VehicleSpeedModeRequirementVariantType"/>
+</case>
+<case>
+        <caseDiscriminator value="(UMAA::Common::Speed::WATERSPEEDREQUIREMENTVARIANT_D)"/>
+<member name="WaterSpeedRequirementVariantVariant" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Speed::WaterSpeedRequirementVariantType"/>
+</case>
+      </union>
+      <struct name= "SpeedRequirementVariantType" nested="true">
+        <member name="SpeedRequirementVariantTypeSubtypes" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Speed::SpeedRequirementVariantTypeUnion"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

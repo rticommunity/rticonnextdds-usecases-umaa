@@ -1,0 +1,68 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_EXPOBJECTIVETYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_EXPOBJECTIVETYPE
+
+#include "UMAA/Common/Enumeration/EnumerationSets.idl"
+#include "UMAA/Common/IdentifierType.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
+#include "UMAA/Common/Time/DateTimeRequirementType.idl"
+#include "UMAA/MM/BaseType/KeyValueType.idl"
+#include "UMAA/MM/BaseType/StateTriggerType.idl"
+module UMAA
+{
+  module MM
+  {
+    module BaseType
+    {
+
+    const string ExpObjectiveTypeTopic = "UMAA::MM::BaseType::ExpObjectiveType";
+
+      /**
+        * This structure is used to define the goal of an experimental objective by specifying key/value pairs.
+        *
+        * This structure is a specialization of UMAA::MM::BaseType::ObjectiveType.
+        */
+    
+      struct ExpObjectiveType
+      {
+      // Defines a short name for the experimental objective.
+      UMAA::Common::PrimitiveConstrained::StringShortDescription expObjectiveDescription;
+
+      // Defines a set of key/value pairs for the experimental objective.
+      sequence<UMAA::MM::BaseType::KeyValueType,170> keyValues;
+
+      // This field identifies the timestamp that signals the end of an atomic update to the instance of the specialization. NOTE: Ties this element back to the specializationID in ObjectiveType generalization.
+      UMAA::Common::Measurement::DateTime specializationReferenceTimestamp;
+
+      // NOTE: Ties this element back to the ObjectiveType generalization.
+      @key UMAA::Common::Measurement::NumericGUID specializationReferenceID;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_EXPOBJECTIVETYPE
+
