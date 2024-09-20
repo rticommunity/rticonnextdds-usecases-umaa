@@ -90,7 +90,7 @@ cmake -B build -DCMAKE_BUILD_TYPE=Release
 ```sh
 cmake --build ./build --config Release
 ```
-***NOTE: Will take ~ 15 minutes as it is compiling all the idl types into a shared library.***
+***NOTE: Will take ~ 15 minutes as it is compiling all the IDL types into a shared library.***
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
@@ -104,6 +104,7 @@ cmake --build ./build --config Release
 
 ##### Example:
 ```sh
+cd examples
 .start_component autopilot 1
 ```
 
@@ -112,10 +113,8 @@ This reference example provides XML definition for all the entites in
 the AutoPilot component and showcases accessing those entities to read/write data using features
 such as listeners and AsyncWaitset.
 
-The Modern C++ helper files for all the UMAA types have already been generated and placed in `/examples/resources/umaa_6/gen_types/cpp11`.
-
-
-***NOTE: The commands don't implement the UMAA command state pattern("Flow Control") as that is outside the current scope of this middleware example.***
+***NOTE: The commands don't implement the UMAA command state pattern("Flow Control") as  
+that is outside the current scope of this middleware example.***
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -129,13 +128,19 @@ The Modern C++ helper files for all the UMAA types have already been generated a
 
 ##### Example:
 ```sh
+cd examples
 ./start_component.sh usvnav 1
 ```
 
 ##### Overview:
 This app uses Python types to publish messages per the USVNAV component definition.
 
-The Python modules for all the UMAA types have already been generated and placed in `/examples/resources/umaa_6/gen_types/python`.
+The Python modules for all the UMAA types have already been generated and placed into a single folder `/datamodel/umaa/python_flat`.
+
+This allows us to then point the `PYTHONPATH` variable to this folder in the `start_component.sh` script.
+
+For Python types there is a bug in RTIDDSGEN that doesn't resolve the include modules paths
+correctly CODEGENII-2112.
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -149,122 +154,22 @@ The Python modules for all the UMAA types have already been generated and placed
 
 ##### Example:
 ```sh
+cd examples
 ./start_component.sh globalvector
 ```
 
 ##### Overview:
-This script publishes messages of the `GlobalVectorCommandType` to be reference
+This script publishes messages of the `GlobalVectorCommandType` to reference
 reception into the AsynWaitset of the AutoPilot component.
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-## XML SCRIPTS
-
-### Compatibility  
-- UMAA IDL files: 6.0.1
-- Ubuntu 20.04
-- Windows 11
-- Connext: 6.1.2, 7.3.0
-
-### Overview
-These scripts are meant to assist in your workflow when converting the idl
-files to xml/python.
-
-These scripts are intended for backwards compatibility with Connext 6.2.1 as in  
-Connext 7.3.0 you can use the `-r` recursive flag. [7.3.0 RTI CodeGen](https://community.rti.com/static/documentation/connext-dds/7.3.0/doc/manuals/connext_dds_professional/code_generator/users_manual/code_generator/users_manual/GeneratingCode.htm?Highlight=recursive#:~:text=4.1.4.3%20Enabling%20Recursion)
-
-XML and Python helper files for all of the UMAA types have already been generated  
-and placed in the `/examples/resource/umaa_6/gen_types/` folder.
-
-### LINUX
-
-#### Configure
-- Make sure you have followed the setup guide for your Connext installation, 
-including setting the NDDSHOME variable.
-
-- Set the environment variable $UMAA_TYPES to the target folder that *CONTAINS* 
-the `UMAA` idl folder. This script will create a subfolder `gen_types/<type>`.
-
-```sh
-export UMAA_TYPES="<PATH_TO_FOLDER_CONTAINING_UMAA>"
-```
-
-***NOTE:*** *Ensure a pre-processor is in your PATH environment variable.  
-The default is `cpp`. Reference the [RTI code generator](https://community.rti.com/static/documentation/connext-dds/6.1.2/doc/manuals/connext_dds_professional/code_generator/users_manual/index.htm) documentation for more info.*  
-
-#### Usage
-
-##### XML:
-
-The use case here is when importing types into Cameo/Simulink or using with 
-Connext infrastructure tools such as Routing/Recording service etc.
-
-By flatenning the include paths we can decouple from needing to be relative of `CWD`
-
-```sh
-scripts/convert_umaa.sh xml
-```
-
-- Convert idl files recursively through all sub folders.
-- Generate the xml files into a `gen_types/xml` folder inside the `$UMAA_TYPES` directory.
-- Edit include paths to remove folders.
-________________________________________________________________________________
-
-##### Python:
-
-This script can be used to create Python modules from the UMAA idl set.
-This exports all of the modules into a single folder.
-
-For Python types there is a bug in RTIDDSGEN that doesn't resolve the include modules paths
-correctly CODEGENII-2112. Connext 7.4.0 has some new options.
-
-For this reason we export all the modules to a single folder and can them add them to the `PYTHONPATH`.
-
-```sh
-scripts/convert_umaa.sh python
-```
-
-- Convert idl files recursively through all sub folders
-- Generate the python files into an `/python` folder relative to the `$UMAA_TYPES` directory.
-- Edit include paths to remove folders (Example: "./umaa_type.idl")
-________________________________________________________________________________
-
-### WINDOWS
-
-#### Configure
-
-- Make sure you have followed the setup guide for your Connext installation,  
-including setting the NDDSHOME variable by running the setup script.
-
-- Set the environment variable %UMAA_TYPES% to the target folder:
-```sh
-SET UMAA_TYPES="<PATH_TO_UMAA_IDL_REPO>"
-```
-
-***NOTE:*** *Ensure a pre-processor is in your PATH environment variable.**  
-The default is `cp.exe`. Reference the [RTI code generator](https://community.rti.com/static/documentation/connext-dds/6.1.2/doc/manuals/connext_dds_professional/code_generator/users_manual/index.htm) documentation for more info.
-
-
-#### Usage
-
-##### Generate in place:
-
-```sh
-scripts/convert_umaa_xml.bat
-```
-- Convert idl files recursively through all sub folders
-- Place xml file in same location as idl file.
-
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-
-
 ## CMAKE modules
 
-This repo pulls in a git submodule from [rticonnextdds-cmake-utils](https://github.com/rticommunity/rticonnextdds-cmake-utils) into the /examples/resources folder.  
+This repo pulls in a git submodule from [rticonnextdds-cmake-utils](https://github.com/rticommunity/rticonnextdds-cmake-utils) in.  
 
-The `rticonnextdds-cmake-utils` repo provides convenient CMAKE utils to call `rtiddsgen` and pass in idl files as an argument. 
+The `rticonnextdds-cmake-utils` repo provides convenient CMAKE utils to call `rtiddsgen` and pass in IDL files as an argument. 
 Use /examples/CMakeLists.txt as a reference for creating a shared library for your UMAA IDL set. 
 
 --------------------------------------------------------------------------------
