@@ -19,8 +19,10 @@ set(BUILD_SHARED_LIBS ON)
 
 # Add the folder where the FindRTIConnextDDS.cmake file is placed to the
 # CMAKE_MODULE_PATH variable
+get_filename_component(REPO ${CMAKE_CURRENT_SOURCE_DIR} DIRECTORY)
+
 list(APPEND CMAKE_MODULE_PATH
-    "${CMAKE_CURRENT_SOURCE_DIR}/resources/rticonnextdds-cmake-utils/cmake/Modules"
+    "${REPO}/rticonnextdds-cmake-utils/cmake/Modules"
 )
 
 include(ConnextDdsCodegen)
@@ -40,15 +42,11 @@ endif()
 
 set (_UMAA_TYPES)
 set (_UMAA_CPP11_GENERATED)
-set (_UMAA_VERS "umaa_6")
-set (_UMAA_IDL_FOLDER "${CMAKE_CURRENT_SOURCE_DIR}/resources/${_UMAA_VERS}/")
-set (_UMAA_CPP11_FOLDER "${CMAKE_CURRENT_SOURCE_DIR}/resources/${_UMAA_VERS}/gen_types/cpp11/")
+set (_UMAA_IDL_FOLDER "${REPO}/datamodel/umaa/idl/")
+set (_UMAA_CPP11_FOLDER "${REPO}/examples/build/cpp11_gen")
 
 # Add all types
 file(GLOB_RECURSE _UMAA_TYPES RELATIVE ${_UMAA_IDL_FOLDER} ${_UMAA_IDL_FOLDER}*.idl)
-
-message(_UMAA_IDL_FOLDER="${_UMAA_IDL_FOLDER}")
-message(_UMAA_CPP11_FOLDER="${_UMAA_CPP11_FOLDER}")
 
 foreach(_idl IN LISTS _UMAA_TYPES)
     # Maintain folder structure on output so includes work
@@ -87,10 +85,10 @@ add_dependencies(umaa_cpp11_types gen_cpp11_umaa_types)
 
 # Create the target for the AutoPilot executable
 add_executable(autopilot
-    "${CMAKE_CURRENT_SOURCE_DIR}/modern_cpp/autopilot.cxx"
-    "${CMAKE_CURRENT_SOURCE_DIR}/modern_cpp/application.hpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/modern_cpp/umaa_autopilot.hpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/modern_cpp/umaa_autopilot.cxx"
+    "${CMAKE_CURRENT_SOURCE_DIR}/c++11/autopilot.cxx"
+    "${CMAKE_CURRENT_SOURCE_DIR}/c++11/application.hpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/c++11/umaa_autopilot.hpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/c++11/umaa_autopilot.cxx"
 )
 target_link_libraries(autopilot
     PRIVATE
