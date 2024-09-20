@@ -196,6 +196,7 @@ void AutoPilot::setup_async_waitset()
     _async_waitset.start();
 }
 
+// Function not used, created as reference example
 template <typename T>
 void AutoPilot::process_samples(DataReader<T> reader, T &current_data)
 {
