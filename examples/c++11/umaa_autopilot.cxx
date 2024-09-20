@@ -178,7 +178,13 @@ void AutoPilot::setup_async_waitset()
     // Use waitsets for processes that might not be ligthweight.
     // Due to thread context switch small impact to latency
 
-    // Global Vector
+    // Reference example: 
+    // https://github.com/rticommunity/rticonnextdds-examples/tree/master/examples/connext_dds/asyncwaitset/c%2B%2B11
+
+    // Class documentation:
+    // https://community.rti.com/static/documentation/connext-dds/current/doc/api/connext_dds/api_cpp2/classrti_1_1core_1_1cond_1_1AsyncWaitSet.html#a9a0a88fa860f0d4cf06b115dee5e6d5c
+
+    // Add Global Vector Status Condition and Handler function
     dds::core::cond::StatusCondition global_vector_sc(_global_vector_cmd_r);
     global_vector_sc.enabled_statuses(
             dds::core::status::StatusMask::data_available());
