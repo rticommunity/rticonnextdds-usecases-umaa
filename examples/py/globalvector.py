@@ -38,17 +38,21 @@ def get_type_name(type):
 def publisher_main():
 
     # Need to register all types in component before creating Domain Participant
-    dds.DomainParticipant.register_idl_type(UMAA_MO_GlobalVectorControl_GlobalVectorCommandType,
-                                            get_type_name(UMAA_MO_GlobalVectorControl_GlobalVectorCommandType))
+    dds.DomainParticipant.register_idl_type(
+            UMAA_MO_GlobalVectorControl_GlobalVectorCommandType,
+            get_type_name(UMAA_MO_GlobalVectorControl_GlobalVectorCommandType))
 
-    dds.DomainParticipant.register_idl_type(UMAA_MO_GlobalVectorControl_GlobalVectorCommandAckReportType,
-                                            get_type_name(UMAA_MO_GlobalVectorControl_GlobalVectorCommandAckReportType))
+    dds.DomainParticipant.register_idl_type(
+            UMAA_MO_GlobalVectorControl_GlobalVectorCommandAckReportType,
+            get_type_name(UMAA_MO_GlobalVectorControl_GlobalVectorCommandAckReportType))
 
-    dds.DomainParticipant.register_idl_type(UMAA_MO_GlobalVectorControl_GlobalVectorCommandStatusType,
-                                            get_type_name(UMAA_MO_GlobalVectorControl_GlobalVectorCommandStatusType))
+    dds.DomainParticipant.register_idl_type(
+            UMAA_MO_GlobalVectorControl_GlobalVectorCommandStatusType,
+            get_type_name(UMAA_MO_GlobalVectorControl_GlobalVectorCommandStatusType))
 
-    dds.DomainParticipant.register_idl_type(UMAA_MO_GlobalVectorControl_GlobalVectorExecutionStatusReportType,
-                                            get_type_name(UMAA_MO_GlobalVectorControl_GlobalVectorExecutionStatusReportType))
+    dds.DomainParticipant.register_idl_type(
+        UMAA_MO_GlobalVectorControl_GlobalVectorExecutionStatusReportType,
+        get_type_name(UMAA_MO_GlobalVectorControl_GlobalVectorExecutionStatusReportType))
 
     # All of our XML files are being passed in by the NDDS_QOS_PROFILES env variable
     qos_provider = dds.QosProvider("")
@@ -62,12 +66,14 @@ def publisher_main():
         participant.find_datawriter("pub::GlobalVectorCommandType"))
 
     globalvector_command_sample = UMAA_MO_GlobalVectorControl_GlobalVectorCommandType()
-    
+
     # Select the union to send
-    globalvector_command_sample.speed.SpeedRequirementVariantTypeSubtypes.discriminator = UMAA_Common_Speed_SpeedRequirementVariantTypeEnum.WATERSPEEDREQUIREMENTVARIANT_D
+    globalvector_command_sample.speed.SpeedRequirementVariantTypeSubtypes.discriminator = \
+            UMAA_Common_Speed_SpeedRequirementVariantTypeEnum.WATERSPEEDREQUIREMENTVARIANT_D
 
     # Set a random value
-    globalvector_command_sample.speed.SpeedRequirementVariantTypeSubtypes.WaterSpeedRequirementVariantVariant.speed.speed = 6
+    globalvector_command_sample.speed.SpeedRequirementVariantTypeSubtypes \
+            .WaterSpeedRequirementVariantVariant.speed.speed = 6
 
     print(globalvector_command_sample.speed.SpeedRequirementVariantTypeSubtypes)
 
@@ -83,7 +89,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Global Vector Command Consumer"
     )
-    print("Global Vector Command Consumer \nThis is just an example application to publish a 'Global Vector Command' to the AutoPilot component. \nDoes NOT implement UMAA Flow Control\n\n")
+    print("Global Vector Command Consumer\n" \
+        "This is just an example application to publish a 'Global Vector " \
+        "Command' to the AutoPilot component.\n" \
+        "Does NOT implement UMAA Flow Control\n\n")
 
     args = parser.parse_args()
 

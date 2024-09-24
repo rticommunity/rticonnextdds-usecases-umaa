@@ -34,24 +34,24 @@ def get_type_name(type):
 def publisher_main():
 
     print("Registering Types")
-    
+
     # Need to Register all types in Component before creating Domain Participant
     dds.DomainParticipant.register_idl_type(
         UMAA_SO_LogReport_LogReportType, get_type_name(
             UMAA_SO_LogReport_LogReportType))
-    
+
     dds.DomainParticipant.register_idl_type(
         UMAA_SO_HealthReport_HealthReportType, get_type_name(
             UMAA_SO_HealthReport_HealthReportType))
-    
+
     dds.DomainParticipant.register_idl_type(
         UMAA_SA_GlobalPoseStatus_GlobalPoseReportType, get_type_name(
             UMAA_SA_GlobalPoseStatus_GlobalPoseReportType))
-    
+
     dds.DomainParticipant.register_idl_type(
         UMAA_SA_VelocityStatus_VelocityReportType, get_type_name(
             UMAA_SA_VelocityStatus_VelocityReportType))
-    
+
     dds.DomainParticipant.register_idl_type(
         UMAA_SA_SpeedStatus_SpeedReportType, get_type_name(
             UMAA_SA_SpeedStatus_SpeedReportType))
@@ -68,10 +68,10 @@ def publisher_main():
     print("Looking up writers")
     speed_report_writer = dds.DataWriter(
         participant.find_datawriter("pub::SpeedReportType"))
-    
+
     globalpose_report_writer = dds.DataWriter(
         participant.find_datawriter("pub::GlobalPoseReportType"))
-    
+
     velocity_report_writer = dds.DataWriter(
         participant.find_datawriter("pub::VelocityReportType"))
 
@@ -118,7 +118,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="UMAA USV NAV Component"
     )
-    print("UMAA USV NAV Component. \nReference example that Publishes the necessary topics to be consumed by the AutoPilot component.\n\n")
+    print("UMAA USV NAV Component.\n" \
+        "Reference example that Publishes the necessary topics to be " \
+        "consumed by the AutoPilot component.\n\n")
 
     args = parser.parse_args()
 
