@@ -18,9 +18,8 @@ void AutoPilot::create()
     // Need to register types first before you create Participant
     register_types();
 
-    auto qos_provider = QosProvider("");
-    _participant = qos_provider->create_participant_from_config(
-            "umaa_components_lib::autopilot");
+    _participant = QosProvider::Default()->create_participant_from_config(
+                                                             "umaa_components_lib::autopilot");
 
     lookup_entities();
 
@@ -34,20 +33,24 @@ void AutoPilot::create()
 
 std::string AutoPilot::get_type_name(std::string topic_name)
 {
-    // Stripping namespaces from Topic to use as Type name
-    // This needs to correllate with the XML definition in domain.xml
-    // Workaround for CORE-15111 where Topic and Type name can't be equal.
+        /* 
+          Stripping namespaces from Topic to use as Type name
+          This needs to correllate with the XML definition in domain.xml
+          Workaround for CORE-15111 where Topic and Type name can't be equal.
+          Having a shorter Type name also makes it a bit more legible in print outs
+         */
 
-    // Having a shorter Type name also makes it a bit more legible in print outs
-
-    std::string type_name =
+        std::string type_name =
             topic_name.substr(topic_name.find_last_of("::") + 1);
-    return type_name;
+        return type_name;
 };
 
 void AutoPilot::register_types()
 {
-    // Register all types used in this component.
+    /* 
+      Register all types used in this component.
+      This is usually templatized/refactored but left as is for clarity of API usage.
+     */
     std::cout << "Registering Types" << std::endl;
 
     register_type<PrimitiveDriverCommandAckReportType>(
@@ -113,13 +116,13 @@ void AutoPilot::register_types()
 void AutoPilot::lookup_entities()
 {
     try {
-        // Get outputs
+        // Get outputs(writers)
         _health_report_w = find_datawriter_by_topic_name<
                 dds::pub::DataWriter<HealthReportType>>(
                 find_publisher(_participant, PUBLISHER_NAME),
                 HealthReportTypeTopic);
 
-        // Get inputs
+        // Get inputs(readers)
         _speed_report_r = find_datareader_by_topic_name<
                 dds::sub::DataReader<SpeedReportType>>(
                 find_subscriber(_participant, SUBSCRIBER_NAME),
@@ -156,7 +159,7 @@ void AutoPilot::attach_reader_listeners()
 
     // Lower latency than waitsets.
 
-    // Could probably abstract away all of this, left for clarity
+    // These are usually refactored with Templates, left as is for API usage clarity
     auto speed_report_listener =
             std::make_shared<ReportDataListener<SpeedReportType>>(
                     _speed_report_data);
@@ -176,7 +179,7 @@ void AutoPilot::attach_reader_listeners()
 void AutoPilot::setup_async_waitset()
 {
     // Use waitsets for processes that might not be ligthweight.
-    // Due to thread context switch small impact to latency
+    // Due to thread context switch small impact to latency relative to Listeners
 
     // Reference example: 
     // https://github.com/rticommunity/rticonnextdds-examples/tree/master/examples/connext_dds/asyncwaitset/c%2B%2B11
@@ -227,10 +230,6 @@ void AutoPilot::process_samples(DataReader<T> reader, T &current_data)
             // Do something with data here
         }
     }
-    // Sleep a random amount of time between 1 and 10 secs. This is
-    // intended to cause the handling thread of the AWS to take a long
-    // time dispatching
-    rti::util::sleep(dds::core::Duration::from_secs(rand() % 10 + 1));
 }
 
 template <typename T>
@@ -255,8 +254,8 @@ void AutoPilot::process_keyed_samples(
         // Add Loaned Sample to map
         // Only retaining last sample within application state in this case
 
-        // If Meta sample will construct empty <T> object i.e. clear it out
-        // Meta sample == unregister/dispose so will likely want to clear data
+        // If meta sample will construct empty <T> object i.e blank sample.data object
+        // (Meta sample == unregister/dispose)
         keyed_data_map[sample.info().instance_handle()] =
                 dds::sub::Sample<T>(sample);
 
@@ -268,13 +267,10 @@ void AutoPilot::process_keyed_samples(
         //               << reader.topic_description().type_name() << std::endl;
 
         } else {
-            //     This would be a meta sample such as unregister or dispose
+        //     This would be a meta sample such as unregister or dispose
         //     std::cout << "Received new meta sample for: "
         //               << reader.topic_description().type_name() << std::endl;
         }
     }
-    // Sleep a random amount of time between 1 and 10 secs. This is
-    // intended to cause the handling thread of the AWS to take a long
-    // time dispatching
-    rti::util::sleep(dds::core::Duration::from_secs(rand() % 10 + 1));
+
 }
