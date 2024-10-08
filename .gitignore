@@ -3,3 +3,5 @@
 .clang-format
 examples/build/*
 .vscode/settings.json
+
+datamodel/umaa/python_flat/__pycache__/
