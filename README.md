@@ -1,4 +1,25 @@
 # UMAA Starter Kit
+A starting point for developing to the UMAA standard with Connext.
+
+- [Overview](#overview)
+- [UMAA Standard](#umaa-standard)
+- [Types](#types)
+- [Components](#components)
+- [CMAKE modules](#cmake-modules)
+- [Recording Service](#recording-service)
+
+## Overview
+The intention of this Starter Kit was to provide some ongoing reference  
+examples focusing on the Connext infrastructure/various API’s interacting, and  
+instantiation of UMAA components.
+
+It features the following:
+- XML App Creation used with the following API's
+  - Python API
+  - Modern C++ with Compiled Types
+- CMAKE file using `rticonnextdds-cmake-utils` modules for code generation of large type sets
+- Recommended best practices for assigning QOS to topics
+
 
 ## UMAA Standard
 Latest Version: 6.0 Distro A
@@ -24,24 +45,11 @@ The UMAA standard defines the following(as of 6.0):
 The application level requirements (i.e Flow Control/Large Collections/Generic-Specified types)  
 are outside of the current scope of this middleware reference example.**
 
-## Overview
-The intention of this Starter Kit was to provide some ongoing reference  
-examples focusing on the Connext infrastructure/various API’s interacting, and  
-instantiation of UMAA components.
-
-It features the following:
-- XML App Creation used with the following API's
-  - Python API
-  - Modern C++ with Compiled Types
-- CMAKE file using `rticonnextdds-cmake-utils` modules for code generation of large type sets
-- Recommended best practices for assigning QOS to topics
-
-
 ## Types
 UMAA defines ~ 600 data types. This is what is used to determine the "structure" of the data being transported.
 
-With Connext, we use RTI Code Generator `rtiddsgen` [manual](https://community.rti.com/static/documentation/connext-dds/current/doc/manuals/connext_dds_professional/code_generator/users_manual/code_generator/users_manual/UsersManual_Title.htm) to generate code per the API being used.  
-This code assists with construction, serialization/deserialization of these data structures.
+With Connext, we use RTI Code Generator `rtiddsgen` ([manual](https://community.rti.com/static/documentation/connext-dds/current/doc/manuals/connext_dds_professional/code_generator/users_manual/code_generator/users_manual/UsersManual_Title.htm)) to generate code per the API being used.  
+This code assists with construction and serialization/deserialization of these data structures.
 
 
 ### C++11 types
@@ -75,9 +83,9 @@ XML types are used for the following use cases:
 - Referencing types in Admin Console when type propagation is disabled
 - Referencing types in Routing Service or Recording service when type propagation is disabled
 
-We can use `rtiddsgen` along with the `convertToXML` flag to convert our IDL files to XML. 
+We can use `rtiddsgen` along with the `-convertToXML` flag to convert our IDL files to XML. 
 
-With Connext 7.3 there is a `-r` recursive flag that can be used to iterate through the subfolders and convert as necessary. [rtiddsgen enable recursion](https://community.rti.com/static/documentation/connext-dds/current/doc/manuals/connext_dds_professional/code_generator/users_manual/code_generator/users_manual/GeneratingCode.htm#Chapter_4_Generating_Example_Code:~:text=4.1.4.3%20Enabling%20Recursion)
+With Connext 7.3 there is a `-r` recursive flag that can be used to iterate through the subfolders and convert as necessary. ([rtiddsgen enable recursion](https://community.rti.com/static/documentation/connext-dds/current/doc/manuals/connext_dds_professional/code_generator/users_manual/code_generator/users_manual/GeneratingCode.htm#Chapter_4_Generating_Example_Code:~:text=4.1.4.3%20Enabling%20Recursion))
 
 For this example we have provided these XML types in `datamodel/umaa/xml_flat` for your convenience. 
 
