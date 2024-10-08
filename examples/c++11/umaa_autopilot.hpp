@@ -75,32 +75,34 @@ using namespace UMAA::MM::ConditionalReport;
 const std::string PUBLISHER_NAME = "pub";
 const std::string SUBSCRIBER_NAME = "sub";
 
-// Uncomment below for 6.1.2
 
-// namespace std {
-// template <>
-// struct hash<dds::core::detail::InstanceHandle> {
-//     size_t operator()(const dds::core::detail::InstanceHandle &h) const
-//     {
-//         // elements_to_hash will be 16 / 8 = 2 for 64-bit architectures and
-//         // 16 / 4 = 4 for 32-bit architectures.
-//         constexpr size_t elements_to_hash =
-//                 static_cast<size_t>(MIG_RTPS_KEY_HASH_MAX_LENGTH)
-//                 / sizeof(size_t);
-//         const size_t *key_hash = reinterpret_cast<const size_t *>(
-//                 &h.extensions().native().keyHash.value[0]);
+// InstanceHandle, Condition types and Entity types were made hashable in 7.0
+#if RTI_DDS_VERSION_MAJOR < 7
+    namespace std {
+template <>
+struct hash<dds::core::detail::InstanceHandle> {
+    size_t operator()(const dds::core::detail::InstanceHandle &h) const
+    {
+        // elements_to_hash will be 16 / 8 = 2 for 64-bit architectures and
+        // 16 / 4 = 4 for 32-bit architectures.
+        constexpr size_t elements_to_hash =
+                static_cast<size_t>(MIG_RTPS_KEY_HASH_MAX_LENGTH)
+                / sizeof(size_t);
+        const size_t *key_hash = reinterpret_cast<const size_t *>(
+                &h.extensions().native().keyHash.value[0]);
 
-//         // This loop should be optimized away by most 64-bit compilers
-//         size_t result = 0;
-//         for (size_t i = 0; i < elements_to_hash; ++i) {
-//             result ^= key_hash[i];
-//         }
+        // This loop should be optimized away by most 64-bit compilers
+        size_t result = 0;
+        for (size_t i = 0; i < elements_to_hash; ++i) {
+            result ^= key_hash[i];
+        }
 
-//         return result;
-//     }
-// };
+        return result;
+    }
+};
 
-// }  // namespace std
+}  // namespace std
+#endif
 
 template <typename T>
 class ReportDataListener : public NoOpDataReaderListener<T> {
