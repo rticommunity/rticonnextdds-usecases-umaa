@@ -38,6 +38,7 @@ def get_type_name(type):
 def publisher_main():
 
     # Need to register all types in component before creating Domain Participant
+    # This is usually abstracted away to another utility class, left as is for API usage clarity
     dds.DomainParticipant.register_idl_type(
             UMAA_MO_GlobalVectorControl_GlobalVectorCommandType,
             get_type_name(UMAA_MO_GlobalVectorControl_GlobalVectorCommandType))
@@ -68,21 +69,20 @@ def publisher_main():
     globalvector_command_sample = UMAA_MO_GlobalVectorControl_GlobalVectorCommandType()
 
     # Select the union to send
+    speed_cmd = random.randrange(0, 10, 2)
     globalvector_command_sample.speed.SpeedRequirementVariantTypeSubtypes.discriminator = \
             UMAA_Common_Speed_SpeedRequirementVariantTypeEnum.WATERSPEEDREQUIREMENTVARIANT_D
 
     # Set a random value
     globalvector_command_sample.speed.SpeedRequirementVariantTypeSubtypes \
-            .WaterSpeedRequirementVariantVariant.speed.speed = 6
-
-    print(globalvector_command_sample.speed.SpeedRequirementVariantTypeSubtypes)
+            .WaterSpeedRequirementVariantVariant.speed.speed = speed_cmd
 
     # write data samples in a loop
     while (True):
         time.sleep(5)
 
         globalvector_command_w.write(globalvector_command_sample)
-        print("Writing Global Vector Command")
+        print(f'Writing Global Vector Command (Speed): {speed_cmd }')
 
 
 if __name__ == "__main__":
