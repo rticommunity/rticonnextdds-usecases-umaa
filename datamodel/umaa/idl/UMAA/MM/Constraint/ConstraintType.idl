@@ -1,0 +1,58 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_CONSTRAINT_CONSTRAINTTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_CONSTRAINT_CONSTRAINTTYPE
+
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
+module UMAA
+{
+  module MM
+  {
+    module Constraint
+    {
+      /**
+        * This structure defines common attributes across all Constraints.
+        */
+      @nested
+      struct ConstraintType
+      {
+      // Defines a unique identifier for the conditional.
+      UMAA::Common::Measurement::NumericGUID constraintConditionalID;
+
+      // Defines a unique identifier for the constraint.
+      UMAA::Common::Measurement::NumericGUID constraintID;
+
+      // Defines a short name for the constraint.
+      UMAA::Common::PrimitiveConstrained::StringShortDescription name;
+
+      // Defines a unique identifier of the trigger that enables the constraint. If it is not defined, the trigger conditional is assumed to always be true.
+      @optional UMAA::Common::Measurement::NumericGUID triggerConditionalID;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_CONSTRAINT_CONSTRAINTTYPE
+

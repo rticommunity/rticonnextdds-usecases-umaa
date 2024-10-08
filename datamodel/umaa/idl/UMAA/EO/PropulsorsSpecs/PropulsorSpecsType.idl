@@ -1,0 +1,79 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_PROPULSORSSPECS_PROPULSORSPECSTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_PROPULSORSSPECS_PROPULSORSPECSTYPE
+
+#include "UMAA/Common/Angle/GammaAnglePropulsorToleranceType.idl"
+#include "UMAA/Common/Angle/PropellerPitchAnglePropulsorToleranceType.idl"
+#include "UMAA/Common/Angle/RhoAnglePropulsorToleranceType.idl"
+#include "UMAA/Common/Enumeration/EnumerationSets.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/Measurement/Position3DBodyXYZ.idl"
+#include "UMAA/Common/Orientation/Orientation3DPlatformType.idl"
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
+module UMAA
+{
+  module EO
+  {
+    module PropulsorsSpecs
+    {
+      /**
+        * This structure is used to report the specifications of a propulsor on the vehicle.
+        */
+      @nested
+      struct PropulsorSpecsType
+      {
+      // If true, specifies that the propulsor is a counter rotator.
+      boolean counterRotator;
+
+      // Specifies an upper and lower gamma angle limit for the propulsor; attribute is not defined when the propulsor angle is fixed.
+      @optional UMAA::Common::Angle::GammaAnglePropulsorToleranceType gamma;
+
+      // The name of the propulsor unit.
+      UMAA::Common::PrimitiveConstrained::StringShortDescription name;
+
+      // Specifies the rotation offset of the propulsor coordinate reference frame with respect to the vehicle coordinate reference frame.
+      UMAA::Common::Orientation::Orientation3DPlatformType orientation;
+
+      // Specifies the position offset of the propulsor coordinate reference frame with respect to the vehicle coordinate reference frame.
+      UMAA::Common::Measurement::Position3DBodyXYZ position;
+
+      // Specifies an upper and lower angle limit for the propeller angle; attribute is not defined for propellers that have static pitch angles.
+      @optional UMAA::Common::Angle::PropellerPitchAnglePropulsorToleranceType propellerPitch;
+
+      // Specifies a lower speed limit for propulsors that are reversible; attribute is not defined for propulsors that are not reversible.
+      @optional UMAA::Common::Measurement::FrequencyRPM propulsionLowerLimit;
+
+      // Specifies an upper speed limit for the propulsor.
+      UMAA::Common::Measurement::FrequencyRPM propulsionUpperLimit;
+
+      // Specifies an upper and lower rho angle limit for the propulsor; attribute is not defined when the propulsor angle is fixed.
+      @optional UMAA::Common::Angle::RhoAnglePropulsorToleranceType rho;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLESUBSYSTEMCONTROLANDSTATUS_PROPULSORSSPECS_PROPULSORSPECSTYPE
+

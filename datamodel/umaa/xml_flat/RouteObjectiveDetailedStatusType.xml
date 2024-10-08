@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="./LargeSetMetadata.xml"/>
+<include file="./EnumerationSets.xml"/>
+<include file="./MaritimeEnumerationSets.xml"/>
+<include file="./Measurements.xml"/>
+<include file="./ConstrainedTypes.xml"/>
+<include file="./SpeedVariantType.xml"/>
+<include file="./WaypointDetailedStatusType.xml"/>
+<module name="UMAA">
+  <module name="MM">
+    <module name="BaseType">
+      <const name="RouteObjectiveDetailedStatusTypeTopic" type="string" value="&quot;UMAA::MM::BaseType::RouteObjectiveDetailedStatusType&quot;"/>
+      <struct name= "RouteObjectiveDetailedStatusType">
+        <member name="crossTrackError" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance" optional="true"/>
+        <member name="currentWaypointID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID"/>
+        <member name="distanceRemaining" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance"/>
+        <member name="distanceToWaypoint" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance"/>
+        <member name="isCrossTrackLimitAchieved" type="boolean" optional="true"/>
+        <member name="speedToWaypoint" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Speed::SpeedVariantType"/>
+        <member name="specializationReferenceTimestamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+        <member name="specializationReferenceID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="waypointDetailedStatusSetMetadata" type="nonBasic"  nonBasicTypeName= "UMAA::Common::LargeSetMetadata"/>
+      </struct>
+      <const name="RouteObjectiveDetailedStatusTypeWaypointDetailedStatusSetElementTopic" type="string" value="&quot;UMAA::MM::BaseType::RouteObjectiveDetailedStatusTypeWaypointDetailedStatusSetElement&quot;"/>
+      <struct name= "RouteObjectiveDetailedStatusTypeWaypointDetailedStatusSetElement">
+        <member name="element" type="nonBasic"  nonBasicTypeName= "UMAA::MM::BaseType::WaypointDetailedStatusType"/>
+        <member name="setID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="elementID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="elementTimestamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

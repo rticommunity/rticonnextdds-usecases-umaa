@@ -1,0 +1,76 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ELEVATION_ELEVATIONVARIANTTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ELEVATION_ELEVATIONVARIANTTYPE
+
+#include "UMAA/Common/Measurement/AltitudeAGLVariantType.idl"
+#include "UMAA/Common/Measurement/AltitudeASFVariantType.idl"
+#include "UMAA/Common/Measurement/AltitudeGeodeticVariantType.idl"
+#include "UMAA/Common/Measurement/AltitudeMSLVariantType.idl"
+#include "UMAA/Common/Measurement/DepthVariantType.idl"
+module UMAA
+{
+  module Common
+  {
+    module Measurement
+    {
+        enum ElevationVariantTypeEnum
+        {
+            ALTITUDEAGLVARIANT_D,
+            ALTITUDEASFVARIANT_D,
+            ALTITUDEGEODETICVARIANT_D,
+            ALTITUDEMSLVARIANT_D,
+            DEPTHVARIANT_D
+        };
+
+        @nested
+        union ElevationVariantTypeUnion switch (ElevationVariantTypeEnum)
+        {
+              case ALTITUDEAGLVARIANT_D:
+                UMAA::Common::Measurement::AltitudeAGLVariantType AltitudeAGLVariantVariant;
+              case ALTITUDEASFVARIANT_D:
+                UMAA::Common::Measurement::AltitudeASFVariantType AltitudeASFVariantVariant;
+              case ALTITUDEGEODETICVARIANT_D:
+                UMAA::Common::Measurement::AltitudeGeodeticVariantType AltitudeGeodeticVariantVariant;
+              case ALTITUDEMSLVARIANT_D:
+                UMAA::Common::Measurement::AltitudeMSLVariantType AltitudeMSLVariantVariant;
+              case DEPTHVARIANT_D:
+                UMAA::Common::Measurement::DepthVariantType DepthVariantVariant;
+        };
+      
+      /**
+        * The desired elevation used for the vehicle.
+        */
+      @nested
+      struct ElevationVariantType
+      {
+      // Union to capture specializations of ElevationVariantType
+      ElevationVariantTypeUnion ElevationVariantTypeSubtypes;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ELEVATION_ELEVATIONVARIANTTYPE
+

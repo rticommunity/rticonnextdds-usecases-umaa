@@ -1,0 +1,68 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_COMMUNICATIONS_MANAGEMENT_COMMSCHANNEL_COMMSCHANNELCONFIG_COMMSCHANNELADDMESSAGECANCELCONFIGCOMMANDSTATUSTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_COMMUNICATIONS_MANAGEMENT_COMMSCHANNEL_COMMSCHANNELCONFIG_COMMSCHANNELADDMESSAGECANCELCONFIGCOMMANDSTATUSTYPE
+
+#include "UMAA/Common/IdentifierType.idl"
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+module UMAA
+{
+  module CO
+  {
+    module CommsChannelConfig
+    {
+    
+      const string CommsChannelAddMessageCancelConfigCommandStatusTypeTopic = "UMAA::CO::CommsChannelConfig::CommsChannelAddMessageCancelConfigCommandStatusType";
+  
+      /**
+        * This structure is used to report the status of the nullification of the current configuration command.
+        */
+    
+      struct CommsChannelAddMessageCancelConfigCommandStatusType
+      {
+      // The origination time of the data being conveyed in the message, or as close to the data or command generation time as is reasonably possible.
+      UMAA::Common::Measurement::DateTime timeStamp;
+
+      // The unique identifier of the originating source of the command interface.
+      @key UMAA::Common::IdentifierType source;
+
+      // The unique identifier for the session.
+      @key UMAA::Common::Measurement::NumericGUID sessionID;
+
+      // The status of the command.
+      UMAA::Common::MaritimeEnumeration::CommandStatusEnumModule::CommandStatusEnumType commandStatus;
+
+      // The reason for the status of the command.
+      UMAA::Common::MaritimeEnumeration::CommandStatusReasonEnumModule::CommandStatusReasonEnumType commandStatusReason;
+
+      // Human-readable description related to response. Systems should not parse or use any information from this for processing purposes.
+      string<4095> logMessage;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_COMMUNICATIONS_MANAGEMENT_COMMSCHANNEL_COMMSCHANNELCONFIG_COMMSCHANNELADDMESSAGECANCELCONFIGCOMMANDSTATUSTYPE
+

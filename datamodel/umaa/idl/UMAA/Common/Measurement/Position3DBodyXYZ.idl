@@ -1,0 +1,54 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_REFINEMENTS_MEASUREMENTSETS_POSITION3DBODYXYZ
+#define _LDM_MDE_REFINEMENTS_MEASUREMENTSETS_POSITION3DBODYXYZ
+
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
+module UMAA
+{
+  module Common
+  {
+    module Measurement
+    {
+      /**
+        * 
+        */
+      @nested
+      struct Position3DBodyXYZ
+      {
+      // The position on the body x-axis, which extends out the front of the reference body.
+      UMAA::Common::PrimitiveConstrained::XPosition xAxis;
+
+      // The position on the body y-axis, which extends out the right (starboard) of the reference body.
+      UMAA::Common::PrimitiveConstrained::YPosition yAxis;
+
+      // The position on the body z-axis, which is perpendicular to the x and y axes and is directed downward from the center of the body.
+      UMAA::Common::PrimitiveConstrained::ZPosition zAxis;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_REFINEMENTS_MEASUREMENTSETS_POSITION3DBODYXYZ
+

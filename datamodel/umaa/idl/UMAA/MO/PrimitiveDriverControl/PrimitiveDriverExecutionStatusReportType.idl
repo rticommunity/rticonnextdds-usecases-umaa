@@ -1,0 +1,72 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_PRIMITIVEDRIVERCONTROL_PRIMITIVEDRIVEREXECUTIONSTATUSREPORTTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_PRIMITIVEDRIVERCONTROL_PRIMITIVEDRIVEREXECUTIONSTATUSREPORTTYPE
+
+#include "UMAA/Common/IdentifierType.idl"
+#include "UMAA/Common/Measurement/LinearEffort.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/Measurement/RotationalEffort.idl"
+module UMAA
+{
+  module MO
+  {
+    module PrimitiveDriverControl
+    {
+    
+      const string PrimitiveDriverExecutionStatusReportTypeTopic = "UMAA::MO::PrimitiveDriverControl::PrimitiveDriverExecutionStatusReportType";
+  
+      /**
+        * This structure is used to report the current mobility in the vehicle coordinate frame. It consists of a six element propulsive wrench and a six element resistive wrench. The six elements of each wrench break down into three linear elements and three rotational elements, which are mapped to the three axis orthogonal coordinate frame of the vehicle. All elements of the Wrench message are not necessarily applicable to a particular vehicle.
+        */
+    
+      struct PrimitiveDriverExecutionStatusReportType
+      {
+      // The current propulsive linear effort (X, Y, Z).
+      UMAA::Common::Measurement::LinearEffort propulsiveLinearEffort;
+
+      // The current propulsive rotational effort (X, Y, Z).
+      UMAA::Common::Measurement::RotationalEffort propulsiveRotationalEffort;
+
+      // The current resistive linear effort (X, Y, Z).
+      UMAA::Common::Measurement::LinearEffort resistiveLinearEffort;
+
+      // The current resistive rotational effort (X, Y, Z).
+      UMAA::Common::Measurement::RotationalEffort resistiveRotationalEffort;
+
+      // The origination time of the data being conveyed in the message, or as close to the data or command generation time as is reasonably possible.
+      UMAA::Common::Measurement::DateTime timeStamp;
+
+      // The unique identifier of the originating source of the command interface.
+      @key UMAA::Common::IdentifierType source;
+
+      // The unique identifier for the session.
+      @key UMAA::Common::Measurement::NumericGUID sessionID;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_PRIMITIVEDRIVERCONTROL_PRIMITIVEDRIVEREXECUTIONSTATUSREPORTTYPE
+

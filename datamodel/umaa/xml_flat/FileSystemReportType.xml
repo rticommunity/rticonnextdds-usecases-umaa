@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="./EnumerationSets.xml"/>
+<include file="./IdentifierType.xml"/>
+<include file="./Measurements.xml"/>
+<include file="./ConstrainedTypes.xml"/>
+<module name="UMAA">
+  <module name="SO">
+    <module name="FileSystemStatus">
+      <const name="FileSystemReportTypeTopic" type="string" value="&quot;UMAA::SO::FileSystemStatus::FileSystemReportType&quot;"/>
+      <struct name= "FileSystemReportType">
+        <member name="availableInodes" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::LargeCount" optional="true"/>
+        <member name="availableSpace" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::SizeLargeBytes" optional="true"/>
+        <member name="freeInodes" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::LargeCount" optional="true"/>
+        <member name="freeSpace" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::SizeLargeBytes" optional="true"/>
+        <member name="inodes" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::LargeCount" optional="true"/>
+        <member name="maxFilenameLength" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Count" optional="true"/>
+        <member name="path" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::StringShortDescription"/>
+        <member name="reachable" type="boolean"/>
+        <member name="_readOnly" type="boolean" optional="true"/>
+        <member name="totalSpace" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::SizeLargeBytes" optional="true"/>
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::IdentifierType" key="true"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

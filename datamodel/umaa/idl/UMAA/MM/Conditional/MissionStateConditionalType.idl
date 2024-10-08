@@ -1,0 +1,64 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_CONDITIONAL_MISSIONSTATECONDITIONALTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_CONDITIONAL_MISSIONSTATECONDITIONALTYPE
+
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
+module UMAA
+{
+  module MM
+  {
+    module Conditional
+    {
+
+    const string MissionStateConditionalTypeTopic = "UMAA::MM::Conditional::MissionStateConditionalType";
+
+      /**
+        * This structure defines a mission state conditional. The conditional is true when the current state of the specified mission, provided by MissionPlanExecutionReportType, is equal to the defined missionState.
+        *
+        * This structure is a specialization of UMAA::MM::Conditional::ConditionalType.
+        */
+    
+      struct MissionStateConditionalType
+      {
+      // Identifies the mission to be used in the conditional statement.
+      UMAA::Common::Measurement::NumericGUID missionID;
+
+      // Specifies the state to compare with the current mission state.
+      UMAA::Common::MaritimeEnumeration::TaskStateEnumModule::TaskStateEnumType missionState;
+
+      // This field identifies the timestamp that signals the end of an atomic update to the instance of the specialization. NOTE: Ties this element back to the specializationID in ConditionalType generalization.
+      UMAA::Common::Measurement::DateTime specializationReferenceTimestamp;
+
+      // NOTE: Ties this element back to the ConditionalType generalization.
+      @key UMAA::Common::Measurement::NumericGUID specializationReferenceID;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_CONDITIONAL_MISSIONSTATECONDITIONALTYPE
+

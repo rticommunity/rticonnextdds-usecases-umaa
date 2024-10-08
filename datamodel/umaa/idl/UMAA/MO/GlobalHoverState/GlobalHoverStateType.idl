@@ -1,0 +1,64 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_GLOBALHOVERSTATE_GLOBALHOVERSTATETYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_GLOBALHOVERSTATE_GLOBALHOVERSTATETYPE
+
+#include "UMAA/MO/GlobalHoverState/GlobalHoveringHoverType.idl"
+#include "UMAA/MO/GlobalHoverState/GlobalTransitHoverType.idl"
+module UMAA
+{
+  module MO
+  {
+    module GlobalHoverState
+    {
+        enum GlobalHoverStateTypeEnum
+        {
+            GLOBALTRANSITHOVER_D,
+            GLOBALHOVERINGHOVER_D
+        };
+
+        @nested
+        union GlobalHoverStateTypeUnion switch (GlobalHoverStateTypeEnum)
+        {
+              case GLOBALTRANSITHOVER_D:
+                UMAA::MO::GlobalHoverState::GlobalTransitHoverType GlobalTransitHoverVariant;
+              case GLOBALHOVERINGHOVER_D:
+                UMAA::MO::GlobalHoverState::GlobalHoveringHoverType GlobalHoveringHoverVariant;
+        };
+      
+      /**
+        * State of the global hover. While first transiting to the hover location, the selector will be GlobalTransitHoverType until the position, heading, and elevation are first achieved within their respective tolerances. Once achieved, the union selector will change to GlobalHoveringHoverType. The selector will not change as a result of any of the GlobalHoveringHoverType achievements states being lost and regained as a result of tolerance settings being violated. The service is expected to make driving adjustments to attempt to keep all achievement states satisfied. This is true until the service determines that tolerance(s) are violated by a sufficient margin that it is more effective for the vehicle to return to transiting to the hover location. In that case, the GlobalHoverStateType reverts to the GlobalTransitHoverType selector and those transit achievements then are actively set.
+        */
+      @nested
+      struct GlobalHoverStateType
+      {
+      // Union to capture specializations of GlobalHoverStateType
+      GlobalHoverStateTypeUnion GlobalHoverStateTypeSubtypes;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONTROL_GLOBALHOVERSTATE_GLOBALHOVERSTATETYPE
+

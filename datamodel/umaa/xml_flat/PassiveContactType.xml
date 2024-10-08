@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="./MaritimeEnumerationSets.xml"/>
+<include file="./Measurements.xml"/>
+<include file="./MeasurementConstrainedTypes.xml"/>
+<include file="./ConstrainedTypes.xml"/>
+<module name="UMAA">
+  <module name="SA">
+    <module name="PassiveContactReport">
+      <struct name= "PassiveContactType" nested="true">
+        <member name="bearing" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::BearingAngle"/>
+        <member name="bearingRate" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::AngleRate"/>
+        <member name="bearingRateUncertainty" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::ContactUncertainty"/>
+        <member name="bearingUncertainty" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::ContactUncertainty"/>
+        <member name="contactLevel" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::PeakSoundPressureLevel"/>
+        <member name="contactType" type="nonBasic"  nonBasicTypeName= "UMAA::Common::MaritimeEnumeration::PassiveContactFeatureEnumModule::PassiveContactFeatureEnumType" optional="true"/>
+        <member name="course" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::CourseTrueNorth" optional="true"/>
+        <member name="courseUncertainty" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::ContactUncertainty" optional="true"/>
+        <member name="declination" type="nonBasic"  nonBasicTypeName= "UMAA::Common::MeasurementConstrained::AngleHalf" optional="true"/>
+        <member name="declinationUncertainty" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::ContactUncertainty" optional="true"/>
+        <member name="narrowbandContactFrequency" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::FrequencyHertz" optional="true"/>
+        <member name="range" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance" optional="true"/>
+        <member name="rangeUncertainty" type="nonBasic"  nonBasicTypeName= "UMAA::Common::PrimitiveConstrained::ContactUncertainty" optional="true"/>
+        <member name="threatType" type="nonBasic"  nonBasicTypeName= "UMAA::Common::MaritimeEnumeration::TrackIdentityEnumModule::TrackIdentityEnumType" optional="true"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

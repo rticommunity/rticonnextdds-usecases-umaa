@@ -1,0 +1,68 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_DYNAMIC_WATERSPACE_ENVIRONMENT_RELATIVECONTACTREPORT_RELATIVECONTACTREPORTTYPE
+#define _LDM_MDE_DYNAMIC_WATERSPACE_ENVIRONMENT_RELATIVECONTACTREPORT_RELATIVECONTACTREPORTTYPE
+
+#include "UMAA/Common/IdentifierType.idl"
+#include "UMAA/Common/Measurement/GeoPosition2D.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+module UMAA
+{
+  module SA
+  {
+    module RelativeContactReport
+    {
+    
+      const string RelativeContactReportTypeTopic = "UMAA::SA::RelativeContactReport::RelativeContactReportType";
+  
+      /**
+        * This structure is used to report the contact characteristics relative to ownship.
+        */
+    
+      struct RelativeContactReportType
+      {
+      // The relative bearing of the ownship vessel from the contact.
+      @optional UMAA::Common::Measurement::Angle bearing;
+
+      // An estimated point in which the distance between the vehicle and contact will reach the minimum value.
+      @optional UMAA::Common::Measurement::GeoPosition2D CPA;
+
+      // Time of contact CPA.
+      @optional UMAA::Common::Measurement::DateTime CPATime;
+
+      // The origination time of the data being conveyed in the message, or as close to the data or command generation time as is reasonably possible.
+      UMAA::Common::Measurement::DateTime timeStamp;
+
+      // The unique identifier of the originating source of the command interface.
+      @key UMAA::Common::IdentifierType source;
+
+      // An identifier of the contact.
+      @key UMAA::Common::Measurement::NumericGUID contactID;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_DYNAMIC_WATERSPACE_ENVIRONMENT_RELATIVECONTACTREPORT_RELATIVECONTACTREPORTTYPE
+

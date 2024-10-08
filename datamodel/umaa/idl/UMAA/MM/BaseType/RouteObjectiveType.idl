@@ -1,0 +1,82 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_ROUTEOBJECTIVETYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_ROUTEOBJECTIVETYPE
+
+#include "UMAA/Common/LargeListMetadata.idl"
+#include "UMAA/Common/Enumeration/EnumerationSets.idl"
+#include "UMAA/Common/IdentifierType.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
+#include "UMAA/Common/Time/DateTimeRequirementType.idl"
+#include "UMAA/MM/BaseType/StateTriggerType.idl"
+#include "UMAA/MM/BaseType/WaypointType.idl"
+module UMAA
+{
+  module MM
+  {
+    module BaseType
+    {
+
+    const string RouteObjectiveTypeTopic = "UMAA::MM::BaseType::RouteObjectiveType";
+
+      /**
+        * This structure is used to report an element that describes a clearly defined goal specifying the action(s) required for following a route. The route objective is achieved by having the vehicle achieve each waypoint in order and is complete when the final waypoint is achieved. Each waypoint is specified by a position along with a captureRadius, and each waypoint optionally includes a specified attitude and elevation. If the attitude or elevation is not specified, then any attitude or elevation at the waypoint is acceptable, respectively. The desired effect when a waypoint is achieved is for the vehicle's position to be within a distance less than or equal to the captureRadius. The captureRadius includes an optional tolerance. If specified and the system is unable to achieve the captureRadius, then the waypoint can be considered completed if the vehicle's position is within a distance less than or equal to the specified tolerance. If the system is unable to complete the waypoint within the specified tolerance, then the objective is considered to have failed. If the captureRadius tolerance is not specified and the system is not able to achieve the captureRadius, then it is a "best effort" to achieve the waypoint, and is therefore not considered a cause for the objective to fail. If attitude or elevation is specified, then the desired effect when a waypoint is achieved includes the vehicle's attitude aligning with this specified attitude or obtaining the specified elevation, respectively, at the waypoint position along with the positional effect described above. Both attitude and elevation include an optional tolerance. If the system is unable to achieve the specified attitude or elevation within their tolerance, then the objective is considered to have failed. If a tolerance is not defined for attitude or elevation, then it is a "best effort" to achieve the specified attitude or elevation, respectively, and is therefore not considered a cause for the objective to fail. Additionally, there is an optional trackTolerance. If trackTolerance is specified, then the defined path between waypoints is specified to be the track line created by the waypoints with a cross track error less than or equal to the trackTolerance. The trackTolerance includes an optional tolerance. If specified, the vehicle is allowed to operate within this tolerance without having the objective fail. Otherwise, if the tolerance is violated, then the objective is considered to have failed. If the trackTolerance tolerance is not specified, then it is a "best effort" to maintain the specified trackTolerance, and is therefore not considered a cause for the objective to fail. If the trackTolerance is not specified, then path between waypoints is not specified and therefore left for the system to determine the best path.
+        *
+        * This structure is a specialization of UMAA::MM::BaseType::ObjectiveType.
+        */
+    
+      struct RouteObjectiveType
+      {
+      // Description of a route.
+      UMAA::Common::PrimitiveConstrained::StringShortDescription routeDescription;
+
+      // This field identifies the timestamp that signals the end of an atomic update to the instance of the specialization. NOTE: Ties this element back to the specializationID in ObjectiveType generalization.
+      UMAA::Common::Measurement::DateTime specializationReferenceTimestamp;
+
+      // NOTE: Ties this element back to the ObjectiveType generalization.
+      @key UMAA::Common::Measurement::NumericGUID specializationReferenceID;
+      UMAA::Common::LargeListMetadata waypointsListMetadata;
+      };
+
+      const string RouteObjectiveTypeWaypointsListElementTopic = "UMAA::MM::BaseType::RouteObjectiveTypeWaypointsListElement";
+      // Defines the large list element type that wraps UMAA::MM::BaseType::WaypointType
+      struct RouteObjectiveTypeWaypointsListElement
+      {
+        // The value of the list element.
+        UMAA::MM::BaseType::WaypointType element;
+        // NOTE: Ties this element back to the list metadata with the same listID, which is the collection of all elements in the topic with the same sourceId.
+        @key UMAA::Common::Measurement::NumericGUID listID;
+        // NOTE: Uniquely identifies this element within the list and universally across any large collection that currently exists on the DDS bus.
+        @key UMAA::Common::Measurement::NumericGUID elementID;
+        // The timestamp of this element.
+        UMAA::Common::Measurement::DateTime elementTimestamp;
+        // NOTE: references to the elementID of the element that logically follows this element in the linked list. This is empty if this element is sequentially last.
+        @optional UMAA::Common::Measurement::NumericGUID nextElementID;
+      };
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_ROUTEOBJECTIVETYPE
+

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="./IdentifierType.xml"/>
+<include file="./Measurements.xml"/>
+<include file="./FinSpecsType.xml"/>
+<module name="UMAA">
+  <module name="EO">
+    <module name="FinsSpecs">
+      <const name="FinsSpecsReportTypeTopic" type="string" value="&quot;UMAA::EO::FinsSpecs::FinsSpecsReportType&quot;"/>
+      <struct name= "FinsSpecsReportType">
+        <member name="finSpecs" sequenceMaxLength="16" type="nonBasic"  nonBasicTypeName= "UMAA::EO::FinsSpecs::FinSpecsType"/>
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::IdentifierType" key="true"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

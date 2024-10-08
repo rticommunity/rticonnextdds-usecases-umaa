@@ -1,0 +1,83 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_TASKPLANTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_TASKPLANTYPE
+
+#include "UMAA/Common/LargeSetMetadata.idl"
+#include "UMAA/Common/Enumeration/EnumerationSets.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
+#include "UMAA/Common/Time/DateTimeRequirementType.idl"
+#include "UMAA/MM/BaseType/ObjectiveType.idl"
+#include "UMAA/MM/BaseType/StateTriggerType.idl"
+module UMAA
+{
+  module MM
+  {
+    module BaseType
+    {
+      /**
+        * This structure is used to define the attributes to specify a task plan. A task plan is a collection of logically related set of objectives.
+        */
+      @nested
+      struct TaskPlanType
+      {
+      // An indication of whether approval is required for the specified task within a mission.
+      boolean approvalRequired;
+
+      // A short name for the task.
+      UMAA::Common::PrimitiveConstrained::StringShortDescription name;
+
+      // Specifies the conditional statement that when true attempts to change the current state. Each trigger is evaluated individually, meaning if multiple triggers are defined with the same state, then their conditional statements are treated as if they are logically OR'd.
+      sequence<UMAA::MM::BaseType::StateTriggerType,16> stateTrigger;
+
+      // A description of the task.
+      UMAA::Common::PrimitiveConstrained::StringShortDescription taskDescription;
+
+      // Unique identifier for the task within a mission.
+      UMAA::Common::Measurement::NumericGUID taskID;
+
+      // Specifies the desired importance for completing the task in order to handle the case where a plan cannot be generated to complete all tasks. For this case, task priority is used to determine what task(s) to drop from the plan. Tasks with the lowest priority must be dropped before tasks with a higher priority. Task priority is considered before objective priority, meaning a low priority task with a high priority objective would be dropped before a high priority task with a low priority objective. If multiple tasks have the lowest priority, then the order in which they are dropped is not defined by their priority and must be determined by some other mechanism.
+      UMAA::Common::Measurement::Priority taskPriority;
+      UMAA::Common::LargeSetMetadata objectivesSetMetadata;
+      };
+
+      const string TaskPlanTypeObjectivesSetElementTopic = "UMAA::MM::BaseType::TaskPlanTypeObjectivesSetElement";
+      // Defines the large set element type that wraps UMAA::MM::BaseType::ObjectiveType
+      struct TaskPlanTypeObjectivesSetElement
+      {
+        // The value of the set element.
+        UMAA::MM::BaseType::ObjectiveType element;
+        // NOTE: Ties this element back to the set metadata with the same setID, which is the collection of all elements in the topic with the same sourceId.
+        @key UMAA::Common::Measurement::NumericGUID setID;
+        // NOTE: Uniquely identifies this element within the set and universally across any large collection that currently exists on the DDS bus.
+        @key UMAA::Common::Measurement::NumericGUID elementID;
+        // The timestamp of this element.
+        UMAA::Common::Measurement::DateTime elementTimestamp;
+      };
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_TASKPLANTYPE
+

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="./IdentifierType.xml"/>
+<include file="./Measurements.xml"/>
+<include file="./ResourceAllocationPriorityCommandType.xml"/>
+<module name="UMAA">
+  <module name="SO">
+    <module name="ResourceAllocation">
+      <const name="ResourceAllocationPriorityCommandAckReportTypeTopic" type="string" value="&quot;UMAA::SO::ResourceAllocation::ResourceAllocationPriorityCommandAckReportType&quot;"/>
+      <struct name= "ResourceAllocationPriorityCommandAckReportType">
+        <member name="command" type="nonBasic"  nonBasicTypeName= "UMAA::SO::ResourceAllocation::ResourceAllocationPriorityCommandType"/>
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::IdentifierType" key="true"/>
+        <member name="sessionID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

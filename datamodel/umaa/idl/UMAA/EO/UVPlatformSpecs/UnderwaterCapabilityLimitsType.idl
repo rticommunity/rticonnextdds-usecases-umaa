@@ -1,0 +1,101 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONFIGANDCHARACTERISTICS_UVPLATFORMSPECS_UNDERWATERCAPABILITYLIMITSTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONFIGANDCHARACTERISTICS_UVPLATFORMSPECS_UNDERWATERCAPABILITYLIMITSTYPE
+
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/Measurement/OrientationAcceleration3D.idl"
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
+module UMAA
+{
+  module EO
+  {
+    module UVPlatformSpecs
+    {
+      /**
+        * This structure describes the capability limits for any vehicle operating under the surface.
+        */
+      @nested
+      struct UnderwaterCapabilityLimitsType
+      {
+      // The speed that results in the maximum range for the vehicle.
+      @optional UMAA::Common::Measurement::SpeedLocalWaterMass cruisingSpeed;
+
+      // The highest rate of increase of vehicle linear velocity as a function of time.
+      @optional UMAA::Common::PrimitiveConstrained::AccelerationLocalWaterMass maxAcceleration;
+
+      // The highest rate of increase of vehicle rotational velocity as a function of time in three dimensions.
+      @optional UMAA::Common::Measurement::OrientationAcceleration3D maxAttitudeAcceleration;
+
+      // The highest rate of decrease of vehicle rotational velocity as a function of time in three dimensions.
+      @optional UMAA::Common::Measurement::OrientationAcceleration3D maxAttitudeDeceleration;
+
+      // The highest rate of decrease of vehicle linear velocity as a function of time.
+      @optional UMAA::Common::PrimitiveConstrained::AccelerationLocalWaterMass maxDeceleration;
+
+      // The highest rate of vertical velocity change as a function of time.
+      @optional UMAA::Common::PrimitiveConstrained::SpeedBSLAcceleration maxDepthAcceleration;
+
+      // The largest possible vertical displacement of the vehicle as a function of time.
+      @optional UMAA::Common::Measurement::SpeedBSL maxDepthChangeRate;
+
+      // The largest possible forward horizontal displacement of the vehicle as a function of time.
+      @optional UMAA::Common::Measurement::SpeedLocalWaterMass maxForwardSpeed;
+
+      // The highest angular rate of change in the rotation of a vehicle about the transverse axis.
+      @optional UMAA::Common::Measurement::PitchRate maxPitchRate;
+
+      // The largest possible reverse horizontal displacement of the vehicle as a function of time.
+      @optional UMAA::Common::Measurement::SpeedLocalWaterMass maxReverseSpeed;
+
+      // The fastest linear velocity that is allowed when dragging a payload.
+      @optional UMAA::Common::Measurement::SpeedLocalWaterMass maxTowingSpeed;
+
+      // The highest rate of linear velocity change as a function of time when towing.
+      @optional UMAA::Common::Measurement::AngleAcceleration maxTowingTurnAcceleration;
+
+      // The fastest vehicle direction change rate when towing a payload.
+      @optional UMAA::Common::Measurement::TurnRate maxTowingTurnRate;
+
+      // The highest rate of linear velocity change as a function of time.
+      @optional UMAA::Common::Measurement::AngleAcceleration maxTurnAcceleration;
+
+      // The fastest vehicle direction change rate.
+      @optional UMAA::Common::Measurement::TurnRate maxTurnRate;
+
+      // The largest vehicle operating distance below the water surface.
+      @optional UMAA::Common::Measurement::DistanceBSL maxVehicleDepth;
+
+      // The slowest linear velocity that is required to enable control surfaces to operate.
+      @optional UMAA::Common::Measurement::SpeedLocalWaterMass minSpeedInMedium;
+
+      // The slowest linear velocity that is allowed when dragging a payload.
+      @optional UMAA::Common::Measurement::SpeedLocalWaterMass minTowingSpeed;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_VEHICLECONFIGANDCHARACTERISTICS_UVPLATFORMSPECS_UNDERWATERCAPABILITYLIMITSTYPE
+

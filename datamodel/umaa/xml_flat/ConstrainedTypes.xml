@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<module name="UMAA">
+  <module name="Common">
+    <module name="PrimitiveConstrained">
+      <const name="AccelerationLocalWaterMass_MIN" type="float64" value="-299792458.0"/>
+      <const name="AccelerationLocalWaterMass_MAX" type="float64" value="299792458.0"/>
+      <typedef name="AccelerationLocalWaterMass" type="float64"/>
+      <const name="AirTemperature_MIN" type="float64" value="-100.0"/>
+      <const name="AirTemperature_MAX" type="float64" value="100.0"/>
+      <typedef name="AirTemperature" type="float64"/>
+      <const name="AngleAcceleration_MIN" type="float64" value="-10000.0"/>
+      <const name="AngleAcceleration_MAX" type="float64" value="10000.0"/>
+      <typedef name="AngleAcceleration" type="float64"/>
+      <const name="BearingAngle_MIN" type="float64" value="-6.28318530718"/>
+      <const name="BearingAngle_MAX" type="float64" value="6.28318530718"/>
+      <typedef name="BearingAngle" type="float64"/>
+      <const name="CarrierToNoiseDensityRatio_MIN" type="float64" value="0.0"/>
+      <const name="CarrierToNoiseDensityRatio_MAX" type="float64" value="1000000.0"/>
+      <typedef name="CarrierToNoiseDensityRatio" type="float64"/>
+      <const name="ColorComponent_MIN" type="int32" value="0"/>
+      <const name="ColorComponent_MAX" type="int32" value="255"/>
+      <typedef name="ColorComponent" type="int32"/>
+      <typedef name="ContactUncertainty" type="float64"/>
+      <const name="CovarAccelPlatformXYZ_MIN" type="float64" value="-10000.0"/>
+      <const name="CovarAccelPlatformXYZ_MAX" type="float64" value="10000.0"/>
+      <typedef name="CovarAccelPlatformXYZ" type="float64"/>
+      <const name="CovarOrientationAccelPlatformXYZ_MIN" type="float64" value="-100.0"/>
+      <const name="CovarOrientationAccelPlatformXYZ_MAX" type="float64" value="100.0"/>
+      <typedef name="CovarOrientationAccelPlatformXYZ" type="float64"/>
+      <const name="CovarOrientationNED_MIN" type="float64" value="-10000.0"/>
+      <const name="CovarOrientationNED_MAX" type="float64" value="10000.0"/>
+      <typedef name="CovarOrientationNED" type="float64"/>
+      <const name="CovarOrientationVelNED_MIN" type="float64" value="-10000.0"/>
+      <const name="CovarOrientationVelNED_MAX" type="float64" value="10000.0"/>
+      <typedef name="CovarOrientationVelNED" type="float64"/>
+      <const name="CovarPosECEF_MIN" type="float64" value="-10000.0"/>
+      <const name="CovarPosECEF_MAX" type="float64" value="10000.0"/>
+      <typedef name="CovarPosECEF" type="float64"/>
+      <const name="CovarPosNED_MIN" type="float64" value="-10000.0"/>
+      <const name="CovarPosNED_MAX" type="float64" value="10000.0"/>
+      <typedef name="CovarPosNED" type="float64"/>
+      <const name="CovarPosVelNED_MIN" type="float64" value="-10000.0"/>
+      <const name="CovarPosVelNED_MAX" type="float64" value="10000.0"/>
+      <typedef name="CovarPosVelNED" type="float64"/>
+      <const name="CovarVelNED_MIN" type="float64" value="-10000.0"/>
+      <const name="CovarVelNED_MAX" type="float64" value="10000.0"/>
+      <typedef name="CovarVelNED" type="float64"/>
+      <const name="DewPointTemperature_MIN" type="float64" value="-100.0"/>
+      <const name="DewPointTemperature_MAX" type="float64" value="100.0"/>
+      <typedef name="DewPointTemperature" type="float64"/>
+      <const name="GeodeticAltitude_MIN" type="float64" value="-10000.0"/>
+      <const name="GeodeticAltitude_MAX" type="float64" value="700000.0"/>
+      <typedef name="GeodeticAltitude" type="float64"/>
+      <const name="IlluminatorBeamWidth_MIN" type="float64" value="0.0"/>
+      <const name="IlluminatorBeamWidth_MAX" type="float64" value="6.28318530718"/>
+      <typedef name="IlluminatorBeamWidth" type="float64"/>
+      <const name="IlluminatorIntensityLevel_MIN" type="float64" value="0.0"/>
+      <const name="IlluminatorIntensityLevel_MAX" type="float64" value="100.0"/>
+      <typedef name="IlluminatorIntensityLevel" type="float64"/>
+      <const name="Left_MIN" type="float64" value="-20000000.0"/>
+      <const name="Left_MAX" type="float64" value="20000000.0"/>
+      <typedef name="Left" type="float64"/>
+      <const name="MaxEngineOilPressure_MIN" type="float64" value="0.0"/>
+      <const name="MaxEngineOilPressure_MAX" type="float64" value="512.0"/>
+      <typedef name="MaxEngineOilPressure" type="float64"/>
+      <typedef name="MMSI" stringMaxLength="9" type="string"/>
+      <const name="NanosecondsCount_MIN" type="int64" value="-9223372036854775807"/>
+      <const name="NanosecondsCount_MAX" type="int64" value="9223372036854775807"/>
+      <typedef name="NanosecondsCount" type="int64"/>
+      <const name="NanosecondsDrift_MIN" type="int32" value="-2147483648"/>
+      <const name="NanosecondsDrift_MAX" type="int32" value="2147483647"/>
+      <typedef name="NanosecondsDrift" type="int32"/>
+      <const name="NaturalNumberCount_MIN" type="float64" value="0.0"/>
+      <const name="NaturalNumberCount_MAX" type="float64" value="9223372036854775807.0"/>
+      <typedef name="NaturalNumberCount" type="float64"/>
+      <const name="PeakSoundPressureLevel_MIN" type="float64" value="-400.0"/>
+      <const name="PeakSoundPressureLevel_MAX" type="float64" value="400.0"/>
+      <typedef name="PeakSoundPressureLevel" type="float64"/>
+      <typedef name="Ratio" type="float64"/>
+      <const name="SignalToNoiseRatio_MIN" type="float64" value="0.0"/>
+      <const name="SignalToNoiseRatio_MAX" type="float64" value="100.0"/>
+      <typedef name="SignalToNoiseRatio" type="float64"/>
+      <const name="SpeedBSLAcceleration_MIN" type="float64" value="-299792458.0"/>
+      <const name="SpeedBSLAcceleration_MAX" type="float64" value="299792458.0"/>
+      <typedef name="SpeedBSLAcceleration" type="float64"/>
+      <typedef name="StringLongDescription" stringMaxLength="4095" type="string"/>
+      <typedef name="StringName" stringMaxLength="64" type="string"/>
+      <typedef name="StringShortDescription" stringMaxLength="1023" type="string"/>
+      <typedef name="StringValue" stringMaxLength="256" type="string"/>
+      <typedef name="UniformResourceIdentifier" stringMaxLength="2047" type="string"/>
+      <const name="WaterTemperature_MIN" type="float64" value="-22.0"/>
+      <const name="WaterTemperature_MAX" type="float64" value="100.0"/>
+      <typedef name="WaterTemperature" type="float64"/>
+      <const name="WeatherBarometricPressure_MIN" type="float64" value="600.0"/>
+      <const name="WeatherBarometricPressure_MAX" type="float64" value="1200.0"/>
+      <typedef name="WeatherBarometricPressure" type="float64"/>
+      <typedef name="XPosition" type="float64"/>
+      <typedef name="YPosition" type="float64"/>
+      <const name="ZPosition_MIN" type="float64" value="-100000.0"/>
+      <const name="ZPosition_MAX" type="float64" value="100000.0"/>
+      <typedef name="ZPosition" type="float64"/>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

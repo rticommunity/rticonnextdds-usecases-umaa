@@ -1,0 +1,63 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_REFINEMENTS_MEASUREMENTERRORS_COVARIANCEORIENTATIONVELOCITYNEDTYPE
+#define _LDM_MDE_REFINEMENTS_MEASUREMENTERRORS_COVARIANCEORIENTATIONVELOCITYNEDTYPE
+
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
+module UMAA
+{
+  module Common
+  {
+    module Measurement
+    {
+      /**
+        * Describes orientation rate covariance.
+        */
+      @nested
+      struct CovarianceOrientationVelocityNEDType
+      {
+      // Pitch-Pitch orientation velocity-orientation velocity error covariance.
+      UMAA::Common::PrimitiveConstrained::CovarOrientationVelNED rpRp;
+
+      // Pitch-Yaw orientation velocity-orientation velocity error covariance.
+      @optional UMAA::Common::PrimitiveConstrained::CovarOrientationVelNED rpRy;
+
+      // Roll-Pitch orientation velocity-orientation velocity error covariance.
+      @optional UMAA::Common::PrimitiveConstrained::CovarOrientationVelNED rrRp;
+
+      // Roll-Roll orientation velocity-orientation velocity error covariance.
+      UMAA::Common::PrimitiveConstrained::CovarOrientationVelNED rrRr;
+
+      // Roll-Yaw orientation velocity-orientation velocity error covariance.
+      @optional UMAA::Common::PrimitiveConstrained::CovarOrientationVelNED rrRy;
+
+      // Yaw-Yaw orientation velocity-orientation velocity error covariance.
+      UMAA::Common::PrimitiveConstrained::CovarOrientationVelNED ryRy;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_REFINEMENTS_MEASUREMENTERRORS_COVARIANCEORIENTATIONVELOCITYNEDTYPE
+

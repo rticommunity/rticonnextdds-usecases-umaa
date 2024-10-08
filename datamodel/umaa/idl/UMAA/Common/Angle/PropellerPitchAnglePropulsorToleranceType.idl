@@ -1,0 +1,54 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ANGLE_PROPELLERPITCHANGLEPROPULSORTOLERANCETYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ANGLE_PROPELLERPITCHANGLEPROPULSORTOLERANCETYPE
+
+#include "UMAA/Common/Measurement/Measurements.idl"
+module UMAA
+{
+  module Common
+  {
+    module Angle
+    {
+      /**
+        * Describes a tolerance range for the propeller pitch angle.
+        */
+      @nested
+      struct PropellerPitchAnglePropulsorToleranceType
+      {
+      // After the value with a specified tolerance is achieved (either initially or after an update), defines the amount of time to delay transitioning a command or objective to a failed state when the specified tolerance is violated. This measured time is reset each time the value is determined to be within the specified tolerance. If not defined, then a system configured delay time is used.
+      @optional UMAA::Common::Measurement::DurationSeconds failureDelay;
+
+      // Specifies the lower limit of allowable values.
+      UMAA::Common::Measurement::PropellerPitchAnglePropulsor lowerlimit;
+
+      // Specifies the upper limit of allowable values.
+      UMAA::Common::Measurement::PropellerPitchAnglePropulsor upperlimit;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ANGLE_PROPELLERPITCHANGLEPROPULSORTOLERANCETYPE
+

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="UMAA/Common/Distance/DistanceRequirementType.xml"/>
+<include file="UMAA/Common/Enumeration/EnumerationSets.xml"/>
+<include file="UMAA/Common/IdentifierType.xml"/>
+<include file="UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.xml"/>
+<include file="UMAA/Common/Measurement/ElevationRequirementVariantType.xml"/>
+<include file="UMAA/Common/Measurement/ElevationVariantType.xml"/>
+<include file="UMAA/Common/Measurement/GeoPosition2D.xml"/>
+<include file="UMAA/Common/Measurement/Measurements.xml"/>
+<include file="UMAA/Common/PrimitiveConstrained/ConstrainedTypes.xml"/>
+<include file="UMAA/Common/Speed/SpeedRequirementVariantType.xml"/>
+<include file="UMAA/Common/Speed/SpeedVariantType.xml"/>
+<include file="UMAA/Common/Time/DateTimeRequirementType.xml"/>
+<include file="UMAA/MM/BaseType/StateTriggerType.xml"/>
+<module name="UMAA">
+  <module name="MM">
+    <module name="BaseType">
+      <const name="CircleObjectiveTypeTopic" type="string" value="&quot;UMAA::MM::BaseType::CircleObjectiveType&quot;"/>
+      <struct name= "CircleObjectiveType">
+        <member name="duration" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DurationSeconds" optional="true"/>
+        <member name="elevation" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::ElevationRequirementVariantType" optional="true"/>
+        <member name="loops" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::SizeReal" optional="true"/>
+        <member name="position" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::GeoPosition2D" optional="true"/>
+        <member name="radius" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::Distance"/>
+        <member name="speed" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Speed::SpeedRequirementVariantType"/>
+        <member name="trackTolerance" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Distance::DistanceRequirementType"/>
+        <member name="transitElevation" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::ElevationVariantType" optional="true"/>
+        <member name="transitSpeed" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Speed::SpeedVariantType"/>
+        <member name="turnDirection" type="nonBasic"  nonBasicTypeName= "UMAA::Common::MaritimeEnumeration::WaterTurnDirectionEnumModule::WaterTurnDirectionEnumType"/>
+        <member name="specializationReferenceTimestamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+        <member name="specializationReferenceID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

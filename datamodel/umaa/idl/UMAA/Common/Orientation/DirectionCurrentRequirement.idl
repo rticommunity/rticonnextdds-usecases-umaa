@@ -1,0 +1,52 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ORIENTATION_DIRECTIONCURRENTREQUIREMENT
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ORIENTATION_DIRECTIONCURRENTREQUIREMENT
+
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/Orientation/DirectionToleranceType.idl"
+module UMAA
+{
+  module Common
+  {
+    module Orientation
+    {
+      /**
+        * A requirement that specifies the direction with respect to the current, where 0 is defined to be with the direction of the current (i.e. downstream).
+        */
+      @nested
+      struct DirectionCurrentRequirement
+      {
+      // Specifies the heading offset angle relative to the current, where 0 is defined to be with the direction of the current (i.e. downstream).
+      UMAA::Common::Measurement::HeadingCurrentDirection direction;
+
+      // Specifies the heading reference angle tolerance relative to the current, where 0 is defined to be with the direction of the current (i.e. downstream).
+      @optional UMAA::Common::Orientation::DirectionToleranceType directionTolerance;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ORIENTATION_DIRECTIONCURRENTREQUIREMENT
+

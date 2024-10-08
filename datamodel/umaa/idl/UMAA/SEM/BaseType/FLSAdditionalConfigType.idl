@@ -1,0 +1,68 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_SENSOR_MANAGEMENT_BASETYPE_FLSADDITIONALCONFIGTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_SENSOR_MANAGEMENT_BASETYPE_FLSADDITIONALCONFIGTYPE
+
+#include "UMAA/SEM/BaseType/FLSConfigSearchBottomType.idl"
+#include "UMAA/SEM/BaseType/FLSConfigSearchVolumeType.idl"
+#include "UMAA/SEM/BaseType/FLSConfigTestType.idl"
+module UMAA
+{
+  module SEM
+  {
+    module BaseType
+    {
+        enum FLSAdditionalConfigTypeEnum
+        {
+            FLSCONFIGSEARCHBOTTOM_D,
+            FLSCONFIGSEARCHVOLUME_D,
+            FLSCONFIGTEST_D
+        };
+
+        @nested
+        union FLSAdditionalConfigTypeUnion switch (FLSAdditionalConfigTypeEnum)
+        {
+              case FLSCONFIGSEARCHBOTTOM_D:
+                UMAA::SEM::BaseType::FLSConfigSearchBottomType FLSConfigSearchBottomVariant;
+              case FLSCONFIGSEARCHVOLUME_D:
+                UMAA::SEM::BaseType::FLSConfigSearchVolumeType FLSConfigSearchVolumeVariant;
+              case FLSCONFIGTEST_D:
+                UMAA::SEM::BaseType::FLSConfigTestType FLSConfigTestVariant;
+        };
+      
+      /**
+        * The desired configuration mode for an FLS.
+        */
+      @nested
+      struct FLSAdditionalConfigType
+      {
+      // Union to capture specializations of FLSAdditionalConfigType
+      FLSAdditionalConfigTypeUnion FLSAdditionalConfigTypeSubtypes;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_SENSOR_MANAGEMENT_BASETYPE_FLSADDITIONALCONFIGTYPE
+

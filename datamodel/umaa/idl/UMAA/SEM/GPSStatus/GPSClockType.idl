@@ -1,0 +1,89 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_SENSOR_MANAGEMENT_GPSSTATUS_GPSCLOCKTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_SENSOR_MANAGEMENT_GPSSTATUS_GPSCLOCKTYPE
+
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
+module UMAA
+{
+  module SEM
+  {
+    module GPSStatus
+    {
+      /**
+        * Specifies the characteristics of a GPS clock.
+        */
+      @nested
+      struct GPSClockType
+      {
+      // The clock's time bias.
+      UMAA::Common::PrimitiveConstrained::NanosecondsCount bias;
+
+      // The clock's bias uncertainty (1-Sigma).
+      UMAA::Common::PrimitiveConstrained::NanosecondsCount biasUncertainty;
+
+      // The clock's drift.
+      UMAA::Common::PrimitiveConstrained::NanosecondsDrift drift;
+
+      // The clock's drift uncertainty (1-Sigma).
+      UMAA::Common::PrimitiveConstrained::NanosecondsDrift driftUncertainty;
+
+      // The clock's elapsed real-time of this clock since system boot.
+      UMAA::Common::PrimitiveConstrained::NanosecondsCount elapsedRealtime;
+
+      // The estimate of the relative precision of the alignment of the elapsedRealtime timestamp (68% confidence).
+      UMAA::Common::PrimitiveConstrained::NanosecondsCount elapsedRealtimeUncertainty;
+
+      // The difference between hardware clock inside GPS receiver and the true GPS time since 0000Z, January 6, 1980.
+      UMAA::Common::PrimitiveConstrained::NanosecondsCount fullBias;
+
+      // The count of hardware clock discontinuities.
+      UMAA::Common::PrimitiveConstrained::NanosecondsCount hardwareClockDiscontinuityCount;
+
+      // The leap second associated with the clock's time.
+      UMAA::Common::Measurement::Count leapSecond;
+
+      // The reference carrier frequency in Hz.
+      UMAA::Common::Measurement::RadioFrequencyHertz referenceCarrierFrequency;
+
+      // The reference code type.
+      UMAA::Common::PrimitiveConstrained::StringShortDescription referenceCodeTypeFor;
+
+      // The reference constellation type.
+      UMAA::Common::MaritimeEnumeration::GPSConstellationEnumModule::GPSConstellationEnumType referenceConstellationType;
+
+      // The receiver internal hardware clock value.
+      UMAA::Common::Measurement::Count time;
+
+      // The time figure of merit (TFOM) denotes the quality of the time solution as an enumeration representing an estimated time error range with respect to UTC (1 sigma).
+      UMAA::Common::MaritimeEnumeration::TFOMEnumModule::TFOMEnumType timeFigureOfMerit;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_SENSOR_MANAGEMENT_GPSSTATUS_GPSCLOCKTYPE
+

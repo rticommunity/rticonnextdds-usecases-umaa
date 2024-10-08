@@ -19,8 +19,10 @@ set(BUILD_SHARED_LIBS ON)
 
 # Add the folder where the FindRTIConnextDDS.cmake file is placed to the
 # CMAKE_MODULE_PATH variable
+get_filename_component(REPO ${CMAKE_CURRENT_SOURCE_DIR} DIRECTORY)
+
 list(APPEND CMAKE_MODULE_PATH
-    "${CMAKE_CURRENT_SOURCE_DIR}/resources/rticonnextdds-cmake-utils/cmake/Modules"
+    "${REPO}/rticonnextdds-cmake-utils/cmake/Modules"
 )
 
 include(ConnextDdsCodegen)
@@ -34,31 +36,20 @@ find_package(RTIConnextDDS
         core
 )
 
-
-if(NOT TARGET rtiddsgen_umaa_types)
-add_custom_target(rtiddsgen_umaa_types ALL)
+if(NOT TARGET gen_cpp11_umaa_types)
+add_custom_target(gen_cpp11_umaa_types ALL)
 endif()
 
 set (_UMAA_TYPES)
-set (_UMAA_GENERATED)
-set (_UMAA_IDL_FOLDER "${CMAKE_CURRENT_SOURCE_DIR}/resources/umaa_521/")
-set (_UMAA_CONST_IDL "${CMAKE_CURRENT_SOURCE_DIR}/resources/umaa_consts.idl")
-
-
-# Add individual types instead of GLOB_RECURSE
-# list(APPEND _UMAA_TYPES "BasicTypes/Quaternion.idl")
-# list(APPEND _UMAA_TYPES "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl")
-# list(APPEND _UMAA_TYPES "UMAA/Common/Measurement/Measurements.idl")
-# list(APPEND _UMAA_TYPES "UMAA/Common/MeasurementCoordinate/EngineeringCoordinateAxes.idl")
-# list(APPEND _UMAA_TYPES "UMAA/EO/AnchorControl/AnchorCommandType.idl")
-# list(APPEND _UMAA_TYPES "UMAA/EO/AnchorStatus/AnchorReportType.idl")
-# list(APPEND _UMAA_TYPES "UMAA/EO/AnchorControl/AnchorCommandStatusType.idl")
+set (_UMAA_CPP11_GENERATED)
+set (_UMAA_IDL_FOLDER "${REPO}/datamodel/umaa/idl/")
+set (_UMAA_CPP11_FOLDER "${REPO}/examples/build/cpp11_gen")
 
 # Add all types
 file(GLOB_RECURSE _UMAA_TYPES RELATIVE ${_UMAA_IDL_FOLDER} ${_UMAA_IDL_FOLDER}*.idl)
 
-
 foreach(_idl IN LISTS _UMAA_TYPES)
+    # Maintain folder structure on output so includes work
     string(CONCAT _idl_PATH ${_UMAA_IDL_FOLDER} ${_idl})
     get_filename_component(_idl_FOLDER ${_idl} DIRECTORY)
     get_filename_component(_idl_NAME ${_idl} NAME)
@@ -67,78 +58,44 @@ foreach(_idl IN LISTS _UMAA_TYPES)
     connextdds_rtiddsgen_run(
         IDL_FILE ${_idl_PATH}
         OUTPUT_DIRECTORY
-            "${CMAKE_CURRENT_BINARY_DIR}/src/${_idl_FOLDER}"
+            "${_UMAA_CPP11_FOLDER}/${_idl_FOLDER}"
         INCLUDE_DIRS "${_UMAA_IDL_FOLDER}"
         LANG "C++11"
         VAR "UMAA_TYPES"
     )
     # add generated files to list
-    list(APPEND _UMAA_GENERATED ${UMAA_TYPES_CXX11_SOURCES})
+    list(APPEND _UMAA_CPP11_GENERATED ${UMAA_TYPES_CXX11_SOURCES})
 
     # create target per idl
     add_custom_target(${_idl_NAME}
         DEPENDS ${UMAA_TYPES_CXX11_SOURCES})
-    add_dependencies(rtiddsgen_umaa_types ${_idl_NAME})
-
+    add_dependencies(gen_cpp11_umaa_types ${_idl_NAME})
 endforeach()
 
 ## Create shared library for UMAA Types
-add_library(umaa_types_lib SHARED 
-    ${_UMAA_GENERATED}
+add_library(umaa_cpp11_types SHARED
+    ${_UMAA_CPP11_GENERATED}
 )
-target_link_libraries(umaa_types_lib RTIConnextDDS::cpp2_api)
-target_include_directories(umaa_types_lib PUBLIC 
-    "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/src/>"
+target_link_libraries(umaa_cpp11_types RTIConnextDDS::cpp2_api)
+target_include_directories(umaa_cpp11_types PUBLIC 
+    "$<BUILD_INTERFACE:${_UMAA_CPP11_FOLDER}/>"
 )
-set_property(TARGET umaa_types_lib PROPERTY CXX_STANDARD 11)
-add_dependencies(umaa_types_lib rtiddsgen_umaa_types)
+set_property(TARGET umaa_cpp11_types PROPERTY CXX_STANDARD 11)
+add_dependencies(umaa_cpp11_types gen_cpp11_umaa_types)
 
-# Call rtiddsgen on the IDL const file
-connextdds_rtiddsgen_run(
-    IDL_FILE ${_UMAA_CONST_IDL}
-    OUTPUT_DIRECTORY
-        "${CMAKE_CURRENT_BINARY_DIR}/src/"
-    LANG "C++11"
-    VAR "UMAA_CONSTS"
+# Create the target for the AutoPilot executable
+add_executable(autopilot
+    "${CMAKE_CURRENT_SOURCE_DIR}/c++11/autopilot.cxx"
+    "${CMAKE_CURRENT_SOURCE_DIR}/c++11/application.hpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/c++11/umaa_autopilot.hpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/c++11/umaa_autopilot.cxx"
 )
-
-# ## Add target for UMAA consts file
-add_custom_target(rtiddsgen_umaa_consts
-    DEPENDS ${UMAA_CONSTS_CXX11_SOURCES}
-)
-
-
-# Create the target for the Anchor Controller executable
-add_executable(anchor_controller
-    "${CMAKE_CURRENT_SOURCE_DIR}/modern_cpp_compiled_types/anchor_controller.cxx"
-    "${CMAKE_CURRENT_SOURCE_DIR}/modern_cpp_compiled_types/application.hpp"
-    "${CMAKE_CURRENT_BINARY_DIR}/src/umaa_consts.hpp"
-)
-target_link_libraries(anchor_controller
+target_link_libraries(autopilot
     PRIVATE
         RTIConnextDDS::cpp2_api
-        umaa_types_lib
+        umaa_cpp11_types
 )
-target_include_directories(anchor_controller PRIVATE 
+target_include_directories(autopilot PRIVATE 
     "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/src/>"
 )
-set_property(TARGET anchor_controller PROPERTY CXX_STANDARD 11)
-add_dependencies(anchor_controller rtiddsgen_umaa_consts)
-
-
-# Create the target for the autonomy executable
-add_executable(autonomy
-    "${CMAKE_CURRENT_SOURCE_DIR}/modern_cpp_dynamicdata_types/autonomy.cxx"
-    "${CMAKE_CURRENT_SOURCE_DIR}/modern_cpp_dynamicdata_types/application.hpp"
-    "${CMAKE_CURRENT_BINARY_DIR}/src/umaa_consts.hpp"
-)
-target_link_libraries(autonomy
-    PRIVATE
-        RTIConnextDDS::cpp2_api
-)
-target_include_directories(autonomy
-    PRIVATE 
-        "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/src/>"
-)
-set_property(TARGET autonomy PROPERTY CXX_STANDARD 11)
-add_dependencies(autonomy rtiddsgen_umaa_consts)
+set_property(TARGET autopilot PROPERTY CXX_STANDARD 11)

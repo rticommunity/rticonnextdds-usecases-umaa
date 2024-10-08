@@ -1,0 +1,98 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_OBJECTIVEDETAILEDSTATUSTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_OBJECTIVEDETAILEDSTATUSTYPE
+
+#include "UMAA/Common/Enumeration/EnumerationSets.idl"
+#include "UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
+module UMAA
+{
+  module MM
+  {
+    module BaseType
+    {
+      /**
+        * This structure is used to define the objective detailed status.
+        *
+        * This structure has the following specializations:
+        * UMAA::MM::BaseType::StationkeepObjectiveDetailedStatusType
+        * UMAA::MM::BaseType::ScreenRandomWalkObjectiveDetailedStatusType
+        * UMAA::MM::BaseType::ExpObjectiveDetailedStatusType
+        * UMAA::MM::BaseType::HoverObjectiveDetailedStatusType
+        * UMAA::MM::BaseType::Figure8ObjectiveDetailedStatusType
+        * UMAA::MM::BaseType::RegularPolygonObjectiveDetailedStatusType
+        * UMAA::MM::BaseType::DriftObjectiveDetailedStatusType
+        * UMAA::MM::BaseType::RouteObjectiveDetailedStatusType
+        * UMAA::MM::BaseType::CircleObjectiveDetailedStatusType
+        * UMAA::MM::BaseType::RacetrackObjectiveDetailedStatusType
+        * UMAA::MM::BaseType::AreaRandomWalkObjectiveDetailedStatusType
+        * UMAA::MM::BaseType::VectorObjectiveDetailedStatusType
+      */
+    @nested
+    struct ObjectiveDetailedStatusType
+    {
+      // The current child objective IDs associated with this objective.
+      sequence<UMAA::Common::Measurement::NumericGUID,256> childObjectiveIDs;
+
+      // Human details about why the operation is not currently meeting objectives.
+      UMAA::Common::PrimitiveConstrained::StringShortDescription errors;
+
+      // The explanation for what is being performed and the 'why' of any changes.
+      UMAA::Common::PrimitiveConstrained::StringShortDescription feedback;
+
+      // An indication whether the executor is currently meeting the objective.
+      boolean isCurrentlyMeetingObjective;
+
+      // The current objective identification within the current task plan.
+      UMAA::Common::Measurement::NumericGUID objectiveID;
+
+      // The objective status enumeration value.
+      UMAA::Common::MaritimeEnumeration::ObjectiveExecutorStateEnumModule::ObjectiveExecutorStateEnumType objectiveStatus;
+
+      // This field provides the reason for the objective status.
+      UMAA::Common::MaritimeEnumeration::ObjectiveExecutorStateReasonEnumModule::ObjectiveExecutorStateReasonEnumType objectiveStatusReason;
+
+      // Actual past time of objective start.
+      UMAA::Common::Measurement::DateTime startTime;
+
+      // Any warnings the operation should be aware of when performing this objective.
+      UMAA::Common::PrimitiveConstrained::StringShortDescription warnings;
+
+      // ID to capture specializations of ObjectiveDetailedStatusType.
+      UMAA::Common::Measurement::NumericGUID specializationID;
+
+      // This field identifies the timestamp that signals the end of an atomic update to the instance of the specialization.
+      UMAA::Common::Measurement::DateTime specializationTimestamp;
+
+      // Topic to capture specializations of ObjectiveDetailedStatusType.
+      UMAA::Common::PrimitiveConstrained::StringShortDescription specializationTopic;
+    };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_BASETYPE_OBJECTIVEDETAILEDSTATUSTYPE
+

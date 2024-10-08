@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="./IdentifierType.xml"/>
+<include file="./MaritimeEnumerationSets.xml"/>
+<include file="./Measurements.xml"/>
+<module name="UMAA">
+  <module name="SO">
+    <module name="EmitterReport">
+      <const name="EmitterReportTypeTopic" type="string" value="&quot;UMAA::SO::EmitterReport::EmitterReportType&quot;"/>
+      <struct name= "EmitterReportType">
+        <member name="endTime" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime" optional="true"/>
+        <member name="state" type="nonBasic"  nonBasicTypeName= "UMAA::Common::MaritimeEnumeration::EmitterStateEnumModule::EmitterStateEnumType"/>
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::IdentifierType" key="true"/>
+        <member name="emitterID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

@@ -1,0 +1,63 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_CONDITIONAL_CONSTRAINTVIOLATEDCONDITIONALTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_CONDITIONAL_CONSTRAINTVIOLATEDCONDITIONALTYPE
+
+#include "UMAA/Common/Measurement/Measurements.idl"
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
+module UMAA
+{
+  module MM
+  {
+    module Conditional
+    {
+
+    const string ConstraintViolatedConditionalTypeTopic = "UMAA::MM::Conditional::ConstraintViolatedConditionalType";
+
+      /**
+        * This structure defines a constraint violated conditional. The conditional is true when the conditional provided in the ConditionalReportType message, as specified by constraintConditionalID, is determined to be false.
+        *
+        * This structure is a specialization of UMAA::MM::Conditional::ConditionalType.
+        */
+    
+      struct ConstraintViolatedConditionalType
+      {
+      // Defines the unique identifier of the constraint conditional.
+      UMAA::Common::Measurement::NumericGUID constraintConditionalID;
+
+      // Specifies how long the constraint needs to be violated before becoming true in order to allow the system to react to new constraints. This duration resets after achieving the constraint.
+      @optional UMAA::Common::Measurement::DurationSeconds duration;
+
+      // This field identifies the timestamp that signals the end of an atomic update to the instance of the specialization. NOTE: Ties this element back to the specializationID in ConditionalType generalization.
+      UMAA::Common::Measurement::DateTime specializationReferenceTimestamp;
+
+      // NOTE: Ties this element back to the ConditionalType generalization.
+      @key UMAA::Common::Measurement::NumericGUID specializationReferenceID;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_MISSION_EXECUTION_MANAGEMENT_CONDITIONAL_CONSTRAINTVIOLATEDCONDITIONALTYPE
+

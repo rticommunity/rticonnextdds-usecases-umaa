@@ -1,0 +1,52 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ELEVATION_DEPTHRATEREQUIREMENTTYPE
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ELEVATION_DEPTHRATEREQUIREMENTTYPE
+
+#include "UMAA/Common/Measurement/DepthRateToleranceType.idl"
+#include "UMAA/Common/Measurement/Measurements.idl"
+module UMAA
+{
+  module Common
+  {
+    module Measurement
+    {
+      /**
+        * Defines the change in depth as a function of time.
+        */
+      @nested
+      struct DepthRateRequirementType
+      {
+      // Specifies the change in depth as a function of time.
+      UMAA::Common::Measurement::SpeedBSL depthRate;
+
+      // Specifies the depth rate tolerance.
+      @optional UMAA::Common::Measurement::DepthRateToleranceType depthRateTolerance;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ELEVATION_DEPTHRATEREQUIREMENTTYPE
+

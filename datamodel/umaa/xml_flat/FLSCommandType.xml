@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
+<types>
+<include file="./IdentifierType.xml"/>
+<include file="./MaritimeEnumerationSets.xml"/>
+<include file="./Measurements.xml"/>
+<include file="./FLSAdditionalConfigType.xml"/>
+<module name="UMAA">
+  <module name="SEM">
+    <module name="FLSControl">
+      <const name="FLSCommandTypeTopic" type="string" value="&quot;UMAA::SEM::FLSControl::FLSCommandType&quot;"/>
+      <struct name= "FLSCommandType">
+        <member name="additionalConfig" type="nonBasic"  nonBasicTypeName= "UMAA::SEM::BaseType::FLSAdditionalConfigType" optional="true"/>
+        <member name="configMode" type="nonBasic"  nonBasicTypeName= "UMAA::Common::MaritimeEnumeration::FLSConfigModeEnumModule::FLSConfigModeEnumType"/>
+        <member name="operationalState" type="nonBasic"  nonBasicTypeName= "UMAA::Common::MaritimeEnumeration::ActivationStateTargetEnumModule::ActivationStateTargetEnumType"/>
+        <member name="timeStamp" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::DateTime"/>
+        <member name="source" type="nonBasic"  nonBasicTypeName= "UMAA::Common::IdentifierType" key="true"/>
+        <member name="sessionID" type="nonBasic"  nonBasicTypeName= "UMAA::Common::Measurement::NumericGUID" key="true"/>
+        <member name="destination" type="nonBasic"  nonBasicTypeName= "UMAA::Common::IdentifierType" key="true"/>
+      </struct>
+    </module>
+  </module>
+</module>
+</types>
+</dds>

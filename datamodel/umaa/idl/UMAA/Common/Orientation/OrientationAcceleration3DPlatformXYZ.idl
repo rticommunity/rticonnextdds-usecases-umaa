@@ -1,0 +1,54 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release. 
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+// WARNING: THIS CODE IS AUTO-GENERATED
+//   DO NOT EDIT
+
+/**
+  *
+  * Version 6.0
+  * Date: 2024-06-06
+  *
+  */
+
+
+#ifndef _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ORIENTATION_ORIENTATIONACCELERATION3DPLATFORMXYZ
+#define _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ORIENTATION_ORIENTATIONACCELERATION3DPLATFORMXYZ
+
+#include "UMAA/Common/PrimitiveConstrained/ConstrainedTypes.idl"
+module UMAA
+{
+  module Common
+  {
+    module Orientation
+    {
+      /**
+        * Specifies the acceleration for each axis of an Orientation.
+        */
+      @nested
+      struct OrientationAcceleration3DPlatformXYZ
+      {
+      // Specifies the acceleration of the platform's rotation about the longitudinal axis in the XYZ Platform coordinate system.
+      UMAA::Common::PrimitiveConstrained::AngleAcceleration xAccel;
+
+      // Specifies the acceleration of the platform's rotation about the lateral axis in the XYZ Platform coordinate system.
+      UMAA::Common::PrimitiveConstrained::AngleAcceleration yAccel;
+
+      // Specifies the acceleration of the platform's rotation about the vertical axis in the XYZ Platform coordinate system.
+      UMAA::Common::PrimitiveConstrained::AngleAcceleration zAccel;
+      };
+
+  
+    };
+  };
+};
+
+#endif // _LDM_MDE_PRIMARY_MISSION_CONTROL_VEHICLE_MANAGEMENT_ORIENTATION_ORIENTATIONACCELERATION3DPLATFORMXYZ
+
