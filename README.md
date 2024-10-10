@@ -1,17 +1,22 @@
 # UMAA Starter Kit
-A starting point for developing to the UMAA standard with Connext.
 
+A starting point for developing to the UMAA standard with Connext.
 - [Overview](#overview)
 - [UMAA Standard](#umaa-standard)
 - [Types](#types)
 - [Components](#components)
+- [Examples](#examples)
 - [CMAKE modules](#cmake-modules)
 - [Recording Service](#recording-service)
 
 ## Overview
-The intention of this Starter Kit was to provide some ongoing reference  
-examples focusing on the Connext infrastructure/various API’s interacting, and  
-instantiation of UMAA components.
+This Starter Kit provides an entry point to developing with UMAA.  
+It highlights usage of a few UMAA defined Components to simulate  
+interaction between the different interfaces. 
+
+It showcases Connext's ability to easily instantiate UMAA components  
+using either the Modern C++ or the Python APIs and manage the configuration of  
+both systems with a centralized configuration store.
 
 It features the following:
 - XML App Creation used with the following API's
@@ -20,8 +25,8 @@ It features the following:
 - CMAKE file using `rticonnextdds-cmake-utils` modules for code generation of large type sets
 - Recommended best practices for assigning QOS to topics
 
-
 ## UMAA Standard
+### High level overview
 Latest Version: 6.0 Distro A
 [Download from AUVSI](https://www.auvsi.org/unmanned-maritime-autonomy-architecture)
 
@@ -34,48 +39,40 @@ The UMAA standard defines the following(as of 6.0):
   - Command state machine/handshaking("Flow Control")
   - Large data set synchronization("Large Collections")
   - Type inheritance("Generic/Specified Types")
-- Systems level:
-  - "Components", which are a collection of "Interfaces" derived from the UMAA MBSE model. 
-    - This example provides a starting point for the Autopilot and USVNAV components based  
-  on our interpretation of the v1.0 Component Definitions release.  
-    - There are currently ~ 40 components defined by UMAA of which 9 are Distro A.  
+- "Components", which are a collection of "Interfaces" derived from the UMAA MBSE model.
+  - This starter kit provides an xml definition of the Autopilot and USVNAV component  
+  DDS entities based on our interpretation of the v1.0 Component Definitions release. 
+  - There are currently ~40 components defined by UMAA of which 9 are Distro A.  
     (`resources/components/UMAA Component Definitions v1.0.pdf`)
-
-**NOTE:  
+    
+*NOTE:  
 The application level requirements (i.e Flow Control/Large Collections/Generic-Specified types)  
-are outside of the current scope of this middleware reference example.**
+are outside of the current scope of this middleware reference starter kit.  
+Some application layer development would be required on top of the middleware infrastructure to   
+be compliant with the UMAA standard.*
 
 ## Types
-UMAA defines ~ 600 data types. This is what is used to determine the "structure" of the data being transported.
-
+UMAA defines ~ 600 data types. This is what is used to determine the "structure" of the data being transported.  
 With Connext, we use RTI Code Generator `rtiddsgen` ([manual](https://community.rti.com/static/documentation/connext-dds/current/doc/manuals/connext_dds_professional/code_generator/users_manual/code_generator/users_manual/UsersManual_Title.htm)) to generate code per the API being used.  
 This code assists with construction and serialization/deserialization of these data structures.
-
 
 ### C++11 types
 For the C++11 API, we generate helper headers and classes for all of the UMAA types  
 and then compile them into a single shared library.
 
-This makes it more convenient to link your source code against when developing. 
-
-You can see a reference CMAKE file example in `examples/Cmakelists.txt`
+This makes it more convenient to link your source code against when developing.   
+You can see a reference CMAKE file example in `examples/Cmakelists.txt` [CMAKE modules](#cmake-modules)
 
 In this example we generate all the Type support code into the `build` folder and  
 then use that code to create a shared lib. 
 
-Sometimes you will see the term "compiled types" used in reference to this. 
-
-
 ### Python types
-With Python, `rtiddsgen` converts the types into Python modules that we can then reference in our Python scripts. 
-
+With Python, `rtiddsgen` converts the types into Python modules that we can then reference in our Python scripts.  
 For Python types there is a bug in RTIDDSGEN that doesn't resolve the include modules  
 paths correctly. (CODEGENII-2112)
 
-The workaround is to export all the modules to a single folder and then we can add them to the `PYTHONPATH`.
-
+The workaround is to export all the modules to a single folder and then we can add them to the `PYTHONPATH`.  
 You can find the Python types have been pre-generated and added to the `datamodel/umaa/python_flat` folder for this example.
-
 
 ### XML types
 XML types are used for the following use cases:
@@ -93,71 +90,65 @@ These XML types have had all of their includes "flattenned" to point to the same
 directory. This allows for use cases where we want to decouple the XML includes from  
 needing to be relative to the CWD.
 
-
 ## Components
-These example applications simulate a few components using types and services  
+These reference applications simulate a few components using types and services  
 from the public UMAA 6 standard. The intention here was to minimize application  
 code and highlight the ease of access to the writers/readers and their usage.  
 
-There are currently ~ 40 components defined by UMAA of which 9 are Distro A.
+There are currently ~ 40 components defined by UMAA of which 9 are Distro A.  
 (`resources/components/UMAA Component Definitions v1.0.pdf`)
 
-By referencing the `start_component.sh` script we can see how components can be  
+By inspecting the `start_component.sh` script we can see how components can be  
 instantiated from Modern C++ or Python apps using the same DDS configuration files. 
 
-It takes advantage of Connext’s XML-Based Application Creation framework  
+It takes advantage of Connext's XML-Based Application Creation framework  
 to define and manage all of the messaging entities with XML files.
 
 This lends itself well to the common use case of simulation/test apps in Python  
 correlating with deployed apps in Modern C++.
 
-
+## Examples 
 ### Prerequisites
 Reference the Connext Getting Started guides to complete the below: 
-
 - Linux-based OS or WSL.
 - Connext 7.3.0 Host/Target install
 - Python API setup
 
 ### Tested compatibility
 - Ubuntu 20.04
-- Connext 6.1.2(*Exception: Python*)/Connext 7.3.0
+- Connext 6.1.2(C++11)/Connext 7.3.0(C++11,Python)
 
 ### Cloning Repository
-
 To clone the repository you will need to run `git clone` as follows to download
 both the repository and its submodule dependencies:
-
 ```bash
 git clone --recurse-submodule https://github.com/rticommunity/rticonnextdds-usecases-umaa.git
 ```
 
 If you forget to clone the repository with `--recurse-submodule`, simply run
 the following command to pull all the dependencies:
-
 ```bash
 git submodule update --init --recursive
 ```
 
 ### Configure
-
 ```sh
 cd examples/
 cmake -B build -DCMAKE_BUILD_TYPE=Release
 ```
 
 ### Build
-
 ```sh
 cmake --build ./build --config Release
-```
-***NOTE: Will take ~ 15 minutes as it is compiling all the IDL types into a shared library.***
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
+```  
+*NOTE: Will take ~ 15 minutes as it is compiling all the IDL types into a shared library*
 
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 ### AutoPilot Component (Modern CPP)
 --------------------------------------------------------------------------------
 ##### Options:
+
 ```
         arg1: component name: [autopilot, usvnav, globalvector] \n
         arg2: Domain ID to override <components>.xml definition \n
@@ -170,17 +161,18 @@ cd examples
 ```
 
 ##### Overview:
-This reference example provides XML definition for all the entites in 
+This reference application provides XML definition for all the entites in 
 the AutoPilot component and showcases accessing those entities to read/write data using features
 such as listeners and AsyncWaitset.
 
-***NOTE: The commands don't implement the UMAA command state pattern("Flow Control") as  
-that is outside the current scope of this middleware example.***
+*NOTE: The commands don't implement the UMAA command state pattern("Flow Control") as  
+that is outside the current scope of this middleware example.*
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 ### USVNAV Component (Python)
 --------------------------------------------------------------------------------
+
 ##### Options:
 ```
         arg1: component name: [autopilot, usvnav, globalvector] \n
@@ -195,11 +187,9 @@ cd examples
 
 ##### Overview:
 The Python API is fully supported in `Connext 7.3.0`
-
 This app uses Python types to publish messages per the USVNAV component definition.
 
 The Python modules for all the UMAA types have already been generated and placed into a single folder `/datamodel/umaa/python_flat`.
-
 This allows us to then point the `PYTHONPATH` variable to this folder in the `start_component.sh` script.
 
 For Python types there is a bug in RTIDDSGEN that doesn't resolve the include modules paths
@@ -227,36 +217,33 @@ reception into the AsynWaitset of the AutoPilot component.
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
-
 ## CMAKE modules
-
-This repo pulls in a git submodule from [rticonnextdds-cmake-utils](https://github.com/rticommunity/rticonnextdds-cmake-utils) in.  
-
-The `rticonnextdds-cmake-utils` repo provides convenient CMAKE utils to call `rtiddsgen` and pass in IDL files as an argument. 
+This repo pulls in a git submodule from [rticonnextdds-cmake-utils](https://github.com/rticommunity/rticonnextdds-cmake-utils).  
+The `rticonnextdds-cmake-utils` repo provides convenient CMAKE utils to find Connext, call `rtiddsgen` and pass in IDL files as an argument. 
 Use /examples/CMakeLists.txt as a reference for creating a shared library for your UMAA IDL set. 
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
-
-
 ## Recording Service
-
 Connext includes a recording service that can capture selected DDS traffic and store in a SQLite database to allow for 
-playback/conversion at a later date.
-
-[Recording Service Manual] (https://community.rti.com/static/documentation/connext-dds/7.3.0/doc/manuals/connext_dds_professional/services/recording_service/index.html)
+playback/conversion at a later date. [Recording Service Manual(7.3)](https://community.rti.com/static/documentation/connext-dds/7.3.0/doc/manuals/connext_dds_professional/services/recording_service/index.html)
 
 A reference config file has been created to cover 2 scenarios "deploy" and "debug" with some assumptions made for both.
 
 #### Usage
-
 - You can use the `rtisetenv*.sh` scripts located in `PATH_TO_CONNEXT_INSTALL/resource/scripts/` to put the `bin` folder into your PATH.
 
 ##### Start Recording in "Deploy" mode:
-
 ```sh
 <PATH_TO_CONNEXT_INSTALL>/bin/rtirecordingservice -cfgName deploy -cfgFile <PATH_TO_FILE>/umaa_record.xml
 ```
+
+##### Start Recording in "Debug" mode:
+```sh
+<PATH_TO_CONNEXT_INSTALL>/bin/rtirecordingservice -cfgName debug -cfgFile <PATH_TO_FILE>/umaa_record.xml
+```
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ##### Start Recording in "Debug" mode:
 
