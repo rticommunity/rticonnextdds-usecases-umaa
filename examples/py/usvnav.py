@@ -20,41 +20,33 @@ from GlobalPoseReportType import *
 from VelocityReportType import *
 
 
-def get_type_name(type):
-    # Get full type name from module
-    type_str = idl.get_type_support(type).type_name
+def register_types():
+  print("Registering Types")
 
-    # Strip out namespaces and use as Type Name
-    # Workaround for issue registering types with same names as topics (CORE-15111)
-    # Typenames need to correllate with domain.xml
-    type_split = (type_str.rsplit('::', 1)[1])
-    return type_split
+  # Need to Register all types in Component before creating Domain Participant
+  dds.DomainParticipant.register_idl_type(
+      UMAA_SO_LogReport_LogReportType,
+      idl.get_type_support(UMAA_SO_LogReport_LogReportType).type_name)
+
+  dds.DomainParticipant.register_idl_type(
+      UMAA_SO_HealthReport_HealthReportType,
+      idl.get_type_support(UMAA_SO_HealthReport_HealthReportType).type_name)
+
+  dds.DomainParticipant.register_idl_type(
+      UMAA_SA_GlobalPoseStatus_GlobalPoseReportType,
+      idl.get_type_support(UMAA_SA_GlobalPoseStatus_GlobalPoseReportType).type_name)
+
+  dds.DomainParticipant.register_idl_type(
+      UMAA_SA_VelocityStatus_VelocityReportType,
+      idl.get_type_support(UMAA_SA_VelocityStatus_VelocityReportType).type_name)
+
+  dds.DomainParticipant.register_idl_type(
+      UMAA_SA_SpeedStatus_SpeedReportType,
+      idl.get_type_support(UMAA_SA_SpeedStatus_SpeedReportType).type_name)
 
 
 def publisher_main():
-
-    print("Registering Types")
-
-    # Need to Register all types in Component before creating Domain Participant
-    dds.DomainParticipant.register_idl_type(
-        UMAA_SO_LogReport_LogReportType, get_type_name(
-            UMAA_SO_LogReport_LogReportType))
-
-    dds.DomainParticipant.register_idl_type(
-        UMAA_SO_HealthReport_HealthReportType, get_type_name(
-            UMAA_SO_HealthReport_HealthReportType))
-
-    dds.DomainParticipant.register_idl_type(
-        UMAA_SA_GlobalPoseStatus_GlobalPoseReportType, get_type_name(
-            UMAA_SA_GlobalPoseStatus_GlobalPoseReportType))
-
-    dds.DomainParticipant.register_idl_type(
-        UMAA_SA_VelocityStatus_VelocityReportType, get_type_name(
-            UMAA_SA_VelocityStatus_VelocityReportType))
-
-    dds.DomainParticipant.register_idl_type(
-        UMAA_SA_SpeedStatus_SpeedReportType, get_type_name(
-            UMAA_SA_SpeedStatus_SpeedReportType))
+    register_types()
 
     # All of our XML files are being passed in by the NDDS_QOS_PROFILES env variable
     qos_provider = dds.QosProvider("")
@@ -118,9 +110,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="UMAA USV NAV Component"
     )
-    print("UMAA USV NAV Component.\n" \
-        "Reference example that Publishes the necessary topics to be " \
-        "consumed by the AutoPilot component.\n\n")
+    print("UMAA USV NAV Component.\n"
+          "Reference example that Publishes the necessary topics to be "
+          "consumed by the AutoPilot component.\n\n")
 
     args = parser.parse_args()
 

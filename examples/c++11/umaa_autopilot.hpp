@@ -213,8 +213,6 @@ private:
             std::unordered_map<dds::core::InstanceHandle, dds::sub::Sample<T>>
                     &keyed_data_map);
 
-    std::string get_type_name(std::string topic_name);
-
     std::mutex _m;
 
 

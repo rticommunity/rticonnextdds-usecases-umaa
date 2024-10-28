@@ -30,87 +30,44 @@ void AutoPilot::create()
     std::cout << "Completed AutoPilot entities setup" << std::endl;
 };
 
-
-std::string AutoPilot::get_type_name(std::string topic_name)
-{
-        /* 
-          Stripping namespaces from Topic to use as Type name
-          This needs to correllate with the XML definition in domain.xml
-          Workaround for CORE-15111 where Topic and Type name can't be equal.
-          Having a shorter Type name also makes it a bit more legible in print outs
-         */
-
-        std::string type_name =
-            topic_name.substr(topic_name.find_last_of("::") + 1);
-        return type_name;
-};
-
 void AutoPilot::register_types()
 {
     /* 
       Register all types used in this component.
-      This is usually templatized/refactored but left as is for clarity of API usage.
      */
     std::cout << "Registering Types" << std::endl;
 
-    register_type<PrimitiveDriverCommandAckReportType>(
-            get_type_name(PrimitiveDriverCommandAckReportTypeTopic));
-    register_type<PrimitiveDriverCommandStatusType>(
-            get_type_name(PrimitiveDriverCommandStatusTypeTopic));
-    register_type<PrimitiveDriverExecutionStatusReportType>(
-            get_type_name(PrimitiveDriverExecutionStatusReportTypeTopic));
-    register_type<GlobalVectorCommandAckReportType>(
-            get_type_name(GlobalVectorCommandAckReportTypeTopic));
-    register_type<GlobalVectorCommandStatusType>(
-            get_type_name(GlobalVectorCommandStatusTypeTopic));
-    register_type<GlobalVectorExecutionStatusReportType>(
-            get_type_name(GlobalVectorExecutionStatusReportTypeTopic));
-    register_type<GlobalHoverCommandAckReportType>(
-            get_type_name(GlobalHoverCommandAckReportTypeTopic));
-    register_type<GlobalHoverCommandStatusType>(
-            get_type_name(GlobalHoverCommandStatusTypeTopic));
-    register_type<GlobalHoverExecutionStatusReportType>(
-            get_type_name(GlobalHoverExecutionStatusReportTypeTopic));
-    register_type<UVPlatformCapabilitiesReportType>(
-            get_type_name(UVPlatformCapabilitiesReportTypeTopic));
-    register_type<UVPlatformSpecsReportType>(
-            get_type_name(UVPlatformSpecsReportTypeTopic));
-    register_type<LogReportType>(get_type_name(LogReportTypeTopic));
-    register_type<HealthReportType>(get_type_name(HealthReportTypeTopic));
-    register_type<MissionPlanConstraintAddCommandType>(
-            get_type_name(MissionPlanConstraintAddCommandTypeTopic));
-    register_type<MissionPlanConstraintDeleteCommandType>(
-            get_type_name(MissionPlanConstraintDeleteCommandTypeTopic));
-    register_type<ActiveConstraintsCommandAckReportType>(
-            get_type_name(ActiveConstraintsCommandAckReportTypeTopic));
-    register_type<ActiveConstraintsCommandStatusType>(
-            get_type_name(ActiveConstraintsCommandStatusTypeTopic));
-    register_type<PrimitiveDriverCommandType>(
-            get_type_name(PrimitiveDriverCommandTypeTopic));
-    register_type<GlobalVectorCommandType>(
-            get_type_name(GlobalVectorCommandTypeTopic));
-    register_type<GlobalHoverCommandType>(
-            get_type_name(GlobalHoverCommandTypeTopic));
-    register_type<GlobalPoseReportType>(
-            get_type_name(GlobalPoseReportTypeTopic));
-    register_type<VelocityReportType>(get_type_name(VelocityReportTypeTopic));
-    register_type<SpeedReportType>(get_type_name(SpeedReportTypeTopic));
-    register_type<WindReportType>(get_type_name(WindReportTypeTopic));
-    register_type<WaterCurrentReportType>(
-            get_type_name(WaterCurrentReportTypeTopic));
-    register_type<MissionPlanConstraintAddCommandAckReportType>(
-            get_type_name(MissionPlanConstraintAddCommandAckReportTypeTopic));
-    register_type<MissionPlanConstraintAddCommandStatusType>(
-            get_type_name(MissionPlanConstraintAddCommandStatusTypeTopic));
-    register_type<MissionPlanConstraintDeleteCommandAckReportType>(
-            get_type_name(
-                    MissionPlanConstraintDeleteCommandAckReportTypeTopic));
-    register_type<MissionPlanConstraintDeleteCommandStatusType>(
-            get_type_name(MissionPlanConstraintDeleteCommandStatusTypeTopic));
-    register_type<ActiveConstraintsCommandType>(
-            get_type_name(ActiveConstraintsCommandTypeTopic));
-    register_type<ConditionalReportType>(
-            get_type_name(ConditionalReportTypeTopic));
+    register_type<PrimitiveDriverCommandAckReportType>();
+    register_type<PrimitiveDriverCommandStatusType>();
+    register_type<PrimitiveDriverExecutionStatusReportType>();
+    register_type<GlobalVectorCommandAckReportType>();
+    register_type<GlobalVectorCommandStatusType>();
+    register_type<GlobalVectorExecutionStatusReportType>();
+    register_type<GlobalHoverCommandAckReportType>();
+    register_type<GlobalHoverCommandStatusType>();
+    register_type<GlobalHoverExecutionStatusReportType>();
+    register_type<UVPlatformCapabilitiesReportType>();
+    register_type<UVPlatformSpecsReportType>();
+    register_type<LogReportType>();
+    register_type<HealthReportType>();
+    register_type<MissionPlanConstraintAddCommandType>();
+    register_type<MissionPlanConstraintDeleteCommandType>();
+    register_type<ActiveConstraintsCommandAckReportType>();
+    register_type<ActiveConstraintsCommandStatusType>();
+    register_type<PrimitiveDriverCommandType>();
+    register_type<GlobalVectorCommandType>();
+    register_type<GlobalHoverCommandType>();
+    register_type<GlobalPoseReportType>();
+    register_type<VelocityReportType>();
+    register_type<SpeedReportType>();
+    register_type<WindReportType>();
+    register_type<WaterCurrentReportType>();
+    register_type<MissionPlanConstraintAddCommandAckReportType>();
+    register_type<MissionPlanConstraintAddCommandStatusType>();
+    register_type<MissionPlanConstraintDeleteCommandAckReportType>();
+    register_type<MissionPlanConstraintDeleteCommandStatusType>();
+    register_type<ActiveConstraintsCommandType>();
+    register_type<ConditionalReportType>();
 };
 
 void AutoPilot::lookup_entities()

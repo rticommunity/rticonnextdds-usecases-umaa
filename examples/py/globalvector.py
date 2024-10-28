@@ -23,37 +23,28 @@ from GlobalVectorExecutionStatusReportType import *
 
 # This example uses Python modules generated from the UMAA IDL files
 
-
-def get_type_name(type):
-    # Get full type name from module
-    type_str = idl.get_type_support(type).type_name
-
-    # Strip out namespaces and use as Type Name
-    # Workaround for issue registering types with same names as topics (CORE-15111)
-    # Typenames need to correllate with components/types_topics.xml
-    type_split = (type_str.rsplit('::', 1)[1])
-    return type_split
-
-
-def publisher_main():
+def register_types():
+    print("Registering Types")
 
     # Need to register all types in component before creating Domain Participant
-    # This is usually abstracted away to another utility class, left as is for API usage clarity
     dds.DomainParticipant.register_idl_type(
-            UMAA_MO_GlobalVectorControl_GlobalVectorCommandType,
-            get_type_name(UMAA_MO_GlobalVectorControl_GlobalVectorCommandType))
+        UMAA_MO_GlobalVectorControl_GlobalVectorCommandType,
+        idl.get_type_support(UMAA_MO_GlobalVectorControl_GlobalVectorCommandType).type_name)
 
     dds.DomainParticipant.register_idl_type(
-            UMAA_MO_GlobalVectorControl_GlobalVectorCommandAckReportType,
-            get_type_name(UMAA_MO_GlobalVectorControl_GlobalVectorCommandAckReportType))
+        UMAA_MO_GlobalVectorControl_GlobalVectorCommandAckReportType,
+        idl.get_type_support(UMAA_MO_GlobalVectorControl_GlobalVectorCommandAckReportType).type_name)
 
     dds.DomainParticipant.register_idl_type(
-            UMAA_MO_GlobalVectorControl_GlobalVectorCommandStatusType,
-            get_type_name(UMAA_MO_GlobalVectorControl_GlobalVectorCommandStatusType))
+        UMAA_MO_GlobalVectorControl_GlobalVectorCommandStatusType,
+        idl.get_type_support(UMAA_MO_GlobalVectorControl_GlobalVectorCommandStatusType).type_name)
 
     dds.DomainParticipant.register_idl_type(
         UMAA_MO_GlobalVectorControl_GlobalVectorExecutionStatusReportType,
-        get_type_name(UMAA_MO_GlobalVectorControl_GlobalVectorExecutionStatusReportType))
+        idl.get_type_support(UMAA_MO_GlobalVectorControl_GlobalVectorExecutionStatusReportType).type_name)
+
+def publisher_main():
+    register_types()
 
     # All of our XML files are being passed in by the NDDS_QOS_PROFILES env variable
     qos_provider = dds.QosProvider("")
@@ -90,8 +81,8 @@ if __name__ == "__main__":
         description="Global Vector Command Consumer"
     )
     print("Global Vector Command Consumer\n" \
-        "This is just an example application to publish a 'Global Vector " \
-        "Command' to the AutoPilot component.\n" \
+        "This is just an example 'Global Vector Command Consumer' " \
+        "to interact with the AutoPilot component.\n" \
         "Does NOT implement UMAA Flow Control\n\n")
 
     args = parser.parse_args()
