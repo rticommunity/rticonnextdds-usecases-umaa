@@ -31,19 +31,20 @@ Latest Version: 6.0 Distro A
 [Download from AUVSI](https://www.auvsi.org/unmanned-maritime-autonomy-architecture)
 
 The UMAA standard defines the following(as of 6.0):  
-- DDS Level:
+- Middleware level:
   - Data model(~600 data types in an IDL format)
   - No QOS (Exception: Large Collections- PRESENTATION)
   - Topics(“Interfaces”) per “Service”.
 - Application level:  
   - Command state machine/handshaking("Flow Control")
   - Large data set synchronization("Large Collections")
-  - Type inheritance("Generic/Specified Types")
-- "Components", which are a collection of "Interfaces" derived from the UMAA MBSE model.
-  - This starter kit provides an xml definition of the Autopilot and USVNAV component  
-  DDS entities based on our interpretation of the v1.0 Component Definitions release. 
-  - There are currently ~40 components defined by UMAA of which 9 are Distro A.  
-    (`resources/components/UMAA Component Definitions v1.0.pdf`)
+  - Type extension("Generalizations/Specializations")
+- Systems level:
+  - "Components": Collection of "Interfaces" defined in the UMAA MBSE model.
+    - This starter kit provides an xml definition of the Autopilot and USVNAV component  
+      DDS entities based on our interpretation of the v1.0 Component Definitions release. 
+    - There are currently ~40 components defined by UMAA of which 9 are Distro A.  
+      (`resources/components/UMAA Component Definitions v1.0.pdf`)
     
 *NOTE:  
 The application level requirements (i.e Flow Control/Large Collections/Generic-Specified types)  
