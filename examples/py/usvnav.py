@@ -66,11 +66,16 @@ def publisher_main():
 
     velocity_report_writer = dds.DataWriter(
         participant.find_datawriter("pub::VelocityReportType"))
+    
+    log_report_writer = dds.DataWriter(
+        participant.find_datawriter("pub::LogReportType"))
 
     # Create samples
     speed_report_sample = UMAA_SA_SpeedStatus_SpeedReportType()
     globalpose_report_sample = UMAA_SA_GlobalPoseStatus_GlobalPoseReportType()
     velocity_report_sample = UMAA_SA_VelocityStatus_VelocityReportType()
+    log_report_sample = UMAA_SO_LogReport_LogReportType()
+
 
     # Write data samples in a loop
     while (True):
@@ -104,6 +109,12 @@ def publisher_main():
             f'Writing Velocity data eastSpeed: {velocity_report_sample.velocity.eastSpeed}')
         print(
             f'Writing Velocity data northSpeed: {velocity_report_sample.velocity.northSpeed}')
+        
+        # Write LogReport
+        log_report_writer.write(log_report_sample)
+        print(f'Writing Log Report')
+        
+
 
 
 if __name__ == "__main__":

@@ -7,7 +7,7 @@ exit=false
 
 cmd=""
 
-if [ "$1" == "autopilot" ] || [ "$1" == "usvnav" ] || [ "$1" == "globalvector" ]; then
+if [ "$1" == "autopilot" ] || [ "$1" == "usvnav" ] || [ "$1" == "globalvector" ] || [ "$1" == "logger" ]; then
     component=$1
     if [ $component == "autopilot" ]; then
         cmd="./build/$component"
@@ -28,7 +28,7 @@ fi
 
 if $exit; then
     echo "pass in: \n
-        arg1: component name: ["autopilot", "usvnav", "globalvector"] \n
+        arg1: component name: ["autopilot", "usvnav", "globalvector", "logger"] \n
         arg2: Domain ID to override <components>.xml definition \n
         example: start_component.sh autopilot 5 "
 else

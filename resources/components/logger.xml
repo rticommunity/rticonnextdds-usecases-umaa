@@ -32,47 +32,21 @@ to use the software.
     <!-- This is where we define the Components i.e. Applications and associate the DDS entities (Participants/Writers/Topics/QOS) -->
     <domain_participant_library name="umaa_components_lib" >
 
-        <domain_participant name="usvnav" domain_ref="umaa_domain_lib::UMAA_6"
+        <domain_participant name="logger" domain_ref="umaa_domain_lib::UMAA_6"
             domain_id="$(DOMAIN_ID)">
-            <domain_participant_qos base_name="umaa_qos_lib::default_participant" />
+      <domain_participant_qos base_name="umaa_qos_lib::default_participant" />
 
             <publisher name="pub">
-
-                <!-- LogReport Service (Producer) -->
-                <data_writer name="LogReportType"
-                    topic_ref="UMAA::SO::LogReport::LogReportType">
-                    <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
-                </data_writer>
-
-                <!-- HealthReport Service (Producer) -->
-                <data_writer name="HealthReportType"
-                    topic_ref="UMAA::SO::HealthReport::HealthReportType">
-                    <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
-                </data_writer>
-
-                <!-- GlobalPoseStatus Service (Producer) -->
-                <data_writer name="GlobalPoseReportType"
-                    topic_ref="UMAA::SA::GlobalPoseStatus::GlobalPoseReportType">
-                    <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
-                </data_writer>
-
-                <!-- VelocityStatus Service (Producer) -->
-                <data_writer name="VelocityReportType"
-                    topic_ref="UMAA::SA::VelocityStatus::VelocityReportType">
-                    <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
-                </data_writer>
-
-                <!-- SpeedStatus Service (Producer) -->
-                <data_writer name="SpeedReportType"
-                    topic_ref="UMAA::SA::SpeedStatus::SpeedReportType">
-                    <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
-                </data_writer>
+               <!-- No Publishers for this component -->
 
             </publisher>
 
             <subscriber name="sub">
-                <!-- No subscribers for this component -->
-
+              <!-- LogReport Service (Consumer) -->
+              <data_reader name="LogReportType"
+                topic_ref="UMAA::SO::LogReport::LogReportType">
+                <datareader_qos base_name="umaa_qos_lib::topic_qos_assign" />
+              </data_reader>
             </subscriber>
 
         </domain_participant>
