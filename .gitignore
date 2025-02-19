@@ -5,3 +5,5 @@ examples/build/*
 .vscode/settings.json
 
 datamodel/umaa/python_flat/__pycache__/
+
+examples/py/__pycache__/

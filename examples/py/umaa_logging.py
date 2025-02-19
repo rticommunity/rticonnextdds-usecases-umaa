@@ -17,7 +17,7 @@ import asyncio
 from LogReportType import *
 
 
-class Logger:
+class UMAA_Logger:
     def __init__(self, participant):
         
       # Lookup the Readers
@@ -71,6 +71,6 @@ if __name__ == "__main__":
         "umaa_components_lib::logger")
 
     try:
-        rti.asyncio.run(Logger(participant).run())
+        rti.asyncio.run(UMAA_Logger(participant).run())
     except KeyboardInterrupt:
         pass
