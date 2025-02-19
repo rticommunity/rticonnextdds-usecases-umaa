@@ -151,7 +151,7 @@ cmake --build ./build --config Release
 ##### Options:
 
 ```
-        arg1: component name: [autopilot, usvnav, globalvector] \n
+        arg1: component name: [autopilot, usvnav, logging, globalvectorcmd] \n
         arg2: Domain ID to override <components>.xml definition \n
 ```
 
@@ -163,7 +163,7 @@ cd examples
 
 ##### Overview:
 This reference application provides XML definition for all the entites in 
-the AutoPilot component and showcases accessing those entities to read/write data using features
+the UMAA `AutoPilot` component and showcases accessing those entities to read/write data using features
 such as listeners and AsyncWaitset.
 
 *NOTE: The commands don't implement the UMAA command state pattern("Flow Control") as  
@@ -176,7 +176,7 @@ that is outside the current scope of this middleware example.*
 
 ##### Options:
 ```
-        arg1: component name: [autopilot, usvnav, globalvector] \n
+        arg1: component name: [autopilot, usvnav, logging, globalvectorcmd] \n
         arg2: Domain ID to override <components>.xml definition \n
 ```
 
@@ -187,14 +187,29 @@ cd examples
 ```
 
 ##### Overview:
-The Python API is fully supported in `Connext 7.3.0`
-This app uses Python types to publish messages per the USVNAV component definition.
+This reference application provides XML definition for all the entites in 
+the UMAA `USVNav` component and showcases accessing those entities to read/write data 
 
-The Python modules for all the UMAA types have already been generated and placed into a single folder `/datamodel/umaa/python_flat`.
-This allows us to then point the `PYTHONPATH` variable to this folder in the `start_component.sh` script.
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+### Logging Component (Python)
+--------------------------------------------------------------------------------
 
-For Python types there is a bug in RTIDDSGEN that doesn't resolve the include modules paths
-correctly.(CODEGENII-2112)
+##### Options:
+```
+        arg1: component name: [autopilot, usvnav, logging, globalvectorcmd] \n
+        arg2: Domain ID to override <components>.xml definition \n
+```
+
+##### Example:
+```sh
+cd examples
+./start_component.sh logging 1
+```
+
+##### Overview:
+This reference application provides XML definition for all the entites in 
+the UMAA `Logging` component and showcases accessing those entities to read/write data 
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -202,19 +217,19 @@ correctly.(CODEGENII-2112)
 --------------------------------------------------------------------------------
 ##### Options: 
 ```
-        arg1: component name: [autopilot, usvnav, globalvector] \n
+        arg1: component name: [autopilot, usvnav, logging, globalvectorcmd] \n
         arg2: Domain ID to override <components>.xml definition \n
 ```
 
 ##### Example:
 ```sh
 cd examples
-./start_component.sh globalvector
+./start_component.sh globalvectorcmd
 ```
 
 ##### Overview:
 This script publishes messages of the `GlobalVectorCommandType` to reference
-reception into the AsynWaitset of the AutoPilot component.
+reception into the AsynWaitset of the `AutoPilot` component.
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
