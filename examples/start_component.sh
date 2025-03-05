@@ -28,7 +28,7 @@ fi
 
 if $exit; then
     echo "pass in: \n
-        arg1: component name: ["autopilot", "usvnav", "globalvectorcmd", "logger"] \n
+        arg1: component name: ["autopilot", "usvnav", "globalvectorcmd", "logging"] \n
         arg2: Domain ID to override <components>.xml definition \n
         example: start_component.sh autopilot 5 "
 else
