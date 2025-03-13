@@ -82,11 +82,13 @@ void run(ApplicationArguments args)
 
             ap.global_vector_cmd_reader().key_value(key_holder, instance_handle);
 
-            std::cout << "Key Value: "
-                      << "Source: " 
-                      << key_holder.source() << "\n"
-                      << "Destination: " << key_holder.destination() << "\n"
-                      << std::endl;
+            auto id = key_holder.source().id();
+            std::cout << "Source ID: ";
+            for (const auto &byte : id)
+            {
+              std::cout << static_cast<int>(byte) << " ";
+            }
+            std::cout << std::endl;
         }
 
         rti::util::sleep(Duration(1));
