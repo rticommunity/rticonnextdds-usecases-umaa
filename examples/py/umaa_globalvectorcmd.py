@@ -12,8 +12,7 @@ from rti.types.builtin import String
 import time
 import argparse
 import random
-import sys
-import os
+import uuid
 import rti.idl as idl
 
 from GlobalVectorCommandType import *
@@ -67,6 +66,12 @@ def publisher_main():
     # Set a random value
     globalvector_command_sample.speed.SpeedRequirementVariantTypeSubtypes \
             .WaterSpeedRequirementVariantVariant.speed.speed = speed_cmd
+    
+    # Set Source GUID
+    source_guid = uuid.uuid4()
+    source_guid_list = list(source_guid.bytes)
+    globalvector_command_sample.source.id.value = dds.Uint8Seq(source_guid_list)
+
 
     # write data samples in a loop
     while (True):
@@ -87,4 +92,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    publisher_main()
+    try:
+      publisher_main()
+    except KeyboardInterrupt:
+      pass
