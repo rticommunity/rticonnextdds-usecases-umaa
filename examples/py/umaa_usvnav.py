@@ -118,13 +118,16 @@ def publisher_main():
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
-        description="UMAA USV NAV Component"
-    )
-    print("UMAA USV NAV Component.\n"
-          "Reference example that Publishes the necessary topics to be "
-          "consumed by the AutoPilot component.\n\n")
+  parser = argparse.ArgumentParser(
+      description="UMAA USV NAV Component"
+  )
+  print("UMAA USV NAV Component.\n"
+        "Reference example that Publishes the necessary topics to be "
+        "consumed by the AutoPilot component.\n\n")
 
-    args = parser.parse_args()
+  args = parser.parse_args()
 
+  try:
     publisher_main()
+  except KeyboardInterrupt:
+    pass
