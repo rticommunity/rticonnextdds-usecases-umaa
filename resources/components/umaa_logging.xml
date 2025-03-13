@@ -32,38 +32,25 @@ to use the software.
     <!-- This is where we define the Components i.e. Applications and associate the DDS entities (Participants/Writers/Topics/QOS) -->
     <domain_participant_library name="umaa_components_lib" >
 
-        <!-- Define the entities for the Anchor Controller - Associate with Topics and QOS -->
-        <domain_participant name="globalvector" domain_ref="umaa_domain_lib::UMAA_6"
+        <domain_participant name="logger" domain_ref="umaa_domain_lib::UMAA_6"
             domain_id="$(DOMAIN_ID)">
-            <domain_participant_qos base_name="umaa_qos_lib::default_participant" />
+      <domain_participant_qos base_name="umaa_qos_lib::default_participant" />
 
             <publisher name="pub">
-                <!-- GlobalVectorControl Service (Consumer) -->
-                <data_writer name="GlobalVectorCommandType"
-                    topic_ref="UMAA::MO::GlobalVectorControl::GlobalVectorCommandType">
-                    <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
-                </data_writer>
+               <!-- No Publishers for this component -->
+
             </publisher>
 
             <subscriber name="sub">
-                <!-- GlobalVectorControl Service (Consumer) -->
-                <data_reader name="GlobalVectorCommandAckReportType"
-                    topic_ref="UMAA::MO::GlobalVectorControl::GlobalVectorCommandAckReportType">
-                    <datareader_qos base_name="umaa_qos_lib::topic_qos_assign" />
-                </data_reader>
-
-                <data_reader name="GlobalVectorCommandStatusType"
-                    topic_ref="UMAA::MO::GlobalVectorControl::GlobalVectorCommandStatusType">
-                    <datareader_qos base_name="umaa_qos_lib::topic_qos_assign" />
-                </data_reader>
-
-                <data_reader name="GlobalVectorExecutionStatusReportType"
-                    topic_ref="UMAA::MO::GlobalVectorControl::GlobalVectorExecutionStatusReportType">
-                    <datareader_qos base_name="umaa_qos_lib::topic_qos_assign" />
-                </data_reader>
+              <!-- LogReport Service (Consumer) -->
+              <data_reader name="LogReportType"
+                topic_ref="UMAA::SO::LogReport::LogReportType">
+                <datareader_qos base_name="umaa_qos_lib::topic_qos_assign" />
+              </data_reader>
             </subscriber>
 
         </domain_participant>
+
     
     </domain_participant_library>
 </dds>
