@@ -143,6 +143,11 @@ public:
         return _health_report_w;
     };
 
+    DataReader<GlobalVectorCommandType> global_vector_cmd_reader()
+    {
+      return _global_vector_cmd_r;
+    };
+
     const SpeedReportType &speed_report_data() const
     {
         return _speed_report_data;

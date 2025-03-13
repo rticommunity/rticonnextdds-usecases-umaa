@@ -75,6 +75,18 @@ void run(ApplicationArguments args)
                           << it.second.info().state().instance_state()
                           << std::endl;
             }
+
+            // Convert InstanceHandle back to individual values
+            auto instance_handle = ap.global_vector_commands().begin()->first;
+            GlobalVectorCommandType key_holder;
+
+            ap.global_vector_cmd_reader().key_value(key_holder, instance_handle);
+
+            std::cout << "Key Value: "
+                      << "Source: " 
+                      << key_holder.source() << "\n"
+                      << "Destination: " << key_holder.destination() << "\n"
+                      << std::endl;
         }
 
         rti::util::sleep(Duration(1));
