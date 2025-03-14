@@ -76,14 +76,18 @@ void run(ApplicationArguments args)
                           << std::endl;
             }
 
-            // Convert InstanceHandle back to individual values
+            /**
+             * Convert InstanceHandle back to individual values
+             * This is for the use case when you receive a command and need to update the 
+             * corresponding CommandStatus using the SessionID with the current state
+             **/ 
             auto instance_handle = ap.global_vector_commands().begin()->first;
             GlobalVectorCommandType key_holder;
 
             ap.global_vector_cmd_reader().key_value(key_holder, instance_handle);
 
-            auto id = key_holder.source().id();
-            std::cout << "Source ID: ";
+            auto id = key_holder.sessionID();
+            std::cout << "Session ID: ";
             for (const auto &byte : id)
             {
               std::cout << static_cast<int>(byte) << " ";

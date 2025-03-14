@@ -67,10 +67,10 @@ def publisher_main():
     globalvector_command_sample.speed.SpeedRequirementVariantTypeSubtypes \
             .WaterSpeedRequirementVariantVariant.speed.speed = speed_cmd
     
-    # Set Source GUID
-    source_guid = uuid.uuid4()
-    source_guid_list = list(source_guid.bytes)
-    globalvector_command_sample.source.id.value = dds.Uint8Seq(source_guid_list)
+    # Set a random SessionID GUID
+    sessionid_guid = uuid.uuid4()
+    sessionid_guid_list = list(sessionid_guid.bytes)
+    globalvector_command_sample.sessionID.value = dds.Uint8Seq(sessionid_guid_list)
 
 
     # write data samples in a loop
