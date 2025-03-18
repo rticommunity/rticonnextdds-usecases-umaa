@@ -71,6 +71,7 @@ if __name__ == "__main__":
         "umaa_components_lib::logger")
 
     try:
-        rti.asyncio.run(UMAA_Logger(participant).run())
+      rti.asyncio.run(UMAA_Logger(participant).run())
     except KeyboardInterrupt:
-        pass
+      print("\nFinishing ...")
+      pass
