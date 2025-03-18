@@ -95,4 +95,5 @@ if __name__ == "__main__":
     try:
       publisher_main()
     except KeyboardInterrupt:
+      print("\nFinishing ...")
       pass
