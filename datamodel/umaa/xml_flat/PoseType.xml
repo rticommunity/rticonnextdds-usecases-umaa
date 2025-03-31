@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:////home/rti/rti_connext_dds-7.3.0/bin/../resource/app/app_support/rtiddsgen/schema/rti_dds_profiles.xsd">
 <types>
-<include file="UMAA/Common/MaritimeEnumeration/MaritimeEnumerationSets.xml"/>
-<include file="UMAA/Common/Measurement/CovariancePositionNEDType.xml"/>
-<include file="UMAA/Common/Measurement/GeoPosition2D.xml"/>
-<include file="UMAA/Common/Measurement/Measurements.xml"/>
-<include file="UMAA/Common/Orientation/Orientation3DNEDType.xml"/>
-<include file="UMAA/Common/PrimitiveConstrained/ConstrainedTypes.xml"/>
+<include file="./MaritimeEnumerationSets.xml" />
+<include file="./CovariancePositionNEDType.xml" />
+<include file="./GeoPosition2D.xml" />
+<include file="./Measurements.xml" />
+<include file="./Orientation3DNEDType.xml" />
+<include file="./ConstrainedTypes.xml" />
 <module name="UMAA">
   <module name="Common">
     <module name="Environment">
