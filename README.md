@@ -80,6 +80,7 @@ XML types are used for the following use cases:
 - Importing types into Cameo/Simulink
 - Referencing types in Admin Console when type propagation is disabled
 - Referencing types in Routing Service or Recording service when type propagation is disabled
+- DynamicData types usage. This is a flexible alternative to complied types.
 
 We can use `rtiddsgen` along with the `-convertToXML` flag to convert our IDL files to XML. 
 
