@@ -250,10 +250,10 @@ reception into the AsynWaitset of the `AutoPilot` component.
 These Python scripts are provided as an example for how you can dynamically subscribe  
 and publish to UMAA topics as needed.
 
-By inspecting the Python files you should be able to see the basi mechanics of loading in XML files,  
+By inspecting the Python files you should be able to see the basic mechanics of loading in XML files,  
 setting the Topic/Type, and selecting the QoS Profile.
 
-You are also able to use the DynamicData api to interact with structures dynamically.  
+You can then use the DynamicData API to interact with the data structures dynamically.  
 See the Python docs [here](https://community.rti.com/static/documentation/connext-dds/current/doc/api/connext_dds/api_python/types.html#dynamictype-and-dynamicdata) for further reference.
 
 This can be used for Unit testing, diagnostics or simulation.
