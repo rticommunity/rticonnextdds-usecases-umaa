@@ -9,11 +9,11 @@ cmd=""
 
 if [ "$1" == "autopilot" ] || [ "$1" == "usvnav" ] || [ "$1" == "globalvectorcmd" ] || [ "$1" == "logging" ]; then
     component=$1
+    if [ "$2" ]; then
+        export DOMAIN_ID=$2
+    fi
     if [ $component == "autopilot" ]; then
         cmd="./build/$component"
-
-    elif [ "$2" ]; then
-        export DOMAIN_ID=$2
     else
         cmd="python3 ./py/umaa_$component.py"
 
