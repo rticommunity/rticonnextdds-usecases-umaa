@@ -149,7 +149,7 @@ to use the software.
 
     </qos_profile>
 
-        <qos_profile name="aperiodic_reliable_qos" base_name="BuiltinQosLib::Generic.Common">
+    <qos_profile name="aperiodic_reliable_qos" base_name="BuiltinQosLib::Generic.Common">
 
       <!-- This QOS profile is intended for aperiodic messages(SetElements/CommandStatus etc.) that need to be resent if not received -->
 

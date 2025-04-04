@@ -1,13 +1,23 @@
 # UMAA Starter Kit
 
 A starting point for developing to the UMAA standard with Connext.
-- [Overview](#overview)
-- [UMAA Standard](#umaa-standard)
-- [Types](#types)
-- [Components](#components)
-- [Examples](#examples)
+- [Overview](#overview)  
+  High Level Overview
+- [UMAA Standard](#umaa-standard)  
+  Breakdown of UMAA standard from a DDS perspective
+- [Types](#types)  
+  Data Model options
+- [Component Examples](#component-examples)
+  - [C++ Autopilot](#c-autopilot)  
+  - [Python USVNAV](#python-usvnav) 
+  - [Python Logging](#python-logging)
+  - [Global Vector Commands](#global-vector-commands)  
+    NOTE: Not a full component but used for example
+- [Dynamic Pub Sub Examples](#dynamic-pub-sub-examples)  
+  Generic Python utility scripts to publish/subscribe to UMAA Topics  
 - [CMAKE modules](#cmake-modules)
-- [Recording Service](#recording-service)
+- [Recording Service](#recording-service)  
+  Example Configuration file for Recording UMAA topics
 
 ## Overview
 This Starter Kit provides an entry point to developing with UMAA.  
@@ -92,7 +102,7 @@ These XML types have had all of their includes "flattenned" to point to the same
 directory. This allows for use cases where we want to decouple the XML includes from  
 needing to be relative to the CWD.
 
-## Components
+## Component Examples
 These reference applications simulate a few components using types and services  
 from the public UMAA 6 standard. The intention here was to minimize application  
 code and highlight the ease of access to the writers/readers and their usage.  
@@ -109,7 +119,6 @@ to define and manage all of the messaging entities with XML files.
 This lends itself well to the common use case of simulation/test apps in Python  
 correlating with deployed apps in Modern C++.
 
-## Examples 
 ### Prerequisites
 Reference the Connext Getting Started guides to complete the below: 
 - Linux-based OS or WSL.
@@ -147,7 +156,7 @@ cmake --build ./build --config Release
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
-### AutoPilot Component (Modern CPP)
+### C++ AutoPilot
 --------------------------------------------------------------------------------
 ##### Options:
 
@@ -172,7 +181,7 @@ that is outside the current scope of this middleware example.*
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
-### USVNAV Component (Python)
+### Python USVNAV
 --------------------------------------------------------------------------------
 
 ##### Options:
@@ -193,7 +202,7 @@ the UMAA `USVNav` component and showcases accessing those entities to read/write
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
-### Logging Component (Python)
+### Python Logging
 --------------------------------------------------------------------------------
 
 ##### Options:
@@ -218,8 +227,8 @@ the UMAA `Logging` component and showcases accessing those entities to read/writ
 --------------------------------------------------------------------------------
 ##### Options: 
 ```
-        arg1: component name: [autopilot, usvnav, logging, globalvectorcmd] \n
-        arg2: Domain ID to override <components>.xml definition \n
+    arg1: component name: [autopilot, usvnav, logging, globalvectorcmd] \n
+    arg2: Domain ID to override <components>.xml definition \n
 ```
 
 ##### Example:
@@ -231,6 +240,41 @@ cd examples
 ##### Overview:
 This script publishes messages of the `GlobalVectorCommandType` to reference
 reception into the AsynWaitset of the `AutoPilot` component.
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+## Dynamic Pub Sub Examples
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+### Overview
+These Python scripts are provided as an example for how you can dynamically subscribe  
+and publish to UMAA topics as needed.
+
+By inspecting the Python files you should be able to see the basic mechanics of loading in XML files,  
+setting the Topic/Type, and selecting the QoS Profile.
+
+You can then use the DynamicData API to interact with the data structures dynamically.  
+See the Python docs [here](https://community.rti.com/static/documentation/connext-dds/current/doc/api/connext_dds/api_python/types.html#dynamictype-and-dynamicdata) for further reference.
+
+This can be used for Unit testing, diagnostics or simulation.
+
+#### UMAA Publisher
+##### Example:
+```sh
+cd ./examples
+
+python ./py/umaa_dynamic_pub.py --qos umaa_qos_lib::periodic_best_effort_qos --topic UMAA::EO::BallastTank::BallastPumpCommandType --domain 0
+```
+
+#### UMAA Subscriber
+##### Example:
+
+```sh
+cd ./examples
+
+python ./py/umaa_dynamic_sub.py --qos umaa_qos_lib::periodic_best_effort_qos --topic UMAA::EO::BallastTank::BallastPumpCommandType --domain 0
+```
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
