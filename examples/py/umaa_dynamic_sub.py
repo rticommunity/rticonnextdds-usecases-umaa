@@ -131,6 +131,7 @@ if __name__ == "__main__":
       rti.asyncio.run(UMAA_Sub(args).run())
         
     except KeyboardInterrupt:
+      print("Stopping Application")
       pass
 
 
