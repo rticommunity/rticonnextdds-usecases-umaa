@@ -186,8 +186,8 @@ to use the software.
       <datareader_qos topic_filter="*ReportType" base_name="periodic_best_effort_qos" />
 
       <!-- Set Topics to Durable and Reliable Profile -->
-      <datawriter_qos topic_filter="*CommandType" base_name="aperiodic_durable_reliable_qos" />
-      <datareader_qos topic_filter="*CommandType" base_name="aperiodic_durable_reliable_qos" />
+      <datawriter_qos topic_filter="*CommandType" base_name="aperiodic_reliable_qos" />
+      <datareader_qos topic_filter="*CommandType" base_name="aperiodic_reliable_qos" />
       
       <!-- This will override the previous *ReportType filter -->
       <datawriter_qos topic_filter="*SpecsReportType" base_name="aperiodic_durable_reliable_qos" />
