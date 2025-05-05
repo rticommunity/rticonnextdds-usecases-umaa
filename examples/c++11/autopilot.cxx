@@ -113,6 +113,11 @@ int main(int argc, char *argv[])
     // Sets Connext verbosity programatically to help debugging
     rti::config::Logger::instance().verbosity(arguments.verbosity);
 
+    //Set the debug output to a specific file
+    rti::config::Logger::instance().output_file("debug_output.log");
+
+    // Log a debug message to verify - Needs to be at Level 5 Verbosity
+    rti::config::Logger::instance().debug("This is a debug message logged to the file.");
 
     try {
         run(arguments);
