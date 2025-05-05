@@ -4,8 +4,18 @@
 export NDDS_QOS_PROFILES=""
 export PYTHONPATH=""
 exit=false
-
 cmd=""
+
+
+# Set verbosity level
+# 0 = SILENT
+# 1 = EXCEPTION
+# 2 = WARNING
+# 3 = STATUS_LOCAL
+# 4 = STATUS_REMOTE
+# 5 = STATUS_ALL
+
+export VERBOSITY=5
 
 if [ "$1" == "autopilot" ] || [ "$1" == "usvnav" ] || [ "$1" == "globalvectorcmd" ] || [ "$1" == "logging" ]; then
     component=$1
@@ -48,6 +58,6 @@ else
     echo $NDDS_QOS_PROFILES
 
     # start
-    $cmd
+    $cmd -v $VERBOSITY
 
 fi
