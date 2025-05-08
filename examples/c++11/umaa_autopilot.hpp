@@ -104,29 +104,65 @@ struct hash<dds::core::detail::InstanceHandle> {
 }  // namespace std
 #endif
 
-template <typename T>
-class ReportDataListener : public NoOpDataReaderListener<T> {
-    T &_data;
-
+// This is a listener that will be used to receive events from the DomainParticipant i.e. the DDS "Bus"
+class MyParticipantListener
+    : public dds::domain::NoOpDomainParticipantListener
+{
 public:
-    ReportDataListener(T &data) : _data(data)
-    {
-    }
+  virtual void on_requested_deadline_missed(
+      dds::pub::AnyDataWriter &writer,
+      const dds::core::status::OfferedDeadlineMissedStatus &status)
+  {
+    std::cout << "ParticipantListener: on_requested_deadline_missed()"
+              << std::endl;
+  }
 
-    virtual void on_data_available(DataReader<T> &reader)
-    {
-        LoanedSamples<T> samples = reader.take();
-        for (const auto &sample : samples) {
-            // If valid, it means we have actual
-            // data available, otherwise we got metadata.
-            if (sample.info().valid()) {
-                // Update container with latest sample
-                _data = sample.data();
-            }
-        }
-    }
+  virtual void on_offered_incompatible_qos(
+      dds::pub::AnyDataWriter &writer,
+      const ::dds::core::status::OfferedIncompatibleQosStatus &status)
+  {
+    std::cout << "ParticipantListener: on_offered_incompatible_qos()"
+              << std::endl;
+  }
+
+  virtual void on_sample_rejected(
+      dds::sub::AnyDataReader &the_reader,
+      const dds::core::status::SampleRejectedStatus &status)
+  {
+    std::cout << "ParticipantListener: on_sample_rejected()" << std::endl;
+  }
+
+  virtual void on_liveliness_changed(
+      dds::sub::AnyDataReader &the_reader,
+      const dds::core::status::LivelinessChangedStatus &status)
+  {
+    std::cout << "ParticipantListener: on_liveliness_changed()"
+              << std::endl;
+  }
+
+  virtual void on_sample_lost(
+      dds::sub::AnyDataReader &the_reader,
+      const dds::core::status::SampleLostStatus &status)
+  {
+    std::cout << "ParticipantListener: on_sample_lost()" << std::endl;
+  }
+
+  virtual void on_subscription_matched(
+      dds::sub::AnyDataReader &the_reader,
+      const dds::core::status::SubscriptionMatchedStatus &status)
+  {
+    std::cout << "ParticipantListener: on_subscription_matched()"
+              << std::endl;
+  }
+
+  virtual void on_inconsistent_topic(
+      dds::topic::AnyTopic &topic,
+      const dds::core::status::InconsistentTopicStatus &status)
+  {
+    std::cout << "ParticipantListener: on_inconsistent_topic()"
+              << std::endl;
+  }
 };
-
 
 class AutoPilot {
 public:

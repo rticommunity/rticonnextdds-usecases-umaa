@@ -21,8 +21,28 @@ void AutoPilot::create()
     _participant = QosProvider::Default()->create_participant_from_config(
                                                              "umaa_components_lib::autopilot");
 
+    // Lookup the Readers and Writers defined in XML and assign to internal variables                                                      
     lookup_entities();
 
+    // Create a shared pointer for the Participant Listener and attach it to the participant
+    // This is a listener that will be used to receive events from the DomainParticipant i.e. the DDS "Bus"
+    auto participant_listener = std::make_shared<MyParticipantListener>();
+
+    // Pick the Statuses we want to be triggered by the listeners
+    // Data Available is being handled by the Async Waitset
+    dds::core::status::StatusMask mask = 
+        dds::core::status::StatusMask::requested_deadline_missed() |
+        dds::core::status::StatusMask::offered_incompatible_qos() |
+        dds::core::status::StatusMask::sample_rejected() |
+        dds::core::status::StatusMask::liveliness_changed() |
+        dds::core::status::StatusMask::sample_lost() |
+        dds::core::status::StatusMask::subscription_matched() |
+        dds::core::status::StatusMask::inconsistent_topic();
+
+    // Attach the listener to the participant
+    _participant.set_listener(participant_listener, mask);
+
+    // Set up the Async Waitset with our desired conditions and handlers
     setup_async_waitset();
 
     std::cout << "Completed AutoPilot entities setup" << std::endl;
