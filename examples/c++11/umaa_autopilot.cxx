@@ -23,8 +23,6 @@ void AutoPilot::create()
 
     lookup_entities();
 
-    // attach_reader_listeners();
-
     setup_async_waitset();
 
     std::cout << "Completed AutoPilot entities setup" << std::endl;
@@ -107,31 +105,6 @@ void AutoPilot::lookup_entities()
     };
 };
 
-void AutoPilot::attach_reader_listeners()
-{
-    // Add listeners to our readers
-
-    // Listeners are performed in the context of the receive thread, so only use
-    // for lightweight operations
-
-    // Lower latency than waitsets.
-
-    // These are usually refactored with Templates, left as is for API usage clarity
-    auto speed_report_listener =
-            std::make_shared<ReportDataListener<SpeedReportType>>(
-                    _speed_report_data);
-    _speed_report_r.set_listener(speed_report_listener);
-
-    auto globalpose_report_listener =
-            std::make_shared<ReportDataListener<GlobalPoseReportType>>(
-                    _globalpose_report_data);
-    _globalpose_report_r.set_listener(globalpose_report_listener);
-
-    auto velocity_report_listener =
-            std::make_shared<ReportDataListener<VelocityReportType>>(
-                    _velocity_report_data);
-    _velocity_report_r.set_listener(velocity_report_listener);
-};
 
 void AutoPilot::setup_async_waitset()
 {
