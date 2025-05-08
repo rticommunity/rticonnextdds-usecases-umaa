@@ -23,7 +23,7 @@ void AutoPilot::create()
 
     lookup_entities();
 
-    attach_reader_listeners();
+    // attach_reader_listeners();
 
     setup_async_waitset();
 
@@ -144,7 +144,7 @@ void AutoPilot::setup_async_waitset()
     // Class documentation:
     // https://community.rti.com/static/documentation/connext-dds/current/doc/api/connext_dds/api_cpp2/classrti_1_1core_1_1cond_1_1AsyncWaitSet.html#a9a0a88fa860f0d4cf06b115dee5e6d5c
 
-    // Add Global Vector Status Condition and Handler function
+    // Add Global Vector Status Condition and Keyed Data Handler function
     dds::core::cond::StatusCondition global_vector_sc(_global_vector_cmd_r);
     global_vector_sc.enabled_statuses(
             dds::core::status::StatusMask::data_available());
@@ -155,8 +155,46 @@ void AutoPilot::setup_async_waitset()
                 _global_vector_commands);
     });
 
-    // Attach conditions
+    // Add Speed Report Status Condition and Non-Keyed Data Handler function
+    // This data could be handled with Keys/Instances if receiving from multiple 
+    // sources as each source_id creates a unique Instance
+    // but in this case we are only receiving from one source for simplicity
+    dds::core::cond::StatusCondition speed_report_sc(_speed_report_r);
+    speed_report_sc.enabled_statuses(
+        dds::core::status::StatusMask::data_available());
+
+    speed_report_sc->handler([this](dds::core::cond::Condition)
+                             { this->process_samples<SpeedReportType>(
+                                   _speed_report_r,
+                                   _speed_report_data); });
+
+    // Add Global Pose Report Status Condition and Non-Keyed Data Handler function
+    dds::core::cond::StatusCondition global_pose_report_sc(_globalpose_report_r);
+    global_pose_report_sc.enabled_statuses(
+        dds::core::status::StatusMask::data_available());
+
+    global_pose_report_sc->handler([this](dds::core::cond::Condition)
+                                   { this->process_samples<GlobalPoseReportType>(
+                                         _globalpose_report_r,
+                                         _globalpose_report_data); });
+
+
+    // Add Velocity Report Status Condition and Non-Keyed Data Handler function
+    dds::core::cond::StatusCondition velocity_report_sc(_velocity_report_r);
+    velocity_report_sc.enabled_statuses(
+        dds::core::status::StatusMask::data_available());
+
+    velocity_report_sc->handler([this](dds::core::cond::Condition)
+                                { this->process_samples<VelocityReportType>(
+                                      _velocity_report_r,
+                                      _velocity_report_data); });
+
+    // Attach conditions. The Async Waitset will be triggered when any of the
+    // attached conditions are triggered.
     _async_waitset.attach_condition(global_vector_sc);
+    _async_waitset.attach_condition(speed_report_sc);
+    _async_waitset.attach_condition(global_pose_report_sc);
+    _async_waitset.attach_condition(velocity_report_sc);
 
     // Start Async Waitset
     _async_waitset.start();
@@ -182,9 +220,8 @@ void AutoPilot::process_samples(DataReader<T> reader, T &current_data)
                       << " Sample\n"
                       << std::endl;
 
+            current_data = sample.data();
             // std::cout << sample.data() << std::endl;
-
-            // Do something with data here
         }
     }
 }
