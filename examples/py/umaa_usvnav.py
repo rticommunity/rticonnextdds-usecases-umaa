@@ -114,18 +114,42 @@ def publisher_main():
         log_report_writer.write(log_report_sample)
         print(f'Writing Log Report')
         
-
-
-
 if __name__ == "__main__":
   parser = argparse.ArgumentParser(
       description="UMAA USV NAV Component"
+  )
+  parser.add_argument(
+      "-v",
+      "--verbosity",
+      type=int,
+      default=2,
+      help="Logging Verbosity",
   )
   print("UMAA USV NAV Component.\n"
         "Reference example that Publishes the necessary topics to be "
         "consumed by the AutoPilot component.\n\n")
 
   args = parser.parse_args()
+
+  verbosity_levels = {
+      0: dds.Verbosity.SILENT,
+      1: dds.Verbosity.EXCEPTION,
+      2: dds.Verbosity.WARNING,
+      3: dds.Verbosity.STATUS_LOCAL,
+      4: dds.Verbosity.STATUS_REMOTE,
+      5: dds.Verbosity.STATUS_ALL,
+  }
+
+  # Sets Connext verbosity to help debugging
+  verbosity = verbosity_levels.get(args.verbosity, dds.Verbosity.EXCEPTION)
+
+  dds.Logger.instance.verbosity = verbosity
+
+  # Set the debug output to a specific file
+  dds.Logger.instance.output_file("debug_output.log")
+
+  # Log a debug message to verify- Needs to be at Level 5 Verbosity
+  dds.Logger.instance.debug("This is a debug message logged to the file.")
 
   try:
     publisher_main()

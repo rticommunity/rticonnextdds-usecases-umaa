@@ -50,6 +50,36 @@ struct ApplicationArguments {
     int threads;
 };
 
+inline void set_verbosity(
+    rti::config::Verbosity &verbosity,
+    int verbosity_value)
+{
+  switch (verbosity_value)
+  {
+  case 0:
+    verbosity = rti::config::Verbosity::SILENT;
+    break;
+  case 1:
+    verbosity = rti::config::Verbosity::EXCEPTION;
+    break;
+  case 2:
+    verbosity = rti::config::Verbosity::WARNING;
+    break;
+  case 3:
+    verbosity = rti::config::Verbosity::STATUS_LOCAL;
+    break;
+  case 4:
+    verbosity = rti::config::Verbosity::STATUS_REMOTE;
+    break;
+  case 5:
+    verbosity = rti::config::Verbosity::STATUS_ALL;
+    break;
+  default:
+    verbosity = rti::config::Verbosity::EXCEPTION;
+    break;
+  }
+}
+
 // Parses application arguments for example.
 inline ApplicationArguments parse_arguments(int argc, char *argv[])
 {
@@ -72,9 +102,7 @@ inline ApplicationArguments parse_arguments(int argc, char *argv[])
         } else if ((argc > arg_processing + 1)
                 && (strcmp(argv[arg_processing], "-v") == 0
                 || strcmp(argv[arg_processing], "--verbosity") == 0)) {
-            args.verbosity =
-                    static_cast<rti::config::Verbosity::inner_enum>(
-                            atoi(argv[arg_processing + 1]));
+            set_verbosity(args.verbosity, atoi(argv[arg_processing + 1]));
             arg_processing += 2;
         } else if ((argc > arg_processing + 1)
             && (strcmp(argv[arg_processing], "-t") == 0

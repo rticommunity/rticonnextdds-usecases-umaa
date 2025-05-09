@@ -56,10 +56,38 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="UMAA Logging Component"
     )
+    parser.add_argument(
+        "-v",
+        "--verbosity",
+        type=int,
+        default=2,
+        help="Logging Verbosity",
+    )
+
     print("UMAA Logging Component DDS starter\n")
 
     args = parser.parse_args()
 
+    verbosity_levels = {
+        0: dds.Verbosity.SILENT,
+        1: dds.Verbosity.EXCEPTION,
+        2: dds.Verbosity.WARNING,
+        3: dds.Verbosity.STATUS_LOCAL,
+        4: dds.Verbosity.STATUS_REMOTE,
+        5: dds.Verbosity.STATUS_ALL,
+    }
+
+    # Sets Connext verbosity to help debugging
+    verbosity = verbosity_levels.get(args.verbosity, dds.Verbosity.EXCEPTION)
+
+    dds.Logger.instance.verbosity = verbosity
+    # Set the debug output to a specific file
+    dds.Logger.instance.output_file("debug_output.log")
+
+    # Log a debug message to verify- Needs to be at Level 5 Verbosity
+    dds.Logger.instance.debug("This is a debug message logged to the file.")
+
+    # Register necessary types
     register_types()
 
     # All of our XML files are being passed in by the NDDS_QOS_PROFILES env variable

@@ -85,12 +85,37 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Global Vector Command Consumer"
     )
+    parser.add_argument(
+        "-v",
+        "--verbosity",
+        type=int,
+        default=2,
+        help="Logging Verbosity",
+    )
     print("Global Vector Command Consumer\n" \
         "This is just an example 'Global Vector Command Consumer' " \
         "to interact with the AutoPilot component.\n" \
         "Does NOT implement UMAA Flow Control\n\n")
 
     args = parser.parse_args()
+
+    verbosity_levels = {
+        0: dds.Verbosity.SILENT,
+        1: dds.Verbosity.EXCEPTION,
+        2: dds.Verbosity.WARNING,
+        3: dds.Verbosity.STATUS_LOCAL,
+        4: dds.Verbosity.STATUS_REMOTE,
+        5: dds.Verbosity.STATUS_ALL,
+    }
+
+    # Sets Connext verbosity to help debugging
+    verbosity = verbosity_levels.get(args.verbosity, dds.Verbosity.EXCEPTION)
+    
+    # Set the debug output to a specific file
+    dds.Logger.instance.output_file("debug_output.log")
+
+    # Log a debug message to verify- Needs to be at Level 5 Verbosity
+    dds.Logger.instance.debug("This is a debug message logged to the file.")
 
     try:
       publisher_main()
