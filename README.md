@@ -1,6 +1,8 @@
 # UMAA Starter Kit
 
 A starting point for developing to the UMAA standard with Connext.
+
+
 - [Overview](#overview)  
   High Level Overview
 - [UMAA Standard](#umaa-standard)  
@@ -20,6 +22,9 @@ A starting point for developing to the UMAA standard with Connext.
   Example Configuration file for Recording UMAA topics
 
 ## Overview
+
+[Walkthrough here](https://www.rti.com/developers/case-code/umaa)
+
 This Starter Kit provides an entry point to developing with UMAA.  
 It highlights usage of a few UMAA defined Components to simulate  
 interaction between the different interfaces. 
