@@ -86,11 +86,21 @@ void run(ApplicationArguments args)
 
             ap.global_vector_cmd_reader().key_value(key_holder, instance_handle);
 
-            auto id = key_holder.sessionID();
+            // Print Session ID
+            auto session_id = key_holder.sessionID();
             std::cout << "Session ID: ";
-            for (const auto &byte : id)
+            for (const auto &byte : session_id)
             {
-              std::cout << static_cast<int>(byte) << " ";
+              printf("%02x ", byte);
+            }
+            std::cout << std::endl;
+
+            // Print Destination ID
+            auto dest_id = key_holder.destination().parentID();
+            std::cout << "Destination ID: ";
+            for (const auto &byte : dest_id)
+            {
+              printf("%02x ", byte);
             }
             std::cout << std::endl;
         }
@@ -114,7 +124,7 @@ int main(int argc, char *argv[])
     rti::config::Logger::instance().verbosity(arguments.verbosity);
 
     //Set the debug output to a specific file
-    // rti::config::Logger::instance().output_file("debug_output.log");
+    rti::config::Logger::instance().output_file("debug_output.log");
 
     // Log a debug message to verify - Needs to be at Level 5 Verbosity
     rti::config::Logger::instance().debug("This is a debug message logged to the file.");

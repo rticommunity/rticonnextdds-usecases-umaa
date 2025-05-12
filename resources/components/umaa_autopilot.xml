@@ -25,7 +25,16 @@ to use the software.
         <element>
             <name>DOMAIN_ID</name>
             <value>1</value>
-        </element> 
+        </element>
+        <element>
+          <!-- 
+            Need to remove dashes from GUID for the content filter to work. 
+            Can add spaces to the GUID to make it more readable.
+            -->
+          <name>GUID</name>
+          <value>cb 8e 88 58 c8 c2 27 7f 94 b6 32 28 7b ed 9d 05</value>
+
+        </element>
     </configuration_variables>
 
     <!-- Participant library -->
@@ -142,7 +151,16 @@ to use the software.
                 <!-- GlobalVectorControl Service (Producer) -->
                 <data_reader name="GlobalVectorCommandType"
                     topic_ref="UMAA::MO::GlobalVectorControl::GlobalVectorCommandType">
-                    <datareader_qos base_name="umaa_qos_lib::topic_qos_assign" />
+                  <datareader_qos base_name="umaa_qos_lib::topic_qos_assign" />
+
+                  <!-- 
+                    Create Content Filter to filter out messages that are not for this autopilot instance. 
+                    Make sure you define "kind" or it will fail silently (CORE-10554).
+                    -->
+                  <content_filter kind="builtin.sql">
+                    <expression>destination.parentID = &amp;hex($(GUID))</expression>
+                  </content_filter>
+
                 </data_reader>
 
                 <!-- GlobalHoverControl Service (Producer) -->
