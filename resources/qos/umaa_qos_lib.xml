@@ -75,6 +75,42 @@ to use the software.
         </domain_participant_qos>
     </qos_profile>
 
+    <qos_profile name="instance_resource_cleanup">
+
+      <!-- 
+          Every unique Instance allocates a new buffer. 
+          By cleaning up the resources every time we call "dispose" we minimize unbounded memory growth. 
+          For 6.1 this is binary either zero or infinite. In 7.2 configurable values are allowed.
+        -->
+      <datawriter_qos>
+        <writer_data_lifecycle>
+          <autopurge_disposed_instances_delay>
+            <sec>DURATION_ZERO_SEC</sec>
+            <nanosec>DURATION_ZERO_NSEC</nanosec>
+          </autopurge_disposed_instances_delay>
+        </writer_data_lifecycle>
+
+      </datawriter_qos>
+
+      <datareader_qos>
+        <reader_data_lifecycle>
+          <autopurge_disposed_instances_delay>
+            <sec>DURATION_ZERO_SEC</sec>
+            <nanosec>DURATION_ZERO_NSEC</nanosec>
+          </autopurge_disposed_instances_delay>
+
+          <autopurge_disposed_samples_delay>
+            <sec>10</sec>
+            <nanosec>DURATION_ZERO_NSEC</nanosec>
+          </autopurge_disposed_samples_delay>
+
+        </reader_data_lifecycle>
+      </datareader_qos>
+
+
+
+    </qos_profile>
+
     <!-- 
       This is where we create our QOS profiles per "Data Pattern" i.e. aperiodic commands, periodic status reports etc.
       -->
@@ -89,6 +125,9 @@ to use the software.
 
         <!-- Only Keep the last message in a buffer of 1. This is for Status messages that are sent periodically. -->
         <element>BuiltinQosSnippetLib::QosPolicy.History.KeepLast_1</element>
+
+        <!-- Automatically cleanup disposed Instances-->
+        <element>umaa_qos_lib::instance_resource_cleanup</element>
       </base_name>
 
       <datawriter_qos>
@@ -121,6 +160,9 @@ to use the software.
           ensuring applications that come online later will receive the latest configuration.
         -->
         <element>BuiltinQosSnippetLib::QosPolicy.Durability.TransientLocal</element>
+
+        <!-- Automatically cleanup disposed Instances-->
+        <element>umaa_qos_lib::instance_resource_cleanup</element>
       </base_name>
 
       <datawriter_qos>
@@ -141,6 +183,9 @@ to use the software.
       <base_name>
         <!-- Send messages out "Reliably". Message will get resent if not received -->
         <element>BuiltinQosSnippetLib::QosPolicy.Reliability.Reliable</element>
+
+        <!-- Automatically cleanup disposed Instances-->
+        <element>umaa_qos_lib::instance_resource_cleanup</element>
       </base_name>
 
       <datawriter_qos>
@@ -173,7 +218,7 @@ to use the software.
       <!-- Set Topics to Durable and Reliable Profile -->
       <datawriter_qos topic_filter="*CommandType" base_name="aperiodic_reliable_qos" />
       <datareader_qos topic_filter="*CommandType" base_name="aperiodic_reliable_qos" />
-      
+
       <!-- This will override the previous *ReportType filter -->
       <datawriter_qos topic_filter="*SpecsReportType" base_name="aperiodic_durable_reliable_qos" />
       <datareader_qos topic_filter="*SpecsReportType" base_name="aperiodic_durable_reliable_qos" />
