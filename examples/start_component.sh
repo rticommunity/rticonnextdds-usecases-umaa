@@ -15,7 +15,7 @@ cmd=""
 # 4 = STATUS_REMOTE
 # 5 = STATUS_ALL
 
-export VERBOSITY=5
+export VERBOSITY=2
 
 if [ "$1" == "autopilot" ] || [ "$1" == "usvnav" ] || [ "$1" == "globalvectorcmd" ] || [ "$1" == "logging" ]; then
     component=$1
