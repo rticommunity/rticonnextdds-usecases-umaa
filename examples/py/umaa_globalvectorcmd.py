@@ -59,7 +59,7 @@ def publisher_main():
     globalvector_command_sample = UMAA_MO_GlobalVectorControl_GlobalVectorCommandType()
 
     # Select the union to send
-    speed_cmd = random.randrange(0, 10, 2)
+    speed_cmd = random.randrange(2, 10, 2)
     globalvector_command_sample.speed.SpeedRequirementVariantTypeSubtypes.discriminator = \
             UMAA_Common_Speed_SpeedRequirementVariantTypeEnum.WATERSPEEDREQUIREMENTVARIANT_D
 
@@ -72,6 +72,13 @@ def publisher_main():
     sessionid_guid_list = list(sessionid_guid.bytes)
     globalvector_command_sample.sessionID.value = dds.Uint8Seq(sessionid_guid_list)
 
+    # Set a Destination GUID for the AutoPilot Component
+    dest_guid = uuid.UUID(str("cb8e8858-c8c2-277f-94b6-32287bed9d05"))
+    dest_guid_list = list(dest_guid.bytes)
+
+    globalvector_command_sample.destination.parentID.value = dds.Uint8Seq(dest_guid_list)
+
+    cmds_sent = 0
 
     # write data samples in a loop
     while (True):
@@ -79,6 +86,14 @@ def publisher_main():
 
         globalvector_command_w.write(globalvector_command_sample)
         print(f'Writing Global Vector Command (Speed): {speed_cmd }')
+        cmds_sent += 1
+
+        if cmds_sent == 5:
+          print("Sent 5 commands, Cancelling (disposing) Command...")
+          instance_handle = globalvector_command_w.lookup_instance(
+              globalvector_command_sample)
+          globalvector_command_w.dispose_instance(instance_handle)
+          break
 
 
 if __name__ == "__main__":

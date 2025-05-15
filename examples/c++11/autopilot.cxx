@@ -42,6 +42,10 @@ void run(ApplicationArguments args)
         healthreport_writer.write(sample);
         // std::cout << "Sending Health Report/Waiting for data\n";
 
+        std::cout << "\n\n____________________________________________________________________\n"
+                  << "Telemetry Reports:\n"
+                  << "____________________________________________________________________\n";
+
         // Optional, so check first
         if (ap.speed_report_data().speedThroughWater().has_value()) {
             auto current_speed =
@@ -66,33 +70,53 @@ void run(ApplicationArguments args)
         // This is just a reference on accessing values in Type
         if (!ap.global_vector_commands().empty())
         {
-            std::cout << "Current Global Vector Commands:\n";
+          std::cout << "\n\n____________________________________________________________________\n"
+                    << "Global Vector Commands:\n"
+                    << "____________________________________________________________________\n";
 
-            for (auto& it : ap.global_vector_commands()) {
-                std::cout << "Speed Command " 
-                          << it.second.data().speed().SpeedRequirementVariantTypeSubtypes().WaterSpeedRequirementVariantVariant().speed().speed()
-                          << " State: "
-                          << it.second.info().state().instance_state()
-                          << std::endl;
-            }
+          for (auto &it : ap.global_vector_commands())
+          {
+            std::cout << "--------------------------------------------------------------------" << std::endl;
+            std::cout << "Instance Handle: " << it.second.info().instance_handle() << std::endl;
+            std::cout << "State: " << it.second.info().state().instance_state() << std::endl;
 
-            /**
-             * Convert InstanceHandle back to individual values
-             * This is for the use case when you receive a command and need to update the 
-             * corresponding CommandStatus using the SessionID with the current state
-             **/ 
-            auto instance_handle = ap.global_vector_commands().begin()->first;
-            GlobalVectorCommandType key_holder;
-
-            ap.global_vector_cmd_reader().key_value(key_holder, instance_handle);
-
-            auto id = key_holder.sessionID();
-            std::cout << "Session ID: ";
-            for (const auto &byte : id)
+            if (it.second.info().state().instance_state() == InstanceState::alive())
             {
-              std::cout << static_cast<int>(byte) << " ";
+
+              std::cout << "Current Water Speed Command: " << it.second.data().speed().SpeedRequirementVariantTypeSubtypes().WaterSpeedRequirementVariantVariant().speed().speed() << std::endl;
+
+              /**
+               * Convert InstanceHandle back to individual values
+               * This is for the use case when you receive a command and need to update the
+               * corresponding CommandStatus using the SessionID with the current state
+               **/
+              auto instance_handle = ap.global_vector_commands().begin()->first;
+              GlobalVectorCommandType key_holder;
+
+              ap.global_vector_cmd_reader().key_value(key_holder, instance_handle);
+
+              // Print Session ID
+              auto session_id = key_holder.sessionID();
+              std::cout << "Session ID: ";
+              for (const auto &byte : session_id)
+              {
+                printf("%02x ", byte);
+              }
+              std::cout << std::endl;
+
+              // Print Destination ID
+              auto dest_id = key_holder.destination().parentID();
+              std::cout << "Destination ID: ";
+              for (const auto &byte : dest_id)
+              {
+                printf("%02x ", byte);
+              }
+              std::cout << std::endl;
+            } 
+
             }
-            std::cout << std::endl;
+
+            
         }
 
         rti::util::sleep(Duration(1));
@@ -114,7 +138,7 @@ int main(int argc, char *argv[])
     rti::config::Logger::instance().verbosity(arguments.verbosity);
 
     //Set the debug output to a specific file
-    // rti::config::Logger::instance().output_file("debug_output.log");
+    rti::config::Logger::instance().output_file("debug_output.log");
 
     // Log a debug message to verify - Needs to be at Level 5 Verbosity
     rti::config::Logger::instance().debug("This is a debug message logged to the file.");
