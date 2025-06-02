@@ -20,7 +20,7 @@
 
 using namespace application;
 
-// Include all rti namespaces. Done for easier legibility.
+// Include all rti namespaces. Done for easier example legibility.
 using namespace rti::all;
 
 void run(ApplicationArguments args)
@@ -138,7 +138,7 @@ int main(int argc, char *argv[])
     rti::config::Logger::instance().verbosity(arguments.verbosity);
 
     //Set the debug output to a specific file
-    rti::config::Logger::instance().output_file("debug_output.log");
+    // rti::config::Logger::instance().output_file("debug_output.log");
 
     // Log a debug message to verify - Needs to be at Level 5 Verbosity
     rti::config::Logger::instance().debug("This is a debug message logged to the file.");
@@ -147,7 +147,7 @@ int main(int argc, char *argv[])
         run(arguments);
     } catch (const std::exception &ex) {
         // All DDS exceptions inherit from std::exception
-        std::cerr << "Exception in run): " << ex.what() << std::endl;
+        std::cerr << "Exception in run: " << ex.what() << std::endl;
         return EXIT_FAILURE;
     }
 
