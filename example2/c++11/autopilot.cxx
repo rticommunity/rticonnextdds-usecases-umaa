@@ -17,7 +17,7 @@
 
 #include "application.hpp" // Argument parsing
 #include "dds_umaa_service.hpp"
-#include "dds_participant.hpp"
+#include "dds_umaa_participant.hpp"
 #include "umaa_services.hpp"
 
 using namespace application;
@@ -28,9 +28,9 @@ using namespace rti::all;
 void run(ApplicationArguments args)
 {
 
-  // Initialize the DDSParticipant before using it
+  // Initialize the DDSUMAAParticipant before using it
   // Light wrapper class around the DDS Participant to include some extra metadata
-  auto dp = std::make_shared<DDSParticipant>(args.domain_id);
+  auto dp = std::make_shared<DDSUMAAParticipant>(args.domain_id);
 
   GlobalVectorControlServiceProvider globalvectorcommandprovider(dp);
 

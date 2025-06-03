@@ -7,7 +7,7 @@
 #include <unordered_map>
 #include <mutex>
 
-#include "dds_participant.hpp"
+#include "dds_umaa_participant.hpp"
 
 using namespace rti::all;
 
@@ -28,7 +28,7 @@ class DDSUMAAService
 
 public:
   // Constructor accepting a DomainParticipant and SERVICE_KIND
-  explicit DDSUMAAService(std::shared_ptr<DDSParticipant> &dp, SERVICE_KIND kind)
+  explicit DDSUMAAService(std::shared_ptr<DDSUMAAParticipant> &dp, SERVICE_KIND kind)
       : _participant(dds::core::null), _async_waitset(AsyncWaitSetProperty()), _kind(kind)
   {
     _participant = dp->get_participant();
@@ -101,7 +101,7 @@ template <typename CommandType, typename CommandStatusType, typename CommandAckT
 class DDSUMAAControlService : public DDSUMAAService
 {
 public:
-  DDSUMAAControlService(std::shared_ptr<DDSParticipant> &dp,
+  DDSUMAAControlService(std::shared_ptr<DDSUMAAParticipant> &dp,
                         SERVICE_KIND kind,
                         const std::string &CommandTopicName,
                         const std::string &CommandStatusTopicName,

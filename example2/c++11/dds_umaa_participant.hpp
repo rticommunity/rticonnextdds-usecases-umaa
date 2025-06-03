@@ -1,5 +1,5 @@
-#ifndef DDS_PARTICIPANT_HPP
-#define DDS_PARTICIPANT_HPP
+#ifndef DDS_UMAA_PARTICIPANT
+#define DDS_UMAA_PARTICIPANT
 
 #include <iostream>
 #include <csignal>
@@ -75,7 +75,7 @@ public:
   }
 };
 
-class DDSParticipant {
+class DDSUMAAParticipant {
 
 private:
 
@@ -87,7 +87,7 @@ private:
 
 public:
   // New constructor: accepts QoS XML file and profile
-  DDSParticipant(const int domain_id)
+  DDSUMAAParticipant(const int domain_id)
       : _guid("test"),
         _participant(dds::core::null),
         _domain_id(domain_id)
@@ -100,12 +100,12 @@ public:
         _participant = dds::domain::DomainParticipant(
             _domain_id, qos_provider.participant_qos(PARTICIPANT_QOS_PROFILE));
 
-        std::cout << "DDSParticipant created with QoS profile: " << PARTICIPANT_QOS_PROFILE
+        std::cout << "DDSUMAAParticipant created with QoS profile: " << PARTICIPANT_QOS_PROFILE
                   << " from file: " << PARTICIPANT_QOS_FILE << std::endl;
       } else {
         // Fallback to default
         _participant = dds::domain::DomainParticipant(1);
-        std::cout << "DDSParticipant created with default QoS" << std::endl;
+        std::cout << "DDSUMAAParticipant created with default QoS" << std::endl;
       }
     } catch (const std::exception& e) {
       std::cerr << "Failed to create DomainParticipant with QoS profile: " << e.what() << std::endl;
@@ -133,8 +133,8 @@ public:
     
   }
 
-  ~DDSParticipant() {
-      std::cout << "DDSParticipant destroyed" << std::endl;
+  ~DDSUMAAParticipant() {
+      std::cout << "DDSUMAAParticipant destroyed" << std::endl;
   }
 
     // Getter for QoS file
@@ -160,4 +160,4 @@ public:
     // Additional public methods can be added here
 };
 
-#endif // DDS_PARTICIPANT_HPP
+#endif // DDS_UMAA_PARTICIPANT

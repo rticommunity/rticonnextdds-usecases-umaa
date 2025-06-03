@@ -16,7 +16,7 @@ class GlobalVectorControlServiceProvider : public DDSUMAAControlService<
                                                GlobalVectorCommandAckReportType>
 {
 public:
-  GlobalVectorControlServiceProvider(std::shared_ptr<DDSParticipant> &dp) : DDSUMAAControlService(dp,
+  GlobalVectorControlServiceProvider(std::shared_ptr<DDSUMAAParticipant> &dp) : DDSUMAAControlService(dp,
                                                                                                   SERVICE_KIND::PROVIDER,
                                                                                                   GlobalVectorCommandTypeTopic,
                                                                                                   GlobalVectorCommandStatusTypeTopic,
@@ -32,7 +32,7 @@ class GlobalVectorControlServiceConsumer : public DDSUMAAControlService<
                                                GlobalVectorCommandAckReportType>
 {
 public:
-  GlobalVectorControlServiceConsumer(std::shared_ptr<DDSParticipant> &dp) : DDSUMAAControlService(dp,
+  GlobalVectorControlServiceConsumer(std::shared_ptr<DDSUMAAParticipant> &dp) : DDSUMAAControlService(dp,
                                                                                                   SERVICE_KIND::CONSUMER,
                                                                                                   GlobalVectorCommandTypeTopic,
                                                                                                   GlobalVectorCommandStatusTypeTopic,
