@@ -22,13 +22,13 @@ list(APPEND CMAKE_MODULE_PATH
 
 
 # Set Vars
-set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-set(BUILD_SHARED_LIBS ON)
+set (CMAKE_POSITION_INDEPENDENT_CODE ON)
+set (BUILD_SHARED_LIBS ON)
+set (CMAKE_LIBRARY_OUTPUT_DIRECTORY "${REPO}/resources/lib")
 set (_UMAA_TYPES) # Holds UMAA IDL files
 set (_UMAA_CPP11_GENERATED) # Holds UMAA cpp generated files
 set (_UMAA_IDL_FOLDER "${REPO}/datamodel/umaa/idl/")
 set (_UMAA_CPP11_FOLDER "${REPO}/datamodel/umaa/cpp11_gen")
-set (LIBRARY_OUTPUT_DIRECTORY "${REPO}/resources/lib")
 set (CMAKE_CXX_STANDARD 11)
 
 
