@@ -129,6 +129,7 @@ Reference the Connext Getting Started guides to complete the below:
 - Linux-based OS or WSL.
 - Connext 7.3.0 Host/Target install
 - Python API setup
+- [Setup Connext Environment Variables](https://community.rti.com/howto/configuring-environment-rtisetenv-scripts)
 
 ### Tested compatibility
 - Ubuntu 20.04
