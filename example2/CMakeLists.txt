@@ -74,12 +74,6 @@ foreach(_idl IN LISTS _UMAA_TYPES)
     add_dependencies(gen_cpp11_umaa_types ${_idl_NAME})
 endforeach()
 
-# Try to find a pre-built umaa_cpp11_types library first
-find_library(UMAA_CPP11_TYPES_LIB
-    NAMES umaa_cpp11_types
-    PATHS ${LIBRARY_OUTPUT_DIRECTORY}
-)
-
 ## Create shared library for UMAA Types
 add_library(umaa_cpp11_types SHARED
     ${_UMAA_CPP11_GENERATED}
@@ -95,7 +89,7 @@ add_dependencies(umaa_cpp11_types gen_cpp11_umaa_types)
 add_executable(autopilot
     "${CMAKE_CURRENT_SOURCE_DIR}/c++11/autopilot.cxx"
     "${CMAKE_CURRENT_SOURCE_DIR}/c++11/application.hpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/c++11/dds_participant.hpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/c++11/dds_umaa_participant.hpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/c++11/dds_umaa_service.hpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/c++11/umaa_services.hpp"
 )
