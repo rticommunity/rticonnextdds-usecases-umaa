@@ -29,8 +29,8 @@ void run(ApplicationArguments args)
 {
 
   // Initialize the DDSParticipant before using it
-  // Pass in XML file for QoS Library and QoS Profile for Participant
-  auto dp = std::make_shared<DDSParticipant>("../resources/qos/umaa_qos_lib.xml", "umaa_qos_lib::default_participant");
+  // Light wrapper class around the DDS Participant to include some extra metadata
+  auto dp = std::make_shared<DDSParticipant>(args.domain_id);
 
   GlobalVectorControlServiceProvider globalvectorcommandprovider(dp);
 
@@ -147,7 +147,7 @@ int main(int argc, char *argv[])
   std::cout << "Logging Verbosity at: " << arguments.verbosity << std::endl;
 
   // Set the debug output to a specific file
-  rti::config::Logger::instance().output_file("debug_output.log");
+  // rti::config::Logger::instance().output_file("debug_output.log");
 
   // Log a debug message to verify - Needs to be at Level 5 Verbosity
   rti::config::Logger::instance().debug("This is a debug message logged to the file.");

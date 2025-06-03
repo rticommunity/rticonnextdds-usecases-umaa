@@ -12,8 +12,8 @@
 // For example legibility.
 using namespace rti::all;
 
-// const std::string PUBLISHER_NAME = "pub";
-// const std::string SUBSCRIBER_NAME = "sub";
+const std::string PARTICIPANT_QOS_FILE = "../resources/qos/umaa_qos_lib.xml";
+const std::string PARTICIPANT_QOS_PROFILE = "umaa_qos_lib::default_participant";
 
 // This is a listener that will be used to receive events from the DomainParticipant i.e. the DDS "Bus"
 class MyParticipantListener
@@ -79,27 +79,29 @@ class DDSParticipant {
 
 private:
 
-  const std::string _qos_file;
-  const std::string _qos_profile;
   const std::string _guid;
+  const int _domain_id;
 
   // Domain Participant
   DomainParticipant _participant;
 
 public:
   // New constructor: accepts QoS XML file and profile
-  DDSParticipant(const std::string& qos_file, const std::string& qos_profile, const std::string& guid = "default_guid")
-      : _qos_file(qos_file), _qos_profile(qos_profile), _guid(guid),
-        _participant(dds::core::null)
+  DDSParticipant(const int domain_id)
+      : _guid("test"),
+        _participant(dds::core::null),
+        _domain_id(domain_id)
   {
     try {
-      if (!_qos_file.empty() && !_qos_profile.empty()) {
+      if (!PARTICIPANT_QOS_FILE.empty() && !PARTICIPANT_QOS_PROFILE.empty()) {
         // Create QosProvider and DomainParticipant with profile
-        dds::core::QosProvider qos_provider(_qos_file);
+        dds::core::QosProvider qos_provider(PARTICIPANT_QOS_FILE);
+
         _participant = dds::domain::DomainParticipant(
-            1, qos_provider.participant_qos(_qos_profile));
-        std::cout << "DDSParticipant created with QoS profile: " << _qos_profile
-                  << " from file: " << _qos_file << std::endl;
+            _domain_id, qos_provider.participant_qos(PARTICIPANT_QOS_PROFILE));
+
+        std::cout << "DDSParticipant created with QoS profile: " << PARTICIPANT_QOS_PROFILE
+                  << " from file: " << PARTICIPANT_QOS_FILE << std::endl;
       } else {
         // Fallback to default
         _participant = dds::domain::DomainParticipant(1);
@@ -137,12 +139,12 @@ public:
 
     // Getter for QoS file
     const std::string& get_qos_file() const {
-        return _qos_file;
+        return PARTICIPANT_QOS_FILE;
     }
 
     // Getter for QoS profile
     const std::string& get_qos_profile() const {
-        return _qos_profile;
+        return PARTICIPANT_QOS_PROFILE;
     }
 
     // Getter for GUID

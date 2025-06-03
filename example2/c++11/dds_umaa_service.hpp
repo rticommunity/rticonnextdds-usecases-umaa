@@ -20,6 +20,8 @@ enum class SERVICE_KIND
 
 const std::string PUBLISHER_NAME = "pub";
 const std::string SUBSCRIBER_NAME = "sub";
+const std::string TOPIC_QOS_FILE = "../resources/qos/umaa_qos_lib.xml";
+const std::string TOPIC_QOS_PROFILE = "umaa_qos_lib::topic_qos_assign";
 
 class DDSUMAAService
 {
@@ -48,10 +50,6 @@ protected:
   rti::core::cond::AsyncWaitSet _async_waitset = dds::core::null;
 
   SERVICE_KIND _kind; // Consumer or Provider
-
-  const std::string _qos_file = "../resources/qos/umaa_qos_lib.xml";
-  const std::string _qos_lib = "umaa_qos_lib";
-  const std::string _qos_profile = "topic_qos_assign";
 
   std::mutex _m;
 
@@ -114,7 +112,7 @@ public:
     std::cout << "Created Control Service Class" << std::endl;
 
     // QoS Provider gets QoS from XML
-    _qos_provider = dds::core::QosProvider(_qos_file);
+    _qos_provider = dds::core::QosProvider(TOPIC_QOS_FILE);
 
     // Create Topics
     dds::topic::Topic<CommandType> command_topic = dds::topic::find<dds::topic::Topic<CommandType>>(_participant, CommandTopicName);
@@ -158,7 +156,7 @@ public:
       _command_reader = dds::sub::DataReader<CommandType>(
           dds::sub::Subscriber(_participant),
           command_topic,
-          _qos_provider.datareader_qos(_qos_lib + "::" + _qos_profile));
+          _qos_provider.datareader_qos(TOPIC_QOS_PROFILE));
 
       std::cout << "DataReader for CommandType created on topic: " << CommandTopicName << " with named QoS profile." << std::endl;
 
@@ -166,7 +164,7 @@ public:
       _command_status_writer = dds::pub::DataWriter<CommandStatusType>(
           dds::pub::Publisher(_participant),
           command_status_topic,
-          _qos_provider.datawriter_qos(_qos_lib + "::" + _qos_profile));
+          _qos_provider.datawriter_qos(TOPIC_QOS_PROFILE));
 
       std::cout << "DataWriter for CommandStatusType created on topic: " << CommandStatusTopicName << " with named QoS profile." << std::endl;
 
@@ -174,7 +172,7 @@ public:
       _command_status_ack_writer = dds::pub::DataWriter<CommandAckType>(
           dds::pub::Publisher(_participant),
           command_ack_topic,
-          _qos_provider.datawriter_qos(_qos_lib + "::" + _qos_profile));
+          _qos_provider.datawriter_qos(TOPIC_QOS_PROFILE));
 
       std::cout << "DataWriter for CommandAckType created on topic: " << CommandAckTopicName << " with named QoS profile." << std::endl;
       break;
@@ -186,7 +184,7 @@ public:
       _command_writer = dds::pub::DataWriter<CommandType>(
           dds::pub::Publisher(_participant),
           command_topic,
-          _qos_provider.datawriter_qos(_qos_lib + "::" + _qos_profile));
+          _qos_provider.datawriter_qos(TOPIC_QOS_PROFILE));
 
       std::cout << "DataWriter for CommandType created on topic: " << CommandTopicName << " with named QoS profile." << std::endl;
 
@@ -194,7 +192,7 @@ public:
       _command_status_reader = dds::sub::DataReader<CommandStatusType>(
           dds::sub::Subscriber(_participant),
           command_status_topic,
-          _qos_provider.datareader_qos(_qos_lib + "::" + _qos_profile));
+          _qos_provider.datareader_qos(TOPIC_QOS_PROFILE));
 
       std::cout << "DataReader for CommandStatusType created on topic: " << CommandStatusTopicName << " with named QoS profile." << std::endl;
 
@@ -202,7 +200,7 @@ public:
       _command_status_ack_reader = dds::sub::DataReader<CommandAckType>(
           dds::sub::Subscriber(_participant),
           command_ack_topic,
-          _qos_provider.datareader_qos(_qos_lib + "::" + _qos_profile));
+          _qos_provider.datareader_qos(TOPIC_QOS_PROFILE));
 
       std::cout << "DataReader for CommandAckType created on topic: " << CommandAckTopicName << " with named QoS profile." << std::endl;
       break;
