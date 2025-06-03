@@ -17,3 +17,5 @@ example1/debug_output.log
 example2/build/
 
 datamodel/umaa/cpp11_gen/
+
+example2/debug_output.log
