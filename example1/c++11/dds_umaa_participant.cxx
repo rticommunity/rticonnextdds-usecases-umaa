@@ -11,9 +11,9 @@
  */
 
 
-#include "umaa_autopilot.hpp"
+#include "dds_umaa_participant.hpp"
 
-void AutoPilot::create()
+void DDSUMAAParticipant::create()
 {
     // Need to register types first before you create Participant
     register_types();
@@ -45,10 +45,10 @@ void AutoPilot::create()
     // Set up the Async Waitset with our desired conditions and handlers
     setup_async_waitset();
 
-    std::cout << "Completed AutoPilot entities setup" << std::endl;
+    std::cout << "Completed DDSUMAAParticipant entities setup" << std::endl;
 };
 
-void AutoPilot::register_types()
+void DDSUMAAParticipant::register_types()
 {
     /* 
       Register all types used in this component.
@@ -88,7 +88,7 @@ void AutoPilot::register_types()
     register_type<ConditionalReportType>();
 };
 
-void AutoPilot::lookup_entities()
+void DDSUMAAParticipant::lookup_entities()
 {
     try {
         // Get outputs(writers)
@@ -126,7 +126,7 @@ void AutoPilot::lookup_entities()
 };
 
 
-void AutoPilot::setup_async_waitset()
+void DDSUMAAParticipant::setup_async_waitset()
 {
     // Use waitsets for processes that might not be ligthweight.
     // Due to thread context switch small impact to latency relative to Listeners
@@ -195,7 +195,7 @@ void AutoPilot::setup_async_waitset()
 
 // Function not used, created as reference example
 template <typename T>
-void AutoPilot::process_samples(DataReader<T> reader, T &current_data)
+void DDSUMAAParticipant::process_samples(DataReader<T> reader, T &current_data)
 {
     // Take all samples. This will reset the StatusCondition
     dds::sub::LoanedSamples<T> samples = reader.take();
@@ -220,7 +220,7 @@ void AutoPilot::process_samples(DataReader<T> reader, T &current_data)
 }
 
 template <typename T>
-void AutoPilot::process_keyed_samples(
+void DDSUMAAParticipant::process_keyed_samples(
         DataReader<T> reader,
         std::unordered_map<dds::core::InstanceHandle, dds::sub::Sample<T>>
                 &keyed_data_map)

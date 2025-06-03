@@ -10,8 +10,8 @@
  * to use the software.
  */
 
-#ifndef UMAA_AUTOPILOT_HPP
-#define UMAA_AUTOPILOT_HPP
+#ifndef DDS_UMAA_PARTICIPANT_HPP
+#define DDS_UMAA_PARTICIPANT_HPP
 
 #include <iostream>
 #include <csignal>
@@ -164,9 +164,9 @@ public:
   }
 };
 
-class AutoPilot {
+class DDSUMAAParticipant {
 public:
-    AutoPilot(int threads)
+    DDSUMAAParticipant(int threads)
             : _async_waitset(AsyncWaitSetProperty().thread_pool_size(threads))
     {
         std::cout << "Created AutoPilot Component" << std::endl;
@@ -257,7 +257,7 @@ private:
     std::mutex _m;
 
 
-};  //  AutoPilot
+};
 
 
-#endif  // UMAA_AUTOPILOT_HPP
+#endif  // DDS_UMAA_PARTICIPANT_HPP

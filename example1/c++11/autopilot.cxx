@@ -16,7 +16,7 @@
 #include <rti/rti.hpp>  // include all base plus extensions
 
 #include "application.hpp"  // Argument parsing
-#include "umaa_autopilot.hpp"
+#include "dds_umaa_participant.hpp"
 
 using namespace application;
 
@@ -26,7 +26,7 @@ using namespace rti::all;
 void run(ApplicationArguments args)
 {
     // Setup Autopilot DDS Component
-    AutoPilot ap(args.threads);
+    DDSUMAAParticipant ap(args.threads);
     ap.create();
 
     // Create samples and get writers before loop
