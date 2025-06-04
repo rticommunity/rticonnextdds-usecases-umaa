@@ -145,7 +145,7 @@ to use the software.
     <qos_profile name="aperiodic_durable_reliable_qos" base_name="BuiltinQosLib::Generic.Common">
 
       <!-- 
-        This QOS profile is intended for aperiodic messages(Configuration/Commands/etc) that we need to ensure get delivered as well as
+        This QOS profile is intended for aperiodic messages(Configurations etc) that we need to ensure get delivered as well as
         sent to any "late-joiners" i.e. if an applications comes up after a message gets "sent", it will get cached and resent.
        -->
 
@@ -178,7 +178,7 @@ to use the software.
 
     <qos_profile name="aperiodic_reliable_qos" base_name="BuiltinQosLib::Generic.Common">
 
-      <!-- This QOS profile is intended for aperiodic messages(SetElements/CommandStatus etc.) that need to be resent if not received -->
+      <!-- This QOS profile is intended for aperiodic messages(Commands/SetElements/CommandStatus etc.) that need to be resent if not received -->
 
       <base_name>
         <!-- Send messages out "Reliably". Message will get resent if not received -->
@@ -195,7 +195,26 @@ to use the software.
           <kind>ASYNCHRONOUS_PUBLISH_MODE_QOS</kind>
         </publish_mode>
 
+        <liveliness>
+          <lease_duration>
+            <sec>4</sec>
+            <nanosec>0</nanosec>
+          </lease_duration>
+        </liveliness>
       </datawriter_qos>
+
+      <datareader_qos>
+        
+        <!-- This checks every 10 seconds if the DataWriter is still alive. 
+             Will trigger on_liveliness_lost() / change Instance State to NOT_ALIVE_NO_WRITERS 
+          -->
+        <liveliness>
+          <lease_duration>
+            <sec>10</sec>
+            <nanosec>0</nanosec>
+          </lease_duration>
+        </liveliness>
+      </datareader_qos>
 
     </qos_profile>
 
