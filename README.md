@@ -4,22 +4,19 @@ A starting point for developing to the UMAA standard with Connext.
 
 
 - [Overview](#overview)  
-  High Level Overview
-- [UMAA Standard](#umaa-standard)  
-  Breakdown of UMAA standard from a DDS perspective
-- [Types](#types)  
-  Data Model options
-- [Component Examples](#component-examples)
-  - [C++ Autopilot](#c-autopilot)  
-  - [Python USVNAV](#python-usvnav) 
-  - [Python Logging](#python-logging)
-  - [Global Vector Commands](#global-vector-commands)  
-    NOTE: Not a full component but used for example
-- [Dynamic Pub Sub Examples](#dynamic-pub-sub-examples)  
-  Generic Python utility scripts to publish/subscribe to UMAA Topics  
+ 
+
+- [UMAA Standard](#umaa-standard)   
+Breakdown of UMAA standard from a DDS perspective
+- [Example1: XML defined UMAA components](example1/readme.md)  
+  XML definition of DDS entities per UMAA component to be shared between C++/Python API
+- [Example2: Composed UMAA Service Template Classes](example2/readme.md)  
+  Template UMAA Service classes to generate UMAA Services and compose a UMAA Component
+- [Example3: Dynamic Data Pub/Sub](example3/readme.md)  
+  Use a single Python script to publish or subscribe to any UMAA Topic dynamically
 - [CMAKE modules](#cmake-modules)
-- [Recording Service](#recording-service)  
-  Example Configuration file for Recording UMAA topics
+- [Recording Service](#recording-service)    
+Example Configuration file for Recording UMAA topics
 
 ## Overview
 
@@ -30,18 +27,12 @@ It highlights usage of a few UMAA defined Components to simulate
 interaction between the different interfaces. 
 
 It showcases Connext's ability to easily instantiate UMAA components  
-using either the Modern C++ or the Python APIs and manage the configuration of  
-both systems with a centralized configuration store.
+using either the Modern C++ or the Python APIs.  
+It also highlights the option to manage DDS configuration of both systems with  
+a centralized xml or compose UMAA services from template classes. 
 
-It features the following:
-- XML App Creation used with the following API's
-  - Python API
-  - Modern C++ with Compiled Types
-- CMAKE file using `rticonnextdds-cmake-utils` modules for code generation of large type sets
-- Recommended best practices for assigning QOS to topics
 
 ## UMAA Standard
-### High level overview
 Latest Version: 6.0 Distro A
 [Download from AUVSI](https://www.auvsi.org/unmanned-maritime-autonomy-architecture)
 
@@ -67,13 +58,6 @@ are outside of the current scope of this middleware reference starter kit.
 Some application layer development would be required on top of the middleware infrastructure to   
 be compliant with the UMAA standard.*
 
-## Examples
-- [XML defined UMAA components](example1/readme.md)
-  XML definition of DDS entities per UMAA component to be shared between C++/Python API
-- [Composed UMAA Service Template Classes](example2/readme.md)
-  Template UMAA Service classes to generate UMAA Services and compose a UMAA Component
-- [Dynamic Data Pub/Sub](example3/readme.md)
-  Use a single Python script to publish or subscribe to any UMAA Topic dynamically
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
