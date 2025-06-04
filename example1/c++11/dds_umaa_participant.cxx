@@ -19,25 +19,27 @@ void DDSUMAAParticipant::create()
     register_types();
 
     _participant = QosProvider::Default()->create_participant_from_config(
-                                                             "umaa_components_lib::autopilot");
+            "umaa_components_lib::autopilot");
 
-    // Lookup the Readers and Writers defined in XML and assign to internal variables                                                      
+    // Lookup the Readers and Writers defined in XML and assign to internal
+    // variables
     lookup_entities();
 
-    // Create a shared pointer for the Participant Listener and attach it to the participant
-    // This is a listener that will be used to receive events from the DomainParticipant i.e. the DDS "Bus"
+    // Create a shared pointer for the Participant Listener and attach it to the
+    // participant This is a listener that will be used to receive events from
+    // the DomainParticipant i.e. the DDS "Bus"
     auto participant_listener = std::make_shared<MyParticipantListener>();
 
     // Pick the Statuses we want to be triggered by the listeners
     // Data Available is being handled by the Async Waitset
-    dds::core::status::StatusMask mask = 
-        dds::core::status::StatusMask::requested_deadline_missed() |
-        dds::core::status::StatusMask::offered_incompatible_qos() |
-        dds::core::status::StatusMask::sample_rejected() |
-        dds::core::status::StatusMask::liveliness_changed() |
-        dds::core::status::StatusMask::sample_lost() |
-        dds::core::status::StatusMask::subscription_matched() |
-        dds::core::status::StatusMask::inconsistent_topic();
+    dds::core::status::StatusMask mask =
+            dds::core::status::StatusMask::requested_deadline_missed()
+            | dds::core::status::StatusMask::offered_incompatible_qos()
+            | dds::core::status::StatusMask::sample_rejected()
+            | dds::core::status::StatusMask::liveliness_changed()
+            | dds::core::status::StatusMask::sample_lost()
+            | dds::core::status::StatusMask::subscription_matched()
+            | dds::core::status::StatusMask::inconsistent_topic();
 
     // Attach the listener to the participant
     _participant.set_listener(participant_listener, mask);
@@ -50,7 +52,7 @@ void DDSUMAAParticipant::create()
 
 void DDSUMAAParticipant::register_types()
 {
-    /* 
+    /*
       Register all types used in this component.
      */
     std::cout << "Registering Types" << std::endl;
@@ -129,9 +131,10 @@ void DDSUMAAParticipant::lookup_entities()
 void DDSUMAAParticipant::setup_async_waitset()
 {
     // Use waitsets for processes that might not be ligthweight.
-    // Due to thread context switch small impact to latency relative to Listeners
+    // Due to thread context switch small impact to latency relative to
+    // Listeners
 
-    // Reference example: 
+    // Reference example:
     // https://github.com/rticommunity/rticonnextdds-examples/tree/master/examples/connext_dds/asyncwaitset/c%2B%2B11
 
     // Class documentation:
@@ -149,38 +152,43 @@ void DDSUMAAParticipant::setup_async_waitset()
     });
 
     // Add Speed Report Status Condition and Non-Keyed Data Handler function
-    // This data could be handled with Keys/Instances if receiving from multiple 
+    // This data could be handled with Keys/Instances if receiving from multiple
     // sources as each source_id creates a unique Instance
     // but in this case we are only receiving from one source for simplicity
     dds::core::cond::StatusCondition speed_report_sc(_speed_report_r);
     speed_report_sc.enabled_statuses(
-        dds::core::status::StatusMask::data_available());
+            dds::core::status::StatusMask::data_available());
 
-    speed_report_sc->handler([this](dds::core::cond::Condition)
-                             { this->process_samples<SpeedReportType>(
-                                   _speed_report_r,
-                                   _speed_report_data); });
+    speed_report_sc->handler([this](dds::core::cond::Condition) {
+        this->process_samples<SpeedReportType>(
+                _speed_report_r,
+                _speed_report_data);
+    });
 
-    // Add Global Pose Report Status Condition and Non-Keyed Data Handler function
-    dds::core::cond::StatusCondition global_pose_report_sc(_globalpose_report_r);
+    // Add Global Pose Report Status Condition and Non-Keyed Data Handler
+    // function
+    dds::core::cond::StatusCondition global_pose_report_sc(
+            _globalpose_report_r);
     global_pose_report_sc.enabled_statuses(
-        dds::core::status::StatusMask::data_available());
+            dds::core::status::StatusMask::data_available());
 
-    global_pose_report_sc->handler([this](dds::core::cond::Condition)
-                                   { this->process_samples<GlobalPoseReportType>(
-                                         _globalpose_report_r,
-                                         _globalpose_report_data); });
+    global_pose_report_sc->handler([this](dds::core::cond::Condition) {
+        this->process_samples<GlobalPoseReportType>(
+                _globalpose_report_r,
+                _globalpose_report_data);
+    });
 
 
     // Add Velocity Report Status Condition and Non-Keyed Data Handler function
     dds::core::cond::StatusCondition velocity_report_sc(_velocity_report_r);
     velocity_report_sc.enabled_statuses(
-        dds::core::status::StatusMask::data_available());
+            dds::core::status::StatusMask::data_available());
 
-    velocity_report_sc->handler([this](dds::core::cond::Condition)
-                                { this->process_samples<VelocityReportType>(
-                                      _velocity_report_r,
-                                      _velocity_report_data); });
+    velocity_report_sc->handler([this](dds::core::cond::Condition) {
+        this->process_samples<VelocityReportType>(
+                _velocity_report_r,
+                _velocity_report_data);
+    });
 
     // Attach conditions. The Async Waitset will be triggered when any of the
     // attached conditions are triggered.
@@ -241,8 +249,8 @@ void DDSUMAAParticipant::process_keyed_samples(
         // Add Loaned Sample to map
         // Only retaining last sample within application state in this case
 
-        // If meta sample will construct empty <T> object i.e blank sample.data object
-        // (Meta sample == unregister/dispose)
+        // If meta sample will construct empty <T> object i.e blank sample.data
+        // object (Meta sample == unregister/dispose)
         keyed_data_map[sample.info().instance_handle()] =
                 dds::sub::Sample<T>(sample);
 
@@ -250,14 +258,15 @@ void DDSUMAAParticipant::process_keyed_samples(
         // std::cout << keyed_data_map[sample.info().instance_handle()].data();
 
         if (sample.info().valid()) {
-        //     std::cout << "Received new data sample for: "
-        //               << reader.topic_description().type_name() << std::endl;
+            //     std::cout << "Received new data sample for: "
+            //               << reader.topic_description().type_name() <<
+            //               std::endl;
 
         } else {
-        //     This would be a meta sample such as unregister or dispose
-        //     std::cout << "Received new meta sample for: "
-        //               << reader.topic_description().type_name() << std::endl;
+            //     This would be a meta sample such as unregister or dispose
+            //     std::cout << "Received new meta sample for: "
+            //               << reader.topic_description().type_name() <<
+            //               std::endl;
         }
     }
-
 }

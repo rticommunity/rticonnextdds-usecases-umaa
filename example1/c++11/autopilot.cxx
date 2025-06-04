@@ -42,9 +42,11 @@ void run(ApplicationArguments args)
         healthreport_writer.write(sample);
         // std::cout << "Sending Health Report/Waiting for data\n";
 
-        std::cout << "\n\n____________________________________________________________________\n"
+        std::cout << "\n\n_____________________________________________________"
+                     "_______________\n"
                   << "Telemetry Reports:\n"
-                  << "____________________________________________________________________\n";
+                  << "_________________________________________________________"
+                     "___________\n";
 
         // Optional, so check first
         if (ap.speed_report_data().speedThroughWater().has_value()) {
@@ -53,8 +55,9 @@ void run(ApplicationArguments args)
             std::cout << "SPEED : " << current_speed << std::endl;
         }
 
-        std::cout << "LAT: " << ap.globalpose_report_data().position().geodeticLatitude()
-                      << std::endl;
+        std::cout << "LAT: "
+                  << ap.globalpose_report_data().position().geodeticLatitude()
+                  << std::endl;
         std::cout << "LON: "
                   << ap.globalpose_report_data().position().geodeticLongitude()
                   << std::endl;
@@ -68,55 +71,64 @@ void run(ApplicationArguments args)
 
 
         // This is just a reference on accessing values in Type
-        if (!ap.global_vector_commands().empty())
-        {
-          std::cout << "\n\n____________________________________________________________________\n"
-                    << "Global Vector Commands:\n"
-                    << "____________________________________________________________________\n";
+        if (!ap.global_vector_commands().empty()) {
+            std::cout << "\n\n_________________________________________________"
+                         "___________________\n"
+                      << "Global Vector Commands:\n"
+                      << "_____________________________________________________"
+                         "_______________\n";
 
-          for (auto &it : ap.global_vector_commands())
-          {
-            std::cout << "--------------------------------------------------------------------" << std::endl;
-            std::cout << "Instance Handle: " << it.second.info().instance_handle() << std::endl;
-            std::cout << "State: " << it.second.info().state().instance_state() << std::endl;
+            for (auto &it : ap.global_vector_commands()) {
+                std::cout << "-------------------------------------------------"
+                             "-------------------"
+                          << std::endl;
+                std::cout << "Instance Handle: "
+                          << it.second.info().instance_handle() << std::endl;
+                std::cout << "State: "
+                          << it.second.info().state().instance_state()
+                          << std::endl;
 
-            if (it.second.info().state().instance_state() == InstanceState::alive())
-            {
+                if (it.second.info().state().instance_state()
+                    == InstanceState::alive()) {
+                    std::cout << "Current Water Speed Command: "
+                              << it.second.data()
+                                         .speed()
+                                         .SpeedRequirementVariantTypeSubtypes()
+                                         .WaterSpeedRequirementVariantVariant()
+                                         .speed()
+                                         .speed()
+                              << std::endl;
 
-              std::cout << "Current Water Speed Command: " << it.second.data().speed().SpeedRequirementVariantTypeSubtypes().WaterSpeedRequirementVariantVariant().speed().speed() << std::endl;
+                    /**
+                     * Convert InstanceHandle back to individual values
+                     * This is for the use case when you receive a command and
+                     *need to update the corresponding CommandStatus using the
+                     *SessionID with the current state
+                     **/
+                    auto instance_handle = it.first;
+                    GlobalVectorCommandType key_holder;
 
-              /**
-               * Convert InstanceHandle back to individual values
-               * This is for the use case when you receive a command and need to update the
-               * corresponding CommandStatus using the SessionID with the current state
-               **/
-              auto instance_handle = ap.global_vector_commands().begin()->first;
-              GlobalVectorCommandType key_holder;
+                    ap.global_vector_cmd_reader().key_value(
+                            key_holder,
+                            instance_handle);
 
-              ap.global_vector_cmd_reader().key_value(key_holder, instance_handle);
+                    // Print Session ID
+                    auto session_id = key_holder.sessionID();
+                    std::cout << "Session ID: ";
+                    for (const auto &byte : session_id) {
+                        printf("%02x ", byte);
+                    }
+                    std::cout << std::endl;
 
-              // Print Session ID
-              auto session_id = key_holder.sessionID();
-              std::cout << "Session ID: ";
-              for (const auto &byte : session_id)
-              {
-                printf("%02x ", byte);
-              }
-              std::cout << std::endl;
-
-              // Print Destination ID
-              auto dest_id = key_holder.destination().parentID();
-              std::cout << "Destination ID: ";
-              for (const auto &byte : dest_id)
-              {
-                printf("%02x ", byte);
-              }
-              std::cout << std::endl;
-            } 
-
+                    // Print Destination ID
+                    auto dest_id = key_holder.destination().parentID();
+                    std::cout << "Destination ID: ";
+                    for (const auto &byte : dest_id) {
+                        printf("%02x ", byte);
+                    }
+                    std::cout << std::endl;
+                }
             }
-
-            
         }
 
         rti::util::sleep(Duration(1));
@@ -137,11 +149,12 @@ int main(int argc, char *argv[])
     // Sets Connext verbosity programatically to help debugging
     rti::config::Logger::instance().verbosity(arguments.verbosity);
 
-    //Set the debug output to a specific file
-    // rti::config::Logger::instance().output_file("debug_output.log");
+    // Set the debug output to a specific file
+    //  rti::config::Logger::instance().output_file("debug_output.log");
 
     // Log a debug message to verify - Needs to be at Level 5 Verbosity
-    rti::config::Logger::instance().debug("This is a debug message logged to the file.");
+    rti::config::Logger::instance().debug(
+            "This is a debug message logged to the file.");
 
     try {
         run(arguments);
