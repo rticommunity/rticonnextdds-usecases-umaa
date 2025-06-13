@@ -246,11 +246,28 @@ void DDSUMAAParticipant::process_keyed_samples(
 
     // Process sample
     for (const auto &sample : samples) {
-        // Add Loaned Sample to map
-        // Only retaining last sample within application state in this case
 
-        // If meta sample will construct empty <T> object i.e blank sample.data
-        // object (Meta sample == unregister/dispose)
+        /** If no "Active" Instance, assign next "Alive" instance.
+         *  This is purely an API usage example and not necessarily reflect
+         *  UMAA Flow Control compliance/your design requirements.
+         *
+         *  You might want to test for "oldest" Instance etc.
+         *
+         *  However it will most likely be somewhat similar.
+         **/
+        if (_active_instance == dds::core::null
+            && sample.info().state().instance_state()
+                    == InstanceState::alive()) {
+            _active_instance = sample.info().instance_handle();
+        }
+
+
+        /**  Add Loaned Sample to map
+         * Only retaining last sample within application state in this case
+         * 
+         * If meta sample will construct empty <T> object i.e blank sample.data
+         * object (Meta sample == unregister/dispose)
+        */
         keyed_data_map[sample.info().instance_handle()] =
                 dds::sub::Sample<T>(sample);
 

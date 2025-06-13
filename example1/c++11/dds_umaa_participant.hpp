@@ -78,7 +78,7 @@ const std::string SUBSCRIBER_NAME = "sub";
 
 // InstanceHandle, Condition types and Entity types were made hashable in 7.0
 #if RTI_DDS_VERSION_MAJOR < 7
-namespace std {
+    namespace std {
 template <>
 struct hash<dds::core::detail::InstanceHandle> {
     size_t operator()(const dds::core::detail::InstanceHandle &h) const
@@ -104,64 +104,64 @@ struct hash<dds::core::detail::InstanceHandle> {
 }  // namespace std
 #endif
 
-// This is a listener that will be used to receive events from the
-// DomainParticipant i.e. the DDS "Bus"
+// This is a listener that will be used to receive events from the DomainParticipant i.e. the DDS "Bus"
 class MyParticipantListener
-        : public dds::domain::NoOpDomainParticipantListener {
+    : public dds::domain::NoOpDomainParticipantListener
+{
 public:
-    virtual void on_requested_deadline_missed(
-            dds::pub::AnyDataWriter &writer,
-            const dds::core::status::OfferedDeadlineMissedStatus &status)
-    {
-        std::cout << "ParticipantListener: on_requested_deadline_missed()"
-                  << std::endl;
-    }
+  virtual void on_requested_deadline_missed(
+      dds::pub::AnyDataWriter &writer,
+      const dds::core::status::OfferedDeadlineMissedStatus &status)
+  {
+    std::cout << "ParticipantListener: on_requested_deadline_missed()"
+              << std::endl;
+  }
 
-    virtual void on_offered_incompatible_qos(
-            dds::pub::AnyDataWriter &writer,
-            const ::dds::core::status::OfferedIncompatibleQosStatus &status)
-    {
-        std::cout << "ParticipantListener: on_offered_incompatible_qos()"
-                  << std::endl;
-    }
+  virtual void on_offered_incompatible_qos(
+      dds::pub::AnyDataWriter &writer,
+      const ::dds::core::status::OfferedIncompatibleQosStatus &status)
+  {
+    std::cout << "ParticipantListener: on_offered_incompatible_qos()"
+              << std::endl;
+  }
 
-    virtual void on_sample_rejected(
-            dds::sub::AnyDataReader &the_reader,
-            const dds::core::status::SampleRejectedStatus &status)
-    {
-        std::cout << "ParticipantListener: on_sample_rejected()" << std::endl;
-    }
+  virtual void on_sample_rejected(
+      dds::sub::AnyDataReader &the_reader,
+      const dds::core::status::SampleRejectedStatus &status)
+  {
+    std::cout << "ParticipantListener: on_sample_rejected()" << std::endl;
+  }
 
-    virtual void on_liveliness_changed(
-            dds::sub::AnyDataReader &the_reader,
-            const dds::core::status::LivelinessChangedStatus &status)
-    {
-        std::cout << "ParticipantListener: on_liveliness_changed()"
-                  << std::endl;
-    }
+  virtual void on_liveliness_changed(
+      dds::sub::AnyDataReader &the_reader,
+      const dds::core::status::LivelinessChangedStatus &status)
+  {
+    std::cout << "ParticipantListener: on_liveliness_changed()"
+              << std::endl;
+  }
 
-    virtual void on_sample_lost(
-            dds::sub::AnyDataReader &the_reader,
-            const dds::core::status::SampleLostStatus &status)
-    {
-        std::cout << "ParticipantListener: on_sample_lost()" << std::endl;
-    }
+  virtual void on_sample_lost(
+      dds::sub::AnyDataReader &the_reader,
+      const dds::core::status::SampleLostStatus &status)
+  {
+    std::cout << "ParticipantListener: on_sample_lost()" << std::endl;
+  }
 
-    virtual void on_subscription_matched(
-            dds::sub::AnyDataReader &the_reader,
-            const dds::core::status::SubscriptionMatchedStatus &status)
-    {
-        std::cout << "ParticipantListener: on_subscription_matched()"
-                  << std::endl;
-    }
+  virtual void on_subscription_matched(
+      dds::sub::AnyDataReader &the_reader,
+      const dds::core::status::SubscriptionMatchedStatus &status)
+  {
+    std::cout << "ParticipantListener: on_subscription_matched()"
+              << std::endl;
+  }
 
-    virtual void on_inconsistent_topic(
-            dds::topic::AnyTopic &topic,
-            const dds::core::status::InconsistentTopicStatus &status)
-    {
-        std::cout << "ParticipantListener: on_inconsistent_topic()"
-                  << std::endl;
-    }
+  virtual void on_inconsistent_topic(
+      dds::topic::AnyTopic &topic,
+      const dds::core::status::InconsistentTopicStatus &status)
+  {
+    std::cout << "ParticipantListener: on_inconsistent_topic()"
+              << std::endl;
+  }
 };
 
 class DDSUMAAParticipant {
@@ -181,7 +181,7 @@ public:
 
     DataReader<GlobalVectorCommandType> global_vector_cmd_reader()
     {
-        return _global_vector_cmd_r;
+      return _global_vector_cmd_r;
     };
 
     const SpeedReportType &speed_report_data() const
@@ -255,6 +255,8 @@ private:
                     &keyed_data_map);
 
     std::mutex _m;
+
+
 };
 
 
