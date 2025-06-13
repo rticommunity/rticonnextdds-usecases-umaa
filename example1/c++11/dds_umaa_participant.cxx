@@ -1,5 +1,5 @@
 /*
- * (c) Copyright, Real-Time Innovations, 2024.  All rights reserved.
+ * (c) Copyright, Real-Time Innovations, 2025.  All rights reserved.
  * RTI grants Licensee a license to use, modify, compile, and create derivative
  * works of the software solely for use with RTI Connext DDS. Licensee may
  * redistribute copies of the software provided that all such copies are subject
@@ -115,7 +115,7 @@ void DDSUMAAParticipant::lookup_entities()
                 find_subscriber(_participant, SUBSCRIBER_NAME),
                 VelocityReportTypeTopic);
 
-        _global_vector_cmd_r = find_datareader_by_topic_name<
+        _globalvector_cmd_r = find_datareader_by_topic_name<
                 dds::sub::DataReader<GlobalVectorCommandType>>(
                 find_subscriber(_participant, SUBSCRIBER_NAME),
                 GlobalVectorCommandTypeTopic);
@@ -141,14 +141,15 @@ void DDSUMAAParticipant::setup_async_waitset()
     // https://community.rti.com/static/documentation/connext-dds/current/doc/api/connext_dds/api_cpp2/classrti_1_1core_1_1cond_1_1AsyncWaitSet.html#a9a0a88fa860f0d4cf06b115dee5e6d5c
 
     // Add Global Vector Status Condition and Keyed Data Handler function
-    dds::core::cond::StatusCondition global_vector_sc(_global_vector_cmd_r);
+    dds::core::cond::StatusCondition global_vector_sc(_globalvector_cmd_r);
     global_vector_sc.enabled_statuses(
             dds::core::status::StatusMask::data_available());
 
     global_vector_sc->handler([this](dds::core::cond::Condition) {
         this->process_keyed_samples<GlobalVectorCommandType>(
-                _global_vector_cmd_r,
-                _global_vector_commands);
+                _globalvector_cmd_r,
+                _globalvector_commands,
+                _active_globalvector_command_instance);
     });
 
     // Add Speed Report Status Condition and Non-Keyed Data Handler function
@@ -231,7 +232,8 @@ template <typename T>
 void DDSUMAAParticipant::process_keyed_samples(
         DataReader<T> reader,
         std::unordered_map<dds::core::InstanceHandle, dds::sub::Sample<T>>
-                &keyed_data_map)
+                &keyed_data_map,
+              dds::core::InstanceHandle &active_instance)
 {
     auto samples = reader.take();
 
@@ -255,10 +257,10 @@ void DDSUMAAParticipant::process_keyed_samples(
          *
          *  However it will most likely be somewhat similar.
          **/
-        if (_active_instance == dds::core::null
+        if (active_instance == dds::core::null
             && sample.info().state().instance_state()
                     == InstanceState::alive()) {
-            _active_instance = sample.info().instance_handle();
+            active_instance = sample.info().instance_handle();
         }
 
 

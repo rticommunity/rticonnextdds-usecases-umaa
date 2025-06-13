@@ -1,5 +1,5 @@
 /*
- * (c) Copyright, Real-Time Innovations, 2024.  All rights reserved.
+ * (c) Copyright, Real-Time Innovations, 2025.  All rights reserved.
  * RTI grants Licensee a license to use, modify, compile, and create derivative
  * works of the software solely for use with RTI Connext DDS. Licensee may
  * redistribute copies of the software provided that all such copies are subject
@@ -78,7 +78,7 @@ const std::string SUBSCRIBER_NAME = "sub";
 
 // InstanceHandle, Condition types and Entity types were made hashable in 7.0
 #if RTI_DDS_VERSION_MAJOR < 7
-    namespace std {
+namespace std {
 template <>
 struct hash<dds::core::detail::InstanceHandle> {
     size_t operator()(const dds::core::detail::InstanceHandle &h) const
@@ -104,64 +104,64 @@ struct hash<dds::core::detail::InstanceHandle> {
 }  // namespace std
 #endif
 
-// This is a listener that will be used to receive events from the DomainParticipant i.e. the DDS "Bus"
+// This is a listener that will be used to receive events from the
+// DomainParticipant i.e. the DDS "Bus"
 class MyParticipantListener
-    : public dds::domain::NoOpDomainParticipantListener
-{
+        : public dds::domain::NoOpDomainParticipantListener {
 public:
-  virtual void on_requested_deadline_missed(
-      dds::pub::AnyDataWriter &writer,
-      const dds::core::status::OfferedDeadlineMissedStatus &status)
-  {
-    std::cout << "ParticipantListener: on_requested_deadline_missed()"
-              << std::endl;
-  }
+    virtual void on_requested_deadline_missed(
+            dds::pub::AnyDataWriter &writer,
+            const dds::core::status::OfferedDeadlineMissedStatus &status)
+    {
+        std::cout << "ParticipantListener: on_requested_deadline_missed()"
+                  << std::endl;
+    }
 
-  virtual void on_offered_incompatible_qos(
-      dds::pub::AnyDataWriter &writer,
-      const ::dds::core::status::OfferedIncompatibleQosStatus &status)
-  {
-    std::cout << "ParticipantListener: on_offered_incompatible_qos()"
-              << std::endl;
-  }
+    virtual void on_offered_incompatible_qos(
+            dds::pub::AnyDataWriter &writer,
+            const ::dds::core::status::OfferedIncompatibleQosStatus &status)
+    {
+        std::cout << "ParticipantListener: on_offered_incompatible_qos()"
+                  << std::endl;
+    }
 
-  virtual void on_sample_rejected(
-      dds::sub::AnyDataReader &the_reader,
-      const dds::core::status::SampleRejectedStatus &status)
-  {
-    std::cout << "ParticipantListener: on_sample_rejected()" << std::endl;
-  }
+    virtual void on_sample_rejected(
+            dds::sub::AnyDataReader &the_reader,
+            const dds::core::status::SampleRejectedStatus &status)
+    {
+        std::cout << "ParticipantListener: on_sample_rejected()" << std::endl;
+    }
 
-  virtual void on_liveliness_changed(
-      dds::sub::AnyDataReader &the_reader,
-      const dds::core::status::LivelinessChangedStatus &status)
-  {
-    std::cout << "ParticipantListener: on_liveliness_changed()"
-              << std::endl;
-  }
+    virtual void on_liveliness_changed(
+            dds::sub::AnyDataReader &the_reader,
+            const dds::core::status::LivelinessChangedStatus &status)
+    {
+        std::cout << "ParticipantListener: on_liveliness_changed()"
+                  << std::endl;
+    }
 
-  virtual void on_sample_lost(
-      dds::sub::AnyDataReader &the_reader,
-      const dds::core::status::SampleLostStatus &status)
-  {
-    std::cout << "ParticipantListener: on_sample_lost()" << std::endl;
-  }
+    virtual void on_sample_lost(
+            dds::sub::AnyDataReader &the_reader,
+            const dds::core::status::SampleLostStatus &status)
+    {
+        std::cout << "ParticipantListener: on_sample_lost()" << std::endl;
+    }
 
-  virtual void on_subscription_matched(
-      dds::sub::AnyDataReader &the_reader,
-      const dds::core::status::SubscriptionMatchedStatus &status)
-  {
-    std::cout << "ParticipantListener: on_subscription_matched()"
-              << std::endl;
-  }
+    virtual void on_subscription_matched(
+            dds::sub::AnyDataReader &the_reader,
+            const dds::core::status::SubscriptionMatchedStatus &status)
+    {
+        std::cout << "ParticipantListener: on_subscription_matched()"
+                  << std::endl;
+    }
 
-  virtual void on_inconsistent_topic(
-      dds::topic::AnyTopic &topic,
-      const dds::core::status::InconsistentTopicStatus &status)
-  {
-    std::cout << "ParticipantListener: on_inconsistent_topic()"
-              << std::endl;
-  }
+    virtual void on_inconsistent_topic(
+            dds::topic::AnyTopic &topic,
+            const dds::core::status::InconsistentTopicStatus &status)
+    {
+        std::cout << "ParticipantListener: on_inconsistent_topic()"
+                  << std::endl;
+    }
 };
 
 class DDSUMAAParticipant {
@@ -174,38 +174,42 @@ public:
 
     void create();
 
-    DataWriter<HealthReportType> health_report_writer()
+    DataWriter<HealthReportType> get_health_report_writer()
     {
         return _health_report_w;
     };
 
-    DataReader<GlobalVectorCommandType> global_vector_cmd_reader()
+    DataReader<GlobalVectorCommandType> get_globalvector_cmd_reader()
     {
-      return _global_vector_cmd_r;
+        return _globalvector_cmd_r;
     };
 
-    const SpeedReportType &speed_report_data() const
+    const SpeedReportType &get_speed_report_data()
     {
         return _speed_report_data;
     };
 
-    const GlobalPoseReportType &globalpose_report_data() const
+    const GlobalPoseReportType &get_globalpose_report_data()
     {
         return _globalpose_report_data;
     };
 
-    const VelocityReportType &velocity_report_data() const
+    const VelocityReportType &get_velocity_report_data()
     {
         return _velocity_report_data;
     };
 
-    const std::unordered_map<
-            dds::core::InstanceHandle,
-            dds::sub::Sample<GlobalVectorCommandType>> &
-    global_vector_commands() const
+    const dds::sub::Sample<GlobalVectorCommandType> &
+    get_active_globalvector_command()
     {
-        return _global_vector_commands;
+        return _globalvector_commands.at(
+                _active_globalvector_command_instance);
     };
+
+    const dds::core::InstanceHandle &get_active_globalvector_command_instance()
+    {
+        return _active_globalvector_command_instance;
+    }
 
 
 private:
@@ -229,11 +233,14 @@ private:
     DataReader<VelocityReportType> _velocity_report_r = dds::core::null;
     VelocityReportType _velocity_report_data;
 
-    DataReader<GlobalVectorCommandType> _global_vector_cmd_r = dds::core::null;
+    DataReader<GlobalVectorCommandType> _globalvector_cmd_r = dds::core::null;
     std::unordered_map<
             dds::core::InstanceHandle,
             dds::sub::Sample<GlobalVectorCommandType>>
-            _global_vector_commands;
+            _globalvector_commands;
+
+    dds::core::InstanceHandle _active_globalvector_command_instance =
+            dds::core::null;
 
 
     // Functions
@@ -252,11 +259,10 @@ private:
     void process_keyed_samples(
             DataReader<T> reader,
             std::unordered_map<dds::core::InstanceHandle, dds::sub::Sample<T>>
-                    &keyed_data_map);
+                    &keyed_data_map,
+            dds::core::InstanceHandle &active_instance);
 
     std::mutex _m;
-
-
 };
 
 

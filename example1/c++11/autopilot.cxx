@@ -1,5 +1,5 @@
 /*
- * (c) Copyright, Real-Time Innovations, 2024.  All rights reserved.
+ * (c) Copyright, Real-Time Innovations, 2025.  All rights reserved.
  * RTI grants Licensee a license to use, modify, compile, and create derivative
  * works of the software solely for use with RTI Connext DDS. Licensee may
  * redistribute copies of the software provided that all such copies are subject
@@ -31,7 +31,7 @@ void run(ApplicationArguments args)
 
     // Create samples and get writers before loop
     HealthReportType sample;
-    auto healthreport_writer = ap.health_report_writer();
+    auto healthreport_writer = ap.get_health_report_writer();
 
     std::cout << "Entering Run loop \n";
 
@@ -49,85 +49,90 @@ void run(ApplicationArguments args)
                      "___________\n";
 
         // Optional, so check first
-        if (ap.speed_report_data().speedThroughWater().has_value()) {
+        if (ap.get_speed_report_data().speedThroughWater().has_value()) {
             auto current_speed =
-                    ap.speed_report_data().speedThroughWater().value();
+                    ap.get_speed_report_data().speedThroughWater().value();
             std::cout << "SPEED : " << current_speed << std::endl;
         }
 
         std::cout << "LAT: "
-                  << ap.globalpose_report_data().position().geodeticLatitude()
+                  << ap.get_globalpose_report_data().position().geodeticLatitude()
                   << std::endl;
         std::cout << "LON: "
-                  << ap.globalpose_report_data().position().geodeticLongitude()
+                  << ap.get_globalpose_report_data().position().geodeticLongitude()
                   << std::endl;
 
         std::cout << "EAST SPEED: "
-                  << ap.velocity_report_data().velocity().eastSpeed()
+                  << ap.get_velocity_report_data().velocity().eastSpeed()
                   << std::endl;
         std::cout << "NORTH SPEED: "
-                  << ap.velocity_report_data().velocity().northSpeed()
+                  << ap.get_velocity_report_data().velocity().northSpeed()
                   << std::endl;
 
 
-        // This is just a reference on accessing values in Type
-        if (!ap.global_vector_commands().empty()) {
-            std::cout << "\n\n_________________________________________________"
-                         "___________________\n"
-                      << "Global Vector Commands:\n"
-                      << "_____________________________________________________"
-                         "_______________\n";
+        /** This is just a reference for accessing Instance Sample Data values.
+         *  For UMAA Flow Control there would be more involved such as changing
+         *  the Active Instances Command States etc.
+         *  Currently out of scope for this example.
+         **/
+        auto globalvector_command_active_instance =
+                ap.get_active_globalvector_command_instance();
 
-            for (auto &it : ap.global_vector_commands()) {
-                std::cout << "-------------------------------------------------"
-                             "-------------------"
+        if (globalvector_command_active_instance != dds::core::null) {
+            auto active_globalvector_command =
+                    ap.get_active_globalvector_command();
+
+            std::cout << "\n\n"
+                         "_________________________________________________\n"
+                         "Active Global Vector Command:\n"
+                         "_________________________________________________\n";
+
+            std::cout << "Instance Handle: "
+                      << globalvector_command_active_instance << std::endl;
+            std::cout << "State: "
+                      << active_globalvector_command.info()
+                                 .state()
+                                 .instance_state()
+                      << std::endl;
+
+            if (active_globalvector_command.info().state().instance_state()
+                == InstanceState::alive()) {
+                std::cout << "Current Water Speed Command: "
+                          << active_globalvector_command.data()
+                                     .speed()
+                                     .SpeedRequirementVariantTypeSubtypes()
+                                     .WaterSpeedRequirementVariantVariant()
+                                     .speed()
+                                     .speed()
                           << std::endl;
-                std::cout << "Instance Handle: "
-                          << it.second.info().instance_handle() << std::endl;
-                std::cout << "State: "
-                          << it.second.info().state().instance_state()
-                          << std::endl;
 
-                if (it.second.info().state().instance_state()
-                    == InstanceState::alive()) {
-                    std::cout << "Current Water Speed Command: "
-                              << it.second.data()
-                                         .speed()
-                                         .SpeedRequirementVariantTypeSubtypes()
-                                         .WaterSpeedRequirementVariantVariant()
-                                         .speed()
-                                         .speed()
-                              << std::endl;
+                /**
+                 * Convert InstanceHandle back to individual values
+                 * This is for the use case when you receive a command and
+                 * need to update the corresponding CommandStatus using the
+                 * SessionID with the current state
+                 **/
+                GlobalVectorCommandType key_holder;
 
-                    /**
-                     * Convert InstanceHandle back to individual values
-                     * This is for the use case when you receive a command and
-                     *need to update the corresponding CommandStatus using the
-                     *SessionID with the current state
-                     **/
-                    auto instance_handle = it.first;
-                    GlobalVectorCommandType key_holder;
+                ap.get_globalvector_cmd_reader().key_value(
+                        key_holder,
+                        globalvector_command_active_instance);
 
-                    ap.global_vector_cmd_reader().key_value(
-                            key_holder,
-                            instance_handle);
-
-                    // Print Session ID
-                    auto session_id = key_holder.sessionID();
-                    std::cout << "Session ID: ";
-                    for (const auto &byte : session_id) {
-                        printf("%02x ", byte);
-                    }
-                    std::cout << std::endl;
-
-                    // Print Destination ID
-                    auto dest_id = key_holder.destination().parentID();
-                    std::cout << "Destination ID: ";
-                    for (const auto &byte : dest_id) {
-                        printf("%02x ", byte);
-                    }
-                    std::cout << std::endl;
+                // Print Session ID
+                auto session_id = key_holder.sessionID();
+                std::cout << "Session ID: ";
+                for (const auto &byte : session_id) {
+                    printf("%02x ", byte);
                 }
+                std::cout << std::endl;
+
+                // Print Destination ID
+                auto dest_id = key_holder.destination().parentID();
+                std::cout << "Destination ID: ";
+                for (const auto &byte : dest_id) {
+                    printf("%02x ", byte);
+                }
+                std::cout << std::endl;
             }
         }
 
