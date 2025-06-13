@@ -25,8 +25,7 @@ public:
     explicit DDSUMAAService(
             std::shared_ptr<DDSUMAAParticipant> &dp,
             SERVICE_KIND kind)
-            : _async_waitset(AsyncWaitSetProperty()),
-              _kind(kind)
+            : _async_waitset(AsyncWaitSetProperty()), _kind(kind)
     {
         _participant = dp->get_participant();
     }
@@ -48,13 +47,13 @@ protected:
 
     SERVICE_KIND _kind;  // Consumer or Provider
 
-    std::mutex _m;
-
     template <typename T>
     void process_keyed_data(
             dds::sub::DataReader<T> reader,
             std::unordered_map<dds::core::InstanceHandle, dds::sub::Sample<T>>
-                    &keyed_data_map)
+                    &keyed_data_map,
+            dds::core::InstanceHandle &active_instance,
+            std::mutex &m)
     {
         auto samples = reader.take();
 
@@ -63,7 +62,7 @@ protected:
         _async_waitset.unlock_condition(
                 dds::core::cond::StatusCondition(reader));
 
-        const std::lock_guard<std::mutex> lock(_m);
+        const std::lock_guard<std::mutex> lock(m);
 
         // For keyed data i.e. commands we will be updating a list of
         // current/past commands to keep track of their state as well as their
@@ -71,11 +70,25 @@ protected:
 
         // Process sample
         for (const auto &sample : samples) {
-            // Add Loaned Sample to map
-            // Only retaining last sample within application state in this case
+            /** If no "Active" Instance, assign next "Alive" instance.
+             *  This is purely an API usage example and not necessarily reflect
+             *  UMAA Flow Control compliance/your design requirements.
+             *
+             *  You might want to test for "oldest" Instance etc.
+             *
+             *  However it will most likely be somewhat similar.
+             **/
+            if (active_instance == dds::core::null
+                && sample.info().state().instance_state()
+                        == InstanceState::alive()) {
+                active_instance = sample.info().instance_handle();
+            }
 
-            // If meta sample will construct empty <T> object i.e blank
-            // sample.data object (Meta sample == unregister/dispose)
+            /** Add Loaned Sample to map
+             *  Only retaining last sample within application state in this case
+             *  If meta sample will construct empty <T> object i.e blank
+             *  sample.data object (Meta sample == unregister/dispose)
+             **/
             keyed_data_map[sample.info().instance_handle()] =
                     dds::sub::Sample<T>(sample);
 
@@ -159,10 +172,14 @@ public:
         case SERVICE_KIND::PROVIDER:
             std::cout << "Creating provider..." << std::endl;
 
-            // Create a DataReader for CommandType using named QoS profile
+            // Create a DataReader for CommandType using named QoS profile and
+            // assign QoS based on the topic_filter tag
+            // This way we control QoS at a per Topic level
             _command_reader = dds::sub::DataReader<CommandType>(
                     command_topic,
-                    _qos_provider.datareader_qos(TOPIC_QOS_PROFILE));
+                    _qos_provider.extensions().datareader_qos_w_topic_name(
+                            TOPIC_QOS_PROFILE,
+                            CommandTopicName));
 
             std::cout << "DataReader for CommandType created on topic: "
                       << CommandTopicName << " with named QoS profile."
@@ -171,7 +188,9 @@ public:
             // Create a DataWriter for CommandStatusType using named QoS profile
             _command_status_writer = dds::pub::DataWriter<CommandStatusType>(
                     command_status_topic,
-                    _qos_provider.datawriter_qos(TOPIC_QOS_PROFILE));
+                    _qos_provider.extensions().datawriter_qos_w_topic_name(
+                            TOPIC_QOS_PROFILE,
+                            CommandStatusTopicName));
 
             std::cout << "DataWriter for CommandStatusType created on topic: "
                       << CommandStatusTopicName << " with named QoS profile."
@@ -180,7 +199,9 @@ public:
             // Create a DataWriter for CommandAckType using named QoS profile
             _command_status_ack_writer = dds::pub::DataWriter<CommandAckType>(
                     command_ack_topic,
-                    _qos_provider.datawriter_qos(TOPIC_QOS_PROFILE));
+                    _qos_provider.extensions().datawriter_qos_w_topic_name(
+                            TOPIC_QOS_PROFILE,
+                            CommandAckTopicName));
 
             std::cout << "DataWriter for CommandAckType created on topic: "
                       << CommandAckTopicName << " with named QoS profile."
@@ -192,7 +213,9 @@ public:
             // Create a DataWriter for CommandType using named QoS profile
             _command_writer = dds::pub::DataWriter<CommandType>(
                     command_topic,
-                    _qos_provider.datawriter_qos(TOPIC_QOS_PROFILE));
+                    _qos_provider.extensions().datawriter_qos_w_topic_name(
+                            TOPIC_QOS_PROFILE,
+                            CommandTopicName));
 
             std::cout << "DataWriter for CommandType created on topic: "
                       << CommandTopicName << " with named QoS profile."
@@ -201,7 +224,9 @@ public:
             // Create a DataReader for CommandStatusType using named QoS profile
             _command_status_reader = dds::sub::DataReader<CommandStatusType>(
                     command_status_topic,
-                    _qos_provider.datareader_qos(TOPIC_QOS_PROFILE));
+                    _qos_provider.extensions().datareader_qos_w_topic_name(
+                            TOPIC_QOS_PROFILE,
+                            CommandStatusTopicName));
 
             std::cout << "DataReader for CommandStatusType created on topic: "
                       << CommandStatusTopicName << " with named QoS profile."
@@ -210,7 +235,9 @@ public:
             // Create a DataReader for CommandAckType using named QoS profile
             _command_status_ack_reader = dds::sub::DataReader<CommandAckType>(
                     command_ack_topic,
-                    _qos_provider.datareader_qos(TOPIC_QOS_PROFILE));
+                    _qos_provider.extensions().datareader_qos_w_topic_name(
+                            TOPIC_QOS_PROFILE,
+                            CommandAckTopicName));
 
             std::cout << "DataReader for CommandAckType created on topic: "
                       << CommandAckTopicName << " with named QoS profile."
@@ -266,7 +293,9 @@ public:
             _command_condition->handler([this](dds::core::cond::Condition) {
                 this->process_keyed_data<CommandType>(
                         _command_reader,
-                        _command_sample_map);
+                        _command_sample_map,
+                        _active_command_instance,
+                        _command_m);
             });
 
             // Attach conditions. The Async Waitset will be triggered when any
@@ -285,8 +314,9 @@ public:
             break;
 
         case SERVICE_KIND::CONSUMER:
-            // std::cout << "Configuring AsyncWaitSet for CONSUMER in
-            // DDSUMAAControlService." << std::endl;
+            std::cout << "Configuring AsyncWaitSet for CONSUMER in "
+                         "DDSUMAAControlService."
+                      << std::endl;
 
             _command_status_condition.enabled_statuses(
                     dds::core::status::StatusMask::data_available());
@@ -295,7 +325,9 @@ public:
                     [this](dds::core::cond::Condition) {
                         this->process_keyed_data<CommandStatusType>(
                                 _command_status_reader,
-                                _command_status_sample_map);
+                                _command_status_sample_map,
+                                _active_command_status_instance,
+                                _command_status_m);
                     });
 
             // Attach condition to trigger waitset
@@ -308,7 +340,9 @@ public:
                     [this](dds::core::cond::Condition) {
                         this->process_keyed_data<CommandAckType>(
                                 _command_status_ack_reader,
-                                _command_ack_sample_map);
+                                _command_ack_sample_map,
+                                _active_command_ack_instance,
+                                _command_ack_m);
                     });
 
             // Attach condition to trigger waitset
@@ -331,60 +365,66 @@ public:
     }
 
     // Getters for writers
-    dds::pub::DataWriter<CommandType> get_command_writer() const
+    dds::pub::DataWriter<CommandType> get_command_writer()
     {
         return _command_writer;
     }
 
-    dds::pub::DataWriter<CommandStatusType> get_command_status_writer() const
+    dds::pub::DataWriter<CommandStatusType> get_command_status_writer()
     {
         return _command_status_writer;
     }
 
-    dds::pub::DataWriter<CommandAckType> get_command_status_ack_writer() const
+    dds::pub::DataWriter<CommandAckType> get_command_status_ack_writer()
     {
         return _command_status_ack_writer;
     }
 
     // Getters for readers
-    dds::sub::DataReader<CommandType> get_command_reader() const
+    dds::sub::DataReader<CommandType> get_command_reader()
     {
         return _command_reader;
     }
 
-    dds::sub::DataReader<CommandStatusType> get_command_status_reader() const
+    dds::sub::DataReader<CommandStatusType> get_command_status_reader()
     {
         return _command_status_reader;
     }
 
-    dds::sub::DataReader<CommandAckType> get_command_status_ack_reader() const
+    dds::sub::DataReader<CommandAckType> get_command_status_ack_reader()
     {
         return _command_status_ack_reader;
     }
 
-    // Getters for maps
-    const std::unordered_map<
-            dds::core::InstanceHandle,
-            dds::sub::Sample<CommandType>> &
-    get_command_sample_map()
+    // Getters for active data
+    const dds::sub::Sample<CommandType> &get_active_command_sample()
     {
-        return _command_sample_map;
+        return _command_sample_map.at(_active_command_instance);
     }
 
-    const std::unordered_map<
-            dds::core::InstanceHandle,
-            dds::sub::Sample<CommandStatusType>> &
-    get_command_status_sample_map()
+    const dds::sub::Sample<CommandStatusType> &
+    get_active_command_status_sample()
     {
-        return _command_status_sample_map;
+        return _command_status_sample_map.at(_active_command_status_instance);
     }
 
-    const std::unordered_map<
-            dds::core::InstanceHandle,
-            dds::sub::Sample<CommandAckType>> &
-    get_command_ack_sample_map()
+    const dds::sub::Sample<CommandAckType> &get_active_command_ack_sample()
     {
-        return _command_ack_sample_map;
+        return _command_ack_sample_map.at(_active_command_ack_instance);
+    }
+
+    // Getters for active instance handles
+    const dds::core::InstanceHandle &get_active_command_instance()
+    {
+        return _active_command_instance;
+    }
+    const dds::core::InstanceHandle &get_active_command_status_instance()
+    {
+        return _active_command_status_instance;
+    }
+    const dds::core::InstanceHandle &get_active_command_ack_instance()
+    {
+        return _active_command_ack_instance;
     }
 
 private:
@@ -421,6 +461,16 @@ private:
             dds::core::InstanceHandle,
             dds::sub::Sample<CommandAckType>>
             _command_ack_sample_map;
+
+    // Active Instances
+    dds::core::InstanceHandle _active_command_instance = dds::core::null;
+    dds::core::InstanceHandle _active_command_status_instance = dds::core::null;
+    dds::core::InstanceHandle _active_command_ack_instance = dds::core::null;
+
+    // Mutexes
+    std::mutex _command_m;
+    std::mutex _command_status_m;
+    std::mutex _command_ack_m;
 
     // QoS Provider gets QoS from XML
     dds::core::QosProvider _qos_provider = dds::core::null;
@@ -463,7 +513,9 @@ public:
             // Create a DataWriter for StatusType using named QoS profile
             _status_writer = dds::pub::DataWriter<StatusType>(
                     status_topic,
-                    _qos_provider.datawriter_qos(TOPIC_QOS_PROFILE));
+                    _qos_provider.extensions().datawriter_qos_w_topic_name(
+                            TOPIC_QOS_PROFILE,
+                            StatusTopicName));
 
             std::cout << "DataWriter for StatusType created on topic: "
                       << StatusTopicName << " with named QoS profile."
@@ -476,7 +528,9 @@ public:
             // Create a DataReader for StatusType using named QoS profile
             _status_reader = dds::sub::DataReader<StatusType>(
                     status_topic,
-                    _qos_provider.datareader_qos(TOPIC_QOS_PROFILE));
+                    _qos_provider.extensions().datareader_qos_w_topic_name(
+                            TOPIC_QOS_PROFILE,
+                            StatusTopicName));
 
             std::cout << "DataReader for StatusType created on topic: "
                       << StatusTopicName << " with named QoS profile."
@@ -522,7 +576,9 @@ public:
             _status_condition->handler([this](dds::core::cond::Condition) {
                 this->process_keyed_data<StatusType>(
                         _status_reader,
-                        _status_sample_map);
+                        _status_sample_map,
+                        _active_status_instance,
+                        _status_m);
             });
 
             // Attach condition to trigger waitset
@@ -545,26 +601,28 @@ public:
     }
 
     // Getters for writers
-    dds::pub::DataWriter<StatusType> get_status_writer() const
+    dds::pub::DataWriter<StatusType> get_status_writer()
     {
         return _status_writer;
     }
 
     // Getters for readers
-    dds::sub::DataReader<StatusType> get_status_reader() const
+    dds::sub::DataReader<StatusType> get_status_reader()
     {
         return _status_reader;
     }
 
-    // Getters for maps
-    const std::unordered_map<
-            dds::core::InstanceHandle,
-            dds::sub::Sample<StatusType>> &
-    get_status_sample_map()
+    // Getter for Active Instance Sample
+    const dds::sub::Sample<StatusType> &get_active_status_sample()
     {
-        return _status_sample_map;
+        return _status_sample_map.at(_active_status_instance);
     }
 
+    // Getter for active status instance handle
+    const dds::core::InstanceHandle &get_active_status_instance()
+    {
+        return _active_status_instance;
+    }
 
 private:
     // Writers
@@ -578,6 +636,12 @@ private:
 
     std::unordered_map<dds::core::InstanceHandle, dds::sub::Sample<StatusType>>
             _status_sample_map;
+
+    // Active Instances
+    dds::core::InstanceHandle _active_status_instance = dds::core::null;
+
+    // Mutexes
+    std::mutex _status_m;
 
     // QoS Provider gets QoS from XML
     dds::core::QosProvider _qos_provider = dds::core::null;
