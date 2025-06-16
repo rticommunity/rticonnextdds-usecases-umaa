@@ -107,10 +107,10 @@ void run(ApplicationArguments args)
                           << std::endl;
 
                 /**
-                 * Convert InstanceHandle back to individual values
-                 * This is for the use case when you receive a command and
-                 * need to update the corresponding CommandStatus using the
-                 * SessionID with the current state
+                 *  Convert InstanceHandle back to individual values
+                 *  This is for the use case when you receive a command and
+                 *  need to update the corresponding CommandStatus using the
+                 *  SessionID with the current state
                  **/
                 GlobalVectorCommandType key_holder;
 

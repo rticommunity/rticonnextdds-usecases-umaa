@@ -82,7 +82,6 @@ target_link_libraries(umaa_cpp11_types RTIConnextDDS::cpp2_api)
 target_include_directories(umaa_cpp11_types PUBLIC 
     "$<BUILD_INTERFACE:${_UMAA_CPP11_FOLDER}/>"
 )
-# set_property(TARGET umaa_cpp11_types PROPERTY CXX_STANDARD 11)
 add_dependencies(umaa_cpp11_types gen_cpp11_umaa_types)
 
 # Create the target for the AutoPilot executable

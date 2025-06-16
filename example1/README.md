@@ -98,13 +98,13 @@ cmake --build ./build --config Release
 ##### Options:
 
 ```
-        arg1: component name: [autopilot, usvnav, logging, globalvectorcmd] \n
-        arg2: Domain ID to override <components>.xml definition \n
+        arg1: component name: [autopilot, usvnav, logging, globalvectorcmd]
+        arg2: Domain ID to override <components>.xml definition
 ```
 
 ##### Example:
 ```sh
-cd examples
+cd example1
 .start_component autopilot 1
 ```
 
@@ -123,13 +123,13 @@ that is outside the current scope of this middleware example.*
 
 ##### Options:
 ```
-        arg1: component name: [autopilot, usvnav, logging, globalvectorcmd] \n
-        arg2: Domain ID to override <components>.xml definition \n
+        arg1: component name: [autopilot, usvnav, logging, globalvectorcmd]
+        arg2: Domain ID to override <components>.xml definition
 ```
 
 ##### Example:
 ```sh
-cd examples
+cd example1
 ./start_component.sh usvnav 1
 ```
 
@@ -144,13 +144,13 @@ the UMAA `USVNav` component and showcases accessing those entities to read/write
 
 ##### Options:
 ```
-        arg1: component name: [autopilot, usvnav, logging, globalvectorcmd] \n
-        arg2: Domain ID to override <components>.xml definition \n
+        arg1: component name: [autopilot, usvnav, logging, globalvectorcmd]
+        arg2: Domain ID to override <components>.xml definition
 ```
 
 ##### Example:
 ```sh
-cd examples
+cd example1
 ./start_component.sh logging 1
 ```
 
@@ -164,13 +164,13 @@ the UMAA `Logging` component and showcases accessing those entities to read/writ
 --------------------------------------------------------------------------------
 ##### Options: 
 ```
-    arg1: component name: [autopilot, usvnav, logging, globalvectorcmd] \n
-    arg2: Domain ID to override <components>.xml definition \n
+    arg1: component name: [autopilot, usvnav, logging, globalvectorcmd]
+    arg2: Domain ID to override <components>.xml definition
 ```
 
 ##### Example:
 ```sh
-cd examples
+cd example1
 ./start_component.sh globalvectorcmd
 ```
 

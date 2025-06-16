@@ -4,8 +4,6 @@ A starting point for developing to the UMAA standard with Connext.
 
 
 - [Overview](#overview)  
- 
-
 - [UMAA Standard](#umaa-standard)   
 Breakdown of UMAA standard from a DDS perspective
 - [Example1: XML defined UMAA components](example1/readme.md)  

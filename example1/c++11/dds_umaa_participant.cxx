@@ -233,7 +233,7 @@ void DDSUMAAParticipant::process_keyed_samples(
         DataReader<T> reader,
         std::unordered_map<dds::core::InstanceHandle, dds::sub::Sample<T>>
                 &keyed_data_map,
-              dds::core::InstanceHandle &active_instance)
+        dds::core::InstanceHandle &active_instance)
 {
     auto samples = reader.take();
 
@@ -248,7 +248,6 @@ void DDSUMAAParticipant::process_keyed_samples(
 
     // Process sample
     for (const auto &sample : samples) {
-
         /** If no "Active" Instance, assign next "Alive" instance.
          *  This is purely an API usage example and not necessarily reflect
          *  UMAA Flow Control compliance/your design requirements.
@@ -266,10 +265,10 @@ void DDSUMAAParticipant::process_keyed_samples(
 
         /**  Add Loaned Sample to map
          * Only retaining last sample within application state in this case
-         * 
+         *
          * If meta sample will construct empty <T> object i.e blank sample.data
          * object (Meta sample == unregister/dispose)
-        */
+         */
         keyed_data_map[sample.info().instance_handle()] =
                 dds::sub::Sample<T>(sample);
 
