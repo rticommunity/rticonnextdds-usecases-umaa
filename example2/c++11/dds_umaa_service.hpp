@@ -19,6 +19,13 @@ const std::string SUBSCRIBER_NAME = "sub";
 const std::string TOPIC_QOS_FILE = "../resources/qos/umaa_qos_lib.xml";
 const std::string TOPIC_QOS_PROFILE = "umaa_qos_lib::topic_qos_assign";
 
+/**
+ * @brief Base class for all UMAA DDS service classes.
+ *
+ * This class provides common functionality for DDS-based services, including
+ * access to the DomainParticipant, AsyncWaitSet, and a utility for processing
+ * keyed data. It is intended to be subclassed by specific service types.
+ */
 class DDSUMAAService {
 public:
     // Constructor accepting a DomainParticipant and SERVICE_KIND
@@ -47,6 +54,13 @@ protected:
 
     SERVICE_KIND _kind;  // Consumer or Provider
 
+    /**
+     * @brief Utility function to process keyed data samples.
+     *
+     * This function takes all available samples from the reader, updates the
+     * keyed data map, and sets the active instance if not already set.
+     * Thread safety is provided via the passed-in mutex.
+     */
     template <typename T>
     void process_keyed_data(
             dds::sub::DataReader<T> reader,
@@ -105,7 +119,19 @@ protected:
     // Additional methods can be added here
 };
 
-// Control class extending UMAAServiceDDS
+/**
+ * @brief UMAA Control Service class..
+ *
+ * This template class manages the DDS entities (topics, readers, writers, waitsets)
+ * for a UMAA Control Service, including command, command status, command ack, and
+ * execution status topics. It provides methods for accessing these entities and
+ * for handling asynchronous data events.
+ *
+ * @tparam CommandType The type for the command topic.
+ * @tparam CommandStatusType The type for the command status topic.
+ * @tparam CommandAckType The type for the command ack topic.
+ * @tparam ExecutionStatusType The type for the execution status topic.
+ */
 template <
         typename CommandType,
         typename CommandStatusType,
@@ -591,7 +617,15 @@ private:
     dds::core::QosProvider _qos_provider = dds::core::null;
 };
 
-// Status/Report class extending UMAAServiceDDS
+/**
+ * @brief Status/Report Service class.
+ *
+ * This template class manages the DDS entities (topics, readers, writers, waitsets)
+ * for a Status or Report Service, providing access to the status writer, reader,
+ * and active sample/instance.
+ *
+ * @tparam StatusType The type for the status topic.
+ */
 template <typename StatusType>
 class DDSUMAAStatusService : public DDSUMAAService {
 public:

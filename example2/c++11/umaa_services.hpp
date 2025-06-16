@@ -50,6 +50,9 @@ using namespace UMAA::SA::WindStatus;
 using namespace UMAA::SA::WaterCurrentStatus;
 using namespace UMAA::MM::ConditionalReport;
 
+/**
+ * @brief Service provider for GlobalVectorControl, handling command, status, ack, and execution status topics.
+ */
 class GlobalVectorControlServiceProvider
         : public DDSUMAAControlService<
                   GlobalVectorCommandType,
@@ -70,6 +73,9 @@ public:
     }
 };
 
+/**
+ * @brief Service consumer for GlobalVectorControl, handling command, status, ack, and execution status topics.
+ */
 class GlobalVectorControlServiceConsumer
         : public DDSUMAAControlService<
                   GlobalVectorCommandType,
@@ -90,6 +96,9 @@ public:
     }
 };
 
+/**
+ * @brief Consumer service for SpeedReportType topic.
+ */
 class SpeedReportServiceConsumer
         : public DDSUMAAStatusService<SpeedReportType> {
 public:
@@ -103,6 +112,9 @@ public:
     }
 };
 
+/**
+ * @brief Provider service for SpeedReportType topic.
+ */
 class SpeedReportServiceProvider
         : public DDSUMAAStatusService<SpeedReportType> {
 public:
@@ -116,6 +128,9 @@ public:
     }
 };
 
+/**
+ * @brief Consumer service for VelocityReportType topic.
+ */
 class VelocityReportServiceConsumer
         : public DDSUMAAStatusService<VelocityReportType> {
 public:
@@ -129,6 +144,9 @@ public:
     }
 };
 
+/**
+ * @brief Provider service for VelocityReportType topic.
+ */
 class VelocityReportServiceProvider
         : public DDSUMAAStatusService<VelocityReportType> {
 public:
@@ -142,6 +160,9 @@ public:
     }
 };
 
+/**
+ * @brief Consumer service for HealthReportType topic.
+ */
 class HealthReportServiceConsumer
         : public DDSUMAAStatusService<HealthReportType> {
 public:
@@ -155,6 +176,9 @@ public:
     }
 };
 
+/**
+ * @brief Provider service for HealthReportType topic.
+ */
 class HealthReportServiceProvider
         : public DDSUMAAStatusService<HealthReportType> {
 public:
@@ -168,6 +192,9 @@ public:
     }
 };
 
+/**
+ * @brief Consumer service for GlobalPoseReportType topic.
+ */
 class GlobalPoseReportServiceConsumer
         : public DDSUMAAStatusService<GlobalPoseReportType> {
 public:
@@ -181,6 +208,9 @@ public:
     }
 };
 
+/**
+ * @brief Provider service for GlobalPoseReportType topic.
+ */
 class GlobalPoseReportServiceProvider
         : public DDSUMAAStatusService<GlobalPoseReportType> {
 public:

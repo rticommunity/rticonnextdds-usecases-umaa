@@ -104,8 +104,13 @@ struct hash<dds::core::detail::InstanceHandle> {
 }  // namespace std
 #endif
 
-// This is a listener that will be used to receive events from the
-// DomainParticipant i.e. the DDS "Bus"
+/**
+ * @brief Listener for DomainParticipant events.
+ *
+ * This listener receives and logs DDS DomainParticipant events such as deadline missed,
+ * incompatible QoS, sample rejected, liveliness changed, sample lost, subscription matched,
+ * and inconsistent topic. Used for debugging and monitoring DDS status.
+ */
 class MyParticipantListener
         : public dds::domain::NoOpDomainParticipantListener {
 public:
@@ -164,6 +169,14 @@ public:
     }
 };
 
+/**
+ * @brief Main participant class for UMAA DDS components.
+ *
+ * This class encapsulates the DDS DomainParticipant and provides methods for
+ * registering types, looking up entities, setting up waitsets, and accessing
+ * writers/readers and active data for key UMAA topics. It manages thread safety
+ * for keyed data and exposes utility functions for component logic.
+ */
 class DDSUMAAParticipant {
 public:
     DDSUMAAParticipant(int threads)
