@@ -199,11 +199,25 @@ public:
         return _velocity_report_data;
     };
 
+
+    /**
+     * Retrieves the currently active global vector command.
+     * This method is thread-safe as it uses a mutex to protect access
+     * to the `_globalvector_commands` map and
+     * `_active_globalvector_command_instance`. Throws a runtime_error if the
+     * active command instance is not found.
+     */
     const dds::sub::Sample<GlobalVectorCommandType> &
     get_active_globalvector_command()
     {
-        return _globalvector_commands.at(
-                _active_globalvector_command_instance);
+        const std::lock_guard<std::mutex> lock(_m_globalvector);
+
+        auto it = _globalvector_commands.find(_active_globalvector_command_instance);
+        if (it == _globalvector_commands.end()) {
+            throw std::runtime_error("Active global vector command instance not found");
+        }
+
+        return it->second;
     };
 
     const dds::core::InstanceHandle &get_active_globalvector_command_instance()
@@ -262,7 +276,7 @@ private:
                     &keyed_data_map,
             dds::core::InstanceHandle &active_instance);
 
-    std::mutex _m;
+    std::mutex _m_globalvector;
 };
 
 

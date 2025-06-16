@@ -34,7 +34,7 @@ public:
     virtual void enable_async_waitset() = 0;
 
     // Getter for SERVICE_KIND
-    const SERVICE_KIND get_kind()
+    SERVICE_KIND get_kind()
     {
         return _kind;
     }
@@ -62,35 +62,33 @@ protected:
         _async_waitset.unlock_condition(
                 dds::core::cond::StatusCondition(reader));
 
-        const std::lock_guard<std::mutex> lock(m);
-
-        // For keyed data i.e. commands we will be updating a list of
-        // current/past commands to keep track of their state as well as their
-        // most recent data.
-
         // Process sample
         for (const auto &sample : samples) {
-            /** If no "Active" Instance, assign next "Alive" instance.
-             *  This is purely an API usage example and not necessarily reflect
-             *  UMAA Flow Control compliance/your design requirements.
-             *
-             *  You might want to test for "oldest" Instance etc.
-             *
-             *  However it will most likely be somewhat similar.
-             **/
-            if (active_instance == dds::core::null
-                && sample.info().state().instance_state()
-                        == InstanceState::alive()) {
-                active_instance = sample.info().instance_handle();
-            }
+            {
+                const std::lock_guard<std::mutex> lock(m);
 
-            /** Add Loaned Sample to map
-             *  Only retaining last sample within application state in this case
-             *  If meta sample will construct empty <T> object i.e blank
-             *  sample.data object (Meta sample == unregister/dispose)
-             **/
-            keyed_data_map[sample.info().instance_handle()] =
-                    dds::sub::Sample<T>(sample);
+                /** If no "Active" Instance, assign next "Alive" instance.
+                 *  This is purely an API usage example and not necessarily reflect
+                 *  UMAA Flow Control compliance/your design requirements.
+                 *
+                 *  You might want to test for "oldest" Instance etc.
+                 *
+                 *  However it will most likely be somewhat similar.
+                 **/
+                if (active_instance == dds::core::null
+                    && sample.info().state().instance_state()
+                            == InstanceState::alive()) {
+                    active_instance = sample.info().instance_handle();
+                }
+
+                /** Add Loaned Sample to map
+                 *  Only retaining last sample within application state in this case
+                 *  If meta sample will construct empty <T> object i.e blank
+                 *  sample.data object (Meta sample == unregister/dispose)
+                 **/
+                keyed_data_map[sample.info().instance_handle()] =
+                        dds::sub::Sample<T>(sample);
+            }
 
             if (sample.info().valid()) {
                 std::cout << "Received new data sample for: "
@@ -399,18 +397,43 @@ public:
     // Getters for active data
     const dds::sub::Sample<CommandType> &get_active_command_sample()
     {
-        return _command_sample_map.at(_active_command_instance);
+      // grab lock
+      const std::lock_guard<std::mutex> lock(_command_m);
+
+      auto it = _command_sample_map.find(_active_command_instance);
+      if (it != _command_sample_map.end()) {
+          return it->second;
+      } else {
+          throw std::runtime_error(
+                  "Active command instance not found in the map.");
+      }
     }
 
     const dds::sub::Sample<CommandStatusType> &
     get_active_command_status_sample()
     {
-        return _command_status_sample_map.at(_active_command_status_instance);
+      // grab lock
+      const std::lock_guard<std::mutex> lock(_command_status_m);
+
+      auto it = _command_status_sample_map.find(_active_command_status_instance);
+      if (it != _command_status_sample_map.end()) {
+          return it->second;
+      } else {
+          throw std::runtime_error("Active command status instance not found in the map.");
+      }
     }
 
     const dds::sub::Sample<CommandAckType> &get_active_command_ack_sample()
     {
-        return _command_ack_sample_map.at(_active_command_ack_instance);
+      // grab lock
+      const std::lock_guard<std::mutex> lock(_command_ack_m);
+
+      auto it = _command_ack_sample_map.find(_active_command_ack_instance);
+      if (it != _command_ack_sample_map.end()) {
+          return it->second;
+      } else {
+          throw std::runtime_error("Active command ACK instance not found in the map.");
+      }
     }
 
     // Getters for active instance handles
@@ -615,7 +638,12 @@ public:
     // Getter for Active Instance Sample
     const dds::sub::Sample<StatusType> &get_active_status_sample()
     {
-        return _status_sample_map.at(_active_status_instance);
+        auto it = _status_sample_map.find(_active_status_instance);
+        if (it != _status_sample_map.end()) {
+            return it->second;
+        } else {
+            throw std::runtime_error("Active status instance not found in the map.");
+        }
     }
 
     // Getter for active status instance handle

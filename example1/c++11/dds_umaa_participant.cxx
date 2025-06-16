@@ -213,7 +213,7 @@ void DDSUMAAParticipant::process_samples(DataReader<T> reader, T &current_data)
     // samples
     _async_waitset.unlock_condition(dds::core::cond::StatusCondition(reader));
 
-    const std::lock_guard<std::mutex> lock(_m);
+    const std::lock_guard<std::mutex> lock(_m_globalvector);
 
     // Process sample
     for (const auto &sample : samples) {
@@ -241,7 +241,7 @@ void DDSUMAAParticipant::process_keyed_samples(
     // samples
     _async_waitset.unlock_condition(dds::core::cond::StatusCondition(reader));
 
-    const std::lock_guard<std::mutex> lock(_m);
+    const std::lock_guard<std::mutex> lock(_m_globalvector);
 
     // For keyed data i.e. commands we will be updating a list of current/past
     // commands to keep track of their state as well as their most recent data.
