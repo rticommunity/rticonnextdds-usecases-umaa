@@ -1,4 +1,4 @@
-# (c) 2024 Copyright, Real-Time Innovations, Inc.  All rights reserved.
+# (c) 2025 Copyright, Real-Time Innovations, Inc.  All rights reserved.
 # RTI grants Licensee a license to use, modify, compile, and create derivative
 # works of the Software.  Licensee has the right to distribute object form only
 # for use with RTI products.  The Software is provided "as is", with no warranty
@@ -12,6 +12,7 @@ from rti.types.builtin import String
 import time
 import argparse
 import random
+import uuid
 
 from LogReportType import *
 from HealthReportType import *
@@ -76,6 +77,15 @@ def publisher_main():
     velocity_report_sample = UMAA_SA_VelocityStatus_VelocityReportType()
     log_report_sample = UMAA_SO_LogReport_LogReportType()
 
+    # Create a random GUID
+    random_guid = uuid.uuid4()
+    random_guid_list = list(random_guid.bytes)
+    random_guid_bytes = dds.Uint8Seq(random_guid_list)
+
+    # Set Source ID's
+    speed_report_sample.source.id.value = dds.Uint8Seq(random_guid_bytes)
+    globalpose_report_sample.source.id.value = dds.Uint8Seq(random_guid_bytes)
+    velocity_report_sample.source.id.value = dds.Uint8Seq(random_guid_bytes)
 
     # Write data samples in a loop
     while (True):

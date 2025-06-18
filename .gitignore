@@ -7,3 +7,15 @@ examples/build/*
 datamodel/umaa/python_flat/__pycache__/
 
 examples/py/__pycache__/
+
+resources/lib/
+
+example1/build/
+
+example1/debug_output.log
+
+example2/build/
+
+datamodel/umaa/cpp11_gen/
+
+example2/debug_output.log

@@ -4,22 +4,17 @@ A starting point for developing to the UMAA standard with Connext.
 
 
 - [Overview](#overview)  
-  High Level Overview
-- [UMAA Standard](#umaa-standard)  
-  Breakdown of UMAA standard from a DDS perspective
-- [Types](#types)  
-  Data Model options
-- [Component Examples](#component-examples)
-  - [C++ Autopilot](#c-autopilot)  
-  - [Python USVNAV](#python-usvnav) 
-  - [Python Logging](#python-logging)
-  - [Global Vector Commands](#global-vector-commands)  
-    NOTE: Not a full component but used for example
-- [Dynamic Pub Sub Examples](#dynamic-pub-sub-examples)  
-  Generic Python utility scripts to publish/subscribe to UMAA Topics  
+- [UMAA Standard](#umaa-standard)   
+Breakdown of UMAA standard from a DDS perspective
+- [Example1: XML defined UMAA components](example1/readme.md)  
+  XML definition of DDS entities per UMAA component to be shared between C++/Python API
+- [Example2: Composed UMAA Service Template Classes](example2/readme.md)  
+  Template UMAA Service classes to generate UMAA Services and compose a UMAA Component
+- [Example3: Dynamic Data Pub/Sub](example3/readme.md)  
+  Use a single Python script to publish or subscribe to any UMAA Topic dynamically
 - [CMAKE modules](#cmake-modules)
-- [Recording Service](#recording-service)  
-  Example Configuration file for Recording UMAA topics
+- [Recording Service](#recording-service)    
+Example Configuration file for Recording UMAA topics
 
 ## Overview
 
@@ -30,18 +25,12 @@ It highlights usage of a few UMAA defined Components to simulate
 interaction between the different interfaces. 
 
 It showcases Connext's ability to easily instantiate UMAA components  
-using either the Modern C++ or the Python APIs and manage the configuration of  
-both systems with a centralized configuration store.
+using either the Modern C++ or the Python APIs.  
+It also highlights the option to manage DDS configuration of both systems with  
+a centralized xml or compose UMAA services from template classes. 
 
-It features the following:
-- XML App Creation used with the following API's
-  - Python API
-  - Modern C++ with Compiled Types
-- CMAKE file using `rticonnextdds-cmake-utils` modules for code generation of large type sets
-- Recommended best practices for assigning QOS to topics
 
 ## UMAA Standard
-### High level overview
 Latest Version: 6.0 Distro A
 [Download from AUVSI](https://www.auvsi.org/unmanned-maritime-autonomy-architecture)
 
@@ -67,220 +56,6 @@ are outside of the current scope of this middleware reference starter kit.
 Some application layer development would be required on top of the middleware infrastructure to   
 be compliant with the UMAA standard.*
 
-## Types
-UMAA defines ~ 600 data types. This is what is used to determine the "structure" of the data being transported.  
-With Connext, we use RTI Code Generator `rtiddsgen` ([manual](https://community.rti.com/static/documentation/connext-dds/current/doc/manuals/connext_dds_professional/code_generator/users_manual/code_generator/users_manual/UsersManual_Title.htm)) to generate code per the API being used.  
-This code assists with construction and serialization/deserialization of these data structures.
-
-### C++11 types
-For the C++11 API, we generate helper headers and classes for all of the UMAA types  
-and then compile them into a single shared library.
-
-This makes it more convenient to link your source code against when developing.   
-You can see a reference CMAKE file example in `examples/Cmakelists.txt` [CMAKE modules](#cmake-modules)
-
-In this example we generate all the Type support code into the `build` folder and  
-then use that code to create a shared lib. 
-
-### Python types
-With Python, `rtiddsgen` converts the types into Python modules that we can then reference in our Python scripts.  
-For Python types there is a bug in RTIDDSGEN that doesn't resolve the include modules  
-paths correctly. (CODEGENII-2112)
-
-The workaround is to export all the modules to a single folder and then we can add them to the `PYTHONPATH`.  
-You can find the Python types have been pre-generated and added to the `datamodel/umaa/python_flat` folder for this example.
-
-### XML types
-XML types are used for the following use cases:
-- Importing types into Cameo/Simulink
-- Referencing types in Admin Console when type propagation is disabled
-- Referencing types in Routing Service or Recording service when type propagation is disabled
-- DynamicData types usage. This is a flexible alternative to complied types.
-
-We can use `rtiddsgen` along with the `-convertToXML` flag to convert our IDL files to XML. 
-
-With Connext 7.3 there is a `-r` recursive flag that can be used to iterate through the subfolders and convert as necessary. ([rtiddsgen enable recursion](https://community.rti.com/static/documentation/connext-dds/current/doc/manuals/connext_dds_professional/code_generator/users_manual/code_generator/users_manual/GeneratingCode.htm#Chapter_4_Generating_Example_Code:~:text=4.1.4.3%20Enabling%20Recursion))
-
-For this example we have provided these XML types in `datamodel/umaa/xml_flat` for your convenience. 
-
-These XML types have had all of their includes "flattenned" to point to the same  
-directory. This allows for use cases where we want to decouple the XML includes from  
-needing to be relative to the CWD.
-
-## Component Examples
-These reference applications simulate a few components using types and services  
-from the public UMAA 6 standard. The intention here was to minimize application  
-code and highlight the ease of access to the writers/readers and their usage.  
-
-There are currently ~ 40 components defined by UMAA of which 9 are Distro A.  
-(`resources/components/UMAA Component Definitions v1.0.pdf`)
-
-By inspecting the `start_component.sh` script we can see how components can be  
-instantiated from Modern C++ or Python apps using the same DDS configuration files. 
-
-It takes advantage of Connext's XML-Based Application Creation framework  
-to define and manage all of the messaging entities with XML files.
-
-This lends itself well to the common use case of simulation/test apps in Python  
-correlating with deployed apps in Modern C++.
-
-### Prerequisites
-Reference the Connext Getting Started guides to complete the below: 
-- Linux-based OS or WSL.
-- Connext 7.3.0 Host/Target install
-- Python API setup
-- [Setup Connext Environment Variables](https://community.rti.com/howto/configuring-environment-rtisetenv-scripts)
-
-### Tested compatibility
-- Ubuntu 20.04
-- Connext 6.1.2(C++11)/Connext 7.3.0(C++11,Python)
-
-### Cloning Repository
-To clone the repository you will need to run `git clone` as follows to download
-both the repository and its submodule dependencies:
-```bash
-git clone --recurse-submodule https://github.com/rticommunity/rticonnextdds-usecases-umaa.git
-```
-
-If you forget to clone the repository with `--recurse-submodule`, simply run
-the following command to pull all the dependencies:
-```bash
-git submodule update --init --recursive
-```
-
-### Configure
-```sh
-cd examples/
-cmake -B build -DCMAKE_BUILD_TYPE=Release
-```
-
-### Build
-```sh
-cmake --build ./build --config Release
-```  
-*NOTE: Will take ~ 15 minutes as it is compiling all the IDL types into a shared library*
-
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-### C++ AutoPilot
---------------------------------------------------------------------------------
-##### Options:
-
-```
-        arg1: component name: [autopilot, usvnav, logging, globalvectorcmd] \n
-        arg2: Domain ID to override <components>.xml definition \n
-```
-
-##### Example:
-```sh
-cd examples
-.start_component autopilot 1
-```
-
-##### Overview:
-This reference application provides XML definition for all the entites in 
-the UMAA `AutoPilot` component and showcases accessing those entities to read/write data using features
-such as listeners and AsyncWaitset.
-
-*NOTE: The commands don't implement the UMAA command state pattern("Flow Control") as  
-that is outside the current scope of this middleware example.*
-
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-### Python USVNAV
---------------------------------------------------------------------------------
-
-##### Options:
-```
-        arg1: component name: [autopilot, usvnav, logging, globalvectorcmd] \n
-        arg2: Domain ID to override <components>.xml definition \n
-```
-
-##### Example:
-```sh
-cd examples
-./start_component.sh usvnav 1
-```
-
-##### Overview:
-This reference application provides XML definition for all the entites in 
-the UMAA `USVNav` component and showcases accessing those entities to read/write data 
-
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-### Python Logging
---------------------------------------------------------------------------------
-
-##### Options:
-```
-        arg1: component name: [autopilot, usvnav, logging, globalvectorcmd] \n
-        arg2: Domain ID to override <components>.xml definition \n
-```
-
-##### Example:
-```sh
-cd examples
-./start_component.sh logging 1
-```
-
-##### Overview:
-This reference application provides XML definition for all the entites in 
-the UMAA `Logging` component and showcases accessing those entities to read/write data 
-
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-### Global Vector Commands
---------------------------------------------------------------------------------
-##### Options: 
-```
-    arg1: component name: [autopilot, usvnav, logging, globalvectorcmd] \n
-    arg2: Domain ID to override <components>.xml definition \n
-```
-
-##### Example:
-```sh
-cd examples
-./start_component.sh globalvectorcmd
-```
-
-##### Overview:
-This script publishes messages of the `GlobalVectorCommandType` to reference
-reception into the AsynWaitset of the `AutoPilot` component.
-
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-## Dynamic Pub Sub Examples
-
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-### Overview
-These Python scripts are provided as an example for how you can dynamically subscribe  
-and publish to UMAA topics as needed.
-
-By inspecting the Python files you should be able to see the basic mechanics of loading in XML files,  
-setting the Topic/Type, and selecting the QoS Profile.
-
-You can then use the DynamicData API to interact with the data structures dynamically.  
-See the Python docs [here](https://community.rti.com/static/documentation/connext-dds/current/doc/api/connext_dds/api_python/types.html#dynamictype-and-dynamicdata) for further reference.
-
-This can be used for Unit testing, diagnostics or simulation.
-
-#### UMAA Publisher
-##### Example:
-```sh
-cd ./examples
-
-python ./py/umaa_dynamic_pub.py --qos umaa_qos_lib::periodic_best_effort_qos --topic UMAA::EO::BallastTank::BallastPumpCommandType --domain 0
-```
-
-#### UMAA Subscriber
-##### Example:
-
-```sh
-cd ./examples
-
-python ./py/umaa_dynamic_sub.py --qos umaa_qos_lib::periodic_best_effort_qos --topic UMAA::EO::BallastTank::BallastPumpCommandType --domain 0
-```
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------

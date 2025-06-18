@@ -1,5 +1,5 @@
 #
-# (c) 2024 Copyright, Real-Time Innovations, Inc.  All rights reserved.
+# (c) 2025 Copyright, Real-Time Innovations, Inc.  All rights reserved.
 #
 # RTI grants Licensee a license to use, modify, compile, and create derivative
 # works of the Software.  Licensee has the right to distribute object form
@@ -13,22 +13,28 @@
 cmake_minimum_required(VERSION 3.11)
 project(umaa_case_code)
 
-set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-set(BUILD_SHARED_LIBS ON)
-
-
-# Add the folder where the FindRTIConnextDDS.cmake file is placed to the
-# CMAKE_MODULE_PATH variable
+# Add folder where FindRTIConnextDDS.cmake file is to CMAKE_MODULE_PATH
 get_filename_component(REPO ${CMAKE_CURRENT_SOURCE_DIR} DIRECTORY)
 
 list(APPEND CMAKE_MODULE_PATH
     "${REPO}/rticonnextdds-cmake-utils/cmake/Modules"
 )
 
+
+# Set Vars
+set (CMAKE_POSITION_INDEPENDENT_CODE ON)
+set (CMAKE_LIBRARY_OUTPUT_DIRECTORY "${REPO}/resources/lib")
+set (BUILD_SHARED_LIBS ON)
+set (_UMAA_TYPES) # Holds UMAA IDL files
+set (_UMAA_CPP11_GENERATED) # Holds UMAA cpp generated files
+set (_UMAA_IDL_FOLDER "${REPO}/datamodel/umaa/idl/")
+set (_UMAA_CPP11_FOLDER "${REPO}/datamodel/umaa/cpp11_gen")
+set (CMAKE_CXX_STANDARD 11)
+
+
 include(ConnextDdsCodegen)
 
-# Find the ConnextDDS libraries. This will look for the core and API libraries
-# only
+# This will look for the ConnextDDS core and API libraries
 find_package(RTIConnextDDS
     "6.1.2"
     REQUIRED
@@ -36,16 +42,12 @@ find_package(RTIConnextDDS
         core
 )
 
+# Add target to run codegen on idl files for cpp11
 if(NOT TARGET gen_cpp11_umaa_types)
 add_custom_target(gen_cpp11_umaa_types ALL)
 endif()
 
-set (_UMAA_TYPES)
-set (_UMAA_CPP11_GENERATED)
-set (_UMAA_IDL_FOLDER "${REPO}/datamodel/umaa/idl/")
-set (_UMAA_CPP11_FOLDER "${REPO}/examples/build/cpp11_gen")
-
-# Add all types
+# Add all UMAA IDL files to list
 file(GLOB_RECURSE _UMAA_TYPES RELATIVE ${_UMAA_IDL_FOLDER} ${_UMAA_IDL_FOLDER}*.idl)
 
 foreach(_idl IN LISTS _UMAA_TYPES)
@@ -80,22 +82,20 @@ target_link_libraries(umaa_cpp11_types RTIConnextDDS::cpp2_api)
 target_include_directories(umaa_cpp11_types PUBLIC 
     "$<BUILD_INTERFACE:${_UMAA_CPP11_FOLDER}/>"
 )
-set_property(TARGET umaa_cpp11_types PROPERTY CXX_STANDARD 11)
+# set_property(TARGET umaa_cpp11_types PROPERTY CXX_STANDARD 11)
 add_dependencies(umaa_cpp11_types gen_cpp11_umaa_types)
 
 # Create the target for the AutoPilot executable
 add_executable(autopilot
     "${CMAKE_CURRENT_SOURCE_DIR}/c++11/autopilot.cxx"
     "${CMAKE_CURRENT_SOURCE_DIR}/c++11/application.hpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/c++11/umaa_autopilot.hpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/c++11/umaa_autopilot.cxx"
+    "${CMAKE_CURRENT_SOURCE_DIR}/c++11/dds_umaa_participant.hpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/c++11/dds_umaa_service.hpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/c++11/umaa_services.hpp"
 )
+
 target_link_libraries(autopilot
     PRIVATE
         RTIConnextDDS::cpp2_api
         umaa_cpp11_types
 )
-target_include_directories(autopilot PRIVATE 
-    "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/src/>"
-)
-set_property(TARGET autopilot PROPERTY CXX_STANDARD 11)
