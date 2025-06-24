@@ -16,18 +16,21 @@ This lends itself well to the common use case of simulation/test apps in Python
 correlating with deployed apps in Modern C++.
 
 ## Use Case
+Recommended for large systems where there is a clear delineation between systems and software  engineering.
+
 XML definition of DDS entities allows for a single point of configuration/definition  
 of a DDS system. 
 
-Applications developed in API's such as C++ or Python can have a single point of reference.
+Applications developed in API's such as C++ or Python can have a single point of system definition/configuration.  
 
-The downside is a close coupling of configs to application development  
-which could add additional administrative overhead.
-Recommended for large systems where there is a clear delineation between systems and software  engineering.
+The downside is a close coupling of configs to application development which could add   
+additional administrative overhead.  
+
 
 - Components are defined in `/resources/components`
-- UMAA Domain (Topics/Types) is defined in `/resources/domain`
-  NOTE: `umaa_domain_lib.xml` is inherited into the component definitions. This file contains all types/topics defined for UMAA 6.0 and can be reused for your own development if desired.  
+- UMAA Domain (Topics/Types) is defined in `/resources/domain`  
+  *NOTE: `umaa_domain_lib.xml` is inherited into the component definitions.  
+  This file contains all types/topics defined for UMAA 6.0 and can be reused for your own development if desired.*  
 - QoS profiles are defines in `resources/qos`
 
 All 3 sets of XML files are consumed in the `./start_component.sh` script.
