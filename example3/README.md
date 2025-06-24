@@ -8,7 +8,8 @@ This example uses DynamicData types to instantiate the structures and populate t
 
 This can be quite flexible/dynamic however the downside with DynamicData is the use of an ASCII string to index into the fields.
 
-By inspecting the Python examples you should be able to see the basic mechanics of loading in XML files, setting the Topic/Type, and selecting the QoS Profile.
+By inspecting the Python examples you should be able to see the basic mechanics of loading in XML files,   
+setting the Topic/Type, and selecting the QoS Profile.
 
 You can then use the DynamicData API to interact with the data structures dynamically.  
 See the Python docs [here](https://community.rti.com/static/documentation/connext-dds/current/doc/api/connext_dds/api_python/types.html#dynamictype-and-dynamicdata) for further reference.
