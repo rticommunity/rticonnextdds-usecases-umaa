@@ -6,12 +6,12 @@ A starting point for developing to the UMAA standard with Connext.
 - [Overview](#overview)  
 - [UMAA Standard](#umaa-standard)   
 Breakdown of UMAA standard from a DDS perspective
-- [Example1: XML defined UMAA components](example1/readme.md)  
-  XML definition of DDS entities per UMAA component to be shared between C++/Python API
-- [Example2: Composed UMAA Service Template Classes](example2/readme.md)  
-  Template UMAA Service classes to generate UMAA Services and compose a UMAA Component
-- [Example3: Dynamic Data Pub/Sub](example3/readme.md)  
-  Use a single Python script to publish or subscribe to any UMAA Topic dynamically
+- [Example1: XML defined UMAA components](example1/README.md)  
+  *USE CASE: Industrial grade infrastructure where you have separate Systems Engineering group to own XML files.*
+- [Example2: Composed UMAA Service Template Classes](example2/README.md)  
+  *USE CASE: Rapid prototyping and to maintain flexibility.*  
+- [Example3: Dynamic Data Pub/Sub](example3/README.md)  
+  *USE CASE: Debugging/Simulation/Testing of UMAA topic data.*
 - [CMAKE modules](#cmake-modules)
 - [Recording Service](#recording-service)    
 Example Configuration file for Recording UMAA topics
