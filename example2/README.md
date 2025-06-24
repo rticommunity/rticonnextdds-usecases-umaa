@@ -1,15 +1,19 @@
 # Composed UMAA Service Template Classes
-This example creates template classes to generate the readers/writers per UMAA Service.
-This allows for an architecture where a UMAA component can be "composed" of multiple  
-UMAA Services as needed.
+This example creates template classes to generate the readers/writers per UMAA Service.  
+
+It allows for an architecture where a UMAA component can be "composed" of multiple   
+UMAA Services as needed.  
+
 Once a UMAA service has been created, each DDS reader/writer entity is exposed and can be used as desired.  
-This example also includes usage of Connext's AsyncWaitset which provides a convenient mechanism to  
+
+This example also includes usage of Connext's AsyncWaitset which provides a convenient mechanism to   
 manage multithreaded Waitsets.
 
-NOTE: When testing, use with Example1's Python scripts to simulate `USVNAV` etc.
+*NOTE: When testing, use with Example1's Python scripts to simulate `USVNAV` etc.*
 
 ## Use case
-Composing the UMAA components from template UMAA service classes as needed allows for a combination of reusability as well as conformance to the UMAA system design.
+Composing the UMAA components from template UMAA service classes allows for a combination of   
+reusability as well as conformance to the UMAA system design.
 
 ## C++11 types
 For the C++11 API, we generate helper headers and classes for all of the UMAA types  
