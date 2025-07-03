@@ -47,7 +47,7 @@ to use the software.
 
             <publisher name="pub">
 
-                <!-- PrimitiveDriverControl Service (Producer) -->
+                <!-- PrimitiveDriverControl Service (Provider) -->
                 <data_writer name="PrimitiveDriverCommandAckReportType"
                     topic_ref="UMAA::MO::PrimitiveDriverControl::PrimitiveDriverCommandAckReportType">
                     <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
@@ -63,7 +63,7 @@ to use the software.
                     <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
                 </data_writer>
 
-                <!-- GlobalVectorControl Service (Producer) -->
+                <!-- GlobalVectorControl Service (Provider) -->
                 <data_writer name="GlobalVectorCommandAckReportType"
                     topic_ref="UMAA::MO::GlobalVectorControl::GlobalVectorCommandAckReportType">
                     <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
@@ -79,7 +79,7 @@ to use the software.
                     <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
                 </data_writer>
 
-                <!-- GlobalHoverControl Service (Producer) -->
+                <!-- GlobalHoverControl Service (Provider) -->
                 <data_writer name="GlobalHoverCommandAckReportType"
                     topic_ref="UMAA::MO::GlobalHoverControl::GlobalHoverCommandAckReportType">
                     <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
@@ -95,7 +95,7 @@ to use the software.
                     <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
                 </data_writer>
 
-                <!-- UVPlatformSpecs Service (Producer) -->
+                <!-- UVPlatformSpecs Service (Provider) -->
                 <data_writer name="UVPlatformCapabilitiesReportType"
                     topic_ref="UMAA::EO::UVPlatformSpecs::UVPlatformCapabilitiesReportType">
                     <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
@@ -106,13 +106,13 @@ to use the software.
                     <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
                 </data_writer>
 
-                <!-- LogReport Service (Producer) -->
+                <!-- LogReport Service (Provider) -->
                 <data_writer name="LogReportType"
                     topic_ref="UMAA::SO::LogReport::LogReportType">
                     <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
                 </data_writer>
 
-                <!-- HealthReport Service (Producer) -->
+                <!-- HealthReport Service (Provider) -->
                 <data_writer name="HealthReportType"
                     topic_ref="UMAA::SO::HealthReport::HealthReportType">
                     <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
@@ -129,7 +129,7 @@ to use the software.
                     <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
                 </data_writer>
 
-                <!-- ActiveConstraintsControl Service (Producer) -->
+                <!-- ActiveConstraintsControl Service (Provider) -->
                 <data_writer name="ActiveConstraintsCommandAckReportType"
                     topic_ref="UMAA::MM::ActiveConstraintsControl::ActiveConstraintsCommandAckReportType">
                     <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
@@ -142,13 +142,13 @@ to use the software.
             </publisher>
 
             <subscriber name="sub">
-                <!-- PrimitiveDriverControl Service (Producer)  -->
+                <!-- PrimitiveDriverControl Service (Provider)  -->
                 <data_reader name="PrimitiveDriverCommandType"
                     topic_ref="UMAA::MO::PrimitiveDriverControl::PrimitiveDriverCommandType">
                     <datareader_qos base_name="umaa_qos_lib::topic_qos_assign" />
                 </data_reader>
 
-                <!-- GlobalVectorControl Service (Producer) -->
+                <!-- GlobalVectorControl Service (Provider) -->
                 <data_reader name="GlobalVectorCommandType"
                     topic_ref="UMAA::MO::GlobalVectorControl::GlobalVectorCommandType">
                   <datareader_qos base_name="umaa_qos_lib::topic_qos_assign" />
@@ -163,7 +163,7 @@ to use the software.
 
                 </data_reader>
 
-                <!-- GlobalHoverControl Service (Producer) -->
+                <!-- GlobalHoverControl Service (Provider) -->
                 <data_reader name="GlobalHoverCommandType"
                     topic_ref="UMAA::MO::GlobalHoverControl::GlobalHoverCommandType">
                     <datareader_qos base_name="umaa_qos_lib::topic_qos_assign" />
@@ -220,7 +220,7 @@ to use the software.
                     <datareader_qos base_name="umaa_qos_lib::topic_qos_assign" />
                 </data_reader>
 
-                <!-- ActiveConstraintsControl Service (Producer) -->
+                <!-- ActiveConstraintsControl Service (Provider) -->
                 <data_reader name="ActiveConstraintsCommandType"
                     topic_ref="UMAA::MM::ActiveConstraintsControl::ActiveConstraintsCommandType">
                     <datareader_qos base_name="umaa_qos_lib::topic_qos_assign" />

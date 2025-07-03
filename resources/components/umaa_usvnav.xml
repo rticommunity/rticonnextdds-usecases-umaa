@@ -38,31 +38,31 @@ to use the software.
 
             <publisher name="pub">
 
-                <!-- LogReport Service (Producer) -->
+                <!-- LogReport Service (Provider) -->
                 <data_writer name="LogReportType"
                     topic_ref="UMAA::SO::LogReport::LogReportType">
                     <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
                 </data_writer>
 
-                <!-- HealthReport Service (Producer) -->
+                <!-- HealthReport Service (Provider) -->
                 <data_writer name="HealthReportType"
                     topic_ref="UMAA::SO::HealthReport::HealthReportType">
                     <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
                 </data_writer>
 
-                <!-- GlobalPoseStatus Service (Producer) -->
+                <!-- GlobalPoseStatus Service (Provider) -->
                 <data_writer name="GlobalPoseReportType"
                     topic_ref="UMAA::SA::GlobalPoseStatus::GlobalPoseReportType">
                     <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
                 </data_writer>
 
-                <!-- VelocityStatus Service (Producer) -->
+                <!-- VelocityStatus Service (Provider) -->
                 <data_writer name="VelocityReportType"
                     topic_ref="UMAA::SA::VelocityStatus::VelocityReportType">
                     <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
                 </data_writer>
 
-                <!-- SpeedStatus Service (Producer) -->
+                <!-- SpeedStatus Service (Provider) -->
                 <data_writer name="SpeedReportType"
                     topic_ref="UMAA::SA::SpeedStatus::SpeedReportType">
                     <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
