@@ -149,7 +149,7 @@ to use the software.
 
           For this recommendation, it is assumed that any new sample PER INSTANCE will 
           overwrite the previous as you only want the last value per unique "Status/Report"
-          If this is not the case, increase the buffer or set to KEEP_ALL
+          If this is not the case, increase the buffer as desired.
          -->
         <history>
           <depth>1</depth>
@@ -207,6 +207,33 @@ to use the software.
         </history>
 
         <!-- 
+          If using KEEP_ALL History, we want to set some bounds on the samples we can keep in the queue to limit 
+          unbounded memory growth.  
+          When either of these resource limits are hit, the writer will block for the configured max_blocking_time
+
+          NOTE: These values are arbitrary and just for reference usage, adjust to your system requirements
+          NOTE: max_samples_per_instance must be < max_samples
+          -->
+        <resource_limits>
+          <max_samples>100</max_samples>
+          <max_samples_per_instance>50</max_samples_per_instance>
+        </resource_limits>
+
+        <!-- 
+          Because we are using KEEP_ALL history, when either of the resource limits are reached 
+          i.e. (max_samples, max_samples_per_instance), 
+          the writer will block for the below configured time before returning a Timeout Error
+
+          Adjust as necessary per your system requirements.
+          -->
+        <reliability>
+          <max_blocking_time>
+            <sec>1</sec>
+            <nanosec>DURATION_INFINITE_NSEC</nanosec>
+          </max_blocking_time>
+        </reliability>
+
+        <!-- 
           By default, with KEEP_ALL History and Durability QoS set to TRANSIENT_LOCAL, 
           when an application comes up after samples have been written to this topic, 
           ALL samples that have been written prior will be resent.
@@ -223,6 +250,19 @@ to use the software.
         <history>
           <kind>KEEP_ALL_HISTORY_QOS</kind>
         </history>
+
+        <!-- 
+          If using KEEP_ALL History, we want to set some bounds on the samples we can keep in the queue to
+          limit unbounded memory growth.  
+          When either of these resource limits are hit, the reader will block from acknowledging new samples
+
+          NOTE: These values are arbitrary and just for reference usage, adjust to your system requirements
+          NOTE: max_samples_per_instance must be < max_samples
+          -->
+        <resource_limits>
+          <max_samples>100</max_samples>
+          <max_samples_per_instance>50</max_samples_per_instance>
+        </resource_limits>
       </datareader_qos>
 
     </qos_profile>
@@ -241,6 +281,11 @@ to use the software.
 
       <datawriter_qos>
 
+        <!-- This will spin up a separate thread to send out samples asynchronously as UMAA messages can be very large -->
+        <publish_mode>
+          <kind>ASYNCHRONOUS_PUBLISH_MODE_QOS</kind>
+        </publish_mode>
+
         <!-- 
           For these samples Commands etc., the assumption is you need to keep all messages.
 
@@ -251,10 +296,33 @@ to use the software.
           <kind>KEEP_ALL_HISTORY_QOS</kind>
         </history>
 
-        <!-- This will spin up a separate thread to send out samples asynchronously as UMAA messages can be very large -->
-        <publish_mode>
-          <kind>ASYNCHRONOUS_PUBLISH_MODE_QOS</kind>
-        </publish_mode>
+        <!-- 
+          If using KEEP_ALL History, we want to set some bounds on the samples we can keep in the queue to
+          limit unbounded memory growth.  
+          When either of these resource limits are hit, the writer will block for the configured
+          max_blocking_time
+
+          NOTE: These values are arbitrary and just for reference usage, adjust to your system requirements
+          NOTE: max_samples_per_instance must be < max_samples
+          -->
+        <resource_limits>
+          <max_samples>100</max_samples>
+          <max_samples_per_instance>50</max_samples_per_instance>
+        </resource_limits>
+
+        <!-- 
+          Because we are using KEEP_ALL history, when either of the resource limits are reached 
+          i.e. (max_samples, max_samples_per_instance), 
+          the writer will block for the below configured time before returning a Timeout Error
+
+          Adjust as necessary per your system requirements.
+          -->
+        <reliability>
+          <max_blocking_time>
+            <sec>1</sec>
+            <nanosec>DURATION_INFINITE_NSEC</nanosec>
+          </max_blocking_time>
+        </reliability>
 
         <liveliness>
           <lease_duration>
@@ -266,8 +334,9 @@ to use the software.
 
       <datareader_qos>
 
-        <!-- This checks every 10 seconds if the DataWriter is still alive. 
-             Will trigger on_liveliness_lost() / change Instance State to NOT_ALIVE_NO_WRITERS 
+        <!-- 
+          This checks every 10 seconds if the DataWriter is still alive. 
+          Will trigger on_liveliness_lost() / change Instance State to NOT_ALIVE_NO_WRITERS 
           -->
         <liveliness>
           <lease_duration>
@@ -279,6 +348,20 @@ to use the software.
         <history>
           <kind>KEEP_ALL_HISTORY_QOS</kind>
         </history>
+
+        <!-- 
+          If using KEEP_ALL History, we want to set some bounds on the samples we can keep in the queue to
+          limit unbounded memory growth.  
+          When either of these resource limits are hit, the reader will block from acknowledging new samples
+
+          NOTE: These values are arbitrary and just for reference usage, adjust to your system requirements
+          NOTE: max_samples_per_instance must be < max_samples
+          -->
+        <resource_limits>
+          <max_samples>100</max_samples>
+          <max_samples_per_instance>50</max_samples_per_instance>
+        </resource_limits>
+
       </datareader_qos>
 
     </qos_profile>
