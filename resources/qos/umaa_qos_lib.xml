@@ -120,13 +120,16 @@ to use the software.
       <!-- This profile is intended for Periodic status/report data -->
 
       <base_name>
-        <!-- Send messages out "Best Effort" without any guarantee of delivery. -->
+        <!-- 
+          Send messages out "Best Effort" without any guarantee of delivery. 
+          This is akin to a basic UDP "send and forget" message.
+
+          Recommended for data sent periodically/high rate where if a sample is dropped  
+          you will receive another one shortly, so no need to resend.
+          -->
         <element>BuiltinQosSnippetLib::QosPolicy.Reliability.BestEffort</element>
 
-        <!-- Only Keep the last message in a buffer of 1. This is for Status messages that are sent periodically. -->
-        <element>BuiltinQosSnippetLib::QosPolicy.History.KeepLast_1</element>
-
-        <!-- Automatically cleanup disposed Instances-->
+         <!-- Automatically cleanup disposed Instances-->
         <element>umaa_qos_lib::instance_resource_cleanup</element>
       </base_name>
 
@@ -138,7 +141,28 @@ to use the software.
         <publish_mode>
           <kind>ASYNCHRONOUS_PUBLISH_MODE_QOS</kind>
         </publish_mode>
+
+
+        <!-- 
+          Only Keep the last message in a buffer(History depth) of 1 on the writer side.
+          This is for Status messages that are sent periodically.  
+
+          For this recommendation, it is assumed that any new sample PER INSTANCE will 
+          overwrite the previous as you only want the last value per unique "Status/Report"
+          If this is not the case, increase the buffer or set to KEEP_ALL
+         -->
+        <history>
+          <depth>1</depth>
+          <kind>KEEP_LAST_HISTORY_QOS</kind>
+        </history>
       </datawriter_qos>
+
+      <datareader_qos>
+        <history>
+          <depth>1</depth>
+          <kind>KEEP_LAST_HISTORY_QOS</kind>
+        </history>
+      </datareader_qos>
 
     </qos_profile>
 
@@ -155,7 +179,7 @@ to use the software.
         <element>BuiltinQosSnippetLib::QosPolicy.Reliability.Reliable</element>
 
         <!-- 
-          "Cache" the last message in the writer buffer. This will resend the last command to any
+          "Cache" the last message in the writer buffer. This will resend the last written samples to any
           late-joiners. This supports the use case of sending out a Configuration message on startup and
           ensuring applications that come online later will receive the latest configuration.
         -->
@@ -172,7 +196,34 @@ to use the software.
           <kind>ASYNCHRONOUS_PUBLISH_MODE_QOS</kind>
         </publish_mode>
 
+        <!-- 
+          For these samples SpecsReportType etc., the assumption is you need to keep all messages.
+
+          In this scenario, no samples will be overwritten, and samples will only be removed from the 
+          queue when they have been acknowledged as received from the reader side.
+          -->
+        <history>
+          <kind>KEEP_ALL_HISTORY_QOS</kind>
+        </history>
+
+        <!-- 
+          By default, with KEEP_ALL History and Durability QoS set to TRANSIENT_LOCAL, 
+          when an application comes up after samples have been written to this topic, 
+          ALL samples that have been written prior will be resent.
+
+          If this is not desired, set the writer_depth property below.
+        -->
+        <!-- <durability>
+          <writer_depth>5</writer_depth>
+        </durability> -->
+
       </datawriter_qos>
+
+      <datareader_qos>
+        <history>
+          <kind>KEEP_ALL_HISTORY_QOS</kind>
+        </history>
+      </datareader_qos>
 
     </qos_profile>
 
@@ -190,6 +241,16 @@ to use the software.
 
       <datawriter_qos>
 
+        <!-- 
+          For these samples Commands etc., the assumption is you need to keep all messages.
+
+          In this scenario, no samples will be overwritten, and samples will only be removed from the 
+          queue when they have been acknowledged as received from the reader side.
+          -->
+        <history>
+          <kind>KEEP_ALL_HISTORY_QOS</kind>
+        </history>
+
         <!-- This will spin up a separate thread to send out samples asynchronously as UMAA messages can be very large -->
         <publish_mode>
           <kind>ASYNCHRONOUS_PUBLISH_MODE_QOS</kind>
@@ -204,7 +265,7 @@ to use the software.
       </datawriter_qos>
 
       <datareader_qos>
-        
+
         <!-- This checks every 10 seconds if the DataWriter is still alive. 
              Will trigger on_liveliness_lost() / change Instance State to NOT_ALIVE_NO_WRITERS 
           -->
@@ -214,6 +275,10 @@ to use the software.
             <nanosec>0</nanosec>
           </lease_duration>
         </liveliness>
+
+        <history>
+          <kind>KEEP_ALL_HISTORY_QOS</kind>
+        </history>
       </datareader_qos>
 
     </qos_profile>
