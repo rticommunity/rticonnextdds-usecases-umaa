@@ -72,18 +72,19 @@ playback/conversion at a later date. [Recording Service Manual(7.3)](https://com
 
 A reference config file has been created to cover 2 scenarios "deploy" and "debug" with some assumptions made for both.
 
-#### Usage
-- You can use the `rtisetenv*.sh` scripts located in `PATH_TO_CONNEXT_INSTALL/resource/scripts/` to put the `bin` folder into your PATH.
+#### ENV Variables
+- Set NDDSHOME to your Connext Install Path.
 
+#### Usage
 ##### Start Recording in "Deploy" mode:
 ```sh
-<PATH_TO_CONNEXT_INSTALL>/bin/rtirecordingservice -cfgName deploy -cfgFile <PATH_TO_FILE>/umaa_record.xml
+./start_record.sh deploy
 ```
 
 ##### Start Recording in "Debug" mode:
 ```sh
-<PATH_TO_CONNEXT_INSTALL>/bin/rtirecordingservice -cfgName debug -cfgFile <PATH_TO_FILE>/umaa_record.xml
-```
+./start_record.sh debug```
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
+
 
