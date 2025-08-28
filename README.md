@@ -87,10 +87,3 @@ A reference config file has been created to cover 2 scenarios "deploy" and "debu
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-##### Start Recording in "Debug" mode:
-
-```sh
-<PATH_TO_CONNEXT_INSTALL>/bin/rtirecordingservice -cfgName debug -cfgFile <PATH_TO_FILE>/umaa_record.xml
-```
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
