@@ -54,7 +54,7 @@
             save on hard drive space so you can apply filters here to log just what 
             is necessary for debugging -->
             <topic_group name="DEPLOY_DATA_FILTERED" participant_ref="INTERNAL-VEH1">
-                <allow_topic_name_filter>UMAA::SA*,UMAA::MM*,UMAA::MO</allow_topic_name_filter>
+                <allow_topic_name_filter>UMAA::SA*,UMAA::MM*,UMAA::MO*</allow_topic_name_filter>
                 <deny_topic_name_filter>rti/*</deny_topic_name_filter>
             </topic_group>
 
