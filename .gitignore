@@ -19,3 +19,5 @@ example2/build/
 datamodel/umaa/cpp11_gen/
 
 example2/debug_output.log
+
+resources/services/data/

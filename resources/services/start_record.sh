@@ -22,11 +22,15 @@ fi
 
 
 if [ "$1" == "debug" ] || [ "$1" == "deploy" ] ; then
-    config=$1
+  config=$1
+  if [ "$2" ]; then
+    export DOMAIN_ID=$2
+  fi
 else
-  echo "pass in: \n
-  arg1: Recording Service Configuration name from umaa_record.xml: ["debug", "deploy"] \n
-  example: start_record.sh deploy "
+  echo "pass in:"
+  echo "arg1: Recording Service Configuration name from umaa_record.xml: ["debug", "deploy"]"
+  echo "arg2: DDS Domain ID (Default: 1)"
+  echo "example: start_record.sh deploy 1"
 fi
 
 # Recording Service configuration file
@@ -59,6 +63,7 @@ echo "
 -------------------------RECORDING SERVICE CONFIGS: ----------------------------
 XML FILES used:  $xml
 CONFIG = $config
+Domain ID: $DOMAIN_ID
 Logging Verbosity: $verbosity
 -------------------------RECORDING SERVICE CONFIGS: ----------------------------
 "
