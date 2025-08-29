@@ -61,6 +61,7 @@ be compliant with the UMAA standard.*
 --------------------------------------------------------------------------------
 ## CMAKE modules
 This repo pulls in a git submodule from [rticonnextdds-cmake-utils](https://github.com/rticommunity/rticonnextdds-cmake-utils).  
+
 The `rticonnextdds-cmake-utils` repo provides convenient CMAKE utils to find Connext, call `rtiddsgen` and pass in IDL files as an argument. 
 Use /examples/CMakeLists.txt as a reference for creating a shared library for your UMAA IDL set. 
 
@@ -93,4 +94,5 @@ cd resources/services
 cd resources/services
 ./start_record.sh debug
 ```
+
 
