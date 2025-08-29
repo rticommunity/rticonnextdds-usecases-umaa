@@ -24,8 +24,8 @@ This makes it more convenient to link your source code against when developing.
 In this example we generate all the Type support code into the `datamodel/cpp11_gen` folder and  
 then use that code to create a shared lib.  
 
-## Prerequisites
-Reference the Connext Getting Started guides to complete the below: 
+## Setup
+Reference the [Connext Getting Started](https://community.rti.com/static/documentation/connext-dds/current/doc/manuals/connext_dds_professional/getting_started_guide/index.html) guides to complete the below: 
 - Linux-based OS or WSL.
 - Connext 7.3.0 Host/Target install
 - Python API setup

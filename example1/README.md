@@ -58,8 +58,8 @@ The workaround is to export all the modules to a single folder and then we can a
 You can find the Python types have been pre-generated and added to the `datamodel/umaa/python_flat` folder for this example.
 
 
-## Prerequisites
-Reference the Connext Getting Started guides to complete the below: 
+## Setup
+Reference the [Connext Getting Started guides](https://community.rti.com/static/documentation/connext-dds/current/doc/manuals/connext_dds_professional/getting_started_guide/index.html) to complete the below: 
 - Linux-based OS or WSL.
 - Connext 7.3.0 Host/Target install
 - Python API setup

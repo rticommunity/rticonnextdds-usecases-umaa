@@ -68,21 +68,29 @@ Use /examples/CMakeLists.txt as a reference for creating a shared library for yo
 --------------------------------------------------------------------------------
 ## Recording Service
 Connext includes a recording service that can capture selected DDS traffic and store in a SQLite database to allow for 
-playback/conversion at a later date. [Recording Service Manual(7.3)](https://community.rti.com/static/documentation/connext-dds/7.3.0/doc/manuals/connext_dds_professional/services/recording_service/index.html)
+playback/conversion at a later date. 
 
 A reference config file has been created to cover 2 scenarios("deploy" and "debug") with some assumptions made for both.
 
-#### ENV Variables
-- Set NDDSHOME to your Connext Install Path.
+### Assets
+- [Recording Service Manual(7.3)](https://community.rti.com/static/documentation/connext-dds/7.3.0/doc/manuals/connext_dds_professional/services/recording_service/index.html)
+- [Docker Container Image](https://hub.docker.com/r/rticom/recording-service)  
 
-#### Usage
-##### Start Recording in "Deploy" mode:
+### Setup
+- Install Connext Host per [Connext Getting Started](https://community.rti.com/static/documentation/connext-dds/current/doc/manuals/connext_dds_professional/getting_started_guide/index.html) Guide  
+- Clone `rticonnextdds-usecases-umaa` repo  
+- Set `NDDSHOME` to your Connext Install Path.  
+
+### Usage
+#### Start Recording in "Deploy" mode:
 ```sh
+cd resources/services
 ./start_record.sh deploy
 ```
 
-##### Start Recording in "Debug" mode:
+#### Start Recording in "Debug" mode:
 ```sh
+cd resources/services
 ./start_record.sh debug
 ```
 

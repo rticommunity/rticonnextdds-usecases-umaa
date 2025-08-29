@@ -32,8 +32,8 @@ These XML types have had all of their includes "flattenned" to point to the same
 directory. This allows for use cases where we want to decouple the XML includes from  
 needing to be relative to the CWD.
 
-## Prerequisites
-Reference the Connext Getting Started guides to complete the below: 
+## Setup
+Reference the [Connext Getting Started](https://community.rti.com/static/documentation/connext-dds/current/doc/manuals/connext_dds_professional/getting_started_guide/index.html) guides to complete the below: 
 - Linux-based OS or WSL.
 - Connext 7.3.0 Host/Target install
 - Python API setup
