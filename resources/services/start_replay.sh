@@ -19,21 +19,20 @@ if [[ -z "${NDDSHOME}" ]]; then
 fi
 
 
-if [ "$1" == "debug" ] || [ "$1" == "deploy" ] ; then
+# Recording Service configuration file
+xml="./umaa_replay.xml"
+
+if [ "$1" == "xcdr" ] || [ "$1" == "json" ] ; then
   config=$1
   if [ "$2" ]; then
     export DOMAIN_ID=$2
   fi
 else
   echo "pass in:"
-  echo "arg1: Recording Service Configuration name from umaa_record.xml: ["debug", "deploy"]"
+  echo "arg1: Replay Service Configuration name from umaa_play.xml: ["xcdr", "json"]"
   echo "arg2: DDS Domain ID (Default: 1)"
-  echo "example: start_record.sh deploy 1"
+  echo "example: start_replay.sh xcdr 1"
 fi
-
-# Recording Service configuration file
-xml="./umaa_record.xml"
-
 
 ################################################################################
 #                                 VERBOSITY                                    #
@@ -58,14 +57,14 @@ verbosity=ERROR:ERROR
 ################################################################################
 
 echo "
--------------------------RECORDING SERVICE CONFIGS: ----------------------------
+---------------------------REPLAY SERVICE CONFIGS: -----------------------------
 XML FILES used:  $xml
-CONFIG = $config
-Domain ID: $DOMAIN_ID
 Logging Verbosity: $verbosity
--------------------------RECORDING SERVICE CONFIGS: ----------------------------
+CONFIG = $config
+
+---------------------------REPLAY SERVICE CONFIGS: -----------------------------
 "
 
 
-# Run Recording Service
-$NDDSHOME/bin/rtirecordingservice -cfgName $config -verbosity $verbosity  -cfgFile $xml
+# Run Replay Service
+$NDDSHOME/bin/rtireplayservice -cfgName $config -verbosity $verbosity  -cfgFile $xml

@@ -32,9 +32,7 @@
               <storage_format>XCDR_AUTO</storage_format>
               <fileset>
                 <workspace_dir>data</workspace_dir>
-                <execution_dir_expression>
-                    umaa_xcdr
-                </execution_dir_expression>
+                <execution_dir_expression>xcdr</execution_dir_expression>
 
                 <!-- 
                   This creates a sequence of 101 files at 1GB each 
@@ -44,7 +42,7 @@
                   RECORD-1479 is currently being worked on to resolve this feature gap 
                   -->
                   <filename_expression>
-                      umaa_xcdr-%auto:0-100%-log-filtered.db
+                      xcdr-%auto:0-100%-log-filtered.db
                   </filename_expression>
                   <rollover>
                       <enabled>true</enabled>
@@ -91,13 +89,11 @@
                <storage_format>JSON_SQLITE</storage_format>
                <fileset>
                   <workspace_dir>data</workspace_dir>
-                  <execution_dir_expression>
-                      umaa_json
-                  </execution_dir_expression>
+                  <execution_dir_expression>json</execution_dir_expression>
 
                   <!-- This creates a sequence of 2 files at 5 GB each -->
                   <filename_expression>
-                      umaa_json-%auto:0-1%-log-filtered.db
+                      json-%auto:0-1%-log-filtered.db
                   </filename_expression>
                   <rollover>
                     <enabled>true</enabled>
