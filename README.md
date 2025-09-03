@@ -13,8 +13,8 @@ Breakdown of UMAA standard from a DDS perspective
 - [Example3: Dynamic Data Pub/Sub](example3/README.md)  
   *USE CASE: Debugging/Simulation/Testing of UMAA topic data.*
 - [CMAKE modules](#cmake-modules)
-- [Recording Service](#recording-service)    
-Example Configuration file for Recording UMAA topics
+- [Record/Replay/Convert](#recordreplayconvert-usage-examples) usage examples    
+  *Examples of Record/Replay/Convert DDS Messages for offline analysis* 
 
 ## Overview
 
@@ -67,11 +67,11 @@ Use /examples/CMakeLists.txt as a reference for creating a shared library for yo
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
-## Recording Service
-Connext includes a recording service that can capture selected DDS traffic and store in a SQLite database to allow for 
+## Record/Replay/Convert usage examples
+Connext includes a set of services that can capture selected DDS traffic and store in a SQLite database to allow for 
 playback/conversion at a later date. 
 
-A reference config file has been created to cover 2 scenarios("deploy" and "debug") with some assumptions made for both.
+Some reference examples have been created for the workflow of recording, replaying and converting DDS messages.
 
 ### Assets
 - [Recording Service Manual(7.3)](https://community.rti.com/static/documentation/connext-dds/7.3.0/doc/manuals/connext_dds_professional/services/recording_service/index.html)
@@ -81,18 +81,61 @@ A reference config file has been created to cover 2 scenarios("deploy" and "debu
 - Install Connext Host per [Connext Getting Started](https://community.rti.com/static/documentation/connext-dds/current/doc/manuals/connext_dds_professional/getting_started_guide/index.html) Guide  
 - Clone `rticonnextdds-usecases-umaa` repo  
 - Set `NDDSHOME` to your Connext Install Path.  
+- Publish DDS Data on Domain ID 1 using [Example1's USVNAV Component](/example1/README.md#python-usvnav)
 
-### Usage
-#### Start Recording in "Deploy" mode:
+### Record a "Deploy" scenario
+This example logs a filtered subset of topics in a XCDR serialized format to a SQLite Database.   
+(Recording in a serialized format is more efficient for runtime usage.)       
+
+It also rolls over every 1GB and uses a formatted naming convention for every index.    
+Domain ID: 1
+
 ```sh
 cd resources/services
 ./start_record.sh deploy
 ```
 
-#### Start Recording in "Debug" mode:
+#### Record a "Debug" scenario
+This example logs all topics in a JSON serialized(human readable) format to a SQLite Database.  
+Domain ID: 1
+
 ```sh
 cd resources/services
 ./start_record.sh debug
 ```
 
+### Replay XCDR data
+This example replays XCDR data logged from the "Deploy" scenario.  
+Domain ID: 1
 
+```sh
+cd resources/services
+./start_replay.sh xcdr
+```
+
+### Replay JSON data
+This example replays JSON data logged from the "Debug" scenario.  
+Domain ID: 1
+
+```sh
+cd resources/services
+./start_replay.sh json
+```
+
+### Convert XCDR to JSON
+This example converts XCDR data logged from the "Deploy" scenario to JSON.  
+Domain ID: 1
+
+```sh
+cd resources/services
+./start_convert.sh xcdr_to_json
+```
+
+### Convert XCDR to CSV
+This example converts XCDR data logged from the "Deploy" scenario to CSV.    
+Domain ID: 1
+
+```sh
+cd resources/services
+./start_convert.sh xcdr_to_csv
+```
