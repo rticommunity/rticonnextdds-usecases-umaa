@@ -19,21 +19,20 @@ if [[ -z "${NDDSHOME}" ]]; then
 fi
 
 
-if [ "$1" == "debug" ] || [ "$1" == "deploy" ] ; then
+# Converter Service configuration file
+xml="./umaa_convert.xml"
+
+if [ "$1" == "xcdr_to_json" ] || [ "$1" == "xcdr_to_csv" ] ; then
   config=$1
   if [ "$2" ]; then
     export DOMAIN_ID=$2
   fi
 else
   echo "pass in:"
-  echo "arg1: Recording Service Configuration name from umaa_record.xml: ["debug", "deploy"]"
+  echo "arg1: Replay Service Configuration name from umaa_play.xml: ["xcdr_json", "xcdr_to_csv"]"
   echo "arg2: DDS Domain ID (Default: 1)"
-  echo "example: start_record.sh deploy 1"
+  echo "example: start_convert.sh xcdr_to_csv 1"
 fi
-
-# Recording Service configuration file
-xml="./umaa_record.xml"
-
 
 ################################################################################
 #                                 VERBOSITY                                    #
@@ -53,19 +52,19 @@ xml="./umaa_record.xml"
 # Format:  <service_level>[:<dds_level>]
 # Default: ERROR:ERROR
 
-verbosity=ERROR:ERROR
+verbosity=SILENT:SILENT
 
 ################################################################################
 
 echo "
--------------------------RECORDING SERVICE CONFIGS: ----------------------------
+------------------------CONVERTER SERVICE CONFIGS: -----------------------------
 XML FILES used:  $xml
-CONFIG = $config
-Domain ID: $DOMAIN_ID
 Logging Verbosity: $verbosity
--------------------------RECORDING SERVICE CONFIGS: ----------------------------
+CONFIG = $config
+
+------------------------CONVERTER SERVICE CONFIGS: -----------------------------
 "
 
 
-# Run Recording Service
-$NDDSHOME/bin/rtirecordingservice -cfgName $config -verbosity $verbosity  -cfgFile $xml
+# Run Converter Service
+$NDDSHOME/bin/rticonverter -cfgName $config -verbosity $verbosity  -cfgFile $xml
