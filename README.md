@@ -95,7 +95,7 @@ cd resources/services
 ./start_record.sh deploy
 ```
 
-#### Record a "Debug" scenario
+### Record a "Debug" scenario
 This example logs all topics in a JSON serialized(human readable) format to a SQLite Database.  
 Domain ID: 1
 
@@ -138,4 +138,5 @@ Domain ID: 1
 ```sh
 cd resources/services
 ./start_convert.sh xcdr_to_csv
+
 ```
