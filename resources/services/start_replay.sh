@@ -19,8 +19,8 @@ if [[ -z "${NDDSHOME}" ]]; then
 fi
 
 
-# Recording Service configuration file
-xml="./umaa_replay.xml"
+# Recording Service configuration file and UMAA QoS file
+xml="./umaa_replay.xml;../qos/umaa_qos_lib.xml"
 
 if [ "$1" == "xcdr" ] || [ "$1" == "json" ] ; then
   config=$1

@@ -53,7 +53,11 @@
         <!-- Topics to replay -->
         <allow_topic_name_filter>*</allow_topic_name_filter>
         <deny_topic_name_filter>rti/*</deny_topic_name_filter>
+
+        <!-- Set Writer to use same QoS as system to ensure compatibility -->
+        <datawriter_qos base_name="umaa_qos_lib::topic_assign_qos" />
       </topic_group>
+      
     </session>
   </replay_service>
 
