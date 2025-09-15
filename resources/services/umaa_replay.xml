@@ -37,9 +37,53 @@
             </time_range>
         </data_selection-->
 
+
     <!-- Specify playback behavior, including what local time to start -->
-    <!--playback>
-        </playback-->
+    <playback>
+
+      <!-- 
+        Specifies the rate to replay data, as a double. For example, to play 
+        data at half speed, use 0.5.   
+        Default: 1 (normal speed) 
+        -->
+      <rate>1</rate>
+
+
+      <!-- 
+        Plays the data in a repeating loop, until Replay Service is stopped. Note that this means that
+        only a termination signal or a remote shutdown command will make it stop replaying data.
+        When no time range data selection has been specified (see Section 4.3.10) then Replay will
+        replay the whole contents of the database file(s) and when it’s time to loop, it will start
+        from the very beginning of the file or files. However, when a specific time range has been
+        specified for replay, the looping will respect the time range and will restart at the
+        specified start time and end at the specified end time.
+
+        Note: in our default SQLite implementation, Replay is able to check if new data has been
+        written by Recorder (or any application) for every given stream being replayed, since the
+        start of the service. This feature is generally not supported when looping without specifying
+        a time range and may yield unexpected results. 
+      -->
+      <enable_looping>false</enable_looping>
+
+
+      <!-- 
+        Specifies the timestamp kind to replay data. If not specified, RECEPTION_TIMESTAMP is assumed.
+        The options are:
+
+        RECEPTION_TIMESTAMP: Time stored when the DDS sample was received by the DataReader. For more
+        details, please see DESTINATION_ORDER QosPolicy in the RTI Connext Core Libraries User’s
+        Manual.
+
+        SOURCE_TIMESTAMP: Time stored by the DataWriter when the DDS sample was written.
+
+        Note: For more information about source timestamp and reception timestamp, please see Section
+        4.1.6.
+
+        Default: RECEPTION_TIMESTAMP. 
+      -->
+      <sample_order>RECEPTION_TIMESTAMP</sample_order>
+
+    </playback>
 
        
       <domain_participant name="INTERNAL-VEH1">
@@ -54,8 +98,12 @@
         <allow_topic_name_filter>*</allow_topic_name_filter>
         <deny_topic_name_filter>rti/*</deny_topic_name_filter>
 
+        <!-- Set to republish with original timestamp, otherwise system time is used -->
+        <publish_with_original_timestamp>false</publish_with_original_timestamp>
+
+
         <!-- Set Writer to use same QoS as system to ensure compatibility -->
-        <datawriter_qos base_name="umaa_qos_lib::topic_assign_qos" />
+        <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
       </topic_group>
       
     </session>
@@ -98,7 +146,12 @@
         <!-- Topics to replay -->
         <allow_topic_name_filter>*</allow_topic_name_filter>
         <deny_topic_name_filter>rti/*</deny_topic_name_filter>
+
+        <!-- Set Writer to use same QoS as system to ensure compatibility -->
+        <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
+
       </topic_group>
+
     </session>
   </replay_service>
 
