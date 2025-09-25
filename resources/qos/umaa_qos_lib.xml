@@ -28,13 +28,24 @@ to use the software.
     <qos_profile name="default_participant">
         <domain_participant_qos>
 
-        <!-- 
-          Default transport is UDPv4 | SHMEM, uncomment to disable SHMEM and have all
-          data go over loopback for monitoring traffic over wireshark etc. 
-          -->
-        <!-- <transport_builtin>
-              <mask>UDPv4</mask>
-          </transport_builtin> -->
+
+        <transport_builtin>
+            <!-- 
+            Default transports are UDPv4 | SHMEM
+            Disable SHMEM for diagnostics, Wireshark etc
+            -->
+            <!-- <mask>UDPv4</mask> -->
+
+            <!-- Modify the SHMEM transport -->
+            <shmem>
+
+              <!-- Pipe out SHMEM traffic to loopback for capture on Wireshark -->
+              <!-- <enable_udp_debugging>true</enable_udp_debugging>
+              <udp_debugging_address>127.0.0.1</udp_debugging_address>
+              <udp_debugging_port>7399</udp_debugging_port> -->
+
+            </shmem>
+          </transport_builtin>
 
         <!-- Uncomment to enable Monitoring Libraries. 
             Ensure NNDSHOME variable is set. Be aware of resource impact-->
