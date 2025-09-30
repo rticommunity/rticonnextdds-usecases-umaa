@@ -6,6 +6,7 @@ A starting point for developing to the UMAA standard with Connext.
 - [Overview](#overview)  
 - [UMAA Standard](#umaa-standard)   
   Breakdown of UMAA standard from a DDS perspective
+- [UMAA Data Types](#umaa-data-types)
 - [Best Practices](#best-practices)   
   Recommendations and general guidelines
 - [Example1: XML defined UMAA components](example1/README.md)  
@@ -58,10 +59,31 @@ are outside of the current scope of this middleware reference starter kit.
 Some application layer development would be required on top of the middleware infrastructure to   
 be compliant with the UMAA standard.*
 
+## UMAA Data Types
+UMAA defines ~ 600 data types. This is what is used to determine the "structure" of the data being transported.  
+With Connext, we use RTI Code Generator `rtiddsgen` ([manual](https://community.rti.com/static/documentation/connext-dds/current/doc/manuals/connext_dds_professional/code_generator/users_manual/code_generator/users_manual/UsersManual_Title.htm)) to generate code per the API being used.  
+This code assists with construction and serialization/deserialization of these data structures.
+
+### C++11 data types
+For the C++11 API, we generate helper headers and classes for all of the UMAA types  
+and then compile them into a single shared library.
+
+This makes it more convenient to link your source code against when developing.   
+
+In this example we generate all the Type support code into the `datamodel/cpp11_gen` folder and  
+then use that code to create a shared lib. 
+
+### Python data types
+With Python, `rtiddsgen` converts the types into Python modules that we can then reference in our Python scripts.  
+For Python types there is a bug in RTIDDSGEN that doesn't resolve the include modules  
+paths correctly. (CODEGENII-2112)
+
+The workaround is to export all the modules to a single folder and then we can add them to the `PYTHONPATH`.  
+You can find the Python types have been pre-generated and added to the `datamodel/umaa/python_flat` folder for this example.
 
 ## Best Practices
 ### Increase Network Buffers
-UMAA data `types` can tend to be very large individually(compressed up to 1 KB each) and even  
+[UMAA data types](#umaa-data-types) can tend to be very large individually(compressed up to 1 KB each) and even  
 more so in aggregate.    
 During the automatic discovery process these are sent out to provide a definition of the  
 data structure to allow for deserialization of the messages.  
@@ -153,5 +175,6 @@ cd resources/services
 ./start_convert.sh xcdr_to_csv
 
 ```
+
 
 
