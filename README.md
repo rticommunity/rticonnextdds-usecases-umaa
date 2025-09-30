@@ -5,7 +5,9 @@ A starting point for developing to the UMAA standard with Connext.
 
 - [Overview](#overview)  
 - [UMAA Standard](#umaa-standard)   
-Breakdown of UMAA standard from a DDS perspective
+  Breakdown of UMAA standard from a DDS perspective
+- [Best Practices](#best-practices)
+  Recommendations and general guidelines
 - [Example1: XML defined UMAA components](example1/README.md)  
   *USE CASE: Industrial grade infrastructure where you have separate Systems Engineering group to own XML files.*
 - [Example2: Composed UMAA Service Template Classes](example2/README.md)  
@@ -56,9 +58,23 @@ are outside of the current scope of this middleware reference starter kit.
 Some application layer development would be required on top of the middleware infrastructure to   
 be compliant with the UMAA standard.*
 
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+## Best Practices
+
+### Increase Network Buffers
+UMAA data `types` can tend to be very large individually(compressed up to 1 KB each) and even more so in aggregate.    
+During the automatic discovery process these are sent out to provide a definition of the  
+data structure to allow for deserialization of the messages.  
+
+On startup, this can cause local UDP buffers to get filled up and prevent the discovery sequence from fully completing.  
+
+To mitigate this on Linux systems, one of the options is to [increase the UDP buffers](https://community.rti.com/howto/improve-rti-connext-dds-network-performance-linux-systems).
+
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
+
 ## CMAKE modules
 This repo pulls in a git submodule from [rticonnextdds-cmake-utils](https://github.com/rticommunity/rticonnextdds-cmake-utils).  
 
@@ -140,3 +156,4 @@ cd resources/services
 ./start_convert.sh xcdr_to_csv
 
 ```
+
