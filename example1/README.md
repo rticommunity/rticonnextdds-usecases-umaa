@@ -35,29 +35,6 @@ additional administrative overhead.
 
 All 3 sets of XML files are consumed in the `./start_component.sh` script.
 
-## Types
-UMAA defines ~ 600 data types. This is what is used to determine the "structure" of the data being transported.  
-With Connext, we use RTI Code Generator `rtiddsgen` ([manual](https://community.rti.com/static/documentation/connext-dds/current/doc/manuals/connext_dds_professional/code_generator/users_manual/code_generator/users_manual/UsersManual_Title.htm)) to generate code per the API being used.  
-This code assists with construction and serialization/deserialization of these data structures.
-
-### C++11 types
-For the C++11 API, we generate helper headers and classes for all of the UMAA types  
-and then compile them into a single shared library.
-
-This makes it more convenient to link your source code against when developing.   
-
-In this example we generate all the Type support code into the `datamodel/cpp11_gen` folder and  
-then use that code to create a shared lib. 
-
-### Python types
-With Python, `rtiddsgen` converts the types into Python modules that we can then reference in our Python scripts.  
-For Python types there is a bug in RTIDDSGEN that doesn't resolve the include modules  
-paths correctly. (CODEGENII-2112)
-
-The workaround is to export all the modules to a single folder and then we can add them to the `PYTHONPATH`.  
-You can find the Python types have been pre-generated and added to the `datamodel/umaa/python_flat` folder for this example.
-
-
 ## Setup
 Reference the [Connext Getting Started guides](https://community.rti.com/static/documentation/connext-dds/current/doc/manuals/connext_dds_professional/getting_started_guide/index.html) to complete the below: 
 - Linux-based OS or WSL.
@@ -180,3 +157,4 @@ cd example1
 ##### Overview:
 This script publishes messages of the `GlobalVectorCommandType` to reference
 reception into the AsyncWaitset of the `AutoPilot` component.
+
