@@ -104,7 +104,20 @@ cd resources/services
 ./start_record.sh debug
 ```
 
-### Replay XCDR data
+### Replay 
+
+When you "replay" DDS data what you are really doing is re-publishing the   
+messages that were originally logged.  
+
+As a writer of DDS data, your QoS then needs to meet or exceed any existing readers  
+within the current system.  
+
+You can include your systems QoS with the following 2 steps:   
+
+- Add the QoS XML file to the -cfgFile argument as per [this example.](https://github.com/rticommunity/rticonnextdds-usecases-umaa/blob/49a1bc8ee0714f8cc67c6dbc050ad010f27c9670/resources/services/start_replay.sh#L23)  
+- Set the datawriter to use the desired QoS Profile [like this.](https://github.com/rticommunity/rticonnextdds-usecases-umaa/blob/49a1bc8ee0714f8cc67c6dbc050ad010f27c9670/resources/services/umaa_replay.xml#L151)  
+
+#### Replay XCDR data
 This example replays XCDR data logged from the "Deploy" scenario.  
 Domain ID: 1
 
@@ -113,7 +126,7 @@ cd resources/services
 ./start_replay.sh xcdr
 ```
 
-### Replay JSON data
+#### Replay JSON data
 This example replays JSON data logged from the "Debug" scenario.  
 Domain ID: 1
 
