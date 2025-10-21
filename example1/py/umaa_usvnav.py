@@ -152,14 +152,8 @@ if __name__ == "__main__":
 
   # Sets Connext verbosity to help debugging
   verbosity = verbosity_levels.get(args.verbosity, dds.Verbosity.EXCEPTION)
-
   dds.Logger.instance.verbosity = verbosity
 
-  # Set the debug output to a specific file
-  dds.Logger.instance.output_file("debug_output.log")
-
-  # Log a debug message to verify- Needs to be at Level 5 Verbosity
-  dds.Logger.instance.debug("This is a debug message logged to the file.")
 
   try:
     publisher_main()
