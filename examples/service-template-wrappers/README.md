@@ -9,7 +9,7 @@ Once a UMAA service has been created, each DDS reader/writer entity is exposed a
 This example also includes usage of Connext's AsyncWaitset which provides a convenient mechanism to   
 manage multithreaded Waitsets.
 
-*NOTE: When testing, use with Example1's Python scripts to simulate `USVNAV` etc.*
+*NOTE: When testing, use with XML App Framework's Python scripts to simulate `USVNAV` etc.*
 
 ## Use case
 Composing the UMAA components from template UMAA service classes allows for a combination of   
@@ -21,7 +21,7 @@ and then compile them into a single shared library.
 
 This makes it more convenient to link your source code against when developing.   
 
-In this example we generate all the Type support code into the `datamodel/cpp11_gen` folder and  
+In this example we generate all the Type support code into the `build/umaa_cpp11_gen` folder and  
 then use that code to create a shared lib.  
 
 ## Setup
@@ -50,7 +50,7 @@ git submodule update --init --recursive
 
 ## Configure
 ```sh
-cd examples/
+cd examples/service-template-wrappers
 cmake -B build -DCMAKE_BUILD_TYPE=Release
 ```
 
@@ -73,6 +73,6 @@ cmake --build ./build --config Release
 
 ##### Example:
 ```sh
-cd examples
-.start_component autopilot 1
+cd examples/service-template-wrappers
+./start_component.sh autopilot 1
 ```

@@ -24,7 +24,7 @@
 // For example legibility.
 using namespace rti::all;
 
-const std::string PARTICIPANT_QOS_FILE = "../resources/qos/umaa_qos_lib.xml";
+const std::string PARTICIPANT_QOS_FILE = "../../qos/umaa_qos_lib.xml";
 const std::string PARTICIPANT_QOS_PROFILE = "umaa_qos_lib::default_participant";
 
 // This is a listener that will be used to receive events from the

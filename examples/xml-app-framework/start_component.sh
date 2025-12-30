@@ -28,7 +28,7 @@ if [ "$1" == "autopilot" ] || [ "$1" == "usvnav" ] || [ "$1" == "globalvectorcmd
         cmd="python3 ./py/umaa_$component.py"
 
         # Add UMAA Python modules to PATH
-        PYTHONPATH+="../datamodel/umaa/python_flat"
+        PYTHONPATH+="../../datamodel/umaa/python_flat"
         echo "PYTHONPATH updated: "
         echo $PYTHONPATH
     fi
@@ -46,13 +46,13 @@ else
     # These xml files do need to be added in this order:
 
     # Add QOS File
-    NDDS_QOS_PROFILES+="../resources/qos/umaa_qos_lib.xml;"
+    NDDS_QOS_PROFILES+="../../qos/umaa_qos_lib.xml;"
     
     # Add UMAA Domain Topics
-    NDDS_QOS_PROFILES+="../resources/domain/umaa_domain_lib.xml;"
+    NDDS_QOS_PROFILES+="./domain/umaa_domain_lib.xml;"
     
     # Add desired component
-    NDDS_QOS_PROFILES+="../resources/components/umaa_${component}.xml"
+    NDDS_QOS_PROFILES+="./components/umaa_${component}.xml"
 
     echo "NDDS_QOS_PROFILES updated: "
     echo $NDDS_QOS_PROFILES

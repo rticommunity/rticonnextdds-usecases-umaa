@@ -29,7 +29,7 @@ if [ "$1" == "autopilot" ]; then
         cmd="python3 ./py/umaa_$component.py"
 
         # Add UMAA Python modules to PATH
-        PYTHONPATH+="../datamodel/umaa/python_flat"
+        PYTHONPATH+="../../datamodel/umaa/python_flat"
         echo "PYTHONPATH updated: "
         echo $PYTHONPATH
     fi

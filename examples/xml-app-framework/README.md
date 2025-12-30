@@ -4,7 +4,7 @@ from the public UMAA 6 standard. The intention here was to minimize application
 code and highlight the ease of access to the writers/readers and their usage.  
 
 There are currently ~ 40 components defined by UMAA of which 9 are Distro A.  
-(`resources/components/UMAA Component Definitions v1.0.pdf`)
+(`components/UMAA Component Definitions v1.0.pdf`)
 
 By inspecting the `start_component.sh` script we can see how components can be  
 instantiated from Modern C++ or Python apps using the same DDS configuration files. 
@@ -27,11 +27,11 @@ The downside is a close coupling of configs to application development which cou
 additional administrative overhead.  
 
 
-- Components are defined in `/resources/components`
-- UMAA Domain (Topics/Types) is defined in `/resources/domain`  
+- Components are defined in `./components`
+- UMAA Domain (Topics/Types) is defined in `./domain`  
   *NOTE: `umaa_domain_lib.xml` is inherited into the component definitions.  
   This file contains all types/topics defined for UMAA 6.0 and can be reused for your own development if desired.*  
-- QoS profiles are defines in `resources/qos`
+- QoS profiles are defined in `../../qos`
 
 All 3 sets of XML files are consumed in the `./start_component.sh` script.
 
@@ -61,7 +61,7 @@ git submodule update --init --recursive
 
 ### Configure
 ```sh
-cd examples/
+cd examples/xml-app-framework
 cmake -B build -DCMAKE_BUILD_TYPE=Release
 ```
 
@@ -84,8 +84,8 @@ cmake --build ./build --config Release
 
 ##### Example:
 ```sh
-cd example1
-.start_component autopilot 1
+cd examples/xml-app-framework
+./start_component.sh autopilot 1
 ```
 
 ##### Overview:
@@ -109,8 +109,8 @@ that is outside the current scope of this middleware example.*
 
 ##### Example:
 ```sh
-cd example1
-./start_component.sh usvnav 1
+cd xml-app-framework
+./start_component.sh usvnav
 ```
 
 ##### Overview:
@@ -130,8 +130,8 @@ the UMAA `USVNav` component and showcases accessing those entities to read/write
 
 ##### Example:
 ```sh
-cd example1
-./start_component.sh logging 1
+cd xml-app-framework
+./start_component.sh logging
 ```
 
 ##### Overview:
@@ -150,7 +150,7 @@ the UMAA `Logging` component and showcases accessing those entities to read/writ
 
 ##### Example:
 ```sh
-cd example1
+cd xml-app-framework
 ./start_component.sh globalvectorcmd
 ```
 

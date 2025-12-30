@@ -48,7 +48,7 @@ def publisher_main():
     # All of our XML files are being passed in by the NDDS_QOS_PROFILES env variable
     qos_provider = dds.QosProvider("")
 
-    # Lookup the Participant we defined in our XML file resources/components/globalvector.xml
+    # Lookup the Participant we defined in our XML file components/globalvector.xml
     participant = qos_provider.create_participant_from_config(
         "umaa_components_lib::globalvector")
 

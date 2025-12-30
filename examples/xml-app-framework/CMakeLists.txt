@@ -15,6 +15,7 @@ project(umaa_case_code)
 
 # Add folder where FindRTIConnextDDS.cmake file is to CMAKE_MODULE_PATH
 get_filename_component(REPO ${CMAKE_CURRENT_SOURCE_DIR} DIRECTORY)
+get_filename_component(REPO ${REPO} DIRECTORY)
 
 list(APPEND CMAKE_MODULE_PATH
     "${REPO}/rticonnextdds-cmake-utils/cmake/Modules"
@@ -23,8 +24,8 @@ list(APPEND CMAKE_MODULE_PATH
 
 # Set Vars
 set (CMAKE_POSITION_INDEPENDENT_CODE ON)
-set (CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/lib")
 set (BUILD_SHARED_LIBS ON)
+set (CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/lib")
 set (_UMAA_TYPES) # Holds UMAA IDL files
 set (_UMAA_CPP11_GENERATED) # Holds UMAA cpp generated files
 set (_UMAA_IDL_FOLDER "${REPO}/datamodel/umaa/idl/")
@@ -82,7 +83,6 @@ target_link_libraries(umaa_cpp11_types RTIConnextDDS::cpp2_api)
 target_include_directories(umaa_cpp11_types PUBLIC 
     "$<BUILD_INTERFACE:${_UMAA_CPP11_FOLDER}/>"
 )
-# set_property(TARGET umaa_cpp11_types PROPERTY CXX_STANDARD 11)
 add_dependencies(umaa_cpp11_types gen_cpp11_umaa_types)
 
 # Create the target for the AutoPilot executable
@@ -90,8 +90,7 @@ add_executable(autopilot
     "${CMAKE_CURRENT_SOURCE_DIR}/c++11/autopilot.cxx"
     "${CMAKE_CURRENT_SOURCE_DIR}/c++11/application.hpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/c++11/dds_umaa_participant.hpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/c++11/dds_umaa_service.hpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/c++11/umaa_services.hpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/c++11/dds_umaa_participant.cxx"
 )
 
 target_link_libraries(autopilot
