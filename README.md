@@ -2,40 +2,20 @@
 
 A starting point for developing to the UMAA standard with Connext.
 
-
-- [Overview](#overview)  
+- [Overview](#overview)
 - [UMAA Standard](#umaa-standard)   
   Breakdown of UMAA standard from a DDS perspective
+- [Examples](#examples)
+  - [XML-Based Application Framework](#xml-based-application-framework)
+  - [Service Template Wrappers](#service-template-wrappers)
+  - [Dynamic Types Python](#dynamic-types-python)
 - [UMAA Data Types](#umaa-data-types)
 - [Best Practices](#best-practices)   
   Recommendations and general guidelines
-
-## Examples
-
-### [XML-Based Application Framework](examples/xml-app-framework/README.md)
-Centralized XML configuration for DDS entities, components, and QoS profiles. Ideal for large systems with separate systems engineering teams managing configuration files independently from application code.
-
-**When to use:** You need strict separation between systems configuration and software development, or want a single source of truth for DDS infrastructure that can be shared across C++ and Python applications.
-
-### [Service Template Wrappers](examples/service-template-wrappers/README.md)
-C++ template classes that compose UMAA services programmatically with AsyncWaitset support. Provides flexibility to dynamically build components at runtime.
-
-**When to use:** You're doing rapid prototyping, need runtime flexibility to compose services, or prefer a code-centric approach over XML configuration.
-
-### [Dynamic Types Python](examples/dynamic-types-python/README.md)
-Python scripts using DynamicData API for runtime type instantiation without code generation. Perfect for testing, debugging, and simulating UMAA messages.
-
-**When to use:** You need quick debugging/testing without recompiling, want to simulate specific UMAA messages, or need flexible data inspection during development.
-
----
-
 - [CMAKE modules](#cmake-modules)
-- [Record/Replay/Convert](#recordreplayconvert-usage-examples) usage examples    
-  *Examples of Record/Replay/Convert DDS Messages for offline analysis* 
+- [Record/Replay/Convert](#recordreplayconvert-usage-examples)
 
 ## Overview
-
-[Walkthrough here](https://www.rti.com/developers/case-code/umaa)
 
 This Starter Kit provides an entry point to developing with UMAA.  
 It highlights usage of a few UMAA defined Components to simulate  
@@ -44,12 +24,16 @@ interaction between the different interfaces.
 It showcases Connext's ability to easily instantiate UMAA components  
 using either the Modern C++ or the Python APIs.  
 It also highlights the option to manage DDS configuration of both systems with  
-a centralized xml or compose UMAA services from template classes. 
+a centralized xml or compose UMAA services from template classes.
 
 
 ## UMAA Standard
 Latest Version: 6.0 Distro A
 [Download from AUVSI](https://www.auvsi.org/unmanned-maritime-autonomy-architecture)
+
+**Note:** The AUVSI UMAA website now provides a Distro A SDK that includes reference code examples designed to be used with RTI Connext. 
+The UMAA SDK examples are currently considered the best path forward with regards to UMAA development.
+Examples in this repo are intended as alternatives re: setting up DDS for different use cases and could be integrated into the SDK if so desired.
 
 The UMAA standard defines the following(as of 6.0):  
 - Middleware level:
@@ -62,7 +46,7 @@ The UMAA standard defines the following(as of 6.0):
   - Type extension("Generalizations/Specializations")
 - Systems level:
   - "Components": Collection of "Interfaces" defined in the UMAA MBSE model.
-    - This starter kit provides an xml definition of the Autopilot and USVNAV component  
+    - **Note:** This starter kit provides an xml definition of the Autopilot and USVNAV component  
       DDS entities based on our interpretation of the v1.0 Component Definitions release. 
     - There are currently ~40 components defined by UMAA of which 9 are Distro A.  
       (`examples/xml-app-framework/components/UMAA Component Definitions v1.0.pdf`)
@@ -71,7 +55,30 @@ The UMAA standard defines the following(as of 6.0):
 The application level requirements (i.e Flow Control/Large Collections/Generic-Specified types)  
 are outside of the current scope of this middleware reference starter kit.  
 Some application layer development would be required on top of the middleware infrastructure to   
-be compliant with the UMAA standard.*
+be compliant with the UMAA standard. See the UMAA SDK from AUVSI for details.*
+
+## Examples
+
+### XML-Based Application Framework
+[Full Documentation](examples/xml-app-framework/README.md)
+
+Centralized XML configuration for DDS entities, components, and QoS profiles. Ideal for large systems with separate systems engineering teams managing configuration files independently from application code.
+
+**When to use:** You need strict separation between systems configuration and software development, or want a single source of truth for DDS infrastructure that can be shared across C++ and Python applications.
+
+### Service Template Wrappers
+[Full Documentation](examples/service-template-wrappers/README.md)
+
+C++ template classes that compose UMAA services programmatically with AsyncWaitset support. Provides flexibility to dynamically build components at runtime.
+
+**When to use:** You're doing rapid prototyping, need runtime flexibility to compose services, or prefer a code-centric approach over XML configuration.
+
+### Dynamic Types Python
+[Full Documentation](examples/dynamic-types-python/README.md)
+
+Python scripts using DynamicData API for runtime type instantiation without code generation. Perfect for testing, debugging, and simulating UMAA messages.
+
+**When to use:** You need quick debugging/testing without recompiling, want to simulate specific UMAA messages, or need flexible data inspection during development.
 
 ## UMAA Data Types
 UMAA defines ~ 600 data types. This is what is used to determine the "structure" of the data being transported.  
@@ -197,8 +204,15 @@ within the current system.
 
 You can include your systems QoS with the following 2 steps:   
 
-- Add the QoS XML file to the -cfgFile argument as per [this example.](https://github.com/rticommunity/rticonnextdds-usecases-umaa/blob/49a1bc8ee0714f8cc67c6dbc050ad010f27c9670/services/start_replay.sh#L23)  
-- Set the datawriter to use the desired QoS Profile [like this.](https://github.com/rticommunity/rticonnextdds-usecases-umaa/blob/49a1bc8ee0714f8cc67c6dbc050ad010f27c9670/services/umaa_replay.xml#L151)  
+1. Add the QoS XML file to the -cfgFile argument (see `services/start_replay.sh`):
+   ```bash
+   xml="./umaa_replay.xml;../qos/umaa_qos_lib.xml"
+   ```
+
+2. Set the datawriter to use the desired QoS Profile (see `services/umaa_replay.xml`):
+   ```xml
+   <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
+   ```
 
 #### Replay XCDR data
 This example replays XCDR data logged from the "Deploy" scenario.  
