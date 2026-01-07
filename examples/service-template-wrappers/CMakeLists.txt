@@ -13,81 +13,34 @@
 cmake_minimum_required(VERSION 3.11)
 project(umaa_case_code)
 
-# Add folder where FindRTIConnextDDS.cmake file is to CMAKE_MODULE_PATH
-get_filename_component(REPO ${CMAKE_CURRENT_SOURCE_DIR} DIRECTORY)
-get_filename_component(REPO ${REPO} DIRECTORY)
-
-list(APPEND CMAKE_MODULE_PATH
-    "${REPO}/rticonnextdds-cmake-utils/cmake/Modules"
-)
-
-
-# Set Vars
-set (CMAKE_POSITION_INDEPENDENT_CODE ON)
-set (CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/lib")
-set (BUILD_SHARED_LIBS ON)
-set (_UMAA_TYPES) # Holds UMAA IDL files
-set (_UMAA_CPP11_GENERATED) # Holds UMAA cpp generated files
-set (_UMAA_IDL_FOLDER "${REPO}/datamodel/umaa/idl/")
-set (_UMAA_CPP11_FOLDER "${CMAKE_CURRENT_BINARY_DIR}/umaa_cpp11_gen")
-set (CMAKE_CXX_STANDARD 11)
-
-
-include(ConnextDdsCodegen)
-
-# This will look for the ConnextDDS core and API libraries
-find_package(RTIConnextDDS
-    "6.1.2"
-    REQUIRED
-    COMPONENTS
-        core
-)
-
-# Add target to run codegen on idl files for cpp11
-if(NOT TARGET gen_cpp11_umaa_types)
-add_custom_target(gen_cpp11_umaa_types ALL)
+# Check if this file is being run as the root project
+if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    get_filename_component(ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../.." ABSOLUTE)
+    message(FATAL_ERROR 
+        "========================================================================\n"
+        "Error: This project cannot be built standalone.\n"
+        "Please run CMake from the repository root directory.\n"
+        "========================================================================\n"
+        "Example:\n"
+        "  cd ${ROOT_DIR}\n"
+        "  mkdir -p build && cd build\n"
+        "  cmake ..\n"
+        "  make\n"
+        "========================================================================"
+    )
 endif()
 
-# Add all UMAA IDL files to list
-file(GLOB_RECURSE _UMAA_TYPES RELATIVE ${_UMAA_IDL_FOLDER} ${_UMAA_IDL_FOLDER}*.idl)
+# Set Vars
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+set(CMAKE_CXX_STANDARD 11)
 
-foreach(_idl IN LISTS _UMAA_TYPES)
-    # Maintain folder structure on output so includes work
-    string(CONCAT _idl_PATH ${_UMAA_IDL_FOLDER} ${_idl})
-    get_filename_component(_idl_FOLDER ${_idl} DIRECTORY)
-    get_filename_component(_idl_NAME ${_idl} NAME)
-
-    # call rtiddsgen on the IDL files
-    connextdds_rtiddsgen_run(
-        IDL_FILE ${_idl_PATH}
-        OUTPUT_DIRECTORY
-            "${_UMAA_CPP11_FOLDER}/${_idl_FOLDER}"
-        INCLUDE_DIRS "${_UMAA_IDL_FOLDER}"
-        LANG "C++11"
-        VAR "UMAA_TYPES"
-    )
-    # add generated files to list
-    list(APPEND _UMAA_CPP11_GENERATED ${UMAA_TYPES_CXX11_SOURCES})
-
-    # create target per idl
-    add_custom_target(${_idl_NAME}
-        DEPENDS ${UMAA_TYPES_CXX11_SOURCES})
-    add_dependencies(gen_cpp11_umaa_types ${_idl_NAME})
-endforeach()
-
-## Create shared library for UMAA Types
-add_library(umaa_cpp11_types SHARED
-    ${_UMAA_CPP11_GENERATED}
-)
-target_link_libraries(umaa_cpp11_types RTIConnextDDS::cpp2_api)
-target_include_directories(umaa_cpp11_types PUBLIC 
-    "$<BUILD_INTERFACE:${_UMAA_CPP11_FOLDER}/>"
-)
-# set_property(TARGET umaa_cpp11_types PROPERTY CXX_STANDARD 11)
-add_dependencies(umaa_cpp11_types gen_cpp11_umaa_types)
+# umaa_types target should already exist from parent build
+if(NOT TARGET umaa_types)
+    message(FATAL_ERROR "umaa_types target not found - build from repository root")
+endif()
 
 # Create the target for the AutoPilot executable
-add_executable(autopilot
+add_executable(service_autopilot
     "${CMAKE_CURRENT_SOURCE_DIR}/c++11/autopilot.cxx"
     "${CMAKE_CURRENT_SOURCE_DIR}/c++11/application.hpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/c++11/dds_umaa_participant.hpp"
@@ -95,8 +48,8 @@ add_executable(autopilot
     "${CMAKE_CURRENT_SOURCE_DIR}/c++11/umaa_services.hpp"
 )
 
-target_link_libraries(autopilot
+target_link_libraries(service_autopilot
     PRIVATE
         RTIConnextDDS::cpp2_api
-        umaa_cpp11_types
+        umaa_types
 )
