@@ -17,7 +17,7 @@ class UMAA_Pub:
     def __init__(self, args):
 
       # Pull in XML files with QoS Profiles and Types
-      self.qos_provider = dds.QosProvider("../resources/qos/umaa_qos_lib.xml;../datamodel/umaa/xml_flat/include_all.xml")
+      self.qos_provider = dds.QosProvider("../../qos/umaa_qos_lib.xml;../../datamodel/umaa/xml_flat/include_all.xml")
 
       # Create a Participant on specific Domain ID
       self.participant = dds.DomainParticipant(args.domain)

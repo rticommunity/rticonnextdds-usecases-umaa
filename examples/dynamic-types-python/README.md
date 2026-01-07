@@ -52,18 +52,18 @@ git clone --recurse-submodule https://github.com/rticommunity/rticonnextdds-usec
 #### UMAA Publisher
 ##### Example:
 ```sh
-cd ./examples
+cd examples/dynamic-types-python
 
-python ./py/umaa_dynamic_pub.py --qos umaa_qos_lib::periodic_best_effort_qos --topic UMAA::EO::BallastTank::BallastPumpCommandType --domain 0
+python umaa_dynamic_pub.py --qos umaa_qos_lib::periodic_best_effort_qos --topic UMAA::EO::BallastTank::BallastPumpCommandType --domain 0
 ```
 
 #### UMAA Subscriber
 ##### Example:
 
 ```sh
-cd ./examples
+cd examples/dynamic-types-python
 
-python ./py/umaa_dynamic_sub.py --qos umaa_qos_lib::periodic_best_effort_qos --topic UMAA::EO::BallastTank::BallastPumpCommandType --domain 0
+python umaa_dynamic_sub.py --qos umaa_qos_lib::periodic_best_effort_qos --topic UMAA::EO::BallastTank::BallastPumpCommandType --domain 0
 ```
 
 --------------------------------------------------------------------------------

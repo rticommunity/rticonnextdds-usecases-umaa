@@ -53,7 +53,7 @@ def publisher_main():
     qos_provider = dds.QosProvider("")
 
     print("Creating Participant")
-    # Lookup the Participant we defined in our XML file resources/components/usvnav.xml
+    # Lookup the Participant we defined in our XML file components/usvnav.xml
     participant = qos_provider.create_participant_from_config(
         "umaa_components_lib::usvnav")
 

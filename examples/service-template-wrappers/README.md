@@ -9,7 +9,7 @@ Once a UMAA service has been created, each DDS reader/writer entity is exposed a
 This example also includes usage of Connext's AsyncWaitset which provides a convenient mechanism to   
 manage multithreaded Waitsets.
 
-*NOTE: When testing, use with Example1's Python scripts to simulate `USVNAV` etc.*
+*NOTE: When testing, use with XML App Framework's Python scripts to simulate `USVNAV` etc.*
 
 ## Use case
 Composing the UMAA components from template UMAA service classes allows for a combination of   
@@ -21,7 +21,7 @@ and then compile them into a single shared library.
 
 This makes it more convenient to link your source code against when developing.   
 
-In this example we generate all the Type support code into the `datamodel/cpp11_gen` folder and  
+In this example we generate all the Type support code into the `build/umaa_cpp11_gen` folder and  
 then use that code to create a shared lib.  
 
 ## Setup
@@ -48,17 +48,28 @@ the following command to pull all the dependencies:
 git submodule update --init --recursive
 ```
 
-## Configure
-```sh
-cd examples/
-cmake -B build -DCMAKE_BUILD_TYPE=Release
-```
-
 ## Build
+**All builds must be performed from the repository root.**
+
 ```sh
-cmake --build ./build --config Release
+# Source the Connext environment script
+source <connext_install_dir>/resource/scripts/rtisetenv_<target>.bash
+# Example: source /opt/rti_connext_dds-7.3.0/resource/scripts/rtisetenv_x64Linux4gcc7.3.0.bash
+
+# From repository root
+cd rticonnextdds-usecases-umaa
+mkdir -p build && cd build
+cmake ..
+
+# Build everything
+make -j1  # Sequential build recommended
+
+# Or build just this example
+make service_autopilot
 ```  
-*NOTE: Will take ~ 15 minutes as it is compiling all the IDL types into a shared library*
+*NOTE: Initial build takes ~15 minutes as it compiles all UMAA IDL types into a shared library*
+
+Executable is output to: `build/examples/service-template-wrappers/service_autopilot`
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -73,6 +84,6 @@ cmake --build ./build --config Release
 
 ##### Example:
 ```sh
-cd examples
-.start_component autopilot 1
+cd examples/service-template-wrappers
+./start_component.sh autopilot 1
 ```

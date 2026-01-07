@@ -2,26 +2,20 @@
 
 A starting point for developing to the UMAA standard with Connext.
 
-
-- [Overview](#overview)  
+- [Overview](#overview)
 - [UMAA Standard](#umaa-standard)   
   Breakdown of UMAA standard from a DDS perspective
+- [Examples](#examples)
+  - [XML-Based Application Framework](#xml-based-application-framework)
+  - [Service Template Wrappers](#service-template-wrappers)
+  - [Dynamic Types Python](#dynamic-types-python)
 - [UMAA Data Types](#umaa-data-types)
 - [Best Practices](#best-practices)   
   Recommendations and general guidelines
-- [Example1: XML defined UMAA components](example1/README.md)  
-  *USE CASE: Industrial grade infrastructure where you have separate Systems Engineering group to own XML files.*
-- [Example2: Composed UMAA Service Template Classes](example2/README.md)  
-  *USE CASE: Rapid prototyping and to maintain flexibility.*  
-- [Example3: Dynamic Data Pub/Sub](example3/README.md)  
-  *USE CASE: Debugging/Simulation/Testing of UMAA topic data.*
 - [CMAKE modules](#cmake-modules)
-- [Record/Replay/Convert](#recordreplayconvert-usage-examples) usage examples    
-  *Examples of Record/Replay/Convert DDS Messages for offline analysis* 
+- [Record/Replay/Convert](#recordreplayconvert-usage-examples)
 
 ## Overview
-
-[Walkthrough here](https://www.rti.com/developers/case-code/umaa)
 
 This Starter Kit provides an entry point to developing with UMAA.  
 It highlights usage of a few UMAA defined Components to simulate  
@@ -30,12 +24,16 @@ interaction between the different interfaces.
 It showcases Connext's ability to easily instantiate UMAA components  
 using either the Modern C++ or the Python APIs.  
 It also highlights the option to manage DDS configuration of both systems with  
-a centralized xml or compose UMAA services from template classes. 
+a centralized xml or compose UMAA services from template classes.
 
 
 ## UMAA Standard
 Latest Version: 6.0 Distro A
 [Download from AUVSI](https://www.auvsi.org/unmanned-maritime-autonomy-architecture)
+
+**Note:** The AUVSI UMAA website now provides a Distro A SDK that includes reference code examples designed to be used with RTI Connext. 
+The UMAA SDK examples are currently considered the best path forward with regards to UMAA development.
+Examples in this repo are intended as alternatives re: setting up DDS for different use cases and could be integrated into the SDK if so desired.
 
 The UMAA standard defines the following(as of 6.0):  
 - Middleware level:
@@ -48,16 +46,39 @@ The UMAA standard defines the following(as of 6.0):
   - Type extension("Generalizations/Specializations")
 - Systems level:
   - "Components": Collection of "Interfaces" defined in the UMAA MBSE model.
-    - This starter kit provides an xml definition of the Autopilot and USVNAV component  
+    - **Note:** This starter kit provides an xml definition of the Autopilot and USVNAV component  
       DDS entities based on our interpretation of the v1.0 Component Definitions release. 
     - There are currently ~40 components defined by UMAA of which 9 are Distro A.  
-      (`resources/components/UMAA Component Definitions v1.0.pdf`)
+      (`examples/xml-app-framework/components/UMAA Component Definitions v1.0.pdf`)
     
 *NOTE:  
 The application level requirements (i.e Flow Control/Large Collections/Generic-Specified types)  
 are outside of the current scope of this middleware reference starter kit.  
 Some application layer development would be required on top of the middleware infrastructure to   
-be compliant with the UMAA standard.*
+be compliant with the UMAA standard. See the UMAA SDK from AUVSI for details.*
+
+## Examples
+
+### XML-Based Application Framework
+[Full Documentation](examples/xml-app-framework/README.md)
+
+Centralized XML configuration for DDS entities, components, and QoS profiles. Ideal for large systems with separate systems engineering teams managing configuration files independently from application code.
+
+**When to use:** You need strict separation between systems configuration and software development, or want a single source of truth for DDS infrastructure that can be shared across C++ and Python applications.
+
+### Service Template Wrappers
+[Full Documentation](examples/service-template-wrappers/README.md)
+
+C++ template classes that compose UMAA services programmatically with AsyncWaitset support. Provides flexibility to dynamically build components at runtime.
+
+**When to use:** You're doing rapid prototyping, need runtime flexibility to compose services, or prefer a code-centric approach over XML configuration.
+
+### Dynamic Types Python
+[Full Documentation](examples/dynamic-types-python/README.md)
+
+Python scripts using DynamicData API for runtime type instantiation without code generation. Perfect for testing, debugging, and simulating UMAA messages.
+
+**When to use:** You need quick debugging/testing without recompiling, want to simulate specific UMAA messages, or need flexible data inspection during development.
 
 ## UMAA Data Types
 UMAA defines ~ 600 data types. This is what is used to determine the "structure" of the data being transported.  
@@ -70,8 +91,7 @@ and then compile them into a single shared library.
 
 This makes it more convenient to link your source code against when developing.   
 
-In this example we generate all the Type support code into the `datamodel/cpp11_gen` folder and  
-then use that code to create a shared lib. 
+The build system generates all Type support code into `build/umaa_cpp11_gen` and creates a shared library (`libumaa_types.so`) in `build/datamodel/lib`. 
 
 ### Python data types
 With Python, `rtiddsgen` converts the types into Python modules that we can then reference in our Python scripts.  
@@ -98,9 +118,44 @@ To mitigate this on Linux systems, one of the options is to [increase the UDP bu
 ## CMAKE modules
 This repo pulls in a git submodule from [rticonnextdds-cmake-utils](https://github.com/rticommunity/rticonnextdds-cmake-utils).  
 
-The `rticonnextdds-cmake-utils` repo provides convenient CMAKE utils to find Connext, call `rtiddsgen` and pass in IDL files as an argument. 
-Use /examples/CMakeLists.txt as a reference for creating a shared library for your UMAA IDL set. 
+The `rticonnextdds-cmake-utils` repo provides convenient CMAKE utils to find Connext, call `rtiddsgen` and pass in IDL files as an argument.
 
+### Build System Architecture
+**All builds must be performed from the repository root.** Standalone subfolder builds are not supported.
+
+The build system generates UMAA type support code (~600 IDL files) into `build/umaa_cpp11_gen` and creates a shared library (`libumaa_types.so`) in `build/datamodel/lib`. Examples then link against this library.
+
+#### Building Everything
+```bash
+# Source the Connext environment script
+source <connext_install_dir>/resource/scripts/rtisetenv_<target>.bash
+# Example: source /opt/rti_connext_dds-7.3.0/resource/scripts/rtisetenv_x64Linux4gcc7.3.0.bash
+
+# Build all targets
+mkdir -p build && cd build
+cmake ..
+make -j1  # Sequential build recommended due to large number of IDL targets
+```
+
+#### Building Individual Targets
+You can build specific components without rebuilding everything:
+
+```bash
+cd build
+
+# Build just the datamodel library
+make umaa_types
+
+# Build specific examples
+make service_autopilot      # Service template wrappers example
+make xml_app_autopilot      # XML-based framework example
+```
+
+Executables are output to:
+- `build/examples/service-template-wrappers/service_autopilot`
+- `build/examples/xml-app-framework/xml_app_autopilot`
+
+**Note:** Individual IDL file targets are also available (e.g., `make LandmarkReportType.idl_datamodel`) if you need to regenerate specific types during development.
 
 ## Record/Replay/Convert usage examples
 Connext includes a set of services that can capture selected DDS traffic and store in a SQLite database to allow for 
@@ -116,7 +171,7 @@ Some reference examples have been created for the workflow of recording, replayi
 - Install Connext Host per [Connext Getting Started](https://community.rti.com/static/documentation/connext-dds/current/doc/manuals/connext_dds_professional/getting_started_guide/index.html) Guide  
 - Clone `rticonnextdds-usecases-umaa` repo  
 - Set `NDDSHOME` to your Connext Install Path.  
-- Publish DDS Data on Domain ID 1 using [Example1's USVNAV Component](/example1/README.md#python-usvnav)
+- Publish DDS Data on Domain ID 1 using [XML App Framework's USVNAV Component](/examples/xml-app-framework/README.md#python-usvnav)
 
 ### Record a "Deploy" scenario
 This example logs a filtered subset of topics in a XCDR serialized format to a SQLite Database.   
@@ -126,7 +181,7 @@ It also rolls over every 1GB and uses a formatted naming convention for every in
 Domain ID: 1
 
 ```sh
-cd resources/services
+cd services
 ./start_record.sh deploy
 ```
 
@@ -135,7 +190,7 @@ This example logs all topics in a JSON serialized(human readable) format to a SQ
 Domain ID: 1
 
 ```sh
-cd resources/services
+cd services
 ./start_record.sh debug
 ```
 
@@ -149,15 +204,22 @@ within the current system.
 
 You can include your systems QoS with the following 2 steps:   
 
-- Add the QoS XML file to the -cfgFile argument as per [this example.](https://github.com/rticommunity/rticonnextdds-usecases-umaa/blob/49a1bc8ee0714f8cc67c6dbc050ad010f27c9670/resources/services/start_replay.sh#L23)  
-- Set the datawriter to use the desired QoS Profile [like this.](https://github.com/rticommunity/rticonnextdds-usecases-umaa/blob/49a1bc8ee0714f8cc67c6dbc050ad010f27c9670/resources/services/umaa_replay.xml#L151)  
+1. Add the QoS XML file to the -cfgFile argument (see `services/start_replay.sh`):
+   ```bash
+   xml="./umaa_replay.xml;../qos/umaa_qos_lib.xml"
+   ```
+
+2. Set the datawriter to use the desired QoS Profile (see `services/umaa_replay.xml`):
+   ```xml
+   <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
+   ```
 
 #### Replay XCDR data
 This example replays XCDR data logged from the "Deploy" scenario.  
 Domain ID: 1
 
 ```sh
-cd resources/services
+cd services
 ./start_replay.sh xcdr
 ```
 
@@ -166,7 +228,7 @@ This example replays JSON data logged from the "Debug" scenario.
 Domain ID: 1
 
 ```sh
-cd resources/services
+cd services
 ./start_replay.sh json
 ```
 
@@ -175,7 +237,7 @@ This example converts XCDR data logged from the "Deploy" scenario to JSON.
 Domain ID: 1
 
 ```sh
-cd resources/services
+cd services
 ./start_convert.sh xcdr_to_json
 ```
 
@@ -184,7 +246,7 @@ This example converts XCDR data logged from the "Deploy" scenario to CSV.
 Domain ID: 1
 
 ```sh
-cd resources/services
+cd services
 ./start_convert.sh xcdr_to_csv
 
 ```

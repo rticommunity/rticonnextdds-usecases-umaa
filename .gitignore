@@ -1,23 +1,18 @@
 .vscode/*
 .clang-tidy
 .clang-format
-examples/build/*
-.vscode/settings.json
 
+# Build artifacts
+examples/*/build/
+**/debug_output.log
+
+# Python cache
 datamodel/umaa/python_flat/__pycache__/
+examples/*/py/__pycache__/
 
-examples/py/__pycache__/
-
-resources/lib/
-
-example1/build/
-
-example1/debug_output.log
-
-example2/build/
+# Service data
+services/data/
 
 datamodel/umaa/cpp11_gen/
 
-example2/debug_output.log
-
-resources/services/data/
+build/

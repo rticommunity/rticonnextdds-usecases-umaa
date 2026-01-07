@@ -16,8 +16,7 @@
 #include <iostream>
 #include <csignal>
 #include <string>
-#include <mutex>
-#include <unordered_map>
+#include <functional>
 #include <rti/rti.hpp>  // include all base plus extensions
 
 #include <rti/core/cond/AsyncWaitSet.hpp>
@@ -173,14 +172,28 @@ public:
  * @brief Main participant class for UMAA DDS components.
  *
  * This class encapsulates the DDS DomainParticipant and provides methods for
- * registering types, looking up entities, setting up waitsets, and accessing
- * writers/readers and active data for key UMAA topics. It manages thread safety
- * for keyed data and exposes utility functions for component logic.
+ * registering types, looking up entities, setting up waitsets with callbacks.
+ * The class is focused on DDS setup and delegates data processing to user callbacks.
  */
 class DDSUMAAParticipant {
 public:
-    DDSUMAAParticipant(int threads)
-            : _async_waitset(AsyncWaitSetProperty().thread_pool_size(threads))
+    // Callback type definitions
+    using SpeedReportCallback = std::function<void(const rti::sub::LoanedSample<SpeedReportType>&)>;
+    using GlobalPoseReportCallback = std::function<void(const rti::sub::LoanedSample<GlobalPoseReportType>&)>;
+    using VelocityReportCallback = std::function<void(const rti::sub::LoanedSample<VelocityReportType>&)>;
+    using GlobalVectorCommandCallback = std::function<void(const rti::sub::LoanedSample<GlobalVectorCommandType>&)>;
+
+    DDSUMAAParticipant(
+            int threads,
+            SpeedReportCallback on_speed_report,
+            GlobalPoseReportCallback on_globalpose_report,
+            VelocityReportCallback on_velocity_report,
+            GlobalVectorCommandCallback on_globalvector_command)
+            : _async_waitset(AsyncWaitSetProperty().thread_pool_size(threads)),
+              _on_speed_report(on_speed_report),
+              _on_globalpose_report(on_globalpose_report),
+              _on_velocity_report(on_velocity_report),
+              _on_globalvector_command(on_globalvector_command)
     {
         std::cout << "Created AutoPilot Component" << std::endl;
     }
@@ -190,56 +203,20 @@ public:
     DataWriter<HealthReportType> get_health_report_writer()
     {
         return _health_report_w;
-    };
+    }
 
     DataReader<GlobalVectorCommandType> get_globalvector_cmd_reader()
     {
         return _globalvector_cmd_r;
-    };
-
-    const SpeedReportType &get_speed_report_data()
-    {
-        return _speed_report_data;
-    };
-
-    const GlobalPoseReportType &get_globalpose_report_data()
-    {
-        return _globalpose_report_data;
-    };
-
-    const VelocityReportType &get_velocity_report_data()
-    {
-        return _velocity_report_data;
-    };
-
-
-    /**
-     * Retrieves the currently active global vector command.
-     * This method is thread-safe as it uses a mutex to protect access
-     * to the `_globalvector_commands` map and
-     * `_active_globalvector_command_instance`. Throws a runtime_error if the
-     * active command instance is not found.
-     */
-    const dds::sub::Sample<GlobalVectorCommandType> &
-    get_active_globalvector_command()
-    {
-        const std::lock_guard<std::mutex> lock(_m_globalvector);
-
-        auto it = _globalvector_commands.find(_active_globalvector_command_instance);
-        if (it == _globalvector_commands.end()) {
-            throw std::runtime_error("Active global vector command instance not found");
-        }
-
-        return it->second;
-    };
-
-    const dds::core::InstanceHandle &get_active_globalvector_command_instance()
-    {
-        return _active_globalvector_command_instance;
     }
 
-
 private:
+    // Callbacks
+    SpeedReportCallback _on_speed_report;
+    GlobalPoseReportCallback _on_globalpose_report;
+    VelocityReportCallback _on_velocity_report;
+    GlobalVectorCommandCallback _on_globalvector_command;
+
     // Domain Participant
     DomainParticipant _participant = dds::core::null;
 
@@ -249,47 +226,29 @@ private:
     // Async Waitset
     rti::core::cond::AsyncWaitSet _async_waitset = dds::core::null;
 
-    // Readers/Containers
-    // Probably abstract into wrapper object, left minimal for clarity
+    // Readers
     DataReader<SpeedReportType> _speed_report_r = dds::core::null;
-    SpeedReportType _speed_report_data;
-
     DataReader<GlobalPoseReportType> _globalpose_report_r = dds::core::null;
-    GlobalPoseReportType _globalpose_report_data;
-
     DataReader<VelocityReportType> _velocity_report_r = dds::core::null;
-    VelocityReportType _velocity_report_data;
-
     DataReader<GlobalVectorCommandType> _globalvector_cmd_r = dds::core::null;
-    std::unordered_map<
-            dds::core::InstanceHandle,
-            dds::sub::Sample<GlobalVectorCommandType>>
-            _globalvector_commands;
-
-    dds::core::InstanceHandle _active_globalvector_command_instance =
-            dds::core::null;
-
 
     // Functions
     void register_types();
-
     void lookup_entities();
-
     void setup_async_waitset();
 
-    void attach_reader_listeners();
+    template <typename T, typename Callback>
+    void process_samples(DataReader<T> reader, Callback callback)
+    {
+        auto samples = reader.take();
+        _async_waitset.unlock_condition(dds::core::cond::StatusCondition(reader));
 
-    template <typename T>
-    void process_samples(DataReader<T> reader, T &current_data);
-
-    template <typename T>
-    void process_keyed_samples(
-            DataReader<T> reader,
-            std::unordered_map<dds::core::InstanceHandle, dds::sub::Sample<T>>
-                    &keyed_data_map,
-            dds::core::InstanceHandle &active_instance);
-
-    std::mutex _m_globalvector;
+        for (const auto &sample : samples) {
+            if (sample.info().valid()) {
+                callback(sample);
+            }
+        }
+    }
 };
 
 
