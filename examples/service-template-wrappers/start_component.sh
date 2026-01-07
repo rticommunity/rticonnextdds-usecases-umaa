@@ -24,7 +24,14 @@ if [ "$1" == "autopilot" ]; then
         DOMAIN_ID=$2
     fi
     if [ $component == "autopilot" ]; then
-        cmd="./build/$component"
+        # Check for binary in top-level build folder
+        if [ -f "../../build/examples/service-template-wrappers/service_autopilot" ]; then
+            cmd="../../build/examples/service-template-wrappers/service_autopilot"
+        else
+            echo "Error: autopilot binary not found in ../../build/examples/service-template-wrappers/"
+            echo "Build from repository root: cd ../../ && mkdir -p build && cd build && cmake .. && make service_autopilot"
+            exit 1
+        fi
     else
         cmd="python3 ./py/umaa_$component.py"
 
