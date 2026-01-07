@@ -1,58 +1,26 @@
 cmake_minimum_required(VERSION 3.11)
 project(UMAA_DataModel)
 
-# Check if CONNEXTDDS_ARCH is set (only if building standalone)
-if(NOT DEFINED CONNEXTDDS_ARCH AND NOT DEFINED ENV{CONNEXTDDS_ARCH} AND NOT RTIConnextDDS_FOUND)
+# Check if this file is being run as the root project
+if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    get_filename_component(ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/.." ABSOLUTE)
     message(FATAL_ERROR 
         "========================================================================\n"
-        "ERROR: CONNEXTDDS_ARCH is not set.\n"
+        "Error: This project cannot be built standalone.\n"
+        "Please run CMake from the repository root directory.\n"
         "========================================================================\n"
-        "Helper scripts to set the environment are included in the Connext\n"
-        "installation directory, typically found at:\n"
-        "  <install_dir>/resource/scripts/rtisetenv_<target>.bash\n"
-        "\n"
-        "Examples:\n"
-        "  source /opt/rti_connext_dds-6.1.2/resource/scripts/rtisetenv_x64Linux4gcc7.3.0.bash\n"
-        "  source /opt/rti_connext_dds-7.3.0/resource/scripts/rtisetenv_x64Linux4gcc7.3.0.bash\n"
-        "\n"
-        "Or set it manually:\n"
-        "  export CONNEXTDDS_ARCH=x64Linux4gcc7.3.0\n"
-        "  cmake .. -DCONNEXTDDS_ARCH=x64Linux4gcc7.3.0\n"
+        "Example:\n"
+        "  cd ${ROOT_DIR}\n"
+        "  mkdir -p build && cd build\n"
+        "  cmake ..\n"
+        "  make\n"
         "========================================================================"
     )
 endif()
 
-# Get the architecture (from environment or CMake variable)
-if(NOT CONNEXTDDS_ARCH AND NOT RTIConnextDDS_FOUND)
-    set(CONNEXTDDS_ARCH $ENV{CONNEXTDDS_ARCH})
-    message(STATUS "========================================================================")
-    message(STATUS "RTI Connext DDS Target Architecture: ${CONNEXTDDS_ARCH}")
-    message(STATUS "========================================================================")
-endif()
-
-# Only find RTI Connext if not already found by parent
+# Verify RTI Connext was found by parent
 if(NOT RTIConnextDDS_FOUND)
-    if(NOT CONNEXTDDS_DIR)
-        set(CONNEXTDDS_DIR $ENV{NDDSHOME})
-    endif()
-
-    if(NOT CONNEXTDDS_ARCH)
-        set(CONNEXTDDS_ARCH $ENV{CONNEXTDDS_ARCH})
-    endif()
-
-    # Add cmake utils if not already in path
-    if(NOT DEFINED CMAKE_MODULE_PATH OR NOT "${CMAKE_MODULE_PATH}" MATCHES "rticonnextdds-cmake-utils")
-        get_filename_component(REPO ${CMAKE_CURRENT_SOURCE_DIR} DIRECTORY)
-        list(APPEND CMAKE_MODULE_PATH
-            "${REPO}/rticonnextdds-cmake-utils/cmake/Modules"
-        )
-    endif()
-
-    find_package(
-        RTIConnextDDS "6.1.2"
-        REQUIRED
-        COMPONENTS core
-    )
+    message(FATAL_ERROR "RTI Connext DDS not found - should be found by parent CMakeLists.txt")
 endif()
 
 # Set output directories
