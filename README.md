@@ -9,12 +9,26 @@ A starting point for developing to the UMAA standard with Connext.
 - [UMAA Data Types](#umaa-data-types)
 - [Best Practices](#best-practices)   
   Recommendations and general guidelines
-- [XML App Framework: XML defined UMAA components](examples/xml-app-framework/README.md)  
-  *USE CASE: Industrial grade infrastructure where you have separate Systems Engineering group to own XML files.*
-- [Service Template Wrappers: Composed UMAA Service Template Classes](examples/service-template-wrappers/README.md)  
-  *USE CASE: Rapid prototyping and to maintain flexibility.*  
-- [Dynamic Types Python: Dynamic Data Pub/Sub](examples/dynamic-types-python/README.md)  
-  *USE CASE: Debugging/Simulation/Testing of UMAA topic data.*
+
+## Examples
+
+### [XML-Based Application Framework](examples/xml-app-framework/README.md)
+Centralized XML configuration for DDS entities, components, and QoS profiles. Ideal for large systems with separate systems engineering teams managing configuration files independently from application code.
+
+**When to use:** You need strict separation between systems configuration and software development, or want a single source of truth for DDS infrastructure that can be shared across C++ and Python applications.
+
+### [Service Template Wrappers](examples/service-template-wrappers/README.md)
+C++ template classes that compose UMAA services programmatically with AsyncWaitset support. Provides flexibility to dynamically build components at runtime.
+
+**When to use:** You're doing rapid prototyping, need runtime flexibility to compose services, or prefer a code-centric approach over XML configuration.
+
+### [Dynamic Types Python](examples/dynamic-types-python/README.md)
+Python scripts using DynamicData API for runtime type instantiation without code generation. Perfect for testing, debugging, and simulating UMAA messages.
+
+**When to use:** You need quick debugging/testing without recompiling, want to simulate specific UMAA messages, or need flexible data inspection during development.
+
+---
+
 - [CMAKE modules](#cmake-modules)
 - [Record/Replay/Convert](#recordreplayconvert-usage-examples) usage examples    
   *Examples of Record/Replay/Convert DDS Messages for offline analysis* 
@@ -70,8 +84,7 @@ and then compile them into a single shared library.
 
 This makes it more convenient to link your source code against when developing.   
 
-In each example, we generate all the Type support code into the example's `build/umaa_cpp11_gen` folder and  
-then use that code to create a shared lib. 
+The build system generates all Type support code into `build/umaa_cpp11_gen` and creates a shared library (`libumaa_types.so`) in `build/datamodel/lib`. 
 
 ### Python data types
 With Python, `rtiddsgen` converts the types into Python modules that we can then reference in our Python scripts.  
@@ -98,9 +111,44 @@ To mitigate this on Linux systems, one of the options is to [increase the UDP bu
 ## CMAKE modules
 This repo pulls in a git submodule from [rticonnextdds-cmake-utils](https://github.com/rticommunity/rticonnextdds-cmake-utils).  
 
-The `rticonnextdds-cmake-utils` repo provides convenient CMAKE utils to find Connext, call `rtiddsgen` and pass in IDL files as an argument. 
+The `rticonnextdds-cmake-utils` repo provides convenient CMAKE utils to find Connext, call `rtiddsgen` and pass in IDL files as an argument.
 
-Each example builds independently with its own CMakeLists.txt that generates UMAA type support code into a local `build/umaa_cpp11_gen` folder and creates a shared library. See individual example READMEs for build instructions.
+### Build System Architecture
+**All builds must be performed from the repository root.** Standalone subfolder builds are not supported.
+
+The build system generates UMAA type support code (~600 IDL files) into `build/umaa_cpp11_gen` and creates a shared library (`libumaa_types.so`) in `build/datamodel/lib`. Examples then link against this library.
+
+#### Building Everything
+```bash
+# Source the Connext environment script
+source <connext_install_dir>/resource/scripts/rtisetenv_<target>.bash
+# Example: source /opt/rti_connext_dds-7.3.0/resource/scripts/rtisetenv_x64Linux4gcc7.3.0.bash
+
+# Build all targets
+mkdir -p build && cd build
+cmake ..
+make -j1  # Sequential build recommended due to large number of IDL targets
+```
+
+#### Building Individual Targets
+You can build specific components without rebuilding everything:
+
+```bash
+cd build
+
+# Build just the datamodel library
+make umaa_types
+
+# Build specific examples
+make service_autopilot      # Service template wrappers example
+make xml_app_autopilot      # XML-based framework example
+```
+
+Executables are output to:
+- `build/examples/service-template-wrappers/service_autopilot`
+- `build/examples/xml-app-framework/xml_app_autopilot`
+
+**Note:** Individual IDL file targets are also available (e.g., `make LandmarkReportType.idl_datamodel`) if you need to regenerate specific types during development.
 
 ## Record/Replay/Convert usage examples
 Connext includes a set of services that can capture selected DDS traffic and store in a SQLite database to allow for 

@@ -48,17 +48,28 @@ the following command to pull all the dependencies:
 git submodule update --init --recursive
 ```
 
-## Configure
-```sh
-cd examples/service-template-wrappers
-cmake -B build -DCMAKE_BUILD_TYPE=Release
-```
-
 ## Build
+**All builds must be performed from the repository root.**
+
 ```sh
-cmake --build ./build --config Release
+# Source the Connext environment script
+source <connext_install_dir>/resource/scripts/rtisetenv_<target>.bash
+# Example: source /opt/rti_connext_dds-7.3.0/resource/scripts/rtisetenv_x64Linux4gcc7.3.0.bash
+
+# From repository root
+cd rticonnextdds-usecases-umaa
+mkdir -p build && cd build
+cmake ..
+
+# Build everything
+make -j1  # Sequential build recommended
+
+# Or build just this example
+make service_autopilot
 ```  
-*NOTE: Will take ~ 15 minutes as it is compiling all the IDL types into a shared library*
+*NOTE: Initial build takes ~15 minutes as it compiles all UMAA IDL types into a shared library*
+
+Executable is output to: `build/examples/service-template-wrappers/service_autopilot`
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
