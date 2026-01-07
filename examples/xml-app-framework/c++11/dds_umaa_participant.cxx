@@ -140,22 +140,18 @@ void DDSUMAAParticipant::setup_async_waitset()
     // Class documentation:
     // https://community.rti.com/static/documentation/connext-dds/current/doc/api/connext_dds/api_cpp2/classrti_1_1core_1_1cond_1_1AsyncWaitSet.html#a9a0a88fa860f0d4cf06b115dee5e6d5c
 
-    // Add Global Vector Status Condition and Keyed Data Handler function
+    // Add Global Vector Command Status Condition and callback
     dds::core::cond::StatusCondition global_vector_sc(_globalvector_cmd_r);
     global_vector_sc.enabled_statuses(
             dds::core::status::StatusMask::data_available());
 
     global_vector_sc->handler([this](dds::core::cond::Condition) {
-        this->process_keyed_samples<GlobalVectorCommandType>(
+        this->process_samples<GlobalVectorCommandType>(
                 _globalvector_cmd_r,
-                _globalvector_commands,
-                _active_globalvector_command_instance);
+                _on_globalvector_command);
     });
 
-    // Add Speed Report Status Condition and Non-Keyed Data Handler function
-    // This data could be handled with Keys/Instances if receiving from multiple
-    // sources as each source_id creates a unique Instance
-    // but in this case we are only receiving from one source for simplicity
+    // Add Speed Report Status Condition and callback
     dds::core::cond::StatusCondition speed_report_sc(_speed_report_r);
     speed_report_sc.enabled_statuses(
             dds::core::status::StatusMask::data_available());
@@ -163,11 +159,10 @@ void DDSUMAAParticipant::setup_async_waitset()
     speed_report_sc->handler([this](dds::core::cond::Condition) {
         this->process_samples<SpeedReportType>(
                 _speed_report_r,
-                _speed_report_data);
+                _on_speed_report);
     });
 
-    // Add Global Pose Report Status Condition and Non-Keyed Data Handler
-    // function
+    // Add Global Pose Report Status Condition and callback
     dds::core::cond::StatusCondition global_pose_report_sc(
             _globalpose_report_r);
     global_pose_report_sc.enabled_statuses(
@@ -176,11 +171,11 @@ void DDSUMAAParticipant::setup_async_waitset()
     global_pose_report_sc->handler([this](dds::core::cond::Condition) {
         this->process_samples<GlobalPoseReportType>(
                 _globalpose_report_r,
-                _globalpose_report_data);
+                _on_globalpose_report);
     });
 
 
-    // Add Velocity Report Status Condition and Non-Keyed Data Handler function
+    // Add Velocity Report Status Condition and callback
     dds::core::cond::StatusCondition velocity_report_sc(_velocity_report_r);
     velocity_report_sc.enabled_statuses(
             dds::core::status::StatusMask::data_available());
@@ -188,7 +183,7 @@ void DDSUMAAParticipant::setup_async_waitset()
     velocity_report_sc->handler([this](dds::core::cond::Condition) {
         this->process_samples<VelocityReportType>(
                 _velocity_report_r,
-                _velocity_report_data);
+                _on_velocity_report);
     });
 
     // Attach conditions. The Async Waitset will be triggered when any of the
@@ -200,91 +195,4 @@ void DDSUMAAParticipant::setup_async_waitset()
 
     // Start Async Waitset
     _async_waitset.start();
-}
-
-// Function not used, created as reference example
-template <typename T>
-void DDSUMAAParticipant::process_samples(DataReader<T> reader, T &current_data)
-{
-    // Take all samples. This will reset the StatusCondition
-    dds::sub::LoanedSamples<T> samples = reader.take();
-
-    // Release status condition in case other threads can process outstanding
-    // samples
-    _async_waitset.unlock_condition(dds::core::cond::StatusCondition(reader));
-
-    const std::lock_guard<std::mutex> lock(_m_globalvector);
-
-    // Process sample
-    for (const auto &sample : samples) {
-        if (sample.info().valid()) {
-            std::cout << "Received " << reader.topic_description().type_name()
-                      << " Sample\n"
-                      << std::endl;
-
-            current_data = sample.data();
-            // std::cout << sample.data() << std::endl;
-        }
-    }
-}
-
-template <typename T>
-void DDSUMAAParticipant::process_keyed_samples(
-        DataReader<T> reader,
-        std::unordered_map<dds::core::InstanceHandle, dds::sub::Sample<T>>
-                &keyed_data_map,
-        dds::core::InstanceHandle &active_instance)
-{
-    auto samples = reader.take();
-
-    // Release status condition in case other threads can process outstanding
-    // samples
-    _async_waitset.unlock_condition(dds::core::cond::StatusCondition(reader));
-
-    const std::lock_guard<std::mutex> lock(_m_globalvector);
-
-    // For keyed data i.e. commands we will be updating a list of current/past
-    // commands to keep track of their state as well as their most recent data.
-
-    // Process sample
-    for (const auto &sample : samples) {
-        /** If no "Active" Instance, assign next "Alive" instance.
-         *  This is purely an API usage example and not necessarily reflect
-         *  UMAA Flow Control compliance/your design requirements.
-         *
-         *  You might want to test for "oldest" Instance etc.
-         *
-         *  However it will most likely be somewhat similar.
-         **/
-        if (active_instance == dds::core::null
-            && sample.info().state().instance_state()
-                    == InstanceState::alive()) {
-            active_instance = sample.info().instance_handle();
-        }
-
-
-        /**  Add Loaned Sample to map
-         * Only retaining last sample within application state in this case
-         *
-         * If meta sample will construct empty <T> object i.e blank sample.data
-         * object (Meta sample == unregister/dispose)
-         */
-        keyed_data_map[sample.info().instance_handle()] =
-                dds::sub::Sample<T>(sample);
-
-        // Uncomment to Print out
-        // std::cout << keyed_data_map[sample.info().instance_handle()].data();
-
-        if (sample.info().valid()) {
-            //     std::cout << "Received new data sample for: "
-            //               << reader.topic_description().type_name() <<
-            //               std::endl;
-
-        } else {
-            //     This would be a meta sample such as unregister or dispose
-            //     std::cout << "Received new meta sample for: "
-            //               << reader.topic_description().type_name() <<
-            //               std::endl;
-        }
-    }
 }

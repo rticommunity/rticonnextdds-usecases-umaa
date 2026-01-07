@@ -66,20 +66,22 @@ using namespace UMAA::MM::ConditionalReport;
  * @brief Service provider for GlobalVectorControl, handling command, status, ack, and execution status topics.
  */
 class GlobalVectorControlServiceProvider
-        : public DDSUMAAControlService<
+        : public DDSUMAAControlProvider<
                   GlobalVectorCommandType,
                   GlobalVectorCommandStatusType,
                   GlobalVectorCommandAckReportType,
                   GlobalVectorExecutionStatusReportType> {
 public:
-    GlobalVectorControlServiceProvider(std::shared_ptr<DDSUMAAParticipant> &dp)
-            : DDSUMAAControlService(
+    GlobalVectorControlServiceProvider(
+            std::shared_ptr<DDSUMAAParticipant> &dp,
+            CommandCallback on_command_callback)
+            : DDSUMAAControlProvider(
                       dp,
-                      SERVICE_KIND::PROVIDER,
                       GlobalVectorCommandTypeTopic,
                       GlobalVectorCommandStatusTypeTopic,
                       GlobalVectorCommandAckReportTypeTopic,
-                      GlobalVectorExecutionStatusReportTypeTopic)
+                      GlobalVectorExecutionStatusReportTypeTopic,
+                      on_command_callback)
     {
         std::cout << "Creating GlobalVectorControlServiceProvider" << std::endl;
     }
@@ -89,20 +91,26 @@ public:
  * @brief Service consumer for GlobalVectorControl, handling command, status, ack, and execution status topics.
  */
 class GlobalVectorControlServiceConsumer
-        : public DDSUMAAControlService<
+        : public DDSUMAAControlConsumer<
                   GlobalVectorCommandType,
                   GlobalVectorCommandStatusType,
                   GlobalVectorCommandAckReportType,
                   GlobalVectorExecutionStatusReportType> {
 public:
-    GlobalVectorControlServiceConsumer(std::shared_ptr<DDSUMAAParticipant> &dp)
-            : DDSUMAAControlService(
+    GlobalVectorControlServiceConsumer(
+            std::shared_ptr<DDSUMAAParticipant> &dp,
+            CommandStatusCallback on_command_status_callback,
+            CommandAckCallback on_command_ack_callback,
+            ExecutionStatusCallback on_execution_status_callback)
+            : DDSUMAAControlConsumer(
                       dp,
-                      SERVICE_KIND::CONSUMER,
                       GlobalVectorCommandTypeTopic,
                       GlobalVectorCommandStatusTypeTopic,
                       GlobalVectorCommandAckReportTypeTopic,
-                      GlobalVectorExecutionStatusReportTypeTopic)
+                      GlobalVectorExecutionStatusReportTypeTopic,
+                      on_command_status_callback,
+                      on_command_ack_callback,
+                      on_execution_status_callback)
     {
         std::cout << "Creating GlobalVectorControlServiceConsumer" << std::endl;
     }
@@ -112,13 +120,15 @@ public:
  * @brief Consumer service for SpeedReportType topic.
  */
 class SpeedReportServiceConsumer
-        : public DDSUMAAStatusService<SpeedReportType> {
+        : public DDSUMAAStatusConsumer<SpeedReportType> {
 public:
-    SpeedReportServiceConsumer(std::shared_ptr<DDSUMAAParticipant> &dp)
-            : DDSUMAAStatusService(
+    SpeedReportServiceConsumer(
+            std::shared_ptr<DDSUMAAParticipant> &dp,
+            StatusCallback on_status_callback)
+            : DDSUMAAStatusConsumer(
                       dp,
-                      SERVICE_KIND::CONSUMER,
-                      SpeedReportTypeTopic)
+                      SpeedReportTypeTopic,
+                      on_status_callback)
     {
         std::cout << "Creating SpeedReportServiceConsumer" << std::endl;
     }
@@ -128,12 +138,11 @@ public:
  * @brief Provider service for SpeedReportType topic.
  */
 class SpeedReportServiceProvider
-        : public DDSUMAAStatusService<SpeedReportType> {
+        : public DDSUMAAStatusProvider<SpeedReportType> {
 public:
     SpeedReportServiceProvider(std::shared_ptr<DDSUMAAParticipant> &dp)
-            : DDSUMAAStatusService(
+            : DDSUMAAStatusProvider(
                       dp,
-                      SERVICE_KIND::PROVIDER,
                       SpeedReportTypeTopic)
     {
         std::cout << "Creating SpeedReportServiceProvider" << std::endl;
@@ -144,13 +153,15 @@ public:
  * @brief Consumer service for VelocityReportType topic.
  */
 class VelocityReportServiceConsumer
-        : public DDSUMAAStatusService<VelocityReportType> {
+        : public DDSUMAAStatusConsumer<VelocityReportType> {
 public:
-    VelocityReportServiceConsumer(std::shared_ptr<DDSUMAAParticipant> &dp)
-            : DDSUMAAStatusService(
+    VelocityReportServiceConsumer(
+            std::shared_ptr<DDSUMAAParticipant> &dp,
+            StatusCallback on_status_callback)
+            : DDSUMAAStatusConsumer(
                       dp,
-                      SERVICE_KIND::CONSUMER,
-                      VelocityReportTypeTopic)
+                      VelocityReportTypeTopic,
+                      on_status_callback)
     {
         std::cout << "Creating VelocityReportServiceConsumer" << std::endl;
     }
@@ -160,12 +171,11 @@ public:
  * @brief Provider service for VelocityReportType topic.
  */
 class VelocityReportServiceProvider
-        : public DDSUMAAStatusService<VelocityReportType> {
+        : public DDSUMAAStatusProvider<VelocityReportType> {
 public:
     VelocityReportServiceProvider(std::shared_ptr<DDSUMAAParticipant> &dp)
-            : DDSUMAAStatusService(
+            : DDSUMAAStatusProvider(
                       dp,
-                      SERVICE_KIND::PROVIDER,
                       VelocityReportTypeTopic)
     {
         std::cout << "Creating VelocityReportServiceProvider" << std::endl;
@@ -176,13 +186,15 @@ public:
  * @brief Consumer service for HealthReportType topic.
  */
 class HealthReportServiceConsumer
-        : public DDSUMAAStatusService<HealthReportType> {
+        : public DDSUMAAStatusConsumer<HealthReportType> {
 public:
-    HealthReportServiceConsumer(std::shared_ptr<DDSUMAAParticipant> &dp)
-            : DDSUMAAStatusService(
+    HealthReportServiceConsumer(
+            std::shared_ptr<DDSUMAAParticipant> &dp,
+            StatusCallback on_status_callback)
+            : DDSUMAAStatusConsumer(
                       dp,
-                      SERVICE_KIND::CONSUMER,
-                      HealthReportTypeTopic)
+                      HealthReportTypeTopic,
+                      on_status_callback)
     {
         std::cout << "Creating HealthReportServiceConsumer" << std::endl;
     }
@@ -192,12 +204,11 @@ public:
  * @brief Provider service for HealthReportType topic.
  */
 class HealthReportServiceProvider
-        : public DDSUMAAStatusService<HealthReportType> {
+        : public DDSUMAAStatusProvider<HealthReportType> {
 public:
     HealthReportServiceProvider(std::shared_ptr<DDSUMAAParticipant> &dp)
-            : DDSUMAAStatusService(
+            : DDSUMAAStatusProvider(
                       dp,
-                      SERVICE_KIND::PROVIDER,
                       HealthReportTypeTopic)
     {
         std::cout << "Creating HealthReportServiceProvider" << std::endl;
@@ -208,13 +219,15 @@ public:
  * @brief Consumer service for GlobalPoseReportType topic.
  */
 class GlobalPoseReportServiceConsumer
-        : public DDSUMAAStatusService<GlobalPoseReportType> {
+        : public DDSUMAAStatusConsumer<GlobalPoseReportType> {
 public:
-    GlobalPoseReportServiceConsumer(std::shared_ptr<DDSUMAAParticipant> &dp)
-            : DDSUMAAStatusService(
+    GlobalPoseReportServiceConsumer(
+            std::shared_ptr<DDSUMAAParticipant> &dp,
+            StatusCallback on_status_callback)
+            : DDSUMAAStatusConsumer(
                       dp,
-                      SERVICE_KIND::CONSUMER,
-                      GlobalPoseReportTypeTopic)
+                      GlobalPoseReportTypeTopic,
+                      on_status_callback)
     {
         std::cout << "Creating GlobalPoseReportServiceConsumer" << std::endl;
     }
@@ -224,12 +237,11 @@ public:
  * @brief Provider service for GlobalPoseReportType topic.
  */
 class GlobalPoseReportServiceProvider
-        : public DDSUMAAStatusService<GlobalPoseReportType> {
+        : public DDSUMAAStatusProvider<GlobalPoseReportType> {
 public:
     GlobalPoseReportServiceProvider(std::shared_ptr<DDSUMAAParticipant> &dp)
-            : DDSUMAAStatusService(
+            : DDSUMAAStatusProvider(
                       dp,
-                      SERVICE_KIND::PROVIDER,
                       GlobalPoseReportTypeTopic)
     {
         std::cout << "Creating GlobalPoseReportServiceProvider" << std::endl;
