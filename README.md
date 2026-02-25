@@ -12,6 +12,8 @@ A starting point for developing to the UMAA standard with Connext.
 - [UMAA Data Types](#umaa-data-types)
 - [Best Practices](#best-practices)   
   Recommendations and general guidelines
+- [DDS Interoperability](#dds-interoperability)  
+  Settings for interoperability with other DDS vendors
 - [CMAKE modules](#cmake-modules)
 - [Record/Replay/Convert](#recordreplayconvert-usage-examples)
 
@@ -113,7 +115,46 @@ from fully completing.
 
 To mitigate this on Linux systems, one of the options is to [increase the UDP buffers](https://community.rti.com/howto/improve-rti-connext-dds-network-performance-linux-systems).
 
+## DDS Interoperability
 
+When communicating with other DDS vendors, the following settings enable compliance with the DDS-XTYPES specification.
+
+### XTypes Compliance Mask
+
+The `NDDS_XTYPES_COMPLIANCE_MASK` environment variable configures RTI Connext to use DDS specification-compliant behavior for type compatibility. This is set in the `start_component.sh` scripts:
+
+```bash
+export NDDS_XTYPES_COMPLIANCE_MASK=0x000001a9
+```
+
+This mask enables several interoperability flags:
+- Comply with DDS-XTYPES 1.3 specification serialization rules
+- Enable strict type validation for cross-vendor communication
+
+See [RTI Connext XTYPES Compliance Documentation](https://community.rti.com/static/documentation/connext-dds/7.3.0/doc/manuals/connext_dds_professional/extensible_types_guide/extensible_types/Data_Representation.htm#ComplianceMask) for full details on compliance mask values.
+
+### DataReader Representation QoS
+
+Different DDS implementations handle data representation differently:
+- **Eclipse Cyclone DDS** uses XCDR2 serialization by default
+- **RTI Connext** determines the serialization format based on the data type's extensibility kind (XCDR for final types, XCDR2 for appendable/mutable types)
+
+To ensure interoperability, the `dds_spec_interop` QoS profile in [qos/umaa_qos_lib.xml](qos/umaa_qos_lib.xml) configures DataReaders to accept both XCDR and XCDR2 data representations:
+
+```xml
+<datareader_qos>
+  <representation>
+    <value>
+      <element>XCDR_DATA_REPRESENTATION</element>
+      <element>XCDR2_DATA_REPRESENTATION</element>
+    </value>
+  </representation>
+</datareader_qos>
+```
+
+This setting ensures that readers can receive data from writers using either serialization format, which is essential when interoperating with other DDS implementations that may default to different representations.
+
+See [RTI Connext DATA_REPRESENTATION QoS Documentation](https://community.rti.com/static/documentation/connext-dds/current/doc/manuals/connext_dds_professional/users_manual/users_manual/DATAREPRESENTATION_Qos.htm) for more details.
 
 ## CMAKE modules
 This repo pulls in a git submodule from [rticonnextdds-cmake-utils](https://github.com/rticommunity/rticonnextdds-cmake-utils).  

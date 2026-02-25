@@ -23,24 +23,42 @@ to use the software.
       You would need to synchronize QOS with the other party you are communicating with.
       The below is just for reference of the simplest mechanisms/best practices to implement. 
       -->
+    <qos_profile name="dds_spec_interop">
 
+
+      <!-- 
+        CycloneDDS uses XCDR2 by default. 
+        RTI determines it based on IDL annotation of the data type.
+        This allows the reader to match with either.
+        See README for more detail. 
+        -->
+      <datareader_qos>
+        <representation>
+          <value>
+            <element>XCDR_DATA_REPRESENTATION</element>
+            <element>XCDR2_DATA_REPRESENTATION</element>
+          </value>
+        </representation>
+      </datareader_qos>
+
+    </qos_profile>
 
     <qos_profile name="default_participant">
+
         <domain_participant_qos>
 
-
         <transport_builtin>
-            <!-- 
+          <!-- 
             Default transports are UDPv4 | SHMEM
             Disable SHMEM for diagnostics, Wireshark etc
             -->
-            <!-- <mask>UDPv4</mask> -->
+          <!-- <mask>UDPv4</mask> -->
 
-            <!-- Modify the SHMEM transport -->
+          <!-- Modify the SHMEM transport -->
             <shmem>
 
-              <!-- Pipe out SHMEM traffic to loopback for capture on Wireshark -->
-              <!-- <enable_udp_debugging>true</enable_udp_debugging>
+            <!-- Pipe out SHMEM traffic to loopback for capture on Wireshark -->
+            <!-- <enable_udp_debugging>true</enable_udp_debugging>
               <udp_debugging_address>127.0.0.1</udp_debugging_address>
               <udp_debugging_port>7399</udp_debugging_port> -->
 
@@ -122,6 +140,7 @@ to use the software.
 
     </qos_profile>
 
+
     <!-- 
       This is where we create our QOS profiles per "Data Pattern" i.e. aperiodic commands, periodic status reports etc.
       -->
@@ -140,8 +159,11 @@ to use the software.
           -->
         <element>BuiltinQosSnippetLib::QosPolicy.Reliability.BestEffort</element>
 
-         <!-- Automatically cleanup disposed Instances-->
+        <!-- Automatically cleanup disposed Instances -->
         <element>umaa_qos_lib::instance_resource_cleanup</element>
+
+        <!-- Interop with other vendors -->
+        <element>umaa_qos_lib::dds_spec_interop</element>
       </base_name>
 
       <datawriter_qos>
@@ -198,6 +220,10 @@ to use the software.
 
         <!-- Automatically cleanup disposed Instances-->
         <element>umaa_qos_lib::instance_resource_cleanup</element>
+
+        <!-- Interop with other vendors -->
+        <element>umaa_qos_lib::dds_spec_interop</element>
+
       </base_name>
 
       <datawriter_qos>
@@ -288,6 +314,9 @@ to use the software.
 
         <!-- Automatically cleanup disposed Instances-->
         <element>umaa_qos_lib::instance_resource_cleanup</element>
+
+        <!-- Interop with other vendors -->
+        <element>umaa_qos_lib::dds_spec_interop</element>
       </base_name>
 
       <datawriter_qos>

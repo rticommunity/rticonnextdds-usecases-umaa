@@ -17,6 +17,9 @@ cmd=""
 
 export VERBOSITY=2
 
+# Interop with other DDS Vendors
+export NDDS_XTYPES_COMPLIANCE_MASK=0x000001a9
+
 if [ "$1" == "autopilot" ] || [ "$1" == "usvnav" ] || [ "$1" == "globalvectorcmd" ] || [ "$1" == "logging" ]; then
     component=$1
     if [ "$2" ]; then
