@@ -131,7 +131,9 @@ This mask enables several interoperability flags:
 - Comply with DDS-XTYPES 1.3 specification serialization rules
 - Enable strict type validation for cross-vendor communication
 
-See [RTI Connext XTYPES Compliance Documentation](https://community.rti.com/static/documentation/connext-dds/7.3.0/doc/manuals/connext_dds_professional/extensible_types_guide/extensible_types/Data_Representation.htm#ComplianceMask) for full details on compliance mask values.
+This can also be done programmatically if necessary for a specific endpoint.
+
+See [RTI Connext XTYPES Compliance Documentation](https://community.rti.com/static/documentation/connext-dds/7.3.0/doc/manuals/connext_dds_professional/extensible_types_guide/extensible_types/Data_Representation.htm#ComplianceMask) for full details on compliance mask values/API's.
 
 ### DataReader Representation QoS
 
@@ -291,6 +293,7 @@ cd services
 ./start_convert.sh xcdr_to_csv
 
 ```
+
 
 
 
