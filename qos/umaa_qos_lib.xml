@@ -23,8 +23,20 @@ to use the software.
       You would need to synchronize QOS with the other party you are communicating with.
       The below is just for reference of the simplest mechanisms/best practices to implement. 
       -->
-    <qos_profile name="dds_spec_interop">
 
+
+    <!-- Use the following QoS Profile as a snippet to interop with Cyclone -->
+    <qos_profile name="cyclone_interop">
+    <!-- 
+      RTI uses a key_hash for instance handles. 
+      This property publishes the key value for scenarios where the dispoe is 
+      the first message received for this instance. 
+      -->
+      <datawriter_qos>
+        <protocol>
+          <serialize_key_with_dispose>true</serialize_key_with_dispose>
+        </protocol>
+      </datawriter_qos>
 
       <!-- 
         CycloneDDS uses XCDR2 by default. 
@@ -162,8 +174,6 @@ to use the software.
         <!-- Automatically cleanup disposed Instances -->
         <element>umaa_qos_lib::instance_resource_cleanup</element>
 
-        <!-- Interop with other vendors -->
-        <element>umaa_qos_lib::dds_spec_interop</element>
       </base_name>
 
       <datawriter_qos>
@@ -220,9 +230,6 @@ to use the software.
 
         <!-- Automatically cleanup disposed Instances-->
         <element>umaa_qos_lib::instance_resource_cleanup</element>
-
-        <!-- Interop with other vendors -->
-        <element>umaa_qos_lib::dds_spec_interop</element>
 
       </base_name>
 
@@ -315,8 +322,6 @@ to use the software.
         <!-- Automatically cleanup disposed Instances-->
         <element>umaa_qos_lib::instance_resource_cleanup</element>
 
-        <!-- Interop with other vendors -->
-        <element>umaa_qos_lib::dds_spec_interop</element>
       </base_name>
 
       <datawriter_qos>
