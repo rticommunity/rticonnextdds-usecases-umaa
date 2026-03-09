@@ -104,30 +104,38 @@ void DDSUMAAParticipant::lookup_entities()
                     HealthReportTypeTopic);
         }
 
+        // Option1: Hardcode QoS Profile in Code
+        // _health_report_w = dds::pub::DataWriter<HealthReportType>(
+        //     dds::pub::Publisher(_participant),
+        //     health_report_topic,
+        //     QosProvider::Default()->datawriter_qos("umaa_qos_lib::aperiodic_durable_reliable_qos"));
+
+    // Option2: Use External QoS Profile "Assigner"
         _health_report_w = dds::pub::DataWriter<HealthReportType>(
-                dds::pub::Publisher(_participant),
-                health_report_topic);
+            dds::pub::Publisher(_participant),
+            health_report_topic,
+            QosProvider::Default().extensions().datawriter_qos_w_topic_name("umaa_qos_lib::topic_qos_assign", HealthReportTypeTopic));
 
         // Get inputs(readers)
         _speed_report_r = find_datareader_by_topic_name<
-                dds::sub::DataReader<SpeedReportType>>(
-                find_subscriber(_participant, SUBSCRIBER_NAME),
-                SpeedReportTypeTopic);
+            dds::sub::DataReader<SpeedReportType>>(
+            find_subscriber(_participant, SUBSCRIBER_NAME),
+            SpeedReportTypeTopic);
 
         _globalpose_report_r = find_datareader_by_topic_name<
-                dds::sub::DataReader<GlobalPoseReportType>>(
-                find_subscriber(_participant, SUBSCRIBER_NAME),
-                GlobalPoseReportTypeTopic);
+            dds::sub::DataReader<GlobalPoseReportType>>(
+            find_subscriber(_participant, SUBSCRIBER_NAME),
+            GlobalPoseReportTypeTopic);
 
         _velocity_report_r = find_datareader_by_topic_name<
-                dds::sub::DataReader<VelocityReportType>>(
-                find_subscriber(_participant, SUBSCRIBER_NAME),
-                VelocityReportTypeTopic);
+            dds::sub::DataReader<VelocityReportType>>(
+            find_subscriber(_participant, SUBSCRIBER_NAME),
+            VelocityReportTypeTopic);
 
         _globalvector_cmd_r = find_datareader_by_topic_name<
-                dds::sub::DataReader<GlobalVectorCommandType>>(
-                find_subscriber(_participant, SUBSCRIBER_NAME),
-                GlobalVectorCommandTypeTopic);
+            dds::sub::DataReader<GlobalVectorCommandType>>(
+            find_subscriber(_participant, SUBSCRIBER_NAME),
+            GlobalVectorCommandTypeTopic);
 
         std::cout << "Found entities" << std::endl;
     } catch (const std::exception &e) {
