@@ -177,6 +177,10 @@ to use the software.
       </base_name>
 
       <datawriter_qos>
+        <!-- This traces the QoS profiles used so it is easy to see in Admin Console -->
+        <publication_name>
+          <name>periodic_best_effort_qos</name>
+        </publication_name>
 
         <!-- 
           Send messages out "Asynchronously" without blocking the main thread as UMAA messages tend to be large. 
@@ -201,10 +205,16 @@ to use the software.
       </datawriter_qos>
 
       <datareader_qos>
+        <!-- This traces the QoS profiles used so it is easy to see in Admin Console -->
+        <subscription_name>
+          <name>periodic_best_effort_qos</name>
+        </subscription_name>
+
         <history>
           <depth>1</depth>
           <kind>KEEP_LAST_HISTORY_QOS</kind>
         </history>
+
       </datareader_qos>
 
     </qos_profile>
@@ -234,6 +244,10 @@ to use the software.
       </base_name>
 
       <datawriter_qos>
+      <!-- This traces the QoS profiles used so it is easy to see in Admin Console -->
+      <publication_name>
+        <name>aperiodic_durable_reliable_qos</name>
+      </publication_name>
 
         <!-- This spins up a separate thread to send out samples asynchronously -->
         <publish_mode>
@@ -291,6 +305,13 @@ to use the software.
       </datawriter_qos>
 
       <datareader_qos>
+
+        <!-- This traces the QoS profiles used so it is easy to see in Admin Console -->
+        <subscription_name>
+          <name>aperiodic_durable_reliable_qos</name>
+        </subscription_name>
+
+
         <history>
           <kind>KEEP_ALL_HISTORY_QOS</kind>
         </history>
@@ -325,6 +346,12 @@ to use the software.
       </base_name>
 
       <datawriter_qos>
+
+        <!-- This traces the QoS profiles used so it is easy to see in Admin Console -->
+        <publication_name>
+          <name>aperiodic_reliable_qos</name>
+        </publication_name>
+
 
         <!-- This will spin up a separate thread to send out samples asynchronously as UMAA messages can be very large -->
         <publish_mode>
@@ -378,6 +405,10 @@ to use the software.
       </datawriter_qos>
 
       <datareader_qos>
+        <!-- This traces the QoS profiles used so it is easy to see in Admin Console -->
+        <subscription_name>
+          <name>aperiodic_reliable_qos</name>
+        </subscription_name>
 
         <!-- 
           This checks every 10 seconds if the DataWriter is still alive. 
