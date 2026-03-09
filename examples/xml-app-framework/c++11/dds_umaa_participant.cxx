@@ -93,11 +93,20 @@ void DDSUMAAParticipant::register_types()
 void DDSUMAAParticipant::lookup_entities()
 {
     try {
-        // Get outputs(writers)
-        _health_report_w = find_datawriter_by_topic_name<
-                dds::pub::DataWriter<HealthReportType>>(
-                find_publisher(_participant, PUBLISHER_NAME),
-                HealthReportTypeTopic);
+        // Get outputs(writers) - find topic, create if not found
+        dds::topic::Topic<HealthReportType> health_report_topic =
+                dds::topic::find<dds::topic::Topic<HealthReportType>>(
+                        _participant,
+                        HealthReportTypeTopic);
+        if (health_report_topic == dds::core::null) {
+            health_report_topic = dds::topic::Topic<HealthReportType>(
+                    _participant,
+                    HealthReportTypeTopic);
+        }
+
+        _health_report_w = dds::pub::DataWriter<HealthReportType>(
+                dds::pub::Publisher(_participant),
+                health_report_topic);
 
         // Get inputs(readers)
         _speed_report_r = find_datareader_by_topic_name<

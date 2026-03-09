@@ -113,10 +113,10 @@ to use the software.
                 </data_writer>
 
                 <!-- HealthReport Service (Provider) -->
-                <data_writer name="HealthReportType"
+                <!-- <data_writer name="HealthReportType"
                     topic_ref="UMAA::SO::HealthReport::HealthReportType">
                     <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
-                </data_writer>
+                </data_writer> -->
 
                 <!-- MissionPlanConstraintControl Service (Consumer) -->
                 <data_writer name="MissionPlanConstraintAddCommandType"
