@@ -16,7 +16,7 @@ to use the software.
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
   <!-- UMAA QOS Library -->
-  <qos_library name="umaa_qos_lib">
+  <qos_library name="UMAAQoSLib">
 
     <!-- 
       NOTE: Currently there are no official required UMAA QOS settings.
@@ -26,7 +26,7 @@ to use the software.
 
 
     <!-- Use the following QoS Profile as a snippet to interop with Cyclone -->
-    <qos_profile name="cyclone_interop">
+    <qos_profile name="CycloneInterop">
     <!-- 
       RTI uses a key_hash for instance handles. 
       This property publishes the key value for scenarios where the dispoe is 
@@ -55,7 +55,7 @@ to use the software.
 
     </qos_profile>
 
-    <qos_profile name="default_participant">
+    <qos_profile name="DefaultUMAAParticipant">
 
         <domain_participant_qos>
 
@@ -76,21 +76,6 @@ to use the software.
 
             </shmem>
           </transport_builtin>
-
-        <!-- Uncomment to enable Monitoring Libraries. 
-            Ensure NNDSHOME variable is set. Be aware of resource impact-->
-        <!--<property>
-              <value>
-                    <element>
-                      <name>rti.monitor.library</name>
-                      <value>rtimonitoring</value>
-                  </element>
-                  <element>
-                      <name>rti.monitor.create_function</name>
-                      <value>RTIDefaultMonitor_create</value>
-                  </element> 
-              </value>
-          </property>-->
 
           <resource_limits>
           <!-- 
@@ -114,9 +99,31 @@ to use the software.
           </discovery_config>
 
         </domain_participant_qos>
+
+        <!-- 
+          PRESENTATION QoS — required by UMAA ICDs for cross-topic ordering.
+          access_scope = TOPIC ensures samples from different topics within the same
+          Subscriber are ordered. ordered_access = true guarantees the elements-first
+          protocol: specialization/element samples arrive before the root sample
+          in the subscriber cache.
+          -->
+        <subscriber_qos>
+          <presentation>
+            <access_scope>TOPIC_PRESENTATION_QOS</access_scope>
+            <ordered_access>true</ordered_access>
+          </presentation>
+        </subscriber_qos>
+
+        <publisher_qos>
+          <presentation>
+            <access_scope>TOPIC_PRESENTATION_QOS</access_scope>
+            <ordered_access>true</ordered_access>
+          </presentation>
+        </publisher_qos>
+
     </qos_profile>
 
-    <qos_profile name="instance_resource_cleanup">
+    <qos_profile name="InstanceResourceAutoCleanup">
 
       <!-- 
           Every unique Instance allocates a new buffer. 
@@ -130,7 +137,6 @@ to use the software.
             <nanosec>DURATION_ZERO_NSEC</nanosec>
           </autopurge_disposed_instances_delay>
         </writer_data_lifecycle>
-
       </datawriter_qos>
 
       <datareader_qos>
@@ -157,9 +163,9 @@ to use the software.
       This is where we create our QOS profiles per "Data Pattern" i.e. aperiodic commands, periodic status reports etc.
       -->
 
-    <qos_profile name="periodic_best_effort_qos" base_name="BuiltinQosLib::Generic.Common">
+    <qos_profile name="TelemetryQoS" base_name="BuiltinQosLib::Generic.Common">
 
-      <!-- This profile is intended for Periodic status/report data -->
+      <!-- This profile is intended for Periodic status/report(Telemetry) data -->
 
       <base_name>
         <!-- 
@@ -172,11 +178,18 @@ to use the software.
         <element>BuiltinQosSnippetLib::QosPolicy.Reliability.BestEffort</element>
 
         <!-- Automatically cleanup disposed Instances -->
-        <element>umaa_qos_lib::instance_resource_cleanup</element>
+        <element>UMAAQoSLib::InstanceResourceAutoCleanup</element>
 
       </base_name>
 
       <datawriter_qos>
+
+      <!-- Use to verify in Admin Console QoS Profile used -->
+      <publication_name>
+        <name>
+          TelemetryQoSWriter
+        </name>
+      </publication_name>
 
         <!-- 
           Send messages out "Asynchronously" without blocking the main thread as UMAA messages tend to be large. 
@@ -201,6 +214,14 @@ to use the software.
       </datawriter_qos>
 
       <datareader_qos>
+        <!-- Use to verify in Admin Console QoS Profile used -->
+        <subscription_name>
+          <name>
+            TelemetryQoSReader
+          </name>
+        </subscription_name>
+
+
         <history>
           <depth>1</depth>
           <kind>KEEP_LAST_HISTORY_QOS</kind>
@@ -209,7 +230,7 @@ to use the software.
 
     </qos_profile>
 
-    <qos_profile name="aperiodic_durable_reliable_qos" base_name="BuiltinQosLib::Generic.Common">
+    <qos_profile name="ConfigQoS" base_name="BuiltinQosLib::Generic.Common">
 
       <!-- 
         This QOS profile is intended for aperiodic messages(Configurations etc) that we need to ensure get delivered as well as
@@ -229,11 +250,18 @@ to use the software.
         <element>BuiltinQosSnippetLib::QosPolicy.Durability.TransientLocal</element>
 
         <!-- Automatically cleanup disposed Instances-->
-        <element>umaa_qos_lib::instance_resource_cleanup</element>
+        <element>UMAAQoSLib::InstanceResourceAutoCleanup</element>
 
       </base_name>
 
       <datawriter_qos>
+
+        <!-- Use to verify in Admin Console QoS Profile used -->
+        <publication_name>
+          <name>
+            ConfigQoSWriter
+          </name>
+        </publication_name>
 
         <!-- This spins up a separate thread to send out samples asynchronously -->
         <publish_mode>
@@ -259,8 +287,8 @@ to use the software.
           NOTE: max_samples_per_instance must be < max_samples
           -->
         <resource_limits>
-          <max_samples>100</max_samples>
-          <max_samples_per_instance>50</max_samples_per_instance>
+          <max_samples>500</max_samples>
+          <max_samples_per_instance>500</max_samples_per_instance>
         </resource_limits>
 
         <!-- 
@@ -291,6 +319,14 @@ to use the software.
       </datawriter_qos>
 
       <datareader_qos>
+
+        <!-- Use to verify in Admin Console QoS Profile used -->
+        <subscription_name>
+          <name>
+            ConfigQoSReader
+          </name>
+        </subscription_name>
+
         <history>
           <kind>KEEP_ALL_HISTORY_QOS</kind>
         </history>
@@ -304,14 +340,14 @@ to use the software.
           NOTE: max_samples_per_instance must be < max_samples
           -->
         <resource_limits>
-          <max_samples>100</max_samples>
-          <max_samples_per_instance>50</max_samples_per_instance>
+          <max_samples>500</max_samples>
+          <max_samples_per_instance>500</max_samples_per_instance>
         </resource_limits>
       </datareader_qos>
 
     </qos_profile>
 
-    <qos_profile name="aperiodic_reliable_qos" base_name="BuiltinQosLib::Generic.Common">
+    <qos_profile name="CommandQoS" base_name="BuiltinQosLib::Generic.Common">
 
       <!-- This QOS profile is intended for aperiodic messages(Commands/SetElements/CommandStatus etc.) that need to be resent if not received -->
 
@@ -320,11 +356,18 @@ to use the software.
         <element>BuiltinQosSnippetLib::QosPolicy.Reliability.Reliable</element>
 
         <!-- Automatically cleanup disposed Instances-->
-        <element>umaa_qos_lib::instance_resource_cleanup</element>
+        <element>UMAAQoSLib::InstanceResourceAutoCleanup</element>
 
       </base_name>
 
       <datawriter_qos>
+
+        <!-- Use to verify in Admin Console QoS Profile used -->
+        <publication_name>
+          <name>
+            CommandQoSWriter
+          </name>
+        </publication_name>
 
         <!-- This will spin up a separate thread to send out samples asynchronously as UMAA messages can be very large -->
         <publish_mode>
@@ -351,8 +394,8 @@ to use the software.
           NOTE: max_samples_per_instance must be < max_samples
           -->
         <resource_limits>
-          <max_samples>100</max_samples>
-          <max_samples_per_instance>50</max_samples_per_instance>
+          <max_samples>500</max_samples>
+          <max_samples_per_instance>500</max_samples_per_instance>
         </resource_limits>
 
         <!-- 
@@ -371,13 +414,20 @@ to use the software.
 
         <liveliness>
           <lease_duration>
-            <sec>4</sec>
+            <sec>5</sec>
             <nanosec>0</nanosec>
           </lease_duration>
         </liveliness>
       </datawriter_qos>
 
       <datareader_qos>
+
+        <!-- Use to verify in Admin Console QoS Profile used -->
+        <subscription_name>
+          <name>
+            CommandQoSReader
+          </name>
+        </subscription_name>
 
         <!-- 
           This checks every 10 seconds if the DataWriter is still alive. 
@@ -403,8 +453,8 @@ to use the software.
           NOTE: max_samples_per_instance must be < max_samples
           -->
         <resource_limits>
-          <max_samples>100</max_samples>
-          <max_samples_per_instance>50</max_samples_per_instance>
+          <max_samples>500</max_samples>
+          <max_samples_per_instance>500</max_samples_per_instance>
         </resource_limits>
 
       </datareader_qos>
@@ -412,7 +462,124 @@ to use the software.
     </qos_profile>
 
 
-    <qos_profile name="topic_qos_assign">
+    <qos_profile name="DefaultQoS" base_name="BuiltinQosLib::Generic.Common">
+
+      <!-- 
+        Default QoS profile for vendor integration / custom topics.
+        Inherits from BuiltinQosLib::Generic.Common with no additional settings.
+
+        If you are integrating with other DDS vendors (e.g. CycloneDDS),
+        uncomment the CycloneInterop snippet below:
+        -->
+
+      <!-- <base_name>
+        <element>UMAAQoSLib::CycloneInterop</element>
+      </base_name> -->
+
+    </qos_profile>
+
+
+    <qos_profile name="ElementQoS" base_name="BuiltinQosLib::Generic.Common">
+
+      <!-- This QOS profile is intended for aperiodic messages(Commands/SetElements/CommandStatus
+      etc.) that need to be resent if not received -->
+
+      <base_name>
+        <!-- Send messages out "Reliably". Message will get resent if not received -->
+        <element>BuiltinQosSnippetLib::QosPolicy.Reliability.Reliable</element>
+
+        <!-- Automatically cleanup disposed Instances-->
+        <element>UMAAQoSLib::InstanceResourceAutoCleanup</element>
+
+      </base_name>
+
+      <datawriter_qos>
+
+        <!-- Use to verify in Admin Console QoS Profile used -->
+        <publication_name>
+          <name>
+            ElementQoSWriter
+          </name>
+        </publication_name>
+
+        <!-- This will spin up a separate thread to send out samples asynchronously as UMAA messages
+        can be very large -->
+        <publish_mode>
+          <kind>ASYNCHRONOUS_PUBLISH_MODE_QOS</kind>
+        </publish_mode>
+
+        <!-- 
+          For these samples Commands etc., the assumption is you need to keep all messages.
+
+          In this scenario, no samples will be overwritten, and samples will only be removed from the 
+          queue when they have been acknowledged as received from the reader side.
+          -->
+        <history>
+          <kind>KEEP_ALL_HISTORY_QOS</kind>
+        </history>
+
+        <!-- 
+          If using KEEP_ALL History, we want to set some bounds on the samples we can keep in the queue to
+          limit unbounded memory growth.  
+          When either of these resource limits are hit, the writer will block for the configured
+          max_blocking_time
+
+          NOTE: These values are arbitrary and just for reference usage, adjust to your system requirements
+          NOTE: max_samples_per_instance must be < max_samples
+          -->
+        <resource_limits>
+          <max_samples>500</max_samples>
+          <max_samples_per_instance>500</max_samples_per_instance>
+        </resource_limits>
+
+        <!-- 
+          Because we are using KEEP_ALL history, when either of the resource limits are reached 
+          i.e. (max_samples, max_samples_per_instance), 
+          the writer will block for the below configured time before returning a Timeout Error
+
+          Adjust as necessary per your system requirements.
+          -->
+        <reliability>
+          <max_blocking_time>
+            <sec>1</sec>
+            <nanosec>DURATION_INFINITE_NSEC</nanosec>
+          </max_blocking_time>
+        </reliability>
+
+      </datawriter_qos>
+
+      <datareader_qos>
+
+        <!-- Use to verify in Admin Console QoS Profile used -->
+        <subscription_name>
+          <name>
+            ElementQoSReader
+          </name>
+        </subscription_name>
+
+        <history>
+          <kind>KEEP_ALL_HISTORY_QOS</kind>
+        </history>
+
+        <!-- 
+          If using KEEP_ALL History, we want to set some bounds on the samples we can keep in the queue to
+          limit unbounded memory growth.  
+          When either of these resource limits are hit, the reader will block from acknowledging new samples
+
+          NOTE: These values are arbitrary and just for reference usage, adjust to your system requirements
+          NOTE: max_samples_per_instance must be < max_samples
+          -->
+        <resource_limits>
+          <max_samples>500</max_samples>
+          <max_samples_per_instance>500</max_samples_per_instance>
+        </resource_limits>
+
+      </datareader_qos>
+
+    </qos_profile>
+
+
+    <qos_profile name="AssignerQoS">
 
       <!-- 
         We can use UMAA Topic suffixes to automatically assign QOS using the "topic_filter" tag.
@@ -423,27 +590,42 @@ to use the software.
         These filters could be refined further based on the behavior of data going over the Topics 
         -->
 
-      <!-- Set Topics to Best Effort Profile   -->
-      <datawriter_qos topic_filter="*ReportType" base_name="periodic_best_effort_qos" />
-      <datareader_qos topic_filter="*ReportType" base_name="periodic_best_effort_qos" />
+      <datawriter_qos topic_filter="*ReportType" base_name="TelemetryQoS" />
+      <datareader_qos topic_filter="*ReportType" base_name="TelemetryQoS" />
 
-      <!-- Set Topics to Durable and Reliable Profile -->
-      <datawriter_qos topic_filter="*CommandType" base_name="aperiodic_reliable_qos" />
-      <datareader_qos topic_filter="*CommandType" base_name="aperiodic_reliable_qos" />
 
-      <!-- This will override the previous *ReportType filter -->
-      <datawriter_qos topic_filter="*SpecsReportType" base_name="aperiodic_durable_reliable_qos" />
-      <datareader_qos topic_filter="*SpecsReportType" base_name="aperiodic_durable_reliable_qos" />
+      <datawriter_qos topic_filter="*SpecsReportType" base_name="ConfigQoS" />
+      <datareader_qos topic_filter="*SpecsReportType" base_name="ConfigQoS" />
 
-      <!-- Set Topics to Reliable Profile -->
-      <datawriter_qos topic_filter="*CommandStatusType" base_name="aperiodic_reliable_qos" />
-      <datareader_qos topic_filter="*CommandStatusType" base_name="aperiodic_reliable_qos" />
+      <datawriter_qos topic_filter="*ConfigReportType" base_name="ConfigQoS" />
+      <datareader_qos topic_filter="*ConfigReportType" base_name="ConfigQoS" />
 
-      <datawriter_qos topic_filter="*SetElement" base_name="aperiodic_reliable_qos" />
-      <datareader_qos topic_filter="*SetElement" base_name="aperiodic_reliable_qos" />
 
-      <datawriter_qos topic_filter="*ListElement" base_name="aperiodic_reliable_qos" />
-      <datareader_qos topic_filter="*ListElement" base_name="aperiodic_reliable_qos" />
+      <datawriter_qos topic_filter="*CommandType" base_name="CommandQoS" />
+      <datareader_qos topic_filter="*CommandType" base_name="CommandQoS" />
+
+      <datawriter_qos topic_filter="*CommandStatusType" base_name="CommandQoS" />
+      <datareader_qos topic_filter="*CommandStatusType" base_name="CommandQoS" />
+
+      <datawriter_qos topic_filter="*CommandAckReportType" base_name="CommandQoS" />
+      <datareader_qos topic_filter="*CommandAckReportType" base_name="CommandQoS" />
+
+      <datawriter_qos topic_filter="*ExecutionStatusType" base_name="CommandQoS" />
+      <datareader_qos topic_filter="*ExecutionStatusType" base_name="CommandQoS" />
+
+
+      <datawriter_qos topic_filter="*SetElement" base_name="ElementQoS" />
+      <datareader_qos topic_filter="*SetElement" base_name="ElementQoS" />
+
+      <datawriter_qos topic_filter="*ListElement" base_name="ElementQoS" />
+      <datareader_qos topic_filter="*ListElement" base_name="ElementQoS" />
+
+      <!-- 
+        Uncomment to apply DefaultQoS to all topics for integration baseline,
+        then refine with more specific filters above as needed.
+        -->
+      <!-- <datawriter_qos topic_filter="*" base_name="DefaultQoS" /> -->
+      <!-- <datareader_qos topic_filter="*" base_name="DefaultQoS" /> -->
 
     </qos_profile>
 
