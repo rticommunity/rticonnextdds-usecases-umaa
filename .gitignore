@@ -16,3 +16,7 @@ services/data/
 datamodel/umaa/cpp11_gen/
 
 build/
+
+python/tests/__pycache__/
+
+python/rtiumaapy/__pycache__/

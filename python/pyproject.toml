@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68.0", "setuptools-scm>=8.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rtiumaapy"
+version = "0.1.0"
+description = "RTI UMAA Python SDK — service templates for the Unmanned Maritime Autonomy Architecture"
+readme = "README.md"
+license = { text = "BSD-3-Clause" }
+requires-python = ">=3.13"
+dependencies = [
+    "rti.connext>=7.5.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24",
+]
+
+[tool.setuptools.packages.find]
+include = ["rtiumaapy*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
