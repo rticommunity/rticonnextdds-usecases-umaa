@@ -7,6 +7,8 @@ from rtiumaapy.timestamp import UmaaTimestamp
 from rtiumaapy.errors import AssemblyError, CommandResult, UmaaCommandException
 from rtiumaapy.dds_context import DDSContext
 from rtiumaapy.base_service import BaseService
+from rtiumaapy.report_provider import ReportProvider
+from rtiumaapy.report_consumer import ReportConsumer
 
 __all__ = [
     "GUIDUtil",
@@ -16,4 +18,6 @@ __all__ = [
     "CommandResult",
     "DDSContext",
     "BaseService",
+    "ReportProvider",
+    "ReportConsumer",
 ]

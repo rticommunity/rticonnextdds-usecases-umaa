@@ -103,3 +103,68 @@ install(DIRECTORY ${UMAA_CPP11_GEN_DIR}/
     DESTINATION include
     FILES_MATCHING PATTERN "*.hpp"
 )
+
+# ═══════════════════════════════════════════════════════════════════════════
+# Python codegen — generate flat Python type modules from UMAA IDL
+#
+# This target is NOT part of the default build.  Run it explicitly:
+#   cmake --build build --target gen_python_umaa_types
+#
+# It invokes rtiddsgen once per IDL file, directing every output into the
+# same flat directory (python/rtiumaapy/datamodel/).  The generated files
+# are checked into the repository so that downstream consumers do not need
+# rtiddsgen installed.
+#
+# NOTE: rtiddsgen ≥ 4.4.0 (Connext ≥ 7.5.0) supports -joinInputFiles
+#       which can consolidate all types into a single .py per domain.
+#       When the next LTS release is adopted, this target should be updated
+#       to use -joinInputFiles / -joinedFilesOutputName for a cleaner
+#       single-file-per-domain layout.
+#
+# NOTE: ConnextDdsCodegen.cmake ≥ 7.6.0 adds LANG "Python" support for
+#       connextdds_rtiddsgen_run().  When the vendored rticonnextdds-cmake-utils
+#       is updated to that version, this custom target can be replaced with
+#       the standard module.  Until then we invoke rtiddsgen directly.
+# ═══════════════════════════════════════════════════════════════════════════
+
+# Output into the rtiumaapy package so generated types ship with pip install
+get_filename_component(_PYTHON_PKG_DIR
+    "${CMAKE_CURRENT_SOURCE_DIR}/../python/rtiumaapy/datamodel" ABSOLUTE)
+set(UMAA_PYTHON_GEN_DIR "${_PYTHON_PKG_DIR}")
+
+# rtiddsgen executable — RTICODEGEN_DIR is set by FindRTIConnextDDS
+set(_RTIDDSGEN "${RTICODEGEN_DIR}/rtiddsgen")
+
+# Stamp file that proves the whole gen step completed
+set(_PYTHON_GEN_STAMP "${CMAKE_CURRENT_BINARY_DIR}/.gen_python_stamp")
+
+# Collect every IDL in the tree so CMake knows to re-run when they change
+file(GLOB_RECURSE _ALL_IDL_FILES "${UMAA_IDL_DIR}/UMAA/*.idl")
+
+# Build one COMMAND per IDL file — all output goes to the same flat dir
+list(LENGTH _ALL_IDL_FILES _idl_count)
+set(_PYTHON_IDL_COMMANDS)
+foreach(_idl_file IN LISTS _ALL_IDL_FILES)
+    list(APPEND _PYTHON_IDL_COMMANDS
+        COMMAND "${_RTIDDSGEN}"
+            -language Python
+            -d "${UMAA_PYTHON_GEN_DIR}"
+            -replace
+            -I "${UMAA_IDL_DIR}"
+            "${_idl_file}"
+    )
+endforeach()
+
+add_custom_command(
+    OUTPUT "${_PYTHON_GEN_STAMP}"
+    COMMAND ${CMAKE_COMMAND} -E make_directory "${UMAA_PYTHON_GEN_DIR}"
+    ${_PYTHON_IDL_COMMANDS}
+    COMMAND ${CMAKE_COMMAND} -E touch "${_PYTHON_GEN_STAMP}"
+    DEPENDS ${_ALL_IDL_FILES}
+    COMMENT "Generating flat Python types from UMAA IDL (${_idl_count} files)..."
+)
+
+add_custom_target(gen_python_umaa_types
+    DEPENDS "${_PYTHON_GEN_STAMP}"
+)
+

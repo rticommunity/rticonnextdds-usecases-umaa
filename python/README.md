@@ -74,7 +74,7 @@ Services are organized into **tiers** based on their DDS entity pattern:
 
 ```python
 import rti.asyncio
-from rtiumaapy import DDSContext
+from rtiumaapy import DDSContext, ReportConsumer
 
 async def main():
     ctx = DDSContext(domain_id=0, qos_file="umaa_qos_lib.xml")
@@ -84,8 +84,8 @@ async def main():
         report_type=GPSReportType,
         report_topic="GPSReportTypeTopic")
 
-    # Command provider — accept engine commands
-    engine = EngineControlProvider(ctx, source_id=my_source_id)
+    # Command provider — accept engine commands  (PR 4+)
+    # engine = EngineControlProvider(ctx, source_id=my_source_id)
 
     await ctx.run_until_shutdown()  # Runs until SIGINT/SIGTERM
 
@@ -120,7 +120,6 @@ python/
 │   ├── errors.py             # UmaaCommandException, AssemblyError, CommandResult
 │   ├── dds_context.py        # DDSContext — DDS lifecycle + service registry
 │   ├── base_service.py       # BaseService ABC
-│   ├── qos.py                # QoS profile constants + topic-to-profile resolver
 │   ├── report_provider.py    # Tier 1: publish reports
 │   ├── report_consumer.py    # Tier 1: subscribe to reports
 │   ├── command_provider.py   # Tier 0: accept and process commands (6 async hooks)
@@ -152,8 +151,8 @@ The SDK is being built incrementally across 9 pull requests, each independently 
 | PR | Name | Scope | Status |
 |----|------|-------|--------|
 | **1** | Project Skeleton + Utilities | `pyproject.toml`, `GUIDUtil`, `UmaaTimestamp`, error types | ✅ Complete |
-| **2** | DDSContext + BaseService | DDS lifecycle, entity factories, service registry, shutdown | Planned |
-| **3** | ReportProvider / Consumer | Tier 1 — simplest pub/sub round-trip | Planned |
+| **2** | DDSContext + BaseService | DDS lifecycle, entity factories, service registry, shutdown | ✅ Complete |
+| **3** | ReportProvider / Consumer | Tier 1 — simplest pub/sub round-trip | ✅ Complete |
 | **4** | CommandProvider / Consumer | Tier 0 — full command state machine, CFT, disposal | Planned |
 | **5** | Multi-Topic + Large Set | Tier 2 — `LargeSetWriter` CRUD, QueryCondition assembly | Planned |
 | **6** | Large List | Tier 3 — `LargeListWriter` CRUD, linked-list assembly | Planned |
@@ -195,7 +194,7 @@ The test suite has two layers:
 | **Unit tests** | `tests/` | No | Pure-Python utilities (`GUIDUtil`, `UmaaTimestamp`, error types) |
 | **Integration tests** | `tests/` | Yes | Real DDS pub/sub through `DDSContext` with loopback transport |
 
-Integration tests use a real `DDSContext`, real DataReaders/DataWriters, and localhost-only loopback transport — no mocking of DDS APIs. Each test gets a unique domain ID to prevent interference.
+Integration tests use a real `DDSContext`, real DataReaders/DataWriters, and localhost-only loopback transport — no mocking of DDS APIs.
 
 ```bash
 pytest tests/ -v                # Run all tests
@@ -204,6 +203,37 @@ pytest tests/ -v -m dds         # Integration tests only
 ```
 
 Integration tests cover full round-trip scenarios: provider writes → consumer callback fires, command lifecycle through all state transitions, multi-topic assembly with QueryConditions, and graceful shutdown with instance disposal. They run fast (~10ms each) via loopback transport.
+
+### Test Isolation — DomainParticipant Partitions
+
+Every integration test gets its own **UUID-based DomainParticipant partition** so that tests sharing the same domain ID are fully isolated. The `dds_context` fixture in `conftest.py` applies a random partition on setup and tears it down on completion:
+
+```python
+# conftest.py (simplified)
+@pytest_asyncio.fixture()
+async def dds_context(qos_file):
+    ctx = DDSContext(domain_id=0, qos_file=qos_file)
+
+    partition = dds.Partition([str(uuid.uuid4())])
+    dp_qos = ctx.participant.qos
+    dp_qos << partition
+    ctx.participant.qos = dp_qos
+    await asyncio.sleep(0.5)  # partition propagation
+
+    try:
+        yield ctx
+    finally:
+        await ctx.shutdown()
+        await rti_asyncio.close()  # CRITICAL — see below
+```
+
+### Critical: `rti.asyncio.close()` in Teardown
+
+`rti.asyncio` uses a **module-level singleton** `_DEFAULT_DISPATCHER` (a `WaitSetAsyncDispatcher`) that caches a reference to the current event loop. When `pytest-asyncio` creates a fresh event loop for the next test, the stale dispatcher is still bound to the old (now closed) loop. This causes `take_async()` to silently hang in all subsequent tests.
+
+**Any test suite using `take_async()` with per-test event loops MUST call `await rti.asyncio.close()` in fixture teardown.**
+
+Without this call, the first test using `take_async()` will pass, but every subsequent test's `take_async()` will never yield data.
 
 ---
 

@@ -127,8 +127,15 @@ to use the software.
 
       <!-- 
           Every unique Instance allocates a new buffer. 
-          By cleaning up the resources every time we call "dispose" we minimize unbounded memory growth. 
-          For 6.1 this is binary either zero or infinite. In 7.2 configurable values are allowed.
+          By cleaning up the resources after "dispose" we minimize unbounded memory growth.
+
+          Writer: autopurge_disposed_instances_delay supports configurable values
+          (0 to 1 year) in RTI Connext 7.3.1 LTS — set to ZERO for immediate cleanup.
+
+          Reader: autopurge_disposed_instances_delay only supports DURATION_ZERO
+          or DURATION_INFINITE (even in 7.3.1). We use INFINITE so that dispose
+          notifications remain visible to application code; the
+          autopurge_disposed_samples_delay (10 s) cleans up stale disposed samples.
         -->
       <datawriter_qos>
         <writer_data_lifecycle>
@@ -142,8 +149,8 @@ to use the software.
       <datareader_qos>
         <reader_data_lifecycle>
           <autopurge_disposed_instances_delay>
-            <sec>DURATION_ZERO_SEC</sec>
-            <nanosec>DURATION_ZERO_NSEC</nanosec>
+            <sec>DURATION_INFINITE_SEC</sec>
+            <nanosec>DURATION_INFINITE_NSEC</nanosec>
           </autopurge_disposed_instances_delay>
 
           <autopurge_disposed_samples_delay>
@@ -152,9 +159,45 @@ to use the software.
           </autopurge_disposed_samples_delay>
 
         </reader_data_lifecycle>
+
+        <!--
+          UMAA only disposes instances — it never unregisters them.  Without a
+          cap, the reader's instance table grows without bound.
+
+          max_instances = 1000 puts a hard ceiling on tracked instances.
+          When the limit is reached, instance_replacement controls which
+          existing slot is recycled to make room:
+
+            disposed_instance_removal = FULLY_PROCESSED_INSTANCES
+              Reclaim disposed instances whose samples have already been
+              taken by the application.  This is the safest option because
+              it never discards data the application has not yet read.
+
+            no_writers_instance_removal = FULLY_PROCESSED_INSTANCES
+              Same policy for instances whose last writer has left but that
+              were not explicitly disposed.
+
+            alive_instance_removal = NO_INSTANCE (default)
+              Never evict an alive instance — better to fail loudly than
+              silently drop live data.
+
+          See: https://community.rti.com/static/documentation/connext-dds/current/
+               doc/manuals/connext_dds_professional/users_manual/users_manual/
+               DATA_READER_RESOURCE_LIMITS_Qos.htm#Configur
+          -->
+        <resource_limits>
+          <max_instances>1000</max_instances>
+        </resource_limits>
+
+        <reader_resource_limits>
+          <instance_replacement>
+            <disposed_instance_removal>FULLY_PROCESSED_INSTANCE_REMOVAL</disposed_instance_removal>
+            <no_writers_instance_removal>FULLY_PROCESSED_INSTANCE_REMOVAL</no_writers_instance_removal>
+            <alive_instance_removal>NO_INSTANCE_REMOVAL</alive_instance_removal>
+          </instance_replacement>
+        </reader_resource_limits>
+
       </datareader_qos>
-
-
 
     </qos_profile>
 
@@ -249,7 +292,7 @@ to use the software.
         -->
         <element>BuiltinQosSnippetLib::QosPolicy.Durability.TransientLocal</element>
 
-        <!-- Automatically cleanup disposed Instances-->
+        <!-- Automatically cleanup disposed Instances -->
         <element>UMAAQoSLib::InstanceResourceAutoCleanup</element>
 
       </base_name>
@@ -355,7 +398,7 @@ to use the software.
         <!-- Send messages out "Reliably". Message will get resent if not received -->
         <element>BuiltinQosSnippetLib::QosPolicy.Reliability.Reliable</element>
 
-        <!-- Automatically cleanup disposed Instances-->
+        <!-- Automatically cleanup disposed Instances -->
         <element>UMAAQoSLib::InstanceResourceAutoCleanup</element>
 
       </base_name>
@@ -488,7 +531,7 @@ to use the software.
         <!-- Send messages out "Reliably". Message will get resent if not received -->
         <element>BuiltinQosSnippetLib::QosPolicy.Reliability.Reliable</element>
 
-        <!-- Automatically cleanup disposed Instances-->
+        <!-- Automatically cleanup disposed Instances -->
         <element>UMAAQoSLib::InstanceResourceAutoCleanup</element>
 
       </base_name>
@@ -587,12 +630,21 @@ to use the software.
         All the datawriters/datareaders defined in the <domain_participant> sections are assigned to this.
         Then depending on their suffix the selected QOS will be applied.
 
+        IMPORTANT: topic_filter uses FIRST-MATCH-WINS semantics. Place more specific
+        patterns (e.g. *SpecsReportType) BEFORE broader ones (e.g. *ReportType)
+        so they are not shadowed.
+
         These filters could be refined further based on the behavior of data going over the Topics 
         -->
 
-      <datawriter_qos topic_filter="*ReportType" base_name="TelemetryQoS" />
-      <datareader_qos topic_filter="*ReportType" base_name="TelemetryQoS" />
-
+      <!-- 
+        Uncomment to apply DefaultQoS as a baseline for all topics.
+        Useful for integration with other teams / DDS vendors.
+        Because topic_filter is first-match-wins, this MUST remain at the top
+        so that the more specific filters below override it.
+        -->
+      <!-- <datawriter_qos topic_filter="*" base_name="DefaultQoS" /> -->
+      <!-- <datareader_qos topic_filter="*" base_name="DefaultQoS" /> -->
 
       <datawriter_qos topic_filter="*SpecsReportType" base_name="ConfigQoS" />
       <datareader_qos topic_filter="*SpecsReportType" base_name="ConfigQoS" />
@@ -600,32 +652,27 @@ to use the software.
       <datawriter_qos topic_filter="*ConfigReportType" base_name="ConfigQoS" />
       <datareader_qos topic_filter="*ConfigReportType" base_name="ConfigQoS" />
 
+      <datawriter_qos topic_filter="*CommandAckReportType" base_name="CommandQoS" />
+      <datareader_qos topic_filter="*CommandAckReportType" base_name="CommandQoS" />
 
-      <datawriter_qos topic_filter="*CommandType" base_name="CommandQoS" />
-      <datareader_qos topic_filter="*CommandType" base_name="CommandQoS" />
+      <datawriter_qos topic_filter="*ReportType" base_name="TelemetryQoS" />
+      <datareader_qos topic_filter="*ReportType" base_name="TelemetryQoS" />
+
 
       <datawriter_qos topic_filter="*CommandStatusType" base_name="CommandQoS" />
       <datareader_qos topic_filter="*CommandStatusType" base_name="CommandQoS" />
 
-      <datawriter_qos topic_filter="*CommandAckReportType" base_name="CommandQoS" />
-      <datareader_qos topic_filter="*CommandAckReportType" base_name="CommandQoS" />
-
       <datawriter_qos topic_filter="*ExecutionStatusType" base_name="CommandQoS" />
       <datareader_qos topic_filter="*ExecutionStatusType" base_name="CommandQoS" />
 
+      <datawriter_qos topic_filter="*CommandType" base_name="CommandQoS" />
+      <datareader_qos topic_filter="*CommandType" base_name="CommandQoS" />
 
       <datawriter_qos topic_filter="*SetElement" base_name="ElementQoS" />
       <datareader_qos topic_filter="*SetElement" base_name="ElementQoS" />
 
       <datawriter_qos topic_filter="*ListElement" base_name="ElementQoS" />
       <datareader_qos topic_filter="*ListElement" base_name="ElementQoS" />
-
-      <!-- 
-        Uncomment to apply DefaultQoS to all topics for integration baseline,
-        then refine with more specific filters above as needed.
-        -->
-      <!-- <datawriter_qos topic_filter="*" base_name="DefaultQoS" /> -->
-      <!-- <datareader_qos topic_filter="*" base_name="DefaultQoS" /> -->
 
     </qos_profile>
 

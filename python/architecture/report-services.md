@@ -34,46 +34,59 @@ class ReportProvider(BaseService):
         service_name: str,
         report_type,
         report_topic: str,
-        source_id: bytes,  # NumericGUID — required for keyed instance disposal
+        key_holder: object,  # pre-built key instance for dispose on close()
     ):
         super().__init__(ctx, service_name)
         self._report_type = report_type
-        self._source_id = source_id
-        topic = ctx.create_topic(report_type, report_topic)
-        self._writer = ctx.create_writer(topic)
+        self._report_topic = report_topic
+        self._key_holder = key_holder
+        self._writer = ctx.create_writer(report_type, report_topic)
 
     def write(self, sample) -> None:
         """Publish a report sample."""
         self._writer.write(sample)
 
     async def close(self) -> None:
-        # Dispose report instance per UMAA §5.2.1.3:
-        # "When a provider stops publishing a report, it shall dispose
-        # its instance to notify consumers."
-        # C++ SDK: ReportProvider destructor creates key-only sample and disposes.
+        """Dispose the keyed instance and close the writer.
+
+        Disposing notifies subscribers that this provider has stopped
+        publishing (instance state → NOT_ALIVE_DISPOSED) per UMAA §5.2.1.3.
+
+        A short sleep between dispose_instance() and writer.close() ensures
+        the BEST_EFFORT dispose message is transmitted on the wire before
+        the transport is torn down.
+
+        This method is idempotent — calling it more than once is safe.
+        """
         try:
-            key_holder = self._report_type()
-            key_holder.source = self._source_id
-            handle = self._writer.lookup_instance(key_holder)
+            handle = self._writer.lookup_instance(self._key_holder)
             if handle != dds.InstanceHandle.nil():
                 self._writer.dispose_instance(handle)
+                await asyncio.sleep(0.1)  # let BEST_EFFORT dispose transmit
+        except dds.AlreadyClosedError:
+            return
         except Exception:
             _logger.debug("Report instance dispose failed (may not have been registered)")
-        self._writer.close()
+        try:
+            self._writer.close()
+        except dds.AlreadyClosedError:
+            pass
 ```
 
 ### Usage
 
 ```python
+key = GPSReportType(source=my_source_id)
+
 gps_provider = ReportProvider(ctx,
     service_name="GPSReport",
     report_type=GPSReportType,
-    report_topic=GPSReportTypeTopic,
-    source_id=my_source_id,  # NumericGUID bytes
+    report_topic="GPSReportType",
+    key_holder=key,
 )
 
 # Publish periodically
-report = GPSReportType()
+report = GPSReportType(source=my_source_id)
 report.latitude = 38.9072
 report.longitude = -77.0369
 gps_provider.write(report)
@@ -106,16 +119,36 @@ class ReportConsumer(BaseService):
         on_report: Optional[Callable] = None,
     ):
         super().__init__(ctx, service_name)
-        topic = ctx.create_topic(report_type, report_topic)
-        self._reader = ctx.create_reader(topic)
+        self._report_type = report_type
+        self._report_topic = report_topic
         self._on_report = on_report
+        self._reader = ctx.create_reader(report_type, report_topic)
+        self._task: Optional[asyncio.Task] = None
+
+    def start(self) -> None:
+        """Start the asynchronous event loop that delivers samples.
+
+        Creates an ``asyncio.Task`` running ``_run()``.  The task is
+        automatically cancelled when ``close()`` is called.
+        """
+        if self._task is None or self._task.done():
+            self._task = asyncio.ensure_future(self._run())
 
     async def _run(self) -> None:
-        """Main event loop — delivers samples to callback."""
-        async for samples in self._reader.take_async():
-            for sample in samples:
-                if sample.info.valid and self._on_report:
+        """Async event loop — delivers valid samples to *on_report*.
+
+        ``take_async()`` yields individual ``Sample`` objects (with ``.data``
+        and ``.info`` attributes), one at a time.
+        """
+        async for sample in self._reader.take_async():
+            if sample.info.valid and self._on_report is not None:
+                try:
                     self._on_report(sample.data)
+                except Exception:
+                    _logger.exception(
+                        "on_report callback failed for %s",
+                        self._report_topic,
+                    )
 
     @property
     def reader(self) -> dds.DataReader:
@@ -123,7 +156,21 @@ class ReportConsumer(BaseService):
         return self._reader
 
     async def close(self) -> None:
-        self._reader.close()
+        """Cancel the event loop task and close the DataReader.
+
+        This method is idempotent — calling it more than once is safe.
+        """
+        if self._task is not None and not self._task.done():
+            self._task.cancel()
+            try:
+                await self._task
+            except asyncio.CancelledError:
+                pass
+            self._task = None
+        try:
+            self._reader.close()
+        except dds.AlreadyClosedError:
+            pass
 ```
 
 ### Usage
@@ -133,11 +180,12 @@ def handle_gps(report):
     print(f"GPS: {report.latitude}, {report.longitude}")
 
 gps_consumer = ReportConsumer(ctx,
-    service_name="GPSReport",
+    service_name="GPSConsumer",
     report_type=GPSReportType,
-    report_topic=GPSReportTypeTopic,
+    report_topic="GPSReportType",
     on_report=handle_gps,
 )
+gps_consumer.start()
 ```
 
 ---

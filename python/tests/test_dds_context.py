@@ -7,6 +7,18 @@ import rti.connextdds as dds
 
 from rtiumaapy.dds_context import DDSContext
 from tests.conftest import DEFAULT_DOMAIN_ID, SimpleReport
+from rtiumaapy.datamodel.AccelerationReportType import (
+    UMAA_SA_AccelerationStatus_AccelerationReportTypeTopic as AccelerationReportTypeTopic,
+)
+from rtiumaapy.datamodel.BatteryReportType import (
+    UMAA_EO_BatteryStatus_BatteryReportTypeTopic as BatteryReportTypeTopic,
+)
+from rtiumaapy.datamodel.GPSReportType import (
+    UMAA_SEM_GPSStatus_GPSReportTypeTopic as GPSReportTypeTopic,
+)
+from rtiumaapy.datamodel.AnchorCommandType import (
+    UMAA_EO_AnchorControl_AnchorCommandTypeTopic as AnchorCommandTypeTopic,
+)
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -80,19 +92,19 @@ class TestProperties:
 class TestTopicCache:
     @pytest.mark.asyncio
     async def test_get_topic_creates(self, dds_context: DDSContext):
-        topic = dds_context.get_topic(SimpleReport, "TestReportType")
-        assert topic.name == "TestReportType"
+        topic = dds_context.get_topic(SimpleReport, GPSReportTypeTopic)
+        assert topic.name == GPSReportTypeTopic
 
     @pytest.mark.asyncio
     async def test_get_topic_caches(self, dds_context: DDSContext):
-        t1 = dds_context.get_topic(SimpleReport, "TestReportType")
-        t2 = dds_context.get_topic(SimpleReport, "TestReportType")
+        t1 = dds_context.get_topic(SimpleReport, GPSReportTypeTopic)
+        t2 = dds_context.get_topic(SimpleReport, GPSReportTypeTopic)
         assert t1 is t2
 
     @pytest.mark.asyncio
     async def test_different_names_different_topics(self, dds_context: DDSContext):
-        t1 = dds_context.get_topic(SimpleReport, "AlphaReportType")
-        t2 = dds_context.get_topic(SimpleReport, "BetaReportType")
+        t1 = dds_context.get_topic(SimpleReport, AccelerationReportTypeTopic)
+        t2 = dds_context.get_topic(SimpleReport, BatteryReportTypeTopic)
         assert t1.name != t2.name
 
 
@@ -104,20 +116,20 @@ class TestTopicCache:
 class TestCreateWriter:
     @pytest.mark.asyncio
     async def test_creates_writer(self, dds_context: DDSContext):
-        writer = dds_context.create_writer(SimpleReport, "TestReportType")
+        writer = dds_context.create_writer(SimpleReport, GPSReportTypeTopic)
         assert isinstance(writer, dds.DataWriter)
 
     @pytest.mark.asyncio
     async def test_report_qos_best_effort(self, dds_context: DDSContext):
         """*ReportType topics should get TelemetryQoS → BEST_EFFORT."""
-        writer = dds_context.create_writer(SimpleReport, "SpeedReportType")
+        writer = dds_context.create_writer(SimpleReport, AccelerationReportTypeTopic)
         qos = writer.qos
         assert qos.reliability.kind == dds.ReliabilityKind.BEST_EFFORT
 
     @pytest.mark.asyncio
     async def test_command_qos_reliable(self, dds_context: DDSContext):
         """*CommandType topics should get CommandQoS → RELIABLE."""
-        writer = dds_context.create_writer(SimpleReport, "SpeedCommandType")
+        writer = dds_context.create_writer(SimpleReport, AnchorCommandTypeTopic)
         qos = writer.qos
         assert qos.reliability.kind == dds.ReliabilityKind.RELIABLE
 
@@ -125,12 +137,12 @@ class TestCreateWriter:
 class TestCreateReader:
     @pytest.mark.asyncio
     async def test_creates_reader(self, dds_context: DDSContext):
-        reader = dds_context.create_reader(SimpleReport, "TestReportType")
+        reader = dds_context.create_reader(SimpleReport, GPSReportTypeTopic)
         assert isinstance(reader, dds.DataReader)
 
     @pytest.mark.asyncio
     async def test_report_qos_best_effort(self, dds_context: DDSContext):
-        reader = dds_context.create_reader(SimpleReport, "SpeedReportType")
+        reader = dds_context.create_reader(SimpleReport, AccelerationReportTypeTopic)
         qos = reader.qos
         assert qos.reliability.kind == dds.ReliabilityKind.BEST_EFFORT
 
@@ -139,7 +151,7 @@ class TestCreateFilteredReader:
     @pytest.mark.asyncio
     async def test_creates_filtered_reader(self, dds_context: DDSContext):
         reader, cft = dds_context.create_filtered_reader(
-            SimpleReport, "TestCommandType", "1=0"
+            SimpleReport, AnchorCommandTypeTopic, "1=0"
         )
         assert isinstance(reader, dds.DataReader)
         assert isinstance(cft, dds.ContentFilteredTopic)
@@ -148,7 +160,7 @@ class TestCreateFilteredReader:
     @pytest.mark.asyncio
     async def test_filter_can_be_updated(self, dds_context: DDSContext):
         reader, cft = dds_context.create_filtered_reader(
-            SimpleReport, "TestCommandType", "1=0"
+            SimpleReport, AnchorCommandTypeTopic, "1=0"
         )
         cft.set_filter(dds.Filter("id > 5"))
         assert cft.filter_expression == "id > 5"
@@ -156,7 +168,7 @@ class TestCreateFilteredReader:
     @pytest.mark.asyncio
     async def test_custom_filter_name(self, dds_context: DDSContext):
         reader, cft = dds_context.create_filtered_reader(
-            SimpleReport, "TestCommandType", "1=0",
+            SimpleReport, AnchorCommandTypeTopic, "1=0",
             filter_name="my_custom_cft",
         )
         assert cft.name == "my_custom_cft"
@@ -164,10 +176,10 @@ class TestCreateFilteredReader:
     @pytest.mark.asyncio
     async def test_auto_filter_name_unique(self, dds_context: DDSContext):
         _, cft1 = dds_context.create_filtered_reader(
-            SimpleReport, "TestCommandType", "1=0"
+            SimpleReport, AnchorCommandTypeTopic, "1=0"
         )
         _, cft2 = dds_context.create_filtered_reader(
-            SimpleReport, "TestCommandType", "1=0"
+            SimpleReport, AnchorCommandTypeTopic, "1=0"
         )
         assert cft1.name != cft2.name
 
