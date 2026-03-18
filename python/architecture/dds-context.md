@@ -48,13 +48,13 @@ class DDSContext:
 
         # QoS provider — loads XML profiles, sets default profile for topic_filter matching
         self._qos_provider = dds.QosProvider(self._qos_file)
-        self._qos_provider.default_profile = "UMAAQoSLib::AssignerQoS"
+        self._qos_provider.default_profile = UMAA.DdsDefinitions.QOS_ASSIGNER_PROFILE
 
         # DomainParticipant — one per context
         self._participant = dds.DomainParticipant(
             domain_id,
             qos=self._qos_provider.participant_qos_from_profile(
-                "UMAAQoSLib::DefaultUMAAParticipant"
+                UMAA.DdsDefinitions.QOS_PARTICIPANT_PROFILE
             ),
         )
 

@@ -5,6 +5,8 @@ __version__ = "0.1.0"
 from rtiumaapy.guid_util import GUIDUtil
 from rtiumaapy.timestamp import UmaaTimestamp
 from rtiumaapy.errors import AssemblyError, CommandResult, UmaaCommandException
+from rtiumaapy.dds_context import DDSContext
+from rtiumaapy.base_service import BaseService
 
 __all__ = [
     "GUIDUtil",
@@ -12,4 +14,6 @@ __all__ = [
     "UmaaCommandException",
     "AssemblyError",
     "CommandResult",
+    "DDSContext",
+    "BaseService",
 ]

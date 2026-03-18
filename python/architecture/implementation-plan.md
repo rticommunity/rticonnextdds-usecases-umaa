@@ -14,7 +14,10 @@ The SDK lives at the **top level** of the repo under `/python`. The repo is orga
 rticonnextdds-usecases-umaa/
 ├── datamodel/                    # IDL files (UMAA data model source)
 │   └── umaa/
-│       └── idl/                  # *.idl files
+│       └── idl/
+│           └── UMAA/
+│               ├── DdsDefinitions.idl  # ★ System-wide DDS constants (shared Python / C++)
+│               └── ...           # Domain-specific IDL
 ├── cpp/                          # C++ SDK (future expansion)
 │   └── service-template-wrappers/ # Service template wrapper example
 ├── qos/                          # QoS XML profiles
@@ -38,7 +41,6 @@ rticonnextdds-usecases-umaa/
 │   │   ├── guid_util.py          # GUIDUtil
 │   │   ├── timestamp.py          # UmaaTimestamp
 │   │   ├── errors.py             # UmaaCommandException, AssemblyError
-│   │   ├── qos.py                # QoS profile constants, topic-to-profile resolver
 │   │   ├── dds_context.py        # DDSContext singleton
 │   │   ├── base_service.py       # BaseService ABC
 │   │   ├── report_provider.py    # ReportProvider (Tier 1)
@@ -123,6 +125,7 @@ rticonnextdds-usecases-umaa/
 - Generated UMAA Python types (from `datamodel/umaa/idl/`) live under `python/umaa_types/`
 - The SDK package is `python/rtiumaapy/` — importable as `from rtiumaapy import ...`
 - QoS XML (`qos/umaa_qos_lib.xml`) is the single source of truth; a copy is bundled under `python/resource/`
+- System-wide DDS constants (QoS profile names, CFT expressions, defaults) are defined in `datamodel/umaa/idl/UMAA/DdsDefinitions.idl` and code-generated for both Python and C++ — no hand-maintained `qos.py`
 - Tests are DDS integration tests (real participant, loopback transport) — no mocks
 - `c++_ref/`, `umaa_docs/`, `umaapy-1.1.1/`, and loose v1 prototype files (`dds_context.py`, `event_processor.py`, `qos_category.py`) are **legacy artifacts kept temporarily for context** — they will be moved or deleted in a future cleanup PR
 
@@ -183,9 +186,8 @@ All architecture docs have been updated to use `rtiumaapy` as the package name. 
 
 | Deliverable | Source Doc | Notes |
 |---|---|---|
-| `rtiumaapy/dds_context.py` | [dds-context.md](dds-context.md) | Singleton, `create_topic()`, `create_writer()`, `create_reader()`, `create_filtered_reader()`, QoS resolution via topic_filter, registry |
+| `rtiumaapy/dds_context.py` | [dds-context.md](dds-context.md) | Singleton, `create_topic()`, `create_writer()`, `create_reader()`, `create_filtered_reader()`, QoS resolution via topic_filter, registry. Uses generated constants from `UMAA::DdsDefinitions` (profile names, CFT expressions). |
 | `rtiumaapy/base_service.py` | [base-service.md](base-service.md) | `BaseService` ABC: auto-register on `__init__`, abstract `_run()` / `close()` |
-| `rtiumaapy/qos.py` | [qos-profiles.md](qos-profiles.md) | QoS profile name constants, topic-to-profile resolver |
 | `resource/umaa_qos_lib.xml` | already exists | Bundle with package |
 | `tests/conftest.py` | — | Shared `DDSContext` fixture (loopback transport, unique domain_id per test) |
 | `tests/test_dds_context.py` | — | Integration: singleton, create entities, topic reuse, shutdown cleanup |
@@ -194,7 +196,7 @@ All architecture docs have been updated to use `rtiumaapy` as the package name. 
 **Key design points:**
 - `run_until_shutdown()` starts all `_run()` coroutines, installs SIGINT/SIGTERM handlers
 - `shutdown()` is async — cancels tasks, awaits `close()` in reverse order, tears down participant
-- QoS resolution: `*ConfigReportType` → ConfigQoS, `*CommandType` → CommandQoS, `*Element` → ElementQoS, else → TelemetryQoS
+- QoS resolution is fully external via `topic_filter` rules in `umaa_qos_lib.xml` — no application-side resolver. DDSContext references profile names via generated `UMAA::DdsDefinitions` constants.
 
 **Acceptance criteria:**
 - Can create a `DDSContext`, register a trivial `BaseService` subclass, call `run_until_shutdown()`, Ctrl-C, verify clean teardown
@@ -474,7 +476,7 @@ Each PR maps to specific architecture docs. When implementing, treat these as th
 | [error-handling.md](error-handling.md) | PR 1 |
 | [dds-context.md](dds-context.md) | PR 2 |
 | [base-service.md](base-service.md) | PR 2 |
-| [qos-profiles.md](qos-profiles.md) | PR 2 |
+| [qos-profiles.md](qos-profiles.md) | PR 2 (reference only — no `qos.py`; constants come from `DdsDefinitions.idl`) |
 | [report-services.md](report-services.md) | PR 3 |
 | [command-services.md](command-services.md) | PR 4 |
 | [command-state-machine.md](command-state-machine.md) | PR 4 |
