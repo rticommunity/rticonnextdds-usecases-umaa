@@ -10,7 +10,7 @@
 
 **Key facts:**
 - **26 service template classes** cover every UMAA interaction pattern
-- **~250 pre-wired service definitions** across 7 UMAA domains (CO, EO, MM, MO, SA, SE, SO)
+- **350 pre-wired service definitions** across 7 UMAA domains (CO, EO, MM, MO, SA, SEM, SO)
 - **Zero-config QoS** — profiles assigned automatically via `topic_filter` rules in XML
 - **Event-driven** — all services use `rti.asyncio` with `reader.take_async()` (no polling)
 - **Single-threaded cooperative model** — no locks, no thread safety concerns in application code
@@ -153,11 +153,11 @@ The SDK is being built incrementally across 9 pull requests, each independently 
 | **1** | Project Skeleton + Utilities | `pyproject.toml`, `GUIDUtil`, `UmaaTimestamp`, error types | ✅ Complete |
 | **2** | DDSContext + BaseService | DDS lifecycle, entity factories, service registry, shutdown | ✅ Complete |
 | **3** | ReportProvider / Consumer | Tier 1 — simplest pub/sub round-trip | ✅ Complete |
-| **4** | CommandProvider / Consumer | Tier 0 — full command state machine, CFT, disposal | Planned |
+| **4** | CommandProvider / Consumer | Tier 0 — full command state machine, CFT, disposal | ✅ Complete |
 | **5** | Multi-Topic + Large Set | Tier 2 — `LargeSetWriter` CRUD, QueryCondition assembly | Planned |
 | **6** | Large List | Tier 3 — `LargeListWriter` CRUD, linked-list assembly | Planned |
 | **7** | Composite Services | Tier 4 — 26 handwritten classes (MissionPlan, Conditional, etc.) | Planned |
-| **8** | Pre-Wired Service Library | ~458 auto-generated concrete classes across 7 domains | Planned |
+| **8** | Pre-Wired Service Library | 350 concrete classes across 7 domains | ✅ Complete |
 | **9** | Examples + Documentation | Working examples, Sphinx API docs | Planned |
 
 ```
@@ -248,7 +248,7 @@ The SDK covers all seven UMAA ICD domains:
 | Mission Management | MM | MissionPlan, Conditional, ObjectiveExecutor |
 | Maritime Operations | MO | GlobalWaypoint, StationKeeping, Transit |
 | Situational Awareness | SA | Contact, GPS, Weather, INS |
-| Sensors | SE | Camera, Radar, Sonar, AIS |
+| Sensors | SEM | Camera, Radar, Sonar, AIS |
 | System Operations | SO | Power, ResourceAllocation, Health |
 
 ---
@@ -267,7 +267,7 @@ Detailed design docs are in [architecture/](architecture/):
 | [Large Set Services](architecture/large-set-services.md) | Tier 2 set-valued reports with CRUD |
 | [Large List Services](architecture/large-list-services.md) | Tier 3 ordered list reports |
 | [Composite Services](architecture/composite-services.md) | Tier 4 one-off classes |
-| [Services Catalog](architecture/services-catalog.md) | Complete ~250 service inventory |
+| [Services Catalog](architecture/services-catalog.md) | Complete 350 service inventory |
 | [Error Handling](architecture/error-handling.md) | 4-layer exception strategy |
 
 ---

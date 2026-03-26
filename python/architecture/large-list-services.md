@@ -2,6 +2,8 @@
 
 > Tier 3: `LargeListReportProvider`, `LargeListReportConsumer`, and `LargeListWriter` — root report with ordered list element children and full CRUD element management.
 
+> **Note:** PR4 confirms sync `write()` is non-blocking under `ASYNCHRONOUS_PUBLISH_MODE` QoS (D35). No API change needed — `write()` calls in this file are correct as-is.
+
 ---
 
 ## Overview

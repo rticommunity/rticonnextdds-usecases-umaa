@@ -2,6 +2,8 @@
 
 > Tier 1: `ReportProvider` and `ReportConsumer` — single-topic reporting for ~169 UMAA report types.
 
+> **Note:** PR4 confirms sync `write()` is non-blocking under `ASYNCHRONOUS_PUBLISH_MODE` QoS (D35). No API change needed — `write()` calls in this file are correct as-is.
+
 ---
 
 ## Overview

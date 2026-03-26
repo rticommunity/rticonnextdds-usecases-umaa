@@ -457,21 +457,13 @@ reader_qos = qp.get_topic_datareader_qos(topic_name)   # matches topic_filter ru
 | List FK field | Generic | Always `listID` |
 | QueryCondition for GUID | May use string comparison | Must use `&hex()` for NumericGUID filtering |
 
-### 9.3  qos-profiles.md
+### 9.3  ~~qos-profiles.md~~ — **RESOLVED**
 
-| Issue | Current | Correct |
-|-------|---------|---------|
-| 4 QoS categories | Telemetry, Command, Config, Element | v2 uses same `topic_filter` auto-assignment as production — no explicit categories |
-| Python SDK categories | May list 4 | Currently only 3: `COMMAND`, `CONFIG`, `REPORT` |
-| Report QoS | "BEST_EFFORT" | Python SDK actually uses **RELIABLE** KEEP_LAST 1 |
+~~Python SDK used RELIABLE for reports.~~ v2 uses `qos/umaa_qos_lib.xml` (BEST_EFFORT for `*ReportType`), matching production. topic_filter auto-assignment (D4) eliminates category mapping.
 
-### 9.4  dds-context.md
+### 9.4  ~~dds-context.md~~ — **RESOLVED**
 
-| Issue | Current | Correct |
-|-------|---------|---------|
-| QoS assignment | `topic_filter` auto-assign | v2 DDSContext uses same `topic_filter` auto-assignment via `get_topic_*_qos(topic_name)` |
-| CFT creation API | May be incomplete | Use `dds.ContentFilteredTopic(topic, name, dds.Filter(expr, params))` |
-| EventProcessor | May be described as removed | Still exists in v2 codebase (TBD: remove or keep alongside asyncio?) |
+~~EventProcessor status unknown.~~ EventProcessor was never ported to v2 (D1). QoS uses `topic_filter` via `get_topic_*_qos()` (D4). `create_filtered_reader()` documented.
 
 ---
 
@@ -480,7 +472,7 @@ reader_qos = qp.get_topic_datareader_qos(topic_name)   # matches topic_filter ru
 ### 10.1  Architecture Doc Updates
 
 - [ ] **command-services.md** — Update key counts (3 for CommandType, 2 for Status/Ack), add `&hex()` CFT examples, document dynamic filter update for consumer sessions
-- [ ] **command-state-machine.md** — Verify state enum names match `CommandStatusEnumType` from IDL
+- [x] **command-state-machine.md** — ~~Verify state enum names~~ **DELETED:** Stale doc removed; `command-services.md` is sole authority (C8)
 - [ ] **multi-topic-utilities.md** — Replace generic field references with verified: `element`, `setID`, `listID`, `elementID`, `nextElementID`; add `&hex()` in QueryCondition examples
 - [x] **qos-profiles.md** — ~~Reconcile 3-profile (Python SDK) vs 6-filter (production) models~~ **DONE:** Python SDK now uses same `topic_filter` approach as production
 - [x] **dds-context.md** — ~~Document actual `PROFILE_MAP`~~ **DONE:** `PROFILE_MAP` removed; factory methods use `get_topic_*_qos(topic_name)`. `create_filtered_reader()` documented. Resolve EventProcessor status still open.
@@ -490,21 +482,21 @@ reader_qos = qp.get_topic_datareader_qos(topic_name)   # matches topic_filter ru
 
 ### 10.2  Design Decisions Needed
 
-- [ ] **EventProcessor fate**: v2 DDSContext still creates an EventProcessor, but architecture docs specify `rti.asyncio` exclusively. Remove EventProcessor from DDSContext, or keep for CPU-bound work?
-- [ ] **QoS category for elements**: ~~Production QoS assigns elements to `CommandQoS`. Python SDK has no `ELEMENT` category. Add `QosCategory.ELEMENT` or reuse `COMMAND`?~~ **RESOLVED:** Using `topic_filter` auto-assignment — `*SetElement` and `*ListElement` automatically get `ElementQoS`.
-- [ ] **Report BEST_EFFORT vs RELIABLE**: Python SDK uses RELIABLE for reports. Align with production (BEST_EFFORT) or keep for reliability during development?
-- [ ] **QueryCondition vs application-level filter**: Both C++ SDKs use app-level filtering. QueryCondition is more efficient but adds complexity. Which approach for v2?
-- [ ] **Concurrent commands**: PSU/ARL supports `ACCEPT_CONCURRENT`/`QUEUE_INCOMING`. v1 Python is single-session. What does v2 support?
+- [x] **EventProcessor fate**: ~~v2 DDSContext still creates an EventProcessor~~ **RESOLVED:** EventProcessor was never ported to v2. `rti.asyncio` is exclusive (D1). `DDSContext.run_blocking()` handles CPU-bound offload (D38).
+- [x] **QoS category for elements**: ~~Production QoS assigns elements to `CommandQoS`. Python SDK has no `ELEMENT` category. Add `QosCategory.ELEMENT` or reuse `COMMAND`?~~ **RESOLVED:** Using `topic_filter` auto-assignment — `*SetElement` and `*ListElement` automatically get `ElementQoS` (D4).
+- [x] **Report BEST_EFFORT vs RELIABLE**: ~~Python SDK uses RELIABLE for reports.~~ **RESOLVED:** v2 `DDSContext` defaults to `qos/umaa_qos_lib.xml` which uses BEST_EFFORT for `*ReportType` (D4). Legacy `umaapy_qos_lib.xml` (RELIABLE) is not used.
+- [x] **QueryCondition vs application-level filter**: ~~Both C++ SDKs use app-level filtering.~~ **RESOLVED:** v2 uses QueryCondition for element scoping (D24). More efficient than app-level filtering.
+- [x] **Concurrent commands**: ~~PSU/ARL supports `ACCEPT_CONCURRENT`/`QUEUE_INCOMING`.~~ **RESOLVED:** v2 is single-session (D3, D15). Multi-session deferred (D41).
 
 ### 10.3  Implementation Prerequisites
 
-- [ ] **UmaaTimestamp utility**: Wrap `DateTime` struct ↔ Python datetime conversion
-- [ ] **GUIDUtil utility**: `NumericGUID` (octet[16]) generation, `&hex()` formatting, string conversion
-- [ ] **BaseService ABC**: Abstract `close()`, auto-register/unregister in DDSContext
-- [ ] **CommandProvider skeleton**: 1 CFT reader (destination-filtered) + 2 writers (status + ack)
-- [ ] **CommandConsumer skeleton**: 1 writer + 3 CFT readers (status/ack/exec) with dynamic filters
-- [ ] **ReportProvider / ReportConsumer**: Simplest tier — implement first
-- [ ] **LargeSetConsumer / LargeListConsumer**: Multi-topic assembly with `read_large_set()` / `read_large_list()`
+- [x] **UmaaTimestamp utility**: ~~Wrap `DateTime` struct ↔ Python datetime conversion~~ **DONE:** `timestamp.py` implemented (PR 1)
+- [x] **GUIDUtil utility**: ~~`NumericGUID` (octet[16]) generation, `&hex()` formatting, string conversion~~ **DONE:** `guid_util.py` implemented (PR 1)
+- [x] **BaseService ABC**: ~~Abstract `close()`, auto-register/unregister in DDSContext~~ **DONE:** `base_service.py` implemented (PR 2)
+- [ ] **CommandProvider skeleton**: 1 CFT reader (destination-filtered) + 2 writers (status + ack) — PR 4
+- [ ] **CommandConsumer skeleton**: 1 writer + 3 CFT readers (status/ack/exec) with dynamic filters — PR 4
+- [x] **ReportProvider / ReportConsumer**: ~~Simplest tier — implement first~~ **DONE:** `report_provider.py`, `report_consumer.py` implemented (PR 3)
+- [ ] **LargeSetConsumer / LargeListConsumer**: Multi-topic assembly with `read_large_set()` / `read_large_list()` — PR 5/6
 
 ### 10.4  IDL References to Verify
 
