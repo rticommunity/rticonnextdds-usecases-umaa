@@ -61,11 +61,10 @@ async def dds_context(qos_file: str) -> AsyncGenerator[DDSContext, None]:
         yield ctx
     finally:
         await ctx.shutdown()
-        # Close the rti.asyncio default dispatcher so its cached loop
-        # reference doesn't bleed into the next test's fresh event loop.
-        # Without this, take_async() on subsequent tests silently hangs
-        # because the singleton WaitSetAsyncDispatcher is bound to the
-        # now-closed loop from this test.
+        # DDSContext.shutdown() already calls rti_asyncio.close(), but we
+        # call it again here as an idempotent safety net to ensure the
+        # dispatcher's cached loop reference doesn't bleed into the next
+        # test's fresh event loop.
         await rti_asyncio.close()
 
 

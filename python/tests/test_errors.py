@@ -1,60 +1,79 @@
-"""Tests for rtiumaapy.errors — UmaaCommandException, AssemblyError, CommandResult."""
+"""Tests for rtiumaapy.errors — CommandHookError, CommandFailedError, AssemblyError, CommandResult."""
 
 import pytest
 
-from rtiumaapy.errors import AssemblyError, CommandResult, UmaaCommandException
+from rtiumaapy.errors import AssemblyError, CommandResult, CommandHookError, CommandFailedError
 
 
-class TestUmaaCommandException:
-    """UmaaCommandException carries session_id, reason, and stage."""
+class TestCommandHookError:
+    """CommandHookError carries reason_enum and message (D40)."""
 
     def test_attributes(self):
-        e = UmaaCommandException(
-            session_id="abc-123",
-            reason="Active command exists",
-            stage="ACK",
-        )
-        assert e.session_id == "abc-123"
-        assert e.reason == "Active command exists"
-        assert e.stage == "ACK"
+        e = CommandHookError(reason_enum=3, message="bad param")
+        assert e.reason_enum == 3
+        assert e.message == "bad param"
 
     def test_message_format(self):
-        e = UmaaCommandException(
+        e = CommandHookError(reason_enum=3, message="bad param")
+        assert "3" in str(e)
+        assert "bad param" in str(e)
+
+    def test_is_exception(self):
+        assert issubclass(CommandHookError, Exception)
+
+    def test_catchable(self):
+        with pytest.raises(CommandHookError):
+            raise CommandHookError(reason_enum=1, message="fail")
+
+    def test_defaults(self):
+        e = CommandHookError()
+        assert e.reason_enum == 0
+        assert e.message == ""
+
+
+class TestCommandFailedError:
+    """CommandFailedError carries session_id, status, reason_enum, message (D40)."""
+
+    def test_attributes(self):
+        e = CommandFailedError(
             session_id="abc-123",
-            reason="RPM too high",
-            stage="EXECUTING",
+            status="FAILED",
+            reason_enum=5,
+            message="RPM too high",
+        )
+        assert e.session_id == "abc-123"
+        assert e.status == "FAILED"
+        assert e.reason_enum == 5
+        assert e.message == "RPM too high"
+
+    def test_message_format(self):
+        e = CommandFailedError(
+            session_id="abc-123",
+            status="FAILED",
+            reason_enum=5,
+            message="RPM too high",
         )
         assert "abc-123" in str(e)
-        assert "EXECUTING" in str(e)
+        assert "FAILED" in str(e)
+        assert "5" in str(e)
         assert "RPM too high" in str(e)
 
     def test_is_exception(self):
-        assert issubclass(UmaaCommandException, Exception)
+        assert issubclass(CommandFailedError, Exception)
 
     def test_catchable(self):
-        with pytest.raises(UmaaCommandException) as exc_info:
-            raise UmaaCommandException(
-                session_id="x", reason="rejected", stage="ACK"
+        with pytest.raises(CommandFailedError) as exc_info:
+            raise CommandFailedError(
+                session_id="x", status="FAILED", reason_enum=1, message="rejected"
             )
-        assert exc_info.value.stage == "ACK"
+        assert exc_info.value.session_id == "x"
 
-    def test_plain_message(self):
-        """Allow single-arg usage for simple cases."""
-        e = UmaaCommandException(reason="Consumer already has an active session")
-        assert "active session" in str(e)
+    def test_defaults(self):
+        e = CommandFailedError()
         assert e.session_id == ""
-        assert e.stage == ""
-
-    def test_default_empty(self):
-        e = UmaaCommandException()
-        assert e.session_id == ""
-        assert e.reason == ""
-        assert e.stage == ""
-
-    def test_all_stages(self):
-        for stage in ("ACK", "EXECUTING", "STATUS", "TIMEOUT"):
-            e = UmaaCommandException(session_id="s", reason="r", stage=stage)
-            assert e.stage == stage
+        assert e.status == ""
+        assert e.reason_enum == 0
+        assert e.message == ""
 
 
 class TestAssemblyError:

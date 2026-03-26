@@ -12,8 +12,7 @@
 | [DDSContext](dds-context.md) | Singleton owning DomainParticipant, Publisher, Subscriber, QoS provider, and service registry |
 | [BaseService](base-service.md) | Abstract base class for all 26 service templates — enforces `close()`, auto-registration |
 | [QoS Profiles](qos-profiles.md) | 4 QoS profiles with `topic_filter` assignment rules |
-| [Command Services](command-services.md) | Tier 0: `CommandProvider` / `CommandConsumer` — 4-slot command pattern |
-| [Command State Machine](command-state-machine.md) | `CommandProviderSession` and `CommandConsumerSession` — async command lifecycle |
+| [Command Services](command-services.md) | Tier 0: `CommandProvider` / `CommandConsumer` — 4-slot command pattern, session state machine |
 | [Report Services](report-services.md) | Tier 1: `ReportProvider` / `ReportConsumer` — single-topic reporting |
 | [Large Set Services](large-set-services.md) | Tier 2: `LargeSetReportProvider` / `LargeSetReportConsumer` — root + set elements |
 | [Large List Services](large-list-services.md) | Tier 3: `LargeListReportProvider` / `LargeListReportConsumer` — root + list elements |
@@ -21,7 +20,7 @@
 | [Multi-Topic Utilities](multi-topic-utilities.md) | `read_large_set()`, `read_large_list()`, elements-first protocol, QueryCondition scoping |
 | [SpecializationReaderSet](specialization-reader-set.md) | User-selectable generalization/specialization dispatch |
 | [Services Catalog](services-catalog.md) | Complete API surface — all ~250 services mapped to template classes |
-| [Error Handling](error-handling.md) | 4-layer exception strategy, `UmaaCommandException` |
+| [Error Handling](error-handling.md) | 4-layer exception strategy, `CommandHookError` / `CommandFailedError` (D40) |
 | [Utilities](utilities.md) | Timestamp, GUID, listener utilities |
 
 ---

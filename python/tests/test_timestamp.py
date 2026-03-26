@@ -3,7 +3,25 @@
 import time
 from datetime import datetime, timezone
 
-from rtiumaapy.timestamp import DateTimeFields, UmaaTimestamp
+from rtiumaapy.timestamp import DateTimeFields, UmaaTimestamp, set_timestamp
+
+
+class TestSetTimestamp:
+    """UmaaTimestamp.set_timestamp() stamps a sample's timeStamp field."""
+
+    def test_sets_seconds_and_nanoseconds(self):
+        sample = DateTimeFields()  # has .seconds and .nanoseconds
+
+        class FakeSample:
+            timeStamp = sample
+
+        fake = FakeSample()
+        set_timestamp(fake)
+        assert fake.timeStamp.seconds > 0
+        assert 0 <= fake.timeStamp.nanoseconds < 1_000_000_000
+
+    def test_module_level_alias_matches_class_method(self):
+        assert set_timestamp is UmaaTimestamp.set_timestamp
 
 
 class TestUmaaTimestampNow:

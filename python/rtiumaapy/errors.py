@@ -6,31 +6,50 @@ from dataclasses import dataclass, field
 from typing import Any
 
 
-class UmaaCommandException(Exception):
-    """Raised when a UMAA command interaction fails.
+class CommandHookError(Exception):
+    """Raised by provider hook authors to signal a command failure.
+
+    The framework catches this, validates the reason is legal for the
+    current state (D12), and publishes FAILED status.
 
     Attributes:
-        session_id: The command session UUID string.
-        reason: Human-readable rejection/error reason from the provider.
-        stage: Lifecycle stage where failure occurred.
-            One of ``"ACK"``, ``"EXECUTING"``, ``"STATUS"``, ``"TIMEOUT"``.
+        reason_enum: ICD ``CommandStatusReasonEnum`` value describing
+            the failure category (e.g. ``VALIDATION_FAILED``).
+        message: Human-readable description for logging / diagnostics.
+    """
+
+    def __init__(self, reason_enum: int = 0, message: str = "") -> None:
+        self.reason_enum = reason_enum
+        self.message = message
+        super().__init__(f"CommandHookError({reason_enum}): {message}")
+
+
+class CommandFailedError(Exception):
+    """Raised on the consumer side when a FAILED status is received.
+
+    Carries the full context from the DDS ``CommandStatusType`` sample.
+
+    Attributes:
+        session_id: The command session GUID string.
+        status: Terminal status value (e.g. ``FAILED``).
+        reason_enum: ICD ``CommandStatusReasonEnum`` from the provider.
+        message: Human-readable reason from the provider.
     """
 
     def __init__(
         self,
         session_id: str = "",
-        reason: str = "",
-        stage: str = "",
+        status: str = "",
+        reason_enum: int = 0,
+        message: str = "",
     ) -> None:
         self.session_id = session_id
-        self.reason = reason
-        self.stage = stage
-        if session_id:
-            msg = f"Command {session_id} failed at {stage}: {reason}"
-        else:
-            # Allow a plain message when called with a single positional arg
-            msg = reason or stage
-        super().__init__(msg)
+        self.status = status
+        self.reason_enum = reason_enum
+        self.message = message
+        super().__init__(
+            f"Command {session_id} {status} ({reason_enum}): {message}"
+        )
 
 
 class AssemblyError(Exception):

@@ -32,7 +32,9 @@ class DDSContext:
 
         Args:
             domain_id: DDS domain ID.
-            qos_file: Path to QoS XML. If None, uses bundled umaapy_qos_lib.xml.
+            qos_file: Path to QoS XML. If None, reads from the ``UMAA_QOS_FILE``
+                      environment variable. Raises ``EnvironmentError`` if neither
+                      is provided.
 
         Raises:
             RuntimeError: If a DDSContext already exists (call shutdown() first).
@@ -275,36 +277,54 @@ Starts all registered services' `_run()` coroutines, then blocks until SIGINT/SI
 
 ### Shutdown
 
-Shutdown is **async** — cancels `_run()` tasks, awaits `close()` on each service, then tears down DDS:
+Shutdown is **async** — stops the `rti.asyncio` dispatcher first, then cancels tasks, calls service `close()`, and finally tears down DDS entities:
 
 ```python
     async def shutdown(self) -> None:
         """Tear down all managed resources in order:
-        1. Cancel every service's _run() task.
-        2. Await close() on every registered service (reverse order).
-        3. Close all DDS contained entities.
-        4. Close the DomainParticipant.
-        5. Clear the singleton reference.
+        1. Stop the rti.asyncio dispatcher — we are done listening.
+        2. Cancel every service's _run() task.
+        3. Await close() on every registered service (reverse order)
+           — services publish final messages (writes only).
+        4. Close all DDS contained entities.
+        5. Close the DomainParticipant.
+        6. Clear the singleton reference.
         """
-        # 1. Cancel _run() tasks
-        for service in self._registry.values():
-            if hasattr(service, '_task'):
-                service._task.cancel()
+        # 1. Stop the rti.asyncio dispatcher thread.
+        #    Writer.write() is synchronous and does not need the dispatcher,
+        #    so final status messages can still be published after this.
+        await rti_asyncio.close()
 
-        # 2. Close registered services (reverse order)
-        for key, service in reversed(list(self._registry.items())):
+        # 2. Cancel _run() tasks.  With the dispatcher stopped,
+        #    take_async() coroutines cannot block; CancelledError is
+        #    delivered by the asyncio event loop.
+        for service in self._registry.values():
+            task = getattr(service, '_task', None)
+            if task is not None and not task.done():
+                task.cancel()
+                try:
+                    await task
+                except asyncio.CancelledError:
+                    pass
+
+        # 3. Close registered services in reverse order.
+        #    Service close() publishes final messages (FAILED statuses,
+        #    dispose instances) via synchronous writer.write() calls.
+        #    No DDS entities are closed here.
+        for key in reversed(list(self._registry.keys())):
+            service = self._registry[key]
             try:
                 await service.close()
             except Exception:
                 _logger.exception("Error closing service %s", key)
         self._registry.clear()
 
-        # 3-4. Close DDS entities
+        # 4-5. Close DDS entities (dispatcher already stopped — safe).
         self._participant.close_contained_entities()
         self._participant.close()
         self._topics.clear()
 
-        # 5. Clear singleton
+        # 6. Clear singleton
         if DDSContext._instance is self:
             DDSContext._instance = None
 ```

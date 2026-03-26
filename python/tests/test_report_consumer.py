@@ -1,4 +1,4 @@
-"""Tests for rtiumaapy.report_consumer — ReportConsumer callback delivery."""
+"""Tests for rtiumaapy.report_consumer — ReportConsumer subclass-override delivery (D36)."""
 
 import asyncio
 
@@ -42,24 +42,24 @@ class TestConstruction:
 
 
 # ═══════════════════════════════════════════════════════════════════════════
-# Callback delivery
+# Subclass-override delivery (D36)
 # ═══════════════════════════════════════════════════════════════════════════
 
 
-class TestCallback:
+class TestOnReport:
     @pytest.mark.asyncio
-    async def test_callback_fires_on_data(self, dds_context: DDSContext):
-        """Raw writer → consumer callback receives the sample."""
+    async def test_on_report_fires_on_data(self, dds_context: DDSContext):
+        """Raw writer → subclass on_report receives the sample."""
         received = []  # type: list
         done = asyncio.Event()
 
-        def on_report(sample):
-            received.append(sample)
-            done.set()
+        class TestConsumer(ReportConsumer):
+            async def on_report(self, sample):
+                received.append(sample)
+                done.set()
 
-        consumer = ReportConsumer(
+        consumer = TestConsumer(
             dds_context, "GPSConsumer", FakeReportType, GPSReportTypeTopic,
-            on_report=on_report,
         )
         consumer.start()
 
@@ -78,14 +78,14 @@ class TestCallback:
         received = []  # type: list
         done = asyncio.Event()
 
-        def on_report(sample):
-            received.append(sample)
-            if len(received) >= 3:
-                done.set()
+        class TestConsumer(ReportConsumer):
+            async def on_report(self, sample):
+                received.append(sample)
+                if len(received) >= 3:
+                    done.set()
 
-        consumer = ReportConsumer(
+        consumer = TestConsumer(
             dds_context, "GPSConsumer", FakeReportType, GPSReportTypeTopic,
-            on_report=on_report,
         )
         consumer.start()
 
@@ -103,8 +103,8 @@ class TestCallback:
         assert 30.0 in temps
 
     @pytest.mark.asyncio
-    async def test_no_callback_no_crash(self, dds_context: DDSContext):
-        """Consumer without callback runs without error."""
+    async def test_default_on_report_no_crash(self, dds_context: DDSContext):
+        """Base class on_report (no-op) runs without error."""
         consumer = ReportConsumer(
             dds_context, "GPSConsumer", FakeReportType, GPSReportTypeTopic,
         )
@@ -119,21 +119,21 @@ class TestCallback:
         # No exception means pass
 
     @pytest.mark.asyncio
-    async def test_callback_exception_logged_not_raised(self, dds_context: DDSContext):
-        """A failing callback doesn't crash the run loop."""
+    async def test_on_report_exception_logged_not_raised(self, dds_context: DDSContext):
+        """A failing on_report doesn't crash the run loop."""
         call_count = [0]
         done = asyncio.Event()
 
-        def bad_then_good(sample):
-            call_count[0] += 1
-            if call_count[0] == 1:
-                raise ValueError("boom")
-            # Second call succeeded — signal done
-            done.set()
+        class FailThenSucceedConsumer(ReportConsumer):
+            async def on_report(self, sample):
+                call_count[0] += 1
+                if call_count[0] == 1:
+                    raise ValueError("boom")
+                # Second call succeeded — signal done
+                done.set()
 
-        consumer = ReportConsumer(
+        consumer = FailThenSucceedConsumer(
             dds_context, "GPSConsumer", FakeReportType, GPSReportTypeTopic,
-            on_report=bad_then_good,
         )
         consumer.start()
 

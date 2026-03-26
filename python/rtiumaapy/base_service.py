@@ -58,9 +58,13 @@ class BaseService(ABC):
 
     @abstractmethod
     async def close(self) -> None:
-        """Release all DDS entities owned by this service.
+        """Perform logical cleanup for this service.
 
         Called by :meth:`DDSContext.shutdown` in reverse registration order.
-        Subclasses **must** close all their DataReaders and DataWriters here.
+        Subclasses should cancel tasks, dispose instances, and end sessions
+        here but must **not** close DDS entities (readers/writers) — the
+        ``rti.asyncio`` dispatcher may still reference their wait-sets.
+        Entity destruction is handled by ``DDSContext.shutdown()`` via
+        ``close_contained_entities()`` after the dispatcher is stopped.
         """
         ...

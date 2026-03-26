@@ -65,3 +65,14 @@ class UmaaTimestamp:
             ts.seconds + ts.nanoseconds / 1e9,
             tz=timezone.utc,
         )
+
+    @staticmethod
+    def set_timestamp(sample) -> None:
+        """Set ``sample.timeStamp`` to the current UTC time."""
+        ts = UmaaTimestamp.now()
+        sample.timeStamp.seconds = ts.seconds
+        sample.timeStamp.nanoseconds = ts.nanoseconds
+
+
+# Module-level convenience alias
+set_timestamp = UmaaTimestamp.set_timestamp

@@ -22,21 +22,21 @@ from rtiumaapy.datamodel.GPSReportType import (
 class TestRoundTrip:
     @pytest.mark.asyncio
     async def test_provider_to_consumer(self, dds_context: DDSContext):
-        """Provider writes → Consumer callback fires with correct data."""
+        """Provider writes → Consumer on_report fires with correct data."""
         received = []  # type: list
         done = asyncio.Event()
         key = FakeReportType(source=7)
 
-        def on_report(sample):
-            received.append(sample)
-            done.set()
+        class TestConsumer(ReportConsumer):
+            async def on_report(self, sample):
+                received.append(sample)
+                done.set()
 
         provider = ReportProvider(
             dds_context, "GPSProvider", FakeReportType, GPSReportTypeTopic, key,
         )
-        consumer = ReportConsumer(
+        consumer = TestConsumer(
             dds_context, "GPSConsumer", FakeReportType, GPSReportTypeTopic,
-            on_report=on_report,
         )
         consumer.start()
 

@@ -69,45 +69,35 @@ rti.asyncio.run(main())
 ## Package Layout
 
 ```
-src/rtiumaapy/
+rtiumaapy/
 ├── __init__.py                  # Clean re-exports, no side effects
 ├── dds_context.py               # DDSContext singleton
-├── core/
-│   ├── __init__.py
-│   ├── base_service.py          # BaseService ABC
-│   ├── exceptions.py            # UmaaCommandException
-│   ├── command_provider.py      # CommandProvider (Tier 0)
-│   ├── command_consumer.py      # CommandConsumer (Tier 0)
-│   ├── report_provider.py       # ReportProvider (Tier 1)
-│   ├── report_consumer.py       # ReportConsumer (Tier 1)
-│   ├── large_set_report_provider.py   # LargeSetReportProvider (Tier 2)
-│   ├── large_set_report_consumer.py   # LargeSetReportConsumer (Tier 2)
-│   ├── large_list_report_provider.py  # LargeListReportProvider (Tier 3)
-│   ├── large_list_report_consumer.py  # LargeListReportConsumer (Tier 3)
-│   ├── specialization_reader_set.py   # SpecializationReaderSet
-│   └── composite/               # One-off classes for complex types (Tier 4)
-│       ├── mission_plan_report_consumer.py
-│       ├── mission_plan_report_provider.py
-│       ├── conditional_report_consumer.py
-│       ├── conditional_report_provider.py
-│       ├── objective_executor_consumer.py
-│       ├── objective_executor_provider.py
-│       ├── global_waypoint_command_consumer.py
-│       ├── global_waypoint_command_provider.py
-│       └── ...
-├── util/
-│   ├── __init__.py
-│   ├── multi_topic_utils.py     # read_large_set(), read_large_list(), write helpers
-│   ├── command_provider_session.py  # CommandProviderSession state machine
-│   ├── command_consumer_session.py  # CommandConsumerSession
-│   ├── timestamp.py             # Timestamp wrapper
-│   ├── uuid_factory.py          # GUID generation utilities
-│   └── guid_utils.py            # guid_to_hex() for CFT filters
-├── resource/
-│   ├── __init__.py
-│   └── umaa_qos_lib.xml         # Bundled QoS profiles
-└── examples/
-    └── ...
+├── base_service.py              # BaseService ABC
+├── errors.py                    # CommandHookError, CommandFailedError (D40)
+├── command_provider.py          # CommandProvider (Tier 0)
+├── command_consumer.py          # CommandConsumer (Tier 0)
+├── command_provider_session.py   # CommandProviderSession state machine
+├── report_provider.py           # ReportProvider (Tier 1)
+├── report_consumer.py           # ReportConsumer (Tier 1)
+├── timestamp.py                 # UmaaTimestamp + set_timestamp convenience
+├── guid_util.py                 # GUID generation, hex conversion for CFT filters
+├── datamodel/                   # 596 flat generated IDL type modules
+│   ├── HealthReportType.py
+│   ├── GlobalVectorCommandType.py
+│   └── ...
+├── services/                    # 350 pre-wired concrete service classes
+│   ├── __init__.py               # Re-exports all classes from all domains
+│   ├── co/                       # Common Operations (42 classes)
+│   ├── eo/                       # Engineering Operations (58 classes)
+│   ├── mm/                       # Mission Management (70 classes)
+│   ├── mo/                       # Maritime Operations (18 classes)
+│   ├── sa/                       # Situational Awareness (66 classes)
+│   ├── sem/                      # Sensors (26 classes)
+│   └── so/                       # System Operations (70 classes)
+└── resource/
+    ├── __init__.py
+    └── umaa_qos_lib.xml          # Bundled QoS profiles (unused — UMAA_QOS_FILE env var)
+```
 ```
 
 ---
@@ -273,8 +263,7 @@ Phase 1 (Foundation)
 | [BaseService](base-service.md) | Abstract base class for all service templates |
 | [QoS Profiles](qos-profiles.md) | QoS assignment rules and profile reference |
 | [Services Catalog](services-catalog.md) | Complete API surface for every template class + pre-defined service definitions |
-| [Command Services](command-services.md) | Tier 0: CommandProvider / CommandConsumer |
-| [Command State Machine](command-state-machine.md) | Command lifecycle, sessions, startup/shutdown |
+| [Command Services](command-services.md) | Tier 0: CommandProvider / CommandConsumer, command lifecycle, sessions |
 | [Report Services](report-services.md) | Tier 1: ReportProvider / ReportConsumer |
 | [Large Set Services](large-set-services.md) | Tier 2: LargeSetReportProvider / Consumer |
 | [Large List Services](large-list-services.md) | Tier 3: LargeListReportProvider / Consumer |

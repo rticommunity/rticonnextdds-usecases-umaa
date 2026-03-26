@@ -85,21 +85,22 @@ class TestProperties:
 
 
 # ═══════════════════════════════════════════════════════════════════════════
-# Topic cache
+# Topic lookup (D17)
 # ═══════════════════════════════════════════════════════════════════════════
 
 
-class TestTopicCache:
+class TestTopicLookup:
     @pytest.mark.asyncio
     async def test_get_topic_creates(self, dds_context: DDSContext):
         topic = dds_context.get_topic(SimpleReport, GPSReportTypeTopic)
         assert topic.name == GPSReportTypeTopic
 
     @pytest.mark.asyncio
-    async def test_get_topic_caches(self, dds_context: DDSContext):
+    async def test_get_topic_reuses_via_find(self, dds_context: DDSContext):
+        """Second call finds the existing Topic via dds.Topic.find()."""
         t1 = dds_context.get_topic(SimpleReport, GPSReportTypeTopic)
         t2 = dds_context.get_topic(SimpleReport, GPSReportTypeTopic)
-        assert t1 is t2
+        assert t1 == t2
 
     @pytest.mark.asyncio
     async def test_different_names_different_topics(self, dds_context: DDSContext):

@@ -9,10 +9,12 @@ from __future__ import annotations
 
 import asyncio
 import logging
+import os
 import signal
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple, Type
 
+import rti.asyncio as rti_asyncio
 import rti.connextdds as dds
 
 _logger = logging.getLogger(__name__)
@@ -25,18 +27,28 @@ QOS_ASSIGNER_PROFILE = "UMAAQoSLib::AssignerQoS"
 QOS_PARTICIPANT_PROFILE = "UMAAQoSLib::DefaultUMAAParticipant"
 
 
+UMAA_QOS_FILE_ENV = "UMAA_QOS_FILE"
+
+
 def _default_qos_file() -> str:
-    """Return the path to the canonical QoS XML (``qos/umaa_qos_lib.xml``).
+    """Return the path to the QoS XML from the ``UMAA_QOS_FILE`` env var.
 
     Raises:
-        FileNotFoundError: If the QoS file cannot be located.
+        EnvironmentError: If ``UMAA_QOS_FILE`` is not set.
+        FileNotFoundError: If the path does not exist.
     """
-    repo_qos = Path(__file__).resolve().parent.parent.parent / "qos" / "umaa_qos_lib.xml"
-    if repo_qos.exists():
-        return str(repo_qos)
-    raise FileNotFoundError(
-        "Cannot locate qos/umaa_qos_lib.xml relative to the repository root."
-    )
+    env = os.environ.get(UMAA_QOS_FILE_ENV)
+    if not env:
+        raise EnvironmentError(
+            f"{UMAA_QOS_FILE_ENV} environment variable is not set. "
+            "Set it to the path of qos/umaa_qos_lib.xml."
+        )
+    p = Path(env)
+    if not p.exists():
+        raise FileNotFoundError(
+            f"{UMAA_QOS_FILE_ENV}={env!r} does not exist."
+        )
+    return str(p)
 
 
 class DDSContext:
@@ -59,8 +71,8 @@ class DDSContext:
 
         Args:
             domain_id: DDS domain ID.
-            qos_file: Path to QoS XML.  If *None*, uses the repo-level
-                ``qos/umaa_qos_lib.xml``.
+            qos_file: Path to QoS XML.  If *None*, reads from the
+                ``UMAA_QOS_FILE`` environment variable.
 
         Raises:
             RuntimeError: If a ``DDSContext`` already exists.
@@ -88,9 +100,6 @@ class DDSContext:
         # Shared Publisher / Subscriber
         self._publisher = dds.Publisher(self._participant)
         self._subscriber = dds.Subscriber(self._participant)
-
-        # Topic cache: topic_name → Topic
-        self._topics: Dict[str, dds.Topic] = {}
 
         # Service registry: service_name → service instance (insertion-ordered)
         self._registry: Dict[str, Any] = {}
@@ -139,26 +148,24 @@ class DDSContext:
     def domain_id(self) -> int:
         return self._domain_id
 
-    # ── Topic cache ───────────────────────────────────────────────────────
+    # ── Topic lookup ─────────────────────────────────────────────────────
 
     def get_topic(self, data_type: Type, topic_name: str) -> dds.Topic:
         """Retrieve or create a typed DDS Topic.
+
+        Uses ``dds.Topic.find()`` to look up an existing Topic registered
+        with the DomainParticipant before creating a new one (D17).
 
         Args:
             data_type: An ``@idl.struct`` type (the IDL-generated Python class).
             topic_name: The DDS topic name string.
 
         Returns:
-            The cached or newly created ``dds.Topic``.
+            The existing or newly created ``dds.Topic``.
         """
-        if topic_name in self._topics:
-            return self._topics[topic_name]
-
         topic = dds.Topic.find(self._participant, topic_name)
         if topic is None:
             topic = dds.Topic(self._participant, topic_name, data_type)
-
-        self._topics[topic_name] = topic
         return topic
 
     # ── Service registry ──────────────────────────────────────────────────
@@ -280,17 +287,27 @@ class DDSContext:
     async def shutdown(self) -> None:
         """Tear down all managed resources in order:
 
-        1. Cancel every service's ``_run()`` task.
-        2. Await ``close()`` on every registered service (reverse order).
-        3. Close all DDS contained entities.
-        4. Close the DomainParticipant.
-        5. Clear the singleton reference.
+        1. Stop the ``rti.asyncio`` dispatcher — we are done listening.
+        2. Cancel every service's ``_run()`` task.
+        3. Await ``close()`` on every registered service (reverse order)
+           — services publish final messages (writes only).
+        4. Close all DDS contained entities.
+        5. Close the DomainParticipant.
+        6. Clear the singleton reference.
         """
         if self._is_shutdown:
             return
         self._is_shutdown = True
 
-        # 1. Cancel _run() tasks
+        # 1. Stop the rti.asyncio dispatcher thread.
+        #    We are done listening — no more data will be received.
+        #    Writer.write() is synchronous and does not need the dispatcher,
+        #    so final status messages can still be published after this.
+        await rti_asyncio.close()
+
+        # 2. Cancel _run() tasks.  With the dispatcher already stopped,
+        #    take_async() coroutines can no longer block; CancelledError
+        #    is delivered by the asyncio event loop, not the dispatcher.
         for service in self._registry.values():
             task: Optional[asyncio.Task] = getattr(service, "_task", None)
             if task is not None and not task.done():
@@ -300,7 +317,10 @@ class DDSContext:
                 except asyncio.CancelledError:
                     pass
 
-        # 2. Close registered services in reverse order
+        # 3. Close registered services in reverse order.
+        #    Service close() publishes final messages (FAILED statuses,
+        #    dispose instances) via synchronous writer.write() calls.
+        #    No DDS entities are closed here.
         for key in reversed(list(self._registry.keys())):
             service = self._registry[key]
             try:
@@ -309,11 +329,10 @@ class DDSContext:
                 _logger.exception("Error closing service %s", key)
         self._registry.clear()
 
-        # 3–4. Close DDS entities
+        # 4–5. Close DDS entities (dispatcher already stopped — safe).
         self._participant.close_contained_entities()
         self._participant.close()
-        self._topics.clear()
 
-        # 5. Clear singleton
+        # 6. Clear singleton
         if DDSContext._instance is self:
             DDSContext._instance = None

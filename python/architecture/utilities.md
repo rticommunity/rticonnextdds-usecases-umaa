@@ -38,6 +38,21 @@ class UmaaTimestamp:
             ts.seconds + ts.nanoseconds / 1e9,
             tz=timezone.utc,
         )
+
+    @staticmethod
+    def set_timestamp(sample) -> None:
+        """Set sample.timeStamp to the current UTC time."""
+        ts = UmaaTimestamp.now()
+        sample.timeStamp.seconds = ts.seconds
+        sample.timeStamp.nanoseconds = ts.nanoseconds
+```
+
+A module-level convenience alias is also exported:
+
+```python
+from rtiumaapy.timestamp import set_timestamp
+
+set_timestamp(report)  # equivalent to UmaaTimestamp.set_timestamp(report)
 ```
 
 ### Usage
@@ -56,7 +71,9 @@ print(f"Received at: {received_time.isoformat()}")
 
 ## GUID Utilities
 
-UMAA identifier fields (`sessionID`, `source.id`, `destination.id`, `setID`, etc.) are all `NumericGUID` — `typedef octet NumericGUID[16]` — raw 16-byte arrays. `GUIDUtil` provides generation, conversion, and hex formatting for CFT filter expressions:
+UMAA identifier fields (`sessionID`, `source.id`, `destination.id`, `setID`, etc.) are all `NumericGUID` — an IDL `@alias` wrapping `octet[16]`. In the generated Python bindings, `NumericGUID` is a dataclass with a `.value` attribute of type `dds.Uint8Seq`. `GUIDUtil` provides raw-bytes generation, conversion, and hex formatting for CFT filter expressions:
+
+> **Important:** `GUIDUtil.generate()` returns raw `bytes`. IDL type fields expect `NumericGUID(value=dds.Uint8Seq(bytes))`. Use `GUIDUtil.to_numeric_guid()` to get a ready-to-assign object, or wrap manually.
 
 ```python
 import uuid
@@ -97,19 +114,27 @@ class GUIDUtil:
 ### Usage
 
 ```python
-# Generate a session ID for a command
+import rti.connextdds as dds
+from Measurements import UMAA_Common_Measurement_NumericGUID as NumericGUID
+
+# Generate a session ID for a command (raw bytes → NumericGUID wrapper)
+session_bytes = GUIDUtil.generate()             # → bytes(16)
 cmd = EngineCommandType()
-cmd.sessionID = GUIDUtil.generate()            # → bytes(16), directly assignable to NumericGUID
+cmd.sessionID = NumericGUID(value=dds.Uint8Seq(session_bytes))
 
 # Generate a source ID for a provider
-source_id = GUIDUtil.generate()
-provider = EngineControlProvider(ctx, source_id=source_id)
+source_bytes = GUIDUtil.generate()
+provider = EngineControlProvider(ctx, source_id=source_bytes)
 
-# Build a CFT filter expression
-filter_expr = f"destination.id = &hex({GUIDUtil.to_hex(source_id)})"
+# Build a CFT filter expression (uses raw bytes for hex conversion)
+filter_expr = f"destination.id = &hex({GUIDUtil.to_hex(source_bytes)})"
 
 # Human-readable logging
-logger.info("Session %s started", GUIDUtil.to_string(cmd.sessionID))
+logger.info("Session %s started", GUIDUtil.to_string(session_bytes))
+
+# Extract raw bytes from a received NumericGUID field
+received_bytes = bytes(sample.sessionID.value)
+logger.info("Received session %s", GUIDUtil.to_string(received_bytes))
 ```
 
 ---

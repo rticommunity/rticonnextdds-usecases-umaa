@@ -50,10 +50,13 @@ class BaseService(ABC):
     @abstractmethod
     async def close(self) -> None:
         """
-        Release all DDS entities owned by this service.
+        Perform logical cleanup for this service.
 
         Called by DDSContext.shutdown() in reverse registration order.
-        Subclasses MUST close all their DataReaders and DataWriters here.
+        Subclasses should dispose instances, end sessions, and publish
+        final messages here but must NOT close DDS entities (readers/
+        writers) — entity destruction is handled by DDSContext.shutdown()
+        via close_contained_entities() after the dispatcher is stopped.
         """
         ...
 ```
@@ -136,5 +139,5 @@ The `close()` method is `async` to allow waiting for in-flight command sessions 
 | **Abstract `close()`** | Every service must release its DDS entities. Making `close()` abstract catches missing implementations at subclass definition time. |
 | **Auto-registration** | Eliminates the error of forgetting to register a service. If it's constructed, it's registered. |
 | **String-key registry** | Names are user-chosen strings. This supports multiple instances of the same template type in the same context. |
-| **No `start()` method** | Services are inert after construction. `DDSContext.run_until_shutdown()` starts all registered services' `_run()` tasks at once. No per-service `start()` call. |
+| **Optional `start()` method** | Creates an `asyncio.Task` for the service's `_run()` coroutine. Used in tests and selective startup scenarios where `run_until_shutdown()` is not appropriate. `run_until_shutdown()` auto-starts all registered services if `start()` was not called (D37). |
 | **`async close()`** | Shutdown may involve waiting for in-flight command sessions to cancel gracefully, requiring `await`. Called by `DDSContext.shutdown()` (also async). |
