@@ -13,6 +13,7 @@ import rti.connextdds as dds
 
 from rtiumaapy.base_service import BaseService
 from rtiumaapy.dds_context import DDSContext
+from rtiumaapy.validation import validate_message
 
 _logger = logging.getLogger(__name__)
 
@@ -59,20 +60,31 @@ class ReportProvider(BaseService):
     # ── Publishing ────────────────────────────────────────────────────────
 
     def write(self, sample) -> None:
-        """Publish a report sample.
+        """Publish a report sample, validating fields first.
+
+        Logs a warning if validation fails but still publishes
+        (matches C++ behavior).
 
         Args:
             sample: An instance of *report_type* with fields populated.
         """
+        valid, errors = validate_message(sample)
+        if not valid:
+            _logger.warning(
+                "Report validation failed for %s: %s",
+                self._report_topic,
+                "; ".join(errors),
+            )
         self._writer.write(sample)
 
     # ── Lifecycle ─────────────────────────────────────────────────────────
 
     async def close(self) -> None:
-        """Dispose the report instance and close the writer.
+        """Dispose the report instance so subscribers see NOT_ALIVE_DISPOSED.
 
-        Disposing notifies subscribers that this provider has stopped
-        publishing (instance state → NOT_ALIVE_DISPOSED).
+        Entity cleanup is deferred to ``DDSContext.shutdown()`` which stops
+        the ``rti.asyncio`` dispatcher before calling
+        ``close_contained_entities()``.
 
         This method is idempotent — calling it more than once is safe.
         """
@@ -81,9 +93,7 @@ class ReportProvider(BaseService):
             if handle != dds.InstanceHandle.nil():
                 self._writer.dispose_instance(handle)
                 # BEST_EFFORT dispose: allow time for the dispose message to
-                # be sent on the wire before closing the writer.  Without this
-                # the writer.close() can tear down the transport before the
-                # dispose is transmitted.
+                # be sent on the wire before shutdown continues.
                 await asyncio.sleep(0.1)
         except dds.AlreadyClosedError:
             return  # writer already closed — nothing else to do
@@ -92,7 +102,3 @@ class ReportProvider(BaseService):
                 "Report instance dispose failed for %s (may not have been registered)",
                 self._report_topic,
             )
-        try:
-            self._writer.close()
-        except dds.AlreadyClosedError:
-            pass
