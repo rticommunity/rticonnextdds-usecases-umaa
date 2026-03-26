@@ -270,6 +270,11 @@ class DDSContext:
         ``asyncio.Task``.  When a termination signal arrives the context
         calls :meth:`shutdown` to tear everything down.
         """
+        # Call on_start() for services/components that define it
+        for service in self._registry.values():
+            if hasattr(service, "on_start"):
+                await service.on_start()
+
         # Start _run() for every registered service
         for service in self._registry.values():
             if hasattr(service, "_run"):

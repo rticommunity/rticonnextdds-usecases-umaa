@@ -7,6 +7,7 @@ from rtiumaapy.timestamp import UmaaTimestamp, set_timestamp
 from rtiumaapy.errors import AssemblyError, CommandResult, CommandHookError, CommandFailedError
 from rtiumaapy.dds_context import DDSContext
 from rtiumaapy.base_service import BaseService
+from rtiumaapy.base_component import BaseComponent
 from rtiumaapy.report_provider import ReportProvider
 from rtiumaapy.report_consumer import ReportConsumer
 from rtiumaapy.command_provider_session import CommandProviderSession
@@ -23,6 +24,7 @@ __all__ = [
     "CommandResult",
     "DDSContext",
     "BaseService",
+    "BaseComponent",
     "ReportProvider",
     "ReportConsumer",
     "CommandProviderSession",

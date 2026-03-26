@@ -76,7 +76,7 @@ class CommsChannelAddMessageConfigProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="CommsChannelAddMessageConfig",
+            service_name="CommsChannelAddMessageConfigProvider",
             command_type=UMAA_CO_CommsChannelConfig_CommsChannelAddMessageConfigCommandType,
             command_topic=UMAA_CO_CommsChannelConfig_CommsChannelAddMessageConfigCommandTypeTopic,
             ack_type=UMAA_CO_CommsChannelConfig_CommsChannelAddMessageConfigAckReportType,
@@ -93,7 +93,7 @@ class CommsChannelAddMessageConfigConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="CommsChannelAddMessageConfig",
+            service_name="CommsChannelAddMessageConfigConsumer",
             command_type=UMAA_CO_CommsChannelConfig_CommsChannelAddMessageConfigCommandType,
             command_topic=UMAA_CO_CommsChannelConfig_CommsChannelAddMessageConfigCommandTypeTopic,
             ack_type=UMAA_CO_CommsChannelConfig_CommsChannelAddMessageConfigAckReportType,
@@ -124,7 +124,7 @@ class CommsChannelClearAllControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="CommsChannelClearAll",
+            service_name="CommsChannelClearAllProvider",
             command_type=UMAA_CO_CommsChannelControl_CommsChannelClearAllCommandType,
             command_topic=UMAA_CO_CommsChannelControl_CommsChannelClearAllCommandTypeTopic,
             ack_type=UMAA_CO_CommsChannelControl_CommsChannelClearAllCommandAckReportType,
@@ -141,7 +141,7 @@ class CommsChannelClearAllControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="CommsChannelClearAll",
+            service_name="CommsChannelClearAllConsumer",
             command_type=UMAA_CO_CommsChannelControl_CommsChannelClearAllCommandType,
             command_topic=UMAA_CO_CommsChannelControl_CommsChannelClearAllCommandTypeTopic,
             ack_type=UMAA_CO_CommsChannelControl_CommsChannelClearAllCommandAckReportType,
@@ -172,7 +172,7 @@ class CommsChannelClearMessageControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="CommsChannelClearMessage",
+            service_name="CommsChannelClearMessageProvider",
             command_type=UMAA_CO_CommsChannelControl_CommsChannelClearMessageCommandType,
             command_topic=UMAA_CO_CommsChannelControl_CommsChannelClearMessageCommandTypeTopic,
             ack_type=UMAA_CO_CommsChannelControl_CommsChannelClearMessageCommandAckReportType,
@@ -189,7 +189,7 @@ class CommsChannelClearMessageControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="CommsChannelClearMessage",
+            service_name="CommsChannelClearMessageConsumer",
             command_type=UMAA_CO_CommsChannelControl_CommsChannelClearMessageCommandType,
             command_topic=UMAA_CO_CommsChannelControl_CommsChannelClearMessageCommandTypeTopic,
             ack_type=UMAA_CO_CommsChannelControl_CommsChannelClearMessageCommandAckReportType,
@@ -220,7 +220,7 @@ class CommsChannelDeleteMessageConfigProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="CommsChannelDeleteMessageConfig",
+            service_name="CommsChannelDeleteMessageConfigProvider",
             command_type=UMAA_CO_CommsChannelConfig_CommsChannelDeleteMessageConfigCommandType,
             command_topic=UMAA_CO_CommsChannelConfig_CommsChannelDeleteMessageConfigCommandTypeTopic,
             ack_type=UMAA_CO_CommsChannelConfig_CommsChannelDeleteMessageConfigAckReportType,
@@ -237,7 +237,7 @@ class CommsChannelDeleteMessageConfigConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="CommsChannelDeleteMessageConfig",
+            service_name="CommsChannelDeleteMessageConfigConsumer",
             command_type=UMAA_CO_CommsChannelConfig_CommsChannelDeleteMessageConfigCommandType,
             command_topic=UMAA_CO_CommsChannelConfig_CommsChannelDeleteMessageConfigCommandTypeTopic,
             ack_type=UMAA_CO_CommsChannelConfig_CommsChannelDeleteMessageConfigAckReportType,
@@ -268,7 +268,7 @@ class CommsChannelPowerConfigProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="CommsChannelPowerConfig",
+            service_name="CommsChannelPowerConfigProvider",
             command_type=UMAA_CO_CommsChannelPowerConfig_CommsChannelPowerConfigCommandType,
             command_topic=UMAA_CO_CommsChannelPowerConfig_CommsChannelPowerConfigCommandTypeTopic,
             ack_type=UMAA_CO_CommsChannelPowerConfig_CommsChannelPowerConfigAckReportType,
@@ -285,7 +285,7 @@ class CommsChannelPowerConfigConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="CommsChannelPowerConfig",
+            service_name="CommsChannelPowerConfigConsumer",
             command_type=UMAA_CO_CommsChannelPowerConfig_CommsChannelPowerConfigCommandType,
             command_topic=UMAA_CO_CommsChannelPowerConfig_CommsChannelPowerConfigCommandTypeTopic,
             ack_type=UMAA_CO_CommsChannelPowerConfig_CommsChannelPowerConfigAckReportType,
@@ -316,7 +316,7 @@ class CommsChannelResetControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="CommsChannelReset",
+            service_name="CommsChannelResetProvider",
             command_type=UMAA_CO_CommsChannelControl_CommsChannelResetCommandType,
             command_topic=UMAA_CO_CommsChannelControl_CommsChannelResetCommandTypeTopic,
             ack_type=UMAA_CO_CommsChannelControl_CommsChannelResetCommandAckReportType,
@@ -333,7 +333,7 @@ class CommsChannelResetControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="CommsChannelReset",
+            service_name="CommsChannelResetConsumer",
             command_type=UMAA_CO_CommsChannelControl_CommsChannelResetCommandType,
             command_topic=UMAA_CO_CommsChannelControl_CommsChannelResetCommandTypeTopic,
             ack_type=UMAA_CO_CommsChannelControl_CommsChannelResetCommandAckReportType,
@@ -364,7 +364,7 @@ class CommsChannelShutdownControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="CommsChannelShutdown",
+            service_name="CommsChannelShutdownProvider",
             command_type=UMAA_CO_CommsChannelControl_CommsChannelShutdownCommandType,
             command_topic=UMAA_CO_CommsChannelControl_CommsChannelShutdownCommandTypeTopic,
             ack_type=UMAA_CO_CommsChannelControl_CommsChannelShutdownCommandAckReportType,
@@ -381,7 +381,7 @@ class CommsChannelShutdownControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="CommsChannelShutdown",
+            service_name="CommsChannelShutdownConsumer",
             command_type=UMAA_CO_CommsChannelControl_CommsChannelShutdownCommandType,
             command_topic=UMAA_CO_CommsChannelControl_CommsChannelShutdownCommandTypeTopic,
             ack_type=UMAA_CO_CommsChannelControl_CommsChannelShutdownCommandAckReportType,
@@ -412,7 +412,7 @@ class CommsChannelStartupControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="CommsChannelStartup",
+            service_name="CommsChannelStartupProvider",
             command_type=UMAA_CO_CommsChannelControl_CommsChannelStartupCommandType,
             command_topic=UMAA_CO_CommsChannelControl_CommsChannelStartupCommandTypeTopic,
             ack_type=UMAA_CO_CommsChannelControl_CommsChannelStartupCommandAckReportType,
@@ -429,7 +429,7 @@ class CommsChannelStartupControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="CommsChannelStartup",
+            service_name="CommsChannelStartupConsumer",
             command_type=UMAA_CO_CommsChannelControl_CommsChannelStartupCommandType,
             command_topic=UMAA_CO_CommsChannelControl_CommsChannelStartupCommandTypeTopic,
             ack_type=UMAA_CO_CommsChannelControl_CommsChannelStartupCommandAckReportType,
@@ -460,7 +460,7 @@ class MessageFilterConfigProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="MessageFilterConfig",
+            service_name="MessageFilterConfigProvider",
             command_type=UMAA_CO_MessageFilterConfig_MessageFilterConfigCommandType,
             command_topic=UMAA_CO_MessageFilterConfig_MessageFilterConfigCommandTypeTopic,
             ack_type=UMAA_CO_MessageFilterConfig_MessageFilterConfigAckReportType,
@@ -477,7 +477,7 @@ class MessageFilterConfigConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="MessageFilterConfig",
+            service_name="MessageFilterConfigConsumer",
             command_type=UMAA_CO_MessageFilterConfig_MessageFilterConfigCommandType,
             command_topic=UMAA_CO_MessageFilterConfig_MessageFilterConfigCommandTypeTopic,
             ack_type=UMAA_CO_MessageFilterConfig_MessageFilterConfigAckReportType,

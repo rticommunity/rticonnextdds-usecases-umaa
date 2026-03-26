@@ -92,7 +92,7 @@ class AnchorControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="Anchor",
+            service_name="AnchorProvider",
             command_type=UMAA_EO_AnchorControl_AnchorCommandType,
             command_topic=UMAA_EO_AnchorControl_AnchorCommandTypeTopic,
             ack_type=UMAA_EO_AnchorControl_AnchorCommandAckReportType,
@@ -109,7 +109,7 @@ class AnchorControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="Anchor",
+            service_name="AnchorConsumer",
             command_type=UMAA_EO_AnchorControl_AnchorCommandType,
             command_topic=UMAA_EO_AnchorControl_AnchorCommandTypeTopic,
             ack_type=UMAA_EO_AnchorControl_AnchorCommandAckReportType,
@@ -140,7 +140,7 @@ class BallastPumpControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="BallastPump",
+            service_name="BallastPumpProvider",
             command_type=UMAA_EO_BallastTank_BallastPumpCommandType,
             command_topic=UMAA_EO_BallastTank_BallastPumpCommandTypeTopic,
             ack_type=UMAA_EO_BallastTank_BallastPumpCommandAckReportType,
@@ -157,7 +157,7 @@ class BallastPumpControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="BallastPump",
+            service_name="BallastPumpConsumer",
             command_type=UMAA_EO_BallastTank_BallastPumpCommandType,
             command_topic=UMAA_EO_BallastTank_BallastPumpCommandTypeTopic,
             ack_type=UMAA_EO_BallastTank_BallastPumpCommandAckReportType,
@@ -188,7 +188,7 @@ class BallastTankControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="BallastTank",
+            service_name="BallastTankProvider",
             command_type=UMAA_EO_BallastTank_BallastTankCommandType,
             command_topic=UMAA_EO_BallastTank_BallastTankCommandTypeTopic,
             ack_type=UMAA_EO_BallastTank_BallastTankCommandAckReportType,
@@ -205,7 +205,7 @@ class BallastTankControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="BallastTank",
+            service_name="BallastTankConsumer",
             command_type=UMAA_EO_BallastTank_BallastTankCommandType,
             command_topic=UMAA_EO_BallastTank_BallastTankCommandTypeTopic,
             ack_type=UMAA_EO_BallastTank_BallastTankCommandAckReportType,
@@ -236,7 +236,7 @@ class EngineControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="Engine",
+            service_name="EngineProvider",
             command_type=UMAA_EO_EngineControl_EngineCommandType,
             command_topic=UMAA_EO_EngineControl_EngineCommandTypeTopic,
             ack_type=UMAA_EO_EngineControl_EngineCommandAckReportType,
@@ -253,7 +253,7 @@ class EngineControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="Engine",
+            service_name="EngineConsumer",
             command_type=UMAA_EO_EngineControl_EngineCommandType,
             command_topic=UMAA_EO_EngineControl_EngineCommandTypeTopic,
             ack_type=UMAA_EO_EngineControl_EngineCommandAckReportType,
@@ -284,7 +284,7 @@ class FinsControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="Fins",
+            service_name="FinsProvider",
             command_type=UMAA_EO_FinsControl_FinsCommandType,
             command_topic=UMAA_EO_FinsControl_FinsCommandTypeTopic,
             ack_type=UMAA_EO_FinsControl_FinsCommandAckReportType,
@@ -301,7 +301,7 @@ class FinsControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="Fins",
+            service_name="FinsConsumer",
             command_type=UMAA_EO_FinsControl_FinsCommandType,
             command_topic=UMAA_EO_FinsControl_FinsCommandTypeTopic,
             ack_type=UMAA_EO_FinsControl_FinsCommandAckReportType,
@@ -332,7 +332,7 @@ class MastControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="Mast",
+            service_name="MastProvider",
             command_type=UMAA_EO_MastControl_MastCommandType,
             command_topic=UMAA_EO_MastControl_MastCommandTypeTopic,
             ack_type=UMAA_EO_MastControl_MastCommandAckReportType,
@@ -349,7 +349,7 @@ class MastControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="Mast",
+            service_name="MastConsumer",
             command_type=UMAA_EO_MastControl_MastCommandType,
             command_topic=UMAA_EO_MastControl_MastCommandTypeTopic,
             ack_type=UMAA_EO_MastControl_MastCommandAckReportType,
@@ -380,7 +380,7 @@ class PowerControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="Power",
+            service_name="PowerProvider",
             command_type=UMAA_EO_PowerControl_PowerCommandType,
             command_topic=UMAA_EO_PowerControl_PowerCommandTypeTopic,
             ack_type=UMAA_EO_PowerControl_PowerCommandAckReportType,
@@ -397,7 +397,7 @@ class PowerControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="Power",
+            service_name="PowerConsumer",
             command_type=UMAA_EO_PowerControl_PowerCommandType,
             command_topic=UMAA_EO_PowerControl_PowerCommandTypeTopic,
             ack_type=UMAA_EO_PowerControl_PowerCommandAckReportType,
@@ -428,7 +428,7 @@ class PropulsorsControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="Propulsors",
+            service_name="PropulsorsProvider",
             command_type=UMAA_EO_PropulsorsControl_PropulsorsCommandType,
             command_topic=UMAA_EO_PropulsorsControl_PropulsorsCommandTypeTopic,
             ack_type=UMAA_EO_PropulsorsControl_PropulsorsCommandAckReportType,
@@ -445,7 +445,7 @@ class PropulsorsControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="Propulsors",
+            service_name="PropulsorsConsumer",
             command_type=UMAA_EO_PropulsorsControl_PropulsorsCommandType,
             command_topic=UMAA_EO_PropulsorsControl_PropulsorsCommandTypeTopic,
             ack_type=UMAA_EO_PropulsorsControl_PropulsorsCommandAckReportType,

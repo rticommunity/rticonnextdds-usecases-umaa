@@ -108,7 +108,7 @@ class BITControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="BIT",
+            service_name="BITProvider",
             command_type=UMAA_SO_BITControl_BITCommandType,
             command_topic=UMAA_SO_BITControl_BITCommandTypeTopic,
             ack_type=UMAA_SO_BITControl_BITCommandAckReportType,
@@ -127,7 +127,7 @@ class BITControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="BIT",
+            service_name="BITConsumer",
             command_type=UMAA_SO_BITControl_BITCommandType,
             command_topic=UMAA_SO_BITControl_BITCommandTypeTopic,
             ack_type=UMAA_SO_BITControl_BITCommandAckReportType,
@@ -160,7 +160,7 @@ class BITConfigProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="BITConfig",
+            service_name="BITConfigProvider",
             command_type=UMAA_SO_BITConfig_BITConfigCommandType,
             command_topic=UMAA_SO_BITConfig_BITConfigCommandTypeTopic,
             ack_type=UMAA_SO_BITConfig_BITConfigAckReportType,
@@ -177,7 +177,7 @@ class BITConfigConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="BITConfig",
+            service_name="BITConfigConsumer",
             command_type=UMAA_SO_BITConfig_BITConfigCommandType,
             command_topic=UMAA_SO_BITConfig_BITConfigCommandTypeTopic,
             ack_type=UMAA_SO_BITConfig_BITConfigAckReportType,
@@ -208,7 +208,7 @@ class ClearDataControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="ClearData",
+            service_name="ClearDataProvider",
             command_type=UMAA_SO_ClearDataControl_ClearDataCommandType,
             command_topic=UMAA_SO_ClearDataControl_ClearDataCommandTypeTopic,
             ack_type=UMAA_SO_ClearDataControl_ClearDataCommandAckReportType,
@@ -225,7 +225,7 @@ class ClearDataControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="ClearData",
+            service_name="ClearDataConsumer",
             command_type=UMAA_SO_ClearDataControl_ClearDataCommandType,
             command_topic=UMAA_SO_ClearDataControl_ClearDataCommandTypeTopic,
             ack_type=UMAA_SO_ClearDataControl_ClearDataCommandAckReportType,
@@ -256,7 +256,7 @@ class ControlSystemIDControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="ControlSystemID",
+            service_name="ControlSystemIDProvider",
             command_type=UMAA_SO_ControlSystemID_ControlSystemIDCommandType,
             command_topic=UMAA_SO_ControlSystemID_ControlSystemIDCommandTypeTopic,
             ack_type=UMAA_SO_ControlSystemID_ControlSystemIDCommandAckReportType,
@@ -273,7 +273,7 @@ class ControlSystemIDControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="ControlSystemID",
+            service_name="ControlSystemIDConsumer",
             command_type=UMAA_SO_ControlSystemID_ControlSystemIDCommandType,
             command_topic=UMAA_SO_ControlSystemID_ControlSystemIDCommandTypeTopic,
             ack_type=UMAA_SO_ControlSystemID_ControlSystemIDCommandAckReportType,
@@ -304,7 +304,7 @@ class EmitterControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="Emitter",
+            service_name="EmitterProvider",
             command_type=UMAA_SO_EmitterControl_EmitterCommandType,
             command_topic=UMAA_SO_EmitterControl_EmitterCommandTypeTopic,
             ack_type=UMAA_SO_EmitterControl_EmitterCommandAckReportType,
@@ -321,7 +321,7 @@ class EmitterControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="Emitter",
+            service_name="EmitterConsumer",
             command_type=UMAA_SO_EmitterControl_EmitterCommandType,
             command_topic=UMAA_SO_EmitterControl_EmitterCommandTypeTopic,
             ack_type=UMAA_SO_EmitterControl_EmitterCommandAckReportType,
@@ -352,7 +352,7 @@ class EmitterPresetControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="EmitterPreset",
+            service_name="EmitterPresetProvider",
             command_type=UMAA_SO_EmitterPresetControl_EmitterPresetCommandType,
             command_topic=UMAA_SO_EmitterPresetControl_EmitterPresetCommandTypeTopic,
             ack_type=UMAA_SO_EmitterPresetControl_EmitterPresetCommandAckReportType,
@@ -369,7 +369,7 @@ class EmitterPresetControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="EmitterPreset",
+            service_name="EmitterPresetConsumer",
             command_type=UMAA_SO_EmitterPresetControl_EmitterPresetCommandType,
             command_topic=UMAA_SO_EmitterPresetControl_EmitterPresetCommandTypeTopic,
             ack_type=UMAA_SO_EmitterPresetControl_EmitterPresetCommandAckReportType,
@@ -400,7 +400,7 @@ class EmitterPresetConfigProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="EmitterPresetConfig",
+            service_name="EmitterPresetConfigProvider",
             command_type=UMAA_SO_EmitterPresetConfig_EmitterPresetConfigCommandType,
             command_topic=UMAA_SO_EmitterPresetConfig_EmitterPresetConfigCommandTypeTopic,
             ack_type=UMAA_SO_EmitterPresetConfig_EmitterPresetConfigAckReportType,
@@ -417,7 +417,7 @@ class EmitterPresetConfigConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="EmitterPresetConfig",
+            service_name="EmitterPresetConfigConsumer",
             command_type=UMAA_SO_EmitterPresetConfig_EmitterPresetConfigCommandType,
             command_topic=UMAA_SO_EmitterPresetConfig_EmitterPresetConfigCommandTypeTopic,
             ack_type=UMAA_SO_EmitterPresetConfig_EmitterPresetConfigAckReportType,
@@ -448,7 +448,7 @@ class ResourceAllocationControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="ResourceAllocation",
+            service_name="ResourceAllocationProvider",
             command_type=UMAA_SO_ResourceAllocation_ResourceAllocationCommandType,
             command_topic=UMAA_SO_ResourceAllocation_ResourceAllocationCommandTypeTopic,
             ack_type=UMAA_SO_ResourceAllocation_ResourceAllocationCommandAckReportType,
@@ -465,7 +465,7 @@ class ResourceAllocationControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="ResourceAllocation",
+            service_name="ResourceAllocationConsumer",
             command_type=UMAA_SO_ResourceAllocation_ResourceAllocationCommandType,
             command_topic=UMAA_SO_ResourceAllocation_ResourceAllocationCommandTypeTopic,
             ack_type=UMAA_SO_ResourceAllocation_ResourceAllocationCommandAckReportType,
@@ -496,7 +496,7 @@ class ResourceAllocationPriorityControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="ResourceAllocationPriority",
+            service_name="ResourceAllocationPriorityProvider",
             command_type=UMAA_SO_ResourceAllocation_ResourceAllocationPriorityCommandType,
             command_topic=UMAA_SO_ResourceAllocation_ResourceAllocationPriorityCommandTypeTopic,
             ack_type=UMAA_SO_ResourceAllocation_ResourceAllocationPriorityCommandAckReportType,
@@ -513,7 +513,7 @@ class ResourceAllocationPriorityControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="ResourceAllocationPriority",
+            service_name="ResourceAllocationPriorityConsumer",
             command_type=UMAA_SO_ResourceAllocation_ResourceAllocationPriorityCommandType,
             command_topic=UMAA_SO_ResourceAllocation_ResourceAllocationPriorityCommandTypeTopic,
             ack_type=UMAA_SO_ResourceAllocation_ResourceAllocationPriorityCommandAckReportType,
@@ -544,7 +544,7 @@ class SyncDataControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="SyncData",
+            service_name="SyncDataProvider",
             command_type=UMAA_SO_SyncDataControl_SyncDataCommandType,
             command_topic=UMAA_SO_SyncDataControl_SyncDataCommandTypeTopic,
             ack_type=UMAA_SO_SyncDataControl_SyncDataCommandAckReportType,
@@ -561,7 +561,7 @@ class SyncDataControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="SyncData",
+            service_name="SyncDataConsumer",
             command_type=UMAA_SO_SyncDataControl_SyncDataCommandType,
             command_topic=UMAA_SO_SyncDataControl_SyncDataCommandTypeTopic,
             ack_type=UMAA_SO_SyncDataControl_SyncDataCommandAckReportType,
@@ -592,7 +592,7 @@ class TamperDetectionControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="TamperDetection",
+            service_name="TamperDetectionProvider",
             command_type=UMAA_SO_TamperDetectionControl_TamperDetectionCommandType,
             command_topic=UMAA_SO_TamperDetectionControl_TamperDetectionCommandTypeTopic,
             ack_type=UMAA_SO_TamperDetectionControl_TamperDetectionCommandAckReportType,
@@ -609,7 +609,7 @@ class TamperDetectionControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="TamperDetection",
+            service_name="TamperDetectionConsumer",
             command_type=UMAA_SO_TamperDetectionControl_TamperDetectionCommandType,
             command_topic=UMAA_SO_TamperDetectionControl_TamperDetectionCommandTypeTopic,
             ack_type=UMAA_SO_TamperDetectionControl_TamperDetectionCommandAckReportType,

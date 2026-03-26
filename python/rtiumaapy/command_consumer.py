@@ -148,6 +148,7 @@ class CommandConsumer(BaseService):
             self._session_command = command
 
             self._set_session_filter(session_id_bytes)
+            await asyncio.sleep(0.01)  # let CFT filter propagate (C78)
             self._command_writer.write(command)
             return session_id_bytes
         else:

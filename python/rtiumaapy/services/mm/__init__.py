@@ -104,7 +104,7 @@ class ActiveConstraintsControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="ActiveConstraints",
+            service_name="ActiveConstraintsProvider",
             command_type=UMAA_MM_ActiveConstraintsControl_ActiveConstraintsCommandType,
             command_topic=UMAA_MM_ActiveConstraintsControl_ActiveConstraintsCommandTypeTopic,
             ack_type=UMAA_MM_ActiveConstraintsControl_ActiveConstraintsCommandAckReportType,
@@ -121,7 +121,7 @@ class ActiveConstraintsControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="ActiveConstraints",
+            service_name="ActiveConstraintsConsumer",
             command_type=UMAA_MM_ActiveConstraintsControl_ActiveConstraintsCommandType,
             command_topic=UMAA_MM_ActiveConstraintsControl_ActiveConstraintsCommandTypeTopic,
             ack_type=UMAA_MM_ActiveConstraintsControl_ActiveConstraintsCommandAckReportType,
@@ -152,7 +152,7 @@ class ConditionalAddControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="ConditionalAdd",
+            service_name="ConditionalAddProvider",
             command_type=UMAA_MM_ConditionalControl_ConditionalAddCommandType,
             command_topic=UMAA_MM_ConditionalControl_ConditionalAddCommandTypeTopic,
             ack_type=UMAA_MM_ConditionalControl_ConditionalAddCommandAckReportType,
@@ -169,7 +169,7 @@ class ConditionalAddControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="ConditionalAdd",
+            service_name="ConditionalAddConsumer",
             command_type=UMAA_MM_ConditionalControl_ConditionalAddCommandType,
             command_topic=UMAA_MM_ConditionalControl_ConditionalAddCommandTypeTopic,
             ack_type=UMAA_MM_ConditionalControl_ConditionalAddCommandAckReportType,
@@ -200,7 +200,7 @@ class ConditionalDeleteControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="ConditionalDelete",
+            service_name="ConditionalDeleteProvider",
             command_type=UMAA_MM_ConditionalControl_ConditionalDeleteCommandType,
             command_topic=UMAA_MM_ConditionalControl_ConditionalDeleteCommandTypeTopic,
             ack_type=UMAA_MM_ConditionalControl_ConditionalDeleteCommandAckReportType,
@@ -217,7 +217,7 @@ class ConditionalDeleteControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="ConditionalDelete",
+            service_name="ConditionalDeleteConsumer",
             command_type=UMAA_MM_ConditionalControl_ConditionalDeleteCommandType,
             command_topic=UMAA_MM_ConditionalControl_ConditionalDeleteCommandTypeTopic,
             ack_type=UMAA_MM_ConditionalControl_ConditionalDeleteCommandAckReportType,
@@ -248,7 +248,7 @@ class MissionPlanAssignmentControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="MissionPlanAssignment",
+            service_name="MissionPlanAssignmentProvider",
             command_type=UMAA_MM_MissionPlanAssignmentControl_MissionPlanAssignmentCommandType,
             command_topic=UMAA_MM_MissionPlanAssignmentControl_MissionPlanAssignmentCommandTypeTopic,
             ack_type=UMAA_MM_MissionPlanAssignmentControl_MissionPlanAssignmentCommandAckReportType,
@@ -265,7 +265,7 @@ class MissionPlanAssignmentControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="MissionPlanAssignment",
+            service_name="MissionPlanAssignmentConsumer",
             command_type=UMAA_MM_MissionPlanAssignmentControl_MissionPlanAssignmentCommandType,
             command_topic=UMAA_MM_MissionPlanAssignmentControl_MissionPlanAssignmentCommandTypeTopic,
             ack_type=UMAA_MM_MissionPlanAssignmentControl_MissionPlanAssignmentCommandAckReportType,
@@ -296,7 +296,7 @@ class MissionPlanConstraintAddControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="MissionPlanConstraintAdd",
+            service_name="MissionPlanConstraintAddProvider",
             command_type=UMAA_MM_MissionPlanConstraintControl_MissionPlanConstraintAddCommandType,
             command_topic=UMAA_MM_MissionPlanConstraintControl_MissionPlanConstraintAddCommandTypeTopic,
             ack_type=UMAA_MM_MissionPlanConstraintControl_MissionPlanConstraintAddCommandAckReportType,
@@ -313,7 +313,7 @@ class MissionPlanConstraintAddControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="MissionPlanConstraintAdd",
+            service_name="MissionPlanConstraintAddConsumer",
             command_type=UMAA_MM_MissionPlanConstraintControl_MissionPlanConstraintAddCommandType,
             command_topic=UMAA_MM_MissionPlanConstraintControl_MissionPlanConstraintAddCommandTypeTopic,
             ack_type=UMAA_MM_MissionPlanConstraintControl_MissionPlanConstraintAddCommandAckReportType,
@@ -344,7 +344,7 @@ class MissionPlanConstraintDeleteControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="MissionPlanConstraintDelete",
+            service_name="MissionPlanConstraintDeleteProvider",
             command_type=UMAA_MM_MissionPlanConstraintControl_MissionPlanConstraintDeleteCommandType,
             command_topic=UMAA_MM_MissionPlanConstraintControl_MissionPlanConstraintDeleteCommandTypeTopic,
             ack_type=UMAA_MM_MissionPlanConstraintControl_MissionPlanConstraintDeleteCommandAckReportType,
@@ -361,7 +361,7 @@ class MissionPlanConstraintDeleteControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="MissionPlanConstraintDelete",
+            service_name="MissionPlanConstraintDeleteConsumer",
             command_type=UMAA_MM_MissionPlanConstraintControl_MissionPlanConstraintDeleteCommandType,
             command_topic=UMAA_MM_MissionPlanConstraintControl_MissionPlanConstraintDeleteCommandTypeTopic,
             ack_type=UMAA_MM_MissionPlanConstraintControl_MissionPlanConstraintDeleteCommandAckReportType,
@@ -392,7 +392,7 @@ class MissionPlanExecutionControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="MissionPlanExecution",
+            service_name="MissionPlanExecutionProvider",
             command_type=UMAA_MM_MissionPlanExecutionControl_MissionPlanExecutionCommandType,
             command_topic=UMAA_MM_MissionPlanExecutionControl_MissionPlanExecutionCommandTypeTopic,
             ack_type=UMAA_MM_MissionPlanExecutionControl_MissionPlanExecutionCommandAckReportType,
@@ -409,7 +409,7 @@ class MissionPlanExecutionControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="MissionPlanExecution",
+            service_name="MissionPlanExecutionConsumer",
             command_type=UMAA_MM_MissionPlanExecutionControl_MissionPlanExecutionCommandType,
             command_topic=UMAA_MM_MissionPlanExecutionControl_MissionPlanExecutionCommandTypeTopic,
             ack_type=UMAA_MM_MissionPlanExecutionControl_MissionPlanExecutionCommandAckReportType,
@@ -440,7 +440,7 @@ class MissionPlanMissionAddControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="MissionPlanMissionAdd",
+            service_name="MissionPlanMissionAddProvider",
             command_type=UMAA_MM_MissionPlanMissionControl_MissionPlanMissionAddCommandType,
             command_topic=UMAA_MM_MissionPlanMissionControl_MissionPlanMissionAddCommandTypeTopic,
             ack_type=UMAA_MM_MissionPlanMissionControl_MissionPlanMissionAddCommandAckReportType,
@@ -457,7 +457,7 @@ class MissionPlanMissionAddControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="MissionPlanMissionAdd",
+            service_name="MissionPlanMissionAddConsumer",
             command_type=UMAA_MM_MissionPlanMissionControl_MissionPlanMissionAddCommandType,
             command_topic=UMAA_MM_MissionPlanMissionControl_MissionPlanMissionAddCommandTypeTopic,
             ack_type=UMAA_MM_MissionPlanMissionControl_MissionPlanMissionAddCommandAckReportType,
@@ -488,7 +488,7 @@ class MissionPlanMissionClearControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="MissionPlanMissionClear",
+            service_name="MissionPlanMissionClearProvider",
             command_type=UMAA_MM_MissionPlanMissionControl_MissionPlanMissionClearCommandType,
             command_topic=UMAA_MM_MissionPlanMissionControl_MissionPlanMissionClearCommandTypeTopic,
             ack_type=UMAA_MM_MissionPlanMissionControl_MissionPlanMissionClearCommandAckReportType,
@@ -505,7 +505,7 @@ class MissionPlanMissionClearControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="MissionPlanMissionClear",
+            service_name="MissionPlanMissionClearConsumer",
             command_type=UMAA_MM_MissionPlanMissionControl_MissionPlanMissionClearCommandType,
             command_topic=UMAA_MM_MissionPlanMissionControl_MissionPlanMissionClearCommandTypeTopic,
             ack_type=UMAA_MM_MissionPlanMissionControl_MissionPlanMissionClearCommandAckReportType,
@@ -536,7 +536,7 @@ class MissionPlanMissionDeleteControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="MissionPlanMissionDelete",
+            service_name="MissionPlanMissionDeleteProvider",
             command_type=UMAA_MM_MissionPlanMissionControl_MissionPlanMissionDeleteCommandType,
             command_topic=UMAA_MM_MissionPlanMissionControl_MissionPlanMissionDeleteCommandTypeTopic,
             ack_type=UMAA_MM_MissionPlanMissionControl_MissionPlanMissionDeleteCommandAckReportType,
@@ -553,7 +553,7 @@ class MissionPlanMissionDeleteControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="MissionPlanMissionDelete",
+            service_name="MissionPlanMissionDeleteConsumer",
             command_type=UMAA_MM_MissionPlanMissionControl_MissionPlanMissionDeleteCommandType,
             command_topic=UMAA_MM_MissionPlanMissionControl_MissionPlanMissionDeleteCommandTypeTopic,
             ack_type=UMAA_MM_MissionPlanMissionControl_MissionPlanMissionDeleteCommandAckReportType,
@@ -584,7 +584,7 @@ class MissionPlanObjectiveAddControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="MissionPlanObjectiveAdd",
+            service_name="MissionPlanObjectiveAddProvider",
             command_type=UMAA_MM_MissionPlanObjectiveControl_MissionPlanObjectiveAddCommandType,
             command_topic=UMAA_MM_MissionPlanObjectiveControl_MissionPlanObjectiveAddCommandTypeTopic,
             ack_type=UMAA_MM_MissionPlanObjectiveControl_MissionPlanObjectiveAddCommandAckReportType,
@@ -601,7 +601,7 @@ class MissionPlanObjectiveAddControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="MissionPlanObjectiveAdd",
+            service_name="MissionPlanObjectiveAddConsumer",
             command_type=UMAA_MM_MissionPlanObjectiveControl_MissionPlanObjectiveAddCommandType,
             command_topic=UMAA_MM_MissionPlanObjectiveControl_MissionPlanObjectiveAddCommandTypeTopic,
             ack_type=UMAA_MM_MissionPlanObjectiveControl_MissionPlanObjectiveAddCommandAckReportType,
@@ -632,7 +632,7 @@ class MissionPlanObjectiveDeleteControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="MissionPlanObjectiveDelete",
+            service_name="MissionPlanObjectiveDeleteProvider",
             command_type=UMAA_MM_MissionPlanObjectiveControl_MissionPlanObjectiveDeleteCommandType,
             command_topic=UMAA_MM_MissionPlanObjectiveControl_MissionPlanObjectiveDeleteCommandTypeTopic,
             ack_type=UMAA_MM_MissionPlanObjectiveControl_MissionPlanObjectiveDeleteCommandAckReportType,
@@ -649,7 +649,7 @@ class MissionPlanObjectiveDeleteControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="MissionPlanObjectiveDelete",
+            service_name="MissionPlanObjectiveDeleteConsumer",
             command_type=UMAA_MM_MissionPlanObjectiveControl_MissionPlanObjectiveDeleteCommandType,
             command_topic=UMAA_MM_MissionPlanObjectiveControl_MissionPlanObjectiveDeleteCommandTypeTopic,
             ack_type=UMAA_MM_MissionPlanObjectiveControl_MissionPlanObjectiveDeleteCommandAckReportType,
@@ -680,7 +680,7 @@ class MissionPlanTaskAddControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="MissionPlanTaskAdd",
+            service_name="MissionPlanTaskAddProvider",
             command_type=UMAA_MM_MissionPlanTaskControl_MissionPlanTaskAddCommandType,
             command_topic=UMAA_MM_MissionPlanTaskControl_MissionPlanTaskAddCommandTypeTopic,
             ack_type=UMAA_MM_MissionPlanTaskControl_MissionPlanTaskAddCommandAckReportType,
@@ -697,7 +697,7 @@ class MissionPlanTaskAddControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="MissionPlanTaskAdd",
+            service_name="MissionPlanTaskAddConsumer",
             command_type=UMAA_MM_MissionPlanTaskControl_MissionPlanTaskAddCommandType,
             command_topic=UMAA_MM_MissionPlanTaskControl_MissionPlanTaskAddCommandTypeTopic,
             ack_type=UMAA_MM_MissionPlanTaskControl_MissionPlanTaskAddCommandAckReportType,
@@ -728,7 +728,7 @@ class MissionPlanTaskDeleteControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="MissionPlanTaskDelete",
+            service_name="MissionPlanTaskDeleteProvider",
             command_type=UMAA_MM_MissionPlanTaskControl_MissionPlanTaskDeleteCommandType,
             command_topic=UMAA_MM_MissionPlanTaskControl_MissionPlanTaskDeleteCommandTypeTopic,
             ack_type=UMAA_MM_MissionPlanTaskControl_MissionPlanTaskDeleteCommandAckReportType,
@@ -745,7 +745,7 @@ class MissionPlanTaskDeleteControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="MissionPlanTaskDelete",
+            service_name="MissionPlanTaskDeleteConsumer",
             command_type=UMAA_MM_MissionPlanTaskControl_MissionPlanTaskDeleteCommandType,
             command_topic=UMAA_MM_MissionPlanTaskControl_MissionPlanTaskDeleteCommandTypeTopic,
             ack_type=UMAA_MM_MissionPlanTaskControl_MissionPlanTaskDeleteCommandAckReportType,
@@ -776,7 +776,7 @@ class ObjectiveAssignmentControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="ObjectiveAssignment",
+            service_name="ObjectiveAssignmentProvider",
             command_type=UMAA_MM_ObjectiveAssignmentControl_ObjectiveAssignmentCommandType,
             command_topic=UMAA_MM_ObjectiveAssignmentControl_ObjectiveAssignmentCommandTypeTopic,
             ack_type=UMAA_MM_ObjectiveAssignmentControl_ObjectiveAssignmentCommandAckReportType,
@@ -793,7 +793,7 @@ class ObjectiveAssignmentControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="ObjectiveAssignment",
+            service_name="ObjectiveAssignmentConsumer",
             command_type=UMAA_MM_ObjectiveAssignmentControl_ObjectiveAssignmentCommandType,
             command_topic=UMAA_MM_ObjectiveAssignmentControl_ObjectiveAssignmentCommandTypeTopic,
             ack_type=UMAA_MM_ObjectiveAssignmentControl_ObjectiveAssignmentCommandAckReportType,
@@ -824,7 +824,7 @@ class ObjectiveExecutionControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="ObjectiveExecution",
+            service_name="ObjectiveExecutionProvider",
             command_type=UMAA_MM_ObjectiveExecutionControl_ObjectiveExecutionCommandType,
             command_topic=UMAA_MM_ObjectiveExecutionControl_ObjectiveExecutionCommandTypeTopic,
             ack_type=UMAA_MM_ObjectiveExecutionControl_ObjectiveExecutionCommandAckReportType,
@@ -841,7 +841,7 @@ class ObjectiveExecutionControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="ObjectiveExecution",
+            service_name="ObjectiveExecutionConsumer",
             command_type=UMAA_MM_ObjectiveExecutionControl_ObjectiveExecutionCommandType,
             command_topic=UMAA_MM_ObjectiveExecutionControl_ObjectiveExecutionCommandTypeTopic,
             ack_type=UMAA_MM_ObjectiveExecutionControl_ObjectiveExecutionCommandAckReportType,
@@ -876,7 +876,7 @@ class ObjectiveExecutorControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="ObjectiveExecutor",
+            service_name="ObjectiveExecutorProvider",
             command_type=UMAA_MM_ObjectiveExecutorControl_ObjectiveExecutorCommandType,
             command_topic=UMAA_MM_ObjectiveExecutorControl_ObjectiveExecutorCommandTypeTopic,
             ack_type=UMAA_MM_ObjectiveExecutorControl_ObjectiveExecutorCommandAckReportType,
@@ -895,7 +895,7 @@ class ObjectiveExecutorControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="ObjectiveExecutor",
+            service_name="ObjectiveExecutorConsumer",
             command_type=UMAA_MM_ObjectiveExecutorControl_ObjectiveExecutorCommandType,
             command_topic=UMAA_MM_ObjectiveExecutorControl_ObjectiveExecutorCommandTypeTopic,
             ack_type=UMAA_MM_ObjectiveExecutorControl_ObjectiveExecutorCommandAckReportType,
@@ -928,7 +928,7 @@ class ObjectiveExecutorStateControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="ObjectiveExecutorState",
+            service_name="ObjectiveExecutorStateProvider",
             command_type=UMAA_MM_ObjectiveExecutorControl_ObjectiveExecutorStateCommandType,
             command_topic=UMAA_MM_ObjectiveExecutorControl_ObjectiveExecutorStateCommandTypeTopic,
             ack_type=UMAA_MM_ObjectiveExecutorControl_ObjectiveExecutorStateCommandAckReportType,
@@ -945,7 +945,7 @@ class ObjectiveExecutorStateControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="ObjectiveExecutorState",
+            service_name="ObjectiveExecutorStateConsumer",
             command_type=UMAA_MM_ObjectiveExecutorControl_ObjectiveExecutorStateCommandType,
             command_topic=UMAA_MM_ObjectiveExecutorControl_ObjectiveExecutorStateCommandTypeTopic,
             ack_type=UMAA_MM_ObjectiveExecutorControl_ObjectiveExecutorStateCommandAckReportType,
@@ -976,7 +976,7 @@ class OperationalModeControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="OperationalMode",
+            service_name="OperationalModeProvider",
             command_type=UMAA_MM_OperationalModeControl_OperationalModeCommandType,
             command_topic=UMAA_MM_OperationalModeControl_OperationalModeCommandTypeTopic,
             ack_type=UMAA_MM_OperationalModeControl_OperationalModeCommandAckReportType,
@@ -993,7 +993,7 @@ class OperationalModeControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="OperationalMode",
+            service_name="OperationalModeConsumer",
             command_type=UMAA_MM_OperationalModeControl_OperationalModeCommandType,
             command_topic=UMAA_MM_OperationalModeControl_OperationalModeCommandTypeTopic,
             ack_type=UMAA_MM_OperationalModeControl_OperationalModeCommandAckReportType,
@@ -1024,7 +1024,7 @@ class TaskPlanAssignmentControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="TaskPlanAssignment",
+            service_name="TaskPlanAssignmentProvider",
             command_type=UMAA_MM_TaskPlanAssignmentControl_TaskPlanAssignmentCommandType,
             command_topic=UMAA_MM_TaskPlanAssignmentControl_TaskPlanAssignmentCommandTypeTopic,
             ack_type=UMAA_MM_TaskPlanAssignmentControl_TaskPlanAssignmentCommandAckReportType,
@@ -1041,7 +1041,7 @@ class TaskPlanAssignmentControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="TaskPlanAssignment",
+            service_name="TaskPlanAssignmentConsumer",
             command_type=UMAA_MM_TaskPlanAssignmentControl_TaskPlanAssignmentCommandType,
             command_topic=UMAA_MM_TaskPlanAssignmentControl_TaskPlanAssignmentCommandTypeTopic,
             ack_type=UMAA_MM_TaskPlanAssignmentControl_TaskPlanAssignmentCommandAckReportType,
@@ -1072,7 +1072,7 @@ class TaskPlanExecutionControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="TaskPlanExecution",
+            service_name="TaskPlanExecutionProvider",
             command_type=UMAA_MM_TaskPlanExecutionControl_TaskPlanExecutionCommandType,
             command_topic=UMAA_MM_TaskPlanExecutionControl_TaskPlanExecutionCommandTypeTopic,
             ack_type=UMAA_MM_TaskPlanExecutionControl_TaskPlanExecutionCommandAckReportType,
@@ -1089,7 +1089,7 @@ class TaskPlanExecutionControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="TaskPlanExecution",
+            service_name="TaskPlanExecutionConsumer",
             command_type=UMAA_MM_TaskPlanExecutionControl_TaskPlanExecutionCommandType,
             command_topic=UMAA_MM_TaskPlanExecutionControl_TaskPlanExecutionCommandTypeTopic,
             ack_type=UMAA_MM_TaskPlanExecutionControl_TaskPlanExecutionCommandAckReportType,

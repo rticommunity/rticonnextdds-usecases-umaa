@@ -56,7 +56,7 @@ class FreeFloatControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="FreeFloat",
+            service_name="FreeFloatProvider",
             command_type=UMAA_MO_FreeFloatControl_FreeFloatCommandType,
             command_topic=UMAA_MO_FreeFloatControl_FreeFloatCommandTypeTopic,
             ack_type=UMAA_MO_FreeFloatControl_FreeFloatCommandAckReportType,
@@ -75,7 +75,7 @@ class FreeFloatControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="FreeFloat",
+            service_name="FreeFloatConsumer",
             command_type=UMAA_MO_FreeFloatControl_FreeFloatCommandType,
             command_topic=UMAA_MO_FreeFloatControl_FreeFloatCommandTypeTopic,
             ack_type=UMAA_MO_FreeFloatControl_FreeFloatCommandAckReportType,
@@ -112,7 +112,7 @@ class GlobalDriftControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="GlobalDrift",
+            service_name="GlobalDriftProvider",
             command_type=UMAA_MO_GlobalDriftControl_GlobalDriftCommandType,
             command_topic=UMAA_MO_GlobalDriftControl_GlobalDriftCommandTypeTopic,
             ack_type=UMAA_MO_GlobalDriftControl_GlobalDriftCommandAckReportType,
@@ -131,7 +131,7 @@ class GlobalDriftControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="GlobalDrift",
+            service_name="GlobalDriftConsumer",
             command_type=UMAA_MO_GlobalDriftControl_GlobalDriftCommandType,
             command_topic=UMAA_MO_GlobalDriftControl_GlobalDriftCommandTypeTopic,
             ack_type=UMAA_MO_GlobalDriftControl_GlobalDriftCommandAckReportType,
@@ -168,7 +168,7 @@ class GlobalHoverControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="GlobalHover",
+            service_name="GlobalHoverProvider",
             command_type=UMAA_MO_GlobalHoverControl_GlobalHoverCommandType,
             command_topic=UMAA_MO_GlobalHoverControl_GlobalHoverCommandTypeTopic,
             ack_type=UMAA_MO_GlobalHoverControl_GlobalHoverCommandAckReportType,
@@ -187,7 +187,7 @@ class GlobalHoverControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="GlobalHover",
+            service_name="GlobalHoverConsumer",
             command_type=UMAA_MO_GlobalHoverControl_GlobalHoverCommandType,
             command_topic=UMAA_MO_GlobalHoverControl_GlobalHoverCommandTypeTopic,
             ack_type=UMAA_MO_GlobalHoverControl_GlobalHoverCommandAckReportType,
@@ -224,7 +224,7 @@ class GlobalVectorControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="GlobalVector",
+            service_name="GlobalVectorProvider",
             command_type=UMAA_MO_GlobalVectorControl_GlobalVectorCommandType,
             command_topic=UMAA_MO_GlobalVectorControl_GlobalVectorCommandTypeTopic,
             ack_type=UMAA_MO_GlobalVectorControl_GlobalVectorCommandAckReportType,
@@ -243,7 +243,7 @@ class GlobalVectorControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="GlobalVector",
+            service_name="GlobalVectorConsumer",
             command_type=UMAA_MO_GlobalVectorControl_GlobalVectorCommandType,
             command_topic=UMAA_MO_GlobalVectorControl_GlobalVectorCommandTypeTopic,
             ack_type=UMAA_MO_GlobalVectorControl_GlobalVectorCommandAckReportType,
@@ -280,7 +280,7 @@ class GlobalWaypointControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="GlobalWaypoint",
+            service_name="GlobalWaypointProvider",
             command_type=UMAA_MO_GlobalWaypointControl_GlobalWaypointCommandType,
             command_topic=UMAA_MO_GlobalWaypointControl_GlobalWaypointCommandTypeTopic,
             ack_type=UMAA_MO_GlobalWaypointControl_GlobalWaypointCommandAckReportType,
@@ -299,7 +299,7 @@ class GlobalWaypointControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="GlobalWaypoint",
+            service_name="GlobalWaypointConsumer",
             command_type=UMAA_MO_GlobalWaypointControl_GlobalWaypointCommandType,
             command_topic=UMAA_MO_GlobalWaypointControl_GlobalWaypointCommandTypeTopic,
             ack_type=UMAA_MO_GlobalWaypointControl_GlobalWaypointCommandAckReportType,
@@ -336,7 +336,7 @@ class PrimitiveDriverControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="PrimitiveDriver",
+            service_name="PrimitiveDriverProvider",
             command_type=UMAA_MO_PrimitiveDriverControl_PrimitiveDriverCommandType,
             command_topic=UMAA_MO_PrimitiveDriverControl_PrimitiveDriverCommandTypeTopic,
             ack_type=UMAA_MO_PrimitiveDriverControl_PrimitiveDriverCommandAckReportType,
@@ -355,7 +355,7 @@ class PrimitiveDriverControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="PrimitiveDriver",
+            service_name="PrimitiveDriverConsumer",
             command_type=UMAA_MO_PrimitiveDriverControl_PrimitiveDriverCommandType,
             command_topic=UMAA_MO_PrimitiveDriverControl_PrimitiveDriverCommandTypeTopic,
             ack_type=UMAA_MO_PrimitiveDriverControl_PrimitiveDriverCommandAckReportType,

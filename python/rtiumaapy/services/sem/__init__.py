@@ -60,7 +60,7 @@ class FLSControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="FLS",
+            service_name="FLSProvider",
             command_type=UMAA_SEM_FLSControl_FLSCommandType,
             command_topic=UMAA_SEM_FLSControl_FLSCommandTypeTopic,
             ack_type=UMAA_SEM_FLSControl_FLSCommandAckReportType,
@@ -77,7 +77,7 @@ class FLSControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="FLS",
+            service_name="FLSConsumer",
             command_type=UMAA_SEM_FLSControl_FLSCommandType,
             command_topic=UMAA_SEM_FLSControl_FLSCommandTypeTopic,
             ack_type=UMAA_SEM_FLSControl_FLSCommandAckReportType,
@@ -108,7 +108,7 @@ class FLSPreCalcControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="FLSPreCalc",
+            service_name="FLSPreCalcProvider",
             command_type=UMAA_SEM_FLSPreCalcControl_FLSPreCalcCommandType,
             command_topic=UMAA_SEM_FLSPreCalcControl_FLSPreCalcCommandTypeTopic,
             ack_type=UMAA_SEM_FLSPreCalcControl_FLSPreCalcCommandAckReportType,
@@ -125,7 +125,7 @@ class FLSPreCalcControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="FLSPreCalc",
+            service_name="FLSPreCalcConsumer",
             command_type=UMAA_SEM_FLSPreCalcControl_FLSPreCalcCommandType,
             command_topic=UMAA_SEM_FLSPreCalcControl_FLSPreCalcCommandTypeTopic,
             ack_type=UMAA_SEM_FLSPreCalcControl_FLSPreCalcCommandAckReportType,
@@ -156,7 +156,7 @@ class IlluminatorControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="Illuminator",
+            service_name="IlluminatorProvider",
             command_type=UMAA_SEM_IlluminatorControl_IlluminatorCommandType,
             command_topic=UMAA_SEM_IlluminatorControl_IlluminatorCommandTypeTopic,
             ack_type=UMAA_SEM_IlluminatorControl_IlluminatorCommandAckReportType,
@@ -173,7 +173,7 @@ class IlluminatorControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="Illuminator",
+            service_name="IlluminatorConsumer",
             command_type=UMAA_SEM_IlluminatorControl_IlluminatorCommandType,
             command_topic=UMAA_SEM_IlluminatorControl_IlluminatorCommandTypeTopic,
             ack_type=UMAA_SEM_IlluminatorControl_IlluminatorCommandAckReportType,
@@ -204,7 +204,7 @@ class InertialSensorControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="InertialSensor",
+            service_name="InertialSensorProvider",
             command_type=UMAA_SEM_InertialSensorControl_InertialSensorCommandType,
             command_topic=UMAA_SEM_InertialSensorControl_InertialSensorCommandTypeTopic,
             ack_type=UMAA_SEM_InertialSensorControl_InertialSensorCommandAckReportType,
@@ -221,7 +221,7 @@ class InertialSensorControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="InertialSensor",
+            service_name="InertialSensorConsumer",
             command_type=UMAA_SEM_InertialSensorControl_InertialSensorCommandType,
             command_topic=UMAA_SEM_InertialSensorControl_InertialSensorCommandTypeTopic,
             ack_type=UMAA_SEM_InertialSensorControl_InertialSensorCommandAckReportType,
@@ -252,7 +252,7 @@ class MapSegmentControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="MapSegment",
+            service_name="MapSegmentProvider",
             command_type=UMAA_SEM_MapSegmentControl_MapSegmentCommandType,
             command_topic=UMAA_SEM_MapSegmentControl_MapSegmentCommandTypeTopic,
             ack_type=UMAA_SEM_MapSegmentControl_MapSegmentCommandAckReportType,
@@ -269,7 +269,7 @@ class MapSegmentControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="MapSegment",
+            service_name="MapSegmentConsumer",
             command_type=UMAA_SEM_MapSegmentControl_MapSegmentCommandType,
             command_topic=UMAA_SEM_MapSegmentControl_MapSegmentCommandTypeTopic,
             ack_type=UMAA_SEM_MapSegmentControl_MapSegmentCommandAckReportType,
@@ -300,7 +300,7 @@ class SASControlProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="SAS",
+            service_name="SASProvider",
             command_type=UMAA_SEM_SASControl_SASCommandType,
             command_topic=UMAA_SEM_SASControl_SASCommandTypeTopic,
             ack_type=UMAA_SEM_SASControl_SASCommandAckReportType,
@@ -317,7 +317,7 @@ class SASControlConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="SAS",
+            service_name="SASConsumer",
             command_type=UMAA_SEM_SASControl_SASCommandType,
             command_topic=UMAA_SEM_SASControl_SASCommandTypeTopic,
             ack_type=UMAA_SEM_SASControl_SASCommandAckReportType,
@@ -348,7 +348,7 @@ class SASConfigProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="SASConfig",
+            service_name="SASConfigProvider",
             command_type=UMAA_SEM_SASConfig_SASConfigCommandType,
             command_topic=UMAA_SEM_SASConfig_SASConfigCommandTypeTopic,
             ack_type=UMAA_SEM_SASConfig_SASConfigAckReportType,
@@ -365,7 +365,7 @@ class SASConfigConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="SASConfig",
+            service_name="SASConfigConsumer",
             command_type=UMAA_SEM_SASConfig_SASConfigCommandType,
             command_topic=UMAA_SEM_SASConfig_SASConfigCommandTypeTopic,
             ack_type=UMAA_SEM_SASConfig_SASConfigAckReportType,

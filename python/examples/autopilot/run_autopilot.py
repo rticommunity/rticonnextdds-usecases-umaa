@@ -82,12 +82,7 @@ async def _main(args: argparse.Namespace) -> None:
         source_id,
         health_period=args.health_period,
     )
-    component.start()
-
-    try:
-        await ctx.run_until_shutdown()
-    finally:
-        await component.stop()
+    await ctx.run_until_shutdown()
 
 
 def main(argv=None) -> None:

@@ -50,6 +50,7 @@ from typing import List
 
 import rti.connextdds as dds
 
+from rtiumaapy.base_component import BaseComponent
 from rtiumaapy.dds_context import DDSContext
 from rtiumaapy.guid_util import GUIDUtil
 from rtiumaapy.timestamp import set_timestamp
@@ -389,12 +390,23 @@ class _APConditionalConsumer(ConditionalReportConsumer):
 # ---------------------------------------------------------------------------
 
 
-class AutopilotComponent:
+class AutopilotComponent(BaseComponent):
     """Python UMAA autopilot component (Component Definitions v1.0 §3.1).
 
-    Implements all 14 services defined in the UMAA Autopilot Component
+    Implements all 18 services defined in the UMAA Autopilot Component
     Definition: 4 command providers, 4 command consumers, 4 report
     providers, and 6 report consumers.
+
+    Registers itself as a :class:`BaseComponent` named ``"AutopilotComponent""`
+    so that :meth:`DDSContext.run_until_shutdown` automatically starts its
+    ``_run()`` coroutine (periodic publishers) and calls ``close()`` during
+    shutdown while DDS writers are still open.
+
+    Usage::
+
+        ctx = DDSContext(domain_id=0)
+        component = AutopilotComponent(ctx, source_id=my_id)
+        asyncio.run(ctx.run_until_shutdown())
 
     Parameters
     ----------
@@ -414,10 +426,9 @@ class AutopilotComponent:
         *,
         health_period: float = 1.0,
     ) -> None:
-        self._ctx = ctx
+        super().__init__(ctx, "AutopilotComponent")
         self._source_id = source_id
         self._health_period = health_period
-        self._tasks: list = []
 
         # --- Telemetry cache (updated by report consumers) ---
         self.latest_pose = None
@@ -547,30 +558,22 @@ class AutopilotComponent:
         self.caps_provider.write(caps)
         logger.info("Published UVPlatformCapabilities")
 
-    # --- Lifecycle ---
+    # --- BaseComponent lifecycle ---
 
-    def start(self) -> None:
-        """Start periodic publishers.
-
-        Call *before* ``ctx.run_until_shutdown()`` (which starts the
-        service event loops).  Periodic tasks (health, specs, caps) are
-        independent of the service framework and run alongside it.
-        """
-        loop = asyncio.get_event_loop()
-        self._tasks.append(loop.create_task(self._publish_health_loop()))
-        self._tasks.append(loop.create_task(self._publish_specs_once()))
-        self._tasks.append(loop.create_task(self._publish_caps_once()))
+    async def on_start(self) -> None:
+        """Publish startup log, specs, and capabilities once."""
         self._publish_log("Autopilot component started")
+        await self._publish_specs_once()
+        await self._publish_caps_once()
         logger.info("Autopilot started — publishing health every %.1fs",
                      self._health_period)
 
-    async def stop(self) -> None:
-        """Cancel periodic tasks.  Service cleanup is handled by DDSContext.shutdown()."""
-        for task in self._tasks:
-            task.cancel()
-        await asyncio.gather(*self._tasks, return_exceptions=True)
-        self._tasks.clear()
+    async def _run(self) -> None:
+        """Periodic health publishing — runs until cancelled by shutdown."""
+        await self._publish_health_loop()
 
+    async def close(self) -> None:
+        """Publish shutdown log.  Called by ``DDSContext.shutdown()`` while writers are still open."""
         self._publish_log("Autopilot component shutting down")
         logger.info("Autopilot stopped")
 

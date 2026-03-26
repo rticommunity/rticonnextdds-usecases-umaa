@@ -100,7 +100,7 @@ class ContactFilterConfigProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="ContactFilterConfig",
+            service_name="ContactFilterConfigProvider",
             command_type=UMAA_SA_ContactFilterConfig_ContactFilterConfigCommandType,
             command_topic=UMAA_SA_ContactFilterConfig_ContactFilterConfigCommandTypeTopic,
             ack_type=UMAA_SA_ContactFilterConfig_ContactFilterConfigAckReportType,
@@ -117,7 +117,7 @@ class ContactFilterConfigConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="ContactFilterConfig",
+            service_name="ContactFilterConfigConsumer",
             command_type=UMAA_SA_ContactFilterConfig_ContactFilterConfigCommandType,
             command_topic=UMAA_SA_ContactFilterConfig_ContactFilterConfigCommandTypeTopic,
             ack_type=UMAA_SA_ContactFilterConfig_ContactFilterConfigAckReportType,
@@ -148,7 +148,7 @@ class GlobalPoseConfigProvider(CommandProvider):
     def __init__(self, ctx: DDSContext, *, source_id):
         super().__init__(
             ctx,
-            service_name="GlobalPoseConfig",
+            service_name="GlobalPoseConfigProvider",
             command_type=UMAA_SA_GlobalPoseConfig_GlobalPoseConfigCommandType,
             command_topic=UMAA_SA_GlobalPoseConfig_GlobalPoseConfigCommandTypeTopic,
             ack_type=UMAA_SA_GlobalPoseConfig_GlobalPoseConfigAckReportType,
@@ -165,7 +165,7 @@ class GlobalPoseConfigConsumer(CommandConsumer):
     def __init__(self, ctx: DDSContext, *, source_id=None, destination_id=None):
         super().__init__(
             ctx,
-            service_name="GlobalPoseConfig",
+            service_name="GlobalPoseConfigConsumer",
             command_type=UMAA_SA_GlobalPoseConfig_GlobalPoseConfigCommandType,
             command_topic=UMAA_SA_GlobalPoseConfig_GlobalPoseConfigCommandTypeTopic,
             ack_type=UMAA_SA_GlobalPoseConfig_GlobalPoseConfigAckReportType,

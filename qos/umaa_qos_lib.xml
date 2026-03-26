@@ -25,35 +25,7 @@ to use the software.
       -->
 
 
-    <!-- Use the following QoS Profile as a snippet to interop with Cyclone -->
-    <qos_profile name="CycloneInterop">
-    <!-- 
-      RTI uses a key_hash for instance handles. 
-      This property publishes the key value for scenarios where the dispoe is 
-      the first message received for this instance. 
-      -->
-      <datawriter_qos>
-        <protocol>
-          <serialize_key_with_dispose>true</serialize_key_with_dispose>
-        </protocol>
-      </datawriter_qos>
-
-      <!-- 
-        CycloneDDS uses XCDR2 by default. 
-        RTI determines it based on IDL annotation of the data type.
-        This allows the reader to match with either.
-        See README for more detail. 
-        -->
-      <datareader_qos>
-        <representation>
-          <value>
-            <element>XCDR_DATA_REPRESENTATION</element>
-            <element>XCDR2_DATA_REPRESENTATION</element>
-          </value>
-        </representation>
-      </datareader_qos>
-
-    </qos_profile>
+    <!-- Domain Participant QoS Profiles -->
 
     <qos_profile name="DefaultUMAAParticipant">
 
@@ -79,10 +51,11 @@ to use the software.
 
           <resource_limits>
           <!-- 
-            Default is 8192. UMAA has large type objects. Set to 0 if you don't want any to propagate.  
+            Default is 8192. UMAA has large type objects.
             Needs to be increased for larger types i.e. GlobalVectorCommand = 20,476 
+            Disabled for performance, uncomment to susbcribe dynamically in Admin Console
             -->
-            <type_object_max_serialized_length>30000</type_object_max_serialized_length>
+            <!-- <type_object_max_serialized_length>30000</type_object_max_serialized_length> -->
 
           <!-- Default is 256. Increase for GUIDS etc -->
               <contentfilter_property_max_length>512</contentfilter_property_max_length>
@@ -123,6 +96,8 @@ to use the software.
 
     </qos_profile>
 
+
+    <!-- QoS Snippets to reuse in other Profiles -->
     <qos_profile name="InstanceResourceAutoCleanup">
 
       <!-- 
@@ -201,6 +176,159 @@ to use the software.
 
     </qos_profile>
 
+    <qos_profile name="CycloneInterop">
+
+      <!-- Used for Interoperability with Cyclone DDS applications -->
+
+      <!-- 
+      RTI uses a key_hash for instance handles. 
+      This property publishes the key value for scenarios where the dispoe is 
+      the first message received for this instance. 
+      -->
+      <datawriter_qos>
+        <protocol>
+          <serialize_key_with_dispose>true</serialize_key_with_dispose>
+        </protocol>
+      </datawriter_qos>
+
+      <!-- 
+        CycloneDDS uses XCDR2 by default. 
+        RTI determines it based on IDL annotation of the data type.
+        This allows the reader to match with either.
+        See README for more detail. 
+        -->
+      <datareader_qos>
+        <representation>
+          <value>
+            <element>XCDR_DATA_REPRESENTATION</element>
+            <element>XCDR2_DATA_REPRESENTATION</element>
+          </value>
+        </representation>
+      </datareader_qos>
+
+    </qos_profile>
+
+    <!-- QoS Profile to work with USTM tool -->
+    <qos_profile name="USTMQoS" base_name="BuiltinQosLib::Generic.Common">
+
+      <!-- 
+        This QOS profile is intended for aperiodic messages(Configurations etc) that we need to ensure get
+        delivered as well as sent to any "late-joiners" i.e. if an applications comes up after a message gets "sent", it will
+        get cached and resent.
+       -->
+
+      <base_name>
+
+        <!-- Send messages out "Reliably". Message will get resent if not received -->
+        <element>BuiltinQosSnippetLib::QosPolicy.Reliability.Reliable</element>
+
+        <!-- 
+          "Cache" the last message in the writer buffer. This will resend the last written samples to any
+          late-joiners. This supports the use case of sending out a Configuration message on startup and
+          ensuring applications that come online later will receive the latest configuration.
+        -->
+        <element>BuiltinQosSnippetLib::QosPolicy.Durability.TransientLocal</element>
+
+        <!-- Automatically cleanup disposed Instances -->
+        <element>UMAAQoSLib::InstanceResourceAutoCleanup</element>
+
+
+      </base_name>
+
+      <datawriter_qos>
+
+        <!-- Use to verify in Admin Console QoS Profile used -->
+        <publication_name>
+          <name>
+            USTMQoSWriter
+          </name>
+        </publication_name>
+
+        <!-- This spins up a separate thread to send out samples asynchronously -->
+        <publish_mode>
+          <kind>ASYNCHRONOUS_PUBLISH_MODE_QOS</kind>
+        </publish_mode>
+
+        <!-- 
+          For these samples SpecsReportType etc., the assumption is you need to keep all messages.
+
+          In this scenario, no samples will be overwritten, and samples will only be removed from the 
+          queue when they have been acknowledged as received from the reader side.
+          -->
+        <history>
+          <kind>KEEP_ALL_HISTORY_QOS</kind>
+        </history>
+
+        <!-- 
+          If using KEEP_ALL History, we want to set some bounds on the samples we can keep in the queue to
+        limit 
+          unbounded memory growth.  
+          When either of these resource limits are hit, the writer will block for the configured
+        max_blocking_time
+
+          NOTE: These values are arbitrary and just for reference usage, adjust to your system requirements
+          NOTE: max_samples_per_instance must be < max_samples
+          -->
+        <resource_limits>
+          <max_samples>500</max_samples>
+          <max_samples_per_instance>500</max_samples_per_instance>
+        </resource_limits>
+
+        <!-- 
+          Because we are using KEEP_ALL history, when either of the resource limits are reached 
+          i.e. (max_samples, max_samples_per_instance), 
+          the writer will block for the below configured time before returning a Timeout Error
+
+          Adjust as necessary per your system requirements.
+          -->
+        <reliability>
+          <max_blocking_time>
+            <sec>1</sec>
+            <nanosec>DURATION_INFINITE_NSEC</nanosec>
+          </max_blocking_time>
+        </reliability>
+
+        <!-- 
+          By default, with KEEP_ALL History and Durability QoS set to TRANSIENT_LOCAL, 
+          when an application comes up after samples have been written to this topic, 
+          ALL samples that have been written prior will be resent.
+
+          If this is not desired, set the writer_depth property below.
+        -->
+        <!-- <durability>
+          <writer_depth>5</writer_depth>
+        </durability> -->
+
+      </datawriter_qos>
+
+      <datareader_qos>
+
+        <!-- Use to verify in Admin Console QoS Profile used -->
+        <subscription_name>
+          <name>
+            USTMQoSReader
+          </name>
+        </subscription_name>
+
+        <history>
+          <kind>KEEP_ALL_HISTORY_QOS</kind>
+        </history>
+
+        <!-- 
+          If using KEEP_ALL History, we want to set some bounds on the samples we can keep in the queue to
+          limit unbounded memory growth.  
+          When either of these resource limits are hit, the reader will block from acknowledging new samples
+
+          NOTE: These values are arbitrary and just for reference usage, adjust to your system requirements
+          NOTE: max_samples_per_instance must be < max_samples
+          -->
+        <resource_limits>
+          <max_samples>500</max_samples>
+          <max_samples_per_instance>500</max_samples_per_instance>
+        </resource_limits>
+      </datareader_qos>
+
+    </qos_profile>
 
     <!-- 
       This is where we create our QOS profiles per "Data Pattern" i.e. aperiodic commands, periodic status reports etc.
@@ -227,7 +355,7 @@ to use the software.
 
       <datawriter_qos>
 
-      <!-- Use to verify in Admin Console QoS Profile used -->
+        <!-- Use to verify in Admin Console QoS Profile used -->
       <publication_name>
         <name>
           TelemetryQoSWriter
@@ -645,6 +773,11 @@ to use the software.
         -->
       <!-- <datawriter_qos topic_filter="*" base_name="DefaultQoS" /> -->
       <!-- <datareader_qos topic_filter="*" base_name="DefaultQoS" /> -->
+
+
+      <!-- Uncomment to apply QoS for use with USTM tool -->
+      <!-- <datawriter_qos topic_filter="*" base_name="USTMQoS" />
+      <datareader_qos topic_filter="*" base_name="USTMQoS" /> -->
 
       <datawriter_qos topic_filter="*SpecsReportType" base_name="ConfigQoS" />
       <datareader_qos topic_filter="*SpecsReportType" base_name="ConfigQoS" />

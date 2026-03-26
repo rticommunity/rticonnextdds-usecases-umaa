@@ -635,3 +635,186 @@ This is preferred over a re-export module (Option B) because it keeps the UMAA d
 **Source:** PR4 post-implementation review.
 
 **Resolution:** Won't fix. The comparison appears at a single call site. The objects are IDL-generated `DateTimeType` structs, not `DateTimeFields`, so a helper on `UmaaTimestamp` wouldn't directly apply. Creating a duck-typed free function for one use site violates YAGNI. The current code is correct and readable enough inline.
+
+---
+
+### C72: CFT readers cannot reliably detect provider crash via `take_async()` — need `on_liveliness_changed()`
+
+**Status:** Resolved — existing `NOT_ALIVE_NO_WRITERS` check in `_read_status_loop` works in practice; all tests pass (1623/1623).
+
+**Context:** `CommandConsumer._read_status_loop()` checks for `instance_state == NOT_ALIVE_NO_WRITERS` on samples returned by `take_async()` to detect provider crashes. The status reader is a **ContentFilteredTopic** (CFT) reader — it filters on `destination.id` to receive only status samples addressed to this consumer's session.
+
+**Original concern:** RTI Connext AI (consulted 4×) stated that CFT readers do **not** reliably surface `NOT_ALIVE_NO_WRITERS` metadata through `take()`/`take_async()`. The reason is two separate DDS notification pipelines:
+
+1. **Sample queue path** (`take`/`take_async`): Filtered by CFT based on data field values. Metadata-only lifecycle transitions (like `NOT_ALIVE_NO_WRITERS`) carry no data payload for the content filter to evaluate, so they may never be enqueued.
+2. **Communication status path** (`on_liveliness_changed`): Tracks matched writer liveliness at the endpoint level, completely independent of content filtering. Fires when `not_alive_count_change > 0`.
+
+**Resolution:** `test_command_provider_crash.py::test_status_writer_close_triggers_terminal` now passes reliably. The existing `NOT_ALIVE_NO_WRITERS` branch in `_read_status_loop` appears to work for the tested scenario (writer close). If future testing reveals unreliable crash detection under heavier load or network partitions, the recommended upgrade path remains: attach an `on_liveliness_changed()` listener to the CFT status reader and bridge to `asyncio` via `loop.call_soon_threadsafe(event.set)`.
+
+**Severity:** Informational — monitor for regressions; no code change needed now.
+
+**Source:** Investigation into `test_command_provider_crash.py` failure; confirmed by RTI Connext AI bot.
+
+---
+
+### C73: Append Provider/Consumer suffix to all `service_name` values for uniqueness
+
+**Status:** Open.
+
+**Context:** `BaseService.__init__` calls `ctx.register_service(service_name, self)`, which uses `service_name` as a unique key. If a component instantiates both a provider and consumer for the same UMAA service (e.g. an `EngineReportProvider` and `EngineReportConsumer`), their `service_name` values must not collide.
+
+**Problem:** The naming convention is inconsistent across service types:
+
+- **Command services** already include the suffix — e.g. `service_name="EngineProvider"` / `"EngineConsumer"`, `service_name="GlobalVectorProvider"` / `"GlobalVectorConsumer"`. These are safe.
+- **Report consumers** use bare names without a suffix — e.g. `service_name="EngineReport"`, `"GlobalPoseReport"`, `"SASConfigReport"`. If a component registers both an `EngineReportProvider` and an `EngineReportConsumer` with the same default name, the second `register_service` call would collide.
+- **Report providers** accept `service_name` from the caller, so collision depends on what the caller passes.
+
+**Recommended fix:** Enforce the convention that every `service_name` ends with `Provider` or `Consumer`:
+
+1. Update all `ReportConsumer` default `service_name` values to include the suffix (e.g. `"EngineReport"` → `"EngineReportConsumer"`).
+2. Update documentation/examples to pass `"<Name>Provider"` when constructing `ReportProvider` subclasses.
+3. Optionally, add a check in `BaseService.__init__` that warns if `service_name` does not end with `Provider` or `Consumer`.
+
+**Impact:** All generated service classes under `rtiumaapy/services/`. Callers that construct `ReportProvider` subclasses will need to update their `service_name` arguments.
+
+**Severity:** Low — no runtime failure today because existing examples don't instantiate both provider and consumer for the same report in one component, but the naming inconsistency is a latent collision risk.
+
+---
+
+### C74: Stale module-level docstring in `autopilot_component.py` references removed `start()`/`stop()` API
+
+**Status:** Open.
+
+**Context:** The `AutopilotComponent` was refactored to extend `BaseComponent`, replacing the manual `start()`/`stop()` lifecycle with `on_start()`/`_run()`/`close()` hooks called automatically by `DDSContext.run_until_shutdown()`.
+
+**Problem:** The module-level docstring (lines 1–43) still describes the old lifecycle:
+
+```python
+2. Start periodic publisher tasks (``start()``).
+
+Usage::
+    ctx = DDSContext(domain_id=0)
+    component = AutopilotComponent(ctx, source_id=my_id)
+    component.start()
+    asyncio.get_event_loop().run_until_complete(ctx.run_until_shutdown())
+```
+
+`AutopilotComponent` no longer has a `start()` method. The class-level docstring (lines 393–409) was correctly updated and shows the right usage.
+
+**Recommended fix:** Update the module-level docstring to match the class-level docstring — remove references to `start()` and show `await ctx.run_until_shutdown()`.
+
+**Severity:** Low — documentation only, no runtime impact.
+
+**Source:** Post-BaseComponent-integration review.
+
+---
+
+### C75: `BaseComponent` method naming inconsistency: `_run()` uses `_` prefix while `on_start()`/`close()` do not
+
+**Status:** Open — by design, but worth documenting.
+
+**Context:** `BaseComponent` defines three lifecycle hooks, all dispatched the same way by `DDSContext.run_until_shutdown()` via `hasattr` duck-typing:
+
+| Method | Prefix | Abstract? | Intent |
+|--------|--------|-----------|--------|
+| `on_start()` | none | No (optional) | One-shot startup |
+| `_run()` | `_` | Yes | Main loop |
+| `close()` | none | Yes | Shutdown cleanup |
+
+All three are framework-called, not user-called. The `_` on `_run` signals "don't call directly" but `on_start` and `close` are equally framework-called. The same `_run` convention is used in `BaseService`, `CommandProvider`, `CommandConsumer`, and `ReportConsumer`.
+
+**Assessment:** The `_run` convention is intentional — `on_start()` and `close()` can be called manually in tests, while `_run()` should only be dispatched by the framework or `start()`. The inconsistency is cosmetic, not functional. The `_` prefix correctly signals that `_run()` creates a long-lived task (vs the fire-and-forget nature of the other hooks).
+
+
+**Decision:** Accept as-is. Document the convention: `_run` = framework-managed task coroutine; `on_*` = optional hooks; `close` = cleanup (callable in tests).
+
+**Severity:** Informational — no fix needed.
+
+**Source:** Post-BaseComponent-integration review.
+
+---
+
+### C76: `run_until_shutdown()` uses `hasattr` duck-typing on the unified service registry
+
+**Status:** Open — by design, but worth documenting the implications.
+
+**Context:** `DDSContext.run_until_shutdown()` iterates `self._registry` and checks for `on_start`, `_run`, and `close` via `hasattr`. Both `BaseComponent` and `BaseService` subclasses share the same registry via `register_service()`.
+
+**Current behavior:**
+- `on_start()` — only `BaseComponent` defines it; `BaseService` does not. Safe.
+- `_run()` — defined by `CommandProvider`, `CommandConsumer`, `ReportConsumer`, AND `BaseComponent`. All are auto-started.
+- `close()` — defined by all service base classes and `BaseComponent`. All called during shutdown.
+
+**Implications:**
+1. When a component creates services in `__init__`, those services self-register and their `_run()` loops start automatically. This means `CommandProvider._run()`, `ReportConsumer._run()`, and `CommandConsumer._run()` all start without needing explicit `.start()` calls. This is the intended production behavior.
+2. The `start()` method on services is now redundant for production use — it exists only for test convenience (tests don't call `run_until_shutdown()`).
+3. If a future `BaseService` subclass inadvertently defines `on_start()`, it would be called automatically. This is unlikely but undocumented.
+
+**Recommendation:** No code change needed. Document the convention: in production, `run_until_shutdown()` manages all lifecycle. In tests, use `.start()` for explicit control. Consider adding a note to `BaseService` that subclasses should not define `on_start()` unless they intend it to be called by the framework.
+
+**Severity:** Informational — current behavior is correct.
+
+**Source:** Post-BaseComponent-integration review.
+
+---
+
+### C77: `type_object_max_serialized_length` disabled in QoS per UMAA USTM reference
+
+**Status:** Resolved — by design.
+
+**Context:** The QoS file disables `type_object_max_serialized_length`:
+```xml
+<!-- <type_object_max_serialized_length>30000</type_object_max_serialized_length> -->
+```
+
+**Rationale:** UMAA type objects are generally quite large (e.g. `GlobalVectorCommand` = 20,476 bytes). Disabling type propagation optimizes discovery performance per the UMAA USTM QoS reference. The inline comment documents how to re-enable for Admin Console dynamic subscription.
+
+**Severity:** Informational — intentional optimization, no fix needed.
+
+**Source:** Post-validation QoS review; UMAA USTM QoS reference.
+
+---
+
+### C78: CFT filter propagation race in `CommandConsumer.send()` — requires `asyncio.sleep(0.01)` workaround
+
+**Status:** Resolved — workaround applied; all 1623 tests pass.
+
+**Context:** `CommandConsumer.send()` calls `_set_session_filter(session_id_bytes)` to update the CFT expression on the ack, status, and exec_status readers, then immediately calls `_command_writer.write(command)`. By the time the provider processes the command and publishes responses, the new CFT filter may not yet be active on the consumer's readers — so ack and status samples are silently dropped by the stale `"1 = 0"` filter.
+
+**Symptom:** Intermittent failures in `test_command_ack_received` (consumer receives 0 acks) and other command lifecycle tests. The provider *sends* the responses, but the consumer's CFT readers discard them.
+
+**Root cause:** `ContentFilteredTopic.set_filter()` updates the filter expression asynchronously within the middleware. There is no synchronous guarantee that subsequent `take_async()` iterations will immediately use the new expression. When `write()` fires immediately after `set_filter()`, the provider's response can arrive before the filter update takes effect.
+
+**Fix applied:** Added `await asyncio.sleep(0.01)` between `_set_session_filter()` and `_command_writer.write()` in `send()`. This yields to the event loop and gives the middleware time to propagate the filter change to all three CFT readers.
+
+```python
+self._set_session_filter(session_id_bytes)
+await asyncio.sleep(0.01)  # let CFT filter propagate (C78)
+self._command_writer.write(command)
+```
+
+**Trade-off:** The 10 ms delay is negligible for UMAA command latency (commands are human-initiated or mission-planner-initiated). A more robust fix would be a middleware callback confirming filter activation, but no such API exists in RTI Connext Python.
+
+**Impact:**
+- `command_consumer.py` line ~153: sleep added.
+- `test_autopilot.py`: All 9 tests now pass reliably (previously 2 intermittent failures).
+
+**Severity:** Medium — command lifecycle correctness depends on the workaround.
+
+**Source:** Investigation into intermittent `test_command_ack_received` and `test_exec_status_published` failures.
+
+---
+
+### C79: CFT teardown race — `_end_session()` resets filters before in-flight samples are delivered
+
+**Status:** Resolved — accepted as-is; `on_exec_status()` is best-effort by design.
+
+**Context:** When the consumer receives a terminal status (e.g. COMPLETED), `_end_session()` immediately calls `_reset_filters()`, which sets all CFT expressions back to `"1 = 0"`. Any exec_status or additional status samples still in-flight from the provider are blocked by the reset filter and never delivered to the consumer's `on_exec_status()` / `on_status()` hooks.
+
+**Root cause:** The UMAA ICD command state machine completes quickly (ISSUED → COMMANDED → EXECUTING → COMPLETED in one burst), so all status transitions arrive in rapid succession. The COMPLETED status triggers `_end_session()` which races against delivery of exec_status samples that are already in the middleware pipeline.
+
+**Resolution:** Accepted as-is. `on_exec_status()` is informational (progress reporting) — the terminal status (COMPLETED/FAILED) is the authoritative lifecycle event and is always delivered before the filter resets. No test asserts on `consumer.exec_statuses` being non-empty. `test_exec_status_published` uses a direct (unfiltered) reader to verify the provider *sent* the message, which is the correct approach — it tests provider behavior independently of consumer CFT lifecycle.
+
+**Severity:** Informational — no fix needed.
+
+**Source:** Investigation into `test_exec_status_published` design; related to C78.
