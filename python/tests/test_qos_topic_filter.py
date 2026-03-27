@@ -57,6 +57,9 @@ from rtiumaapy.datamodel.AnchorCommandAckReportType import (
 from rtiumaapy.datamodel.BITCommandType import (
     UMAA_SO_BITControl_BITCommandTypeTopic as BITCommandTypeTopic,
 )
+from rtiumaapy.datamodel.GlobalVectorExecutionStatusReportType import (
+    UMAA_MO_GlobalVectorControl_GlobalVectorExecutionStatusReportTypeTopic as GlobalVectorExecStatusTopic,
+)
 
 # ElementQoS topics  (*SetElement, *ListElement)
 from rtiumaapy.datamodel.ContactReportType import (
@@ -149,7 +152,7 @@ class TestConfigQoS:
 
 # ═══════════════════════════════════════════════════════════════════════════
 # CommandQoS — *CommandType, *CommandStatusType, *CommandAckReportType,
-#              *ExecutionStatusType (RELIABLE)
+#              *ExecutionStatusReportType (RELIABLE)
 # ═══════════════════════════════════════════════════════════════════════════
 
 
@@ -161,6 +164,7 @@ class TestCommandQoS:
         BITCommandTypeTopic,
         AnchorCommandStatusTypeTopic,
         AnchorCommandAckReportTypeTopic,
+        GlobalVectorExecStatusTopic,
     ])
     def test_writer(self, qos_provider, topic):
         assert _writer_profile_name(qos_provider, topic) == "CommandQoSWriter"
@@ -170,6 +174,7 @@ class TestCommandQoS:
         BITCommandTypeTopic,
         AnchorCommandStatusTypeTopic,
         AnchorCommandAckReportTypeTopic,
+        GlobalVectorExecStatusTopic,
     ])
     def test_reader(self, qos_provider, topic):
         assert _reader_profile_name(qos_provider, topic) == "CommandQoSReader"

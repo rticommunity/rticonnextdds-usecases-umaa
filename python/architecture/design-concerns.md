@@ -366,7 +366,7 @@ Fixed: PR4 consumer deliverable now references D47. Acceptance criteria updated 
 
 ---
 
-## Open Concerns (C46–C54)
+## Resolved Concerns (C46–C79)
 
 ### C46: ~~Provider overview says "filtered by sourceID" — should say "filtered by destination"~~ — **Resolved → applied**
 
@@ -813,3 +813,29 @@ self._command_writer.write(command)
 **Severity:** Informational — no fix needed.
 
 **Source:** Investigation into `test_exec_status_published` design; related to C78.
+
+---
+
+## Open Concerns
+
+(none)
+
+---
+
+## Resolved Concerns (C80)
+
+### C80: `test_exec_status_published` flaky — provider exec_status may not arrive within fixed sleep window — **Resolved**
+
+**Status:** Resolved — root cause was a QoS topic-filter bug, not test timing.
+
+**Context:** `test_autopilot.py::TestGlobalVectorCommand::test_exec_status_published` uses a direct (unfiltered) `DataReader` to verify the provider published at least one `GlobalVectorExecutionStatusReportType` sample. After `consumer.send(cmd)`, the test sleeps for 2 seconds then calls `exec_reader.take()` and asserts `len(valid) >= 1`. The test failed ~10–20% of runs.
+
+**Root cause:** The AssignerQoS `topic_filter` in `qos/umaa_qos_lib.xml` contained a stale entry `*ExecutionStatusType` that never matched any real topic — actual topics end in `ExecutionStatusReportType`. Because AssignerQoS uses first-match-wins semantics, `*ExecutionStatusReportType` topics fell through to the `*ReportType` catch-all, which mapped them to **TelemetryQoS** (BEST_EFFORT, KEEP_LAST 1) instead of the intended **CommandQoS** (RELIABLE, KEEP_ALL). With BEST_EFFORT delivery the test reader intermittently missed the sample.
+
+**Resolution:**
+1. Added `*ExecutionStatusReportType` → CommandQoS filter **before** the `*ReportType` catch-all in `qos/umaa_qos_lib.xml`.
+2. Removed the dead `*ExecutionStatusType` filter that never matched.
+3. Added `GlobalVectorExecutionStatusReportType` to `test_qos_topic_filter.py::TestCommandQoS` parametrize lists to prevent regression.
+4. Test passes 10/10 in isolation and 1,628/1,628 in the full suite.
+
+**Source:** USTM validation session; QoS root-cause confirmed by topic-filter analysis.

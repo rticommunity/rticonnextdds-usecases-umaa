@@ -821,15 +821,15 @@ to use the software.
       <datawriter_qos topic_filter="*CommandAckReportType" base_name="CommandQoS" />
       <datareader_qos topic_filter="*CommandAckReportType" base_name="CommandQoS" />
 
+      <datawriter_qos topic_filter="*ExecutionStatusReportType" base_name="CommandQoS" />
+      <datareader_qos topic_filter="*ExecutionStatusReportType" base_name="CommandQoS" />
+
       <datawriter_qos topic_filter="*ReportType" base_name="TelemetryQoS" />
       <datareader_qos topic_filter="*ReportType" base_name="TelemetryQoS" />
 
 
       <datawriter_qos topic_filter="*CommandStatusType" base_name="CommandQoS" />
       <datareader_qos topic_filter="*CommandStatusType" base_name="CommandQoS" />
-
-      <datawriter_qos topic_filter="*ExecutionStatusType" base_name="CommandQoS" />
-      <datareader_qos topic_filter="*ExecutionStatusType" base_name="CommandQoS" />
 
       <datawriter_qos topic_filter="*CommandType" base_name="CommandQoS" />
       <datareader_qos topic_filter="*CommandType" base_name="CommandQoS" />
