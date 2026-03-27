@@ -20,3 +20,20 @@ build/
 python/tests/__pycache__/
 
 python/rtiumaapy/__pycache__/
+
+# Python virtual environment
+python/.venv/
+
+# All pycache directories under python/
+python/**/__pycache__/
+
+# Reference / vendored directories (not part of the SDK)
+python/architecture/v1/
+
+# Pytest outputs
+python/.pytest_cache/
+python/tests/.pytest_cache/
+python/tests/pytest_*.txt
+
+# Backup files
+python/**/*.bak
