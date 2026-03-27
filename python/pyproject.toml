@@ -18,6 +18,11 @@ dev = [
     "pytest>=8.0",
     "pytest-asyncio>=0.24",
 ]
+docs = [
+    "sphinx>=7.0",
+    "sphinx-rtd-theme>=2.0",
+    "myst-parser>=2.0",
+]
 
 [tool.setuptools.packages.find]
 include = ["rtiumaapy*"]

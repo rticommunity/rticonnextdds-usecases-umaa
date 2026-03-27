@@ -37,3 +37,6 @@ python/tests/pytest_*.txt
 
 # Backup files
 python/**/*.bak
+
+# Sphinx build output
+python/docs/_build/
