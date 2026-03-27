@@ -1,0 +1,74 @@
+/**
+ *
+ * DISTRIBUTION STATEMENT A. Approved for public release.
+ * Distribution is unlimited.
+ * This software was developed by the Department of the Navy,
+ * NAVSEA Unmanned and Small Combatants. It is provided under the terms of
+ * use found in the LICENSE file at the source code root directory.
+ *
+ */
+
+/**
+  *
+  * System-wide DDS constants shared by all UMAA SDK implementations
+  * (Python, C++, etc.). Generated code provides these constants in each
+  * target language — no hand-maintained qos.py or qos.h needed.
+  *
+  */
+
+#ifndef _UMAA_DDS_DEFINITIONS
+#define _UMAA_DDS_DEFINITIONS
+
+module UMAA
+{
+  module DdsDefinitions
+  {
+
+    // ── QoS Library & Profile Names ──────────────────────────────────────
+
+    /** QoS library name as declared in umaa_qos_lib.xml. */
+    const string QOS_LIBRARY_NAME = "UMAAQoSLib";
+
+    /** Auto-assigner profile — uses topic_filter rules to resolve QoS from topic name. */
+    const string QOS_ASSIGNER_PROFILE = "UMAAQoSLib::AssignerQoS";
+
+    /** Participant QoS profile — type_object_max_serialized_length, CFT property length, etc. */
+    const string QOS_PARTICIPANT_PROFILE = "UMAAQoSLib::DefaultUMAAParticipant";
+
+    // ── Individual QoS Profile Names (for reference / diagnostics) ───────
+
+    /** Best-effort, keep-last-1 — general telemetry reports. */
+    const string QOS_TELEMETRY_PROFILE = "UMAAQoSLib::TelemetryQoS";
+
+    /** Reliable, keep-all, liveliness 5s/10s — commands, acks, status, execution status. */
+    const string QOS_COMMAND_PROFILE = "UMAAQoSLib::CommandQoS";
+
+    /** Reliable, transient-local, keep-all — *SpecsReportType (config) topics. */
+    const string QOS_CONFIG_PROFILE = "UMAAQoSLib::ConfigQoS";
+
+    /** Reliable, keep-all, no liveliness — *SetElement / *ListElement topics. */
+    const string QOS_ELEMENT_PROFILE = "UMAAQoSLib::ElementQoS";
+
+    // ── QoS File Paths ───────────────────────────────────────────────────
+
+    /** QoS XML filename (relative to deployment root or bundled resource). */
+    const string QOS_FILE_NAME = "umaa_qos_lib.xml";
+
+    /** Repo-relative path to the canonical QoS XML. */
+    const string QOS_FILE_PATH = "qos/umaa_qos_lib.xml";
+
+    // ── Content Filter Expressions ───────────────────────────────────────
+
+    /** CFT expression that blocks all samples (always false). Used by
+        CommandConsumer to gate its filtered reader before a session starts. */
+    const string CFT_BLOCK_ALL = "1=0";
+
+    // ── Defaults ─────────────────────────────────────────────────────────
+
+    /** Default DDS domain ID for UMAA applications. */
+    const long DEFAULT_DOMAIN_ID = 0;
+
+  };
+};
+
+#endif // _UMAA_DDS_DEFINITIONS
