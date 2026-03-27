@@ -510,7 +510,7 @@ class CommsChannelReportProvider(ReportProvider):
 class CommsChannelReportConsumer(ReportConsumer):
     """CommsChannel report consumer (CO::CommsChannelStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "CommsChannelReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "CommsChannelReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -540,7 +540,7 @@ class CommsChannelConfigReportProvider(ReportProvider):
 class CommsChannelConfigReportConsumer(ReportConsumer):
     """CommsChannelConfig report consumer (CO::CommsChannelConfig)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "CommsChannelConfigReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "CommsChannelConfigReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -570,7 +570,7 @@ class CommsChannelDataEncodingReportProvider(ReportProvider):
 class CommsChannelDataEncodingReportConsumer(ReportConsumer):
     """CommsChannelDataEncoding report consumer (CO::CommsChannelDataEncodingReport)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "CommsChannelDataEncodingReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "CommsChannelDataEncodingReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -600,7 +600,7 @@ class CommsChannelEnvironmentReportProvider(ReportProvider):
 class CommsChannelEnvironmentReportConsumer(ReportConsumer):
     """CommsChannelEnvironment report consumer (CO::CommsChannelEnvironmentReport)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "CommsChannelEnvironmentReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "CommsChannelEnvironmentReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -630,7 +630,7 @@ class CommsChannelPowerReportProvider(ReportProvider):
 class CommsChannelPowerReportConsumer(ReportConsumer):
     """CommsChannelPower report consumer (CO::CommsChannelPowerReport)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "CommsChannelPowerReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "CommsChannelPowerReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -660,7 +660,7 @@ class CommsChannelPowerConfigReportProvider(ReportProvider):
 class CommsChannelPowerConfigReportConsumer(ReportConsumer):
     """CommsChannelPowerConfig report consumer (CO::CommsChannelPowerConfig)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "CommsChannelPowerConfigReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "CommsChannelPowerConfigReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -690,7 +690,7 @@ class CommsChannelReceiverReportProvider(ReportProvider):
 class CommsChannelReceiverReportConsumer(ReportConsumer):
     """CommsChannelReceiver report consumer (CO::CommsChannelStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "CommsChannelReceiverReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "CommsChannelReceiverReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -720,7 +720,7 @@ class CommsChannelReceiverStatisticsReportProvider(ReportProvider):
 class CommsChannelReceiverStatisticsReportConsumer(ReportConsumer):
     """CommsChannelReceiverStatistics report consumer (CO::CommsChannelStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "CommsChannelReceiverStatisticsReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "CommsChannelReceiverStatisticsReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -750,7 +750,7 @@ class CommsChannelSenderReportProvider(ReportProvider):
 class CommsChannelSenderReportConsumer(ReportConsumer):
     """CommsChannelSender report consumer (CO::CommsChannelStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "CommsChannelSenderReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "CommsChannelSenderReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -780,7 +780,7 @@ class CommsChannelSenderStatisticsReportProvider(ReportProvider):
 class CommsChannelSenderStatisticsReportConsumer(ReportConsumer):
     """CommsChannelSenderStatistics report consumer (CO::CommsChannelStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "CommsChannelSenderStatisticsReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "CommsChannelSenderStatisticsReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -810,7 +810,7 @@ class CommsChannelSpecsReportProvider(ReportProvider):
 class CommsChannelSpecsReportConsumer(ReportConsumer):
     """CommsChannelSpecs report consumer (CO::CommsChannelSpecs)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "CommsChannelSpecsReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "CommsChannelSpecsReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -840,7 +840,7 @@ class CommsChannelSystemTimeReportProvider(ReportProvider):
 class CommsChannelSystemTimeReportConsumer(ReportConsumer):
     """CommsChannelSystemTime report consumer (CO::CommsChannelSystemTimeReport)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "CommsChannelSystemTimeReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "CommsChannelSystemTimeReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,

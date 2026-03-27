@@ -624,7 +624,7 @@ This is preferred over a re-export module (Option B) because it keeps the UMAA d
 
 ---
 
-### C71: Timestamp comparison in provider could use a helper
+### C71: ~~Timestamp comparison in provider could use a helper~~ — **Resolved → won't fix**
 
 **Status:** Resolved → won't fix.
 
@@ -638,7 +638,7 @@ This is preferred over a re-export module (Option B) because it keeps the UMAA d
 
 ---
 
-### C72: CFT readers cannot reliably detect provider crash via `take_async()` — need `on_liveliness_changed()`
+### C72: ~~CFT readers cannot reliably detect provider crash via `take_async()` — need `on_liveliness_changed()`~~ — **Resolved**
 
 **Status:** Resolved — existing `NOT_ALIVE_NO_WRITERS` check in `_read_status_loop` works in practice; all tests pass (1623/1623).
 
@@ -657,33 +657,28 @@ This is preferred over a re-export module (Option B) because it keeps the UMAA d
 
 ---
 
-### C73: Append Provider/Consumer suffix to all `service_name` values for uniqueness
+### C73: ~~Append Provider/Consumer suffix to all `service_name` values for uniqueness~~ — **Resolved**
 
-**Status:** Open.
+**Status:** Resolved — all service_name defaults now include Provider/Consumer suffix.
 
 **Context:** `BaseService.__init__` calls `ctx.register_service(service_name, self)`, which uses `service_name` as a unique key. If a component instantiates both a provider and consumer for the same UMAA service (e.g. an `EngineReportProvider` and `EngineReportConsumer`), their `service_name` values must not collide.
 
-**Problem:** The naming convention is inconsistent across service types:
+**Problem:** Report consumer default service_names used bare names like `"EngineReport"` without a `Consumer` suffix. Report providers accepted service_name from the caller, so collision depended on caller convention.
 
-- **Command services** already include the suffix — e.g. `service_name="EngineProvider"` / `"EngineConsumer"`, `service_name="GlobalVectorProvider"` / `"GlobalVectorConsumer"`. These are safe.
-- **Report consumers** use bare names without a suffix — e.g. `service_name="EngineReport"`, `"GlobalPoseReport"`, `"SASConfigReport"`. If a component registers both an `EngineReportProvider` and an `EngineReportConsumer` with the same default name, the second `register_service` call would collide.
-- **Report providers** accept `service_name` from the caller, so collision depends on what the caller passes.
+**Resolution:**
+1. Updated all 111 `ReportConsumer` subclass defaults to include the `Consumer` suffix (e.g. `"EngineReport"` → `"EngineReportConsumer"`).
+2. Updated all `ReportProvider` service_name arguments in the autopilot example to include the `Provider` suffix (e.g. `"HealthReport"` → `"HealthReportProvider"`).
+3. Command services already had Provider/Consumer suffixes from a prior change.
 
-**Recommended fix:** Enforce the convention that every `service_name` ends with `Provider` or `Consumer`:
+**Severity:** Informational — all service_names now follow the `<Name>Provider` / `<Name>Consumer` convention consistently.
 
-1. Update all `ReportConsumer` default `service_name` values to include the suffix (e.g. `"EngineReport"` → `"EngineReportConsumer"`).
-2. Update documentation/examples to pass `"<Name>Provider"` when constructing `ReportProvider` subclasses.
-3. Optionally, add a check in `BaseService.__init__` that warns if `service_name` does not end with `Provider` or `Consumer`.
-
-**Impact:** All generated service classes under `rtiumaapy/services/`. Callers that construct `ReportProvider` subclasses will need to update their `service_name` arguments.
-
-**Severity:** Low — no runtime failure today because existing examples don't instantiate both provider and consumer for the same report in one component, but the naming inconsistency is a latent collision risk.
+**Source:** Post-BaseComponent-integration review.
 
 ---
 
-### C74: Stale module-level docstring in `autopilot_component.py` references removed `start()`/`stop()` API
+### C74: ~~Stale module-level docstring in `autopilot_component.py` references removed `start()`/`stop()` API~~ — **Resolved**
 
-**Status:** Open.
+**Status:** Resolved — docstring updated to show `BaseComponent` lifecycle and `asyncio.run(ctx.run_until_shutdown())` usage.
 
 **Context:** The `AutopilotComponent` was refactored to extend `BaseComponent`, replacing the manual `start()`/`stop()` lifecycle with `on_start()`/`_run()`/`close()` hooks called automatically by `DDSContext.run_until_shutdown()`.
 
@@ -709,9 +704,9 @@ Usage::
 
 ---
 
-### C75: `BaseComponent` method naming inconsistency: `_run()` uses `_` prefix while `on_start()`/`close()` do not
+### C75: ~~`BaseComponent` method naming inconsistency: `_run()` uses `_` prefix while `on_start()`/`close()` do not~~ — **Resolved → by design**
 
-**Status:** Open — by design, but worth documenting.
+**Status:** Resolved — by design.
 
 **Context:** `BaseComponent` defines three lifecycle hooks, all dispatched the same way by `DDSContext.run_until_shutdown()` via `hasattr` duck-typing:
 
@@ -734,9 +729,9 @@ All three are framework-called, not user-called. The `_` on `_run` signals "don'
 
 ---
 
-### C76: `run_until_shutdown()` uses `hasattr` duck-typing on the unified service registry
+### C76: ~~`run_until_shutdown()` uses `hasattr` duck-typing on the unified service registry~~ — **Resolved → by design**
 
-**Status:** Open — by design, but worth documenting the implications.
+**Status:** Resolved — by design.
 
 **Context:** `DDSContext.run_until_shutdown()` iterates `self._registry` and checks for `on_start`, `_run`, and `close` via `hasattr`. Both `BaseComponent` and `BaseService` subclasses share the same registry via `register_service()`.
 
@@ -758,7 +753,7 @@ All three are framework-called, not user-called. The `_` on `_run` signals "don'
 
 ---
 
-### C77: `type_object_max_serialized_length` disabled in QoS per UMAA USTM reference
+### C77: ~~`type_object_max_serialized_length` disabled in QoS per UMAA USTM reference~~ — **Resolved → by design**
 
 **Status:** Resolved — by design.
 
@@ -775,7 +770,7 @@ All three are framework-called, not user-called. The `_` on `_run` signals "don'
 
 ---
 
-### C78: CFT filter propagation race in `CommandConsumer.send()` — requires `asyncio.sleep(0.01)` workaround
+### C78: ~~CFT filter propagation race in `CommandConsumer.send()` — requires `asyncio.sleep(0.01)` workaround~~ — **Resolved**
 
 **Status:** Resolved — workaround applied; all 1623 tests pass.
 
@@ -805,7 +800,7 @@ self._command_writer.write(command)
 
 ---
 
-### C79: CFT teardown race — `_end_session()` resets filters before in-flight samples are delivered
+### C79: ~~CFT teardown race — `_end_session()` resets filters before in-flight samples are delivered~~ — **Resolved → accepted**
 
 **Status:** Resolved — accepted as-is; `on_exec_status()` is best-effort by design.
 

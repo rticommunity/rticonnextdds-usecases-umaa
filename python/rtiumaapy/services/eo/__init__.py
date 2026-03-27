@@ -478,7 +478,7 @@ class AnchorReportProvider(ReportProvider):
 class AnchorReportConsumer(ReportConsumer):
     """Anchor report consumer (EO::AnchorStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "AnchorReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "AnchorReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -508,7 +508,7 @@ class AnchorSpecsReportProvider(ReportProvider):
 class AnchorSpecsReportConsumer(ReportConsumer):
     """AnchorSpecs report consumer (EO::AnchorSpecs)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "AnchorSpecsReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "AnchorSpecsReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -538,7 +538,7 @@ class BallastPumpReportProvider(ReportProvider):
 class BallastPumpReportConsumer(ReportConsumer):
     """BallastPump report consumer (EO::BallastTank)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "BallastPumpReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "BallastPumpReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -568,7 +568,7 @@ class BallastPumpSpecsReportProvider(ReportProvider):
 class BallastPumpSpecsReportConsumer(ReportConsumer):
     """BallastPumpSpecs report consumer (EO::BallastTank)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "BallastPumpSpecsReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "BallastPumpSpecsReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -598,7 +598,7 @@ class BallastTankReportProvider(ReportProvider):
 class BallastTankReportConsumer(ReportConsumer):
     """BallastTank report consumer (EO::BallastTank)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "BallastTankReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "BallastTankReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -628,7 +628,7 @@ class BallastTankSpecsReportProvider(ReportProvider):
 class BallastTankSpecsReportConsumer(ReportConsumer):
     """BallastTankSpecs report consumer (EO::BallastTank)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "BallastTankSpecsReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "BallastTankSpecsReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -658,7 +658,7 @@ class BatteryReportProvider(ReportProvider):
 class BatteryReportConsumer(ReportConsumer):
     """Battery report consumer (EO::BatteryStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "BatteryReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "BatteryReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -688,7 +688,7 @@ class BatterySpecsReportProvider(ReportProvider):
 class BatterySpecsReportConsumer(ReportConsumer):
     """BatterySpecs report consumer (EO::BatterySpecs)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "BatterySpecsReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "BatterySpecsReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -718,7 +718,7 @@ class BilgePumpReportProvider(ReportProvider):
 class BilgePumpReportConsumer(ReportConsumer):
     """BilgePump report consumer (EO::BilgePumpStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "BilgePumpReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "BilgePumpReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -748,7 +748,7 @@ class EngineReportProvider(ReportProvider):
 class EngineReportConsumer(ReportConsumer):
     """Engine report consumer (EO::EngineStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "EngineReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "EngineReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -778,7 +778,7 @@ class EngineSpecsReportProvider(ReportProvider):
 class EngineSpecsReportConsumer(ReportConsumer):
     """EngineSpecs report consumer (EO::EngineSpecs)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "EngineSpecsReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "EngineSpecsReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -808,7 +808,7 @@ class FinsSpecsReportProvider(ReportProvider):
 class FinsSpecsReportConsumer(ReportConsumer):
     """FinsSpecs report consumer (EO::FinsSpecs)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "FinsSpecsReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "FinsSpecsReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -838,7 +838,7 @@ class FuelTankReportProvider(ReportProvider):
 class FuelTankReportConsumer(ReportConsumer):
     """FuelTank report consumer (EO::FuelTankStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "FuelTankReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "FuelTankReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -868,7 +868,7 @@ class FuelTankSpecsReportProvider(ReportProvider):
 class FuelTankSpecsReportConsumer(ReportConsumer):
     """FuelTankSpecs report consumer (EO::FuelTankSpecs)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "FuelTankSpecsReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "FuelTankSpecsReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -898,7 +898,7 @@ class GeneratorReportProvider(ReportProvider):
 class GeneratorReportConsumer(ReportConsumer):
     """Generator report consumer (EO::GeneratorStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "GeneratorReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "GeneratorReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -928,7 +928,7 @@ class GeneratorSpecsReportProvider(ReportProvider):
 class GeneratorSpecsReportConsumer(ReportConsumer):
     """GeneratorSpecs report consumer (EO::GeneratorSpecs)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "GeneratorSpecsReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "GeneratorSpecsReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -958,7 +958,7 @@ class MastReportProvider(ReportProvider):
 class MastReportConsumer(ReportConsumer):
     """Mast report consumer (EO::MastStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "MastReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "MastReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -988,7 +988,7 @@ class PowerReportProvider(ReportProvider):
 class PowerReportConsumer(ReportConsumer):
     """Power report consumer (EO::PowerStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "PowerReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "PowerReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -1018,7 +1018,7 @@ class PropulsorsSpecsReportProvider(ReportProvider):
 class PropulsorsSpecsReportConsumer(ReportConsumer):
     """PropulsorsSpecs report consumer (EO::PropulsorsSpecs)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "PropulsorsSpecsReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "PropulsorsSpecsReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -1048,7 +1048,7 @@ class UVPlatformCapabilitiesReportProvider(ReportProvider):
 class UVPlatformCapabilitiesReportConsumer(ReportConsumer):
     """UVPlatformCapabilities report consumer (EO::UVPlatformSpecs)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "UVPlatformCapabilitiesReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "UVPlatformCapabilitiesReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -1078,7 +1078,7 @@ class UVPlatformSpecsReportProvider(ReportProvider):
 class UVPlatformSpecsReportConsumer(ReportConsumer):
     """UVPlatformSpecs report consumer (EO::UVPlatformSpecs)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "UVPlatformSpecsReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "UVPlatformSpecsReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,

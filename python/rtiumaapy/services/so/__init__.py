@@ -642,7 +642,7 @@ class BITReportProvider(ReportProvider):
 class BITReportConsumer(ReportConsumer):
     """BIT report consumer (SO::BITReport)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "BITReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "BITReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -672,7 +672,7 @@ class BITConfigReportProvider(ReportProvider):
 class BITConfigReportConsumer(ReportConsumer):
     """BITConfig report consumer (SO::BITConfig)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "BITConfigReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "BITConfigReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -702,7 +702,7 @@ class BITSpecsReportProvider(ReportProvider):
 class BITSpecsReportConsumer(ReportConsumer):
     """BITSpecs report consumer (SO::BITSpecs)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "BITSpecsReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "BITSpecsReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -732,7 +732,7 @@ class ClientIDReportProvider(ReportProvider):
 class ClientIDReportConsumer(ReportConsumer):
     """ClientID report consumer (SO::ControlSystemID)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "ClientIDReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "ClientIDReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -762,7 +762,7 @@ class ControlSystemIDReportProvider(ReportProvider):
 class ControlSystemIDReportConsumer(ReportConsumer):
     """ControlSystemID report consumer (SO::ControlSystemID)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "ControlSystemIDReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "ControlSystemIDReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -792,7 +792,7 @@ class EmitterReportProvider(ReportProvider):
 class EmitterReportConsumer(ReportConsumer):
     """Emitter report consumer (SO::EmitterReport)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "EmitterReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "EmitterReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -822,7 +822,7 @@ class EmitterPresetReportProvider(ReportProvider):
 class EmitterPresetReportConsumer(ReportConsumer):
     """EmitterPreset report consumer (SO::EmitterPresetReport)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "EmitterPresetReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "EmitterPresetReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -852,7 +852,7 @@ class EmitterPresetConfigReportProvider(ReportProvider):
 class EmitterPresetConfigReportConsumer(ReportConsumer):
     """EmitterPresetConfig report consumer (SO::EmitterPresetConfig)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "EmitterPresetConfigReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "EmitterPresetConfigReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -882,7 +882,7 @@ class EmitterSpecsReportProvider(ReportProvider):
 class EmitterSpecsReportConsumer(ReportConsumer):
     """EmitterSpecs report consumer (SO::EmitterSpecs)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "EmitterSpecsReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "EmitterSpecsReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -912,7 +912,7 @@ class FileSystemReportProvider(ReportProvider):
 class FileSystemReportConsumer(ReportConsumer):
     """FileSystem report consumer (SO::FileSystemStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "FileSystemReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "FileSystemReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -942,7 +942,7 @@ class HealthReportProvider(ReportProvider):
 class HealthReportConsumer(ReportConsumer):
     """Health report consumer (SO::HealthReport)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "HealthReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "HealthReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -972,7 +972,7 @@ class HeartbeatPulseReportProvider(ReportProvider):
 class HeartbeatPulseReportConsumer(ReportConsumer):
     """HeartbeatPulse report consumer (SO::HeartbeatPulseStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "HeartbeatPulseReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "HeartbeatPulseReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -1002,7 +1002,7 @@ class LogReportProvider(ReportProvider):
 class LogReportConsumer(ReportConsumer):
     """Log report consumer (SO::LogReport)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "LogReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "LogReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -1032,7 +1032,7 @@ class MemoryReportProvider(ReportProvider):
 class MemoryReportConsumer(ReportConsumer):
     """Memory report consumer (SO::MemoryStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "MemoryReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "MemoryReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -1062,7 +1062,7 @@ class ProcessingUnitReportProvider(ReportProvider):
 class ProcessingUnitReportConsumer(ReportConsumer):
     """ProcessingUnit report consumer (SO::ProcessingUnitStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "ProcessingUnitReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "ProcessingUnitReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -1092,7 +1092,7 @@ class RecordingSpecsReportProvider(ReportProvider):
 class RecordingSpecsReportConsumer(ReportConsumer):
     """RecordingSpecs report consumer (SO::RecordingSpecs)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "RecordingSpecsReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "RecordingSpecsReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -1122,7 +1122,7 @@ class RecordingStatusReportProvider(ReportProvider):
 class RecordingStatusReportConsumer(ReportConsumer):
     """RecordingStatus report consumer (SO::RecordingStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "RecordingStatusReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "RecordingStatusReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -1152,7 +1152,7 @@ class ResourceAllocationReportProvider(ReportProvider):
 class ResourceAllocationReportConsumer(ReportConsumer):
     """ResourceAllocation report consumer (SO::ResourceAllocation)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "ResourceAllocationReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "ResourceAllocationReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -1182,7 +1182,7 @@ class ResourceAllocationConfigReportProvider(ReportProvider):
 class ResourceAllocationConfigReportConsumer(ReportConsumer):
     """ResourceAllocationConfig report consumer (SO::ResourceAllocation)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "ResourceAllocationConfigReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "ResourceAllocationConfigReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -1212,7 +1212,7 @@ class ResourceAllocationPriorityReportProvider(ReportProvider):
 class ResourceAllocationPriorityReportConsumer(ReportConsumer):
     """ResourceAllocationPriority report consumer (SO::ResourceAllocation)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "ResourceAllocationPriorityReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "ResourceAllocationPriorityReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -1242,7 +1242,7 @@ class ResourceAuthorizationReportProvider(ReportProvider):
 class ResourceAuthorizationReportConsumer(ReportConsumer):
     """ResourceAuthorization report consumer (SO::ResourceIdentification)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "ResourceAuthorizationReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "ResourceAuthorizationReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -1272,7 +1272,7 @@ class SubsystemIDReportProvider(ReportProvider):
 class SubsystemIDReportConsumer(ReportConsumer):
     """SubsystemID report consumer (SO::ResourceIdentification)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "SubsystemIDReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "SubsystemIDReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -1302,7 +1302,7 @@ class TamperDetectionReportProvider(ReportProvider):
 class TamperDetectionReportConsumer(ReportConsumer):
     """TamperDetection report consumer (SO::TamperDetectionStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "TamperDetectionReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "TamperDetectionReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -1332,7 +1332,7 @@ class VehicleIDReportProvider(ReportProvider):
 class VehicleIDReportConsumer(ReportConsumer):
     """VehicleID report consumer (SO::ResourceIdentification)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "VehicleIDReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "VehicleIDReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,

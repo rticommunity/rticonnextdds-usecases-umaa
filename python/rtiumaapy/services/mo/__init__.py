@@ -390,7 +390,7 @@ class ContactManeuverInfluenceReportProvider(ReportProvider):
 class ContactManeuverInfluenceReportConsumer(ReportConsumer):
     """ContactManeuverInfluence report consumer (MO::ContactManeuverInfluenceStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "ContactManeuverInfluenceReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "ContactManeuverInfluenceReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -420,7 +420,7 @@ class CoordinationSituationalSignalReportProvider(ReportProvider):
 class CoordinationSituationalSignalReportConsumer(ReportConsumer):
     """CoordinationSituationalSignal report consumer (MO::CoordinationSituationalSignalStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "CoordinationSituationalSignalReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "CoordinationSituationalSignalReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -450,7 +450,7 @@ class HazardAvoidanceConfigReportProvider(ReportProvider):
 class HazardAvoidanceConfigReportConsumer(ReportConsumer):
     """HazardAvoidanceConfig report consumer (MO::HazardAvoidanceConfig)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "HazardAvoidanceConfigReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "HazardAvoidanceConfigReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,

@@ -47,6 +47,12 @@ to use the software.
               <udp_debugging_port>7399</udp_debugging_port> -->
 
             </shmem>
+
+            <udpv4>
+              <recv_socket_buffer_size>1048576</recv_socket_buffer_size>
+            
+            
+            </udpv4>
           </transport_builtin>
 
           <resource_limits>
@@ -63,12 +69,34 @@ to use the software.
 
           <discovery_config>
           <!-- This is to make Type propagation asynchronous due to large UMAA Type Objects -->
-              <publication_writer_publish_mode>
-                  <kind>ASYNCHRONOUS_PUBLISH_MODE_QOS</kind>
-              </publication_writer_publish_mode>
-              <subscription_writer_publish_mode>
-                  <kind>ASYNCHRONOUS_PUBLISH_MODE_QOS</kind>
-              </subscription_writer_publish_mode>
+            <publication_writer_publish_mode>
+                <kind>ASYNCHRONOUS_PUBLISH_MODE_QOS</kind>
+            </publication_writer_publish_mode>
+            <subscription_writer_publish_mode>
+                <kind>ASYNCHRONOUS_PUBLISH_MODE_QOS</kind>
+            </subscription_writer_publish_mode>
+
+            <!-- Spreads responses out over time so they don't all hit the wire simultaneously. -->
+            <publication_reader>
+              <min_heartbeat_response_delay>
+                <sec>0</sec>
+                <nanosec>0</nanosec>
+              </min_heartbeat_response_delay>
+              <max_heartbeat_response_delay>
+                <sec>1</sec>
+                <nanosec>10000000</nanosec>
+              </max_heartbeat_response_delay>
+            </publication_reader>
+            <subscription_reader>
+              <min_heartbeat_response_delay>
+                <sec>0</sec>
+                <nanosec>0</nanosec>
+              </min_heartbeat_response_delay>
+              <max_heartbeat_response_delay>
+                <sec>1</sec>
+                <nanosec>10000000</nanosec>
+              </max_heartbeat_response_delay>
+            </subscription_reader>
           </discovery_config>
 
         </domain_participant_qos>
@@ -208,6 +236,26 @@ to use the software.
 
     </qos_profile>
 
+
+    <!-- Beginning of QoS Profiles -->
+
+    <qos_profile name="DefaultQoS" base_name="BuiltinQosLib::Generic.Common">
+
+      <!-- 
+        Default QoS profile for vendor integration / custom topics.
+        Inherits from BuiltinQosLib::Generic.Common with no additional settings.
+
+        If you are integrating with other DDS vendors (e.g. CycloneDDS),
+        uncomment the CycloneInterop snippet below:
+        -->
+
+      <!-- <base_name>
+        <element>UMAAQoSLib::CycloneInterop</element>
+      </base_name> -->
+
+    </qos_profile>
+
+
     <!-- QoS Profile to work with USTM tool -->
     <qos_profile name="USTMQoS" base_name="BuiltinQosLib::Generic.Common">
 
@@ -232,6 +280,8 @@ to use the software.
         <!-- Automatically cleanup disposed Instances -->
         <element>UMAAQoSLib::InstanceResourceAutoCleanup</element>
 
+        <!-- Cyclone Compatibility Mode -->
+        <element>UMAAQoSLib::CycloneInterop</element>
 
       </base_name>
 
@@ -283,7 +333,7 @@ to use the software.
           -->
         <reliability>
           <max_blocking_time>
-            <sec>1</sec>
+            <sec>5</sec>
             <nanosec>DURATION_INFINITE_NSEC</nanosec>
           </max_blocking_time>
         </reliability>
@@ -471,7 +521,7 @@ to use the software.
           -->
         <reliability>
           <max_blocking_time>
-            <sec>1</sec>
+            <sec>5</sec>
             <nanosec>DURATION_INFINITE_NSEC</nanosec>
           </max_blocking_time>
         </reliability>
@@ -578,7 +628,7 @@ to use the software.
           -->
         <reliability>
           <max_blocking_time>
-            <sec>1</sec>
+            <sec>5</sec>
             <nanosec>DURATION_INFINITE_NSEC</nanosec>
           </max_blocking_time>
         </reliability>
@@ -629,23 +679,6 @@ to use the software.
         </resource_limits>
 
       </datareader_qos>
-
-    </qos_profile>
-
-
-    <qos_profile name="DefaultQoS" base_name="BuiltinQosLib::Generic.Common">
-
-      <!-- 
-        Default QoS profile for vendor integration / custom topics.
-        Inherits from BuiltinQosLib::Generic.Common with no additional settings.
-
-        If you are integrating with other DDS vendors (e.g. CycloneDDS),
-        uncomment the CycloneInterop snippet below:
-        -->
-
-      <!-- <base_name>
-        <element>UMAAQoSLib::CycloneInterop</element>
-      </base_name> -->
 
     </qos_profile>
 

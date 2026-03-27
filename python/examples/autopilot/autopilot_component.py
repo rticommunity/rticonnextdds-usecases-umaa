@@ -29,17 +29,15 @@ Implements **all 18 services** from the UMAA Autopilot Component Definition:
   - ConditionalReport     — caches latest conditional report
 
 All services auto-register with the :class:`DDSContext` and are started
-by ``ctx.run_until_shutdown()``.  The component only needs to:
-
-1. Instantiate services (done in ``__init__``).
-2. Start periodic publisher tasks (``start()``).
+by ``ctx.run_until_shutdown()``, which automatically calls ``on_start()``,
+``_run()`` (periodic publishers), and ``close()`` for every registered
+component and service.
 
 Usage::
 
     ctx = DDSContext(domain_id=0)
     component = AutopilotComponent(ctx, source_id=my_id)
-    component.start()
-    asyncio.get_event_loop().run_until_complete(ctx.run_until_shutdown())
+    asyncio.run(ctx.run_until_shutdown())
 """
 
 from __future__ import annotations
@@ -465,12 +463,12 @@ class AutopilotComponent(BaseComponent):
         health_key = HealthReportType()
         health_key.source = source_id
         self.health_provider = HealthReportProvider(
-            ctx, "HealthReport", health_key,
+            ctx, "HealthReportProvider", health_key,
         )
 
         log_key = LogReportType()
         log_key.source = source_id
-        self.log_provider = LogReportProvider(ctx, "LogReport", log_key)
+        self.log_provider = LogReportProvider(ctx, "LogReportProvider", log_key)
 
         from rtiumaapy.datamodel.UVPlatformSpecsReportType import (
             UMAA_EO_UVPlatformSpecs_UVPlatformSpecsReportType as UVSpecsType,
@@ -478,7 +476,7 @@ class AutopilotComponent(BaseComponent):
         specs_key = UVSpecsType()
         specs_key.source = source_id
         self.specs_provider = UVPlatformSpecsReportProvider(
-            ctx, "UVPlatformSpecs", specs_key,
+            ctx, "UVPlatformSpecsProvider", specs_key,
         )
 
         from rtiumaapy.datamodel.UVPlatformCapabilitiesReportType import (
@@ -487,7 +485,7 @@ class AutopilotComponent(BaseComponent):
         caps_key = UVCapsType()
         caps_key.source = source_id
         self.caps_provider = UVPlatformCapabilitiesReportProvider(
-            ctx, "UVPlatformCapabilities", caps_key,
+            ctx, "UVPlatformCapabilitiesProvider", caps_key,
         )
 
         # --- Report Consumers (6) ---

@@ -398,7 +398,7 @@ class GPSReportProvider(ReportProvider):
 class GPSReportConsumer(ReportConsumer):
     """GPS report consumer (SEM::GPSStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "GPSReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "GPSReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -428,7 +428,7 @@ class IlluminatorReportProvider(ReportProvider):
 class IlluminatorReportConsumer(ReportConsumer):
     """Illuminator report consumer (SEM::IlluminatorStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "IlluminatorReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "IlluminatorReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -458,7 +458,7 @@ class IlluminatorSpecsReportProvider(ReportProvider):
 class IlluminatorSpecsReportConsumer(ReportConsumer):
     """IlluminatorSpecs report consumer (SEM::IlluminatorSpecs)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "IlluminatorSpecsReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "IlluminatorSpecsReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -488,7 +488,7 @@ class InertialSensorReportProvider(ReportProvider):
 class InertialSensorReportConsumer(ReportConsumer):
     """InertialSensor report consumer (SEM::InertialSensorStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "InertialSensorReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "InertialSensorReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -518,7 +518,7 @@ class SASConfigReportProvider(ReportProvider):
 class SASConfigReportConsumer(ReportConsumer):
     """SASConfig report consumer (SEM::SASConfig)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "SASConfigReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "SASConfigReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -548,7 +548,7 @@ class SASStatusReportProvider(ReportProvider):
 class SASStatusReportConsumer(ReportConsumer):
     """SASStatus report consumer (SEM::SASStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "SASStatusReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "SASStatusReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,

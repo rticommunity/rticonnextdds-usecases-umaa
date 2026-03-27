@@ -279,24 +279,21 @@ class CommandProviderSession:
         try:
             while self._current_state not in _TERMINAL_STATES:
 
-                if self._current_state is None:
-                    # Entry → ISSUED
-                    self._transition_to(CommandStatusEnum.ISSUED)
-                    self._publish_status()
-
-                elif self._current_state == CommandStatusEnum.ISSUED:
+                if self._current_state == CommandStatusEnum.ISSUED:
                     # Validation (D42 — after ISSUED + Ack)
                     accepted, reason_msg = \
                         await self._provider.validate_command(self._command)
                     if not accepted:
                         raise CommandHookError(
                             CommandReasonEnum.VALIDATION_FAILED, reason_msg)
-                    self._transition_to(CommandStatusEnum.COMMANDED)
+                    self._transition_to(CommandStatusEnum.COMMANDED,
+                                        reason=CommandReasonEnum.SUCCEEDED)
                     self._publish_status()
                     await self._provider.on_commanded(self)
 
                 elif self._current_state == CommandStatusEnum.COMMANDED:
-                    self._transition_to(CommandStatusEnum.EXECUTING)
+                    self._transition_to(CommandStatusEnum.EXECUTING,
+                                        reason=CommandReasonEnum.SUCCEEDED)
                     self._publish_status()
 
                 elif self._current_state == CommandStatusEnum.EXECUTING:

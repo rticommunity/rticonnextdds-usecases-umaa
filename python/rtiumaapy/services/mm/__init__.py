@@ -1122,7 +1122,7 @@ class ClientControlReportProvider(ReportProvider):
 class ClientControlReportConsumer(ReportConsumer):
     """ClientControl report consumer (MM::ControlTransfer)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "ClientControlReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "ClientControlReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -1152,7 +1152,7 @@ class ClientControlTransferReportProvider(ReportProvider):
 class ClientControlTransferReportConsumer(ReportConsumer):
     """ClientControlTransfer report consumer (MM::ControlTransfer)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "ClientControlTransferReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "ClientControlTransferReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -1182,7 +1182,7 @@ class ConditionalReportProvider(ReportProvider):
 class ConditionalReportConsumer(ReportConsumer):
     """Conditional report consumer (MM::ConditionalReport)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "ConditionalReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "ConditionalReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -1212,7 +1212,7 @@ class ConditionalStateReportProvider(ReportProvider):
 class ConditionalStateReportConsumer(ReportConsumer):
     """ConditionalState report consumer (MM::ConditionalStateReport)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "ConditionalStateReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "ConditionalStateReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -1242,7 +1242,7 @@ class ControlSystemControlReportProvider(ReportProvider):
 class ControlSystemControlReportConsumer(ReportConsumer):
     """ControlSystemControl report consumer (MM::ControlTransfer)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "ControlSystemControlReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "ControlSystemControlReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -1272,7 +1272,7 @@ class ControlSystemTransferReportProvider(ReportProvider):
 class ControlSystemTransferReportConsumer(ReportConsumer):
     """ControlSystemTransfer report consumer (MM::ControlTransfer)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "ControlSystemTransferReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "ControlSystemTransferReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -1302,7 +1302,7 @@ class MissionPlanReportProvider(ReportProvider):
 class MissionPlanReportConsumer(ReportConsumer):
     """MissionPlan report consumer (MM::MissionPlanReport)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "MissionPlanReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "MissionPlanReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -1332,7 +1332,7 @@ class MissionPlanAssignmentReportProvider(ReportProvider):
 class MissionPlanAssignmentReportConsumer(ReportConsumer):
     """MissionPlanAssignment report consumer (MM::MissionPlanAssignmentReport)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "MissionPlanAssignmentReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "MissionPlanAssignmentReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -1362,7 +1362,7 @@ class MissionPlanExecutionReportProvider(ReportProvider):
 class MissionPlanExecutionReportConsumer(ReportConsumer):
     """MissionPlanExecution report consumer (MM::MissionPlanExecutionStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "MissionPlanExecutionReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "MissionPlanExecutionReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -1392,7 +1392,7 @@ class ObjectiveAssignmentReportProvider(ReportProvider):
 class ObjectiveAssignmentReportConsumer(ReportConsumer):
     """ObjectiveAssignment report consumer (MM::ObjectiveAssignmentReport)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "ObjectiveAssignmentReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "ObjectiveAssignmentReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -1422,7 +1422,7 @@ class ObjectiveExecutionReportProvider(ReportProvider):
 class ObjectiveExecutionReportConsumer(ReportConsumer):
     """ObjectiveExecution report consumer (MM::ObjectiveExecutionStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "ObjectiveExecutionReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "ObjectiveExecutionReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -1452,7 +1452,7 @@ class OperationalModeReportProvider(ReportProvider):
 class OperationalModeReportConsumer(ReportConsumer):
     """OperationalMode report consumer (MM::OperationalModeStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "OperationalModeReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "OperationalModeReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -1482,7 +1482,7 @@ class TaskPlanAssignmentReportProvider(ReportProvider):
 class TaskPlanAssignmentReportConsumer(ReportConsumer):
     """TaskPlanAssignment report consumer (MM::TaskPlanAssignmentReport)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "TaskPlanAssignmentReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "TaskPlanAssignmentReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -1512,7 +1512,7 @@ class TaskPlanExecutionReportProvider(ReportProvider):
 class TaskPlanExecutionReportConsumer(ReportConsumer):
     """TaskPlanExecution report consumer (MM::TaskPlanExecutionStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "TaskPlanExecutionReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "TaskPlanExecutionReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,

@@ -180,9 +180,14 @@ class CommandProvider(BaseService):
             await self._reject_active(command)
             return
 
-        # New session
+        # New session — publish ISSUED status synchronously with the ack
+        # so that external observers (e.g. USTM) see the command and its first
+        # status in the correct order, matching C++ provider behavior.
         session = CommandProviderSession(provider=self, command=command)
         self._active_sessions[session_id] = session
+        session._transition_to(CommandStatusEnum.ISSUED,
+                               reason=CommandReasonEnum.SUCCEEDED)
+        session._publish_status()
         session._task = asyncio.create_task(session.run())
 
     async def _handle_metadata_sample(self, info: dds.SampleInfo) -> None:
@@ -222,9 +227,11 @@ class CommandProvider(BaseService):
         """
         temp = CommandProviderSession(self, command)
         try:
-            temp._transition_to(CommandStatusEnum.ISSUED)
+            temp._transition_to(CommandStatusEnum.ISSUED,
+                               reason=CommandReasonEnum.SUCCEEDED)
             temp._publish_status()
-            temp._transition_to(CommandStatusEnum.COMMANDED)
+            temp._transition_to(CommandStatusEnum.COMMANDED,
+                               reason=CommandReasonEnum.SUCCEEDED)
             temp._publish_status()
             temp._transition_to(
                 CommandStatusEnum.FAILED,

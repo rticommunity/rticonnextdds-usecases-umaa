@@ -114,6 +114,26 @@ class CommandConsumer(BaseService):
             status: Terminal status sample, or None for cancel/crash/shutdown.
         """
 
+    # ── Discovery ──────────────────────────────────────────────────────────
+
+    @property
+    def has_matched_provider(self) -> bool:
+        """True if at least one provider is subscribed to the command topic."""
+        return self._command_writer.publication_matched_status.current_count > 0
+
+    async def wait_for_discovery(self, timeout: float = 30.0) -> bool:
+        """Block until a provider subscribes to the command topic.
+
+        Returns True if a provider was discovered, False on timeout.
+        """
+        deadline = asyncio.get_event_loop().time() + timeout
+        while not self.has_matched_provider:
+            remaining = deadline - asyncio.get_event_loop().time()
+            if remaining <= 0:
+                return False
+            await asyncio.sleep(min(0.25, remaining))
+        return True
+
     # ── Send / Cancel ─────────────────────────────────────────────────────
 
     async def send(self, command, session_id: bytes = None) -> bytes:
@@ -207,7 +227,13 @@ class CommandConsumer(BaseService):
                             "; ".join(errors),
                         )
                     session_id = self._session_id
-                    await self.on_status(session_id, sample.data)
+                    try:
+                        await self.on_status(session_id, sample.data)
+                    except Exception:
+                        _logger.exception(
+                            "Consumer %s on_status hook error",
+                            self.service_name,
+                        )
                     if sample.data.commandStatus in _TERMINAL_STATUSES:
                         await self._end_session(sample.data)
             else:
@@ -228,7 +254,13 @@ class CommandConsumer(BaseService):
                             self.service_name,
                             "; ".join(errors),
                         )
-                    await self.on_ack(self._session_id, sample.data)
+                    try:
+                        await self.on_ack(self._session_id, sample.data)
+                    except Exception:
+                        _logger.exception(
+                            "Consumer %s on_ack hook error",
+                            self.service_name,
+                        )
 
     async def _read_exec_status_loop(self) -> None:
         """Exec status reader dispatch — on_exec_status hook."""
@@ -242,8 +274,14 @@ class CommandConsumer(BaseService):
                             self.service_name,
                             "; ".join(errors),
                         )
-                    await self.on_exec_status(
-                        self._session_id, sample.data)
+                    try:
+                        await self.on_exec_status(
+                            self._session_id, sample.data)
+                    except Exception:
+                        _logger.exception(
+                            "Consumer %s on_exec_status hook error",
+                            self.service_name,
+                        )
 
     # ── Session lifecycle ─────────────────────────────────────────────────
 
@@ -262,7 +300,13 @@ class CommandConsumer(BaseService):
         self._session_id = None
         self._session_command = None
         self._reset_filters()
-        await self.on_terminal(session_id, status)
+        try:
+            await self.on_terminal(session_id, status)
+        except Exception:
+            _logger.exception(
+                "Consumer %s on_terminal hook error",
+                self.service_name,
+            )
 
     def _dispose_command_instance(self) -> None:
         """Dispose consumer's command instance (ICD §5.1.5)."""

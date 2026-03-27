@@ -198,7 +198,7 @@ class AccelerationReportProvider(ReportProvider):
 class AccelerationReportConsumer(ReportConsumer):
     """Acceleration report consumer (SA::AccelerationStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "AccelerationReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "AccelerationReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -228,7 +228,7 @@ class CompartmentReportProvider(ReportProvider):
 class CompartmentReportConsumer(ReportConsumer):
     """Compartment report consumer (SA::CompartmentStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "CompartmentReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "CompartmentReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -258,7 +258,7 @@ class CompartmentConfigReportProvider(ReportProvider):
 class CompartmentConfigReportConsumer(ReportConsumer):
     """CompartmentConfig report consumer (SA::CompartmentConfig)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "CompartmentConfigReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "CompartmentConfigReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -288,7 +288,7 @@ class ContactReportProvider(ReportProvider):
 class ContactReportConsumer(ReportConsumer):
     """Contact report consumer (SA::ContactReport)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "ContactReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "ContactReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -318,7 +318,7 @@ class ContactCOLREGSClassificationReportProvider(ReportProvider):
 class ContactCOLREGSClassificationReportConsumer(ReportConsumer):
     """ContactCOLREGSClassification report consumer (SA::ContactCOLREGSClassificationStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "ContactCOLREGSClassificationReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "ContactCOLREGSClassificationReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -348,7 +348,7 @@ class ContactCategoryReportProvider(ReportProvider):
 class ContactCategoryReportConsumer(ReportConsumer):
     """ContactCategory report consumer (SA::ContactCategoryReport)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "ContactCategoryReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "ContactCategoryReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -378,7 +378,7 @@ class ContactIdentityReportProvider(ReportProvider):
 class ContactIdentityReportConsumer(ReportConsumer):
     """ContactIdentity report consumer (SA::ContactIdentityReport)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "ContactIdentityReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "ContactIdentityReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -408,7 +408,7 @@ class ContactVisualClassificationReportProvider(ReportProvider):
 class ContactVisualClassificationReportConsumer(ReportConsumer):
     """ContactVisualClassification report consumer (SA::ContactVisualClassificationStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "ContactVisualClassificationReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "ContactVisualClassificationReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -438,7 +438,7 @@ class DateTimeReportProvider(ReportProvider):
 class DateTimeReportConsumer(ReportConsumer):
     """DateTime report consumer (SA::DateTimeStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "DateTimeReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "DateTimeReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -468,7 +468,7 @@ class ECEFPoseReportProvider(ReportProvider):
 class ECEFPoseReportConsumer(ReportConsumer):
     """ECEFPose report consumer (SA::ECEFPoseStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "ECEFPoseReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "ECEFPoseReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -498,7 +498,7 @@ class GlobalPoseReportProvider(ReportProvider):
 class GlobalPoseReportConsumer(ReportConsumer):
     """GlobalPose report consumer (SA::GlobalPoseStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "GlobalPoseReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "GlobalPoseReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -528,7 +528,7 @@ class GlobalPoseConfigReportProvider(ReportProvider):
 class GlobalPoseConfigReportConsumer(ReportConsumer):
     """GlobalPoseConfig report consumer (SA::GlobalPoseConfig)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "GlobalPoseConfigReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "GlobalPoseConfigReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -558,7 +558,7 @@ class LandmarkReportProvider(ReportProvider):
 class LandmarkReportConsumer(ReportConsumer):
     """Landmark report consumer (SA::LandmarkReport)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "LandmarkReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "LandmarkReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -588,7 +588,7 @@ class MagneticVariationReportProvider(ReportProvider):
 class MagneticVariationReportConsumer(ReportConsumer):
     """MagneticVariation report consumer (SA::MagneticVariationStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "MagneticVariationReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "MagneticVariationReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -618,7 +618,7 @@ class MagneticVariationSpecsReportProvider(ReportProvider):
 class MagneticVariationSpecsReportConsumer(ReportConsumer):
     """MagneticVariationSpecs report consumer (SA::MagneticVariationSpecs)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "MagneticVariationSpecsReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "MagneticVariationSpecsReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -648,7 +648,7 @@ class OrientationReportProvider(ReportProvider):
 class OrientationReportConsumer(ReportConsumer):
     """Orientation report consumer (SA::OrientationStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "OrientationReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "OrientationReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -678,7 +678,7 @@ class PassiveContactReportProvider(ReportProvider):
 class PassiveContactReportConsumer(ReportConsumer):
     """PassiveContact report consumer (SA::PassiveContactReport)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "PassiveContactReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "PassiveContactReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -708,7 +708,7 @@ class PathReporterReportProvider(ReportProvider):
 class PathReporterReportConsumer(ReportConsumer):
     """PathReporter report consumer (SA::PathReporterStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "PathReporterReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "PathReporterReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -738,7 +738,7 @@ class PathReporterSpecsReportProvider(ReportProvider):
 class PathReporterSpecsReportConsumer(ReportConsumer):
     """PathReporterSpecs report consumer (SA::PathReporterSpecs)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "PathReporterSpecsReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "PathReporterSpecsReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -768,7 +768,7 @@ class RelativeContactReportProvider(ReportProvider):
 class RelativeContactReportConsumer(ReportConsumer):
     """RelativeContact report consumer (SA::RelativeContactReport)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "RelativeContactReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "RelativeContactReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -798,7 +798,7 @@ class SeaStateReportProvider(ReportProvider):
 class SeaStateReportConsumer(ReportConsumer):
     """SeaState report consumer (SA::SeaStateReport)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "SeaStateReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "SeaStateReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -828,7 +828,7 @@ class SoundVelocityProfileReportProvider(ReportProvider):
 class SoundVelocityProfileReportConsumer(ReportConsumer):
     """SoundVelocityProfile report consumer (SA::SoundVelocityProfileReport)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "SoundVelocityProfileReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "SoundVelocityProfileReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -858,7 +858,7 @@ class SpeedReportProvider(ReportProvider):
 class SpeedReportConsumer(ReportConsumer):
     """Speed report consumer (SA::SpeedStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "SpeedReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "SpeedReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -888,7 +888,7 @@ class StillImageReportProvider(ReportProvider):
 class StillImageReportConsumer(ReportConsumer):
     """StillImage report consumer (SA::StillImageStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "StillImageReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "StillImageReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -918,7 +918,7 @@ class TerrainReportProvider(ReportProvider):
 class TerrainReportConsumer(ReportConsumer):
     """Terrain report consumer (SA::TerrainReport)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "TerrainReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "TerrainReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -948,7 +948,7 @@ class TranslationalShipMotionReportProvider(ReportProvider):
 class TranslationalShipMotionReportConsumer(ReportConsumer):
     """TranslationalShipMotion report consumer (SA::TranslationalShipMotionStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "TranslationalShipMotionReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "TranslationalShipMotionReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -978,7 +978,7 @@ class VelocityReportProvider(ReportProvider):
 class VelocityReportConsumer(ReportConsumer):
     """Velocity report consumer (SA::VelocityStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "VelocityReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "VelocityReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -1008,7 +1008,7 @@ class WaterCharacteristicsReportProvider(ReportProvider):
 class WaterCharacteristicsReportConsumer(ReportConsumer):
     """WaterCharacteristics report consumer (SA::WaterCharacteristicsStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "WaterCharacteristicsReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "WaterCharacteristicsReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -1038,7 +1038,7 @@ class WaterCurrentReportProvider(ReportProvider):
 class WaterCurrentReportConsumer(ReportConsumer):
     """WaterCurrent report consumer (SA::WaterCurrentStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "WaterCurrentReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "WaterCurrentReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -1068,7 +1068,7 @@ class WeatherReportProvider(ReportProvider):
 class WeatherReportConsumer(ReportConsumer):
     """Weather report consumer (SA::WeatherStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "WeatherReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "WeatherReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
@@ -1098,7 +1098,7 @@ class WindReportProvider(ReportProvider):
 class WindReportConsumer(ReportConsumer):
     """Wind report consumer (SA::WindStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str = "WindReport"):
+    def __init__(self, ctx: DDSContext, service_name: str = "WindReportConsumer"):
         super().__init__(
             ctx,
             service_name=service_name,
