@@ -1,6 +1,6 @@
-# UMAAPy2 Architecture Documentation
+# rtiumaapy Architecture Documentation
 
-> Clean-sheet architecture for the UMAA Python SDK v2, built on RTI Connext DDS with `rti.asyncio`.
+> Architecture for the UMAA Python SDK, built on RTI Connext DDS with `rti.asyncio`.
 
 ---
 
@@ -32,7 +32,7 @@
 │                      Application Code                        │
 │   (create services, register callbacks, run event loop)      │
 ├──────────────────────────────────────────────────────────────┤
-│                      UMAAPy2 SDK                             │
+│                      rtiumaapy SDK                           │
 │  ┌───────────────────────────────────────────────────────┐   │
 │  │                     DDSContext                         │   │
 │  │  DomainParticipant · Publisher · Subscriber · QoS     │   │
@@ -60,11 +60,11 @@
 
 ## C++ SDK References
 
-Two C++ reference implementations inform UMAAPy2's design:
+Two C++ reference implementations inform `rtiumaapy`'s design:
 
 | SDK | Organization | DDS Middleware | Key Files |
 |---|---|---|---|
 | **PSU/ARL C++ SDK** | Penn State Applied Research Lab | RTI Connext DDS | `CommandProviderBase.h`, `ServiceBase.h`, `CommandConsumerBase.h`, `ReportProvider.h` |
 | **JHU/APL C++ SDK** | Johns Hopkins Applied Physics Lab | Eclipse Cyclone DDS | `BaseService.hpp`, `ControlServiceProvider.hpp`, `CommandSessionManager.hpp` |
 
-UMAAPy2 uses the same DDS middleware as the PSU/ARL SDK (RTI Connext) but adopts Python's `asyncio` event loop instead of PSU/ARL's poll-based `cycle()` model.
+`rtiumaapy` uses the same DDS middleware as the PSU/ARL SDK (RTI Connext) but adopts Python's `asyncio` event loop instead of PSU/ARL's poll-based `cycle()` model.

@@ -10,7 +10,7 @@
 
 `DDSContext` is a **singleton** — only one can exist at a time. Call `DDSContext.current()` from anywhere to retrieve the active instance without importing it.
 
-**C++ SDK comparison:** The PSU/ARL C++ SDK's `ServiceBase` class holds a `DomainParticipant` pointer passed from outside. UMAAPy2's `DDSContext` consolidates the participant, publisher, subscriber, QoS provider, and topic cache into one object that also manages the service lifecycle.
+**C++ SDK comparison:** The PSU/ARL C++ SDK's `ServiceBase` class holds a `DomainParticipant` pointer passed from outside. `rtiumaapy`'s `DDSContext` consolidates the participant, publisher, subscriber, QoS provider, and topic cache into one object that also manages the service lifecycle.
 
 ---
 

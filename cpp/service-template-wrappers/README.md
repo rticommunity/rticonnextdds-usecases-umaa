@@ -37,39 +37,14 @@ Reference the [Connext Getting Started](https://community.rti.com/static/documen
 - Ubuntu 20.04
 - Connext 6.1.2(C++11)/Connext 7.3.0(C++11,Python)
 
-## Cloning Repository
-To clone the repository you will need to run `git clone` as follows to download
-both the repository and its submodule dependencies:
-```bash
-git clone --recurse-submodule https://github.com/rticommunity/rticonnextdds-usecases-umaa.git
-```
-
-If you forget to clone the repository with `--recurse-submodule`, simply run
-the following command to pull all the dependencies:
-```bash
-git submodule update --init --recursive
-```
-
 ## Build
-**All builds must be performed from the repository root.**
+See the [top-level README build instructions](../../README.md#build-system-architecture) for cloning, environment setup, and building.
 
+To build just this example:
 ```sh
-# Source the Connext environment script
-source <connext_install_dir>/resource/scripts/rtisetenv_<target>.bash
-# Example: source /opt/rti_connext_dds-7.3.0/resource/scripts/rtisetenv_x64Linux4gcc7.3.0.bash
-
-# From repository root
-cd rticonnextdds-usecases-umaa
-mkdir -p build && cd build
-cmake ..
-
-# Build everything
-make -j1  # Sequential build recommended
-
-# Or build just this example
+cd build
 make service_autopilot
-```  
-*NOTE: Initial build takes ~15 minutes as it compiles all UMAA IDL types into a shared library*
+```
 
 Executable is output to: `build/cpp/service-template-wrappers/service_autopilot`
 
@@ -80,8 +55,8 @@ Executable is output to: `build/cpp/service-template-wrappers/service_autopilot`
 ##### Options:
 
 ```
-        arg1: component name: [autopilot] \n
-        arg2: Domain ID to override <components>.xml definition \n
+        arg1: component name: [autopilot]
+        arg2: Domain ID to override <components>.xml definition
 ```
 
 ##### Example:

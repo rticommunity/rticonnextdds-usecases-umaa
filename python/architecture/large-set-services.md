@@ -15,7 +15,7 @@ Some UMAA report types contain **set-valued members** too large to fit in a sing
 
 Each set element has FK fields linking it back to the root's metadata.
 
-**C++ SDK comparison:** The PSU/ARL C++ SDK provides `LargeSetWriter` — a mutable container that manages an in-memory element table and writes/disposes DDS samples on every mutation. UMAAPy2 provides an equivalent `LargeSetWriter` helper alongside `LargeSetReportProvider` / `LargeSetReportConsumer` template classes.
+**C++ SDK comparison:** The PSU/ARL C++ SDK provides `LargeSetWriter` — a mutable container that manages an in-memory element table and writes/disposes DDS samples on every mutation. `rtiumaapy` provides an equivalent `LargeSetWriter` helper alongside `LargeSetReportProvider` / `LargeSetReportConsumer` template classes.
 
 ---
 

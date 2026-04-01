@@ -99,7 +99,7 @@ A Python framework (`rtiumaapy`) for building UMAA-compliant systems on RTI Conn
 **When to use:** You want to build UMAA components in Python with a high-level service abstraction layer.
 
 ## UMAA Data Types
-UMAA defines ~ 600 data types. This is what is used to determine the "structure" of the data being transported.  
+UMAA defines ~600 data types. This is what is used to determine the "structure" of the data being transported.  
 With Connext, we use RTI Code Generator `rtiddsgen` ([manual](https://community.rti.com/static/documentation/connext-dds/current/doc/manuals/connext_dds_professional/code_generator/users_manual/code_generator/users_manual/UsersManual_Title.htm)) to generate code per the API being used.  
 This code assists with construction and serialization/deserialization of these data structures.
 
@@ -149,7 +149,7 @@ This mask enables several interoperability flags:
 
 This can also be done programmatically if necessary for a specific endpoint.
 
-See [RTI Connext XTYPES Compliance Documentation](https://community.rti.com/static/documentation/connext-dds/7.3.0/doc/manuals/connext_dds_professional/extensible_types_guide/extensible_types/Data_Representation.htm#ComplianceMask) for full details on compliance mask values/API's.
+See [RTI Connext XTYPES Compliance Documentation](https://community.rti.com/static/documentation/connext-dds/current/doc/manuals/connext_dds_professional/extensible_types_guide/extensible_types/Data_Representation.htm#ComplianceMask) for full details on compliance mask values/API's.
 
 ### Cyclone DDS
 
@@ -242,7 +242,7 @@ playback/conversion at a later date.
 Some reference examples have been created for the workflow of recording, replaying and converting DDS messages.
 
 ### Assets
-- [Recording Service Manual(7.3)](https://community.rti.com/static/documentation/connext-dds/7.3.0/doc/manuals/connext_dds_professional/services/recording_service/index.html)
+- [Recording Service Manual](https://community.rti.com/static/documentation/connext-dds/current/doc/manuals/connext_dds_professional/services/recording_service/index.html)
 - [Docker Container Image](https://hub.docker.com/r/rticom/recording-service)  
 
 ### Setup

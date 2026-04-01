@@ -43,6 +43,7 @@ The autopilot component starts 18 UMAA services and runs until you press `Ctrl+C
 - [Getting Started](docs/getting-started.md) — environment setup, first component
 - [Building a Component](docs/building-a-component.md) — step-by-step tutorial
 - [QoS Configuration](docs/qos-configuration.md) — AssignerQoS, topic filter rules, profiles
+- [Vendor Interoperability](docs/vendor-interoperability.md) — DDS-XTYPES compliance, Cyclone DDS interop
 - [Troubleshooting](docs/troubleshooting.md) — common issues and solutions
 - [Changelog](docs/changelog.md)
 

@@ -75,7 +75,7 @@ When the reader's `take_async()` yields the root sample, the elements are **alre
 
 This eliminates the need for assembly timeouts. There is no race condition because DDS delivers samples from the same participant in write order.
 
-**C++ SDK comparison:** The PSU/ARL C++ SDK uses a similar elements-first approach in its service implementations. UMAAPy2 formalizes this as a protocol with reusable utility functions.
+**C++ SDK comparison:** The PSU/ARL C++ SDK uses a similar elements-first approach in its service implementations. `rtiumaapy` formalizes this as a protocol with reusable utility functions.
 
 ---
 
