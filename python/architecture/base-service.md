@@ -12,7 +12,7 @@
 2. **Auto-registration** in the DDSContext service registry
 3. **An abstract `close()` method** enforcing cleanup
 
-**C++ SDK comparison:** The PSU/ARL C++ SDK defines `ServiceBase` as the base class for all services. However, `CommandProviderBase` does not inherit from `ServiceBase` — the inheritance hierarchy is inconsistent. UMAAPy2 enforces that *every* service class inherits from `BaseService`, including command templates.
+**C++ SDK comparison:** The PSU/ARL C++ SDK defines `ServiceBase` as the base class for all services. However, `CommandProviderBase` does not inherit from `ServiceBase` — the inheritance hierarchy is inconsistent. `rtiumaapy` enforces that *every* service class inherits from `BaseService`, including command templates.
 
 ---
 

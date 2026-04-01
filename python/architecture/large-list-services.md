@@ -15,7 +15,7 @@ Similar to Tier 2 (Large Set), some UMAA types have **ordered list-valued member
 | Tier 2 (Large Set) | Unordered set | No ordering guarantee | FK to root via `setID` |
 | Tier 3 (Large List) | Ordered list | Linked-list chain | FK via `listID` + chain via `nextElementID` |
 
-**C++ SDK comparison:** The PSU/ARL C++ `LargeListWriter` provides full positional CRUD: prepend, append, insert-at-index, update, popFront, popBack, remove-at-index, and clear. UMAAPy2's `LargeListWriter` provides equivalent operations, automatically managing linked-list pointer rewiring and DDS writes/disposes on every mutation.
+**C++ SDK comparison:** The PSU/ARL C++ `LargeListWriter` provides full positional CRUD: prepend, append, insert-at-index, update, popFront, popBack, remove-at-index, and clear. `rtiumaapy`'s `LargeListWriter` provides equivalent operations, automatically managing linked-list pointer rewiring and DDS writes/disposes on every mutation.
 
 ---
 

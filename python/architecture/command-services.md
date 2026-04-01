@@ -15,7 +15,7 @@ Every UMAA command interaction follows the same 4-slot pattern defined in the IC
 
 `CommandProvider` and `CommandConsumer` are template classes that accept concrete types and topics for each slot. One pair covers all ~60 UMAA command families.
 
-**C++ SDK comparison:** The PSU/ARL C++ SDK splits this into `CommandProviderBase` (832 lines) and `CommandConsumerBase`. `CommandProviderBase` uses a subclass-override model with 6+ virtual hooks (`isCommandValid`, `onIssued`, `onCommanded`, `onExecuting`, `isCommandCompleted`, `isCommandFailed`). The base class owns ALL status publishing — subclasses never call `sendStatus()` directly. UMAAPy2 adopts the same subclass-override model for **both** `CommandProvider` and `CommandConsumer`, adapted for Python `async` (D44).
+**C++ SDK comparison:** The PSU/ARL C++ SDK splits this into `CommandProviderBase` (832 lines) and `CommandConsumerBase`. `CommandProviderBase` uses a subclass-override model with 6+ virtual hooks (`isCommandValid`, `onIssued`, `onCommanded`, `onExecuting`, `isCommandCompleted`, `isCommandFailed`). The base class owns ALL status publishing — subclasses never call `sendStatus()` directly. `rtiumaapy` adopts the same subclass-override model for **both** `CommandProvider` and `CommandConsumer`, adapted for Python `async` (D44).
 
 ---
 

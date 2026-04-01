@@ -1,4 +1,4 @@
-# UMAAPy2 System Architecture
+# rtiumaapy System Architecture
 
 > Python SDK for the Unmanned Maritime Autonomy Architecture (UMAA).
 > Built on RTI Connext DDS with `rti.asyncio` for cooperative event-driven concurrency.
@@ -51,7 +51,7 @@ All service logic runs cooperatively on a single Python `asyncio` event loop via
 - CPU-bound work should use `asyncio.to_thread()` or `loop.run_in_executor()`.
 - Performance budget: UMAA callbacks ~100 μs each, capacity ~10K/sec, typical load ~200/sec (2% utilization).
 
-**C++ SDK comparison:** The PSU/ARL C++ SDK uses a poll-based model (`ServiceBase::cycle()` called periodically). The JHU/APL C++ SDK uses Eclipse Cyclone DDS with `AsyncWaitSet`. UMAAPy2 uses RTI Connext `rti.asyncio` — the Python equivalent of `AsyncWaitSet`.
+**C++ SDK comparison:** The PSU/ARL C++ SDK uses a poll-based model (`ServiceBase::cycle()` called periodically). The JHU/APL C++ SDK uses Eclipse Cyclone DDS with `AsyncWaitSet`. `rtiumaapy` uses RTI Connext `rti.asyncio` — the Python equivalent of `AsyncWaitSet`.
 
 ```python
 import rti.asyncio
@@ -146,7 +146,7 @@ For the ~5 complex nested types (MissionPlanReportType, ConditionalReportType, e
 
 The UMAA ADD lists three communication patterns. ICD review confirms they map to two template types:
 
-| UMAA Pattern | DDS Mechanism | UMAAPy2 Template |
+| UMAA Pattern | DDS Mechanism | rtiumaapy Template |
 |---|---|---|
 | **Command/Response** | Write commands, read ack/status/exec_status | Tier 0: `CommandProvider` / `CommandConsumer` |
 | **Request/Reply** | Consumer subscribes, provider publishes | Tier 1–4: `ReportProvider` / `ReportConsumer` (+ variants) |

@@ -10,7 +10,7 @@
 
 Most UMAA services follow the simple publish/subscribe pattern: a provider periodically publishes data, and consumers subscribe. `ReportProvider` and `ReportConsumer` are single-topic template classes that cover this pattern.
 
-**C++ SDK comparison:** The PSU/ARL C++ SDK provides `ReportProvider` and `ReportConsumer` base classes with the same structure — one DataWriter for the provider, one DataReader for the consumer. UMAAPy2 follows this pattern directly.
+**C++ SDK comparison:** The PSU/ARL C++ SDK provides `ReportProvider` and `ReportConsumer` base classes with the same structure — one DataWriter for the provider, one DataReader for the consumer. `rtiumaapy` follows this pattern directly.
 
 ---
 

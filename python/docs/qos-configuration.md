@@ -95,17 +95,7 @@ uniform QoS for its validation protocol.
 
 ### Cyclone DDS Interoperability
 
-To communicate with CycloneDDS applications, uncomment the `CycloneInterop` snippet in `DefaultQoS`:
-
-```xml
-<qos_profile name="DefaultQoS" base_name="BuiltinQosLib::Generic.Common">
-  <base_name>
-    <element>UMAAQoSLib::CycloneInterop</element>
-  </base_name>
-</qos_profile>
-```
-
-This enables XCDR2 data representation matching on the reader side.
+See [Vendor Interoperability](vendor-interoperability.md) for full details on Cyclone DDS data representation, key serialization, and type extensibility settings.
 
 ## Verifying QoS Assignment
 
