@@ -61,7 +61,7 @@ to use the software.
             Needs to be increased for larger types i.e. GlobalVectorCommand = 20,476 
             Disabled for performance, uncomment to susbcribe dynamically in Admin Console
             -->
-            <!-- <type_object_max_serialized_length>30000</type_object_max_serialized_length> -->
+            <type_object_max_serialized_length>30000</type_object_max_serialized_length>
 
           <!-- Default is 256. Increase for GUIDS etc -->
               <contentfilter_property_max_length>512</contentfilter_property_max_length>

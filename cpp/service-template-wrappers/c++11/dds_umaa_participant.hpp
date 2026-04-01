@@ -25,7 +25,7 @@
 using namespace rti::all;
 
 const std::string PARTICIPANT_QOS_FILE = "../../qos/umaa_qos_lib.xml";
-const std::string PARTICIPANT_QOS_PROFILE = "umaa_qos_lib::default_participant";
+const std::string PARTICIPANT_QOS_PROFILE = "UMAAQoSLib::DefaultUMAAParticipant";
 
 // This is a listener that will be used to receive events from the
 // DomainParticipant i.e. the DDS "Bus"

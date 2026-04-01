@@ -28,10 +28,10 @@ if [ "$1" == "autopilot" ]; then
     fi
     if [ $component == "autopilot" ]; then
         # Check for binary in top-level build folder
-        if [ -f "../../build/examples/service-template-wrappers/service_autopilot" ]; then
-            cmd="../../build/examples/service-template-wrappers/service_autopilot"
+        if [ -f "../../build/cpp/service-template-wrappers/service_autopilot" ]; then
+            cmd="../../build/cpp/service-template-wrappers/service_autopilot"
         else
-            echo "Error: autopilot binary not found in ../../build/examples/service-template-wrappers/"
+            echo "Error: autopilot binary not found in ../../build/cpp/service-template-wrappers/"
             echo "Build from repository root: cd ../../ && mkdir -p build && cd build && cmake .. && make service_autopilot"
             exit 1
         fi
