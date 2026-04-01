@@ -3,12 +3,12 @@
 .clang-format
 
 # Build artifacts
-examples/*/build/
+cpp/*/build/
 **/debug_output.log
 
 # Python cache
 datamodel/umaa/python_flat/__pycache__/
-examples/*/py/__pycache__/
+cpp/*/py/__pycache__/
 
 # Service data
 services/data/
