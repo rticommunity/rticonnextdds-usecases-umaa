@@ -4,6 +4,10 @@ A Python framework for building UMAA-compliant unmanned maritime systems on RTI 
 
 ---
 
+ **[Python SDK Documentation](https://rtidgreenberg.github.io/rti_umaa_py_docs/)**
+
+
+
 ## Quick Start
 
 ### 1. Get an RTI License
@@ -47,7 +51,6 @@ The autopilot component starts 18 UMAA services and runs until you press `Ctrl+C
 - [Troubleshooting](docs/troubleshooting.md) — common issues and solutions
 - [Changelog](docs/changelog.md)
 
-Full API reference (autodoc): **[rtidgreenberg.github.io/rti_umaa_py_docs](https://rtidgreenberg.github.io/rti_umaa_py_docs/)**
 
 To build the docs locally:
 
