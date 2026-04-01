@@ -5,7 +5,7 @@ code and highlight the ease of access to the writers/readers and their usage.
 
 > **Note:** This example only instantiates DDS entities (readers, writers, participants) and does not implement UMAA application layer requirements such as Flow Control, Large Collections, or Generalizations/Specializations. It is intended as an alternative framework approach to the official UMAA C++ SDKs released by AUVSI.
 
-There are currently ~ 40 components defined by UMAA of which 9 are Distro A.  
+There are currently ~40 components defined by UMAA of which 9 are Distro A.  
 (`components/UMAA Component Definitions v1.0.pdf`)
 
 By inspecting the `start_component.sh` script we can see how components can be  
@@ -48,39 +48,14 @@ Reference the [Connext Getting Started guides](https://community.rti.com/static/
 - Ubuntu 20.04
 - Connext 6.1.2(C++11)/Connext 7.3.0(C++11,Python)
 
-### Cloning Repository
-To clone the repository you will need to run `git clone` as follows to download
-both the repository and its submodule dependencies:
-```bash
-git clone --recurse-submodule https://github.com/rticommunity/rticonnextdds-usecases-umaa.git
-```
-
-If you forget to clone the repository with `--recurse-submodule`, simply run
-the following command to pull all the dependencies:
-```bash
-git submodule update --init --recursive
-```
-
 ### Build
-**All builds must be performed from the repository root.**
+See the [top-level README build instructions](../../README.md#build-system-architecture) for cloning, environment setup, and building.
 
+To build just this example:
 ```sh
-# Source the Connext environment script
-source <connext_install_dir>/resource/scripts/rtisetenv_<target>.bash
-# Example: source /opt/rti_connext_dds-7.3.0/resource/scripts/rtisetenv_x64Linux4gcc7.3.0.bash
-
-# From repository root
-cd rticonnextdds-usecases-umaa
-mkdir -p build && cd build
-cmake ..
-
-# Build everything
-make -j1  # Sequential build recommended
-
-# Or build just this example
+cd build
 make xml_app_autopilot
-```  
-*NOTE: Initial build takes ~15 minutes as it compiles all UMAA IDL types into a shared library*
+```
 
 Executable is output to: `build/cpp/xml-app-framework/xml_app_autopilot`
 
@@ -102,7 +77,7 @@ cd cpp/xml-app-framework
 ```
 
 ##### Overview:
-This reference application provides XML definition for all the entites in 
+This reference application provides XML definition for all the entities in 
 the UMAA `AutoPilot` component and showcases accessing those entities to read/write data using features
 such as listeners and AsyncWaitset.
 
@@ -127,7 +102,7 @@ cd xml-app-framework
 ```
 
 ##### Overview:
-This reference application provides XML definition for all the entites in 
+This reference application provides XML definition for all the entities in 
 the UMAA `USVNav` component and showcases accessing those entities to read/write data 
 
 --------------------------------------------------------------------------------
@@ -148,7 +123,7 @@ cd xml-app-framework
 ```
 
 ##### Overview:
-This reference application provides XML definition for all the entites in 
+This reference application provides XML definition for all the entities in 
 the UMAA `Logging` component and showcases accessing those entities to read/write data 
 
 --------------------------------------------------------------------------------

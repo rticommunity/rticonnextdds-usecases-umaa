@@ -16,7 +16,7 @@ This mask enables several interoperability flags:
 
 The Python start scripts (`start_autopilot.sh`, `start_globalvector_consumer.sh`) include this line commented out — uncomment it when interoperating with other vendors.
 
-This can also be done programmatically if necessary for a specific endpoint. See [RTI Connext XTYPES Compliance Documentation](https://community.rti.com/static/documentation/connext-dds/7.3.0/doc/manuals/connext_dds_professional/extensible_types_guide/extensible_types/Data_Representation.htm#ComplianceMask) for full details on mask values and API usage.
+This can also be done programmatically if necessary for a specific endpoint. See [RTI Connext XTYPES Compliance Documentation](https://community.rti.com/static/documentation/connext-dds/current/doc/manuals/connext_dds_professional/extensible_types_guide/extensible_types/Data_Representation.htm#ComplianceMask) for full details on mask values and API usage.
 
 ## Cyclone DDS
 
