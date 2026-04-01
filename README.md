@@ -6,9 +6,9 @@ A starting point for developing to the UMAA standard with Connext.
 - [UMAA Standard](#umaa-standard)   
   Breakdown of UMAA standard from a DDS perspective
 - [Examples](#examples)
-  - [XML-Based Application Framework](#xml-based-application-framework)
-  - [Service Template Wrappers](#service-template-wrappers)
-  - [Dynamic Types Python](#dynamic-types-python)
+  - [XML-Based Application Framework](#xml-based-application-framework) (C++)
+  - [Service Template Wrappers](#service-template-wrappers) (C++)
+  - [Python SDK](#python-sdk)
 - [UMAA Data Types](#umaa-data-types)
 - [Best Practices](#best-practices)   
   Recommendations and general guidelines
@@ -28,14 +28,20 @@ using either the Modern C++ or the Python APIs.
 It also highlights the option to manage DDS configuration of both systems with  
 a centralized xml or compose UMAA services from template classes.
 
+The repo is organized into:
+- **`cpp/`** — C++ examples (XML App Framework and Service Template Wrappers)
+- **`python/`** — Python SDK with a service-oriented framework for building UMAA components
+- **`datamodel/`** — UMAA IDL types and generated language bindings
+- **`qos/`** — Shared QoS profile definitions
+- **`services/`** — Record/Replay/Convert utility scripts
+
 
 ## UMAA Standard
 Latest Version: 6.0 Distro A
 [Download from AUVSI](https://www.auvsi.org/unmanned-maritime-autonomy-architecture)
 
 **Note:** The AUVSI UMAA website now provides a Distro A SDK that includes reference code examples designed to be used with RTI Connext. 
-The UMAA SDK examples are currently considered the best path forward with regards to UMAA development.
-Examples in this repo are intended as alternatives re: setting up DDS for different use cases and could be integrated into the SDK if so desired.
+
 
 The UMAA standard defines the following(as of 6.0):  
 - Middleware level:
@@ -66,6 +72,8 @@ be compliant with the UMAA standard. See the UMAA SDK from AUVSI for details.*
 
 Centralized XML configuration for DDS entities, components, and QoS profiles. Ideal for large systems with separate systems engineering teams managing configuration files independently from application code.
 
+> **Note:** This example only instantiates DDS entities and does not implement UMAA application layer requirements such as Flow Control, Large Collections, or Generalizations/Specializations. It is intended as an alternative framework approach to the official UMAA C++ SDKs released by AUVSI.
+
 **When to use:** You need strict separation between systems configuration and software development, or want a single source of truth for DDS infrastructure that can be shared across C++ and Python applications.
 
 ### Service Template Wrappers
@@ -73,7 +81,22 @@ Centralized XML configuration for DDS entities, components, and QoS profiles. Id
 
 C++ template classes that compose UMAA services programmatically with AsyncWaitset support. Provides flexibility to dynamically build components at runtime.
 
+> **Note:** This example only instantiates DDS entities and does not implement UMAA application layer requirements such as Flow Control, Large Collections, or Generalizations/Specializations. It is intended as an alternative framework approach to the official UMAA C++ SDKs released by AUVSI.
+
 **When to use:** You're doing rapid prototyping, need runtime flexibility to compose services, or prefer a code-centric approach over XML configuration.
+
+### Python SDK
+[Full Documentation](python/README.md)
+
+A Python framework (`rtiumaapy`) for building UMAA-compliant systems on RTI Connext DDS. Provides base service classes, automatic topic/QoS configuration, and a component builder pattern for composing UMAA services.
+
+**Features:**
+- Service-oriented architecture covering Command, Report, and Composite service patterns
+- ~350 UMAA service definitions
+- Built-in health monitoring, session management, and error handling
+- Sphinx-based [API documentation](python/docs/)
+
+**When to use:** You want to build UMAA components in Python with a high-level service abstraction layer.
 
 ## UMAA Data Types
 UMAA defines ~ 600 data types. This is what is used to determine the "structure" of the data being transported.  
@@ -266,7 +289,7 @@ You can include your systems QoS with the following 2 steps:
 
 2. Set the datawriter to use the desired QoS Profile (see `services/umaa_replay.xml`):
    ```xml
-   <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
+   <datawriter_qos base_name="UMAAQoSLib::AssignerQoS" />
    ```
 
 #### Replay XCDR data

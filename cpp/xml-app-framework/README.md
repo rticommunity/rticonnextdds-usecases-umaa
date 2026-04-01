@@ -3,6 +3,8 @@ These reference applications simulate a few components using types and services
 from the public UMAA 6 standard. The intention here was to minimize application  
 code and highlight the ease of access to the writers/readers and their usage.  
 
+> **Note:** This example only instantiates DDS entities (readers, writers, participants) and does not implement UMAA application layer requirements such as Flow Control, Large Collections, or Generalizations/Specializations. It is intended as an alternative framework approach to the official UMAA C++ SDKs released by AUVSI.
+
 There are currently ~ 40 components defined by UMAA of which 9 are Distro A.  
 (`components/UMAA Component Definitions v1.0.pdf`)
 

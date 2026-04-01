@@ -4,6 +4,8 @@ This example creates template classes to generate the readers/writers per UMAA S
 It allows for an architecture where a UMAA component can be "composed" of multiple   
 UMAA Services as needed.  
 
+> **Note:** This example only instantiates DDS entities (readers, writers, participants) and does not implement UMAA application layer requirements such as Flow Control, Large Collections, or Generalizations/Specializations. It is intended as an alternative framework approach to the official UMAA C++ SDKs released by AUVSI.
+
 Once a UMAA service has been created, each DDS reader/writer entity is exposed and can be used as desired.  
 
 This example also includes usage of Connext's AsyncWaitset which provides a convenient mechanism to   
