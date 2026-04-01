@@ -153,13 +153,13 @@ See [RTI Connext XTYPES Compliance Documentation](https://community.rti.com/stat
 
 ### Cyclone DDS
 
-To ensure interoperability with Cyclone DDS, the `cyclone_interop` QoS profile in [qos/umaa_qos_lib.xml](qos/umaa_qos_lib.xml) is provided as a convenience.
+To ensure interoperability with Cyclone DDS, the `CycloneInterop` QoS profile in [qos/umaa_qos_lib.xml](qos/umaa_qos_lib.xml) is provided as a convenience.
 
 #### Data Representation
 - **Eclipse Cyclone DDS** uses XCDR2 serialization by default
 - **RTI Connext** determines the serialization format based on the data type's extensibility kind (XCDR for final types, XCDR2 for appendable/mutable types)
 
-`cyclone_interop` configures DataReaders to accept both XCDR and XCDR2 data representations:
+`CycloneInterop` configures DataReaders to accept both XCDR and XCDR2 data representations:
 
 ```xml
 <datareader_qos>
@@ -177,7 +177,7 @@ This setting ensures that readers can receive data from writers using either ser
 See [RTI Connext DATA_REPRESENTATION QoS Documentation](https://community.rti.com/static/documentation/connext-dds/current/doc/manuals/connext_dds_professional/users_manual/users_manual/DATAREPRESENTATION_Qos.htm) for more details.
 
 #### Serialize Key with Dispose
-RTI Connext uses a key hash for instance handles. When a dispose message is the first message received for a given instance, the receiver may not have the key values needed to identify it. `cyclone_interop` configures DataWriters to serialize the key value alongside dispose messages so that receivers (including Cyclone DDS) can correctly identify the instance:
+RTI Connext uses a key hash for instance handles. When a dispose message is the first message received for a given instance, the receiver may not have the key values needed to identify it. `CycloneInterop` configures DataWriters to serialize the key value alongside dispose messages so that receivers (including Cyclone DDS) can correctly identify the instance:
 
 ```xml
 <datawriter_qos>

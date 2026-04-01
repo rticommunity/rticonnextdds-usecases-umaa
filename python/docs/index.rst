@@ -26,6 +26,7 @@ Key facts:
    getting-started
    building-a-component
    qos-configuration
+   vendor-interoperability
    troubleshooting
 
 .. toctree::
