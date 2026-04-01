@@ -26,6 +26,9 @@ if [ ! -f "$UMAA_QOS_FILE" ]; then
     exit 1
 fi
 
+# --- Interop with other DDS vendors (uncomment to enable) ---
+# export NDDS_XTYPES_COMPLIANCE_MASK=0x000001a9
+
 # --- Virtual environment ---
 if [ ! -d "$VENV_DIR" ]; then
     echo "Creating virtual environment at $VENV_DIR ..."
