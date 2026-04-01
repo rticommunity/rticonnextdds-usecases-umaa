@@ -47,10 +47,12 @@ The autopilot component starts 18 UMAA services and runs until you press `Ctrl+C
 - [Troubleshooting](docs/troubleshooting.md) — common issues and solutions
 - [Changelog](docs/changelog.md)
 
-For the full API reference (autodoc), build the Sphinx site:
+Full API reference (autodoc): **[rtidgreenberg.github.io/rti_umaa_py_docs](https://rtidgreenberg.github.io/rti_umaa_py_docs/)**
+
+To build the docs locally:
 
 ```bash
-pip install -e ".[docs]"
+pip install ".[docs]"
 sphinx-build -b html docs docs/_build/html
 ```
 
