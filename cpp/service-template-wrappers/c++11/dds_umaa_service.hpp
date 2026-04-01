@@ -25,7 +25,7 @@ using namespace rti::all;
 const std::string PUBLISHER_NAME = "pub";
 const std::string SUBSCRIBER_NAME = "sub";
 const std::string TOPIC_QOS_FILE = "../../qos/umaa_qos_lib.xml";
-const std::string TOPIC_QOS_PROFILE = "umaa_qos_lib::topic_qos_assign";
+const std::string TOPIC_QOS_PROFILE = "UMAAQoSLib::AssignerQoS";
 
 /**
  * @brief UMAA Control Provider Service class.

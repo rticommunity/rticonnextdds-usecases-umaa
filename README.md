@@ -51,7 +51,7 @@ The UMAA standard defines the following(as of 6.0):
     - **Note:** This starter kit provides an xml definition of the Autopilot and USVNAV component  
       DDS entities based on our interpretation of the v1.0 Component Definitions release. 
     - There are currently ~40 components defined by UMAA of which 9 are Distro A.  
-      (`examples/xml-app-framework/components/UMAA Component Definitions v1.0.pdf`)
+      (`cpp/xml-app-framework/components/UMAA Component Definitions v1.0.pdf`)
     
 *NOTE:  
 The application level requirements (i.e Flow Control/Large Collections/Generic-Specified types)  
@@ -62,25 +62,18 @@ be compliant with the UMAA standard. See the UMAA SDK from AUVSI for details.*
 ## Examples
 
 ### XML-Based Application Framework
-[Full Documentation](examples/xml-app-framework/README.md)
+[Full Documentation](cpp/xml-app-framework/README.md)
 
 Centralized XML configuration for DDS entities, components, and QoS profiles. Ideal for large systems with separate systems engineering teams managing configuration files independently from application code.
 
 **When to use:** You need strict separation between systems configuration and software development, or want a single source of truth for DDS infrastructure that can be shared across C++ and Python applications.
 
 ### Service Template Wrappers
-[Full Documentation](examples/service-template-wrappers/README.md)
+[Full Documentation](cpp/service-template-wrappers/README.md)
 
 C++ template classes that compose UMAA services programmatically with AsyncWaitset support. Provides flexibility to dynamically build components at runtime.
 
 **When to use:** You're doing rapid prototyping, need runtime flexibility to compose services, or prefer a code-centric approach over XML configuration.
-
-### Dynamic Types Python
-[Full Documentation](examples/dynamic-types-python/README.md)
-
-Python scripts using DynamicData API for runtime type instantiation without code generation. Perfect for testing, debugging, and simulating UMAA messages.
-
-**When to use:** You need quick debugging/testing without recompiling, want to simulate specific UMAA messages, or need flexible data inspection during development.
 
 ## UMAA Data Types
 UMAA defines ~ 600 data types. This is what is used to determine the "structure" of the data being transported.  
@@ -214,8 +207,8 @@ make xml_app_autopilot      # XML-based framework example
 ```
 
 Executables are output to:
-- `build/examples/service-template-wrappers/service_autopilot`
-- `build/examples/xml-app-framework/xml_app_autopilot`
+- `build/cpp/service-template-wrappers/service_autopilot`
+- `build/cpp/xml-app-framework/xml_app_autopilot`
 
 **Note:** Individual IDL file targets are also available (e.g., `make LandmarkReportType.idl_datamodel`) if you need to regenerate specific types during development.
 
@@ -233,7 +226,7 @@ Some reference examples have been created for the workflow of recording, replayi
 - Install Connext Host per [Connext Getting Started](https://community.rti.com/static/documentation/connext-dds/current/doc/manuals/connext_dds_professional/getting_started_guide/index.html) Guide  
 - Clone `rticonnextdds-usecases-umaa` repo  
 - Set `NDDSHOME` to your Connext Install Path.  
-- Publish DDS Data on Domain ID 1 using [XML App Framework's USVNAV Component](/examples/xml-app-framework/README.md#python-usvnav)
+- Publish DDS Data on Domain ID 1 using [XML App Framework's USVNAV Component](/cpp/xml-app-framework/README.md#python-usvnav)
 
 ### Record a "Deploy" scenario
 This example logs a filtered subset of topics in a XCDR serialized format to a SQLite Database.   

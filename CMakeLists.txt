@@ -46,8 +46,8 @@ find_package(RTIConnextDDS
 add_subdirectory(datamodel)
 
 # Build examples
-add_subdirectory(examples/xml-app-framework)
-add_subdirectory(examples/service-template-wrappers)
+add_subdirectory(cpp/xml-app-framework)
+add_subdirectory(cpp/service-template-wrappers)
 
 message(STATUS "==================================================")
 message(STATUS "UMAA Repository Build Configuration")

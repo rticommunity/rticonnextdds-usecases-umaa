@@ -43,101 +43,101 @@ to use the software.
 
         <domain_participant name="autopilot" domain_ref="umaa_domain_lib::UMAA_6"
             domain_id="$(DOMAIN_ID)">
-            <domain_participant_qos base_name="umaa_qos_lib::default_participant" />
+            <domain_participant_qos base_name="UMAAQoSLib::DefaultUMAAParticipant" />
 
             <publisher name="pub">
 
                 <!-- PrimitiveDriverControl Service (Provider) -->
                 <data_writer name="PrimitiveDriverCommandAckReportType"
                     topic_ref="UMAA::MO::PrimitiveDriverControl::PrimitiveDriverCommandAckReportType">
-                    <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
+                    <datawriter_qos base_name="UMAAQoSLib::AssignerQoS" />
                 </data_writer>
 
                 <data_writer name="PrimitiveDriverCommandStatusType"
                     topic_ref="UMAA::MO::PrimitiveDriverControl::PrimitiveDriverCommandStatusType">
-                    <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
+                    <datawriter_qos base_name="UMAAQoSLib::AssignerQoS" />
                 </data_writer>
 
                 <data_writer name="PrimitiveDriverExecutionStatusReportType"
                     topic_ref="UMAA::MO::PrimitiveDriverControl::PrimitiveDriverExecutionStatusReportType">
-                    <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
+                    <datawriter_qos base_name="UMAAQoSLib::AssignerQoS" />
                 </data_writer>
 
                 <!-- GlobalVectorControl Service (Provider) -->
                 <data_writer name="GlobalVectorCommandAckReportType"
                     topic_ref="UMAA::MO::GlobalVectorControl::GlobalVectorCommandAckReportType">
-                    <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
+                    <datawriter_qos base_name="UMAAQoSLib::AssignerQoS" />
                 </data_writer>
 
                 <data_writer name="GlobalVectorCommandStatusType"
                     topic_ref="UMAA::MO::GlobalVectorControl::GlobalVectorCommandStatusType">
-                    <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
+                    <datawriter_qos base_name="UMAAQoSLib::AssignerQoS" />
                 </data_writer>
 
                 <data_writer name="GlobalVectorExecutionStatusReportType"
                     topic_ref="UMAA::MO::GlobalVectorControl::GlobalVectorExecutionStatusReportType">
-                    <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
+                    <datawriter_qos base_name="UMAAQoSLib::AssignerQoS" />
                 </data_writer>
 
                 <!-- GlobalHoverControl Service (Provider) -->
                 <data_writer name="GlobalHoverCommandAckReportType"
                     topic_ref="UMAA::MO::GlobalHoverControl::GlobalHoverCommandAckReportType">
-                    <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
+                    <datawriter_qos base_name="UMAAQoSLib::AssignerQoS" />
                 </data_writer>
 
                 <data_writer name="GlobalHoverCommandStatusType"
                     topic_ref="UMAA::MO::GlobalHoverControl::GlobalHoverCommandStatusType">
-                    <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
+                    <datawriter_qos base_name="UMAAQoSLib::AssignerQoS" />
                 </data_writer>
 
                 <data_writer name="GlobalHoverExecutionStatusReportType"
                     topic_ref="UMAA::MO::GlobalHoverControl::GlobalHoverExecutionStatusReportType">
-                    <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
+                    <datawriter_qos base_name="UMAAQoSLib::AssignerQoS" />
                 </data_writer>
 
                 <!-- UVPlatformSpecs Service (Provider) -->
                 <data_writer name="UVPlatformCapabilitiesReportType"
                     topic_ref="UMAA::EO::UVPlatformSpecs::UVPlatformCapabilitiesReportType">
-                    <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
+                    <datawriter_qos base_name="UMAAQoSLib::AssignerQoS" />
                 </data_writer>
 
                 <data_writer name="UVPlatformSpecsReportType"
                     topic_ref="UMAA::EO::UVPlatformSpecs::UVPlatformSpecsReportType">
-                    <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
+                    <datawriter_qos base_name="UMAAQoSLib::AssignerQoS" />
                 </data_writer>
 
                 <!-- LogReport Service (Provider) -->
                 <data_writer name="LogReportType"
                     topic_ref="UMAA::SO::LogReport::LogReportType">
-                    <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
+                    <datawriter_qos base_name="UMAAQoSLib::AssignerQoS" />
                 </data_writer>
 
                 <!-- HealthReport Service (Provider) -->
                 <data_writer name="HealthReportType"
                     topic_ref="UMAA::SO::HealthReport::HealthReportType">
-                    <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
+                    <datawriter_qos base_name="UMAAQoSLib::AssignerQoS" />
                 </data_writer>
 
                 <!-- MissionPlanConstraintControl Service (Consumer) -->
                 <data_writer name="MissionPlanConstraintAddCommandType"
                     topic_ref="UMAA::MM::MissionPlanConstraintControl::MissionPlanConstraintAddCommandType">
-                    <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
+                    <datawriter_qos base_name="UMAAQoSLib::AssignerQoS" />
                 </data_writer>
 
                 <data_writer name="MissionPlanConstraintDeleteCommandType"
                     topic_ref="UMAA::MM::MissionPlanConstraintControl::MissionPlanConstraintDeleteCommandType">
-                    <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
+                    <datawriter_qos base_name="UMAAQoSLib::AssignerQoS" />
                 </data_writer>
 
                 <!-- ActiveConstraintsControl Service (Provider) -->
                 <data_writer name="ActiveConstraintsCommandAckReportType"
                     topic_ref="UMAA::MM::ActiveConstraintsControl::ActiveConstraintsCommandAckReportType">
-                    <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
+                    <datawriter_qos base_name="UMAAQoSLib::AssignerQoS" />
                 </data_writer>
 
                 <data_writer name="ActiveConstraintsCommandStatusType"
                     topic_ref="UMAA::MM::ActiveConstraintsControl::ActiveConstraintsCommandStatusType">
-                    <datawriter_qos base_name="umaa_qos_lib::topic_qos_assign" />
+                    <datawriter_qos base_name="UMAAQoSLib::AssignerQoS" />
                 </data_writer>
             </publisher>
 
@@ -145,13 +145,13 @@ to use the software.
                 <!-- PrimitiveDriverControl Service (Provider)  -->
                 <data_reader name="PrimitiveDriverCommandType"
                     topic_ref="UMAA::MO::PrimitiveDriverControl::PrimitiveDriverCommandType">
-                    <datareader_qos base_name="umaa_qos_lib::topic_qos_assign" />
+                    <datareader_qos base_name="UMAAQoSLib::AssignerQoS" />
                 </data_reader>
 
                 <!-- GlobalVectorControl Service (Provider) -->
                 <data_reader name="GlobalVectorCommandType"
                     topic_ref="UMAA::MO::GlobalVectorControl::GlobalVectorCommandType">
-                  <datareader_qos base_name="umaa_qos_lib::topic_qos_assign" />
+                  <datareader_qos base_name="UMAAQoSLib::AssignerQoS" />
 
                   <!-- 
                     Create Content Filter to filter out messages that are not for this autopilot instance. 
@@ -166,70 +166,70 @@ to use the software.
                 <!-- GlobalHoverControl Service (Provider) -->
                 <data_reader name="GlobalHoverCommandType"
                     topic_ref="UMAA::MO::GlobalHoverControl::GlobalHoverCommandType">
-                    <datareader_qos base_name="umaa_qos_lib::topic_qos_assign" />
+                    <datareader_qos base_name="UMAAQoSLib::AssignerQoS" />
                 </data_reader>
 
                 <!-- GlobalPoseStatus Service (Consumer) -->
                 <data_reader name="GlobalPoseReportType"
                     topic_ref="UMAA::SA::GlobalPoseStatus::GlobalPoseReportType">
-                    <datareader_qos base_name="umaa_qos_lib::topic_qos_assign" />
+                    <datareader_qos base_name="UMAAQoSLib::AssignerQoS" />
                 </data_reader>
 
                 <!-- VelocityStatus Service (Consumer) -->
                 <data_reader name="VelocityReportType"
                     topic_ref="UMAA::SA::VelocityStatus::VelocityReportType">
-                    <datareader_qos base_name="umaa_qos_lib::topic_qos_assign" />
+                    <datareader_qos base_name="UMAAQoSLib::AssignerQoS" />
                 </data_reader>
 
                 <!-- SpeedStatus Service (Consumer) -->
                 <data_reader name="SpeedReportType"
                     topic_ref="UMAA::SA::SpeedStatus::SpeedReportType">
-                    <datareader_qos base_name="umaa_qos_lib::topic_qos_assign" />
+                    <datareader_qos base_name="UMAAQoSLib::AssignerQoS" />
                 </data_reader>
 
                 <!-- WindStatus Service (Consumer) -->
                 <data_reader name="WindReportType"
                     topic_ref="UMAA::SA::WindStatus::WindReportType">
-                    <datareader_qos base_name="umaa_qos_lib::topic_qos_assign" />
+                    <datareader_qos base_name="UMAAQoSLib::AssignerQoS" />
                 </data_reader>
 
                 <!-- WaterCurrentStatus Service (Consumer) -->
                 <data_reader name="WaterCurrentReportType"
                     topic_ref="UMAA::SA::WaterCurrentStatus::WaterCurrentReportType">
-                    <datareader_qos base_name="umaa_qos_lib::topic_qos_assign" />
+                    <datareader_qos base_name="UMAAQoSLib::AssignerQoS" />
                 </data_reader>
 
                 <!-- MissionPlanConstraintControl Service (Consumer) -->
                 <data_reader name="MissionPlanConstraintAddCommandAckReportType"
                     topic_ref="UMAA::MM::MissionPlanConstraintControl::MissionPlanConstraintAddCommandAckReportType">
-                    <datareader_qos base_name="umaa_qos_lib::topic_qos_assign" />
+                    <datareader_qos base_name="UMAAQoSLib::AssignerQoS" />
                 </data_reader>
 
                 <data_reader name="MissionPlanConstraintAddCommandStatusType"
                     topic_ref="UMAA::MM::MissionPlanConstraintControl::MissionPlanConstraintAddCommandStatusType">
-                    <datareader_qos base_name="umaa_qos_lib::topic_qos_assign" />
+                    <datareader_qos base_name="UMAAQoSLib::AssignerQoS" />
                 </data_reader>
 
                 <data_reader name="MissionPlanConstraintDeleteCommandAckReportType"
                     topic_ref="UMAA::MM::MissionPlanConstraintControl::MissionPlanConstraintDeleteCommandAckReportType">
-                    <datareader_qos base_name="umaa_qos_lib::topic_qos_assign" />
+                    <datareader_qos base_name="UMAAQoSLib::AssignerQoS" />
                 </data_reader>
 
                 <data_reader name="MissionPlanConstraintDeleteCommandStatusType"
                     topic_ref="UMAA::MM::MissionPlanConstraintControl::MissionPlanConstraintDeleteCommandStatusType">
-                    <datareader_qos base_name="umaa_qos_lib::topic_qos_assign" />
+                    <datareader_qos base_name="UMAAQoSLib::AssignerQoS" />
                 </data_reader>
 
                 <!-- ActiveConstraintsControl Service (Provider) -->
                 <data_reader name="ActiveConstraintsCommandType"
                     topic_ref="UMAA::MM::ActiveConstraintsControl::ActiveConstraintsCommandType">
-                    <datareader_qos base_name="umaa_qos_lib::topic_qos_assign" />
+                    <datareader_qos base_name="UMAAQoSLib::AssignerQoS" />
                 </data_reader>
 
                 <!-- ConditionalReport Service (Consumer) -->
                 <data_reader name="ConditionalReportType"
                     topic_ref="UMAA::MM::ConditionalReport::ConditionalReportType">
-                    <datareader_qos base_name="umaa_qos_lib::topic_qos_assign" />
+                    <datareader_qos base_name="UMAAQoSLib::AssignerQoS" />
                 </data_reader>
 
             </subscriber>

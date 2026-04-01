@@ -80,7 +80,7 @@ make xml_app_autopilot
 ```  
 *NOTE: Initial build takes ~15 minutes as it compiles all UMAA IDL types into a shared library*
 
-Executable is output to: `build/examples/xml-app-framework/xml_app_autopilot`
+Executable is output to: `build/cpp/xml-app-framework/xml_app_autopilot`
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -95,7 +95,7 @@ Executable is output to: `build/examples/xml-app-framework/xml_app_autopilot`
 
 ##### Example:
 ```sh
-cd examples/xml-app-framework
+cd cpp/xml-app-framework
 ./start_component.sh autopilot 1
 ```
 

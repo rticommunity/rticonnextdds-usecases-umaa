@@ -27,10 +27,10 @@ if [ "$1" == "autopilot" ] || [ "$1" == "usvnav" ] || [ "$1" == "globalvectorcmd
     fi
     if [ $component == "autopilot" ]; then
         # Check for binary in top-level build folder
-        if [ -f "../../build/examples/xml-app-framework/xml_app_autopilot" ]; then
-            cmd="../../build/examples/xml-app-framework/xml_app_autopilot"
+        if [ -f "../../build/cpp/xml-app-framework/xml_app_autopilot" ]; then
+            cmd="../../build/cpp/xml-app-framework/xml_app_autopilot"
         else
-            echo "Error: autopilot binary not found in ../../build/examples/xml-app-framework/"
+            echo "Error: autopilot binary not found in ../../build/cpp/xml-app-framework/"
             echo "Build from repository root: cd ../../ && mkdir -p build && cd build && cmake .. && make xml_app_autopilot"
             exit 1
         fi

@@ -69,7 +69,7 @@ make service_autopilot
 ```  
 *NOTE: Initial build takes ~15 minutes as it compiles all UMAA IDL types into a shared library*
 
-Executable is output to: `build/examples/service-template-wrappers/service_autopilot`
+Executable is output to: `build/cpp/service-template-wrappers/service_autopilot`
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -84,6 +84,6 @@ Executable is output to: `build/examples/service-template-wrappers/service_autop
 
 ##### Example:
 ```sh
-cd examples/service-template-wrappers
+cd cpp/service-template-wrappers
 ./start_component.sh autopilot 1
 ```
