@@ -51,7 +51,7 @@ Add this to your shell profile or `.env` file to avoid setting it every session.
 
 ## Verify installation
 
-Run the test suite to confirm everything is working:
+### 1. Run the tests
 
 ```bash
 python -m pytest tests/ -v --tb=short
@@ -59,35 +59,27 @@ python -m pytest tests/ -v --tb=short
 
 You should see over 1,600 tests passing.
 
-## Run the Autopilot Example
+### 2. Run the autopilot example
 
-The autopilot example demonstrates a full UMAA component with 18 services:
+Open two terminals (each with the venv active and `UMAA_QOS_FILE` set).
 
-### Terminal 1 — Start the autopilot
+**Terminal 1 — Start the autopilot**
 
 ```bash
 cd examples/autopilot
 ./start_autopilot.sh
 ```
 
-Or run directly:
+**Terminal 2 — Send a command**
 
 ```bash
-python -m examples.autopilot.run_autopilot --domain-id 0 -v
+cd examples/globalvector_consumer
+./start_globalvector_consumer.sh
 ```
 
-### Terminal 2 — Send a command
-
-Open a second terminal (with the venv active and `UMAA_QOS_FILE` set):
-
-```bash
-python -m examples.globalvector_consumer.run_globalvector_consumer \
-    --domain-id 0 \
-    --dest-guid <autopilot-source-guid>
-```
-
-The consumer sends a `GlobalVectorCommand`, and you'll see the full command lifecycle:
-**ISSUED → COMMANDED → EXECUTING → COMPLETED** in both terminals.
+The start script has the autopilot's destination GUID hardcoded, so no extra
+flags are needed.  You should see the full command lifecycle in both terminals:
+**ISSUED → COMMANDED → EXECUTING → COMPLETED**.
 
 ## Minimal Example — Report Publisher
 

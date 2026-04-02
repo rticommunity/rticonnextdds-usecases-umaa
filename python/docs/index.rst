@@ -7,6 +7,7 @@ RTI UMAA Python SDK
 **Service template framework for building UMAA-compliant unmanned maritime systems on RTI Connext DDS.**
 
 ``rtiumaapy`` provides reusable service template classes for the Unmanned Maritime Autonomy Architecture (UMAA).
+
 Instead of hand-wiring DDS readers, writers, and state machines for every UMAA service, developers subclass
 pre-built templates, override async hooks, and let the SDK handle QoS, lifecycle, and protocol compliance.
 

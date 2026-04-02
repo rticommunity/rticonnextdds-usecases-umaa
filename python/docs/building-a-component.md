@@ -22,7 +22,7 @@ This tutorial walks through creating a UMAA component from scratch — a simplif
 │  │ GPSReportConsumer           │◄─── │ ◄── Subscribed telemetry
 │  └─────────────────────────────┘     │
 ├──────────────────────────────────────┤
-│            DDSContext                 │
+│            DDSContext                │
 │  DomainParticipant · QoS · Registry  │
 └──────────────────────────────────────┘
 ```
