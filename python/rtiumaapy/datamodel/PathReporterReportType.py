@@ -2,7 +2,7 @@
 # WARNING: THIS FILE IS AUTO-GENERATED. DO NOT MODIFY.
 
 # This file was generated from PathReporterReportType.idl
-# using RTI Code Generator (rtiddsgen) version 4.3.1.
+# using RTI Code Generator (rtiddsgen) version 4.6.0.
 # The rtiddsgen tool is part of the RTI Connext DDS distribution.
 # For more information, type 'rtiddsgen -help' at a command shell
 # or consult the Code Generator User's Manual.
@@ -10,9 +10,12 @@
 from dataclasses import field
 from typing import Union, Sequence, Optional
 import rti.idl as idl
+import rti.rpc as rpc
 from enum import IntEnum
 import sys
 import os
+from abc import ABC
+
 
 sys.path.append(os.path.join(os.path.dirname(__file__), 'UMAA/Common/'))
 from LargeListMetadata import *
@@ -42,7 +45,8 @@ UMAA_SA_PathReporterStatus_PathReporterReportTypeTopic = "UMAA::SA::PathReporter
 UMAA.SA.PathReporterStatus.PathReporterReportTypeTopic = UMAA_SA_PathReporterStatus_PathReporterReportTypeTopic
 
 @idl.struct(
-    type_annotations = [idl.type_name("UMAA::SA::PathReporterStatus::PathReporterReportType"), idl.xtypes_compliance(0x0000068C), ],
+    type_annotations = [idl.type_name("UMAA::SA::PathReporterStatus::PathReporterReportType"), idl.xtypes_compliance(0x0000018C), ],
+
     member_annotations = {
         'source': [idl.key, ],
     }
@@ -62,7 +66,8 @@ UMAA_SA_PathReporterStatus_PathReporterReportTypeHistoricalGlobalPathsListElemen
 UMAA.SA.PathReporterStatus.PathReporterReportTypeHistoricalGlobalPathsListElementTopic = UMAA_SA_PathReporterStatus_PathReporterReportTypeHistoricalGlobalPathsListElementTopic
 
 @idl.struct(
-    type_annotations = [idl.type_name("UMAA::SA::PathReporterStatus::PathReporterReportTypeHistoricalGlobalPathsListElement"), idl.xtypes_compliance(0x0000068C), ],
+    type_annotations = [idl.type_name("UMAA::SA::PathReporterStatus::PathReporterReportTypeHistoricalGlobalPathsListElement"), idl.xtypes_compliance(0x0000018C), ],
+
     member_annotations = {
         'listID': [idl.key, ],
         'elementID': [idl.key, ],
@@ -82,7 +87,8 @@ UMAA_SA_PathReporterStatus_PathReporterReportTypeHistoricalLocalPathsListElement
 UMAA.SA.PathReporterStatus.PathReporterReportTypeHistoricalLocalPathsListElementTopic = UMAA_SA_PathReporterStatus_PathReporterReportTypeHistoricalLocalPathsListElementTopic
 
 @idl.struct(
-    type_annotations = [idl.type_name("UMAA::SA::PathReporterStatus::PathReporterReportTypeHistoricalLocalPathsListElement"), idl.xtypes_compliance(0x0000068C), ],
+    type_annotations = [idl.type_name("UMAA::SA::PathReporterStatus::PathReporterReportTypeHistoricalLocalPathsListElement"), idl.xtypes_compliance(0x0000018C), ],
+
     member_annotations = {
         'listID': [idl.key, ],
         'elementID': [idl.key, ],
@@ -102,7 +108,8 @@ UMAA_SA_PathReporterStatus_PathReporterReportTypePlannedGlobalPathsListElementTo
 UMAA.SA.PathReporterStatus.PathReporterReportTypePlannedGlobalPathsListElementTopic = UMAA_SA_PathReporterStatus_PathReporterReportTypePlannedGlobalPathsListElementTopic
 
 @idl.struct(
-    type_annotations = [idl.type_name("UMAA::SA::PathReporterStatus::PathReporterReportTypePlannedGlobalPathsListElement"), idl.xtypes_compliance(0x0000068C), ],
+    type_annotations = [idl.type_name("UMAA::SA::PathReporterStatus::PathReporterReportTypePlannedGlobalPathsListElement"), idl.xtypes_compliance(0x0000018C), ],
+
     member_annotations = {
         'listID': [idl.key, ],
         'elementID': [idl.key, ],
@@ -122,7 +129,8 @@ UMAA_SA_PathReporterStatus_PathReporterReportTypePlannedLocalPathsListElementTop
 UMAA.SA.PathReporterStatus.PathReporterReportTypePlannedLocalPathsListElementTopic = UMAA_SA_PathReporterStatus_PathReporterReportTypePlannedLocalPathsListElementTopic
 
 @idl.struct(
-    type_annotations = [idl.type_name("UMAA::SA::PathReporterStatus::PathReporterReportTypePlannedLocalPathsListElement"), idl.xtypes_compliance(0x0000068C), ],
+    type_annotations = [idl.type_name("UMAA::SA::PathReporterStatus::PathReporterReportTypePlannedLocalPathsListElement"), idl.xtypes_compliance(0x0000018C), ],
+
     member_annotations = {
         'listID': [idl.key, ],
         'elementID': [idl.key, ],

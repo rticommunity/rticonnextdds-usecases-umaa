@@ -2,7 +2,7 @@
 # WARNING: THIS FILE IS AUTO-GENERATED. DO NOT MODIFY.
 
 # This file was generated from BallastPumpFlowRateType.idl
-# using RTI Code Generator (rtiddsgen) version 4.3.1.
+# using RTI Code Generator (rtiddsgen) version 4.6.0.
 # The rtiddsgen tool is part of the RTI Connext DDS distribution.
 # For more information, type 'rtiddsgen -help' at a command shell
 # or consult the Code Generator User's Manual.
@@ -10,9 +10,12 @@
 from dataclasses import field
 from typing import Union, Sequence, Optional
 import rti.idl as idl
+import rti.rpc as rpc
 from enum import IntEnum
 import sys
 import os
+from abc import ABC
+
 
 sys.path.append(os.path.join(os.path.dirname(__file__), 'UMAA/EO/BallastTank/'))
 from MassBallastFlowRateType import *
@@ -37,9 +40,9 @@ class UMAA_EO_BallastTank_BallastPumpFlowRateTypeEnum(IntEnum):
     VOLUMEBALLASTFLOWRATE_D = 1
 
 UMAA.EO.BallastTank.BallastPumpFlowRateTypeEnum = UMAA_EO_BallastTank_BallastPumpFlowRateTypeEnum
-
 @idl.union(
-    type_annotations = [idl.type_name("UMAA::EO::BallastTank::BallastPumpFlowRateTypeUnion"), idl.xtypes_compliance(0x0000068C), ])
+    type_annotations = [idl.type_name("UMAA::EO::BallastTank::BallastPumpFlowRateTypeUnion"), idl.xtypes_compliance(0x0000018C), ])
+
 class UMAA_EO_BallastTank_BallastPumpFlowRateTypeUnion:
 
     discriminator: UMAA.EO.BallastTank.BallastPumpFlowRateTypeEnum = UMAA.EO.BallastTank.BallastPumpFlowRateTypeEnum.MASSBALLASTFLOWRATE_D
@@ -51,7 +54,7 @@ class UMAA_EO_BallastTank_BallastPumpFlowRateTypeUnion:
 UMAA.EO.BallastTank.BallastPumpFlowRateTypeUnion = UMAA_EO_BallastTank_BallastPumpFlowRateTypeUnion
 
 @idl.struct(
-    type_annotations = [idl.type_name("UMAA::EO::BallastTank::BallastPumpFlowRateType"), idl.xtypes_compliance(0x0000068C), ])
+    type_annotations = [idl.type_name("UMAA::EO::BallastTank::BallastPumpFlowRateType"), idl.xtypes_compliance(0x0000018C), ])
 class UMAA_EO_BallastTank_BallastPumpFlowRateType:
     BallastPumpFlowRateTypeSubtypes: UMAA.EO.BallastTank.BallastPumpFlowRateTypeUnion = field(default_factory = UMAA.EO.BallastTank.BallastPumpFlowRateTypeUnion)
 

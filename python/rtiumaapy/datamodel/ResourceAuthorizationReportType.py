@@ -2,7 +2,7 @@
 # WARNING: THIS FILE IS AUTO-GENERATED. DO NOT MODIFY.
 
 # This file was generated from ResourceAuthorizationReportType.idl
-# using RTI Code Generator (rtiddsgen) version 4.3.1.
+# using RTI Code Generator (rtiddsgen) version 4.6.0.
 # The rtiddsgen tool is part of the RTI Connext DDS distribution.
 # For more information, type 'rtiddsgen -help' at a command shell
 # or consult the Code Generator User's Manual.
@@ -10,9 +10,12 @@
 from dataclasses import field
 from typing import Union, Sequence, Optional
 import rti.idl as idl
+import rti.rpc as rpc
 from enum import IntEnum
 import sys
 import os
+from abc import ABC
+
 
 sys.path.append(os.path.join(os.path.dirname(__file__), 'UMAA/Common/Enumeration/'))
 from EnumerationSets import *
@@ -39,10 +42,11 @@ UMAA_SO_ResourceIdentification_ResourceAuthorizationReportTypeTopic = "UMAA::SO:
 UMAA.SO.ResourceIdentification.ResourceAuthorizationReportTypeTopic = UMAA_SO_ResourceIdentification_ResourceAuthorizationReportTypeTopic
 
 @idl.struct(
-    type_annotations = [idl.type_name("UMAA::SO::ResourceIdentification::ResourceAuthorizationReportType"), idl.xtypes_compliance(0x0000068C), ],
+    type_annotations = [idl.type_name("UMAA::SO::ResourceIdentification::ResourceAuthorizationReportType"), idl.xtypes_compliance(0x0000018C), ],
+
     member_annotations = {
         'source': [idl.key, ],
-        'authorizationLevel': [idl.key, ],
+        'authorizationLevel': [idl.key, idl.default(0),],
     }
 )
 class UMAA_SO_ResourceIdentification_ResourceAuthorizationReportType:

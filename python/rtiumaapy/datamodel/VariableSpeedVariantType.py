@@ -2,7 +2,7 @@
 # WARNING: THIS FILE IS AUTO-GENERATED. DO NOT MODIFY.
 
 # This file was generated from VariableSpeedVariantType.idl
-# using RTI Code Generator (rtiddsgen) version 4.3.1.
+# using RTI Code Generator (rtiddsgen) version 4.6.0.
 # The rtiddsgen tool is part of the RTI Connext DDS distribution.
 # For more information, type 'rtiddsgen -help' at a command shell
 # or consult the Code Generator User's Manual.
@@ -10,9 +10,12 @@
 from dataclasses import field
 from typing import Union, Sequence, Optional
 import rti.idl as idl
+import rti.rpc as rpc
 from enum import IntEnum
 import sys
 import os
+from abc import ABC
+
 
 sys.path.append(os.path.join(os.path.dirname(__file__), 'UMAA/Common/Speed/'))
 from RecommendedSpeedVariantType import *
@@ -41,9 +44,9 @@ class UMAA_Common_Speed_VariableSpeedVariantTypeEnum(IntEnum):
     TIMEWITHSPEEDVARIANT_D = 2
 
 UMAA.Common.Speed.VariableSpeedVariantTypeEnum = UMAA_Common_Speed_VariableSpeedVariantTypeEnum
-
 @idl.union(
-    type_annotations = [idl.type_name("UMAA::Common::Speed::VariableSpeedVariantTypeUnion"), idl.xtypes_compliance(0x0000068C), ])
+    type_annotations = [idl.type_name("UMAA::Common::Speed::VariableSpeedVariantTypeUnion"), idl.xtypes_compliance(0x0000018C), ])
+
 class UMAA_Common_Speed_VariableSpeedVariantTypeUnion:
 
     discriminator: UMAA.Common.Speed.VariableSpeedVariantTypeEnum = UMAA.Common.Speed.VariableSpeedVariantTypeEnum.RECOMMENDEDSPEEDVARIANT_D
@@ -56,7 +59,7 @@ class UMAA_Common_Speed_VariableSpeedVariantTypeUnion:
 UMAA.Common.Speed.VariableSpeedVariantTypeUnion = UMAA_Common_Speed_VariableSpeedVariantTypeUnion
 
 @idl.struct(
-    type_annotations = [idl.type_name("UMAA::Common::Speed::VariableSpeedVariantType"), idl.xtypes_compliance(0x0000068C), ])
+    type_annotations = [idl.type_name("UMAA::Common::Speed::VariableSpeedVariantType"), idl.xtypes_compliance(0x0000018C), ])
 class UMAA_Common_Speed_VariableSpeedVariantType:
     VariableSpeedVariantTypeSubtypes: UMAA.Common.Speed.VariableSpeedVariantTypeUnion = field(default_factory = UMAA.Common.Speed.VariableSpeedVariantTypeUnion)
 

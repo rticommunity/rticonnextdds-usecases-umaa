@@ -2,7 +2,7 @@
 # WARNING: THIS FILE IS AUTO-GENERATED. DO NOT MODIFY.
 
 # This file was generated from PassiveContactReportType.idl
-# using RTI Code Generator (rtiddsgen) version 4.3.1.
+# using RTI Code Generator (rtiddsgen) version 4.6.0.
 # The rtiddsgen tool is part of the RTI Connext DDS distribution.
 # For more information, type 'rtiddsgen -help' at a command shell
 # or consult the Code Generator User's Manual.
@@ -10,9 +10,12 @@
 from dataclasses import field
 from typing import Union, Sequence, Optional
 import rti.idl as idl
+import rti.rpc as rpc
 from enum import IntEnum
 import sys
 import os
+from abc import ABC
+
 
 sys.path.append(os.path.join(os.path.dirname(__file__), 'UMAA/Common/'))
 from LargeSetMetadata import *
@@ -45,7 +48,8 @@ UMAA_SA_PassiveContactReport_PassiveContactReportTypeTopic = "UMAA::SA::PassiveC
 UMAA.SA.PassiveContactReport.PassiveContactReportTypeTopic = UMAA_SA_PassiveContactReport_PassiveContactReportTypeTopic
 
 @idl.struct(
-    type_annotations = [idl.type_name("UMAA::SA::PassiveContactReport::PassiveContactReportType"), idl.xtypes_compliance(0x0000068C), ],
+    type_annotations = [idl.type_name("UMAA::SA::PassiveContactReport::PassiveContactReportType"), idl.xtypes_compliance(0x0000018C), ],
+
     member_annotations = {
         'source': [idl.key, ],
     }
@@ -63,7 +67,8 @@ UMAA_SA_PassiveContactReport_PassiveContactReportTypeContactsSetElementTopic = "
 UMAA.SA.PassiveContactReport.PassiveContactReportTypeContactsSetElementTopic = UMAA_SA_PassiveContactReport_PassiveContactReportTypeContactsSetElementTopic
 
 @idl.struct(
-    type_annotations = [idl.type_name("UMAA::SA::PassiveContactReport::PassiveContactReportTypeContactsSetElement"), idl.xtypes_compliance(0x0000068C), ],
+    type_annotations = [idl.type_name("UMAA::SA::PassiveContactReport::PassiveContactReportTypeContactsSetElement"), idl.xtypes_compliance(0x0000018C), ],
+
     member_annotations = {
         'setID': [idl.key, ],
         'elementID': [idl.key, ],

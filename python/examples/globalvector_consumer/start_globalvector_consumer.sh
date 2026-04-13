@@ -33,16 +33,14 @@ fi
 if [ ! -d "$VENV_DIR" ]; then
     echo "Creating virtual environment at $VENV_DIR ..."
     "$PYTHON" -m venv "$VENV_DIR"
-    # shellcheck disable=SC1091
-    source "$VENV_DIR/bin/activate"
+fi
+# shellcheck disable=SC1091
+source "$VENV_DIR/bin/activate"
+if ! python -c "import rtiumaapy" 2>/dev/null; then
     echo "Installing rtiumaapy and dependencies ..."
     pip install --upgrade pip > /dev/null
-    pip install -e "$PYTHON_DIR" > /dev/null
     pip install -e "$PYTHON_DIR[dev]" > /dev/null
     echo "Virtual environment ready."
-else
-    # shellcheck disable=SC1091
-    source "$VENV_DIR/bin/activate"
 fi
 
 # --- RTI license file ---

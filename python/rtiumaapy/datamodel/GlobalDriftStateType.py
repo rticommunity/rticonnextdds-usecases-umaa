@@ -2,7 +2,7 @@
 # WARNING: THIS FILE IS AUTO-GENERATED. DO NOT MODIFY.
 
 # This file was generated from GlobalDriftStateType.idl
-# using RTI Code Generator (rtiddsgen) version 4.3.1.
+# using RTI Code Generator (rtiddsgen) version 4.6.0.
 # The rtiddsgen tool is part of the RTI Connext DDS distribution.
 # For more information, type 'rtiddsgen -help' at a command shell
 # or consult the Code Generator User's Manual.
@@ -10,9 +10,12 @@
 from dataclasses import field
 from typing import Union, Sequence, Optional
 import rti.idl as idl
+import rti.rpc as rpc
 from enum import IntEnum
 import sys
 import os
+from abc import ABC
+
 
 sys.path.append(os.path.join(os.path.dirname(__file__), 'UMAA/MO/GlobalDriftState/'))
 from GlobalRegionDriftType import *
@@ -37,9 +40,9 @@ class UMAA_MO_GlobalDriftState_GlobalDriftStateTypeEnum(IntEnum):
     GLOBALREGIONDRIFT_D = 1
 
 UMAA.MO.GlobalDriftState.GlobalDriftStateTypeEnum = UMAA_MO_GlobalDriftState_GlobalDriftStateTypeEnum
-
 @idl.union(
-    type_annotations = [idl.type_name("UMAA::MO::GlobalDriftState::GlobalDriftStateTypeUnion"), idl.xtypes_compliance(0x0000068C), ])
+    type_annotations = [idl.type_name("UMAA::MO::GlobalDriftState::GlobalDriftStateTypeUnion"), idl.xtypes_compliance(0x0000018C), ])
+
 class UMAA_MO_GlobalDriftState_GlobalDriftStateTypeUnion:
 
     discriminator: UMAA.MO.GlobalDriftState.GlobalDriftStateTypeEnum = UMAA.MO.GlobalDriftState.GlobalDriftStateTypeEnum.GLOBALTRANSITDRIFT_D
@@ -51,7 +54,7 @@ class UMAA_MO_GlobalDriftState_GlobalDriftStateTypeUnion:
 UMAA.MO.GlobalDriftState.GlobalDriftStateTypeUnion = UMAA_MO_GlobalDriftState_GlobalDriftStateTypeUnion
 
 @idl.struct(
-    type_annotations = [idl.type_name("UMAA::MO::GlobalDriftState::GlobalDriftStateType"), idl.xtypes_compliance(0x0000068C), ])
+    type_annotations = [idl.type_name("UMAA::MO::GlobalDriftState::GlobalDriftStateType"), idl.xtypes_compliance(0x0000018C), ])
 class UMAA_MO_GlobalDriftState_GlobalDriftStateType:
     GlobalDriftStateTypeSubtypes: UMAA.MO.GlobalDriftState.GlobalDriftStateTypeUnion = field(default_factory = UMAA.MO.GlobalDriftState.GlobalDriftStateTypeUnion)
 
