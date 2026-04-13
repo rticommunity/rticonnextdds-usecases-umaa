@@ -1,0 +1,505 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BaseComponent &mdash; RTI UMAA Python SDK v0.1.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=2389946f"></script>
+      <script src="../_static/doctools.js?v=888ff710"></script>
+      <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="CommandProvider" href="command-provider.html" />
+    <link rel="prev" title="BaseService" href="base-service.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            RTI UMAA Python SDK
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started.html#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../getting-started.html#clone-the-repository">1. Clone the repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting-started.html#create-a-virtual-environment">2. Create a virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting-started.html#install-the-sdk-in-editable-mode">3. Install the SDK in editable mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting-started.html#set-the-qos-environment-variable">4. Set the QoS environment variable</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started.html#verify-installation">Verify installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started.html#run-the-autopilot-example">Run the Autopilot Example</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../getting-started.html#terminal-1-start-the-autopilot">Terminal 1 — Start the autopilot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting-started.html#terminal-2-send-a-command">Terminal 2 — Send a command</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started.html#minimal-example-report-publisher">Minimal Example — Report Publisher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started.html#minimal-example-report-subscriber">Minimal Example — Report Subscriber</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started.html#what-s-next">What’s Next</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../building-a-component.html">Building a Component</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../building-a-component.html#architecture-overview">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../building-a-component.html#step-1-define-your-component">Step 1: Define Your Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../building-a-component.html#step-2-add-a-command-provider">Step 2: Add a Command Provider</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../building-a-component.html#command-provider-hooks">Command Provider Hooks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../building-a-component.html#failing-a-command">Failing a Command</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../building-a-component.html#step-3-add-a-report-provider">Step 3: Add a Report Provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../building-a-component.html#step-4-add-a-report-consumer">Step 4: Add a Report Consumer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../building-a-component.html#step-5-implement-the-run-loop">Step 5: Implement the Run Loop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../building-a-component.html#step-6-create-the-entry-point">Step 6: Create the Entry Point</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../building-a-component.html#component-lifecycle">Component Lifecycle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../building-a-component.html#using-pre-wired-services">Using Pre-Wired Services</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../qos-configuration.html">QoS Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../qos-configuration.html#how-it-works">How It Works</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qos-configuration.html#qos-profiles">QoS Profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qos-configuration.html#topic-filter-rules">Topic Filter Rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qos-configuration.html#environment-variable">Environment Variable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qos-configuration.html#customizing-qos">Customizing QoS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../qos-configuration.html#modify-the-xml-directly">Modify the XML directly</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../qos-configuration.html#ustm-tool-compatibility">USTM Tool Compatibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../qos-configuration.html#cyclone-dds-interoperability">Cyclone DDS Interoperability</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../qos-configuration.html#verifying-qos-assignment">Verifying QoS Assignment</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../vendor-interoperability.html">Vendor Interoperability</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vendor-interoperability.html#all-vendors-xtypes-compliance-mask">All Vendors — XTYPES Compliance Mask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vendor-interoperability.html#cyclone-dds">Cyclone DDS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../vendor-interoperability.html#data-representation">Data Representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vendor-interoperability.html#serialize-key-with-dispose">Serialize Key with Dispose</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vendor-interoperability.html#type-extensibility-kind">Type Extensibility Kind</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../vendor-interoperability.html#using-cycloneinterop-in-python">Using <code class="docutils literal notranslate"><span class="pre">CycloneInterop</span></code> in Python</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html#environment-setup">Environment &amp; Setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../troubleshooting.html#environmenterror-umaa-qos-file-environment-variable-is-not-set"><code class="docutils literal notranslate"><span class="pre">EnvironmentError:</span> <span class="pre">UMAA_QOS_FILE</span> <span class="pre">environment</span> <span class="pre">variable</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">set</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../troubleshooting.html#runtimeerror-a-ddscontext-already-exists"><code class="docutils literal notranslate"><span class="pre">RuntimeError:</span> <span class="pre">A</span> <span class="pre">DDSContext</span> <span class="pre">already</span> <span class="pre">exists</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../troubleshooting.html#modulenotfounderror-no-module-named-rti"><code class="docutils literal notranslate"><span class="pre">ModuleNotFoundError:</span> <span class="pre">No</span> <span class="pre">module</span> <span class="pre">named</span> <span class="pre">'rti'</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html#dds-connectivity">DDS Connectivity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../troubleshooting.html#no-data-received-subscriber-sees-nothing">No data received — subscriber sees nothing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../troubleshooting.html#command-provider-never-receives-commands">Command provider never receives commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../troubleshooting.html#discovery-takes-too-long">Discovery takes too long</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html#command-lifecycle">Command Lifecycle</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../troubleshooting.html#command-stuck-in-executing">Command stuck in EXECUTING</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../troubleshooting.html#runtimeerror-consumer-already-has-an-active-session"><code class="docutils literal notranslate"><span class="pre">RuntimeError:</span> <span class="pre">Consumer</span> <span class="pre">already</span> <span class="pre">has</span> <span class="pre">an</span> <span class="pre">active</span> <span class="pre">session</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../troubleshooting.html#validation-failure-commandhookerror-validation-failed">Validation failure — <code class="docutils literal notranslate"><span class="pre">CommandHookError(VALIDATION_FAILED)</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html#shutdown-cleanup">Shutdown &amp; Cleanup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../troubleshooting.html#prespsreader-warnings-on-exit"><code class="docutils literal notranslate"><span class="pre">PRESPsReader</span></code> warnings on exit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../troubleshooting.html#services-not-closing-properly">Services not closing properly</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html#testing">Testing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../troubleshooting.html#tests-fail-with-valueerror-service-already-registered">Tests fail with <code class="docutils literal notranslate"><span class="pre">ValueError:</span> <span class="pre">Service</span> <span class="pre">already</span> <span class="pre">registered</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../troubleshooting.html#tests-hang-indefinitely">Tests hang indefinitely</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../troubleshooting.html#running-tests">Running tests</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="dds-context.html">DDSContext</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext"><code class="docutils literal notranslate"><span class="pre">DDSContext</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext.__init__"><code class="docutils literal notranslate"><span class="pre">DDSContext.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext.current"><code class="docutils literal notranslate"><span class="pre">DDSContext.current()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext.participant"><code class="docutils literal notranslate"><span class="pre">DDSContext.participant</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext.publisher"><code class="docutils literal notranslate"><span class="pre">DDSContext.publisher</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext.subscriber"><code class="docutils literal notranslate"><span class="pre">DDSContext.subscriber</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext.qos_provider"><code class="docutils literal notranslate"><span class="pre">DDSContext.qos_provider</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext.domain_id"><code class="docutils literal notranslate"><span class="pre">DDSContext.domain_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext.get_topic"><code class="docutils literal notranslate"><span class="pre">DDSContext.get_topic()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext.register_service"><code class="docutils literal notranslate"><span class="pre">DDSContext.register_service()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext.unregister_service"><code class="docutils literal notranslate"><span class="pre">DDSContext.unregister_service()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext.get_service"><code class="docutils literal notranslate"><span class="pre">DDSContext.get_service()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext.registered_service_keys"><code class="docutils literal notranslate"><span class="pre">DDSContext.registered_service_keys()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext.create_writer"><code class="docutils literal notranslate"><span class="pre">DDSContext.create_writer()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext.create_reader"><code class="docutils literal notranslate"><span class="pre">DDSContext.create_reader()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext.create_filtered_reader"><code class="docutils literal notranslate"><span class="pre">DDSContext.create_filtered_reader()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext.run_until_shutdown"><code class="docutils literal notranslate"><span class="pre">DDSContext.run_until_shutdown()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext.shutdown"><code class="docutils literal notranslate"><span class="pre">DDSContext.shutdown()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dds-context.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dds-context.html#shutdown-order">Shutdown Order</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="base-service.html">BaseService</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="base-service.html#rtiumaapy.base_service.BaseService"><code class="docutils literal notranslate"><span class="pre">BaseService</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="base-service.html#rtiumaapy.base_service.BaseService.__init__"><code class="docutils literal notranslate"><span class="pre">BaseService.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="base-service.html#rtiumaapy.base_service.BaseService.ctx"><code class="docutils literal notranslate"><span class="pre">BaseService.ctx</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="base-service.html#rtiumaapy.base_service.BaseService.service_name"><code class="docutils literal notranslate"><span class="pre">BaseService.service_name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="base-service.html#rtiumaapy.base_service.BaseService.close"><code class="docutils literal notranslate"><span class="pre">BaseService.close()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="base-service.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">BaseComponent</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#rtiumaapy.base_component.BaseComponent"><code class="docutils literal notranslate"><span class="pre">BaseComponent</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rtiumaapy.base_component.BaseComponent.__init__"><code class="docutils literal notranslate"><span class="pre">BaseComponent.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtiumaapy.base_component.BaseComponent.ctx"><code class="docutils literal notranslate"><span class="pre">BaseComponent.ctx</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtiumaapy.base_component.BaseComponent.component_name"><code class="docutils literal notranslate"><span class="pre">BaseComponent.component_name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtiumaapy.base_component.BaseComponent.on_start"><code class="docutils literal notranslate"><span class="pre">BaseComponent.on_start()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtiumaapy.base_component.BaseComponent.close"><code class="docutils literal notranslate"><span class="pre">BaseComponent.close()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="command-provider.html">CommandProvider</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="command-provider.html#rtiumaapy.command_provider.CommandProvider"><code class="docutils literal notranslate"><span class="pre">CommandProvider</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="command-provider.html#rtiumaapy.command_provider.CommandProvider.validate_command"><code class="docutils literal notranslate"><span class="pre">CommandProvider.validate_command()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-provider.html#rtiumaapy.command_provider.CommandProvider.on_updated"><code class="docutils literal notranslate"><span class="pre">CommandProvider.on_updated()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-provider.html#rtiumaapy.command_provider.CommandProvider.on_commanded"><code class="docutils literal notranslate"><span class="pre">CommandProvider.on_commanded()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-provider.html#rtiumaapy.command_provider.CommandProvider.on_executing"><code class="docutils literal notranslate"><span class="pre">CommandProvider.on_executing()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-provider.html#rtiumaapy.command_provider.CommandProvider.on_complete"><code class="docutils literal notranslate"><span class="pre">CommandProvider.on_complete()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-provider.html#rtiumaapy.command_provider.CommandProvider.on_failed"><code class="docutils literal notranslate"><span class="pre">CommandProvider.on_failed()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-provider.html#rtiumaapy.command_provider.CommandProvider.on_terminal"><code class="docutils literal notranslate"><span class="pre">CommandProvider.on_terminal()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-provider.html#rtiumaapy.command_provider.CommandProvider.start"><code class="docutils literal notranslate"><span class="pre">CommandProvider.start()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-provider.html#rtiumaapy.command_provider.CommandProvider.close"><code class="docutils literal notranslate"><span class="pre">CommandProvider.close()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="command-provider.html#state-machine">State Machine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command-provider.html#hooks">Hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command-provider.html#example">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command-provider.html#signaling-failures">Signaling Failures</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="command-consumer.html">CommandConsumer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="command-consumer.html#rtiumaapy.command_consumer.CommandConsumer"><code class="docutils literal notranslate"><span class="pre">CommandConsumer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="command-consumer.html#rtiumaapy.command_consumer.CommandConsumer.on_status"><code class="docutils literal notranslate"><span class="pre">CommandConsumer.on_status()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-consumer.html#rtiumaapy.command_consumer.CommandConsumer.on_ack"><code class="docutils literal notranslate"><span class="pre">CommandConsumer.on_ack()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-consumer.html#rtiumaapy.command_consumer.CommandConsumer.on_exec_status"><code class="docutils literal notranslate"><span class="pre">CommandConsumer.on_exec_status()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-consumer.html#rtiumaapy.command_consumer.CommandConsumer.on_terminal"><code class="docutils literal notranslate"><span class="pre">CommandConsumer.on_terminal()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-consumer.html#rtiumaapy.command_consumer.CommandConsumer.has_matched_provider"><code class="docutils literal notranslate"><span class="pre">CommandConsumer.has_matched_provider</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-consumer.html#rtiumaapy.command_consumer.CommandConsumer.wait_for_discovery"><code class="docutils literal notranslate"><span class="pre">CommandConsumer.wait_for_discovery()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-consumer.html#rtiumaapy.command_consumer.CommandConsumer.send"><code class="docutils literal notranslate"><span class="pre">CommandConsumer.send()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-consumer.html#rtiumaapy.command_consumer.CommandConsumer.cancel"><code class="docutils literal notranslate"><span class="pre">CommandConsumer.cancel()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-consumer.html#rtiumaapy.command_consumer.CommandConsumer.start"><code class="docutils literal notranslate"><span class="pre">CommandConsumer.start()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-consumer.html#rtiumaapy.command_consumer.CommandConsumer.close"><code class="docutils literal notranslate"><span class="pre">CommandConsumer.close()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="command-consumer.html#sending-commands">Sending Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command-consumer.html#hooks">Hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command-consumer.html#example">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command-consumer.html#canceling">Canceling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command-consumer.html#updating">Updating</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="command-session.html">CommandProviderSession</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="command-session.html#rtiumaapy.command_provider_session.CommandProviderSession"><code class="docutils literal notranslate"><span class="pre">CommandProviderSession</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="command-session.html#rtiumaapy.command_provider_session.CommandProviderSession.command"><code class="docutils literal notranslate"><span class="pre">CommandProviderSession.command</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-session.html#rtiumaapy.command_provider_session.CommandProviderSession.session_id"><code class="docutils literal notranslate"><span class="pre">CommandProviderSession.session_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-session.html#rtiumaapy.command_provider_session.CommandProviderSession.current_state"><code class="docutils literal notranslate"><span class="pre">CommandProviderSession.current_state</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-session.html#rtiumaapy.command_provider_session.CommandProviderSession.cancel"><code class="docutils literal notranslate"><span class="pre">CommandProviderSession.cancel()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-session.html#rtiumaapy.command_provider_session.CommandProviderSession.fail"><code class="docutils literal notranslate"><span class="pre">CommandProviderSession.fail()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-session.html#rtiumaapy.command_provider_session.CommandProviderSession.set_new_command"><code class="docutils literal notranslate"><span class="pre">CommandProviderSession.set_new_command()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-session.html#rtiumaapy.command_provider_session.CommandProviderSession.run"><code class="docutils literal notranslate"><span class="pre">CommandProviderSession.run()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="command-session.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command-session.html#properties">Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command-session.html#state-transitions">State Transitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command-session.html#enums">Enums</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="report-provider.html">ReportProvider</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="report-provider.html#rtiumaapy.report_provider.ReportProvider"><code class="docutils literal notranslate"><span class="pre">ReportProvider</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="report-provider.html#rtiumaapy.report_provider.ReportProvider.writer"><code class="docutils literal notranslate"><span class="pre">ReportProvider.writer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="report-provider.html#rtiumaapy.report_provider.ReportProvider.report_topic"><code class="docutils literal notranslate"><span class="pre">ReportProvider.report_topic</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="report-provider.html#rtiumaapy.report_provider.ReportProvider.write"><code class="docutils literal notranslate"><span class="pre">ReportProvider.write()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="report-provider.html#rtiumaapy.report_provider.ReportProvider.close"><code class="docutils literal notranslate"><span class="pre">ReportProvider.close()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="report-provider.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report-provider.html#key-holder">Key Holder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report-provider.html#validation">Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report-provider.html#using-pre-wired-classes">Using Pre-Wired Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="report-consumer.html">ReportConsumer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="report-consumer.html#rtiumaapy.report_consumer.ReportConsumer"><code class="docutils literal notranslate"><span class="pre">ReportConsumer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="report-consumer.html#rtiumaapy.report_consumer.ReportConsumer.reader"><code class="docutils literal notranslate"><span class="pre">ReportConsumer.reader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="report-consumer.html#rtiumaapy.report_consumer.ReportConsumer.report_topic"><code class="docutils literal notranslate"><span class="pre">ReportConsumer.report_topic</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="report-consumer.html#rtiumaapy.report_consumer.ReportConsumer.start"><code class="docutils literal notranslate"><span class="pre">ReportConsumer.start()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="report-consumer.html#rtiumaapy.report_consumer.ReportConsumer.on_report"><code class="docutils literal notranslate"><span class="pre">ReportConsumer.on_report()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="report-consumer.html#rtiumaapy.report_consumer.ReportConsumer.close"><code class="docutils literal notranslate"><span class="pre">ReportConsumer.close()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="report-consumer.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report-consumer.html#event-loop">Event Loop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report-consumer.html#using-pre-wired-classes">Using Pre-Wired Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="errors.html">Errors &amp; Result Types</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="errors.html#rtiumaapy.errors.CommandHookError"><code class="docutils literal notranslate"><span class="pre">CommandHookError</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="errors.html#rtiumaapy.errors.CommandHookError.reason_enum"><code class="docutils literal notranslate"><span class="pre">CommandHookError.reason_enum</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="errors.html#rtiumaapy.errors.CommandHookError.message"><code class="docutils literal notranslate"><span class="pre">CommandHookError.message</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html#rtiumaapy.errors.CommandFailedError"><code class="docutils literal notranslate"><span class="pre">CommandFailedError</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="errors.html#rtiumaapy.errors.CommandFailedError.session_id"><code class="docutils literal notranslate"><span class="pre">CommandFailedError.session_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="errors.html#rtiumaapy.errors.CommandFailedError.status"><code class="docutils literal notranslate"><span class="pre">CommandFailedError.status</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="errors.html#rtiumaapy.errors.CommandFailedError.reason_enum"><code class="docutils literal notranslate"><span class="pre">CommandFailedError.reason_enum</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="errors.html#rtiumaapy.errors.CommandFailedError.message"><code class="docutils literal notranslate"><span class="pre">CommandFailedError.message</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html#rtiumaapy.errors.AssemblyError"><code class="docutils literal notranslate"><span class="pre">AssemblyError</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="errors.html#rtiumaapy.errors.AssemblyError.root_type"><code class="docutils literal notranslate"><span class="pre">AssemblyError.root_type</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="errors.html#rtiumaapy.errors.AssemblyError.slot_name"><code class="docutils literal notranslate"><span class="pre">AssemblyError.slot_name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html#rtiumaapy.errors.CommandResult"><code class="docutils literal notranslate"><span class="pre">CommandResult</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="errors.html#rtiumaapy.errors.CommandResult.session_id"><code class="docutils literal notranslate"><span class="pre">CommandResult.session_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="errors.html#rtiumaapy.errors.CommandResult.status"><code class="docutils literal notranslate"><span class="pre">CommandResult.status</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="errors.html#rtiumaapy.errors.CommandResult.data"><code class="docutils literal notranslate"><span class="pre">CommandResult.data</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html#exception-hierarchy">Exception Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html#commandhookerror">CommandHookError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html#commandfailederror">CommandFailedError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html#commandresult">CommandResult</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utilities.html">Utilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utilities.html#guidutil">GUIDUtil</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utilities.html#rtiumaapy.guid_util.GUIDUtil"><code class="docutils literal notranslate"><span class="pre">GUIDUtil</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utilities.html#umaatimestamp">UmaaTimestamp</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utilities.html#rtiumaapy.timestamp.UmaaTimestamp"><code class="docutils literal notranslate"><span class="pre">UmaaTimestamp</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utilities.html#building-source-identities">Building Source Identities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="services-library.html">Pre-Wired Service Library</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="services-library.html#import-pattern">Import Pattern</a></li>
+<li class="toctree-l2"><a class="reference internal" href="services-library.html#naming-convention">Naming Convention</a></li>
+<li class="toctree-l2"><a class="reference internal" href="services-library.html#constructor-patterns">Constructor Patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="services-library.html#domain-catalog">Domain Catalog</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="services-library.html#common-operations-co-42-classes">Common Operations (CO) — 42 classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services-library.html#engineering-operations-eo-58-classes">Engineering Operations (EO) — 58 classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services-library.html#mission-management-mm-70-classes">Mission Management (MM) — 70 classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services-library.html#maritime-operations-mo-18-classes">Maritime Operations (MO) — 18 classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services-library.html#situational-awareness-sa-66-classes">Situational Awareness (SA) — 66 classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services-library.html#sensors-sem-26-classes">Sensors (SEM) — 26 classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services-library.html#system-operations-so-70-classes">System Operations (SO) — 70 classes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-1-0-2026-03-27-preliminary-release">v0.1.0 (2026-03-27) — Preliminary Release</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#sdk-core">SDK Core</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#utilities">Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#pre-wired-service-library">Pre-Wired Service Library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#generated-data-model">Generated Data Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#examples">Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#qos">QoS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#not-yet-implemented">Not Yet Implemented</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">RTI UMAA Python SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">BaseComponent</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/base-component.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-rtiumaapy.base_component">
+<span id="basecomponent"></span><h1>BaseComponent<a class="headerlink" href="#module-rtiumaapy.base_component" title="Permalink to this heading"></a></h1>
+<p>BaseComponent — abstract base class for UMAA application components.</p>
+<p>A <em>component</em> composes multiple <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseService</span></code> instances into a
+cohesive UMAA application (e.g. an autopilot, a mission executor).</p>
+<p>Lifecycle (managed automatically by <code class="xref py py-class docutils literal notranslate"><span class="pre">DDSContext</span></code>):</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">__init__(ctx,</span> <span class="pre">name)</span></code> — create DDS services, register with context.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">on_start()</span></code>          — one-shot startup (publish initial messages, etc.).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_run()</span></code>              — async coroutine for periodic / event-driven work.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">close()</span></code>             — publish final messages, release resources.</p></li>
+</ol>
+<dl class="py class">
+<dt class="sig sig-object py" id="rtiumaapy.base_component.BaseComponent">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rtiumaapy.base_component.</span></span><span class="sig-name descname"><span class="pre">BaseComponent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext" title="rtiumaapy.dds_context.DDSContext"><span class="pre">DDSContext</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">component_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtiumaapy/base_component.html#BaseComponent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtiumaapy.base_component.BaseComponent" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>Abstract base class for UMAA application components.</p>
+<p>Subclasses <strong>must</strong> implement <code class="xref py py-meth docutils literal notranslate"><span class="pre">_run()</span></code> and <a class="reference internal" href="#rtiumaapy.base_component.BaseComponent.close" title="rtiumaapy.base_component.BaseComponent.close"><code class="xref py py-meth docutils literal notranslate"><span class="pre">close()</span></code></a>.
+Subclasses <strong>may</strong> override <a class="reference internal" href="#rtiumaapy.base_component.BaseComponent.on_start" title="rtiumaapy.base_component.BaseComponent.on_start"><code class="xref py py-meth docutils literal notranslate"><span class="pre">on_start()</span></code></a> for one-shot startup work.</p>
+<p>The component registers itself with the <code class="xref py py-class docutils literal notranslate"><span class="pre">DDSContext</span></code> so that
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">DDSContext.run_until_shutdown()</span></code> calls <code class="docutils literal notranslate"><span class="pre">on_start()</span></code> once, then
+starts <code class="docutils literal notranslate"><span class="pre">_run()</span></code>, and calls <code class="docutils literal notranslate"><span class="pre">close()</span></code> during shutdown (while DDS
+writers are still open).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="rtiumaapy.base_component.BaseComponent.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext" title="rtiumaapy.dds_context.DDSContext"><span class="pre">DDSContext</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">component_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/rtiumaapy/base_component.html#BaseComponent.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtiumaapy.base_component.BaseComponent.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Initialise the component and register it with the context.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ctx</strong> – The <code class="xref py py-class docutils literal notranslate"><span class="pre">DDSContext</span></code> that owns shared DDS infrastructure.</p></li>
+<li><p><strong>component_name</strong> – A unique name for this component instance
+(e.g. <code class="docutils literal notranslate"><span class="pre">&quot;Autopilot&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;MissionExecutor&quot;</span></code>).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rtiumaapy.base_component.BaseComponent.ctx">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ctx</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext" title="rtiumaapy.dds_context.DDSContext"><span class="pre">DDSContext</span></a></em><a class="headerlink" href="#rtiumaapy.base_component.BaseComponent.ctx" title="Permalink to this definition"></a></dt>
+<dd><p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">DDSContext</span></code> this component belongs to.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rtiumaapy.base_component.BaseComponent.component_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">component_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#rtiumaapy.base_component.BaseComponent.component_name" title="Permalink to this definition"></a></dt>
+<dd><p>The registered name of this component.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rtiumaapy.base_component.BaseComponent.on_start">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">on_start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/rtiumaapy/base_component.html#BaseComponent.on_start"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtiumaapy.base_component.BaseComponent.on_start" title="Permalink to this definition"></a></dt>
+<dd><p>One-shot startup hook — called before <code class="docutils literal notranslate"><span class="pre">_run()</span></code>.</p>
+<p>Override to publish initial announcements (specs, capabilities,
+startup log entries, etc.).  The default implementation is a no-op.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rtiumaapy.base_component.BaseComponent.close">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/rtiumaapy/base_component.html#BaseComponent.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtiumaapy.base_component.BaseComponent.close" title="Permalink to this definition"></a></dt>
+<dd><p>Cleanup — called by <code class="docutils literal notranslate"><span class="pre">DDSContext.shutdown()</span></code> while writers are still open.</p>
+<p>Override to publish final status messages, log shutdown events, etc.</p>
+</dd></dl>
+
+</dd></dl>
+
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
+<p>A <em>component</em> groups multiple services into a cohesive UMAA application. The lifecycle is managed by <code class="docutils literal notranslate"><span class="pre">DDSContext</span></code>:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">__init__()</span></code> — create services, register with context</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">on_start()</span></code> — one-shot startup (publish announcements)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_run()</span></code> — async coroutine for periodic work</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">close()</span></code> — publish final messages, release resources</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rtiumaapy</span><span class="w"> </span><span class="kn">import</span> <span class="n">DDSContext</span><span class="p">,</span> <span class="n">BaseComponent</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MyComponent</span><span class="p">(</span><span class="n">BaseComponent</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">:</span> <span class="n">DDSContext</span><span class="p">,</span> <span class="n">source_id</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="s2">&quot;MyComponent&quot;</span><span class="p">)</span>
+        <span class="c1"># Create services here...</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">on_start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Component started — publishing specs&quot;</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shutting down&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="base-service.html" class="btn btn-neutral float-left" title="BaseService" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="command-provider.html" class="btn btn-neutral float-right" title="CommandProvider" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025-2026, Real-Time Innovations, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,569 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Utilities &mdash; RTI UMAA Python SDK v0.1.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=2389946f"></script>
+      <script src="../_static/doctools.js?v=888ff710"></script>
+      <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Pre-Wired Service Library" href="services-library.html" />
+    <link rel="prev" title="Errors &amp; Result Types" href="errors.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            RTI UMAA Python SDK
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started.html#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../getting-started.html#clone-the-repository">1. Clone the repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting-started.html#create-a-virtual-environment">2. Create a virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting-started.html#install-the-sdk-in-editable-mode">3. Install the SDK in editable mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting-started.html#set-the-qos-environment-variable">4. Set the QoS environment variable</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started.html#verify-installation">Verify installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started.html#run-the-autopilot-example">Run the Autopilot Example</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../getting-started.html#terminal-1-start-the-autopilot">Terminal 1 — Start the autopilot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting-started.html#terminal-2-send-a-command">Terminal 2 — Send a command</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started.html#minimal-example-report-publisher">Minimal Example — Report Publisher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started.html#minimal-example-report-subscriber">Minimal Example — Report Subscriber</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started.html#what-s-next">What’s Next</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../building-a-component.html">Building a Component</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../building-a-component.html#architecture-overview">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../building-a-component.html#step-1-define-your-component">Step 1: Define Your Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../building-a-component.html#step-2-add-a-command-provider">Step 2: Add a Command Provider</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../building-a-component.html#command-provider-hooks">Command Provider Hooks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../building-a-component.html#failing-a-command">Failing a Command</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../building-a-component.html#step-3-add-a-report-provider">Step 3: Add a Report Provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../building-a-component.html#step-4-add-a-report-consumer">Step 4: Add a Report Consumer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../building-a-component.html#step-5-implement-the-run-loop">Step 5: Implement the Run Loop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../building-a-component.html#step-6-create-the-entry-point">Step 6: Create the Entry Point</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../building-a-component.html#component-lifecycle">Component Lifecycle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../building-a-component.html#using-pre-wired-services">Using Pre-Wired Services</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../qos-configuration.html">QoS Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../qos-configuration.html#how-it-works">How It Works</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qos-configuration.html#qos-profiles">QoS Profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qos-configuration.html#topic-filter-rules">Topic Filter Rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qos-configuration.html#environment-variable">Environment Variable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qos-configuration.html#customizing-qos">Customizing QoS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../qos-configuration.html#modify-the-xml-directly">Modify the XML directly</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../qos-configuration.html#ustm-tool-compatibility">USTM Tool Compatibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../qos-configuration.html#cyclone-dds-interoperability">Cyclone DDS Interoperability</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../qos-configuration.html#verifying-qos-assignment">Verifying QoS Assignment</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../vendor-interoperability.html">Vendor Interoperability</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vendor-interoperability.html#all-vendors-xtypes-compliance-mask">All Vendors — XTYPES Compliance Mask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vendor-interoperability.html#cyclone-dds">Cyclone DDS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../vendor-interoperability.html#data-representation">Data Representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vendor-interoperability.html#serialize-key-with-dispose">Serialize Key with Dispose</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vendor-interoperability.html#type-extensibility-kind">Type Extensibility Kind</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../vendor-interoperability.html#using-cycloneinterop-in-python">Using <code class="docutils literal notranslate"><span class="pre">CycloneInterop</span></code> in Python</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html#environment-setup">Environment &amp; Setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../troubleshooting.html#environmenterror-umaa-qos-file-environment-variable-is-not-set"><code class="docutils literal notranslate"><span class="pre">EnvironmentError:</span> <span class="pre">UMAA_QOS_FILE</span> <span class="pre">environment</span> <span class="pre">variable</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">set</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../troubleshooting.html#runtimeerror-a-ddscontext-already-exists"><code class="docutils literal notranslate"><span class="pre">RuntimeError:</span> <span class="pre">A</span> <span class="pre">DDSContext</span> <span class="pre">already</span> <span class="pre">exists</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../troubleshooting.html#modulenotfounderror-no-module-named-rti"><code class="docutils literal notranslate"><span class="pre">ModuleNotFoundError:</span> <span class="pre">No</span> <span class="pre">module</span> <span class="pre">named</span> <span class="pre">'rti'</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html#dds-connectivity">DDS Connectivity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../troubleshooting.html#no-data-received-subscriber-sees-nothing">No data received — subscriber sees nothing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../troubleshooting.html#command-provider-never-receives-commands">Command provider never receives commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../troubleshooting.html#discovery-takes-too-long">Discovery takes too long</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html#command-lifecycle">Command Lifecycle</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../troubleshooting.html#command-stuck-in-executing">Command stuck in EXECUTING</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../troubleshooting.html#runtimeerror-consumer-already-has-an-active-session"><code class="docutils literal notranslate"><span class="pre">RuntimeError:</span> <span class="pre">Consumer</span> <span class="pre">already</span> <span class="pre">has</span> <span class="pre">an</span> <span class="pre">active</span> <span class="pre">session</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../troubleshooting.html#validation-failure-commandhookerror-validation-failed">Validation failure — <code class="docutils literal notranslate"><span class="pre">CommandHookError(VALIDATION_FAILED)</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html#shutdown-cleanup">Shutdown &amp; Cleanup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../troubleshooting.html#prespsreader-warnings-on-exit"><code class="docutils literal notranslate"><span class="pre">PRESPsReader</span></code> warnings on exit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../troubleshooting.html#services-not-closing-properly">Services not closing properly</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html#testing">Testing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../troubleshooting.html#tests-fail-with-valueerror-service-already-registered">Tests fail with <code class="docutils literal notranslate"><span class="pre">ValueError:</span> <span class="pre">Service</span> <span class="pre">already</span> <span class="pre">registered</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../troubleshooting.html#tests-hang-indefinitely">Tests hang indefinitely</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../troubleshooting.html#running-tests">Running tests</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="dds-context.html">DDSContext</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext"><code class="docutils literal notranslate"><span class="pre">DDSContext</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext.__init__"><code class="docutils literal notranslate"><span class="pre">DDSContext.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext.current"><code class="docutils literal notranslate"><span class="pre">DDSContext.current()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext.participant"><code class="docutils literal notranslate"><span class="pre">DDSContext.participant</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext.publisher"><code class="docutils literal notranslate"><span class="pre">DDSContext.publisher</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext.subscriber"><code class="docutils literal notranslate"><span class="pre">DDSContext.subscriber</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext.qos_provider"><code class="docutils literal notranslate"><span class="pre">DDSContext.qos_provider</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext.domain_id"><code class="docutils literal notranslate"><span class="pre">DDSContext.domain_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext.get_topic"><code class="docutils literal notranslate"><span class="pre">DDSContext.get_topic()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext.register_service"><code class="docutils literal notranslate"><span class="pre">DDSContext.register_service()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext.unregister_service"><code class="docutils literal notranslate"><span class="pre">DDSContext.unregister_service()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext.get_service"><code class="docutils literal notranslate"><span class="pre">DDSContext.get_service()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext.registered_service_keys"><code class="docutils literal notranslate"><span class="pre">DDSContext.registered_service_keys()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext.create_writer"><code class="docutils literal notranslate"><span class="pre">DDSContext.create_writer()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext.create_reader"><code class="docutils literal notranslate"><span class="pre">DDSContext.create_reader()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext.create_filtered_reader"><code class="docutils literal notranslate"><span class="pre">DDSContext.create_filtered_reader()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext.run_until_shutdown"><code class="docutils literal notranslate"><span class="pre">DDSContext.run_until_shutdown()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dds-context.html#rtiumaapy.dds_context.DDSContext.shutdown"><code class="docutils literal notranslate"><span class="pre">DDSContext.shutdown()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dds-context.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dds-context.html#shutdown-order">Shutdown Order</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="base-service.html">BaseService</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="base-service.html#rtiumaapy.base_service.BaseService"><code class="docutils literal notranslate"><span class="pre">BaseService</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="base-service.html#rtiumaapy.base_service.BaseService.__init__"><code class="docutils literal notranslate"><span class="pre">BaseService.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="base-service.html#rtiumaapy.base_service.BaseService.ctx"><code class="docutils literal notranslate"><span class="pre">BaseService.ctx</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="base-service.html#rtiumaapy.base_service.BaseService.service_name"><code class="docutils literal notranslate"><span class="pre">BaseService.service_name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="base-service.html#rtiumaapy.base_service.BaseService.close"><code class="docutils literal notranslate"><span class="pre">BaseService.close()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="base-service.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="base-component.html">BaseComponent</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="base-component.html#rtiumaapy.base_component.BaseComponent"><code class="docutils literal notranslate"><span class="pre">BaseComponent</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="base-component.html#rtiumaapy.base_component.BaseComponent.__init__"><code class="docutils literal notranslate"><span class="pre">BaseComponent.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="base-component.html#rtiumaapy.base_component.BaseComponent.ctx"><code class="docutils literal notranslate"><span class="pre">BaseComponent.ctx</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="base-component.html#rtiumaapy.base_component.BaseComponent.component_name"><code class="docutils literal notranslate"><span class="pre">BaseComponent.component_name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="base-component.html#rtiumaapy.base_component.BaseComponent.on_start"><code class="docutils literal notranslate"><span class="pre">BaseComponent.on_start()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="base-component.html#rtiumaapy.base_component.BaseComponent.close"><code class="docutils literal notranslate"><span class="pre">BaseComponent.close()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="base-component.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="command-provider.html">CommandProvider</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="command-provider.html#rtiumaapy.command_provider.CommandProvider"><code class="docutils literal notranslate"><span class="pre">CommandProvider</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="command-provider.html#rtiumaapy.command_provider.CommandProvider.validate_command"><code class="docutils literal notranslate"><span class="pre">CommandProvider.validate_command()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-provider.html#rtiumaapy.command_provider.CommandProvider.on_updated"><code class="docutils literal notranslate"><span class="pre">CommandProvider.on_updated()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-provider.html#rtiumaapy.command_provider.CommandProvider.on_commanded"><code class="docutils literal notranslate"><span class="pre">CommandProvider.on_commanded()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-provider.html#rtiumaapy.command_provider.CommandProvider.on_executing"><code class="docutils literal notranslate"><span class="pre">CommandProvider.on_executing()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-provider.html#rtiumaapy.command_provider.CommandProvider.on_complete"><code class="docutils literal notranslate"><span class="pre">CommandProvider.on_complete()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-provider.html#rtiumaapy.command_provider.CommandProvider.on_failed"><code class="docutils literal notranslate"><span class="pre">CommandProvider.on_failed()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-provider.html#rtiumaapy.command_provider.CommandProvider.on_terminal"><code class="docutils literal notranslate"><span class="pre">CommandProvider.on_terminal()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-provider.html#rtiumaapy.command_provider.CommandProvider.start"><code class="docutils literal notranslate"><span class="pre">CommandProvider.start()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-provider.html#rtiumaapy.command_provider.CommandProvider.close"><code class="docutils literal notranslate"><span class="pre">CommandProvider.close()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="command-provider.html#state-machine">State Machine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command-provider.html#hooks">Hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command-provider.html#example">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command-provider.html#signaling-failures">Signaling Failures</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="command-consumer.html">CommandConsumer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="command-consumer.html#rtiumaapy.command_consumer.CommandConsumer"><code class="docutils literal notranslate"><span class="pre">CommandConsumer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="command-consumer.html#rtiumaapy.command_consumer.CommandConsumer.on_status"><code class="docutils literal notranslate"><span class="pre">CommandConsumer.on_status()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-consumer.html#rtiumaapy.command_consumer.CommandConsumer.on_ack"><code class="docutils literal notranslate"><span class="pre">CommandConsumer.on_ack()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-consumer.html#rtiumaapy.command_consumer.CommandConsumer.on_exec_status"><code class="docutils literal notranslate"><span class="pre">CommandConsumer.on_exec_status()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-consumer.html#rtiumaapy.command_consumer.CommandConsumer.on_terminal"><code class="docutils literal notranslate"><span class="pre">CommandConsumer.on_terminal()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-consumer.html#rtiumaapy.command_consumer.CommandConsumer.has_matched_provider"><code class="docutils literal notranslate"><span class="pre">CommandConsumer.has_matched_provider</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-consumer.html#rtiumaapy.command_consumer.CommandConsumer.wait_for_discovery"><code class="docutils literal notranslate"><span class="pre">CommandConsumer.wait_for_discovery()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-consumer.html#rtiumaapy.command_consumer.CommandConsumer.send"><code class="docutils literal notranslate"><span class="pre">CommandConsumer.send()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-consumer.html#rtiumaapy.command_consumer.CommandConsumer.cancel"><code class="docutils literal notranslate"><span class="pre">CommandConsumer.cancel()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-consumer.html#rtiumaapy.command_consumer.CommandConsumer.start"><code class="docutils literal notranslate"><span class="pre">CommandConsumer.start()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-consumer.html#rtiumaapy.command_consumer.CommandConsumer.close"><code class="docutils literal notranslate"><span class="pre">CommandConsumer.close()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="command-consumer.html#sending-commands">Sending Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command-consumer.html#hooks">Hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command-consumer.html#example">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command-consumer.html#canceling">Canceling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command-consumer.html#updating">Updating</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="command-session.html">CommandProviderSession</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="command-session.html#rtiumaapy.command_provider_session.CommandProviderSession"><code class="docutils literal notranslate"><span class="pre">CommandProviderSession</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="command-session.html#rtiumaapy.command_provider_session.CommandProviderSession.command"><code class="docutils literal notranslate"><span class="pre">CommandProviderSession.command</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-session.html#rtiumaapy.command_provider_session.CommandProviderSession.session_id"><code class="docutils literal notranslate"><span class="pre">CommandProviderSession.session_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-session.html#rtiumaapy.command_provider_session.CommandProviderSession.current_state"><code class="docutils literal notranslate"><span class="pre">CommandProviderSession.current_state</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-session.html#rtiumaapy.command_provider_session.CommandProviderSession.cancel"><code class="docutils literal notranslate"><span class="pre">CommandProviderSession.cancel()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-session.html#rtiumaapy.command_provider_session.CommandProviderSession.fail"><code class="docutils literal notranslate"><span class="pre">CommandProviderSession.fail()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-session.html#rtiumaapy.command_provider_session.CommandProviderSession.set_new_command"><code class="docutils literal notranslate"><span class="pre">CommandProviderSession.set_new_command()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-session.html#rtiumaapy.command_provider_session.CommandProviderSession.run"><code class="docutils literal notranslate"><span class="pre">CommandProviderSession.run()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="command-session.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command-session.html#properties">Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command-session.html#state-transitions">State Transitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command-session.html#enums">Enums</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="report-provider.html">ReportProvider</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="report-provider.html#rtiumaapy.report_provider.ReportProvider"><code class="docutils literal notranslate"><span class="pre">ReportProvider</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="report-provider.html#rtiumaapy.report_provider.ReportProvider.writer"><code class="docutils literal notranslate"><span class="pre">ReportProvider.writer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="report-provider.html#rtiumaapy.report_provider.ReportProvider.report_topic"><code class="docutils literal notranslate"><span class="pre">ReportProvider.report_topic</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="report-provider.html#rtiumaapy.report_provider.ReportProvider.write"><code class="docutils literal notranslate"><span class="pre">ReportProvider.write()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="report-provider.html#rtiumaapy.report_provider.ReportProvider.close"><code class="docutils literal notranslate"><span class="pre">ReportProvider.close()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="report-provider.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report-provider.html#key-holder">Key Holder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report-provider.html#validation">Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report-provider.html#using-pre-wired-classes">Using Pre-Wired Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="report-consumer.html">ReportConsumer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="report-consumer.html#rtiumaapy.report_consumer.ReportConsumer"><code class="docutils literal notranslate"><span class="pre">ReportConsumer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="report-consumer.html#rtiumaapy.report_consumer.ReportConsumer.reader"><code class="docutils literal notranslate"><span class="pre">ReportConsumer.reader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="report-consumer.html#rtiumaapy.report_consumer.ReportConsumer.report_topic"><code class="docutils literal notranslate"><span class="pre">ReportConsumer.report_topic</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="report-consumer.html#rtiumaapy.report_consumer.ReportConsumer.start"><code class="docutils literal notranslate"><span class="pre">ReportConsumer.start()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="report-consumer.html#rtiumaapy.report_consumer.ReportConsumer.on_report"><code class="docutils literal notranslate"><span class="pre">ReportConsumer.on_report()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="report-consumer.html#rtiumaapy.report_consumer.ReportConsumer.close"><code class="docutils literal notranslate"><span class="pre">ReportConsumer.close()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="report-consumer.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report-consumer.html#event-loop">Event Loop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report-consumer.html#using-pre-wired-classes">Using Pre-Wired Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="errors.html">Errors &amp; Result Types</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="errors.html#rtiumaapy.errors.CommandHookError"><code class="docutils literal notranslate"><span class="pre">CommandHookError</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="errors.html#rtiumaapy.errors.CommandHookError.reason_enum"><code class="docutils literal notranslate"><span class="pre">CommandHookError.reason_enum</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="errors.html#rtiumaapy.errors.CommandHookError.message"><code class="docutils literal notranslate"><span class="pre">CommandHookError.message</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html#rtiumaapy.errors.CommandFailedError"><code class="docutils literal notranslate"><span class="pre">CommandFailedError</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="errors.html#rtiumaapy.errors.CommandFailedError.session_id"><code class="docutils literal notranslate"><span class="pre">CommandFailedError.session_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="errors.html#rtiumaapy.errors.CommandFailedError.status"><code class="docutils literal notranslate"><span class="pre">CommandFailedError.status</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="errors.html#rtiumaapy.errors.CommandFailedError.reason_enum"><code class="docutils literal notranslate"><span class="pre">CommandFailedError.reason_enum</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="errors.html#rtiumaapy.errors.CommandFailedError.message"><code class="docutils literal notranslate"><span class="pre">CommandFailedError.message</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html#rtiumaapy.errors.AssemblyError"><code class="docutils literal notranslate"><span class="pre">AssemblyError</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="errors.html#rtiumaapy.errors.AssemblyError.root_type"><code class="docutils literal notranslate"><span class="pre">AssemblyError.root_type</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="errors.html#rtiumaapy.errors.AssemblyError.slot_name"><code class="docutils literal notranslate"><span class="pre">AssemblyError.slot_name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html#rtiumaapy.errors.CommandResult"><code class="docutils literal notranslate"><span class="pre">CommandResult</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="errors.html#rtiumaapy.errors.CommandResult.session_id"><code class="docutils literal notranslate"><span class="pre">CommandResult.session_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="errors.html#rtiumaapy.errors.CommandResult.status"><code class="docutils literal notranslate"><span class="pre">CommandResult.status</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="errors.html#rtiumaapy.errors.CommandResult.data"><code class="docutils literal notranslate"><span class="pre">CommandResult.data</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html#exception-hierarchy">Exception Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html#commandhookerror">CommandHookError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html#commandfailederror">CommandFailedError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html#commandresult">CommandResult</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Utilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#guidutil">GUIDUtil</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rtiumaapy.guid_util.GUIDUtil"><code class="docutils literal notranslate"><span class="pre">GUIDUtil</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#umaatimestamp">UmaaTimestamp</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rtiumaapy.timestamp.UmaaTimestamp"><code class="docutils literal notranslate"><span class="pre">UmaaTimestamp</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#building-source-identities">Building Source Identities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="services-library.html">Pre-Wired Service Library</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="services-library.html#import-pattern">Import Pattern</a></li>
+<li class="toctree-l2"><a class="reference internal" href="services-library.html#naming-convention">Naming Convention</a></li>
+<li class="toctree-l2"><a class="reference internal" href="services-library.html#constructor-patterns">Constructor Patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="services-library.html#domain-catalog">Domain Catalog</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="services-library.html#common-operations-co-42-classes">Common Operations (CO) — 42 classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services-library.html#engineering-operations-eo-58-classes">Engineering Operations (EO) — 58 classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services-library.html#mission-management-mm-70-classes">Mission Management (MM) — 70 classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services-library.html#maritime-operations-mo-18-classes">Maritime Operations (MO) — 18 classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services-library.html#situational-awareness-sa-66-classes">Situational Awareness (SA) — 66 classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services-library.html#sensors-sem-26-classes">Sensors (SEM) — 26 classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services-library.html#system-operations-so-70-classes">System Operations (SO) — 70 classes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-1-0-2026-03-27-preliminary-release">v0.1.0 (2026-03-27) — Preliminary Release</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#sdk-core">SDK Core</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#utilities">Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#pre-wired-service-library">Pre-Wired Service Library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#generated-data-model">Generated Data Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#examples">Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#qos">QoS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#not-yet-implemented">Not Yet Implemented</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">RTI UMAA Python SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Utilities</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/utilities.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="utilities">
+<h1>Utilities<a class="headerlink" href="#utilities" title="Permalink to this heading"></a></h1>
+<section id="guidutil">
+<h2>GUIDUtil<a class="headerlink" href="#guidutil" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="rtiumaapy.guid_util.GUIDUtil">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rtiumaapy.guid_util.</span></span><span class="sig-name descname"><span class="pre">GUIDUtil</span></span><a class="reference internal" href="../_modules/rtiumaapy/guid_util.html#GUIDUtil"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtiumaapy.guid_util.GUIDUtil" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>GUID generation and conversion for NumericGUID (octet[16]) fields.</p>
+<p>UMAA identifier fields (<code class="docutils literal notranslate"><span class="pre">sessionID</span></code>, <code class="docutils literal notranslate"><span class="pre">source.id</span></code>, <code class="docutils literal notranslate"><span class="pre">destination.id</span></code>,
+<code class="docutils literal notranslate"><span class="pre">setID</span></code>, etc.) are all <code class="docutils literal notranslate"><span class="pre">NumericGUID</span></code> — <code class="docutils literal notranslate"><span class="pre">typedef</span> <span class="pre">octet</span> <span class="pre">NumericGUID[16]</span></code>
+— raw 16-byte arrays.  This class provides generation, conversion, and hex
+formatting for CFT filter expressions.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="rtiumaapy.guid_util.GUIDUtil.generate">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">generate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="reference internal" href="../_modules/rtiumaapy/guid_util.html#GUIDUtil.generate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtiumaapy.guid_util.GUIDUtil.generate" title="Permalink to this definition"></a></dt>
+<dd><p>Generate a random 128-bit GUID as 16 raw bytes.</p>
+<p>Uses <code class="docutils literal notranslate"><span class="pre">uuid.uuid4()</span></code> (cryptographic random) under the hood.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rtiumaapy.guid_util.GUIDUtil.to_hex">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">to_hex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">guid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/rtiumaapy/guid_util.html#GUIDUtil.to_hex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtiumaapy.guid_util.GUIDUtil.to_hex" title="Permalink to this definition"></a></dt>
+<dd><p>Convert 16 raw bytes to space-separated hex for <code class="docutils literal notranslate"><span class="pre">&amp;hex()</span></code> CFT filters.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">GUIDUtil</span><span class="o">.</span><span class="n">to_hex</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x55\x0e\x84\x00</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span> <span class="o">*</span> <span class="mi">12</span><span class="p">)</span>
+<span class="go">&#39;55 0e 84 00 00 00 00 00 00 00 00 00 00 00 00 00&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rtiumaapy.guid_util.GUIDUtil.to_string">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">guid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/rtiumaapy/guid_util.html#GUIDUtil.to_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtiumaapy.guid_util.GUIDUtil.to_string" title="Permalink to this definition"></a></dt>
+<dd><p>Convert 16 raw bytes to a human-readable UUID string.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">GUIDUtil</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="s1">&#39;550e8400e29b41d4a716446655440000&#39;</span><span class="p">))</span>
+<span class="go">&#39;550e8400-e29b-41d4-a716-446655440000&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rtiumaapy.guid_util.GUIDUtil.from_string">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="reference internal" href="../_modules/rtiumaapy/guid_util.html#GUIDUtil.from_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtiumaapy.guid_util.GUIDUtil.from_string" title="Permalink to this definition"></a></dt>
+<dd><p>Convert a UUID string to 16 raw bytes.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">GUIDUtil</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="s1">&#39;550e8400-e29b-41d4-a716-446655440000&#39;</span><span class="p">)</span>
+<span class="go">b&#39;U\x0e\x84\x00\xe2\x9bA\xd4\xa7\x16DfUD\x00\x00&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<p>GUID generation and conversion for UMAA <code class="docutils literal notranslate"><span class="pre">NumericGUID</span></code> (<code class="docutils literal notranslate"><span class="pre">octet[16]</span></code>) fields.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rtiumaapy</span><span class="w"> </span><span class="kn">import</span> <span class="n">GUIDUtil</span>
+
+<span class="c1"># Generate a random GUID</span>
+<span class="n">guid_bytes</span> <span class="o">=</span> <span class="n">GUIDUtil</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>  <span class="c1"># → 16 bytes</span>
+
+<span class="c1"># Convert to hex for CFT filter expressions</span>
+<span class="n">hex_str</span> <span class="o">=</span> <span class="n">GUIDUtil</span><span class="o">.</span><span class="n">to_hex</span><span class="p">(</span><span class="n">guid_bytes</span><span class="p">)</span>
+<span class="c1"># → &quot;55 0e 84 00 e2 9b 41 d4 a7 16 44 66 55 44 00 00&quot;</span>
+
+<span class="c1"># Convert to human-readable UUID string</span>
+<span class="n">uuid_str</span> <span class="o">=</span> <span class="n">GUIDUtil</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">guid_bytes</span><span class="p">)</span>
+<span class="c1"># → &quot;550e8400-e29b-41d4-a716-446655440000&quot;</span>
+
+<span class="c1"># Parse back from UUID string</span>
+<span class="n">parsed</span> <span class="o">=</span> <span class="n">GUIDUtil</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="s2">&quot;550e8400-e29b-41d4-a716-446655440000&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="umaatimestamp">
+<h2>UmaaTimestamp<a class="headerlink" href="#umaatimestamp" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="rtiumaapy.timestamp.UmaaTimestamp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rtiumaapy.timestamp.</span></span><span class="sig-name descname"><span class="pre">UmaaTimestamp</span></span><a class="reference internal" href="../_modules/rtiumaapy/timestamp.html#UmaaTimestamp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtiumaapy.timestamp.UmaaTimestamp" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Conversion between UMAA <code class="docutils literal notranslate"><span class="pre">DateTimeType</span></code> and Python <code class="docutils literal notranslate"><span class="pre">datetime</span></code>.</p>
+<p>All methods are static — no instance state required.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">DateTimeType</span></code> IDL struct carries two fields:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">seconds</span></code> — POSIX epoch seconds (int64)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nanoseconds</span></code> — sub-second nanoseconds (uint32, 0–999 999 999)</p></li>
+</ul>
+<p>These helpers convert to/from Python <code class="docutils literal notranslate"><span class="pre">datetime</span></code> objects in UTC.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="rtiumaapy.timestamp.UmaaTimestamp.now">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">now</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DateTimeFields</span></span></span><a class="reference internal" href="../_modules/rtiumaapy/timestamp.html#UmaaTimestamp.now"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtiumaapy.timestamp.UmaaTimestamp.now" title="Permalink to this definition"></a></dt>
+<dd><p>Return the current UTC time as <code class="docutils literal notranslate"><span class="pre">DateTimeFields</span></code>.</p>
+<p>Microsecond precision (Python <code class="docutils literal notranslate"><span class="pre">datetime</span></code> limit) — nanosecond field
+is set to <code class="docutils literal notranslate"><span class="pre">microsecond</span> <span class="pre">*</span> <span class="pre">1000</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rtiumaapy.timestamp.UmaaTimestamp.from_datetime">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_datetime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DateTimeFields</span></span></span><a class="reference internal" href="../_modules/rtiumaapy/timestamp.html#UmaaTimestamp.from_datetime"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtiumaapy.timestamp.UmaaTimestamp.from_datetime" title="Permalink to this definition"></a></dt>
+<dd><p>Convert a Python <code class="docutils literal notranslate"><span class="pre">datetime</span></code> to <code class="docutils literal notranslate"><span class="pre">DateTimeFields</span></code>.</p>
+<p>If <em>dt</em> is naive (no tzinfo), it is assumed to be UTC.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rtiumaapy.timestamp.UmaaTimestamp.to_datetime">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">to_datetime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DateTimeFields</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">datetime</span></span></span><a class="reference internal" href="../_modules/rtiumaapy/timestamp.html#UmaaTimestamp.to_datetime"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtiumaapy.timestamp.UmaaTimestamp.to_datetime" title="Permalink to this definition"></a></dt>
+<dd><p>Convert <code class="docutils literal notranslate"><span class="pre">DateTimeFields</span></code> (or any object with <code class="docutils literal notranslate"><span class="pre">.seconds</span></code> /
+<code class="docutils literal notranslate"><span class="pre">.nanoseconds</span></code>) to a Python <code class="docutils literal notranslate"><span class="pre">datetime</span></code> in UTC.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rtiumaapy.timestamp.UmaaTimestamp.set_timestamp">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_timestamp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/rtiumaapy/timestamp.html#UmaaTimestamp.set_timestamp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtiumaapy.timestamp.UmaaTimestamp.set_timestamp" title="Permalink to this definition"></a></dt>
+<dd><p>Set <code class="docutils literal notranslate"><span class="pre">sample.timeStamp</span></code> to the current UTC time.</p>
+</dd></dl>
+
+</dd></dl>
+
+<p>Conversion between UMAA <code class="docutils literal notranslate"><span class="pre">DateTimeType</span></code> and Python <code class="docutils literal notranslate"><span class="pre">datetime</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rtiumaapy</span><span class="w"> </span><span class="kn">import</span> <span class="n">UmaaTimestamp</span><span class="p">,</span> <span class="n">set_timestamp</span>
+
+<span class="c1"># Set a sample&#39;s timestamp to now</span>
+<span class="n">set_timestamp</span><span class="p">(</span><span class="n">my_sample</span><span class="p">)</span>
+
+<span class="c1"># Get current time as DateTimeFields</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">UmaaTimestamp</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">seconds</span><span class="p">,</span> <span class="n">ts</span><span class="o">.</span><span class="n">nanoseconds</span><span class="p">)</span>
+
+<span class="c1"># Convert from Python datetime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timezone</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">UmaaTimestamp</span><span class="o">.</span><span class="n">from_datetime</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+
+<span class="c1"># Convert back to datetime</span>
+<span class="n">dt_back</span> <span class="o">=</span> <span class="n">UmaaTimestamp</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="building-source-identities">
+<h2>Building Source Identities<a class="headerlink" href="#building-source-identities" title="Permalink to this heading"></a></h2>
+<p>UMAA services require an <code class="docutils literal notranslate"><span class="pre">IdentifierType</span></code> with <code class="docutils literal notranslate"><span class="pre">id</span></code> and <code class="docutils literal notranslate"><span class="pre">parentID</span></code>
+fields (both <code class="docutils literal notranslate"><span class="pre">NumericGUID</span></code>). Here’s the standard pattern:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rti.connextdds</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">dds</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rtiumaapy</span><span class="w"> </span><span class="kn">import</span> <span class="n">GUIDUtil</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rtiumaapy.datamodel.HealthReportType</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">UMAA_Common_IdentifierType</span> <span class="k">as</span> <span class="n">IdentifierType</span><span class="p">,</span>
+    <span class="n">UMAA_Common_Measurement_NumericGUID</span> <span class="k">as</span> <span class="n">NumericGUID</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">guid_bytes</span> <span class="o">=</span> <span class="n">GUIDUtil</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+<span class="n">source_id</span> <span class="o">=</span> <span class="n">IdentifierType</span><span class="p">(</span>
+    <span class="nb">id</span><span class="o">=</span><span class="n">NumericGUID</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">dds</span><span class="o">.</span><span class="n">Uint8Seq</span><span class="p">(</span><span class="n">guid_bytes</span><span class="p">)),</span>
+    <span class="n">parentID</span><span class="o">=</span><span class="n">NumericGUID</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">dds</span><span class="o">.</span><span class="n">Uint8Seq</span><span class="p">(</span><span class="n">guid_bytes</span><span class="p">)),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>For command providers, this identity is used as the content filter — only
+commands addressed to this <code class="docutils literal notranslate"><span class="pre">source_id</span></code> are delivered.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="errors.html" class="btn btn-neutral float-left" title="Errors &amp; Result Types" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="services-library.html" class="btn btn-neutral float-right" title="Pre-Wired Service Library" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025-2026, Real-Time Innovations, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
