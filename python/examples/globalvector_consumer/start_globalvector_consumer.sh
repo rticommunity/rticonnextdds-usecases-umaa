@@ -44,13 +44,33 @@ if ! python -c "import rtiumaapy" 2>/dev/null; then
 fi
 
 # --- RTI license file ---
-if [ -z "$NDDSHOME" ]; then
-    echo "ERROR: NDDSHOME environment variable is not set."
+# The PyPI rti.connext package searches for a license in order:
+#   1. RTI_LICENSE_FILE env var  2. $NDDSHOME/rti_license.dat  3. ~/rti_license.dat
+# We prefer RTI_LICENSE_FILE so we don't require a local Connext install.
+if [ -z "$RTI_LICENSE_FILE" ]; then
+    # Fall back to common default locations
+    if [ -f "$HOME/rti_license.dat" ]; then
+        export RTI_LICENSE_FILE="$HOME/rti_license.dat"
+    elif [ -n "$NDDSHOME" ] && [ -f "$NDDSHOME/rti_license.dat" ]; then
+        export RTI_LICENSE_FILE="$NDDSHOME/rti_license.dat"
+    else
+        echo "ERROR: RTI license file not found."
+        echo "Set RTI_LICENSE_FILE or place rti_license.dat in your home directory."
+        exit 1
+    fi
+fi
+if [ ! -f "$RTI_LICENSE_FILE" ]; then
+    echo "ERROR: RTI license file not found: $RTI_LICENSE_FILE"
     exit 1
 fi
-if [ ! -f "$NDDSHOME/rti_license.dat" ]; then
-    echo "ERROR: RTI license file not found: $NDDSHOME/rti_license.dat"
-    exit 1
+
+# --- Isolate from local Connext installs ---
+# The PyPI rti.connext package bundles its own native libraries.
+# Unset NDDSHOME so the runtime doesn't load mismatched resources
+# from a different local Connext version.
+if [ -n "$NDDSHOME" ]; then
+    echo "NOTE: Unsetting NDDSHOME ($NDDSHOME) — the SDK uses the PyPI rti.connext package."
+    unset NDDSHOME
 fi
 
 # --- Source GUID for this consumer (matches USTM UserSystemConfiguration.yaml MissionExecutionManager) ---

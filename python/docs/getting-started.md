@@ -89,30 +89,24 @@ types or topics yourself.  Here's a health report publisher using
 
 ```python
 import asyncio
-import rti.connextdds as dds
-from rtiumaapy import DDSContext, GUIDUtil, set_timestamp
+from rtiumaapy import DDSContext, set_timestamp
 from rtiumaapy.services.so import HealthReportProvider
 from rtiumaapy.datamodel.HealthReportType import (
     UMAA_SO_HealthReport_HealthReportType as HealthReportType,
-    UMAA_Common_IdentifierType as IdentifierType,
-    UMAA_Common_Measurement_NumericGUID as NumericGUID,
 )
 
 async def main():
     ctx = DDSContext(domain_id=0)
-
-    # Build a source identity from a random GUID
-    guid = NumericGUID(value=dds.Uint8Seq(GUIDUtil.generate()))
-    source_id = IdentifierType(id=guid, parentID=guid)
+    # ctx.source_id is auto-generated (or pass source_guid="..." to DDSContext)
 
     # Create the provider — type and topic are pre-wired
     key_holder = HealthReportType()
-    key_holder.source = source_id
+    key_holder.source = ctx.source_id
     provider = HealthReportProvider(ctx, "HealthReport", key_holder)
 
     # Publish a sample
     sample = HealthReportType()
-    sample.source = source_id
+    sample.source = ctx.source_id
     set_timestamp(sample)
     provider.write(sample)
 

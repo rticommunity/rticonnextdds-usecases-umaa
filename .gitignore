@@ -7,8 +7,7 @@ cpp/*/build/
 **/debug_output.log
 
 # Python cache
-datamodel/umaa/python_flat/__pycache__/
-cpp/*/py/__pycache__/
+__pycache__/
 
 # Service data
 services/data/
@@ -17,15 +16,8 @@ datamodel/umaa/cpp11_gen/
 
 build/
 
-python/tests/__pycache__/
-
-python/rtiumaapy/__pycache__/
-
 # Python virtual environment
 python/.venv/
-
-# All pycache directories under python/
-python/**/__pycache__/
 
 # Reference / vendored directories (not part of the SDK)
 python/architecture/v1/
