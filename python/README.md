@@ -40,6 +40,18 @@ python run_autopilot.py
 
 The autopilot component starts 18 UMAA services and runs until you press `Ctrl+C`.
 
+---
+
+## Documentation
+
+- [Getting Started](docs/getting-started.md) — environment setup, first component
+- [Building a Component](docs/building-a-component.md) — step-by-step tutorial
+- [QoS Configuration](docs/qos-configuration.md) — AssignerQoS, topic filter rules, profiles
+- [Vendor Interoperability](docs/vendor-interoperability.md) — DDS-XTYPES compliance, Cyclone DDS interop
+- [Troubleshooting](docs/troubleshooting.md) — common issues and solutions
+- [Changelog](docs/changelog.md)
+
+Full API reference (autodoc): **[rticommunity.github.io/rticonnextdds-usecases-umaa](https://rticommunity.github.io/rticonnextdds-usecases-umaa/)**
 
 To build the docs locally:
 
