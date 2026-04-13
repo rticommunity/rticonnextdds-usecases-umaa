@@ -47,7 +47,7 @@ The autopilot component starts 18 UMAA services and runs until you press `Ctrl+C
 - [Troubleshooting](docs/troubleshooting.md) — common issues and solutions
 - [Changelog](docs/changelog.md)
 
-Full API reference (autodoc): **[rtidgreenberg.github.io/rti_umaa_py_docs](https://rtidgreenberg.github.io/rti_umaa_py_docs/)**
+Full API reference (autodoc): **[rticommunity.github.io/rticonnextdds-usecases-umaa](https://rticommunity.github.io/rticonnextdds-usecases-umaa/)**
 
 To build the docs locally:
 
