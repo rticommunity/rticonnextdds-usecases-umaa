@@ -4,8 +4,6 @@ A Python framework for building UMAA-compliant unmanned maritime systems on RTI 
 
 ---
 
- **[Python SDK Documentation](https://rtidgreenberg.github.io/rti_umaa_py_docs/)**
-
 
 
 ## Quick Start
