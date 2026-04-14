@@ -12,18 +12,23 @@ All 18 services use pre-wired classes from the `rtiumaapy.services` library.
 ## Prerequisites
 
 ```bash
+export RTI_LICENSE_FILE=/path/to/rti_license.dat
 export UMAA_QOS_FILE=/path/to/qos/umaa_qos_lib.xml
 ```
 
 ## Run the Autopilot
 
 ```bash
-cd python/
-python -m examples.autopilot.run_autopilot \
-    --domain-id 0 \
-    --source-guid 01020304050607080910111213141516 \
-    --health-period 1.0 \
-    -v
+./python/examples/autopilot/start_autopilot.sh
+```
+
+The start script creates a virtual environment (if needed), installs
+dependencies, resolves the RTI license file, sets the source GUID, and
+launches the autopilot.
+Extra flags are forwarded to the underlying Python entry point:
+
+```bash
+./python/examples/autopilot/start_autopilot.sh --domain-id 1 -v
 ```
 
 Options:
@@ -31,29 +36,22 @@ Options:
 | Flag | Default | Description |
 |------|---------|-------------|
 | `--domain-id` | `0` | DDS domain ID |
-| `--source-guid` | random | 32-char hex GUID for this component |
+| `--source-guid` | random | Hex GUID (32 chars or UUID with dashes) for this component |
 | `--health-period` | `1.0` | Seconds between health reports |
 | `-v` | off | Enable DEBUG logging |
 
-## Run the Test Peer
+## Run the GlobalVector Consumer
 
-In a separate terminal, send a GlobalVector command and watch health reports:
+In a separate terminal, send a GlobalVector command and watch lifecycle events:
 
 ```bash
-cd python/
-python -m examples.autopilot.test_peer \
-    --target-guid 01020304050607080910111213141516 \
-    --direction 90.0 \
-    --speed 3.0 \
-    -v
+./python/examples/globalvector_consumer/start_globalvector_consumer.sh -v
 ```
 
-The test peer:
-1. Subscribes to health reports (prints every sample).
-2. Waits 2 seconds for DDS discovery.
-3. Sends a single GlobalVector command to the autopilot.
-4. Logs ack, status, and execution-status updates.
-5. Runs until Ctrl-C.
+See the [GlobalVector Consumer README](../globalvector_consumer/README.md) for
+full options. The consumer discovers the autopilot, sends a single
+`GlobalVectorCommand`, logs ack/status/execution-status/terminal callbacks,
+then exits.
 
 ## Architecture
 

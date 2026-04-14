@@ -136,14 +136,11 @@ class SensorComponent(BaseComponent):
     def __init__(self, ctx, source_id):
         super().__init__(ctx, "SensorComponent")
         # ...
-        key_holder = SomeReportType()
-        key_holder.source = source_id
         self.report_provider = ReportProvider(
             ctx,
             "SensorReport",
             SomeReportType,
             SomeReportTypeTopic,
-            key_holder,
         )
 ```
 
@@ -269,8 +266,8 @@ engine = EngineControlProvider(ctx, source_id=my_identity)
 # Report consumer — just pass ctx
 pose = GlobalPoseReportConsumer(ctx)
 
-# Report provider — pass ctx, service_name, and key_holder
-health = HealthReportProvider(ctx, "HealthReport", key_holder)
+# Report provider — just pass ctx
+health = HealthReportProvider(ctx)
 ```
 
 See {doc}`api/services-library` for the complete catalog.

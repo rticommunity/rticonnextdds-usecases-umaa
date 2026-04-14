@@ -2,7 +2,7 @@
 # WARNING: THIS FILE IS AUTO-GENERATED. DO NOT MODIFY.
 
 # This file was generated from BearingSectorVariantType.idl
-# using RTI Code Generator (rtiddsgen) version 4.3.1.
+# using RTI Code Generator (rtiddsgen) version 4.6.0.
 # The rtiddsgen tool is part of the RTI Connext DDS distribution.
 # For more information, type 'rtiddsgen -help' at a command shell
 # or consult the Code Generator User's Manual.
@@ -10,9 +10,12 @@
 from dataclasses import field
 from typing import Union, Sequence, Optional
 import rti.idl as idl
+import rti.rpc as rpc
 from enum import IntEnum
 import sys
 import os
+from abc import ABC
+
 
 sys.path.append(os.path.join(os.path.dirname(__file__), 'UMAA/Common/Orientation/'))
 from BearingSectorGuideCourseVariantType import *
@@ -41,9 +44,9 @@ class UMAA_Common_Orientation_BearingSectorVariantTypeEnum(IntEnum):
     BEARINGSECTORTRUENORTHVARIANT_D = 2
 
 UMAA.Common.Orientation.BearingSectorVariantTypeEnum = UMAA_Common_Orientation_BearingSectorVariantTypeEnum
-
 @idl.union(
-    type_annotations = [idl.type_name("UMAA::Common::Orientation::BearingSectorVariantTypeUnion"), idl.xtypes_compliance(0x0000068C), ])
+    type_annotations = [idl.type_name("UMAA::Common::Orientation::BearingSectorVariantTypeUnion"), idl.xtypes_compliance(0x0000018C), ])
+
 class UMAA_Common_Orientation_BearingSectorVariantTypeUnion:
 
     discriminator: UMAA.Common.Orientation.BearingSectorVariantTypeEnum = UMAA.Common.Orientation.BearingSectorVariantTypeEnum.BEARINGSECTORGUIDECOURSEVARIANT_D
@@ -56,7 +59,7 @@ class UMAA_Common_Orientation_BearingSectorVariantTypeUnion:
 UMAA.Common.Orientation.BearingSectorVariantTypeUnion = UMAA_Common_Orientation_BearingSectorVariantTypeUnion
 
 @idl.struct(
-    type_annotations = [idl.type_name("UMAA::Common::Orientation::BearingSectorVariantType"), idl.xtypes_compliance(0x0000068C), ])
+    type_annotations = [idl.type_name("UMAA::Common::Orientation::BearingSectorVariantType"), idl.xtypes_compliance(0x0000018C), ])
 class UMAA_Common_Orientation_BearingSectorVariantType:
     BearingSectorVariantTypeSubtypes: UMAA.Common.Orientation.BearingSectorVariantTypeUnion = field(default_factory = UMAA.Common.Orientation.BearingSectorVariantTypeUnion)
 

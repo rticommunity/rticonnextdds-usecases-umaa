@@ -30,10 +30,9 @@ After this release, development continues with Tier 2–4 (large sets, large lis
 | **P1** | Pre-wired service library | `rtiumaapy/services/{co,eo,mm,mo,sa,sem,so}/` + `tests/test_service_library.py` | **350 concrete classes** (64 command + 111 report × Provider+Consumer) for all Tier 0/1 services with generated IDL types, validated by ~1,400 parametrized import/subclass/binding tests | ✅ Complete |
 | **P2** | Autopilot example component | `python/examples/autopilot/autopilot_component.py` | Working component that instantiates autopilot services, wires hooks, runs via `DDSContext.run_until_shutdown()` | ✅ Complete |
 | **P3** | Autopilot example runner | `python/examples/autopilot/run_autopilot.py` | Entry point with env var setup and CLI args (domain_id, source GUID) | ✅ Complete |
-| **P4** | Stub test peer | `python/examples/autopilot/test_peer.py` | Minimal command sender + report subscriber to exercise the autopilot from the console | ✅ Complete |
-| **P5** | Package & env setup | `pyproject.toml` updates, README | Installation instructions, `UMAA_QOS_FILE` documentation, dependency pinning | |
-| **P6** | Architecture docs update | `architecture/*.md` | Update implementation-plan.md, dds-context.md (env var), create qos-setup.md | |
-| **P7** | Run & validate | — | Full test suite pass + manual autopilot demo | |
+| **P4** | Package & env setup | `pyproject.toml` updates, README | Installation instructions, `UMAA_QOS_FILE` documentation, dependency pinning | |
+| **P5** | Architecture docs update | `architecture/*.md` | Update implementation-plan.md, dds-context.md (env var), create qos-setup.md | |
+| **P6** | Run & validate | — | Full test suite pass + manual autopilot demo | |
 
 ---
 
@@ -159,13 +158,12 @@ class EngineControlConsumer(CommandConsumer):
 class EngineReportProvider(ReportProvider):
     """Engine status report provider (EO::EngineStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str, key_holder):
+    def __init__(self, ctx: DDSContext, service_name: str):
         super().__init__(
             ctx,
             service_name=service_name,
             report_type=UMAA_EO_EngineStatus_EngineReportType,
             report_topic=UMAA_EO_EngineStatus_EngineReportTypeTopic,
-            key_holder=key_holder,
         )
 ```
 
@@ -436,8 +434,7 @@ A single `AutopilotComponent` class that:
 python/examples/autopilot/
 ├── __init__.py
 ├── autopilot_component.py    # Main AutopilotComponent class
-├── run_autopilot.py          # Entry point (CLI)
-└── test_peer.py              # Stub command sender for manual testing
+└── run_autopilot.py          # Entry point (CLI)
 ```
 
 The component demonstrates:
@@ -466,17 +463,7 @@ python -m examples.autopilot.run_autopilot --domain-id 1
 
 ---
 
-### P4: Test Peer
-
-`test_peer.py` — a minimal script that:
-- Creates a `CommandConsumer` for `GlobalVectorControl` and sends a command
-- Creates a `ReportConsumer` for `HealthReport` and prints received samples
-- Demonstrates the consumer side of the autopilot's services
-- Useful for manual integration testing / demos
-
----
-
-### P5: Package & Environment
+### P4: Package & Environment
 
 - Update `pyproject.toml`: version 0.1.0, entry points, dependency requirements
 - Document `UMAA_QOS_FILE` env var in README (setup instructions)
@@ -489,7 +476,7 @@ python -m examples.autopilot.run_autopilot --domain-id 1
 
 ---
 
-### P6: Documentation Updates
+### P5: Documentation Updates
 
 | Document | Changes |
 |----------|---------|
@@ -500,10 +487,10 @@ python -m examples.autopilot.run_autopilot --domain-id 1
 
 ---
 
-### P7: Validation
+### P6: Validation
 
 - Full test suite: 1,573+ tests pass (163 DDS integration + 1,408 service library + 2 set_timestamp)
-- Manual demo: run autopilot + test_peer, verify:
+- Manual demo: run autopilot, verify:
   - Command round-trip (send → ack → status → complete)
   - Report publishing (health report received by peer)
   - Telemetry consumption (autopilot logs pose/speed data)
@@ -610,8 +597,7 @@ rticonnextdds-usecases-umaa/
 │   ├── examples/                 # Usage examples
 │   │   └── autopilot/            # Autopilot component example
 │   │       ├── autopilot_component.py
-│   │       ├── run_autopilot.py
-│   │       └── test_peer.py
+│   │       └── run_autopilot.py
 │   ├── c++_ref/                  # ⚠ Legacy — C++ reference SDKs (to be moved/removed)
 │   ├── umaa_docs/                # ⚠ Legacy — UMAA spec docs (to be moved/removed)
 │   ├── umaapy-1.1.1/             # ⚠ Legacy — v1 SDK (to be removed)

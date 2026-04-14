@@ -24,13 +24,13 @@ ctx = DDSContext(domain_id=0)
 
 ### `ModuleNotFoundError: No module named 'rti'`
 
-The `rti.connext` Python package is not installed. Install from the RTI Connext DDS installer:
+The `rti.connext` Python package is not installed. Re-install the SDK to pull it in automatically:
 
 ```bash
-pip install rti.connext
+pip install -e ".[dev]"
 ```
 
-Requires a valid RTI license file.
+Requires a valid RTI license file at runtime.
 
 ## DDS Connectivity
 

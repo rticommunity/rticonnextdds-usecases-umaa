@@ -2,7 +2,7 @@
 # WARNING: THIS FILE IS AUTO-GENERATED. DO NOT MODIFY.
 
 # This file was generated from ElevationVariantType.idl
-# using RTI Code Generator (rtiddsgen) version 4.3.1.
+# using RTI Code Generator (rtiddsgen) version 4.6.0.
 # The rtiddsgen tool is part of the RTI Connext DDS distribution.
 # For more information, type 'rtiddsgen -help' at a command shell
 # or consult the Code Generator User's Manual.
@@ -10,9 +10,12 @@
 from dataclasses import field
 from typing import Union, Sequence, Optional
 import rti.idl as idl
+import rti.rpc as rpc
 from enum import IntEnum
 import sys
 import os
+from abc import ABC
+
 
 sys.path.append(os.path.join(os.path.dirname(__file__), 'UMAA/Common/Measurement/'))
 from AltitudeAGLVariantType import *
@@ -49,9 +52,9 @@ class UMAA_Common_Measurement_ElevationVariantTypeEnum(IntEnum):
     DEPTHVARIANT_D = 4
 
 UMAA.Common.Measurement.ElevationVariantTypeEnum = UMAA_Common_Measurement_ElevationVariantTypeEnum
-
 @idl.union(
-    type_annotations = [idl.type_name("UMAA::Common::Measurement::ElevationVariantTypeUnion"), idl.xtypes_compliance(0x0000068C), ])
+    type_annotations = [idl.type_name("UMAA::Common::Measurement::ElevationVariantTypeUnion"), idl.xtypes_compliance(0x0000018C), ])
+
 class UMAA_Common_Measurement_ElevationVariantTypeUnion:
 
     discriminator: UMAA.Common.Measurement.ElevationVariantTypeEnum = UMAA.Common.Measurement.ElevationVariantTypeEnum.ALTITUDEAGLVARIANT_D
@@ -66,7 +69,7 @@ class UMAA_Common_Measurement_ElevationVariantTypeUnion:
 UMAA.Common.Measurement.ElevationVariantTypeUnion = UMAA_Common_Measurement_ElevationVariantTypeUnion
 
 @idl.struct(
-    type_annotations = [idl.type_name("UMAA::Common::Measurement::ElevationVariantType"), idl.xtypes_compliance(0x0000068C), ])
+    type_annotations = [idl.type_name("UMAA::Common::Measurement::ElevationVariantType"), idl.xtypes_compliance(0x0000018C), ])
 class UMAA_Common_Measurement_ElevationVariantType:
     ElevationVariantTypeSubtypes: UMAA.Common.Measurement.ElevationVariantTypeUnion = field(default_factory = UMAA.Common.Measurement.ElevationVariantTypeUnion)
 

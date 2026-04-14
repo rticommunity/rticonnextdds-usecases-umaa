@@ -10,7 +10,7 @@ readme = "README.md"
 license = { text = "BSD-3-Clause" }
 requires-python = ">=3.8"
 dependencies = [
-    "rti.connext>=7.5.0",
+    "rti.connext>=7.6.0,<7.7",
 ]
 
 [project.optional-dependencies]

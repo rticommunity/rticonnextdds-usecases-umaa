@@ -2,7 +2,7 @@
 # WARNING: THIS FILE IS AUTO-GENERATED. DO NOT MODIFY.
 
 # This file was generated from MissionPlanType.idl
-# using RTI Code Generator (rtiddsgen) version 4.3.1.
+# using RTI Code Generator (rtiddsgen) version 4.6.0.
 # The rtiddsgen tool is part of the RTI Connext DDS distribution.
 # For more information, type 'rtiddsgen -help' at a command shell
 # or consult the Code Generator User's Manual.
@@ -10,9 +10,12 @@
 from dataclasses import field
 from typing import Union, Sequence, Optional
 import rti.idl as idl
+import rti.rpc as rpc
 from enum import IntEnum
 import sys
 import os
+from abc import ABC
+
 
 sys.path.append(os.path.join(os.path.dirname(__file__), 'UMAA/Common/'))
 from LargeSetMetadata import *
@@ -47,10 +50,11 @@ UMAA_MM_BaseType = idl.get_module("UMAA_MM_BaseType")
 UMAA.MM.BaseType = UMAA_MM_BaseType
 
 @idl.struct(
-    type_annotations = [idl.type_name("UMAA::MM::BaseType::MissionPlanType"), idl.xtypes_compliance(0x0000068C), ],
+    type_annotations = [idl.type_name("UMAA::MM::BaseType::MissionPlanType"), idl.xtypes_compliance(0x0000018C), ],
+
     member_annotations = {
-        'missionDescription': [idl.bound(1023)],
-        'name': [idl.bound(1023)],
+        'missionDescription': [idl.bound(1023),],
+        'name': [idl.bound(1023),],
         'stateTrigger': [idl.bound(16)],
     }
 )
@@ -70,7 +74,8 @@ UMAA_MM_BaseType_MissionPlanTypeTaskPlansSetElementTopic = "UMAA::MM::BaseType::
 UMAA.MM.BaseType.MissionPlanTypeTaskPlansSetElementTopic = UMAA_MM_BaseType_MissionPlanTypeTaskPlansSetElementTopic
 
 @idl.struct(
-    type_annotations = [idl.type_name("UMAA::MM::BaseType::MissionPlanTypeTaskPlansSetElement"), idl.xtypes_compliance(0x0000068C), ],
+    type_annotations = [idl.type_name("UMAA::MM::BaseType::MissionPlanTypeTaskPlansSetElement"), idl.xtypes_compliance(0x0000018C), ],
+
     member_annotations = {
         'setID': [idl.key, ],
         'elementID': [idl.key, ],

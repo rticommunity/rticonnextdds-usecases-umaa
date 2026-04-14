@@ -2,7 +2,7 @@
 # WARNING: THIS FILE IS AUTO-GENERATED. DO NOT MODIFY.
 
 # This file was generated from Measurements.idl
-# using RTI Code Generator (rtiddsgen) version 4.3.1.
+# using RTI Code Generator (rtiddsgen) version 4.6.0.
 # The rtiddsgen tool is part of the RTI Connext DDS distribution.
 # For more information, type 'rtiddsgen -help' at a command shell
 # or consult the Code Generator User's Manual.
@@ -10,9 +10,12 @@
 from dataclasses import field
 from typing import Union, Sequence, Optional
 import rti.idl as idl
+import rti.rpc as rpc
 from enum import IntEnum
 import sys
 import os
+from abc import ABC
+
 
 
 UMAA = idl.get_module("UMAA")
@@ -101,11 +104,11 @@ UMAA.Common.Measurement.BatteryCycles = UMAA_Common_Measurement_BatteryCycles
     annotations = [idl.array([256]),]
 )
 class UMAA_Common_Measurement_BinaryValue:
-    value: Sequence[idl.uint8] = field(default_factory = idl.array_factory(idl.uint8, [256]))
+    value: Sequence[idl.octet] = field(default_factory = idl.array_factory(idl.octet, [256]))
 
 UMAA.Common.Measurement.BinaryValue = UMAA_Common_Measurement_BinaryValue
 
-UMAA_Common_Measurement_ByteValue = idl.uint8
+UMAA_Common_Measurement_ByteValue = idl.octet
 
 UMAA.Common.Measurement.ByteValue = UMAA_Common_Measurement_ByteValue
 
@@ -612,7 +615,7 @@ UMAA_Common_Measurement_DateTimeNanoseconds = idl.int32
 UMAA.Common.Measurement.DateTimeNanoseconds = UMAA_Common_Measurement_DateTimeNanoseconds
 
 @idl.struct(
-    type_annotations = [idl.type_name("UMAA::Common::Measurement::DateTime"), idl.xtypes_compliance(0x0000068C), ])
+    type_annotations = [idl.type_name("UMAA::Common::Measurement::DateTime"), idl.xtypes_compliance(0x0000018C), ])
 class UMAA_Common_Measurement_DateTime:
     seconds: int = 0
     nanoseconds: idl.int32 = 0
@@ -779,7 +782,7 @@ UMAA.Common.Measurement.Mass = UMAA_Common_Measurement_Mass
     annotations = [idl.array([16]),]
 )
 class UMAA_Common_Measurement_NumericGUID:
-    value: Sequence[idl.uint8] = field(default_factory = idl.array_factory(idl.uint8, [16]))
+    value: Sequence[idl.octet] = field(default_factory = idl.array_factory(idl.octet, [16]))
 
 UMAA.Common.Measurement.NumericGUID = UMAA_Common_Measurement_NumericGUID
 

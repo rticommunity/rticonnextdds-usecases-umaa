@@ -2,7 +2,7 @@
 # WARNING: THIS FILE IS AUTO-GENERATED. DO NOT MODIFY.
 
 # This file was generated from FLSAdditionalConfigType.idl
-# using RTI Code Generator (rtiddsgen) version 4.3.1.
+# using RTI Code Generator (rtiddsgen) version 4.6.0.
 # The rtiddsgen tool is part of the RTI Connext DDS distribution.
 # For more information, type 'rtiddsgen -help' at a command shell
 # or consult the Code Generator User's Manual.
@@ -10,9 +10,12 @@
 from dataclasses import field
 from typing import Union, Sequence, Optional
 import rti.idl as idl
+import rti.rpc as rpc
 from enum import IntEnum
 import sys
 import os
+from abc import ABC
+
 
 sys.path.append(os.path.join(os.path.dirname(__file__), 'UMAA/SEM/BaseType/'))
 from FLSConfigSearchBottomType import *
@@ -41,9 +44,9 @@ class UMAA_SEM_BaseType_FLSAdditionalConfigTypeEnum(IntEnum):
     FLSCONFIGTEST_D = 2
 
 UMAA.SEM.BaseType.FLSAdditionalConfigTypeEnum = UMAA_SEM_BaseType_FLSAdditionalConfigTypeEnum
-
 @idl.union(
-    type_annotations = [idl.type_name("UMAA::SEM::BaseType::FLSAdditionalConfigTypeUnion"), idl.xtypes_compliance(0x0000068C), ])
+    type_annotations = [idl.type_name("UMAA::SEM::BaseType::FLSAdditionalConfigTypeUnion"), idl.xtypes_compliance(0x0000018C), ])
+
 class UMAA_SEM_BaseType_FLSAdditionalConfigTypeUnion:
 
     discriminator: UMAA.SEM.BaseType.FLSAdditionalConfigTypeEnum = UMAA.SEM.BaseType.FLSAdditionalConfigTypeEnum.FLSCONFIGSEARCHBOTTOM_D
@@ -56,7 +59,7 @@ class UMAA_SEM_BaseType_FLSAdditionalConfigTypeUnion:
 UMAA.SEM.BaseType.FLSAdditionalConfigTypeUnion = UMAA_SEM_BaseType_FLSAdditionalConfigTypeUnion
 
 @idl.struct(
-    type_annotations = [idl.type_name("UMAA::SEM::BaseType::FLSAdditionalConfigType"), idl.xtypes_compliance(0x0000068C), ])
+    type_annotations = [idl.type_name("UMAA::SEM::BaseType::FLSAdditionalConfigType"), idl.xtypes_compliance(0x0000018C), ])
 class UMAA_SEM_BaseType_FLSAdditionalConfigType:
     FLSAdditionalConfigTypeSubtypes: UMAA.SEM.BaseType.FLSAdditionalConfigTypeUnion = field(default_factory = UMAA.SEM.BaseType.FLSAdditionalConfigTypeUnion)
 

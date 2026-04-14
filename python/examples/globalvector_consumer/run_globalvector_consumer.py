@@ -11,14 +11,8 @@ import argparse
 import asyncio
 import logging
 
-import rti.connextdds as dds
-
 from rtiumaapy.dds_context import DDSContext
 from rtiumaapy.guid_util import GUIDUtil
-from rtiumaapy.datamodel.HealthReportType import (
-    UMAA_Common_IdentifierType as IdentifierType,
-    UMAA_Common_Measurement_NumericGUID as NumericGUID,
-)
 from rtiumaapy.datamodel.GlobalVectorCommandType import (
     UMAA_MO_GlobalVectorControl_GlobalVectorCommandType as GlobalVectorCommandType,
 )
@@ -66,16 +60,6 @@ class LoggingGlobalVectorConsumer(GlobalVectorControlConsumer):
         self._done.set()
 
 
-def _make_id(guid_hex: str | None = None) -> IdentifierType:
-    """Build an IdentifierType from a hex string or random GUID."""
-    if guid_hex:
-        guid_bytes = GUIDUtil.from_string(guid_hex)
-    else:
-        guid_bytes = GUIDUtil.generate()
-    guid = NumericGUID(value=dds.Uint8Seq(guid_bytes))
-    return IdentifierType(id=guid, parentID=guid)
-
-
 def _parse_args(argv=None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Send a GlobalVectorControl command to a UMAA autopilot.",
@@ -86,11 +70,11 @@ def _parse_args(argv=None) -> argparse.Namespace:
     )
     parser.add_argument(
         "--source-guid", type=str, default=None,
-        help="32-char hex GUID for this consumer's identity. Random if omitted.",
+        help="Hex GUID (32 chars or UUID with dashes) for this consumer's identity. Random if omitted.",
     )
     parser.add_argument(
         "--destination-guid", type=str, default=None,
-        help="32-char hex GUID of the target autopilot provider. Random if omitted.",
+        help="Hex GUID (32 chars or UUID with dashes) of the target autopilot provider. Random if omitted.",
     )
     parser.add_argument(
         "-v", "--verbose", action="store_true",
@@ -100,19 +84,16 @@ def _parse_args(argv=None) -> argparse.Namespace:
 
 
 async def _main(args: argparse.Namespace) -> None:
-    source_id = _make_id(args.source_guid)
-    destination_id = _make_id(args.destination_guid)
+    ctx = DDSContext(domain_id=args.domain_id, source_guid=args.source_guid)
+    destination_id = GUIDUtil.make_source_id(args.destination_guid)
 
-    logger.info("Consumer source GUID: %s",
-                GUIDUtil.to_hex(bytes(source_id.id.value)))
+    logger.info("Consumer source GUID: %s", ctx.source_guid)
     logger.info("Provider destination GUID: %s",
                 GUIDUtil.to_hex(bytes(destination_id.id.value)))
 
-    ctx = DDSContext(domain_id=args.domain_id)
-
     consumer = LoggingGlobalVectorConsumer(
         ctx,
-        source_id=source_id,
+        source_id=ctx.source_id,
         destination_id=destination_id,
     )
 

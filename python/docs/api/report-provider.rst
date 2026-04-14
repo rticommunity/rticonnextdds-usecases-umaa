@@ -19,37 +19,27 @@ On ``close()``, the keyed instance is disposed so subscribers see
 
 .. code-block:: python
 
-   from rtiumaapy import ReportProvider, set_timestamp
+   from rtiumaapy import DDSContext, set_timestamp
+   from rtiumaapy.services.so import HealthReportProvider
    from rtiumaapy.datamodel.HealthReportType import (
        UMAA_SO_HealthReport_HealthReportType as HealthReportType,
-       UMAA_SO_HealthReport_HealthReportTypeTopic,
    )
 
-   key_holder = HealthReportType()
-   key_holder.source = my_source_id
-
-   provider = ReportProvider(
-       ctx,
-       "HealthReport",
-       HealthReportType,
-       UMAA_SO_HealthReport_HealthReportTypeTopic,
-       key_holder,
-   )
+   ctx = DDSContext(domain_id=0)
+   provider = HealthReportProvider(ctx)
 
    # Publish a sample
-   sample = HealthReportType()
-   sample.source = my_source_id
+   sample = HealthReportType(source=ctx.source_id)
    set_timestamp(sample)
-   sample.severity = ErrorCondition.NONE
    provider.write(sample)
 
 
-Key Holder
-----------
+Instance Lifecycle
+------------------
 
-The ``key_holder`` parameter is a default-constructed instance with key fields
-populated. It's used by ``close()`` to look up and dispose the DDS instance.
-For UMAA types, the key field is typically ``source`` (an ``IdentifierType``).
+The instance handle is captured automatically on the first ``write()``.
+On ``close()``, the provider disposes the instance so subscribers see
+``NOT_ALIVE_DISPOSED`` (per UMAA §5.2.1.3).
 
 
 Validation
@@ -63,14 +53,13 @@ publishing. Invalid fields are logged as warnings but the sample is still sent
 Using Pre-Wired Classes
 -----------------------
 
-Pre-wired report providers handle all the type/topic wiring:
+Pre-wired report providers handle all the type/topic wiring.
+Both ``ctx`` and ``service_name`` are the only parameters —
+``service_name`` defaults to the class name if omitted:
 
 .. code-block:: python
 
    from rtiumaapy.services.so import HealthReportProvider
 
-   key_holder = HealthReportType()
-   key_holder.source = my_source_id
-
-   provider = HealthReportProvider(ctx, "HealthReport", key_holder)
-   # topic name and type are pre-configured
+   provider = HealthReportProvider(ctx)
+   # topic name, type, and service_name are all pre-configured

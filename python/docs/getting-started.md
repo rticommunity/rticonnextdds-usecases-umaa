@@ -7,10 +7,10 @@ This guide walks you through installing `rtiumaapy`, running the autopilot examp
 | Requirement | Version |
 |---|---|
 | Python | >= 3.8 |
-| RTI Connext DDS | >= 7.5.0 (with `rti.connext` Python binding) |
+| RTI Connext DDS License | Free evaluation at <https://www.rti.com/free-trial> |
 | OS | Linux, macOS, or Windows |
 
-You need a valid RTI Connext DDS license and the Python binding installed. See the [RTI Connext Python API documentation](https://community.rti.com/static/documentation/connext-dds/current/doc/api/connext_dds/api_python/index.html) for installation instructions.
+You need a valid RTI Connext DDS license file. Place it where Connext can find it (e.g. `$HOME/rti_license.dat` or set `RTI_LICENSE_FILE`). The `rti.connext` Python binding is installed automatically as a package dependency.
 
 ## Installation
 
@@ -83,48 +83,25 @@ flags are needed.  You should see the full command lifecycle in both terminals:
 
 ## Minimal Example — Report Publisher
 
-Here's the simplest possible UMAA service — publishing a health report:
+The SDK includes 350 pre-wired service classes so you don't need to specify
+types or topics yourself.  Here's a health report publisher using
+`HealthReportProvider`:
 
 ```python
 import asyncio
-from rtiumaapy import DDSContext, GUIDUtil, ReportProvider, set_timestamp
+from rtiumaapy import DDSContext, set_timestamp
+from rtiumaapy.services.so import HealthReportProvider
 from rtiumaapy.datamodel.HealthReportType import (
     UMAA_SO_HealthReport_HealthReportType as HealthReportType,
-    UMAA_SO_HealthReport_HealthReportTypeTopic,
-    UMAA_Common_IdentifierType as IdentifierType,
-    UMAA_Common_Measurement_NumericGUID as NumericGUID,
-    UMAA_Common_MaritimeEnumeration_ErrorConditionEnumModule_ErrorConditionEnumType as ErrorCondition,
-    UMAA_Common_MaritimeEnumeration_ErrorCodeEnumModule_ErrorCodeEnumType as ErrorCode,
 )
-import rti.connextdds as dds
 
 async def main():
     ctx = DDSContext(domain_id=0)
 
-    # Create a source identity
-    guid_bytes = GUIDUtil.generate()
-    source_id = IdentifierType(
-        id=NumericGUID(value=dds.Uint8Seq(guid_bytes)),
-        parentID=NumericGUID(value=dds.Uint8Seq(guid_bytes)),
-    )
+    provider = HealthReportProvider(ctx)
 
-    # Create a keyed report provider
-    key_holder = HealthReportType()
-    key_holder.source = source_id
-    provider = ReportProvider(
-        ctx,
-        "HealthReport",
-        HealthReportType,
-        UMAA_SO_HealthReport_HealthReportTypeTopic,
-        key_holder,
-    )
-
-    # Publish a sample
-    sample = HealthReportType()
-    sample.source = source_id
+    sample = HealthReportType(source=ctx.source_id)
     set_timestamp(sample)
-    sample.severity = ErrorCondition.NONE
-    sample.code = ErrorCode.NONE
     provider.write(sample)
 
     await ctx.run_until_shutdown()
@@ -134,23 +111,15 @@ asyncio.run(main())
 
 ## Minimal Example — Report Subscriber
 
+The consumer side is even simpler — subclass the pre-wired
+`HealthReportConsumer` and override `on_report()`:
+
 ```python
 import asyncio
-from rtiumaapy import DDSContext, ReportConsumer
-from rtiumaapy.datamodel.HealthReportType import (
-    UMAA_SO_HealthReport_HealthReportType as HealthReportType,
-    UMAA_SO_HealthReport_HealthReportTypeTopic,
-)
+from rtiumaapy import DDSContext
+from rtiumaapy.services.so import HealthReportConsumer
 
-class MyHealthConsumer(ReportConsumer):
-    def __init__(self, ctx):
-        super().__init__(
-            ctx,
-            "HealthConsumer",
-            HealthReportType,
-            UMAA_SO_HealthReport_HealthReportTypeTopic,
-        )
-
+class MyHealthConsumer(HealthReportConsumer):
     async def on_report(self, sample):
         print(f"Health: severity={sample.severity} code={sample.code}")
 
