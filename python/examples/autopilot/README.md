@@ -12,18 +12,23 @@ All 18 services use pre-wired classes from the `rtiumaapy.services` library.
 ## Prerequisites
 
 ```bash
+export RTI_LICENSE_FILE=/path/to/rti_license.dat
 export UMAA_QOS_FILE=/path/to/qos/umaa_qos_lib.xml
 ```
 
 ## Run the Autopilot
 
 ```bash
-cd python/
-python -m examples.autopilot.run_autopilot \
-    --domain-id 0 \
-    --source-guid 01020304050607080910111213141516 \
-    --health-period 1.0 \
-    -v
+./python/examples/autopilot/start_autopilot.sh
+```
+
+The start script creates a virtual environment (if needed), installs
+dependencies, resolves the RTI license file, sets the source GUID, and
+launches the autopilot.
+Extra flags are forwarded to the underlying Python entry point:
+
+```bash
+./python/examples/autopilot/start_autopilot.sh --domain-id 1 -v
 ```
 
 Options:

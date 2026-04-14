@@ -9,6 +9,9 @@ cpp/*/build/
 # Python cache
 __pycache__/
 
+# Python egg-info
+*.egg-info/
+
 # Service data
 services/data/
 
