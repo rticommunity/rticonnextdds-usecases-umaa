@@ -64,7 +64,7 @@ For questions or issues, email **services_community@rti.com**.
 ## Acknowledgments
 
 Thanks to [Devon at Penn State ARL](https://github.com/dkreed747/umaapy) for
-early UMAA Python explorations that helped inform this project.  
+early UMAA RTI Python explorations that helped inform this project.  
 The JHU APL and Penn State ARL C++ implementations
 from the [UMAA SDK](https://www.auvsi.org/advocacy/advocacy-initiatives/unmanned-maritime-autonomy-architecture/)
 were used as reference throughout development.
