@@ -106,7 +106,8 @@ async def _main(args: argparse.Namespace) -> None:
         if not await consumer.wait_for_discovery(timeout=60.0):
             logger.error("No provider discovered within 60s — exiting.")
             return
-        logger.info("Provider discovered — sending command ...")
+        logger.info("Provider discovered — waiting for discovery to propagate ...")
+        await asyncio.sleep(2)
 
         # Build and send a GlobalVectorCommand
         cmd = GlobalVectorCommandType()
