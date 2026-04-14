@@ -2,50 +2,58 @@
 
 A Python framework for building UMAA-compliant unmanned maritime systems on RTI Connext DDS.
 
+**Full documentation:** [rticommunity.github.io/rticonnextdds-usecases-umaa](https://rticommunity.github.io/rticonnextdds-usecases-umaa/)
+
 ---
-
-
 
 ## Quick Start
 
-### 1. Get an RTI License
-
-Request a free evaluation license at <https://www.rti.com/free-trial>. RTI will auto-respond with your license file.
-
-Place the license file where Connext can find it (e.g. `$HOME/rti_license.dat` or set `RTI_LICENSE_FILE`).
-
-### 2. Install the SDK
+### 1. Install
 
 ```bash
 cd python/
 pip install -e .
 ```
 
-> Requires Python ≥ 3.8. The `rti.connext` package is installed automatically as a dependency.
+> Requires Python ≥ 3.8 and an [RTI Connext license](https://www.rti.com/free-trial).
 
-### 3. Run the Example
+### 2. Run the Autopilot Example
 
 ```bash
 cd examples/autopilot/
 ./start_autopilot.sh
 ```
 
-The autopilot component starts 18 UMAA services and runs until you press `Ctrl+C`.
+### 3. Publish a Report (5 lines)
+
+```python
+import asyncio
+from rtiumaapy import DDSContext, set_timestamp
+from rtiumaapy.services.so import HealthReportProvider
+from rtiumaapy.datamodel.HealthReportType import (
+    UMAA_SO_HealthReport_HealthReportType as HealthReportType,
+)
+
+async def main():
+    ctx = DDSContext(domain_id=0)
+    provider = HealthReportProvider(ctx)
+    sample = HealthReportType(source=ctx.source_id)
+    set_timestamp(sample)
+    provider.write(sample)
+    await ctx.run_until_shutdown()
+
+asyncio.run(main())
+```
 
 ---
 
 ## Documentation
 
-- [Getting Started](docs/getting-started.md) — environment setup, first component
-- [Building a Component](docs/building-a-component.md) — step-by-step tutorial
-- [QoS Configuration](docs/qos-configuration.md) — AssignerQoS, topic filter rules, profiles
-- [Vendor Interoperability](docs/vendor-interoperability.md) — DDS-XTYPES compliance, Cyclone DDS interop
-- [Troubleshooting](docs/troubleshooting.md) — common issues and solutions
-- [Changelog](docs/changelog.md)
+Guides, API reference, and tutorials are on the docs site:
 
-Full API reference (autodoc): **[rticommunity.github.io/rticonnextdds-usecases-umaa](https://rticommunity.github.io/rticonnextdds-usecases-umaa/)**
+**[rticommunity.github.io/rticonnextdds-usecases-umaa](https://rticommunity.github.io/rticonnextdds-usecases-umaa/)**
 
-To build the docs locally:
+To build docs locally:
 
 ```bash
 pip install ".[docs]"
@@ -57,11 +65,6 @@ sphinx-build -b html docs docs/_build/html
 ## Contact
 
 For questions or issues, email **services_community@rti.com**.
-
----
-
-
----
 
 ## License
 
