@@ -25,7 +25,6 @@ class TestRoundTrip:
         """Provider writes → Consumer on_report fires with correct data."""
         received = []  # type: list
         done = asyncio.Event()
-        key = FakeReportType(source=7)
 
         class TestConsumer(ReportConsumer):
             async def on_report(self, sample):
@@ -33,10 +32,10 @@ class TestRoundTrip:
                 done.set()
 
         provider = ReportProvider(
-            dds_context, "GPSProvider", FakeReportType, GPSReportTypeTopic, key,
+            dds_context, "GPSProvider", report_type=FakeReportType, report_topic=GPSReportTypeTopic,
         )
         consumer = TestConsumer(
-            dds_context, "GPSConsumer", FakeReportType, GPSReportTypeTopic,
+            dds_context, "GPSConsumer", report_type=FakeReportType, report_topic=GPSReportTypeTopic,
         )
         consumer.start()
 
@@ -60,9 +59,8 @@ class TestDispose:
     @pytest.mark.asyncio
     async def test_close_disposes_instance(self, dds_context: DDSContext):
         """After provider.close(), subscriber sees NOT_ALIVE_DISPOSED."""
-        key = FakeReportType(source=42)
         provider = ReportProvider(
-            dds_context, "GPSProvider", FakeReportType, GPSReportTypeTopic, key,
+            dds_context, "GPSProvider", report_type=FakeReportType, report_topic=GPSReportTypeTopic,
         )
         reader = dds_context.create_reader(FakeReportType, GPSReportTypeTopic)
 
@@ -93,9 +91,8 @@ class TestDispose:
     @pytest.mark.asyncio
     async def test_close_without_write_no_crash(self, dds_context: DDSContext):
         """Closing a provider that never wrote should not raise."""
-        key = FakeReportType(source=99)
         provider = ReportProvider(
-            dds_context, "GPSProvider", FakeReportType, GPSReportTypeTopic, key,
+            dds_context, "GPSProvider", report_type=FakeReportType, report_topic=GPSReportTypeTopic,
         )
         await provider.close()
         # No exception means pass
@@ -110,12 +107,11 @@ class TestShutdownIntegration:
     @pytest.mark.asyncio
     async def test_shutdown_closes_provider_and_consumer(self, dds_context: DDSContext):
         """DDSContext.shutdown() calls close() on both provider and consumer."""
-        key = FakeReportType(source=1)
         provider = ReportProvider(
-            dds_context, "GPSProvider", FakeReportType, GPSReportTypeTopic, key,
+            dds_context, "GPSProvider", report_type=FakeReportType, report_topic=GPSReportTypeTopic,
         )
         consumer = ReportConsumer(
-            dds_context, "GPSConsumer", FakeReportType, GPSReportTypeTopic,
+            dds_context, "GPSConsumer", report_type=FakeReportType, report_topic=GPSReportTypeTopic,
         )
 
         # Provider and consumer are registered

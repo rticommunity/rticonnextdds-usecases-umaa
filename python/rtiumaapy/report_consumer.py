@@ -37,7 +37,8 @@ class ReportConsumer(BaseService):
     def __init__(
         self,
         ctx: DDSContext,
-        service_name: str,
+        service_name: Optional[str] = None,
+        *,
         report_type: Type,
         report_topic: str,
     ) -> None:

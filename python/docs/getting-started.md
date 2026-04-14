@@ -97,16 +97,10 @@ from rtiumaapy.datamodel.HealthReportType import (
 
 async def main():
     ctx = DDSContext(domain_id=0)
-    # ctx.source_id is auto-generated (or pass source_guid="..." to DDSContext)
 
-    # Create the provider — type and topic are pre-wired
-    key_holder = HealthReportType()
-    key_holder.source = ctx.source_id
-    provider = HealthReportProvider(ctx, "HealthReport", key_holder)
+    provider = HealthReportProvider(ctx)
 
-    # Publish a sample
-    sample = HealthReportType()
-    sample.source = ctx.source_id
+    sample = HealthReportType(source=ctx.source_id)
     set_timestamp(sample)
     provider.write(sample)
 

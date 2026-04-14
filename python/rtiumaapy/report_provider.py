@@ -7,7 +7,7 @@ the NOT_ALIVE_DISPOSED state transition (per UMAA §5.2.1.3).
 
 import asyncio
 import logging
-from typing import Type
+from typing import Optional, Type
 
 import rti.connextdds as dds
 
@@ -24,25 +24,23 @@ class ReportProvider(BaseService):
     Args:
         ctx: The :class:`DDSContext` owning shared DDS infrastructure.
         service_name: Unique name for this service instance.
+            Defaults to the class name if not provided.
         report_type: An ``@idl.struct`` type (the IDL-generated Python class).
         report_topic: The DDS topic name (drives QoS assignment).
-        key_holder: A default-constructed instance of *report_type* with the
-            key field(s) populated to the values used when publishing.
-            Used by ``close()`` to look up and dispose the DDS instance.
     """
 
     def __init__(
         self,
         ctx: DDSContext,
-        service_name: str,
+        service_name: Optional[str] = None,
+        *,
         report_type: Type,
         report_topic: str,
-        key_holder: object,
     ) -> None:
         super().__init__(ctx, service_name)
         self._report_type = report_type
         self._report_topic = report_topic
-        self._key_holder = key_holder
+        self._instance_handle: Optional[dds.InstanceHandle] = None
         self._writer = ctx.create_writer(report_type, report_topic)
 
     # ── Properties ────────────────────────────────────────────────────────
@@ -76,6 +74,8 @@ class ReportProvider(BaseService):
                 "; ".join(errors),
             )
         self._writer.write(sample)
+        if self._instance_handle is None:
+            self._instance_handle = self._writer.lookup_instance(sample)
 
     # ── Lifecycle ─────────────────────────────────────────────────────────
 
@@ -89,9 +89,8 @@ class ReportProvider(BaseService):
         This method is idempotent — calling it more than once is safe.
         """
         try:
-            handle = self._writer.lookup_instance(self._key_holder)
-            if handle != dds.InstanceHandle.nil():
-                self._writer.dispose_instance(handle)
+            if self._instance_handle is not None and self._instance_handle != dds.InstanceHandle.nil():
+                self._writer.dispose_instance(self._instance_handle)
                 # BEST_EFFORT dispose: allow time for the dispose message to
                 # be sent on the wire before shutdown continues.
                 await asyncio.sleep(0.1)

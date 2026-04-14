@@ -125,36 +125,28 @@ The framework catches the exception, validates the reason against the ICD, and p
 
 ## Step 3: Add a Report Provider
 
+Use a pre-wired provider — type and topic are already configured:
+
 ```python
-from rtiumaapy import ReportProvider, set_timestamp
-from rtiumaapy.datamodel.SomeReportType import (
-    SomeReportType,
-    SomeReportTypeTopic,
+from rtiumaapy import set_timestamp
+from rtiumaapy.services.so import HealthReportProvider
+from rtiumaapy.datamodel.HealthReportType import (
+    UMAA_SO_HealthReport_HealthReportType as HealthReportType,
 )
 
 class SensorComponent(BaseComponent):
     def __init__(self, ctx, source_id):
         super().__init__(ctx, "SensorComponent")
         # ...
-        key_holder = SomeReportType()
-        key_holder.source = source_id
-        self.report_provider = ReportProvider(
-            ctx,
-            "SensorReport",
-            SomeReportType,
-            SomeReportTypeTopic,
-            key_holder,
-        )
+        self.health_provider = HealthReportProvider(ctx)
 ```
 
 Report providers are simple — call `write()` whenever you have data:
 
 ```python
-sample = SomeReportType()
-sample.source = self._source_id
+sample = HealthReportType(source=ctx.source_id)
 set_timestamp(sample)
-sample.value = 42.0
-self.report_provider.write(sample)
+self.health_provider.write(sample)
 ```
 
 ## Step 4: Add a Report Consumer
@@ -269,8 +261,8 @@ engine = EngineControlProvider(ctx, source_id=my_identity)
 # Report consumer — just pass ctx
 pose = GlobalPoseReportConsumer(ctx)
 
-# Report provider — pass ctx, service_name, and key_holder
-health = HealthReportProvider(ctx, "HealthReport", key_holder)
+# Report provider — just pass ctx
+health = HealthReportProvider(ctx)
 ```
 
 See {doc}`api/services-library` for the complete catalog.

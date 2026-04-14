@@ -61,3 +61,30 @@ class GUIDUtil:
             b'U\\x0e\\x84\\x00\\xe2\\x9bA\\xd4\\xa7\\x16DfUD\\x00\\x00'
         """
         return uuid.UUID(s).bytes
+
+    @staticmethod
+    def make_source_id(guid_hex: str | None = None):
+        """Build an ``IdentifierType`` from an optional hex GUID string.
+
+        If *guid_hex* is ``None``, a random GUID is generated automatically.
+
+        Args:
+            guid_hex: A 32-character hex string (with or without dashes).
+                If omitted, a random UUID4 is generated.
+
+        Returns:
+            An ``IdentifierType`` with both ``id`` and ``parentID`` set
+            to the same ``NumericGUID``.
+        """
+        import rti.connextdds as dds
+        from rtiumaapy.datamodel.HealthReportType import (
+            UMAA_Common_IdentifierType as IdentifierType,
+            UMAA_Common_Measurement_NumericGUID as NumericGUID,
+        )
+
+        if guid_hex:
+            guid_bytes = GUIDUtil.from_string(guid_hex)
+        else:
+            guid_bytes = GUIDUtil.generate()
+        guid = NumericGUID(value=dds.Uint8Seq(guid_bytes))
+        return IdentifierType(id=guid, parentID=guid)
