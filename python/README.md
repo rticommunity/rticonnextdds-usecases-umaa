@@ -2,29 +2,39 @@
 
 A Python framework for building UMAA-compliant unmanned maritime systems on RTI Connext DDS.
 
-**Full documentation:** [rticommunity.github.io/rticonnextdds-usecases-umaa](https://rticommunity.github.io/rticonnextdds-usecases-umaa/)
+**[Full documentation](https://rticommunity.github.io/rticonnextdds-usecases-umaa/)** — walkthroughs, guides, and API reference.
 
 ---
 
 ## Quick Start
 
-### 1. Install
+### 1. Get a License
+
+If you don't have an RTI Connext license, request a free evaluation at
+<https://www.rti.com/free-trial> — RTI will auto-respond to your email with a license file.
+Then point Connext to it:
+
+```bash
+export RTI_LICENSE_FILE=/path/to/rti_license.dat
+```
+
+### 2. Install
 
 ```bash
 cd python/
 pip install -e .
 ```
 
-> Requires Python ≥ 3.8 and an [RTI Connext license](https://www.rti.com/free-trial).
+> Requires Python ≥ 3.8.
 
-### 2. Run the Autopilot Example
+### 3. Run the Autopilot Example
 
 ```bash
 cd examples/autopilot/
 ./start_autopilot.sh
 ```
 
-### 3. Publish a Report (5 lines)
+### 4. Publish a Report (5 lines)
 
 ```python
 import asyncio
@@ -35,32 +45,17 @@ from rtiumaapy.datamodel.HealthReportType import (
 )
 
 async def main():
-    ctx = DDSContext(domain_id=0)
-    provider = HealthReportProvider(ctx)
-    sample = HealthReportType(source=ctx.source_id)
-    set_timestamp(sample)
-    provider.write(sample)
+
+    ctx = DDSContext(domain_id=0)              # 1. Create a DDS context
+    provider = HealthReportProvider(ctx)       # 2. Create a pre-wired provider
+    sample = HealthReportType(source=ctx.source_id)  # 3. Build a sample
+    set_timestamp(sample)                      # 4. Stamp it
+    provider.write(sample)                     # 5. Publish
+
     await ctx.run_until_shutdown()
 
 asyncio.run(main())
 ```
-
----
-
-## Documentation
-
-Guides, API reference, and tutorials are on the docs site:
-
-**[rticommunity.github.io/rticonnextdds-usecases-umaa](https://rticommunity.github.io/rticonnextdds-usecases-umaa/)**
-
-To build docs locally:
-
-```bash
-pip install ".[docs]"
-sphinx-build -b html docs docs/_build/html
-```
-
----
 
 ## Contact
 
