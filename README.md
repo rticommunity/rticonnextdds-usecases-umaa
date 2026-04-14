@@ -5,10 +5,10 @@ A starting point for developing to the UMAA standard with Connext.
 - [Overview](#overview)
 - [UMAA Standard](#umaa-standard)   
   Breakdown of UMAA standard from a DDS perspective
-- [Examples](#examples)
+- [Python SDK](#python-sdk)
+- [C++ Middleware Framework](#examples)
   - [XML-Based Application Framework](#xml-based-application-framework) (C++)
   - [Service Template Wrappers](#service-template-wrappers) (C++)
-  - [Python SDK](#python-sdk)
 - [UMAA Data Types](#umaa-data-types)
 - [Best Practices](#best-practices)   
   Recommendations and general guidelines
