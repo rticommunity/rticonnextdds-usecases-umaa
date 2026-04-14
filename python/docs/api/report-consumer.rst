@@ -14,27 +14,18 @@ Usage
 -----
 
 A ``ReportConsumer`` subscribes to a single DDS topic and delivers incoming
-samples via the ``on_report()`` hook.
+samples via the ``on_report()`` hook.  Use a pre-wired consumer class —
+subclass it and override ``on_report()``:
 
 .. code-block:: python
 
-   from rtiumaapy import ReportConsumer
-   from rtiumaapy.datamodel.HealthReportType import (
-       UMAA_SO_HealthReport_HealthReportType as HealthReportType,
-       UMAA_SO_HealthReport_HealthReportTypeTopic,
-   )
+   from rtiumaapy.services.so import HealthReportConsumer
 
-   class MyHealthConsumer(ReportConsumer):
-       def __init__(self, ctx):
-           super().__init__(
-               ctx,
-               "HealthConsumer",
-               HealthReportType,
-               UMAA_SO_HealthReport_HealthReportTypeTopic,
-           )
-
+   class MyHealthConsumer(HealthReportConsumer):
        async def on_report(self, sample):
            print(f"Health: severity={sample.severity}")
+
+   consumer = MyHealthConsumer(ctx)
 
 
 Event Loop
