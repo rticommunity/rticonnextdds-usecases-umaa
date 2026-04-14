@@ -22,21 +22,21 @@ class TestConstruction:
     @pytest.mark.asyncio
     async def test_creates_reader(self, dds_context: DDSContext):
         consumer = ReportConsumer(
-            dds_context, "GPSConsumer", FakeReportType, GPSReportTypeTopic,
+            dds_context, "GPSConsumer", report_type=FakeReportType, report_topic=GPSReportTypeTopic,
         )
         assert isinstance(consumer.reader, dds.DataReader)
 
     @pytest.mark.asyncio
     async def test_auto_registers(self, dds_context: DDSContext):
         ReportConsumer(
-            dds_context, "GPSConsumer", FakeReportType, GPSReportTypeTopic,
+            dds_context, "GPSConsumer", report_type=FakeReportType, report_topic=GPSReportTypeTopic,
         )
         assert dds_context.get_service("GPSConsumer") is not None
 
     @pytest.mark.asyncio
     async def test_report_topic_property(self, dds_context: DDSContext):
         consumer = ReportConsumer(
-            dds_context, "GPSConsumer", FakeReportType, GPSReportTypeTopic,
+            dds_context, "GPSConsumer", report_type=FakeReportType, report_topic=GPSReportTypeTopic,
         )
         assert consumer.report_topic == GPSReportTypeTopic
 
@@ -59,7 +59,7 @@ class TestOnReport:
                 done.set()
 
         consumer = TestConsumer(
-            dds_context, "GPSConsumer", FakeReportType, GPSReportTypeTopic,
+            dds_context, "GPSConsumer", report_type=FakeReportType, report_topic=GPSReportTypeTopic,
         )
         consumer.start()
 
@@ -85,7 +85,7 @@ class TestOnReport:
                     done.set()
 
         consumer = TestConsumer(
-            dds_context, "GPSConsumer", FakeReportType, GPSReportTypeTopic,
+            dds_context, "GPSConsumer", report_type=FakeReportType, report_topic=GPSReportTypeTopic,
         )
         consumer.start()
 
@@ -106,7 +106,7 @@ class TestOnReport:
     async def test_default_on_report_no_crash(self, dds_context: DDSContext):
         """Base class on_report (no-op) runs without error."""
         consumer = ReportConsumer(
-            dds_context, "GPSConsumer", FakeReportType, GPSReportTypeTopic,
+            dds_context, "GPSConsumer", report_type=FakeReportType, report_topic=GPSReportTypeTopic,
         )
         consumer.start()
 
@@ -133,7 +133,7 @@ class TestOnReport:
                 done.set()
 
         consumer = FailThenSucceedConsumer(
-            dds_context, "GPSConsumer", FakeReportType, GPSReportTypeTopic,
+            dds_context, "GPSConsumer", report_type=FakeReportType, report_topic=GPSReportTypeTopic,
         )
         consumer.start()
 
@@ -159,6 +159,6 @@ class TestQoS:
     @pytest.mark.asyncio
     async def test_report_qos_best_effort(self, dds_context: DDSContext):
         consumer = ReportConsumer(
-            dds_context, "GPSConsumer", FakeReportType, GPSReportTypeTopic,
+            dds_context, "GPSConsumer", report_type=FakeReportType, report_topic=GPSReportTypeTopic,
         )
         assert consumer.reader.qos.reliability.kind == dds.ReliabilityKind.BEST_EFFORT

@@ -460,33 +460,13 @@ class AutopilotComponent(BaseComponent):
         self.constraint_delete = _APConstraintDeleteConsumer(ctx)
 
         # --- Report Providers (4) ---
-        health_key = HealthReportType()
-        health_key.source = source_id
-        self.health_provider = HealthReportProvider(
-            ctx, "HealthReportProvider", health_key,
-        )
+        self.health_provider = HealthReportProvider(ctx)
 
-        log_key = LogReportType()
-        log_key.source = source_id
-        self.log_provider = LogReportProvider(ctx, "LogReportProvider", log_key)
+        self.log_provider = LogReportProvider(ctx)
 
-        from rtiumaapy.datamodel.UVPlatformSpecsReportType import (
-            UMAA_EO_UVPlatformSpecs_UVPlatformSpecsReportType as UVSpecsType,
-        )
-        specs_key = UVSpecsType()
-        specs_key.source = source_id
-        self.specs_provider = UVPlatformSpecsReportProvider(
-            ctx, "UVPlatformSpecsProvider", specs_key,
-        )
+        self.specs_provider = UVPlatformSpecsReportProvider(ctx)
 
-        from rtiumaapy.datamodel.UVPlatformCapabilitiesReportType import (
-            UMAA_EO_UVPlatformSpecs_UVPlatformCapabilitiesReportType as UVCapsType,
-        )
-        caps_key = UVCapsType()
-        caps_key.source = source_id
-        self.caps_provider = UVPlatformCapabilitiesReportProvider(
-            ctx, "UVPlatformCapabilitiesProvider", caps_key,
-        )
+        self.caps_provider = UVPlatformCapabilitiesReportProvider(ctx)
 
         # --- Report Consumers (6) ---
         self.pose_consumer = _APPoseConsumer(ctx, self)

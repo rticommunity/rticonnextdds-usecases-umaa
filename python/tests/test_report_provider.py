@@ -24,25 +24,22 @@ from rtiumaapy.datamodel.AnchorSpecsReportType import (
 class TestConstruction:
     @pytest.mark.asyncio
     async def test_creates_writer(self, dds_context: DDSContext):
-        key = FakeReportType(source=1)
         prov = ReportProvider(
-            dds_context, "GPSProvider", FakeReportType, GPSReportTypeTopic, key,
+            dds_context, "GPSProvider", report_type=FakeReportType, report_topic=GPSReportTypeTopic,
         )
         assert isinstance(prov.writer, dds.DataWriter)
 
     @pytest.mark.asyncio
     async def test_auto_registers(self, dds_context: DDSContext):
-        key = FakeReportType(source=1)
         ReportProvider(
-            dds_context, "GPSProvider", FakeReportType, GPSReportTypeTopic, key,
+            dds_context, "GPSProvider", report_type=FakeReportType, report_topic=GPSReportTypeTopic,
         )
         assert dds_context.get_service("GPSProvider") is not None
 
     @pytest.mark.asyncio
     async def test_report_topic_property(self, dds_context: DDSContext):
-        key = FakeReportType(source=1)
         prov = ReportProvider(
-            dds_context, "GPSProvider", FakeReportType, GPSReportTypeTopic, key,
+            dds_context, "GPSProvider", report_type=FakeReportType, report_topic=GPSReportTypeTopic,
         )
         assert prov.report_topic == GPSReportTypeTopic
 
@@ -56,9 +53,8 @@ class TestWrite:
     @pytest.mark.asyncio
     async def test_write_sample(self, dds_context: DDSContext):
         """Written sample is received by a raw DataReader."""
-        key = FakeReportType(source=1)
         prov = ReportProvider(
-            dds_context, "GPSProvider", FakeReportType, GPSReportTypeTopic, key,
+            dds_context, "GPSProvider", report_type=FakeReportType, report_topic=GPSReportTypeTopic,
         )
         # Create a raw reader on the same topic
         reader = dds_context.create_reader(FakeReportType, GPSReportTypeTopic)
@@ -78,9 +74,8 @@ class TestWrite:
 
     @pytest.mark.asyncio
     async def test_write_multiple_samples(self, dds_context: DDSContext):
-        key = FakeReportType(source=1)
         prov = ReportProvider(
-            dds_context, "GPSProvider", FakeReportType, GPSReportTypeTopic, key,
+            dds_context, "GPSProvider", report_type=FakeReportType, report_topic=GPSReportTypeTopic,
         )
         reader = dds_context.create_reader(FakeReportType, GPSReportTypeTopic)
 
@@ -107,18 +102,15 @@ class TestQoS:
     @pytest.mark.asyncio
     async def test_report_qos_best_effort(self, dds_context: DDSContext):
         """*ReportType topics get telemetry QoS → BEST_EFFORT."""
-        key = FakeReportType(source=1)
         prov = ReportProvider(
-            dds_context, "GPSProvider", FakeReportType, GPSReportTypeTopic, key,
+            dds_context, "GPSProvider", report_type=FakeReportType, report_topic=GPSReportTypeTopic,
         )
         assert prov.writer.qos.reliability.kind == dds.ReliabilityKind.BEST_EFFORT
 
     @pytest.mark.asyncio
     async def test_specs_report_qos_reliable(self, dds_context: DDSContext):
         """*SpecsReportType topics get config QoS → RELIABLE."""
-        key = FakeReportType(source=1)
         prov = ReportProvider(
-            dds_context, "AnchorSpecsProvider", FakeReportType,
-            AnchorSpecsReportTypeTopic, key,
+            dds_context, "AnchorSpecsProvider", report_type=FakeReportType, report_topic=AnchorSpecsReportTypeTopic,
         )
         assert prov.writer.qos.reliability.kind == dds.ReliabilityKind.RELIABLE

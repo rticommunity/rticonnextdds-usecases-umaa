@@ -48,13 +48,11 @@ Constructor Patterns
 
    consumer = GlobalVectorControlConsumer(ctx)
 
-**Report Providers** require ``ctx``, ``service_name``, and ``key_holder``:
+**Report Providers** require ``ctx`` only:
 
 .. code-block:: python
 
-   key_holder = HealthReportType()
-   key_holder.source = my_identity
-   provider = HealthReportProvider(ctx, "HealthReport", key_holder)
+   provider = HealthReportProvider(ctx)
 
 **Report Consumers** require ``ctx`` only:
 

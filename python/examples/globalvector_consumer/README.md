@@ -36,8 +36,8 @@ Options:
 | Flag | Default | Description |
 |------|---------|-------------|
 | `--domain-id` | `0` | DDS domain ID |
-| `--source-guid` | script default | 32-char hex GUID for this consumer |
-| `--destination-guid` | script default | 32-char hex GUID of the target autopilot |
+| `--source-guid` | script default | Hex GUID (32 chars or UUID with dashes) for this consumer |
+| `--destination-guid` | script default | Hex GUID (32 chars or UUID with dashes) of the target autopilot |
 | `-v` | off | Enable DEBUG logging |
 
 ## Lifecycle

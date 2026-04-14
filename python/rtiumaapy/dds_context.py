@@ -66,6 +66,7 @@ class DDSContext:
         self,
         domain_id: int = 0,
         qos_file: Optional[str] = None,
+        source_guid: Optional[str] = None,
     ) -> None:
         """Create the DDS infrastructure.
 
@@ -73,6 +74,9 @@ class DDSContext:
             domain_id: DDS domain ID.
             qos_file: Path to QoS XML.  If *None*, reads from the
                 ``UMAA_QOS_FILE`` environment variable.
+            source_guid: Hex GUID (32 chars or UUID with dashes) for
+                this component's source identity.  If *None*, a random
+                GUID is generated automatically.
 
         Raises:
             RuntimeError: If a ``DDSContext`` already exists.
@@ -82,8 +86,17 @@ class DDSContext:
                 "A DDSContext already exists. Call shutdown() before creating a new one."
             )
 
+        from rtiumaapy.guid_util import GUIDUtil
+
         self._domain_id = domain_id
         self._qos_file = qos_file or _default_qos_file()
+        self._source_id = GUIDUtil.make_source_id(source_guid)
+
+        if source_guid is None:
+            _logger.info(
+                "Auto-generated source GUID: %s",
+                GUIDUtil.to_hex(self._source_id.id.value),
+            )
 
         # QoS provider — loads XML profiles, sets default for topic_filter matching
         self._qos_provider = dds.QosProvider(self._qos_file)
@@ -147,6 +160,17 @@ class DDSContext:
     @property
     def domain_id(self) -> int:
         return self._domain_id
+
+    @property
+    def source_id(self):
+        """The component's ``IdentifierType`` source identity."""
+        return self._source_id
+
+    @property
+    def source_guid(self) -> str:
+        """The component's source GUID as a 32-char hex string."""
+        from rtiumaapy.guid_util import GUIDUtil
+        return bytes(self._source_id.id.value).hex()
 
     # ── Topic lookup ─────────────────────────────────────────────────────
 

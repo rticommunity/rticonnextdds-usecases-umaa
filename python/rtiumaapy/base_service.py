@@ -11,7 +11,7 @@ etc.) inherits from ``BaseService``.  It provides:
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import TYPE_CHECKING
+from typing import Optional, TYPE_CHECKING
 
 if TYPE_CHECKING:
     from rtiumaapy.dds_context import DDSContext
@@ -30,17 +30,18 @@ class BaseService(ABC):
     should omit ``_run``.
     """
 
-    def __init__(self, ctx: DDSContext, service_name: str) -> None:
+    def __init__(self, ctx: DDSContext, service_name: Optional[str] = None) -> None:
         """Initialise the service and register it with the context.
 
         Args:
             ctx: The :class:`DDSContext` that owns shared DDS infrastructure.
             service_name: A unique name for this service instance
                 (e.g. ``"EngineControl"``, ``"GPSReport"``).
+                Defaults to the class name if not provided.
         """
         self._ctx = ctx
-        self._service_name = service_name
-        ctx.register_service(service_name, self)
+        self._service_name = service_name or type(self).__name__
+        ctx.register_service(self._service_name, self)
 
     # ── Properties ────────────────────────────────────────────────────────
 

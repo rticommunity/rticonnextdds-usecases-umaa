@@ -53,7 +53,7 @@ class CommandProvider(BaseService):
     def __init__(
         self,
         ctx: DDSContext,
-        service_name: str,
+        service_name: Optional[str] = None,
         *,
         command_type: Type,
         ack_type: Type,

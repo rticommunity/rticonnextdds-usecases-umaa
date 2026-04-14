@@ -116,7 +116,7 @@ class _TrackingReportConsumer(ReportConsumer):
     """Report consumer that records received reports."""
 
     def __init__(self, ctx, name, report_type, report_topic):
-        super().__init__(ctx, name, report_type, report_topic)
+        super().__init__(ctx, name, report_type=report_type, report_topic=report_topic)
         self.received = []
         self.done = asyncio.Event()
 
@@ -211,10 +211,8 @@ class TestReportValidation:
         self, dds_context: DDSContext, caplog,
     ):
         """Write invalid report → warning logged, still published."""
-        key = HealthReportType()
         prov = ReportProvider(
-            dds_context, "HealthProvider",
-            HealthReportType, HealthReportTypeTopic, key,
+            dds_context, "HealthProvider", report_type=HealthReportType, report_topic=HealthReportTypeTopic,
         )
         reader = dds_context.create_reader(HealthReportType, HealthReportTypeTopic)
         await wait_for_match(prov.writer)
@@ -241,8 +239,7 @@ class TestReportValidation:
     ):
         """Receive invalid report → warning logged, callback still fires."""
         consumer = _TrackingReportConsumer(
-            dds_context, "HealthConsumer",
-            HealthReportType, HealthReportTypeTopic,
+            dds_context, "HealthConsumer", report_type=HealthReportType, report_topic=HealthReportTypeTopic,
         )
         consumer.start()
 

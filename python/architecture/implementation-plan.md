@@ -158,13 +158,12 @@ class EngineControlConsumer(CommandConsumer):
 class EngineReportProvider(ReportProvider):
     """Engine status report provider (EO::EngineStatus)."""
 
-    def __init__(self, ctx: DDSContext, service_name: str, key_holder):
+    def __init__(self, ctx: DDSContext, service_name: str):
         super().__init__(
             ctx,
             service_name=service_name,
             report_type=UMAA_EO_EngineStatus_EngineReportType,
             report_topic=UMAA_EO_EngineStatus_EngineReportTypeTopic,
-            key_holder=key_holder,
         )
 ```
 
