@@ -809,8 +809,8 @@ to use the software.
 
 
       <!-- Uncomment to apply QoS for use with USTM tool -->
-      <!-- <datawriter_qos topic_filter="*" base_name="USTMQoS" />
-      <datareader_qos topic_filter="*" base_name="USTMQoS" /> -->
+      <datawriter_qos topic_filter="*" base_name="USTMQoS" />
+      <datareader_qos topic_filter="*" base_name="USTMQoS" />
 
       <datawriter_qos topic_filter="*SpecsReportType" base_name="ConfigQoS" />
       <datareader_qos topic_filter="*SpecsReportType" base_name="ConfigQoS" />
