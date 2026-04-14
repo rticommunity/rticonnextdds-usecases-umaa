@@ -28,6 +28,7 @@ Key facts:
    building-a-component
    qos-configuration
    vendor-interoperability
+   ustm-testing
    troubleshooting
 
 .. toctree::
