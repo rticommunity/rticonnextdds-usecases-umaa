@@ -14,9 +14,10 @@ pre-built templates, override async hooks, and let the SDK handle QoS, lifecycle
 Key facts:
 
 - **350 pre-wired services** across 7 UMAA domains — ready to subclass
-- **Zero-config QoS** — profiles assigned automatically via ``topic_filter`` rules
+- **Code-free QoS** — profiles loaded from XML and assigned automatically via ``topic_filter`` rules
 - **Event-driven** — all services use ``rti.asyncio`` with ``take_async()``
-- **Single-threaded cooperative model** — no locks, no thread safety concerns
+- **Test isolation via dynamic partitions** — each ``DDSContext`` assigns a unique GUID partition at runtime so parallel tests never cross-talk
+- **Integration-level end-to-end DDS tests** — full publish/subscribe round-trips with real ``DomainParticipant`` instances
 
 ----
 
