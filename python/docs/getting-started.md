@@ -131,6 +131,183 @@ async def main():
 asyncio.run(main())
 ```
 
+## Minimal Example — Command Provider
+
+Command providers receive commands addressed to them and drive each command
+through the ICD state machine: **ISSUED → COMMANDED → EXECUTING → COMPLETED**.
+Subclass a pre-wired provider and override the `on_executing()` hook to
+implement your domain logic:
+
+```python
+import asyncio
+import logging
+from rtiumaapy import DDSContext, set_timestamp
+from rtiumaapy.services.so import BITControlProvider
+from rtiumaapy.command_provider_session import CommandProviderSession
+
+logging.basicConfig(level=logging.INFO)
+
+class MyBITProvider(BITControlProvider):
+    """Simple Built-In Test provider that always succeeds."""
+
+    async def on_commanded(self, session: CommandProviderSession):
+        print(f"BIT command accepted — session {session.session_id}")
+
+    async def on_executing(self, session: CommandProviderSession):
+        print("Running built-in test...")
+        await asyncio.sleep(1)  # simulate work
+        print("Built-in test passed.")
+
+    async def on_complete(self, session: CommandProviderSession):
+        print("BIT command completed successfully.")
+
+async def main():
+    ctx = DDSContext(domain_id=0)
+    provider = MyBITProvider(ctx, source_id=ctx.source_id)
+    provider.start()
+    await ctx.run_until_shutdown()
+
+asyncio.run(main())
+```
+
+The base class handles ack publishing, status transitions, and session
+management automatically — you only write the behavior.
+
+## Command Provider with Execution Status
+
+Some command services include an execution-status topic for progress feedback.
+The `GlobalVectorControlProvider` (MO domain) is a good example — it reports
+whether heading and speed targets have been achieved:
+
+```python
+import asyncio
+import logging
+from rtiumaapy import DDSContext, set_timestamp
+from rtiumaapy.services.mo import GlobalVectorControlProvider
+from rtiumaapy.command_provider_session import CommandProviderSession
+from rtiumaapy.datamodel.GlobalVectorExecutionStatusReportType import (
+    UMAA_MO_GlobalVectorControl_GlobalVectorExecutionStatusReportType
+    as GlobalVectorExecStatus,
+)
+
+logging.basicConfig(level=logging.INFO)
+
+class MyGlobalVectorProvider(GlobalVectorControlProvider):
+    """Heading/speed controller that publishes execution status."""
+
+    async def on_commanded(self, session: CommandProviderSession):
+        cmd = session.command
+        print(f"GlobalVector COMMANDED — direction={getattr(cmd, 'direction', '?')}")
+
+    async def on_executing(self, session: CommandProviderSession):
+        cmd = session.command
+
+        # Publish execution status showing targets achieved
+        exec_status = GlobalVectorExecStatus()
+        exec_status.source = self._source_id
+        exec_status.sessionID = cmd.sessionID
+        exec_status.directionAchieved = True
+        exec_status.speedAchieved = True
+        exec_status.elevationAchieved = True
+        set_timestamp(exec_status)
+
+        if self._exec_status_writer is not None:
+            self._exec_status_writer.write(exec_status)
+
+        print("GlobalVector targets achieved.")
+
+    async def on_complete(self, session: CommandProviderSession):
+        print("GlobalVector COMPLETED")
+
+async def main():
+    ctx = DDSContext(domain_id=0)
+    provider = MyGlobalVectorProvider(ctx, source_id=ctx.source_id)
+    provider.start()
+    await ctx.run_until_shutdown()
+
+asyncio.run(main())
+```
+
+## Minimal Example — Command Consumer
+
+The consumer side sends a command to a provider and reacts to lifecycle
+events (ack, status transitions, execution status, terminal) via hooks.
+Here's a `BITControlConsumer` that sends a BIT command and waits for
+completion:
+
+```python
+import asyncio
+import logging
+from rtiumaapy import DDSContext
+from rtiumaapy.guid_util import GUIDUtil
+from rtiumaapy.services.so import BITControlConsumer
+from rtiumaapy.datamodel.BITCommandType import (
+    UMAA_SO_BITControl_BITCommandType as BITCommandType,
+)
+
+logging.basicConfig(level=logging.INFO)
+
+class MyBITConsumer(BITControlConsumer):
+    """BIT consumer that logs every lifecycle event."""
+
+    def __init__(self, ctx, *, source_id, destination_id):
+        super().__init__(ctx, source_id=source_id, destination_id=destination_id)
+        self.done = asyncio.Event()
+
+    async def on_ack(self, session_id, ack):
+        print(f"ACK received — session={GUIDUtil.to_hex(session_id)}")
+
+    async def on_status(self, session_id, status):
+        print(f"STATUS — {status.commandStatus}")
+
+    async def on_terminal(self, session_id, status):
+        print(f"TERMINAL — {status.commandStatus if status else 'cancelled'}")
+        self.done.set()
+
+async def main():
+    ctx = DDSContext(domain_id=0)
+
+    # destination_id must match the provider's source_id
+    destination_id = GUIDUtil.make_source_id("<provider-guid-hex>")
+
+    consumer = MyBITConsumer(
+        ctx, source_id=ctx.source_id, destination_id=destination_id,
+    )
+    consumer.start()
+
+    # Wait for the provider to appear on the network
+    await consumer.wait_for_discovery(timeout=30.0)
+
+    # Build and send the command
+    cmd = BITCommandType()
+    session_id = await consumer.send(cmd)
+    print(f"Command sent — session={GUIDUtil.to_hex(session_id)}")
+
+    # Wait for the command lifecycle to finish
+    await asyncio.wait_for(consumer.done.wait(), timeout=30.0)
+
+asyncio.run(main())
+```
+
+Key points:
+
+- `source_id` identifies this consumer; `destination_id` is the target
+  provider's identity (its content filter routes on this).
+- `consumer.send(cmd)` auto-stamps header fields and returns the session ID.
+- `wait_for_discovery()` blocks until a matching provider is found on the
+  network.
+- The consumer reader loops dispatch `on_ack`, `on_status`, `on_exec_status`,
+  and `on_terminal` as events arrive.
+
+```{tip}
+Run the provider example from the previous section in one terminal and this
+consumer in another to see the full
+ISSUED → COMMANDED → EXECUTING → COMPLETED lifecycle.
+
+For a more complete consumer with argument parsing, execution-status tracking,
+and graceful shutdown, see `examples/globalvector_consumer/run_globalvector_consumer.py`.
+```
+
 ## What's Next
 
 - {doc}`building-a-component` — Build a multi-service component from scratch
