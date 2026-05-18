@@ -8,6 +8,7 @@ import rti.connextdds as dds
 from rtiumaapy.dds_context import DDSContext
 from tests.conftest import DEFAULT_DOMAIN_ID, SimpleReport
 from rtiumaapy.datamodel.AccelerationReportType import (
+    UMAA_SA_AccelerationStatus_AccelerationReportType as AccelerationReportType,
     UMAA_SA_AccelerationStatus_AccelerationReportTypeTopic as AccelerationReportTypeTopic,
 )
 from rtiumaapy.datamodel.BatteryReportType import (
@@ -17,8 +18,14 @@ from rtiumaapy.datamodel.GPSReportType import (
     UMAA_SEM_GPSStatus_GPSReportTypeTopic as GPSReportTypeTopic,
 )
 from rtiumaapy.datamodel.AnchorCommandType import (
+    UMAA_EO_AnchorControl_AnchorCommandType as AnchorCommandType,
     UMAA_EO_AnchorControl_AnchorCommandTypeTopic as AnchorCommandTypeTopic,
 )
+
+
+def _reliability_kind_name(kind) -> str:
+    """Normalize RTI reliability kind wrappers/enums to a stable string."""
+    return str(kind).split(".")[-1]
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -123,16 +130,22 @@ class TestCreateWriter:
     @pytest.mark.asyncio
     async def test_report_qos_best_effort(self, dds_context: DDSContext):
         """*ReportType topics should get TelemetryQoS → BEST_EFFORT."""
-        writer = dds_context.create_writer(SimpleReport, AccelerationReportTypeTopic)
+        writer = dds_context.create_writer(
+            AccelerationReportType,
+            AccelerationReportTypeTopic,
+        )
         qos = writer.qos
-        assert qos.reliability.kind == dds.ReliabilityKind.BEST_EFFORT
+        assert _reliability_kind_name(qos.reliability.kind) == "BEST_EFFORT"
 
     @pytest.mark.asyncio
     async def test_command_qos_reliable(self, dds_context: DDSContext):
         """*CommandType topics should get CommandQoS → RELIABLE."""
-        writer = dds_context.create_writer(SimpleReport, AnchorCommandTypeTopic)
+        writer = dds_context.create_writer(
+            AnchorCommandType,
+            AnchorCommandTypeTopic,
+        )
         qos = writer.qos
-        assert qos.reliability.kind == dds.ReliabilityKind.RELIABLE
+        assert _reliability_kind_name(qos.reliability.kind) == "RELIABLE"
 
 
 class TestCreateReader:
@@ -143,9 +156,12 @@ class TestCreateReader:
 
     @pytest.mark.asyncio
     async def test_report_qos_best_effort(self, dds_context: DDSContext):
-        reader = dds_context.create_reader(SimpleReport, AccelerationReportTypeTopic)
+        reader = dds_context.create_reader(
+            AccelerationReportType,
+            AccelerationReportTypeTopic,
+        )
         qos = reader.qos
-        assert qos.reliability.kind == dds.ReliabilityKind.BEST_EFFORT
+        assert _reliability_kind_name(qos.reliability.kind) == "BEST_EFFORT"
 
 
 class TestCreateFilteredReader:

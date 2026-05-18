@@ -254,6 +254,11 @@ class CommandProvider(BaseService):
                 await self._task
             except asyncio.CancelledError:
                 pass
+            except Exception:
+                _logger.exception(
+                    "Provider %s: _run task failed during close",
+                    self.service_name,
+                )
 
         # Fail all active sessions
         tasks = []

@@ -329,6 +329,12 @@ class CommandProviderSession:
                 await self._provider.on_failed(self, e)
 
         finally:
-            await self._provider.on_terminal(self)
+            try:
+                await self._provider.on_terminal(self)
+            except Exception:
+                _logger.exception(
+                    "Session %s: provider on_terminal hook error",
+                    self._session_id,
+                )
             self._dispose_provider_instances()
             self._provider._active_sessions.pop(self._session_id, None)
