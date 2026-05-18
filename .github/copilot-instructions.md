@@ -5,6 +5,16 @@
 - **Always** use the pre-existing venv: `source python/.venv/bin/activate`
 - The venv has `rti.connext 7.6.0` on Python 3.8. Never use the system Python (has 7.3.1).
 - Run tests from inside the venv: `cd python && source .venv/bin/activate && python -m pytest tests/ -x -q`
+- Before running tests or any DDS code, ensure RTI runtime variables are exported in the same shell session:
+	- `export NDDSHOME=/path/to/rti_connext_dds-7.6.0`
+	- `export PATH="$NDDSHOME/bin:$PATH"`
+	- `export LD_LIBRARY_PATH="$NDDSHOME/lib/${RTI_ARCH:-x64Linux4gcc7.3.0}:$LD_LIBRARY_PATH"`
+	- `export RTI_LICENSE_FILE="${RTI_LICENSE_FILE:-$NDDSHOME/rti_license.dat}"`
+- If `NDDSHOME`/license is missing, `dds.DomainParticipant` creation can fail and tests will error before execution.
+- Before running any test suite, verify the wildcard USTM QoS assignment is commented out in `qos/umaa_qos_lib.xml`:
+	- `<!-- <datawriter_qos topic_filter="*" base_name="USTMQoS" /> -->`
+	- `<!-- <datareader_qos topic_filter="*" base_name="USTMQoS" /> -->`
+- Rationale: topic filters are first-match-wins; uncommenting the wildcard USTM lines shadows all specific QoS mappings and breaks QoS profile tests.
 
 ## Project Layout
 

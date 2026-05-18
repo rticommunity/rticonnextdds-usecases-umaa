@@ -65,6 +65,28 @@ class SlowProvider(CommandProvider):
         await asyncio.sleep(30)
 
 
+class TerminalFailProvider(CommandProvider):
+    def __init__(self, ctx, source_id):
+        super().__init__(
+            ctx, "TerminalFailProvider",
+            command_type=AnchorCommandType,
+            ack_type=AnchorCommandAckReportType,
+            status_type=AnchorCommandStatusType,
+            command_topic=AnchorCommandTypeTopic,
+            ack_topic=AnchorCommandAckReportTypeTopic,
+            status_topic=AnchorCommandStatusTypeTopic,
+            source_id=source_id,
+        )
+        self.terminal_calls = 0
+
+    async def on_executing(self, session):
+        return
+
+    async def on_terminal(self, session):
+        self.terminal_calls += 1
+        raise RuntimeError("terminal hook boom")
+
+
 class ShutdownConsumer(CommandConsumer):
     def __init__(self, ctx, source_id, destination_id):
         super().__init__(
@@ -146,6 +168,56 @@ class TestProviderShutdown:
         await asyncio.sleep(0.3)
 
         # Should not raise
+        await provider.close()
+
+    @pytest.mark.asyncio
+    async def test_provider_on_terminal_error_still_cleans_session(
+        self, dds_context: DDSContext,
+    ):
+        """Provider on_terminal raise should not skip session disposal/pop."""
+        provider_id = _make_id()
+        consumer_id = _make_id()
+
+        provider = TerminalFailProvider(dds_context, source_id=provider_id)
+        consumer = ShutdownConsumer(
+            dds_context, source_id=consumer_id,
+            destination_id=provider_id)
+
+        provider.start()
+        consumer.start()
+
+        await wait_for_match(consumer._command_writer)
+        await wait_for_match(provider._ack_writer)
+        await wait_for_match(provider._status_writer)
+
+        await consumer.send(AnchorCommandType())
+
+        await asyncio.wait_for(
+            consumer.terminal_event.wait(), timeout=10.0)
+
+        # Give provider session finally block a moment to complete.
+        await asyncio.sleep(0.2)
+
+        assert provider.terminal_calls == 1
+        assert provider._active_sessions == {}
+
+    @pytest.mark.asyncio
+    async def test_close_continues_if_run_task_raises_non_cancel(
+        self, dds_context: DDSContext,
+    ):
+        """Provider close should continue cleanup if canceled _run raises."""
+        provider_id = _make_id()
+        provider = SlowProvider(dds_context, source_id=provider_id)
+
+        async def bad_run():
+            try:
+                await asyncio.Event().wait()
+            except asyncio.CancelledError as exc:
+                raise RuntimeError("forced _run failure") from exc
+
+        provider._task = asyncio.create_task(bad_run())
+
+        # Should not raise; close should tolerate non-cancel task failure.
         await provider.close()
 
 

@@ -43,6 +43,32 @@ class StubServiceWithRun(BaseService):
         self.closed = True
 
 
+class CountingRunService(BaseService):
+    """Service that records how many concurrent _run entries occurred."""
+
+    def __init__(self, ctx: DDSContext, service_name: str) -> None:
+        super().__init__(ctx, service_name)
+        self.closed = False
+        self.run_entries = 0
+        self.duplicate_started = asyncio.Event()
+
+    async def _run(self) -> None:
+        self.run_entries += 1
+        if self.run_entries > 1:
+            self.duplicate_started.set()
+        try:
+            await asyncio.Event().wait()
+        except asyncio.CancelledError:
+            pass
+
+    def start(self) -> None:
+        if not hasattr(self, "_task") or self._task is None or self._task.done():
+            self._task = asyncio.ensure_future(self._run())
+
+    async def close(self) -> None:
+        self.closed = True
+
+
 # ═══════════════════════════════════════════════════════════════════════════
 # Auto-registration
 # ═══════════════════════════════════════════════════════════════════════════
@@ -144,4 +170,29 @@ class TestRunLifecycle:
         asyncio.create_task(send_signal())
         await ctx.run_until_shutdown()
         assert svc.ran
+        assert svc.closed
+
+    @pytest.mark.asyncio
+    async def test_run_until_shutdown_does_not_double_start(
+        self, qos_file: str,
+    ):
+        """If start() already ran, run_until_shutdown() must not spawn another _run task."""
+        import os
+        import signal
+
+        ctx = DDSContext(domain_id=DEFAULT_DOMAIN_ID, qos_file=qos_file)
+        svc = CountingRunService(ctx, "RunnerOnce")
+        svc.start()
+
+        loop = asyncio.get_running_loop()
+
+        async def send_signal():
+            await asyncio.sleep(0.1)
+            loop.call_soon(lambda: os.kill(os.getpid(), signal.SIGINT))
+
+        asyncio.create_task(send_signal())
+        await ctx.run_until_shutdown()
+
+        assert svc.run_entries == 1
+        assert not svc.duplicate_started.is_set()
         assert svc.closed

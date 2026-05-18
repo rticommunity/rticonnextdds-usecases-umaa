@@ -302,7 +302,9 @@ class DDSContext:
         # Start _run() for every registered service
         for service in self._registry.values():
             if hasattr(service, "_run"):
-                service._task = asyncio.create_task(service._run())
+                task: Optional[asyncio.Task] = getattr(service, "_task", None)
+                if task is None or task.done():
+                    service._task = asyncio.create_task(service._run())
 
         # Wait for shutdown signal
         stop = asyncio.Event()
