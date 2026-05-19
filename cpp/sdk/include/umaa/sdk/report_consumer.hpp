@@ -58,7 +58,7 @@ public:
                         }
                         on_report(sample.data());
                     } catch (const std::exception& e) {
-                        std::cerr << "[ReportConsumer:" << service_name()
+                        std::cerr << "[ReportConsumer:" << this->service_name()
                                   << "] on_report hook failed: " << e.what()
                                   << std::endl;
                     }

@@ -67,7 +67,7 @@ public:
                         if (on_ack_cb_) on_ack_cb_(sample.data());
                         on_ack(sample.data());
                     } catch (const std::exception& e) {
-                        std::cerr << "[CommandConsumer:" << service_name()
+                        std::cerr << "[CommandConsumer:" << this->service_name()
                                   << "] on_ack failed: " << e.what() << std::endl;
                     }
                 }
@@ -87,7 +87,7 @@ public:
                         if (on_status_cb_) on_status_cb_(sample.data());
                         on_status(sample.data());
                     } catch (const std::exception& e) {
-                        std::cerr << "[CommandConsumer:" << service_name()
+                        std::cerr << "[CommandConsumer:" << this->service_name()
                                   << "] on_status failed: " << e.what() << std::endl;
                     }
                 }
@@ -176,7 +176,7 @@ public:
                         if (on_ack_cb_) on_ack_cb_(sample.data());
                         on_ack(sample.data());
                     } catch (const std::exception& e) {
-                        std::cerr << "[CommandConsumer:" << service_name()
+                        std::cerr << "[CommandConsumer:" << this->service_name()
                                   << "] on_ack failed: " << e.what() << std::endl;
                     }
                 }
@@ -196,7 +196,7 @@ public:
                         if (on_status_cb_) on_status_cb_(sample.data());
                         on_status(sample.data());
                     } catch (const std::exception& e) {
-                        std::cerr << "[CommandConsumer:" << service_name()
+                        std::cerr << "[CommandConsumer:" << this->service_name()
                                   << "] on_status failed: " << e.what() << std::endl;
                     }
                 }
@@ -216,7 +216,7 @@ public:
                         if (on_exec_cb_) on_exec_cb_(sample.data());
                         on_exec_status(sample.data());
                     } catch (const std::exception& e) {
-                        std::cerr << "[CommandConsumer:" << service_name()
+                        std::cerr << "[CommandConsumer:" << this->service_name()
                                   << "] on_exec_status failed: " << e.what() << std::endl;
                     }
                 }

@@ -25,5 +25,6 @@
 #include "umaa/sdk/command_provider_session.hpp"
 #include "umaa/sdk/command_provider.hpp"
 #include "umaa/sdk/command_consumer.hpp"
+#include "umaa/sdk/services/all.hpp"
 
 #endif  // UMAA_SDK_HPP

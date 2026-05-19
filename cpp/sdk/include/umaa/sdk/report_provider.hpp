@@ -52,7 +52,7 @@ public:
             try {
                 writer_.dispose_instance(handle_);
             } catch (const std::exception& e) {
-                std::cerr << "[ReportProvider:" << service_name()
+                std::cerr << "[ReportProvider:" << this->service_name()
                           << "] dispose failed: " << e.what() << std::endl;
             }
             handle_ = dds::core::InstanceHandle::nil();
