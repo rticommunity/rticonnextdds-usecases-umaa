@@ -34,9 +34,9 @@ list(APPEND CMAKE_MODULE_PATH
     "${CMAKE_CURRENT_SOURCE_DIR}/rticonnextdds-cmake-utils/cmake/Modules"
 )
 
-# Find RTI Connext DDS
+# Find RTI Connext DDS (pinned to 7.3.x)
 find_package(RTIConnextDDS
-    "6.1.2"
+    "7.3.1"
     REQUIRED
     COMPONENTS
         core
@@ -48,6 +48,7 @@ add_subdirectory(datamodel)
 # Build examples
 add_subdirectory(cpp/xml-app-framework)
 add_subdirectory(cpp/service-template-wrappers)
+add_subdirectory(cpp/sdk)
 
 message(STATUS "==================================================")
 message(STATUS "UMAA Repository Build Configuration")

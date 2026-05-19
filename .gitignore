@@ -2,6 +2,9 @@
 .clang-tidy
 .clang-format
 
+# Reference architectures (vendored, not part of SDK)
+cpp/reference_architectures/
+
 # Build artifacts
 cpp/*/build/
 **/debug_output.log
