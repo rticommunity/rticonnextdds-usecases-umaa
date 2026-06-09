@@ -34,23 +34,23 @@
 ├──────────────────────────────────────────────────────────────┤
 │                      rtiumaapy SDK                           │
 │  ┌───────────────────────────────────────────────────────┐   │
-│  │                     DDSContext                         │   │
+│  │                     DDSContext                        │   │
 │  │  DomainParticipant · Publisher · Subscriber · QoS     │   │
 │  │  Service Registry · Factory Methods                   │   │
 │  ├───────────────────────────────────────────────────────┤   │
-│  │              BaseService (ABC)                         │   │
+│  │              BaseService (ABC)                        │   │
 │  │  close() · auto-registration · _ctx · _service_name   │   │
 │  ├──────┬──────┬──────┬──────┬───────────────────────────┤   │
 │  │ Tier0│ Tier1│ Tier2│ Tier3│ Tier 4                    │   │
-│  │ Cmd  │Report│LgSet │LgList│ Composite                │   │
+│  │ Cmd  │Report│LgSet │LgList│ Composite                 │   │
 │  │ 4slot│1 slot│root+N│root+N│ explicit entities         │   │
 │  ├──────┴──────┴──────┴──────┴───────────────────────────┤   │
 │  │  Multi-Topic Utilities · SpecializationReaderSet      │   │
-│  │  CommandProviderSession · CommandConsumerSession       │   │
+│  │  CommandProviderSession · CommandConsumerSession      │   │
 │  │  Timestamp · GUID · Listeners                         │   │
 │  └───────────────────────────────────────────────────────┘   │
 ├──────────────────────────────────────────────────────────────┤
-│                  RTI Connext DDS + rti.asyncio                │
+│                  RTI Connext DDS + rti.asyncio               │
 │  DomainParticipant · DataReader · DataWriter · QoS XML       │
 │  reader.take_async() · rti.asyncio.run()                     │
 └──────────────────────────────────────────────────────────────┘
