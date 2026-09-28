@@ -3,6 +3,7 @@
 A starting point for developing to the UMAA standard with Connext.
 
 - [Overview](#overview)
+- [Verified Compatibility](#verified-compatibility)
 - [UMAA Standard](#umaa-standard)   
   Breakdown of UMAA standard from a DDS perspective
 - [Python SDK](#python-sdk)
@@ -27,6 +28,14 @@ It showcases Connext's ability to easily instantiate UMAA components
 using either the Modern C++ or the Python APIs.  
 It also highlights the option to manage DDS configuration of both systems with  
 a centralized xml or compose UMAA services from template classes.
+
+## Verified Compatibility
+
+Connext 7.3.0 and 7.7.0 are verified in repository-local Docker images for the
+Python test suite, the XML Autopilot C++/Python smoke test, and the
+discovery-only Python reference components. See the
+[Docker validation guide](docker/README.md) for the exact test matrix and image
+definitions.
 
 The repo is organized into:
 - **`cpp/`** — C++ examples (XML App Framework and Service Template Wrappers)

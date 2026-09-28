@@ -27,6 +27,11 @@ pip install -e .
 
 > Requires Python ≥ 3.8.
 
+> **Verified compatibility:** Connext 7.3.0 and 7.7.0 have passed the full
+> Python test suite in the repository Docker environments. See the
+> [Docker validation guide](../docker/README.md) for image definitions and the
+> complete test matrix.
+
 ### 3. Run the Autopilot Example
 
 ```bash

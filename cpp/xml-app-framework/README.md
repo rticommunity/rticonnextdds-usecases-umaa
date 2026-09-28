@@ -40,13 +40,17 @@ All 3 sets of XML files are consumed in the `./start_component.sh` script.
 ## Setup
 Reference the [Connext Getting Started guides](https://community.rti.com/static/documentation/connext-dds/current/doc/manuals/connext_dds_professional/getting_started_guide/index.html) to complete the below: 
 - Linux-based OS or WSL.
-- Connext 7.3.0 Host/Target install
+- Connext 7.3.0 or 7.7.0 Host/Target install
 - Python API setup
 - [Setup Connext Environment Variables](https://community.rti.com/howto/configuring-environment-rtisetenv-scripts) 
 
 ### Tested compatibility
-- Ubuntu 20.04
-- Connext 6.1.2(C++11)/Connext 7.3.0(C++11,Python)
+- Connext 7.3.0 on Ubuntu 20.04 and Connext 7.7.0 on Ubuntu 24.04.
+- The XML Autopilot C++ application and Python Global Vector publisher smoke
+        test pass in both versions with five writes and at least four C++ reads.
+
+See the [Docker validation guide](../../docker/README.md) for the versioned
+image definitions and commands.
 
 ### Build
 See the [top-level README build instructions](../../README.md#build-system-architecture) for cloning, environment setup, and building.
