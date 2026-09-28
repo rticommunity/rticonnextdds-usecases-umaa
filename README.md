@@ -34,6 +34,7 @@ The repo is organized into:
 - **`datamodel/`** — UMAA IDL types and generated language bindings
 - **`qos/`** — Shared QoS profile definitions
 - **`services/`** — Record/Replay/Convert utility scripts
+- **`docker/`** — [Connext 7.3 and 7.7 container validation](docker/README.md)
 
 
 ## UMAA Standard

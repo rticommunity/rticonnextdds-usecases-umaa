@@ -34,7 +34,25 @@ cd examples/autopilot/
 ./start_autopilot.sh
 ```
 
-### 4. Publish a Report (5 lines)
+### 4. Inspect QoS or Run Discovery Components
+
+Inspect the repository participant QoS profile:
+
+```bash
+python tools/inspect_qos.py
+```
+
+The discovery-only USV reference components create their declared UMAA DDS
+endpoints without publishing data or processing commands:
+
+```bash
+PYTHONPATH=. python -m examples.reference_components.run_component weather
+```
+
+See [reference_components/README.md](examples/reference_components/README.md)
+for the available component names.
+
+### 5. Publish a Report (5 lines)
 
 ```python
 import asyncio

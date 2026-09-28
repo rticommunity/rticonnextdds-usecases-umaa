@@ -56,25 +56,39 @@ to use the software.
           </transport_builtin>
 
           <resource_limits>
-          <!-- 
-            Default is 8192. UMAA has large type objects.
-            Needs to be increased for larger types i.e. GlobalVectorCommand = 20,476 
-            Disabled for performance, uncomment to susbcribe dynamically in Admin Console
+          <!--
+            Connext 7.7 uses TypeObject v2 and TypeLookup by default. Leave
+            the v1 propagation limit unset to use LENGTH_AUTO: large type
+            objects are resolved on demand instead of eagerly sent during
+            discovery, while v2 type resolution remains available.
+
+            For pre-7.7 deployments that require TypeObject v1 propagation,
+            uncomment this limit and set it large enough for the largest UMAA
+            TypeObject. Do not set it to 0 in 7.7: that disables both v1 and
+            v2 type propagation.
             -->
-            <type_object_max_serialized_length>30000</type_object_max_serialized_length>
+            <!-- <type_object_max_serialized_length>30000</type_object_max_serialized_length> -->
 
           <!-- Default is 256. Increase for GUIDS etc -->
               <contentfilter_property_max_length>512</contentfilter_property_max_length>
           </resource_limits>
 
           <discovery_config>
-          <!-- This is to make Type propagation asynchronous due to large UMAA Type Objects -->
+            <!--
+            In Connext 7.7, leave discovery writers at their synchronous
+            defaults because TypeObject v2 resolves large type objects on
+            demand. Pre-7.7 deployments propagating large TypeObject v1 data
+            may need these asynchronous overrides to decouple discovery traffic
+            from the caller thread after measuring the latency tradeoff.
+            -->
+            <!--
             <publication_writer_publish_mode>
-                <kind>ASYNCHRONOUS_PUBLISH_MODE_QOS</kind>
+              <kind>ASYNCHRONOUS_PUBLISH_MODE_QOS</kind>
             </publication_writer_publish_mode>
             <subscription_writer_publish_mode>
-                <kind>ASYNCHRONOUS_PUBLISH_MODE_QOS</kind>
+              <kind>ASYNCHRONOUS_PUBLISH_MODE_QOS</kind>
             </subscription_writer_publish_mode>
+            -->
 
             <!-- Spreads responses out over time so they don't all hit the wire simultaneously. -->
             <publication_reader>
