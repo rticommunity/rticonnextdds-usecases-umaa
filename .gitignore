@@ -18,6 +18,8 @@ services/data/
 datamodel/umaa/cpp11_gen/
 
 build/
+build-*/
+.docker-shared/
 
 # Python virtual environment
 python/.venv/

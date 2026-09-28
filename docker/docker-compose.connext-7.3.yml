@@ -1,0 +1,18 @@
+services:
+  connext:
+    build:
+      context: ..
+      dockerfile: docker/connext-7.3/Dockerfile
+      network: host
+    image: umaa-connext:7.3.0
+    init: true
+    network_mode: host
+    mem_limit: ${CONNEXT_MEMORY_LIMIT:-10g}
+    memswap_limit: ${CONNEXT_MEMORY_SWAP_LIMIT:-12g}
+    working_dir: /workspace
+    environment:
+      RTI_LICENSE_FILE: /shared/rti_license.dat
+    volumes:
+      - ${CONNEXT_SHARED_DIR:-../.docker-shared}:/shared:ro
+      - ${CONNEXT_SHARED_DIR:-../.docker-shared}:/build-cache
+      - ${CONNEXT_WORKSPACE_DIR:-..}:/workspace:ro

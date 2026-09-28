@@ -18,6 +18,7 @@ from typing import TYPE_CHECKING, Optional, Set, Dict
 import rti.connextdds as dds
 
 from rtiumaapy.errors import CommandHookError
+from rtiumaapy.guid_util import GUIDUtil
 
 if TYPE_CHECKING:
     from rtiumaapy.command_provider import CommandProvider
@@ -108,7 +109,7 @@ class CommandProviderSession:
     def __init__(self, provider: CommandProvider, command) -> None:
         self._provider = provider
         self._command = command
-        self._session_id: str = str(command.sessionID)
+        self._session_id = GUIDUtil.numeric_guid_to_string(command.sessionID)
         self._current_state: Optional[int] = None
         self._current_reason: Optional[int] = None
         self._task: Optional[asyncio.Task] = None

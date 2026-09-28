@@ -23,13 +23,21 @@ using namespace application;
 // Include all rti namespaces. Done for easier example legibility.
 using namespace rti::all;
 
+#ifdef UMAA_LEGACY_GENERATED_MEMBER_API
+#define UMAA_GET(instance, member) ((instance).member)
+#define UMAA_SET(instance, member, value) ((instance).member = (value))
+#else
+#define UMAA_GET(instance, member) ((instance).member())
+#define UMAA_SET(instance, member, value) ((instance).member(value))
+#endif
+
 // Callback functions for handling incoming data
 void on_speed_report(const rti::sub::LoanedSample<SpeedReportType> &sample)
 {
     if (sample.info().valid()) {
         // Optional, so check first
-        if (sample.data().speedThroughWater().has_value()) {
-            auto current_speed = sample.data().speedThroughWater().value();
+        if (UMAA_GET(sample.data(), speedThroughWater).has_value()) {
+            auto current_speed = UMAA_GET(sample.data(), speedThroughWater).value();
             std::cout << "SPEED: " << current_speed << std::endl;
         }
     }
@@ -38,16 +46,16 @@ void on_speed_report(const rti::sub::LoanedSample<SpeedReportType> &sample)
 void on_globalpose_report(const rti::sub::LoanedSample<GlobalPoseReportType> &sample)
 {
     if (sample.info().valid()) {
-        std::cout << "LAT: " << sample.data().position().geodeticLatitude() << std::endl;
-        std::cout << "LON: " << sample.data().position().geodeticLongitude() << std::endl;
+        std::cout << "LAT: " << UMAA_GET(UMAA_GET(sample.data(), position), geodeticLatitude) << std::endl;
+        std::cout << "LON: " << UMAA_GET(UMAA_GET(sample.data(), position), geodeticLongitude) << std::endl;
     }
 }
 
 void on_velocity_report(const rti::sub::LoanedSample<VelocityReportType> &sample)
 {
     if (sample.info().valid()) {
-        std::cout << "EAST SPEED: " << sample.data().velocity().eastSpeed() << std::endl;
-        std::cout << "NORTH SPEED: " << sample.data().velocity().northSpeed() << std::endl;
+        std::cout << "EAST SPEED: " << UMAA_GET(UMAA_GET(sample.data(), velocity), eastSpeed) << std::endl;
+        std::cout << "NORTH SPEED: " << UMAA_GET(UMAA_GET(sample.data(), velocity), northSpeed) << std::endl;
     }
 }
 
@@ -62,17 +70,19 @@ void on_globalvector_command(const rti::sub::LoanedSample<GlobalVectorCommandTyp
         std::cout << "State: " << sample.info().state().instance_state() << std::endl;
 
         if (sample.info().state().instance_state() == InstanceState::alive()) {
+            const auto &speed_requirement = UMAA_GET(sample.data(), speed);
+            const auto &speed_subtypes = UMAA_GET(
+                    speed_requirement,
+                    SpeedRequirementVariantTypeSubtypes);
+                const auto &water_speed_requirement =
+                    speed_subtypes.WaterSpeedRequirementVariantVariant();
+            const auto &water_speed = UMAA_GET(water_speed_requirement, speed);
             std::cout << "Current Water Speed Command: "
-                      << sample.data()
-                                 .speed()
-                                 .SpeedRequirementVariantTypeSubtypes()
-                                 .WaterSpeedRequirementVariantVariant()
-                                 .speed()
-                                 .speed()
+                      << UMAA_GET(water_speed, speed)
                       << std::endl;
 
             // Print Session ID
-            auto session_id = sample.data().sessionID();
+            auto session_id = UMAA_GET(sample.data(), sessionID);
             std::cout << "Session ID: ";
             for (const auto &byte : session_id) {
                 printf("%02x ", byte);
@@ -80,7 +90,7 @@ void on_globalvector_command(const rti::sub::LoanedSample<GlobalVectorCommandTyp
             std::cout << std::endl;
 
             // Print Destination ID
-            auto dest_id = sample.data().destination().parentID();
+            auto dest_id = UMAA_GET(UMAA_GET(sample.data(), destination), parentID);
             std::cout << "Destination ID: ";
             for (const auto &byte : dest_id) {
                 printf("%02x ", byte);
@@ -110,7 +120,7 @@ void run(ApplicationArguments args)
     while (!shutdown_requested) {
         // Write a Health Report Status out
         std::string status_str = "Healthy";
-        sample.status(status_str);
+        UMAA_SET(sample, status, status_str);
         healthreport_writer.write(sample);
 
         rti::util::sleep(Duration(1));
@@ -152,3 +162,6 @@ int main(int argc, char *argv[])
 
     return EXIT_SUCCESS;
 }
+
+#undef UMAA_GET
+#undef UMAA_SET

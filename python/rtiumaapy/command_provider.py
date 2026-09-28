@@ -161,7 +161,7 @@ class CommandProvider(BaseService):
 
     async def _handle_valid_sample(self, command) -> None:
         """Route a valid command sample to session or rejection."""
-        session_id = str(command.sessionID)
+        session_id = GUIDUtil.numeric_guid_to_string(command.sessionID)
 
         # Ack every valid command immediately
         self._publish_ack(command)
@@ -199,7 +199,7 @@ class CommandProvider(BaseService):
             try:
                 key_data = self._command_reader.key_value(
                     info.instance_handle)
-                session_id = str(key_data.sessionID)
+                session_id = GUIDUtil.numeric_guid_to_string(key_data.sessionID)
                 if session_id in self._active_sessions:
                     await self._active_sessions[session_id].cancel()
             except Exception:

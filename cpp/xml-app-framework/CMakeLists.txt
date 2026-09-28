@@ -52,3 +52,10 @@ target_link_libraries(xml_app_autopilot
         RTIConnextDDS::cpp2_api
         umaa_types
 )
+
+if(CONNEXTDDS_DIR MATCHES "rti_connext_dds-7\\.3\\.")
+    target_compile_definitions(xml_app_autopilot
+        PRIVATE
+            UMAA_LEGACY_GENERATED_MEMBER_API
+    )
+endif()

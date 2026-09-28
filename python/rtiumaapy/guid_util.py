@@ -63,6 +63,11 @@ class GUIDUtil:
         return uuid.UUID(s).bytes
 
     @staticmethod
+    def numeric_guid_to_string(numeric_guid) -> str:
+        """Convert a generated ``NumericGUID`` value to a UUID string."""
+        return GUIDUtil.to_string(bytes(numeric_guid.value))
+
+    @staticmethod
     def make_source_id(guid_hex: str | None = None):
         """Build an ``IdentifierType`` from an optional hex GUID string.
 

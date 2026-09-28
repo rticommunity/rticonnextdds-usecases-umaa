@@ -1,8 +1,7 @@
 """Tests that AssignerQoS topic_filter rules resolve to the correct QoS profile.
 
-Each QoS profile sets a distinctive publication_name / subscription_name
-(e.g. "TelemetryQoSWriter", "ConfigQoSReader") which we use as proof that the
-correct profile was selected.
+Each QoS profile sets propagated ``umaa.qos.profile`` metadata, which proves
+the correct profile was selected without overriding XML entity names.
 
 IMPORTANT: RTI topic_filter uses **first-match-wins** semantics.
 Specific patterns like ``*SpecsReportType`` must appear before the broader
@@ -85,15 +84,17 @@ def qos_provider() -> dds.QosProvider:
 
 
 def _writer_profile_name(qp: dds.QosProvider, topic: str) -> str:
-    """Return the resolved publication_name (entity_name) for *topic*."""
+    """Return the resolved propagated profile name for a writer topic."""
     qos = qp.get_topic_datawriter_qos(topic)
-    return qos.entity_name.name.strip()
+    assert qos.property.propagate("umaa.qos.profile")
+    return qos.property.get("umaa.qos.profile")
 
 
 def _reader_profile_name(qp: dds.QosProvider, topic: str) -> str:
-    """Return the resolved subscription_name (entity_name) for *topic*."""
+    """Return the resolved propagated profile name for a reader topic."""
     qos = qp.get_topic_datareader_qos(topic)
-    return qos.entity_name.name.strip()
+    assert qos.property.propagate("umaa.qos.profile")
+    return qos.property.get("umaa.qos.profile")
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -110,7 +111,7 @@ class TestTelemetryQoS:
         GPSReportTypeTopic,
     ])
     def test_writer(self, qos_provider, topic):
-        assert _writer_profile_name(qos_provider, topic) == "TelemetryQoSWriter"
+        assert _writer_profile_name(qos_provider, topic) == "TelemetryQoS"
 
     @pytest.mark.parametrize("topic", [
         AccelerationReportTypeTopic,
@@ -118,7 +119,7 @@ class TestTelemetryQoS:
         GPSReportTypeTopic,
     ])
     def test_reader(self, qos_provider, topic):
-        assert _reader_profile_name(qos_provider, topic) == "TelemetryQoSReader"
+        assert _reader_profile_name(qos_provider, topic) == "TelemetryQoS"
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -139,7 +140,7 @@ class TestConfigQoS:
         BITConfigReportTypeTopic,
     ])
     def test_writer(self, qos_provider, topic):
-        assert _writer_profile_name(qos_provider, topic) == "ConfigQoSWriter"
+        assert _writer_profile_name(qos_provider, topic) == "ConfigQoS"
 
     @pytest.mark.parametrize("topic", [
         AnchorSpecsReportTypeTopic,
@@ -147,7 +148,7 @@ class TestConfigQoS:
         BITConfigReportTypeTopic,
     ])
     def test_reader(self, qos_provider, topic):
-        assert _reader_profile_name(qos_provider, topic) == "ConfigQoSReader"
+        assert _reader_profile_name(qos_provider, topic) == "ConfigQoS"
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -167,7 +168,7 @@ class TestCommandQoS:
         GlobalVectorExecStatusTopic,
     ])
     def test_writer(self, qos_provider, topic):
-        assert _writer_profile_name(qos_provider, topic) == "CommandQoSWriter"
+        assert _writer_profile_name(qos_provider, topic) == "CommandQoS"
 
     @pytest.mark.parametrize("topic", [
         AnchorCommandTypeTopic,
@@ -177,7 +178,7 @@ class TestCommandQoS:
         GlobalVectorExecStatusTopic,
     ])
     def test_reader(self, qos_provider, topic):
-        assert _reader_profile_name(qos_provider, topic) == "CommandQoSReader"
+        assert _reader_profile_name(qos_provider, topic) == "CommandQoS"
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -193,11 +194,11 @@ class TestElementQoS:
         GlobalWaypointCommandTypeWaypointsListElementTopic,
     ])
     def test_writer(self, qos_provider, topic):
-        assert _writer_profile_name(qos_provider, topic) == "ElementQoSWriter"
+        assert _writer_profile_name(qos_provider, topic) == "ElementQoS"
 
     @pytest.mark.parametrize("topic", [
         ContactReportTypeContactsSetElementTopic,
         GlobalWaypointCommandTypeWaypointsListElementTopic,
     ])
     def test_reader(self, qos_provider, topic):
-        assert _reader_profile_name(qos_provider, topic) == "ElementQoSReader"
+        assert _reader_profile_name(qos_provider, topic) == "ElementQoS"

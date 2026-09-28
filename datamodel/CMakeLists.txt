@@ -57,6 +57,9 @@ foreach(_idl IN LISTS _UMAA_TYPES)
         OUTPUT_DIRECTORY "${UMAA_CPP11_GEN_DIR}/${_idl_FOLDER}"
         INCLUDE_DIRS "${UMAA_IDL_DIR}"
         LANG "C++11"
+        EXTRA_ARGS
+            -standard
+            DDS_PSM_Cxx
         VAR "UMAA_TYPES"
     )
     

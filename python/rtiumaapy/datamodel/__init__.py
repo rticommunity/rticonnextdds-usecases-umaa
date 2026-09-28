@@ -11,8 +11,19 @@ target.  Do not hand-edit the individual type modules.
 import os as _os
 import sys as _sys
 
+from rti import idl as _idl
+
 # Generated modules use ``from IdentifierType import *`` etc. — bare
 # module-name imports that require this directory on sys.path.
 _pkg_dir = _os.path.dirname(_os.path.abspath(__file__))
 if _pkg_dir not in _sys.path:
     _sys.path.insert(0, _pkg_dir)
+
+if not hasattr(_idl, "octet"):
+    _idl.octet = _idl.uint8
+
+if not hasattr(_idl, "xtypes_compliance"):
+    _idl.xtypes_compliance = lambda _mask: None
+
+if not hasattr(_idl, "default"):
+    _idl.default = lambda _value: None

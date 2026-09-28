@@ -287,12 +287,15 @@ to use the software.
 
       <datawriter_qos>
 
-        <!-- Use to verify in Admin Console QoS Profile used -->
-        <publication_name>
-          <name>
-            USTMQoSWriter
-          </name>
-        </publication_name>
+        <property>
+          <value>
+            <element>
+              <name>umaa.qos.profile</name>
+              <value>USTMQoS</value>
+              <propagate>true</propagate>
+            </element>
+          </value>
+        </property>
 
         <!-- This spins up a separate thread to send out samples asynchronously -->
         <publish_mode>
@@ -353,12 +356,15 @@ to use the software.
 
       <datareader_qos>
 
-        <!-- Use to verify in Admin Console QoS Profile used -->
-        <subscription_name>
-          <name>
-            USTMQoSReader
-          </name>
-        </subscription_name>
+        <property>
+          <value>
+            <element>
+              <name>umaa.qos.profile</name>
+              <value>USTMQoS</value>
+              <propagate>true</propagate>
+            </element>
+          </value>
+        </property>
 
         <history>
           <kind>KEEP_ALL_HISTORY_QOS</kind>
@@ -405,12 +411,15 @@ to use the software.
 
       <datawriter_qos>
 
-        <!-- Use to verify in Admin Console QoS Profile used -->
-      <publication_name>
-        <name>
-          TelemetryQoSWriter
-        </name>
-      </publication_name>
+        <property>
+          <value>
+            <element>
+              <name>umaa.qos.profile</name>
+              <value>TelemetryQoS</value>
+              <propagate>true</propagate>
+            </element>
+          </value>
+        </property>
 
         <!-- 
           Send messages out "Asynchronously" without blocking the main thread as UMAA messages tend to be large. 
@@ -435,12 +444,15 @@ to use the software.
       </datawriter_qos>
 
       <datareader_qos>
-        <!-- Use to verify in Admin Console QoS Profile used -->
-        <subscription_name>
-          <name>
-            TelemetryQoSReader
-          </name>
-        </subscription_name>
+        <property>
+          <value>
+            <element>
+              <name>umaa.qos.profile</name>
+              <value>TelemetryQoS</value>
+              <propagate>true</propagate>
+            </element>
+          </value>
+        </property>
 
 
         <history>
@@ -477,12 +489,15 @@ to use the software.
 
       <datawriter_qos>
 
-        <!-- Use to verify in Admin Console QoS Profile used -->
-        <publication_name>
-          <name>
-            ConfigQoSWriter
-          </name>
-        </publication_name>
+        <property>
+          <value>
+            <element>
+              <name>umaa.qos.profile</name>
+              <value>ConfigQoS</value>
+              <propagate>true</propagate>
+            </element>
+          </value>
+        </property>
 
         <!-- This spins up a separate thread to send out samples asynchronously -->
         <publish_mode>
@@ -541,12 +556,15 @@ to use the software.
 
       <datareader_qos>
 
-        <!-- Use to verify in Admin Console QoS Profile used -->
-        <subscription_name>
-          <name>
-            ConfigQoSReader
-          </name>
-        </subscription_name>
+        <property>
+          <value>
+            <element>
+              <name>umaa.qos.profile</name>
+              <value>ConfigQoS</value>
+              <propagate>true</propagate>
+            </element>
+          </value>
+        </property>
 
         <history>
           <kind>KEEP_ALL_HISTORY_QOS</kind>
@@ -583,12 +601,15 @@ to use the software.
 
       <datawriter_qos>
 
-        <!-- Use to verify in Admin Console QoS Profile used -->
-        <publication_name>
-          <name>
-            CommandQoSWriter
-          </name>
-        </publication_name>
+        <property>
+          <value>
+            <element>
+              <name>umaa.qos.profile</name>
+              <value>CommandQoS</value>
+              <propagate>true</propagate>
+            </element>
+          </value>
+        </property>
 
         <!-- This will spin up a separate thread to send out samples asynchronously as UMAA messages can be very large -->
         <publish_mode>
@@ -643,12 +664,15 @@ to use the software.
 
       <datareader_qos>
 
-        <!-- Use to verify in Admin Console QoS Profile used -->
-        <subscription_name>
-          <name>
-            CommandQoSReader
-          </name>
-        </subscription_name>
+        <property>
+          <value>
+            <element>
+              <name>umaa.qos.profile</name>
+              <value>CommandQoS</value>
+              <propagate>true</propagate>
+            </element>
+          </value>
+        </property>
 
         <!-- 
           This checks every 10 seconds if the DataWriter is still alive. 
@@ -699,12 +723,15 @@ to use the software.
 
       <datawriter_qos>
 
-        <!-- Use to verify in Admin Console QoS Profile used -->
-        <publication_name>
-          <name>
-            ElementQoSWriter
-          </name>
-        </publication_name>
+        <property>
+          <value>
+            <element>
+              <name>umaa.qos.profile</name>
+              <value>ElementQoS</value>
+              <propagate>true</propagate>
+            </element>
+          </value>
+        </property>
 
         <!-- This will spin up a separate thread to send out samples asynchronously as UMAA messages
         can be very large -->
@@ -754,12 +781,15 @@ to use the software.
 
       <datareader_qos>
 
-        <!-- Use to verify in Admin Console QoS Profile used -->
-        <subscription_name>
-          <name>
-            ElementQoSReader
-          </name>
-        </subscription_name>
+        <property>
+          <value>
+            <element>
+              <name>umaa.qos.profile</name>
+              <value>ElementQoS</value>
+              <propagate>true</propagate>
+            </element>
+          </value>
+        </property>
 
         <history>
           <kind>KEEP_ALL_HISTORY_QOS</kind>
