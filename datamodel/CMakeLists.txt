@@ -58,6 +58,8 @@ foreach(_idl IN LISTS _UMAA_TYPES)
         INCLUDE_DIRS "${UMAA_IDL_DIR}"
         LANG "C++11"
         EXTRA_ARGS
+            # Use the pre-7.2 Modern C++ mapping with getter/setter members,
+            # rather than IDL4_CPP direct public fields.
             -standard
             DDS_PSM_Cxx
         VAR "UMAA_TYPES"
