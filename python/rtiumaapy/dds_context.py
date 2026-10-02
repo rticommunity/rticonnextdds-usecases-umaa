@@ -67,6 +67,8 @@ class DDSContext:
         domain_id: int = 0,
         qos_file: Optional[str] = None,
         source_guid: Optional[str] = None,
+        qos_profile: str = QOS_ASSIGNER_PROFILE,
+        participant_qos_profile: str = QOS_PARTICIPANT_PROFILE,
     ) -> None:
         """Create the DDS infrastructure.
 
@@ -77,6 +79,8 @@ class DDSContext:
             source_guid: Hex GUID (32 chars or UUID with dashes) for
                 this component's source identity.  If *None*, a random
                 GUID is generated automatically.
+            qos_profile: Profile used for topic-filter QoS assignment.
+            participant_qos_profile: Profile used for participant QoS.
 
         Raises:
             RuntimeError: If a ``DDSContext`` already exists.
@@ -100,13 +104,13 @@ class DDSContext:
 
         # QoS provider — loads XML profiles, sets default for topic_filter matching
         self._qos_provider = dds.QosProvider(self._qos_file)
-        self._qos_provider.default_profile = QOS_ASSIGNER_PROFILE
+        self._qos_provider.default_profile = qos_profile
 
         # DomainParticipant
         self._participant = dds.DomainParticipant(
             domain_id,
             qos=self._qos_provider.participant_qos_from_profile(
-                QOS_PARTICIPANT_PROFILE
+                participant_qos_profile
             ),
         )
 
